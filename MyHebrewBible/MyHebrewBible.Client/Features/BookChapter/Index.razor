@@ -1,4 +1,6 @@
 ﻿@page "/bookchapter"
+@using MyHebrewBible.Client.Components.BookChapterToolbar
+@using MyHebrewBible.Client.Enums
 
 @inject ApiClient Api
 
@@ -6,11 +8,20 @@
 
 <div class="pb-n1 mt-2 mb-3 border-bottom border-info">
 	<h5 class="text-center">Book Chapter</h5>
+	<p class="text-center mt-4 fs-3"><span class="badge text-bg-warning">@SubTitle</span></p>
 </div>
 
-<WordPartTable ScriptureId="1" />
 
-<p class="mt-5 mb-0"><code> await Api.GetBookChapterAsync(1,1)</code></p>
+
+@if (CurrentPrevNextButtonVM is null)
+{
+	<p>Previous / Next Button is loading</p>
+}
+else
+{
+	<PrevNextButton PrevNextButtonVM="@CurrentPrevNextButtonVM"
+									OnBookChapterSelected="@ReturnedBookChapterPrevNext" />
+}
 
 @if (verses == null)
 {
@@ -20,7 +31,7 @@ else
 {
 	@foreach (var item in verses)
 	{
-		<p class="ps-2 mb-2">
+		<p class="ps-2 mt-4 mb-2">
 			<sup class="fw-bold">@item.Verse</sup>
 			@item.KJV
 		</p>
@@ -28,10 +39,34 @@ else
 }
 
 @code {
+
+	private Enums.BibleBook bibleBook = BibleBook.Genesis;
+	private int chapter = 1;
+
 	private ICollection<BookChapter>? verses = null;
+	public PrevNextButtonVM? CurrentPrevNextButtonVM { get; set; }
+
+	protected string SubTitle = "";
 
 	protected override async Task OnInitializedAsync()
 	{
-		verses = await Api!.GetBookChapterAsync(1, 1);
+		CurrentPrevNextButtonVM = new PrevNextButtonVM(BibleBook.Genesis, 1);
+		SubTitle = $"{BibleBook.Genesis.Title}-1";
+		verses = await Api!.GetBookChapterAsync(BibleBook.Genesis, 1);
 	}
+
+	private async Task ReturnedBookChapterPrevNext(BookChapterPrevNext bookChapterPrevNext)
+	{
+		CurrentPrevNextButtonVM = new PrevNextButtonVM(bookChapterPrevNext.BibleBook!, bookChapterPrevNext.Chapter);
+
+		// Why in the HELL does this not work!!!
+		//verses = await Api!.GetBookChapterAsync(bookChapterPrevNext.BibleBook!.Value, chapter);
+		string t = bookChapterPrevNext.BibleBook!.Title;
+		int b = bookChapterPrevNext.BibleBook!.Value;
+		int c = bookChapterPrevNext.Chapter;
+		SubTitle = $"{t} {c}";
+		verses = await Api!.GetBookChapterAsync(b, c);
+		//StateHasChanged();
+	}
+
 }
