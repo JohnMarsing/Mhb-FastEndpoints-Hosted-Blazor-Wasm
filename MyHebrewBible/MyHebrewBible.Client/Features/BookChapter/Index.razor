@@ -1,0 +1,37 @@
+﻿@page "/bookchapter"
+
+@inject ApiClient Api
+
+<PageTitle>Book Chapter</PageTitle>
+
+<div class="pb-n1 mt-2 mb-3 border-bottom border-info">
+	<h5 class="text-center">Book Chapter</h5>
+</div>
+
+<WordPartTable ScriptureId="1" />
+
+<p class="mt-5 mb-0"><code> await Api.GetBookChapterAsync(1,1)</code></p>
+
+@if (verses == null)
+{
+	<p><em>Loading verses...</em></p>
+}
+else
+{
+	@foreach (var item in verses)
+	{
+		<p class="ps-2 mb-2">
+			<sup class="fw-bold">@item.Verse</sup>
+			@item.KJV
+		</p>
+	}
+}
+
+@code {
+	private ICollection<BookChapter>? verses = null;
+
+	protected override async Task OnInitializedAsync()
+	{
+		verses = await Api!.GetBookChapterAsync(1, 1);
+	}
+}

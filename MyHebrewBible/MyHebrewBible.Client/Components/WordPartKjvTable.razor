@@ -1,0 +1,41 @@
+﻿@inject ApiClient Api
+
+<h3 class="mb-1">Word Part KJV <sup>@ScriptureId</sup></h3>
+<p class="mt-0"><code> await Api.GetWordPartKjvAsync(ScriptureId)</code></p>
+
+@if (wordparts == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>KJV Word</th>
+				<th>Strong's</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in wordparts)
+			{
+				<tr>
+					<td>@item.WordCount</td>
+					<td>@item.Word</td>
+					<td>@item.Strongs</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+@code {
+	[Parameter, EditorRequired] public long ScriptureId { get; set; }
+	private ICollection<WordPartKjv>? wordparts = null;
+
+	protected override async Task OnInitializedAsync()
+	{
+		wordparts = await Api.GetWordPartKjvAsync(ScriptureId);
+	}
+}

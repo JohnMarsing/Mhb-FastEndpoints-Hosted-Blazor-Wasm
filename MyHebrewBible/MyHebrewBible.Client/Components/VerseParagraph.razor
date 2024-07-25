@@ -1,0 +1,31 @@
+﻿@inject ApiClient Api
+
+<h3 class ="mb-1">Verse Paragraph <sup>@BookId-@Chapter</sup> </h3>
+<p class="mt-0"><code> await Api.GetBookChapterAsync(1,1)</code></p>
+
+@if (verses == null)
+{
+	<p><em>Loading verses...</em></p>
+}
+else
+{
+	@foreach (var item in verses)
+	{
+		<p class="ps-2 mb-2">
+			<sup class="fw-bold">@item.Verse</sup>
+			@item.KJV
+		</p>
+	}
+}
+
+@code {
+	[Parameter, EditorRequired] public long BookId { get; set; }
+	[Parameter, EditorRequired] public long Chapter { get; set; }
+
+	private ICollection<BookChapter>? verses = null;
+
+	protected override async Task OnInitializedAsync()
+	{
+		verses = await Api!.GetBookChapterAsync(1, 1);
+	}
+}
