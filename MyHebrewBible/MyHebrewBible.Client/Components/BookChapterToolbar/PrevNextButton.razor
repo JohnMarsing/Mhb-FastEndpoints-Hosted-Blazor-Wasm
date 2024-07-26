@@ -1,44 +1,48 @@
 ﻿@using MyHebrewBible.Client.Enums
 
-@if (@VM!.PrevBibleBook!.ThereIsNone == false)
+@if (buttonToShow == ButtonsToShow.Both | buttonToShow == ButtonsToShow.PreviousOnly)
 {
-	<button type="button" class="btn btn-outline-primary"
-					@onclick="@(e => ButtonClick(VM.PrevBibleBook))">
-		<sup>@VM!.PrevBibleBook!.ButtonText&nbsp;
-		</sup><i class="@VM!.PrevBibleBook.Icon"></i>
-		<br /><small>Prev</small>
-	</button>
-}
-else
-{
-	<OnEdgeButton />
+	@if (@VM!.PrevBibleBook!.ThereIsNone == false)
+	{
+		<button type="button" class="btn btn-outline-primary"
+						@onclick="@(e => ButtonClick(VM.PrevBibleBook))">
+			<sup>
+				@VM!.PrevBibleBook!.ButtonText&nbsp;
+			</sup><i class="@VM!.PrevBibleBook.Icon"></i>
+			<br /><small>Prev</small>
+		</button>
+	}
+	else
+	{
+		<OnEdgeButton />
+	}
 }
 
-
-@if (@VM!.NextBibleBook!.ThereIsNone == false)
+@if (buttonToShow == ButtonsToShow.Both | buttonToShow == ButtonsToShow.NextOnly)
 {
-	<button type="button" class="btn btn-outline-primary"
-					@onclick="@(e => ButtonClick(VM.NextBibleBook))">
-		<i class="@VM!.NextBibleBook.Icon"></i>&nbsp;
-		<sup>@VM!.NextBibleBook.ButtonText</sup>
-		<br /><small>Next</small>
-	</button>
-}
-else
-{
-	<OnEdgeButton />
+	@if (@VM!.NextBibleBook!.ThereIsNone == false)
+	{
+		<button type="button" class="btn btn-outline-primary"
+						@onclick="@(e => ButtonClick(VM.NextBibleBook))">
+			<i class="@VM!.NextBibleBook.Icon"></i>&nbsp;
+			<sup>@VM!.NextBibleBook.ButtonText</sup>
+			<br /><small>Next</small>
+		</button>
+	}
+	else
+	{
+		<OnEdgeButton />
+	}
 }
 
 @code {
 
 	[Parameter, EditorRequired] public PrevNextButtonVM? PrevNextButtonVM { get; set; }
+	[Parameter, EditorRequired] public ButtonsToShow buttonToShow { get; set; }
 	[Parameter] public EventCallback<BookChapterPrevNext> OnBookChapterSelected { get; set; }
 
-	protected string Msg = "";
-
-	private void ButtonClick(BookChapterPrevNext bookChapterPrevNext) 
+	private void ButtonClick(BookChapterPrevNext bookChapterPrevNext)
 	{
-		Msg = $"{bookChapterPrevNext.BibleBook!.Value} {bookChapterPrevNext.BibleBook!.Title} {bookChapterPrevNext.Chapter}";
 		OnBookChapterSelected.InvokeAsync(bookChapterPrevNext);
 	}
 
@@ -48,4 +52,5 @@ else
 	{
 		VM = PrevNextButtonVM;
 	}
+
 }

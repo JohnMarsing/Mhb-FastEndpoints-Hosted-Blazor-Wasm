@@ -6,22 +6,37 @@
 
 <PageTitle>Book Chapter</PageTitle>
 
-<div class="pb-n1 mt-2 mb-3 border-bottom border-info">
-	<h5 class="text-center">Book Chapter</h5>
-	<p class="text-center mt-4 fs-3"><span class="badge text-bg-warning">@SubTitle</span></p>
+<div class="pb-n1 mt-2 mb-2 border-bottom border-info">
+
+	<div class="d-flex justify-content-between mb-3">
+		<div class="ps-2">
+			@if (CurrentPrevNextButtonVM is not null)
+			{
+				<PrevNextButton PrevNextButtonVM="@CurrentPrevNextButtonVM"
+												buttonToShow="ButtonsToShow.PreviousOnly"
+												OnBookChapterSelected="@ReturnedBookChapterPrevNext" />
+			}
+		</div>
+		<div class="fs-4">
+			<p class="text-center mt-4 fs-3"><span class="badge bg-primary-subtle text-dark">@SubTitle</span></p>
+		</div>
+		<div class="pe-2">
+			@if (CurrentPrevNextButtonVM is not null)
+			{
+				<PrevNextButton PrevNextButtonVM="@CurrentPrevNextButtonVM"
+												buttonToShow="ButtonsToShow.NextOnly"
+												OnBookChapterSelected="@ReturnedBookChapterPrevNext" />
+			}
+
+		</div>
+	</div>
+
+
+	@* <h5 class="text-center">Book Chapter</h5> *@
+
 </div>
 
 
-
-@if (CurrentPrevNextButtonVM is null)
-{
-	<p>Previous / Next Button is loading</p>
-}
-else
-{
-	<PrevNextButton PrevNextButtonVM="@CurrentPrevNextButtonVM"
-									OnBookChapterSelected="@ReturnedBookChapterPrevNext" />
-}
 
 @if (verses == null)
 {
@@ -31,10 +46,33 @@ else
 {
 	@foreach (var item in verses)
 	{
-		<p class="ps-2 mt-4 mb-2">
-			<sup class="fw-bold">@item.Verse</sup>
-			@item.KJV
+@* 		
+		@if (item.DescH.GetType() != typeof(DBNull))
+		{
+			<h3 class="mt-2">@item.DescH</h3>
+		}
+		else
+		{
+			<small>why for how come you know have a pin</small>
+		} *@
+
+		@* 		
+		@if (item.DescH != null)
+		{
+			<h3 class="mt-2">@item.DescH</h3>
+		} 
+		*@
+
+		@* 		@if (item.DescD is not null)
+		{
+			<h5 class="text-end mt-3 mb-1 text-black-50 fst-italic">@item.DescD</h5>
+		}
+*@
+
+		<p class="fs-5">
+			<a title="@item.BCV" href="https://www.blueletterbible.org/kjv/gen/1/1/" target="_blank"><sup class="btn btn-outline-primary py-0 px-1"><b>@item.Verse</b></sup></a>  @((MarkupString)@item.KJV!)
 		</p>
+
 	}
 }
 
