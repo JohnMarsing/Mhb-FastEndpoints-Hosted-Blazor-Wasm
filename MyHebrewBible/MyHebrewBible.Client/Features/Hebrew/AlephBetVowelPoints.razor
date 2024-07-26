@@ -1,0 +1,88 @@
+﻿@using MyHebrewBible.Client.Enums;
+
+@using MyHebrewBible.Client.Features.Hebrew.Enums
+
+
+<div class="card bg-light mt-4 mb-2">
+	<div class="row text-center">
+		@foreach (var item in VowelSummary.List.Where(w => w.Value <= 3).OrderBy(o => o.Value).ToList())
+		{
+			<div class="col-4">
+				@((MarkupString)@item.ExampleHtml!)
+				<br />
+				@((MarkupString)@item.UnicodeNameHtml!)
+				<br />
+				@item.UniInt
+				<br />
+				<h4 class="text-primary">@item.Sound</h4>
+			</div>
+		}
+	</div>
+
+	<div class="row my-2 ms-3 text-center">
+		<div class="col-12">
+		<small>the next row includes a <i>chataf</i> (two vertical dots) but has the same sounds</small>
+		</div>
+	</div>
+
+	<div class="row text-center">
+		@foreach (var item in VowelSummary.List
+		.Where(w => w.Value > 3 && w.Value <= 6)
+		.OrderBy(o => o.Value).ToList())
+		{
+			<div class="col-4">
+				@((MarkupString)@item.ExampleHtml!)
+				<br />
+				@((MarkupString)@item.UnicodeNameHtml!)
+				<br />
+				@item.UniInt
+			</div>
+		}
+	</div>
+
+</div>
+
+<div class="card bg-light mt-3">
+	<div class="row text-center">
+		@foreach (var item in VowelSummary.List
+		.Where(w => w.Value > 6 && w.Value <= 9)
+		.OrderBy(o => o.Value).ToList())
+		{
+			<div class="col-4">
+				@((MarkupString)@item.ExampleHtml!)
+				<br />
+				@((MarkupString)@item.UnicodeNameHtml!)
+				<br />
+				@item.UniInt
+				<br />
+				<h4 class="text-primary">@item.Sound</h4>
+			</div>
+		}
+	</div>
+
+	<div class="row text-center">
+		<div class="col-12">
+			&bull; <small><i>shva</i> is a syllable divider that has no sound</small>
+		</div>
+	</div>
+
+</div>
+
+<div class="card bg-light mt-3">
+	<div class="row text-center">
+		@foreach (var item in VowelSummary.List
+		.Where(w => w.Value > 9)
+		.OrderBy(o => o.Value).ToList())
+		{
+			<div class="col-4">
+				@((MarkupString)@item.ExampleHtml!)
+				<br />
+				@((MarkupString)@item.UnicodeNameHtml!)
+				<br />
+				@item.UniInt
+				<br />
+				<h4 class="text-primary">@item.Sound</h4>
+			</div>
+		}
+	</div>
+</div>

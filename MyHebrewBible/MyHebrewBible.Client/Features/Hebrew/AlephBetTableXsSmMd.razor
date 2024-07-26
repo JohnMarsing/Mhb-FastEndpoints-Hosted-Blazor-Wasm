@@ -1,0 +1,67 @@
+﻿@using MyHebrewBible.Client.Features.Hebrew.Enums
+
+
+@*<i class="fas fa-ellipsis-h"></i>*@
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th class="text-center" scope="col"><u>#</u></th>
+			<th class="text-center d-print-none" scope="col"><a href="https://en.wikipedia.org/wiki/Gematria">gem</a></th>
+			<th class="text-center" scope="col"><u>eng</u></th>
+			<th class="" scope="col"><u>prefix</u></th>
+			<th class="text-center" scope="col"><u>nd</u></th>
+			<th class="text-center" scope="col"><u>sofit</u></th>
+			<th class="text-center" scope="col"><u>Letter</u></th>
+			<th class="" scope="col"><u>name</u></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in HebrewChart.List.OrderBy(o => o.Value).ToList())
+		{
+			<tr>
+				<td scope="row" class="text-center">
+					<button type="button" class="btn btn-default btn-sm" title="Literal/Symbolic Meaning"
+						@onclick="() => ShowModal(item)">
+						@item.Value <i class="fa fa-arrow-down"></i>
+					</button>
+				</td>
+				<td scope="row" class="text-center">@item.Gematria</td>
+				<td scope="row" class="text-center">@item.EngLetter</td>
+				<td scope="row">@item.PrefixMeaning</td>
+				<td scope="row" class="hebrewchart black text-center">@item.WithoutDagesh</td>
+				<td scope="row" class="hebrewchart black text-center">@item.Sofit</td>
+				<td scope="row" class="hebrewchart black text-center">@item.Hebrew</td>
+				<td scope="row" class="text-primary">@item.UnicodeName</td>
+			</tr>
+		}
+		<tr><td colspan="11"><small><u>Column Names:</u><br /><b>eng</b>: English like letter; <b>unicode</b>: Unicode character set # (decimal); <b>Strong's</b>: starting Strong's #; <b>gem</b>: Gematria; <b>nd</b>: No Dagesh</small></td></tr>
+	</tbody>
+</table>
+
+<div class="@modalClass" style="display:@(modalOpen?"block":"none");">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header bg-light">
+				@if (Details is not null)
+				{
+					<h5 class="modal-title">@Details!.Title</h5>
+				}
+				<button type="button" class="close" @onclick="CloseModal">
+					<span>&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				@if (@Details!.LiteralMeaning is not null && @Details!.SymbolicMeaning is not null)
+				{
+					<p>@Details!.LiteralMeaning  /	@Details!.SymbolicMeaning</p>
+				}
+			</div>
+			<div class="modal-footer bg-light">
+				<button type="button" class="btn btn-primary" @onclick="CloseModal">
+					Cancel
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

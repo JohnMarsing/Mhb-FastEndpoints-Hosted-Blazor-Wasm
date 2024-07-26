@@ -1,0 +1,60 @@
+﻿@*@using PageLink = MenuItems*@
+
+<nav id="subNavBar" class="navbar navbar-expand-sm navbar-toggleable-md border-bottom box-shadow p-0 mb-3 @NavBarColor">
+	<div class="container">
+
+		<a class="nav-link @GetActive(MenuItems.Chart)" title="" href="@MenuItems.Chart.Page">
+			<i class="fas fa-home"></i>
+			@MenuItems.Chart.Title
+		</a>
+
+		<button class="navbar-toggler" @onclick="ToggleSubNavBar" type="button"
+						data-bs-toggle="collapse" data-target=".navbar-collapse"
+						aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="@SubNavBarCssClass navbar-collapse d-sm-inline-flex flex-sm-row-reverse"
+				 @onclick="ToggleSubNavBar">
+
+			<ul class="navbar-nav flex-grow-1">
+				@foreach (var item in MenuItems.List
+				.Where(w => w.Value != MenuItems.Chart.Value)
+				.OrderBy(o => o.Value))
+				{
+					<li class="nav-item">
+						<a class="nav-link @GetActive(item)" href="@item.Page">
+							<i class="@item.Icon"></i>
+							@item.Title
+						</a>
+					</li>
+				}
+			</ul>
+
+		</div>
+
+	</div>
+</nav>
+
+@code {
+	bool collapseNavMenu = true;
+	string? SubNavBarCssClass => collapseNavMenu ? "collapse" : null;
+	void ToggleSubNavBar()
+	{
+		collapseNavMenu = !collapseNavMenu;
+	}
+
+	// ToDo: review this note because `Display` isn't being used
+	//   Can't force EditorRequired because PrintTable is set to `Display=> false`
+	[Parameter] public MenuItems? ActiveMenuItem { get; set; }
+
+	// ToDo: this was here to theme switching to dark mode which has not happen yet,
+	//   this could just be hard coded in SubNavBar.razor
+	protected string NavBarColor = " navbar-light bg-light ";
+
+	string GetActive(MenuItems currentMenuItem)
+	{
+		return ActiveMenuItem == currentMenuItem ? " active" : "";
+	}
+}

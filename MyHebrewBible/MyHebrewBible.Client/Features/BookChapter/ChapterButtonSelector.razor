@@ -1,0 +1,40 @@
+﻿@using MyHebrewBible.Client.Enums
+
+@* @rendermode InteractiveWebAssembly *@
+
+<div class="row pt-2 pb-1 d-print-none">
+	<div class="col-12">
+
+		<div class="@MediaQuery.Xs.DivClass">
+			<ChapterButtons CurrentBibleBook="@BibleBook" ButtonsPerRow="5" OnChapterFilterSelected="OnChapterSelected" />
+		</div>			<!-- Xs -->
+
+		<div class="@MediaQuery.Sm.DivClass">
+			<ChapterButtons CurrentBibleBook="@BibleBook" ButtonsPerRow="10" OnChapterFilterSelected="OnChapterSelected" />
+		</div>				<!-- Sm -->
+
+		<div class="@MediaQuery.Md.DivClass">
+			<ChapterButtons CurrentBibleBook="@BibleBook" ButtonsPerRow="15" OnChapterFilterSelected="OnChapterSelected" />
+		</div>				<!-- Md -->
+
+		<div class="@MediaQuery.Lg.DivClass">
+			<ChapterButtons CurrentBibleBook="@BibleBook" ButtonsPerRow="20" OnChapterFilterSelected="OnChapterSelected" />
+		</div>			<!-- Lg -->
+
+		<div class="@MediaQuery.Xl.DivClass">
+			<ChapterButtons CurrentBibleBook="@BibleBook" ButtonsPerRow="25" OnChapterFilterSelected="OnChapterSelected" />
+		</div>			<!-- Xl -->
+
+	</div>
+</div>
+
+
+@code {
+	[Parameter] public BibleBook? BibleBook { get; set; }
+	[Parameter] public EventCallback<int> OnChapterSelected { get; set; }
+
+	private void ChapterSelected(int chapter)
+	{
+		OnChapterSelected.InvokeAsync(chapter);
+	}
+}

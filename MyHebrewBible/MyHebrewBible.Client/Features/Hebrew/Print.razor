@@ -1,0 +1,21 @@
+﻿@page "/Hebrew/Print"
+
+@using MyHebrewBible.Client.Enums;
+@using MyHebrewBible.Client.Features.Hebrew.Components;
+@using Page = MyHebrewBible.Client.Features.Hebrew.MenuItemConstants.Print
+
+<PageTitle>@Page.Title</PageTitle>
+
+<SubNavBar ActiveMenuItem="@MenuItems.Print" />
+
+<div class="d-print-none pb-2 mt-4 mb-2 border-bottom">
+	<h1><i class="@Page.Icon"></i> @Page.Title</h1>
+</div>
+
+
+
+<h1 class="text-danger">NOT YET IMPLEMENTED</h1>
+
+@code {
+
+}
