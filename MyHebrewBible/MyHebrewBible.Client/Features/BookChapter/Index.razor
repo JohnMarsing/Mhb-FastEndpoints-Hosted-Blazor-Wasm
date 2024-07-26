@@ -1,10 +1,102 @@
 ﻿@page "/bookchapter"
 @using MyHebrewBible.Client.Components.BookChapterToolbar
 @using MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Helpers
 
 @inject ApiClient Api
 
 <PageTitle>Book Chapter</PageTitle>
+
+<div class="row">
+	<div class="col-10">
+		@if (ShowSearch)
+		{
+			<div class="@MediaQuery.Xs.DivClass">
+				<div class="row mt-0">
+					<div class="col-6">
+						<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
+					</div>
+					<div class="col-6">
+						@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook)
+						{
+							<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
+						}
+					</div>
+				</div>
+
+			</div>
+
+			<div class="@MediaQuery.Sm.DivClass">
+				<div class="row mt-0">
+					<div class="col-5">
+						<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
+					</div>
+					<div class="col-7">
+						@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook)
+						{
+							<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
+						}
+					</div>
+				</div>
+			</div>
+
+			<div class="@MediaQuery.Md.DivClass">
+				<div class="row mt-0">
+					<div class="col-4">
+						<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
+					</div>
+					<div class="col-8">
+						@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook)
+						{
+							<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
+						}
+					</div>
+				</div>
+
+			</div>
+
+			<div class="@MediaQuery.Lg.DivClass">
+				<div class="row mt-0">
+					<div class="col-3">
+						<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
+					</div>
+					<div class="col-9">
+						@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook)
+						{
+							<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
+						}
+					</div>
+				</div>
+
+			</div>
+
+			<div class="@MediaQuery.Xl.DivClass">
+				<div class="row mt-0">
+					<div class="col-2">
+						<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
+					</div>
+					<div class="col-10">
+						@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook)
+						{
+							<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
+						}
+					</div>
+				</div>
+
+			</div>
+
+		}
+		else
+		{
+			@* <p class="my-1 text-black-50 text-center">Search Button Hidden</p> *@
+			<p class="fs-3"><span class="badge bg-primary-subtle text-dark">@SubTitle</span></p>
+		}
+	</div>
+	<div class="col-2">
+		<ShowHideSearchToggle OnToggleSelected="@ReturnedSearchToggle" ShowSearch="@ShowSearch" />
+	</div>
+
+</div>
 
 <div class="pb-n1 mt-2 mb-2 border-bottom border-info">
 
@@ -40,13 +132,13 @@
 
 @if (verses == null)
 {
-	<p><em>Loading verses...</em></p>
+	<p>🤔</p>
 }
 else
 {
 	@foreach (var item in verses)
 	{
-@* 		
+		@*
 		@if (item.DescH.GetType() != typeof(DBNull))
 		{
 			<h3 class="mt-2">@item.DescH</h3>
@@ -56,11 +148,11 @@ else
 			<small>why for how come you know have a pin</small>
 		} *@
 
-		@* 		
+		@*
 		@if (item.DescH != null)
 		{
 			<h3 class="mt-2">@item.DescH</h3>
-		} 
+		}
 		*@
 
 		@* 		@if (item.DescD is not null)
@@ -81,15 +173,44 @@ else
 	private Enums.BibleBook bibleBook = BibleBook.Genesis;
 	private int chapter = 1;
 
+
 	private ICollection<BookChapter>? verses = null;
 	public PrevNextButtonVM? CurrentPrevNextButtonVM { get; set; }
+
+	public BibleBook? CurrentBibleBook { get; set; }
+	public BibleBook? PrevBibleBook { get; set; }
+
+	private void ReturnedBookFilter(BibleBook bibleBook)
+	{
+		PrevBibleBook = CurrentBibleBook;
+		CurrentBibleBook = bibleBook;
+		SubTitle = bibleBook.Title;
+		CurrentPrevNextButtonVM = new PrevNextButtonVM(bibleBook, 1);
+		verses = null;
+		//StateHasChanged();
+	}
+
+	public int? CurrentChapter { get; set; }
+	private async Task ReturnedChapterFilter(int chapter)
+	{
+		CurrentChapter = chapter;
+		ShowSearch = false;
+		SubTitle = CurrentBibleBook!.Title + " " + chapter;
+		CurrentPrevNextButtonVM = new PrevNextButtonVM(CurrentBibleBook, chapter);
+		verses = await Api!.GetBookChapterAsync(CurrentBibleBook.Value, chapter);
+		//BookChapterPrevNext bookChapterPrevNext = new BookChapterPrevNext();
+		//await ReturnedBookChapterPrevNext(bookChapterPrevNext);
+
+		//StateHasChanged();
+	}
 
 	protected string SubTitle = "";
 
 	protected override async Task OnInitializedAsync()
 	{
+		ShowSearch = true;
 		CurrentPrevNextButtonVM = new PrevNextButtonVM(BibleBook.Genesis, 1);
-		SubTitle = $"{BibleBook.Genesis.Title}-1";
+		SubTitle = $"{BibleBook.Genesis.Title} 1";
 		verses = await Api!.GetBookChapterAsync(BibleBook.Genesis, 1);
 	}
 
@@ -106,5 +227,14 @@ else
 		verses = await Api!.GetBookChapterAsync(b, c);
 		//StateHasChanged();
 	}
+
+	
+	private bool ShowSearch;
+	private void ReturnedSearchToggle(bool showSearch)
+	{
+		ShowSearch = showSearch;
+	}
+
+
 
 }

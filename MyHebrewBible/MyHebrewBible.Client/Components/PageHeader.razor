@@ -1,0 +1,12 @@
+﻿@rendermode InteractiveWebAssembly
+
+<PageTitle>@PageEnum.Title</PageTitle>
+
+<div class="pb-n1 mt-2 mb-3 border-bottom border-info">
+		 <h5 class="text-center"><i class="@PageEnum.Icon"></i>&nbsp;&nbsp;@PageEnum.Title</h5> 
+</div>
+
+@code {
+	[Parameter, EditorRequired] public MyHebrewBible.Client.Enums.Nav PageEnum { get; set; } = MyHebrewBible.Client.Enums.Nav.Home;
+
+}

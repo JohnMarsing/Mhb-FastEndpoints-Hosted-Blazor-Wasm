@@ -1,0 +1,46 @@
+﻿@using MyHebrewBible.Client.Enums 
+@using Blazored.Typeahead
+
+@* @rendermode InteractiveWebAssembly *@
+@* @inject ILogger<BibleSearch>? Logger  *@
+
+<BlazoredTypeahead SearchMethod="SearchBibleBooks"
+                   TValue="BibleBook"
+                   TItem="BibleBook"
+									 Value="CurrentBook"
+                   ValueChanged="SelectedResultChanged"
+									 ValueExpression="@(() => CurrentBook)"
+									 EnableDropDown="true"
+									 MaximumSuggestions="66"
+									 MinimumLength="2"
+									 placeholder="Select book...">
+	<SelectedTemplate Context="mycontext">
+		@mycontext.Title &nbsp;&nbsp;&nbsp; <span class="hebrew.sm">@mycontext.NameInHebrew</span>
+	</SelectedTemplate>
+	<HelpTemplate>
+		Please enter at least 2 characters to perform a search.
+	</HelpTemplate>
+	<ResultTemplate Context="mycontext">
+		@mycontext.Title <i class="text-black-50">@mycontext.TransliterationInHebrew</i>
+	</ResultTemplate>
+</BlazoredTypeahead>
+
+@code {
+
+	[Parameter] public EventCallback<BibleBook> OnBookFilterSelected { get; set; }
+
+	protected BibleBook? CurrentBook { get; set; } // = BibleBook.Genesis;
+
+	private void SelectedResultChanged(BibleBook bibleBook)
+	{
+		OnBookFilterSelected.InvokeAsync(bibleBook);
+	}
+
+	private async Task<IEnumerable<BibleBook>> SearchBibleBooks(string searchText)
+	{
+		return await Task.FromResult(BibleBook.List
+			.Where(x => x.Title.ToLower().Contains(searchText.ToLower()) )
+			.OrderBy(o => o.Value));
+	}
+	
+}

@@ -1,0 +1,49 @@
+﻿@page "/Hebrew"
+@using MyHebrewBible.Client.Enums;
+@using MyHebrewBible.Client.Features.Hebrew.Components;
+
+<SubNavBar ActiveMenuItem="@MenuItems.Chart" />
+
+@rendermode InteractiveWebAssembly
+
+<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.Hebrew" />
+
+<div class="@MediaQuery.XsOrSmOrMd.DivClass">
+	<div class="row">
+		<div class="col-12">
+			<h3 class="text-success">
+				Hebrew Letters
+				<span class="hebrew small float-end">אָלֶף־בֵּית עִבְרִי</span>
+			</h3>
+			<AlephBetTableXsSmMd />
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-12">
+			<h3 class="text-success">
+				Vowel Points<span class="hebrew small float-end">נִקּוּד</span>
+			</h3>
+			<AlephBetVowelPoints />
+		</div>
+	</div>
+
+</div>
+
+<div class="@MediaQuery.LgOrXl.DivClass">
+	<div class="row">
+		<div class="col-9">
+			<h3 class="text-success">
+				Hebrew Letters
+				<span class="hebrew small float-end">אָלֶף־בֵּית עִבְרִי</span>
+			</h3>
+			<AlephBetTableLgXl />
+		</div>
+		<div class="col-3">
+			<h3 class="text-success">
+				Vowel Points<span class="hebrew small float-end">נִקּוּד</span>
+			</h3>
+			<AlephBetVowelPoints />
+		</div>
+	</div>
+</div>

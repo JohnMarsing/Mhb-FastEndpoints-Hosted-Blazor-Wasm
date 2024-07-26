@@ -1,0 +1,242 @@
+﻿@page "/Hebrew/Definitions"
+
+@using MyHebrewBible.Client.Enums;
+@using MyHebrewBible.Client.Features.Hebrew.Components;
+@using Page = MyHebrewBible.Client.Features.Hebrew.MenuItemConstants.Definitions
+
+<PageTitle>@Page.Title</PageTitle>
+
+<SubNavBar ActiveMenuItem="@MenuItems.Definitions" />
+
+<div class="d-print-none pb-2 mt-4 mb-2 border-bottom">
+	<h1><i class="@Page.Icon"></i> @Page.Title</h1>
+</div>
+
+
+<div class="d-none d-print-block">
+	<h4>
+		Definitions Related to Hebrew Letters
+		<span class="float-end text-muted"><small>Source: www.MyHebrewBible.Com/Hebrew</small></span>
+	</h4>
+</div>
+
+
+<div class="@MediaQuery.XsOrSm.DivClass">
+	<p class="fs-5 fw-bold mt-4 mb-0"><i>@Enums.Terms.Niqqud.Title</i></p>
+	<p class="ms-3">@((MarkupString)Enums.Terms.Niqqud.Definition)</p>
+
+	<p class="fs-5 fw-bold mt-4 mb-0"><i>@Enums.Terms.Holam.Title</i></p>
+	<p class="ms-3">@((MarkupString)Enums.Terms.Holam.Definition)</p>
+
+	<p class="fs-5 fw-bold mt-4 mb-0"><i>@Enums.Terms.Mappiq.Title</i></p>
+	<p class="ms-3">@((MarkupString)Enums.Terms.Mappiq.Definition)</p>
+
+	<p class="fs-5 fw-bold mt-4 mb-0"><i>@Enums.Terms.Dagesh.Title</i></p>
+	<p class="ms-3">@((MarkupString)Enums.Terms.Dagesh.Definition)</p>
+
+	@((MarkupString)Enums.Terms.DageshGrid.Definition)
+	@((MarkupString)Enums.Terms.DageshHazak.Definition)
+
+	<p class="fs-5 fw-bold mt-4 mb-0"><i>@Enums.Terms.Gutturals.Title</i></p>
+	<p class="ms-3">@((MarkupString)Enums.Terms.Gutturals.Definition)</p>
+
+	<p class="fs-5 fw-bold mt-4 mb-0"><i>@Enums.Terms.KubutzAndShuruk.Title</i></p>
+	<p class="ms-3">@((MarkupString)Enums.Terms.KubutzAndShuruk.Definition)</p>
+
+	<p class="fs-5 fw-bold mt-4 mb-0"><i>@Enums.Terms.KtivHasarNiqqud.Title</i></p>
+	<p class="ms-3">@((MarkupString)Enums.Terms.KtivHasarNiqqud.Definition)</p>
+
+	<p class="fs-5 fw-bold mt-4 mb-0"><i>@Enums.Terms.MatresLectionis.Title</i></p>
+	<p class="ms-3">@((MarkupString)Enums.Terms.MatresLectionis.Definition)</p>
+
+	<p class="fs-5 fw-bold mt-4 mb-0"><i>@Enums.Terms.Shva.Title</i></p>
+	<p class="ms-3">@((MarkupString)Enums.Terms.Shva.Definition)</p>
+
+	<p class="fs-5 fw-bold mt-4 mb-0"><i>@Enums.Terms.HolamHaser.Title</i></p>
+	<p class="ms-3">@((MarkupString)Enums.Terms.HolamHaser.Definition)</p>
+
+	<p class="fs-5 fw-bold mt-4 mb-0"><i>@Enums.Terms.PaleoHebrewAlephbet.Title</i></p>
+	<p class="ms-3">@((MarkupString)Enums.Terms.PaleoHebrewAlephbet.Definition)</p>
+
+	<p class="fs-5 fw-bold mt-4 mb-0"><i>@Enums.Terms.QereKetiv.Title</i></p>
+	<p class="ms-3">@((MarkupString)Enums.Terms.QereKetiv.Definition)</p>
+
+
+</div>
+
+<div class="@MediaQuery.MdOrLgOrXl.DivClass">
+	<div class="card-body">
+		<div class="card-text">
+
+			<dl class="row">
+				<dt class="col-4 float-end"><i>@Enums.Terms.Niqqud.Title</i></dt>
+				<dd class="col-8">
+					@((MarkupString)Enums.Terms.Niqqud.Definition)
+				</dd>
+			</dl>
+
+			<dl class="row">
+				<dt class="col-4"><i>@Enums.Terms.Holam.Title</i></dt>
+				<dd class="col-8">
+					@((MarkupString)Enums.Terms.Holam.Definition)
+				</dd>
+			</dl>
+
+			<dl class="row">
+				<dt class="col-4 float-end"><i>@Enums.Terms.Mappiq.Title</i></dt>
+				<dd class="col-8">
+					@((MarkupString)Enums.Terms.Mappiq.Definition)
+				</dd>
+			</dl>
+
+			<dl class="row">
+				<dt class="col-4 float-end"><i>@Enums.Terms.Dagesh.Title</i></dt>
+				<dd class="col-8">
+					@((MarkupString)Enums.Terms.Dagesh.Definition)
+					@((MarkupString)Enums.Terms.DageshGrid.Definition)
+					@((MarkupString)Enums.Terms.DageshHazak.Definition)
+				</dd>
+			</dl>
+
+
+			<dl class="row">
+				<dt class="col-4 float-end">gutturals</dt>
+				<dd class="col-8">
+					@((MarkupString)Enums.Terms.Gutturals.Definition)
+				</dd>
+			</dl>
+
+			<dl class="row">
+				<dt class="col-4 float-end"><i>Kubutz</i> and <i>Shuruk</i></dt>
+				<dd class="col-8">
+					@((MarkupString)Enums.Terms.KubutzAndShuruk.Definition)
+				</dd>
+			</dl>
+
+			<dl class="row">
+				<dt class="col-4 float-end"><i>Ktiv hasar niqqud</i></dt>
+				<dd class="col-8">
+					@((MarkupString)Enums.Terms.KtivHasarNiqqud.Definition)
+				</dd>
+			</dl>
+
+			<dl class="row">
+				<dt class="col-4 float-end"><i>holam haser</i></dt>
+				<dd class="col-8">
+					@((MarkupString)Enums.Terms.HolamHaser.Definition)
+				</dd>
+			</dl>
+
+			<dl class="row">
+				<dt class="col-4 float-end"><i>matres lectionis</i></dt>
+				<dd class="col-8">
+					@((MarkupString)Enums.Terms.MatresLectionis.Definition)
+				</dd>
+			</dl>
+
+			<dl class="row">
+				<dt class="col-4 float-end"><i>Shva</i></dt>
+				<dd class="col-8">
+					@((MarkupString)Enums.Terms.Shva.Definition)
+				</dd>
+			</dl>
+
+			<dl class="row">
+				<dt class="col-4 float-end">Paleo Hebrew Alephbet</dt>
+				<dd class="col-8">
+					@((MarkupString)Enums.Terms.PaleoHebrewAlephbet.Definition)
+				</dd>
+			</dl>
+
+			<dl class="row">
+				<dt class="col-4 float-end"><i>Qere Ketiv</i></dt>
+				<dd class="col-8">
+					@((MarkupString)Enums.Terms.QereKetiv.Definition)
+				</dd>
+			</dl>
+
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-12">
+		<div class="card bg-light mt-3 mb-2">
+
+			<div class="card-header">
+				<h3 class="text-center">Resources</h3>
+			</div>
+
+			<div class="card-body">
+				<ul>
+					<li>
+						<a href="http://www.hebrew4christians.com/Grammar/Unit_One/unit_one.html" target="_blank">Learning the letters</a> <i class="fas fa-external-link-alt"></i>
+					</li>
+					<li>
+						<a href="http://www.hebrew4christians.com/Grammar/Unit_Two/unit_two.html" target="_blank">Learning the vowels</a> <i class="fas fa-external-link-alt"></i>
+					</li>
+					<li>
+						<a href="http://www.hebrew4christians.com/Grammar/Unit_Three/unit_three.html" target="_blank">Learning the Hebrew syllables</a> <i class="fas fa-external-link-alt"></i>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+@* ToDo: <partial name=@PartialViews.AlephBetFooter /> *@
+
+<div class="d-print-none">
+	<div class="row">
+		<div class="col-12">
+			<button @onclick="LearnMoreToggleButtonClick"
+							class="@Color btn-sm  float-end">
+				@Title <i class='@Icon'></i>
+			</button>
+
+			@if (ContentIsShowing)
+			{
+				<div class="card-body bg-light">
+					<dl>
+						<dt><i>holam haser</i> (more info)</dt>
+						<dd>
+							<br />The <i>holam haser</i> for <i>vav</i> is unicode <a href="http://www.fileformat.info/info/unicode/char/05BA/index.htm">#1466</a>, and it occurs 412 in the database.
+							unicode <a href="http://www.fileformat.info/info/unicode/char/05BC/index.htm">#1468</a> (<i>dagesh</i> or <i>mapiq</i>) and
+							<a href="http://www.fileformat.info/info/unicode/char/05B9/index.htm">#1465</a> (<i>cholem</i>) seem very similar.
+						</dd>
+
+					</dl>
+					<h5><a href="https://en.wikipedia.org/wiki/Transact-SQL">T-Sql</a> Examples</h5>
+
+					<ul>
+						<li>
+							Kubutz and Shuruk<br />&nbsp;&nbsp;<code>SELECT NCHAR(1489) + NCHAR(1467) AS KubutzWithBet, NCHAR(1493)+NCHAR(1468) AS Shuruk</code>
+						</li>
+						<li>
+							English vowels<br />&nbsp;&nbsp;<code>SELECT NCHAR(0257) AS Long_a, NCHAR(0275) AS Long_e, NCHAR(0333) AS Long_o, NCHAR(0363) AS Long_u</code>
+						</li>
+						<li>
+							Precomposed dagesh characters<br />&nbsp;&nbsp;<code>SELECT NCHAR(64305) AS BetDagesh, NCHAR(64315) AS KafDagesh, NCHAR(64324) AS PeDagesh</code>
+						</li>
+					</ul>
+
+				</div>
+			}
+
+		</div>
+	</div>
+</div>
+
+@code {
+	public bool ContentIsShowing = false;
+	private string Color => ContentIsShowing ? "btn-primary" : "btn-primary";
+	private string Title => ContentIsShowing ? "Hide " : "Learn more...";
+	private string Icon => ContentIsShowing ? "fas fa-chevron-up" : "fas fa-chevron-down";
+
+	protected void LearnMoreToggleButtonClick()
+	{
+		ContentIsShowing = !ContentIsShowing;
+	}
+}

@@ -1,0 +1,40 @@
+﻿@page "/Hebrew/Unicode"
+
+@using MyHebrewBible.Client.Enums;
+@using MyHebrewBible.Client.Features.Hebrew.Components;
+@using Page = MyHebrewBible.Client.Features.Hebrew.MenuItemConstants.Unicode
+
+<PageTitle>@Page.Title</PageTitle>
+
+<SubNavBar ActiveMenuItem="@MenuItems.Unicode" />
+
+<div class="d-print-none pb-2 mt-4 mb-2 border-bottom">
+	<h1><i class="@Page.Icon"></i> @Page.Title</h1>
+</div>
+
+<TableTemplate Items="Enums.HebrewChartExtra.List.OrderBy(o => o.Value).ToList()">
+	<TableHeader>
+		<th class="text-info">#</th>
+		<th class="text-primary">gem</th>
+		<th class="text-danger">unicode</th>
+		<th class="text-warning">Sofit?</th>
+		<th class="text-info text-center">Letter</th>
+		<th class="text-info">Eng</th>
+		<th class="text-primary">name</th>
+
+	</TableHeader>
+	<RowTemplate>
+		<td>@context.Value</td>
+		<td>@context.Gematria</td>
+		<td>@context.UniInt</td>
+		<td>@context.IsSofit</td>
+		<td class="hebrewchart black text-center">@context.Hebrew</td>
+		<td>@context.EngLetter</td>
+		<td>@context.UnicodeNameOriginal</td>
+	</RowTemplate>
+</TableTemplate>
+
+
+@code {
+	//<td class="hebrewchart black text-center">@context.IsSofit</td>
+}

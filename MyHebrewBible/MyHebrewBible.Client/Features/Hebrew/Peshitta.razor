@@ -1,0 +1,354 @@
+﻿@page "/Hebrew/Peshitta"
+
+@using MyHebrewBible.Client.Enums;
+@using MyHebrewBible.Client.Features.Hebrew.Components;
+@using Page = MyHebrewBible.Client.Features.Hebrew.MenuItemConstants.Peshitta
+
+<PageTitle>@Page.Title</PageTitle>
+
+<SubNavBar ActiveMenuItem="@MenuItems.Peshitta" />
+
+@*
+flaky url	
+<p class="float-end">
+	<span class="text-muted">
+		<small><sup><a href="http://www.kjv-only.com/peshitta.html">Source <i class="fas fa-external-link-alt" aria-hidden="true"></i></a></sup></small>
+	</span>
+</p>
+*@
+<div class="d-print-none pb-2 mt-4 mb-2 border-bottom">
+	<h1><i class="@Page.Icon"></i> @Page.Title</h1>
+</div>
+
+<div class="table-responsive">
+	<table class="table table-condensed table-striped">
+		<thead>
+			<tr align=middle>
+				<th><b>Scripture passage</b></th>
+				<th><b>KJV</b></th>
+				<th><b>Peshitta</b><a href="#fn13"><sup>13</sup></a> </th>
+				<th><b>NIV and/or NASB</b></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Genesis 1:26</td>
+				<td>"...and over all the earth..."</td>
+				<td>"...and over all the <b>wild beasts</b> of the earth..."</td>
+				<td>"...over all the earth [with footnote]..."</td>
+			</tr>
+
+			<tr>
+				<td>Genesis 2:2</td>
+				<td>"And on the seventh day God ended his work..."</td>
+				<td>"And on the <b>sixth</b> day God finished his works..."</td>
+				<td>"<b>By</b> the seventh day God has finished the work..."</td>
+			</tr>
+
+			<tr>
+				<td>Judges 14:15</td>
+				<td>"And it came to pass on the seventh day..."</td>
+				<td>"But on the <b>fourth</b> day..."</td>
+				<td>"On the <b>fourth</b> day..."</td>
+			</tr>
+
+			<tr>
+				<td>1 Samuel 1:24</td>
+				<td>"three bullocks..."</td>
+				<td>"<b>three-year old</b> bullock..."</td>
+				<td>"<b>three-year-old</b> bull..."</td>
+			</tr>
+
+			<tr>
+				<td>1 Samuel 2:13</td>
+				<td>"...when any man offered sacrifice..."</td>
+				<td>"...of every man who offered a sacrifice, <b>and they made for themselves meat-forks with three prongs</b>..."</td>
+				<td>"...whenever anyone offered a sacrifice..."</td>
+			</tr>
+
+			<tr>
+				<td>1 Samuel 13:5</td>
+				<td>"...thirty thousand chariots..."</td>
+				<td>"...<b>three</b> thousand chariots..."</td>
+				<td>"...<b>three</b> thousand chariots..."</td>
+			</tr>
+
+			<tr>
+				<td>2 Samuel 15:7</td>
+				<td>"...forty years..."</td>
+				<td>"...<b>four</b> years..."</td>
+				<td>"...<b>four</b> years..."</td>
+			</tr>
+
+			<tr>
+				<td>2 Samuel 18:4</td>
+				<td>"And the king said unto them, What seemeth you best I will do..."</td>
+				<td>"<b>And the servants of David said to him, we will go forth quickly to fight against him.</b> And the king said to them, Whatever seems good to you, do it..."</td>
+				<td>"The king answered, "I will do whatever seems best to you.""</td>
+			</tr>
+
+			<tr>
+				<td>1 Kings 5:11</td>
+				<td>"...twenty measures of pure oil..."</td>
+				<td>"...twenty <b>thousand</b> measures of pure oil..."</td>
+				<td>"...twenty <b>thousand</b> baths of pressed olive oil..."</td>
+			</tr>
+
+			<tr>
+				<td>2 Chronicles 3:4</td>
+				<td>"...<b>one hundred</b> twenty..."</td>
+				<td>"...twenty cubits..."</td>
+				<td>"...twenty cubits..."</td>
+			</tr>
+
+			<tr>
+				<td>2 Chronicles 21:2</td>
+				<td>"...Jehoshaphat king of Israel."</td>
+				<td>"...Jehoshaphat king of <b>Judah</b>."</td>
+				<td>"...Jehoshaphat king of Israel [with footnote]."</td>
+			</tr>
+
+			<tr>
+				<td>2 Chronicles 28:19</td>
+				<td>"...Ahaz king of Israel..."</td>
+				<td>"...Ahaz king of <b>Judah</b>..."</td>
+				<td>"...Ahaz king of <b>Judah</b> [with footnote]..."</td>
+			</tr>
+
+			<tr>
+				<td>2 Chronicles 36:9</td>
+				<td>"Jehoiachin was eight years old..."</td>
+				<td>"Jehoiachin was <b>eighteen</b> years old..."</td>
+				<td>"Jehoiachin was <b>eighteen</b> years old..."</td>
+			</tr>
+
+			<tr>
+				<td>Psalm 145:13</td>
+				<td>
+					"Thy kingdom is an everlasting kingdom, and thy dominion endureth
+					throughout all generations."
+				</td>
+				<td>
+					"Thy kingdom is an everlasting kingdom, and thy dominion endures
+					throughout all generations. <b>
+						The LORD is faithful in his words and
+						righteous in all his works.
+					</b>"
+				</td>
+				<td>
+					"Your kingdom is an everlasting kingdom, and your dominion endures
+					through all generations. <b>
+						The LORD is faithful to all his promises and
+						loving toward all he has made.
+					</b>"
+				</td>
+			</tr>
+
+			<tr>
+				<td>Mattthew 8:23, 8:24, 9:36, 11:20, 12:9, 14:18, etc.</td>
+				<td>"he"</td>
+				<td>"<b>Jesus</b>"</td>
+				<td>"<b>Jesus</b>"</td>
+			</tr>
+
+			<tr>
+				<td>Matthew 10:8</td>
+				<td>"...cleanse the lepers, <b>raise the dead</b>, cast out devils..."</td>
+				<td>"...cleanse the lepers, cast out demons..."</td>
+				<td>"...cleanse those who have leprosy, drive out demons..."</td>
+			</tr>
+
+			<tr>
+				<td>Matthew 27:41</td>
+				<td>"...scribes and elders..."</td>
+				<td>"...scribes and elders <b>and Pharisees</b>..."</td>
+				<td>"...scribes and elders..."</td>
+			</tr>
+
+			<tr>
+				<td>Matt 27:35</td>
+				<td>
+					"And they crucified him, and parted his garments,
+					casting lots: <b>
+						that it might be fulfilled which was spoken by the
+						prophet, They parted my garments among them, and upon my vesture did they
+						cast lots
+					</b>."
+				</td>
+				<td>
+					"And when they had crucified him, they divided his
+					clothes by casting lots."<a href="#fn14"><sup>14</sup></a>
+				</td>
+				<td>
+					"When they had crucified him, they divided up his
+					clothes by casting lots."
+				</td>
+			</tr>
+
+			<tr>
+				<td>Matthew 28:18</td>
+				<td>"All power is given unto me in heaven and in earth."</td>
+				<td>"All power in heaven and on earth has been given to me. <b>Just as my Father has sent me I am also sending you.</b>"</td>
+				<td>"All authority in heaven and on earth has been given to me."</td>
+			</tr>
+
+			<tr>
+				<td>Mark 1:2</td>
+				<td>"...the prophets..."</td>
+				<td>"...<b>Isaiah</b> the prophet..."</td>
+				<td>"...<b>Isaiah</b> the prophet..."</td>
+			</tr>
+
+			<tr>
+				<td>Mark 7:24 </td>
+				<td>"And from thence he arose, and went..."</td>
+				<td>"<b>Jesus</b> moved away from thence..."</td>
+				<td>"<b>Jesus</b> left that place and went..."</td>
+			</tr>
+
+			<tr>
+				<td>John 1:18</td>
+				<td>"...the only begotten Son..."</td>
+				<td>"...the only begotten <b>God</b>..."</td>
+				<td>"...the only begotten <b>God</b>..."</td>
+			</tr>
+
+			<tr>
+				<td>John 6:11</td>
+				<td>"...distributed to the <b>disciples, and the disciples to</b> them that were set down..."</td>
+				<td>"...distributed it to those who were sitting down..."</td>
+				<td>"...distributed to those who were seated..."</td>
+			</tr>
+
+			<tr>
+				<td>
+					John 7:53-8:11<br>(the story of the woman caught in
+					adultery)
+				</td>
+				<td>present</td>
+				<td><b>not present</b></td>
+				<td>
+					present, but footnotes indicate this is of
+					questionable origin
+				</td>
+			</tr>
+
+			<tr>
+				<td>Acts 4:25</td>
+				<td>"Who by the mouth of thy servant David..."</td>
+				<td>
+					"who <b>spoke through the Holy Spirit</b> by the mouth of thy servant
+					David..."
+				</td>
+				<td>
+					"You <b>spoke by the Holy Spirit through</b> the mouth of your
+					servant, our father David:..."
+				</td>
+			</tr>
+
+			<tr>
+				<td>Acts 14:10</td>
+				<td>"...Stand upright on thy feet..."</td>
+				<td>"...<b>I say to you, in the name of our Lord Jesus Christ,</b> stand upright on your feet..."</td>
+				<td>"...Stand up on your feet..."</td>
+			</tr>
+
+			<tr>
+				<td>Acts 18:7</td>
+				<td>"...Justus..."</td>
+				<td>"...<b>Titus</b>..."</td>
+				<td>"...Titius Justus..."</td>
+			</tr>
+
+			<tr>
+				<td>Acts 19:5, Acts 19:17, Acts 21:13</td>
+				<td>"...Lord Jesus..."</td>
+				<td>"...Lord Jesus <b>Christ</b>..."</td>
+				<td>"...Lord Jesus..."</td>
+			</tr>
+
+			<tr>
+				<td>Romans 3:26</td>
+				<td>"...Jesus."</td>
+				<td>"...<b>our Lord</b> Jesus <b>Christ</b>."</td>
+				<td>"...Jesus."</td>
+			</tr>
+
+			<tr>
+				<td>Romans 9:5</td>
+				<td>"...Christ came, who is over all, God blessed for ever."</td>
+				<td>
+					"...Christ appeared in the flesh, <b>who is God over all</b>, and to
+					whom are due praises and thanksgiving for ever and ever. Amen.
+				</td>
+				<td>"...Christ, <b>who is God over all</b>, forever praised!"</td>
+			</tr>
+
+			<tr>
+				<td>Ephesians 5:9</td>
+				<td>"For the fruit of the Spirit..."</td>
+				<td>"For the fruits of the <b>light</b>..."</td>
+				<td>"for the fruit of the <b>light</b>..."</td>
+			</tr>
+
+			<tr>
+				<td>Ephesians 5:21</td>
+				<td>"...in the fear of God."</td>
+				<td>"...in the <b>love</b> of <b>Christ</b>."</td>
+				<td>"...in the fear of <b>Christ</b>."</td>
+			</tr>
+
+			<tr>
+				<td>Philippians 2:19</td>
+				<td>"...Lord Jesus..."</td>
+				<td>"...Lord Jesus <b>Christ</b>..."</td>
+				<td>"...Lord Jesus..."</td>
+			</tr>
+
+			<tr>
+				<td>1 John 5:6-8</td>
+				<td>
+					"This is he that came by water and blood, even Jesus Christ; not by water only, but by water and blood. And it is the Spirit that beareth witness, because the Spirit is truth.
+					<b>For there are three that bear record in heaven, the Father, the Word, and the Holy Ghost: and these three are one.</b>
+					And there are three that bear witness in earth, the Spirit, and the water, and the blood: and these three agree in one."
+				</td>
+				<td>
+					"This is he who came by water and blood, even Jesus Christ, not by water only, but by water and blood. And the Spirit testifies that the very Spirit is the truth.
+					And there are three to beat witness, the Spirit and the water and the blood; and these three are one."
+				</td>
+				<td>
+					"This is the one who came by water and blood--Jesus Christ. He did not come by water only, but by water and blood. And it is the Spirit who testifies, because the Spirit is the truth.
+					For there are three that testify:  the Spirit, the water and the blood; and the three are in agreement."
+				</td>
+			</tr>
+
+			<tr>
+				<td>Jude 1:25</td>
+				<td>
+					"To the only wise God our Saviour, be glory and majesty, dominion and
+					power, both now and ever. Amen."
+				</td>
+				<td>
+					"To the only God our Saviour, <b>through Jesus Christ our Lord</b>, be
+					glory and majesty, dominion and power, both now and for ever. Amen."
+				</td>
+
+				<td>
+					"to the only God our Savior be glory, majesty, power and authority,
+					<b>through Jesus Christ our Lord</b>, before all ages, now and
+					forevermore! Amen."
+				</td>
+			</tr>
+
+		</tbody>
+
+		@*<tfoot> <tr>	<td>...</td> <td>...</td>	</tr>	</tfoot>*@
+
+	</table>
+</div>
+
+
+
+@code {
+
+}

@@ -1,0 +1,32 @@
+﻿<div class="d-print-none">
+	<div class="row">
+		<div class="col-12">
+			<button @onclick="LearnMoreToggleButtonClick"
+							class="@Color btn-sm  float-end">
+				@Title <i class='@Icon'></i>
+			</button>
+
+			@if (ContentIsShowing)
+			{
+				<div class="card-body bg-light">
+					@ChildContent
+				</div>
+			}
+
+		</div>
+	</div>
+</div>
+
+@code {
+	[Parameter] public RenderFragment? ChildContent { get; set; }
+
+	public bool ContentIsShowing = false;
+	private string Color => ContentIsShowing ? "btn-primary" : "btn-primary";
+	private string Title => ContentIsShowing ? "Hide " : "Learn more...";
+	private string Icon => ContentIsShowing ? "fas fa-chevron-up" : "fas fa-chevron-down";
+
+	protected void LearnMoreToggleButtonClick()
+	{
+		ContentIsShowing = !ContentIsShowing;
+	}
+}
