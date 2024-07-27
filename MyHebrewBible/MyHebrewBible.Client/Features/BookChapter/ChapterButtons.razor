@@ -1,69 +1,21 @@
 ﻿@using MyHebrewBible.Client.Enums
 
-@* @rendermode InteractiveWebAssembly *@
 
-@if (CurrentBibleBook == BibleBook.Psalms)
+
+@foreach (var r in ButtonRows)
 {
-
-	@foreach (var r in ButtonRowsPsalms1)
-	{
-		<div class="btn-group btn-group-sm">
-			@for (int i = 1; i <= 50; i++)
-			{
-				int iLocal = i;
-				<button type="button" class="btn btn-outline-info font-monospace"
-								@onclick="@(e => ButtonClick(@iLocal))">
-					@((MarkupString)ButtonNumber(i))
-				</button>
-			}
-		</div>
-	}
-
-	@foreach (var r in ButtonRowsPsalms2)
-	{
-		<div class="btn-group btn-group-sm">
-			@for (int i = 51; i <= 100; i++)
-			{
-				int iLocal = i;
-				<button type="button" class="btn btn-outline-info font-monospace"
-								@onclick="@(e => ButtonClick(@iLocal))">
-					@((MarkupString)ButtonNumber(i))
-				</button>
-			}
-		</div>
-	}
-
-	@foreach (var r in ButtonRowsPsalms3)
-	{
-		<div class="btn-group btn-group-sm">
-			@for (int i = 101; i <= 150; i++)
-			{
-				int iLocal = i;
-				<button type="button" class="btn btn-outline-info font-monospace"
-								@onclick="@(e => ButtonClick(@iLocal))">
-					@((MarkupString)ButtonNumber(i))
-				</button>
-			}
-		</div>
-	}
-
+	<div class="btn-group btn-group-sm">
+		@for (int i = r.ChapterStart; i <= r.ChapterEnd; i++)
+		{
+			int iLocal = i;
+			<button type="button" class="btn btn-outline-info font-monospace"
+							@onclick="@(e => ButtonClick(@iLocal))">
+				@((MarkupString)ButtonNumber(i))
+			</button>
+		}
+	</div>
 }
-else
-{
-	@foreach (var r in ButtonRows)
-	{
-		<div class="btn-group btn-group-sm">
-			@for (int i = r.ChapterStart; i <= r.ChapterEnd; i++)
-			{
-				int iLocal = i;
-				<button type="button" class="btn btn-outline-info font-monospace"
-								@onclick="@(e => ButtonClick(@iLocal))">
-					@((MarkupString)ButtonNumber(i))
-				</button>
-			}
-		</div>
-	}
-}
+
 
 @code {
 
@@ -73,57 +25,12 @@ else
 
 	public List<ButtonRow> ButtonRows { get; set; } = new List<ButtonRow>();
 
-	public List<ButtonRow> ButtonRowsPsalms1 { get; set; } = new List<ButtonRow>();
-	public List<ButtonRow> ButtonRowsPsalms2 { get; set; } = new List<ButtonRow>();
-	public List<ButtonRow> ButtonRowsPsalms3 { get; set; } = new List<ButtonRow>();
-
 
 	protected override void OnParametersSet()
 	{
 		ButtonRows.Clear();
-		ButtonRowsPsalms1.Clear();
-		ButtonRowsPsalms2.Clear();
-		ButtonRowsPsalms3.Clear();
-
-		if (CurrentBibleBook == BibleBook.Psalms)
-		{
-			ButtonRowsPsalms1 = PopulatePsalmsButtonRows(1, 50);
-			ButtonRowsPsalms2 = PopulatePsalmsButtonRows(51, 100);
-			ButtonRowsPsalms3 = PopulatePsalmsButtonRows(101, 150);
-		}
-		else
-		{
-			PopulateButtonRows();
-		}
+		PopulateButtonRows();
 	}
-
-	private List<ButtonRow> PopulatePsalmsButtonRows(int startChapter, int lastChapter)
-	{
-		int wholeRowCount = lastChapter / ButtonsPerRow;
-		int lastRowButtonCount = lastChapter % ButtonsPerRow;
-		int s = startChapter;
-		int e = ButtonsPerRow;
-		for (int r = 1; r <= wholeRowCount; r++)
-		{
-			ButtonRows.Add(new ButtonRow()
-				{
-					ChapterStart = s,
-					ChapterEnd = e
-				});
-			s = e + 1;
-			e += ButtonsPerRow;
-		}
-		if (lastRowButtonCount > 0)
-		{
-			ButtonRows.Add(new ButtonRow()
-				{
-					ChapterStart = (lastChapter - lastRowButtonCount) + 1, // 50-5=45+1=46
-					ChapterEnd = lastChapter
-				});
-		}
-		return ButtonRows;
-	}
-
 
 	private void PopulateButtonRows()
 	{
@@ -165,8 +72,6 @@ else
 
 			}
 		}
-
-
 	}
 
 	private void ButtonClick(int chapter)
@@ -210,8 +115,6 @@ else
 
 	}
 
-
-	//@for (int i = r.ChapterStart; i <= r.ChapterEnd; i++)
 }
 
 

@@ -8,93 +8,147 @@
 <PageTitle>Book Chapter</PageTitle>
 
 <div class="row">
-	<div class="col-10">
-		@if (ShowSearch)
-		{
-			<div class="@MediaQuery.Xs.DivClass">
-				<div class="row mt-0">
-					<div class="col-6">
-						<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
-					</div>
-					<div class="col-6">
-						@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook)
+
+	<div class="col-12">
+
+
+		<div class="@MediaQuery.Xs.DivClass">
+			<div class="row mt-0">
+
+				<div class="col-7">
+					<div class="d-flex justify-content-start">
+						<ShowHideSearchToggle OnToggleSelected="@ReturnedSearchToggle" ShowSearch="@ShowSearch" />
+						@if (ShowSearch)
 						{
-							<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
+							<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
+						}
+						else
+						{
+							<p class="ms-2 fs-3"><span class="badge bg-primary-subtle text-dark">@SubTitle</span></p>
 						}
 					</div>
 				</div>
 
-			</div>
-
-			<div class="@MediaQuery.Sm.DivClass">
-				<div class="row mt-0">
-					<div class="col-5">
-						<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
-					</div>
-					<div class="col-7">
-						@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook)
-						{
-							<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
-						}
-					</div>
-				</div>
-			</div>
-
-			<div class="@MediaQuery.Md.DivClass">
-				<div class="row mt-0">
-					<div class="col-4">
-						<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
-					</div>
-					<div class="col-8">
-						@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook)
-						{
-							<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
-						}
-					</div>
+				<div class="col-5">
+					@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook && ShowSearch)
+					{
+						<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
+					}
 				</div>
 
 			</div>
 
-			<div class="@MediaQuery.Lg.DivClass">
-				<div class="row mt-0">
-					<div class="col-3">
-						<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
-					</div>
-					<div class="col-9">
-						@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook)
+		</div>
+
+		<div class="@MediaQuery.Sm.DivClass">
+			<div class="row mt-0">
+
+				<div class="col-6">
+					<div class="d-flex justify-content-start">
+						<ShowHideSearchToggle OnToggleSelected="@ReturnedSearchToggle" ShowSearch="@ShowSearch" />
+						@if (ShowSearch)
 						{
-							<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
+							<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
+						}
+						else
+						{
+							<p class="ms-2 fs-3"><span class="badge bg-primary-subtle text-dark">@SubTitle</span></p>
 						}
 					</div>
 				</div>
 
+				<div class="col-6">
+					@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook && ShowSearch)
+					{
+						<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
+					}
+				</div>
 			</div>
+		</div>
 
-			<div class="@MediaQuery.Xl.DivClass">
-				<div class="row mt-0">
-					<div class="col-2">
-						<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
-					</div>
-					<div class="col-10">
-						@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook)
+		<div class="@MediaQuery.Md.DivClass">
+			<div class="row mt-0">
+
+				<div class="col-5">
+					<div class="d-flex justify-content-start">
+						<ShowHideSearchToggle OnToggleSelected="@ReturnedSearchToggle" ShowSearch="@ShowSearch" />
+						@if (ShowSearch)
 						{
-							<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
+							<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
+						}
+						else
+						{
+							<p class="ms-2 fs-3"><span class="badge bg-primary-subtle text-dark">@SubTitle</span></p>
 						}
 					</div>
 				</div>
 
+				<div class="col-7">
+					@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook && ShowSearch)
+					{
+						<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
+					}
+				</div>
 			</div>
 
-		}
-		else
-		{
-			@* <p class="my-1 text-black-50 text-center">Search Button Hidden</p> *@
-			<p class="fs-3"><span class="badge bg-primary-subtle text-dark">@SubTitle</span></p>
-		}
+		</div>
+
+		<div class="@MediaQuery.Lg.DivClass">
+			<div class="row mt-0">
+
+				<div class="col-4">
+					<div class="d-flex justify-content-start">
+						<ShowHideSearchToggle OnToggleSelected="@ReturnedSearchToggle" ShowSearch="@ShowSearch" />
+						@if (ShowSearch)
+						{
+							<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
+						}
+						else
+						{
+							<p class="ms-2 fs-3"><span class="badge bg-primary-subtle text-dark">@SubTitle</span></p>
+						}
+					</div>
+				</div>
+
+				<div class="col-8">
+					@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook && ShowSearch)
+					{
+						<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
+					}
+				</div>
+			</div>
+
+		</div>
+
+		<div class="@MediaQuery.Xl.DivClass">
+			<div class="row mt-0">
+
+				<div class="col-3">
+					<div class="d-flex justify-content-start">
+						<ShowHideSearchToggle OnToggleSelected="@ReturnedSearchToggle" ShowSearch="@ShowSearch" />
+						@if (ShowSearch)
+						{
+							<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
+						}
+						else
+						{
+							<p class="ms-2 fs-3"><span class="badge bg-primary-subtle text-dark">@SubTitle</span></p>
+						}
+					</div>
+				</div>
+
+				<div class="col-9">
+					@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook && ShowSearch)
+					{
+						<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
+					}
+				</div>
+			</div>
+
+		</div>
+
 	</div>
-	<div class="col-2">
-		<ShowHideSearchToggle OnToggleSelected="@ReturnedSearchToggle" ShowSearch="@ShowSearch" />
-	</div>
+
 
 </div>
 
@@ -109,9 +163,11 @@
 												OnBookChapterSelected="@ReturnedBookChapterPrevNext" />
 			}
 		</div>
-		<div class="fs-4">
+		
+@* 		<div class="fs-4">
 			<p class="text-center mt-4 fs-3"><span class="badge bg-primary-subtle text-dark">@SubTitle</span></p>
 		</div>
+ *@
 		<div class="pe-2">
 			@if (CurrentPrevNextButtonVM is not null)
 			{
@@ -198,10 +254,6 @@ else
 		SubTitle = CurrentBibleBook!.Title + " " + chapter;
 		CurrentPrevNextButtonVM = new PrevNextButtonVM(CurrentBibleBook, chapter);
 		verses = await Api!.GetBookChapterAsync(CurrentBibleBook.Value, chapter);
-		//BookChapterPrevNext bookChapterPrevNext = new BookChapterPrevNext();
-		//await ReturnedBookChapterPrevNext(bookChapterPrevNext);
-
-		//StateHasChanged();
 	}
 
 	protected string SubTitle = "";
@@ -225,16 +277,12 @@ else
 		int c = bookChapterPrevNext.Chapter;
 		SubTitle = $"{t} {c}";
 		verses = await Api!.GetBookChapterAsync(b, c);
-		//StateHasChanged();
 	}
 
-	
 	private bool ShowSearch;
 	private void ReturnedSearchToggle(bool showSearch)
 	{
 		ShowSearch = showSearch;
 	}
-
-
 
 }
