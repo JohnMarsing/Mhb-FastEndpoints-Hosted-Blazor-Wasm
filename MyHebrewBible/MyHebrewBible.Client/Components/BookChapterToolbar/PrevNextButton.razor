@@ -9,7 +9,7 @@
 			<sup>
 				@VM!.PrevBibleBook!.ButtonText&nbsp;
 			</sup><i class="@VM!.PrevBibleBook.Icon"></i>
-			<br /><small>Prev</small>
+			@* <br /><small>Prev</small> *@
 		</button>
 	}
 	else
@@ -26,7 +26,7 @@
 						@onclick="@(e => ButtonClick(VM.NextBibleBook))">
 			<i class="@VM!.NextBibleBook.Icon"></i>&nbsp;
 			<sup>@VM!.NextBibleBook.ButtonText</sup>
-			<br /><small>Next</small>
+			@* <br /><small>Next</small> *@
 		</button>
 	}
 	else

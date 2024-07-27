@@ -1,0 +1,40 @@
+﻿@using MyHebrewBible.Client.Enums
+
+<EditForm Model="@VM"
+					OnValidSubmit="HandleValidSubmit"
+					class="card card-body bg-light m-1">
+	<DataAnnotationsValidator />
+
+	<div class="row mt-0">
+
+		<div class="col-sm-6">
+			<InputNumber id="chapter" class="form-control"  placeholder="Chapter" @bind-Value="VM!.Chapter"  />
+			<ValidationMessage For="@(() => VM.Chapter)" />
+		</div>
+
+		<div class="col-6">
+			<button type="submit" class="btn btn-outline-primary btn-sm">
+				Submit
+			</button>
+		</div>
+	</div>
+
+</EditForm>
+
+
+@code {
+	[Parameter] public EventCallback<int> OnChapterEntered { get; set; }
+
+	private ChapterFormVM? VM { get; set; }
+
+	protected override void OnInitialized()
+	{
+		VM = new ChapterFormVM() { Chapter = 1 };
+	}
+
+	protected void HandleValidSubmit()
+	{
+		OnChapterEntered.InvokeAsync(VM!.Chapter);
+	}
+
+}

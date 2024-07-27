@@ -1,6 +1,6 @@
 ﻿
 <button @onclick="ButtonClicked"
-				class="btn @Color btn-sm  float-end">
+				class="btn @Color btn-lg ">
 	@Title <i class='@Icon'></i>
 </button>
 
@@ -8,8 +8,9 @@
 	[Parameter, EditorRequired] public bool ShowSearch { get; set; }
 	[Parameter, EditorRequired] public EventCallback<bool> OnToggleSelected { get; set; }
 
+	//float-end
 	private string Color => ShowSearch ? "btn-outline-success" : "btn-outline-success";
-	private string Title => ShowSearch ? "Hide " : "Search ";
+	private string Title => string.Empty; // ShowSearch ? "Hide " : "Search ";
 	private string Icon => ShowSearch ? "fas fa-search-minus" : "fas fa-search-plus"; //"fas fa-chevron-up" : "fas fa-chevron-down";
 	
 	protected void ButtonClicked()
