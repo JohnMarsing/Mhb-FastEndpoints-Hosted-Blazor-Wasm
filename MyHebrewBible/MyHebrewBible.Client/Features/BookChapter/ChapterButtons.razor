@@ -1,7 +1,6 @@
 ﻿@using MyHebrewBible.Client.Enums
 
 
-
 @foreach (var r in ButtonRows)
 {
 	<div class="btn-group btn-group-sm">
@@ -16,12 +15,11 @@
 	</div>
 }
 
-
 @code {
 
 	[Parameter, EditorRequired] public BibleBook? CurrentBibleBook { get; set; }
 	[Parameter, EditorRequired] public int ButtonsPerRow { get; set; }
-	[Parameter] public EventCallback<int> OnChapterFilterSelected { get; set; }
+	[Parameter] public EventCallback<BookAndChapter> OnChapterFilterSelected { get; set; }
 
 	public List<ButtonRow> ButtonRows { get; set; } = new List<ButtonRow>();
 
@@ -76,7 +74,8 @@
 
 	private void ButtonClick(int chapter)
 	{
-		OnChapterFilterSelected.InvokeAsync(chapter);
+		ButtonRows.Clear();
+		OnChapterFilterSelected.InvokeAsync(new BookAndChapter(CurrentBibleBook, chapter));
 	}
 
 	protected MarkupString ButtonNumber(int i)
