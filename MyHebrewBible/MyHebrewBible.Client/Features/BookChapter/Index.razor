@@ -1,156 +1,39 @@
 ﻿@page "/bookchapter"
-@using MyHebrewBible.Client.Components.BookChapterToolbar
 @using MyHebrewBible.Client.Enums
 @using MyHebrewBible.Client.Helpers
+@using MyHebrewBible.Client.Features.BookChapter.Search
+@using MyHebrewBible.Client.Features.BookChapter.PrevNext
 
 @inject ApiClient Api
 
 <PageTitle>Book Chapter</PageTitle>
 
-<div class="row">
-
-	<div class="col-12">
-
+<nav class="navbar navbar-light bg-light">
+	<div class="container-fluid">
 
 		<div class="@MediaQuery.Xs.DivClass">
-			<div class="row mt-0">
-
-				<div class="col-7">
-					<div class="d-flex justify-content-start">
-						<ShowHideSearchToggle OnToggleSelected="@ReturnedSearchToggle" ShowSearch="@ShowSearch" />
-						@if (ShowSearch)
-						{
-							<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
-						}
-						else
-						{
-							<p class="ms-2 fs-3"><span class="badge bg-primary-subtle text-dark">@SubTitle</span></p>
-						}
-					</div>
-				</div>
-
-				<div class="col-5">
-					@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook && ShowSearch)
-					{
-						<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
-					}
-				</div>
-
-			</div>
-
+			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter" MediaQuery="@MediaQuery.Xs" OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 		</div>
-
 		<div class="@MediaQuery.Sm.DivClass">
-			<div class="row mt-0">
-
-				<div class="col-6">
-					<div class="d-flex justify-content-start">
-						<ShowHideSearchToggle OnToggleSelected="@ReturnedSearchToggle" ShowSearch="@ShowSearch" />
-						@if (ShowSearch)
-						{
-							<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
-						}
-						else
-						{
-							<p class="ms-2 fs-3"><span class="badge bg-primary-subtle text-dark">@SubTitle</span></p>
-						}
-					</div>
-				</div>
-
-				<div class="col-6">
-					@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook && ShowSearch)
-					{
-						<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
-					}
-				</div>
-			</div>
+			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter" MediaQuery="@MediaQuery.Sm" OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 		</div>
-
 		<div class="@MediaQuery.Md.DivClass">
-			<div class="row mt-0">
-
-				<div class="col-5">
-					<div class="d-flex justify-content-start">
-						<ShowHideSearchToggle OnToggleSelected="@ReturnedSearchToggle" ShowSearch="@ShowSearch" />
-						@if (ShowSearch)
-						{
-							<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
-						}
-						else
-						{
-							<p class="ms-2 fs-3"><span class="badge bg-primary-subtle text-dark">@SubTitle</span></p>
-						}
-					</div>
-				</div>
-
-				<div class="col-7">
-					@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook && ShowSearch)
-					{
-						<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
-					}
-				</div>
-			</div>
-
+			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter" MediaQuery="@MediaQuery.Md" OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 		</div>
-
 		<div class="@MediaQuery.Lg.DivClass">
-			<div class="row mt-0">
-
-				<div class="col-4">
-					<div class="d-flex justify-content-start">
-						<ShowHideSearchToggle OnToggleSelected="@ReturnedSearchToggle" ShowSearch="@ShowSearch" />
-						@if (ShowSearch)
-						{
-							<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
-						}
-						else
-						{
-							<p class="ms-2 fs-3"><span class="badge bg-primary-subtle text-dark">@SubTitle</span></p>
-						}
-					</div>
-				</div>
-
-				<div class="col-8">
-					@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook && ShowSearch)
-					{
-						<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
-					}
-				</div>
-			</div>
-
+			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter" MediaQuery="@MediaQuery.Lg" OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 		</div>
-
 		<div class="@MediaQuery.Xl.DivClass">
-			<div class="row mt-0">
-
-				<div class="col-3">
-					<div class="d-flex justify-content-start">
-						<ShowHideSearchToggle OnToggleSelected="@ReturnedSearchToggle" ShowSearch="@ShowSearch" />
-						@if (ShowSearch)
-						{
-							<BibleSearch OnBookFilterSelected="@ReturnedBookFilter" />
-						}
-						else
-						{
-							<p class="ms-2 fs-3"><span class="badge bg-primary-subtle text-dark">@SubTitle</span></p>
-						}
-					</div>
-				</div>
-
-				<div class="col-9">
-					@if (CurrentBibleBook != null && CurrentBibleBook != PrevBibleBook && ShowSearch)
-					{
-						<ChapterButtonSelector BibleBook="CurrentBibleBook" OnChapterSelected="@ReturnedChapterFilter" />
-					}
-				</div>
-			</div>
-
+			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter" MediaQuery="@MediaQuery.Xl" OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 		</div>
 
 	</div>
+</nav>
 
-
-</div>
+@* @if (ReturnedBookAndChapterFromTypeaheadEditForm is not null)
+{
+	<p>@($"ReturnedBookAndChapterFromTypeaheadEditForm: {ReturnedBookAndChapterFromTypeaheadEditForm}")</p>
+} *@
 
 <div class="pb-n1 mt-2 mb-2 border-bottom border-info">
 
@@ -161,13 +44,10 @@
 				<PrevNextButton PrevNextButtonVM="@CurrentPrevNextButtonVM"
 												buttonToShow="ButtonsToShow.PreviousOnly"
 												OnBookChapterSelected="@ReturnedBookChapterPrevNext" />
+				@*         OnBookAndChapterSelected = "@ReturnedBookAndChapter" /> *@
 			}
 		</div>
-		
-@* 		<div class="fs-4">
-			<p class="text-center mt-4 fs-3"><span class="badge bg-primary-subtle text-dark">@SubTitle</span></p>
-		</div>
- *@
+
 		<div class="pe-2">
 			@if (CurrentPrevNextButtonVM is not null)
 			{
@@ -179,11 +59,9 @@
 		</div>
 	</div>
 
-
 	@* <h5 class="text-center">Book Chapter</h5> *@
 
 </div>
-
 
 
 @if (verses == null)
@@ -225,64 +103,131 @@ else
 }
 
 @code {
+	public BookAndChapter? CurrentBookAndChapter { get; set; }
+	public BibleBook? CurrentBibleBook { get; set; }
+	public int CurrentChapter { get; set; }
 
-	private Enums.BibleBook bibleBook = BibleBook.Genesis;
-	private int chapter = 1;
+	protected override async Task OnInitializedAsync()
+	{
+		SetBibleBookAndChapter();
+		//SetSubTitle(null);
+		//ShowSearch = true;
 
+		//int c = CurrentChapter ?? 1;
+		// 
+		//CurrentPrevNextButtonVM = new PrevNextButtonVM(CurrentBibleBook!, CurrentChapter);  // , c
+		CurrentPrevNextButtonVM = new PrevNextButtonVM(CurrentBookAndChapter!);  
+		verses = await Api!.GetBookChapterAsync(CurrentBibleBook!, CurrentChapter);  
+	}
+
+	protected void SetBibleBookAndChapter()
+	{
+		//ToDo: finish LocalStorage solution
+
+		bool GottenFromLocalStorage = false;
+		if (GottenFromLocalStorage)
+		{
+			CurrentBibleBook = BibleBook.Genesis;
+			CurrentChapter = 2;
+			CurrentBookAndChapter = new BookAndChapter(CurrentBibleBook, CurrentChapter);
+		}
+		else
+		{
+			CurrentBibleBook = BibleBook.Genesis;
+			CurrentChapter = 2;
+			CurrentBookAndChapter = new BookAndChapter(CurrentBibleBook, CurrentChapter);
+		}
+	}
+
+	//ToDo: do I need this SubTitle, currently it's not being used
+	// protected string SubTitle = "";
+	// protected void SetSubTitle(string? TitleOverRide)
+	// {
+	// 	if (TitleOverRide is not null)
+	// 	{
+	// 		SubTitle = TitleOverRide;
+	// 	}
+	// 	else
+	// 	{
+	// 		/*
+	// 		if (CurrentChapter is not null)
+	// 		{
+	// 			SubTitle = $"{CurrentBibleBook!.Title} {CurrentChapter}";
+	// 		}
+	// 		else
+	// 		{
+	// 			SubTitle = $"{CurrentBibleBook!.Title}";
+	// 		}
+	// 		*/
+	// 		SubTitle = $"{CurrentBibleBook!.Title} {CurrentChapter}";
+	// 	}
+	// }
 
 	private ICollection<BookChapter>? verses = null;
 	public PrevNextButtonVM? CurrentPrevNextButtonVM { get; set; }
 
-	public BibleBook? CurrentBibleBook { get; set; }
 	public BibleBook? PrevBibleBook { get; set; }
 
-	private void ReturnedBookFilter(BibleBook bibleBook)
+	protected string? ReturnedBookAndChapterFromTypeaheadEditForm;
+	private async Task ReturnedBookAndChapter(BookAndChapter bookAndChapter)
 	{
+		ReturnedBookAndChapterFromTypeaheadEditForm = bookAndChapter.ToString();
 		PrevBibleBook = CurrentBibleBook;
-		CurrentBibleBook = bibleBook;
-		SubTitle = bibleBook.Title;
-		CurrentPrevNextButtonVM = new PrevNextButtonVM(bibleBook, 1);
-		verses = null;
-		//StateHasChanged();
-	}
+		CurrentBibleBook = bookAndChapter.BibleBook;
+		CurrentChapter = bookAndChapter.Chapter;
+		CurrentBookAndChapter = new BookAndChapter(CurrentBibleBook, CurrentChapter);
 
-	public int? CurrentChapter { get; set; }
-	private async Task ReturnedChapterFilter(int chapter)
-	{
-		CurrentChapter = chapter;
-		ShowSearch = false;
-		SubTitle = CurrentBibleBook!.Title + " " + chapter;
-		CurrentPrevNextButtonVM = new PrevNextButtonVM(CurrentBibleBook, chapter);
-		verses = await Api!.GetBookChapterAsync(CurrentBibleBook.Value, chapter);
-	}
+		//CurrentPrevNextButtonVM = new PrevNextButtonVM(bookAndChapter.BibleBook!, 1);
+		//verses = null;
 
-	protected string SubTitle = "";
-
-	protected override async Task OnInitializedAsync()
-	{
-		ShowSearch = true;
-		CurrentPrevNextButtonVM = new PrevNextButtonVM(BibleBook.Genesis, 1);
-		SubTitle = $"{BibleBook.Genesis.Title} 1";
-		verses = await Api!.GetBookChapterAsync(BibleBook.Genesis, 1);
-	}
-
-	private async Task ReturnedBookChapterPrevNext(BookChapterPrevNext bookChapterPrevNext)
-	{
-		CurrentPrevNextButtonVM = new PrevNextButtonVM(bookChapterPrevNext.BibleBook!, bookChapterPrevNext.Chapter);
-
-		// Why in the HELL does this not work!!!
-		//verses = await Api!.GetBookChapterAsync(bookChapterPrevNext.BibleBook!.Value, chapter);
-		string t = bookChapterPrevNext.BibleBook!.Title;
-		int b = bookChapterPrevNext.BibleBook!.Value;
-		int c = bookChapterPrevNext.Chapter;
-		SubTitle = $"{t} {c}";
+		//CurrentPrevNextButtonVM = new PrevNextButtonVM(bookAndChapter.BibleBook!, bookAndChapter.Chapter);
+		CurrentPrevNextButtonVM = new PrevNextButtonVM(bookAndChapter!);
+		long b = bookAndChapter.BibleBook!.Value;
+		long c = bookAndChapter.Chapter;
+		//verses = await Api!.GetBookChapterAsync(bookAndChapter.BibleBook, bookAndChapter.Chapter);
 		verses = await Api!.GetBookChapterAsync(b, c);
 	}
 
-	private bool ShowSearch;
-	private void ReturnedSearchToggle(bool showSearch)
+
+
+	private async Task ReturnedBookChapterPrevNext(BookChapterPrevNext bookChapterPrevNext)
 	{
-		ShowSearch = showSearch;
+		//CurrentPrevNextButtonVM = new PrevNextButtonVM(bookChapterPrevNext.BibleBook!, bookChapterPrevNext.Chapter);
+
+		var bookAndChapter = new BookAndChapter(bookChapterPrevNext.BookAndChapter!.BibleBook, bookChapterPrevNext.BookAndChapter.Chapter);
+		CurrentPrevNextButtonVM = new PrevNextButtonVM(bookAndChapter!);
+
+		CurrentBookAndChapter = new BookAndChapter(CurrentBibleBook, CurrentChapter);
+
+
+		// Why in the HELL does this not work!!! I THINK BECUASE it need Long and not Int
+		//verses = await Api!.GetBookChapterAsync(bookChapterPrevNext.BibleBook!.Value, chapter);
+
+		/*
+		string t = bookChapterPrevNext.BibleBook!.Title;
+		int b = bookChapterPrevNext.BibleBook!.Value;
+		int c = bookChapterPrevNext.Chapter;
+
+		string t = CurrentBookAndChapter.BibleBook!.Title;
+		int b = CurrentBookAndChapter.BibleBook!.Value;
+		int c = CurrentBookAndChapter.Chapter;
+
+		*/
+
+		int b = bookAndChapter.BibleBook!.Value;
+		int c = bookAndChapter.Chapter;
+
+		//SubTitle = ;
+		//SetSubTitle($"{t} {c}");
+
+		verses = await Api!.GetBookChapterAsync(b, c);
 	}
+
+	//ToDo: review, not being used
+	// private bool ShowSearch;
+	// private void ReturnedSearchToggle(bool showSearch)
+	// {
+	// 	ShowSearch = showSearch;
+	// }
 
 }
