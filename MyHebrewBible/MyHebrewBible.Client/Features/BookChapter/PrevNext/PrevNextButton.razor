@@ -5,7 +5,7 @@
 	@if (@VM!.PrevBibleBook!.ThereIsNone == false)
 	{
 		<button type="button" class="btn btn-outline-primary"
-						@onclick="@(e => ButtonClick(VM.PrevBibleBook))">
+						@onclick="@(e => ButtonClick(VM.PrevBibleBook.BookAndChapter!))">
 			<sup>
 				@VM!.PrevBibleBook!.ButtonText&nbsp;
 			</sup><i class="@VM!.PrevBibleBook.Icon"></i>
@@ -15,7 +15,6 @@
 	else
 	{
 		<OnEdgeButton />
-		@* <p>@($"PrevBibleBook: {VM!.PrevBibleBook!.ToString()}")</p> *@
 	}
 }
 
@@ -24,7 +23,7 @@
 	@if (@VM!.NextBibleBook!.ThereIsNone == false)
 	{
 		<button type="button" class="btn btn-outline-primary"
-						@onclick="@(e => ButtonClick(VM.NextBibleBook))">
+						@onclick="@(e => ButtonClick(VM.NextBibleBook.BookAndChapter!))">
 			<i class="@VM!.NextBibleBook.Icon"></i>&nbsp;
 			<sup>@VM!.NextBibleBook.ButtonText</sup>
 			@* <br /><small>Next</small> *@
@@ -33,7 +32,6 @@
 	else
 	{
 		<OnEdgeButton />
-		@* <p>@($"NextBibleBook: {VM!.NextBibleBook!.ToString()}")</p> *@
 	}
 }
 
@@ -41,11 +39,11 @@
 
 	[Parameter, EditorRequired] public PrevNextButtonVM? PrevNextButtonVM { get; set; }
 	[Parameter, EditorRequired] public ButtonsToShow buttonToShow { get; set; }
-	[Parameter] public EventCallback<BookChapterPrevNext> OnBookChapterSelected { get; set; }
+	[Parameter] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
 
-	private void ButtonClick(BookChapterPrevNext bookChapterPrevNext)
+	private void ButtonClick(BookAndChapter bookAndChapter)
 	{
-		OnBookChapterSelected.InvokeAsync(bookChapterPrevNext);
+		OnBookAndChapterSelected.InvokeAsync(bookAndChapter);
 	}
 
 	protected PrevNextButtonVM? VM { get; set; }
