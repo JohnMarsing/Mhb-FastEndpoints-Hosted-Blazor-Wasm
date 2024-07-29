@@ -4,18 +4,6 @@
 @using System.ComponentModel.DataAnnotations
 @using MyHebrewBible.Client.Enums
 
-@*
-@if (SelectedBibleBook is not null)
-{
-	<p>@($"SelectedBibleBookString: {SelectedBibleBookString}, Chapter: {Chapter} ")</p>
-}
-else
-{
-	<p>@($"SelectedBibleBookString is null")</p>
-}
-
- *@
-
 @if (SelectedBibleBook != BibleBook.Psalms)
 {
 	<EditForm class="d-flex" Model="VM" OnValidSubmit="HandleFormSubmit">
@@ -83,33 +71,15 @@ else
 	</EditForm>
 }
 
-@* @if (ReturnedBookAndChapterFromChapterButtons is not null)
-{
-	<p>@($"ReturnedBookAndChapterFromChapterButtons: {ReturnedBookAndChapterFromChapterButtons}")</p>
-} *@
-
-@* @if (SelectedBibleBook == BibleBook.Psalms)
-{
-	<PsalmsChapterEditForm OnChapterEntered="OnChapterSelected" />
-}
- *@
-
-@* <hr /> *@
-
-@* <p>@($"MediaQuery: {MediaQuery!.Name}")</p> *@
-
 @if (SelectedBibleBook != null)
 {
 	@if (SelectedBibleBook != BibleBook.Psalms)
 	{
 		<div class="row pt-2 pb-1 d-print-none">
 			<div class="col-12">
-				@* <p>@($"SelectedBibleBook: {SelectedBibleBook.Name}")</p> *@
 				<ChapterButtons CurrentBibleBook="@BibleBook" ButtonsPerRow="ButtonsPerRow" OnChapterFilterSelected="OnChapterSelected" />
-
 			</div>
 		</div>
-
 	}
 }
 
@@ -122,7 +92,6 @@ else
 	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
 	[Parameter] public int Chapter { get; set; }
 
-	//[Parameter] public EventCallback<BibleBook> OnBookFilterSelected { get; set; }
 	[Parameter] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
 
 	public int SelectedChapter { get; set; }
@@ -147,10 +116,6 @@ else
 		VMPsalms = new TypeaheadAndChapterVM() { SelectedBook = BibleBook.Psalms, Chapter = Chapter };
 	}
 
-	// private void ChapterSelected(int chapter)
-	// {
-	// 	OnChapterSelected.InvokeAsync(chapter);
-	// }
 
 	protected string? ReturnedBookAndChapterFromChapterButtons;
 	private void OnChapterSelected(BookAndChapter bookAndChapter)
@@ -162,7 +127,6 @@ else
 	private async Task<IEnumerable<Enums.BibleBook>> SearchBibleBooks(string searchText)
 	{
 		return await Task.FromResult(Enums.BibleBook.List
-			// .Where(x => x.Title.ToLower().Contains(searchText.ToLower())).Where(x => x !=BibleBook.Psalms)
 			.Where(x => x.Title.ToLower().Contains(searchText.ToLower()))
 			.OrderBy(o => o.Value));
 	}

@@ -16,68 +16,52 @@ public class PrevNextButtonVM
 
 	private BookChapterPrevNext SetPrevBookChapter(BookAndChapter bookAndChapter)
 	{
-		BookChapterPrevNext bc_pn;
-
-		if (bookAndChapter.BibleBook!.Value == BibleBook.Genesis.Value & bookAndChapter.Chapter == 1)
+		if (bookAndChapter.BibleBook!.Value == BibleBook.Genesis.Value & 
+				bookAndChapter.Chapter == 1)
 		{
-			bc_pn = new(null, "", null); 
-			return bc_pn;
+			return new BookChapterPrevNext(null, "", null); // bookAndChapter is Gen 1, no where to go Prev
 		}
 
 		if (bookAndChapter.Chapter != 1)
 		{
-			var bookAndChapterPrev = bookAndChapter with
+			var bookAndChapterPrevNotFirstChapter = bookAndChapter with
 			{
 				Chapter = bookAndChapter.Chapter - 1
 			};
 
-			bc_pn = new(bookAndChapterPrev, "fas fa-arrow-left", bookAndChapterPrev.Chapter.ToString());
+			return new BookChapterPrevNext(bookAndChapterPrevNotFirstChapter, "fas fa-arrow-left", bookAndChapterPrevNotFirstChapter.Chapter.ToString());
+		}
 
-		}
-		else
-		{
-			var bookAndChapterPrev = bookAndChapter with
-			{
-				BibleBook = BibleBook.FromValue(bookAndChapter.BibleBook.Value - 1),
-				Chapter = bookAndChapter.Chapter - 1
-			};
-			bc_pn = new(bookAndChapterPrev, "fas fa-arrow-left", bookAndChapterPrev.Chapter.ToString());
-		}
-		return bc_pn;
+		BibleBook bibleBookPrev = BibleBook.FromValue((bookAndChapter.BibleBook.Value - 1));  
+		BookAndChapter bookAndChapterPrev = new BookAndChapter(bibleBookPrev, bibleBookPrev.LastChapter);
+		string buttonText = $"{bookAndChapterPrev.Chapter.ToString()} {bookAndChapterPrev.BibleBook!.Abrv}";
+		return new BookChapterPrevNext(bookAndChapterPrev, "fas fa-arrow-left", buttonText);
 	}
 
 	private BookChapterPrevNext SetNextBookChapter(BookAndChapter bookAndChapter)
 	{
-		BookChapterPrevNext bc_pn;
-
 		if (bookAndChapter.BibleBook!.Value == VerseFacts.LastBookInNT &
 				bookAndChapter.Chapter == VerseFacts.LastChapterInNt)
 		{
-			bc_pn = new(null, "", null);
+			return new BookChapterPrevNext(null, "", null); // bookAndChapter is Rev 22 no where to go Next
 		}
 
 		if (bookAndChapter.Chapter != bookAndChapter.BibleBook!.LastChapter)
 		{
-			var bookAndChapterPrev = bookAndChapter with
+			var bookAndChapterNextNotLastChapter = bookAndChapter with
 			{
 				Chapter = bookAndChapter.Chapter + 1
 			};
-
-			bc_pn = new(bookAndChapterPrev, "fas fa-arrow-right", bookAndChapterPrev.Chapter.ToString());
-
+			return new BookChapterPrevNext(bookAndChapterNextNotLastChapter, "fas fa-arrow-right", bookAndChapterNextNotLastChapter.Chapter.ToString());
 		}
-		else
+
+		var bookAndChapterNextIsLastChapter = bookAndChapter with
 		{
-			var bookAndChapterPrev = bookAndChapter with
-			{
-				BibleBook = BibleBook.FromValue(bookAndChapter.BibleBook.Value + 1),
-				Chapter = 1
-			};
-			bc_pn = new(bookAndChapterPrev, "fas fa-arrow-right", bookAndChapterPrev.Chapter.ToString());
-		}
-
-		return bc_pn;
-
+			BibleBook = BibleBook.FromValue(bookAndChapter.BibleBook.Value + 1),
+			Chapter = bookAndChapter.BibleBook.LastChapter
+		};
+		string buttonText = $"{bookAndChapterNextIsLastChapter.Chapter.ToString()} {bookAndChapterNextIsLastChapter.BibleBook.Abrv}";
+		return new BookChapterPrevNext(bookAndChapterNextIsLastChapter, "fas fa-arrow-right", buttonText);
 	}
 
 }

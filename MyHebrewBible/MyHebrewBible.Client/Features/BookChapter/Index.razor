@@ -12,28 +12,34 @@
 	<div class="container-fluid">
 
 		<div class="@MediaQuery.Xs.DivClass">
-			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter" MediaQuery="@MediaQuery.Xs" OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter"
+												 MediaQuery="@MediaQuery.Xs"
+												 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 		</div>
 		<div class="@MediaQuery.Sm.DivClass">
-			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter" MediaQuery="@MediaQuery.Sm" OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter"
+												 MediaQuery="@MediaQuery.Sm"
+												 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 		</div>
 		<div class="@MediaQuery.Md.DivClass">
-			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter" MediaQuery="@MediaQuery.Md" OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter"
+												 MediaQuery="@MediaQuery.Md"
+												 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 		</div>
 		<div class="@MediaQuery.Lg.DivClass">
-			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter" MediaQuery="@MediaQuery.Lg" OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter"
+												 MediaQuery="@MediaQuery.Lg"
+												 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 		</div>
 		<div class="@MediaQuery.Xl.DivClass">
-			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter" MediaQuery="@MediaQuery.Xl" OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter"
+												 MediaQuery="@MediaQuery.Xl"
+												 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 		</div>
 
 	</div>
 </nav>
 
-@* @if (ReturnedBookAndChapterFromTypeaheadEditForm is not null)
-{
-	<p>@($"ReturnedBookAndChapterFromTypeaheadEditForm: {ReturnedBookAndChapterFromTypeaheadEditForm}")</p>
-} *@
 
 <div class="pb-n1 mt-2 mb-2 border-bottom border-info">
 
@@ -43,8 +49,7 @@
 			{
 				<PrevNextButton PrevNextButtonVM="@CurrentPrevNextButtonVM"
 												buttonToShow="ButtonsToShow.PreviousOnly"
-												OnBookChapterSelected="@ReturnedBookChapterPrevNext" />
-				@*         OnBookAndChapterSelected = "@ReturnedBookAndChapter" /> *@
+												OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 			}
 		</div>
 
@@ -53,7 +58,7 @@
 			{
 				<PrevNextButton PrevNextButtonVM="@CurrentPrevNextButtonVM"
 												buttonToShow="ButtonsToShow.NextOnly"
-												OnBookChapterSelected="@ReturnedBookChapterPrevNext" />
+												OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 			}
 
 		</div>
@@ -113,11 +118,10 @@ else
 		//SetSubTitle(null);
 		//ShowSearch = true;
 
-		//int c = CurrentChapter ?? 1;
-		// 
+
 		//CurrentPrevNextButtonVM = new PrevNextButtonVM(CurrentBibleBook!, CurrentChapter);  // , c
-		CurrentPrevNextButtonVM = new PrevNextButtonVM(CurrentBookAndChapter!);  
-		verses = await Api!.GetBookChapterAsync(CurrentBibleBook!, CurrentChapter);  
+		CurrentPrevNextButtonVM = new PrevNextButtonVM(CurrentBookAndChapter!);
+		verses = await Api!.GetBookChapterAsync(CurrentBibleBook!, CurrentChapter);
 	}
 
 	protected void SetBibleBookAndChapter()
@@ -168,19 +172,13 @@ else
 
 	public BibleBook? PrevBibleBook { get; set; }
 
-	protected string? ReturnedBookAndChapterFromTypeaheadEditForm;
 	private async Task ReturnedBookAndChapter(BookAndChapter bookAndChapter)
 	{
-		ReturnedBookAndChapterFromTypeaheadEditForm = bookAndChapter.ToString();
 		PrevBibleBook = CurrentBibleBook;
 		CurrentBibleBook = bookAndChapter.BibleBook;
 		CurrentChapter = bookAndChapter.Chapter;
 		CurrentBookAndChapter = new BookAndChapter(CurrentBibleBook, CurrentChapter);
 
-		//CurrentPrevNextButtonVM = new PrevNextButtonVM(bookAndChapter.BibleBook!, 1);
-		//verses = null;
-
-		//CurrentPrevNextButtonVM = new PrevNextButtonVM(bookAndChapter.BibleBook!, bookAndChapter.Chapter);
 		CurrentPrevNextButtonVM = new PrevNextButtonVM(bookAndChapter!);
 		long b = bookAndChapter.BibleBook!.Value;
 		long c = bookAndChapter.Chapter;
@@ -189,45 +187,11 @@ else
 	}
 
 
-
-	private async Task ReturnedBookChapterPrevNext(BookChapterPrevNext bookChapterPrevNext)
-	{
-		//CurrentPrevNextButtonVM = new PrevNextButtonVM(bookChapterPrevNext.BibleBook!, bookChapterPrevNext.Chapter);
-
-		var bookAndChapter = new BookAndChapter(bookChapterPrevNext.BookAndChapter!.BibleBook, bookChapterPrevNext.BookAndChapter.Chapter);
-		CurrentPrevNextButtonVM = new PrevNextButtonVM(bookAndChapter!);
-
-		CurrentBookAndChapter = new BookAndChapter(CurrentBibleBook, CurrentChapter);
-
-
-		// Why in the HELL does this not work!!! I THINK BECUASE it need Long and not Int
-		//verses = await Api!.GetBookChapterAsync(bookChapterPrevNext.BibleBook!.Value, chapter);
-
-		/*
-		string t = bookChapterPrevNext.BibleBook!.Title;
-		int b = bookChapterPrevNext.BibleBook!.Value;
-		int c = bookChapterPrevNext.Chapter;
-
-		string t = CurrentBookAndChapter.BibleBook!.Title;
-		int b = CurrentBookAndChapter.BibleBook!.Value;
-		int c = CurrentBookAndChapter.Chapter;
-
-		*/
-
-		int b = bookAndChapter.BibleBook!.Value;
-		int c = bookAndChapter.Chapter;
-
-		//SubTitle = ;
-		//SetSubTitle($"{t} {c}");
-
-		verses = await Api!.GetBookChapterAsync(b, c);
-	}
-
 	//ToDo: review, not being used
 	// private bool ShowSearch;
 	// private void ReturnedSearchToggle(bool showSearch)
 	// {
 	// 	ShowSearch = showSearch;
-	// }
+		// }
 
 }
