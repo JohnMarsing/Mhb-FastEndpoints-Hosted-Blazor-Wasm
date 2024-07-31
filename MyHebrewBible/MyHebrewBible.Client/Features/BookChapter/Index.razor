@@ -40,31 +40,27 @@
 	</div>
 </nav>
 
-
 <div class="pb-n1 mt-2 mb-2 border-bottom border-info">
-
 	<div class="d-flex justify-content-between mb-3">
 		<div class="ps-2">
-			@if (CurrentPrevNextButtonVM is not null)
+			@if (CurrentBookAndChapter is not null)
 			{
-				<PrevNextButton PrevNextButtonVM="@CurrentPrevNextButtonVM"
-												buttonToShow="ButtonsToShow.PreviousOnly"
-												OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+				<PreviousButton PreviousBookAndChapter="@CurrentBookAndChapter" 
+					buttonToShow="ButtonsToShow.PreviousOnly" 
+					OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 			}
 		</div>
-
 		<div class="pe-2">
-			@if (CurrentPrevNextButtonVM is not null)
+			@if (CurrentBookAndChapter is not null)
 			{
-				<PrevNextButton PrevNextButtonVM="@CurrentPrevNextButtonVM"
-												buttonToShow="ButtonsToShow.NextOnly"
-												OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+				<NextButton  NextBookAndChapter="@CurrentBookAndChapter" 
+					buttonToShow="ButtonsToShow.NextOnly" 
+					OnBookAndChapterSelected="@ReturnedBookAndChapter"/>
 			}
-
 		</div>
 	</div>
 
-	@* <h5 class="text-center">Book Chapter</h5> *@
+ @* <h5 class="text-center">Book Chapter</h5> *@
 
 </div>
 
@@ -118,9 +114,7 @@ else
 		//SetSubTitle(null);
 		//ShowSearch = true;
 
-
-		//CurrentPrevNextButtonVM = new PrevNextButtonVM(CurrentBibleBook!, CurrentChapter);  // , c
-		CurrentPrevNextButtonVM = new PrevNextButtonVM(CurrentBookAndChapter!);
+		CurrentBookAndChapter = new BookAndChapter(CurrentBibleBook, CurrentChapter);
 		verses = await Api!.GetBookChapterAsync(CurrentBibleBook!, CurrentChapter);
 	}
 
@@ -168,7 +162,6 @@ else
 	// }
 
 	private ICollection<BookChapter>? verses = null;
-	public PrevNextButtonVM? CurrentPrevNextButtonVM { get; set; }
 
 	public BibleBook? PrevBibleBook { get; set; }
 
@@ -179,11 +172,11 @@ else
 		CurrentChapter = bookAndChapter.Chapter;
 		CurrentBookAndChapter = new BookAndChapter(CurrentBibleBook, CurrentChapter);
 
-		CurrentPrevNextButtonVM = new PrevNextButtonVM(bookAndChapter!);
-		long b = bookAndChapter.BibleBook!.Value;
-		long c = bookAndChapter.Chapter;
-		//verses = await Api!.GetBookChapterAsync(bookAndChapter.BibleBook, bookAndChapter.Chapter);
-		verses = await Api!.GetBookChapterAsync(b, c);
+		CurrentBookAndChapter = bookAndChapter!;
+		//long b = bookAndChapter.BibleBook!.Value;
+		//long c = bookAndChapter.Chapter;
+		verses = await Api!.GetBookChapterAsync((long)bookAndChapter.BibleBook, (long)bookAndChapter.Chapter);
+		//verses = await Api!.GetBookChapterAsync(b, c);
 	}
 
 
