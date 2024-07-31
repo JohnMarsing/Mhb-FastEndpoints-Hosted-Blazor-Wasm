@@ -1,0 +1,37 @@
+﻿@using MyHebrewBible.Client.Enums
+
+@if (buttonToShow == ButtonsToShow.Both | buttonToShow == ButtonsToShow.NextOnly)
+{
+	@if (Next!.BibleBook is not null)
+	{
+		<button type="button" class="btn btn-outline-primary"
+						@onclick="@(e => ButtonClick(Next.BibleBook!))">
+			<i class="@Enums.BibleBook.NavigationIcon.Next"></i>&nbsp;
+			<sup>@Next.ButtonText</sup>
+			@* <br /><small>Next</small> *@
+		</button>
+	}
+	else
+	{
+		<OnEdgeButton />
+	}
+}
+@code {
+	[Parameter, EditorRequired] public BookAndChapter? NextBookAndChapter { get; set; }
+	[Parameter, EditorRequired] public ButtonsToShow buttonToShow { get; set; }
+	[Parameter] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
+
+	BibleBookPrevNext? Next;
+
+	protected override void OnParametersSet()
+	{
+		//CurrentBookAndChapter = BookAndChapterParameter;
+		Next = NextBookAndChapter!.BibleBook!.NavigationNext(NextBookAndChapter.Chapter); // only null when Gen 1
+	}
+
+	private void ButtonClick(BibleBook bibleBook)
+	{
+		BookAndChapter? bookAndChapter = new BookAndChapter(bibleBook, NextBookAndChapter!.Chapter + 1);
+		OnBookAndChapterSelected.InvokeAsync(bookAndChapter);
+	}
+}
