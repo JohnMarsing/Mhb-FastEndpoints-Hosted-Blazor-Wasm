@@ -1,4 +1,6 @@
 ﻿
+@* ONLY USED BY 'Features\BookChapter\Index.razor' AND CURRENTLY COMMENTED OUT *@
+
 <button @onclick="ButtonClicked"
 				class="btn @Color btn-lg ">
 	@Title <i class='@Icon'></i>
@@ -10,7 +12,7 @@
 
 	//float-end
 	private string Color => ShowSearch ? "btn-outline-success" : "btn-outline-success";
-	private string Title => string.Empty; // ShowSearch ? "Hide " : "Search ";
+	private string Title => ShowSearch ? "Hide " : "Show "; //  string.Empty;
 	private string Icon => ShowSearch ? "fas fa-search-minus" : "fas fa-search-plus"; //"fas fa-chevron-up" : "fas fa-chevron-down";
 	
 	protected void ButtonClicked()

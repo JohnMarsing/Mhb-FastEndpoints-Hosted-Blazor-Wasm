@@ -5,7 +5,7 @@
 	@if (Previous!.BibleBook is not null)
 	{
 		<button type="button" class="btn btn-outline-primary"
-						@onclick="@(e => ButtonClick( Previous.BibleBook!))">
+						@onclick="ButtonClick">
 			<sup>
 				@Previous.ButtonText &nbsp;
 			</sup><i class="@Enums.BibleBook.NavigationIcon.Previous"></i>
@@ -18,23 +18,21 @@
 	}
 }
 
-
 @code {
 	[Parameter, EditorRequired] public BookAndChapter? PreviousBookAndChapter { get; set; }
 	[Parameter, EditorRequired] public ButtonsToShow buttonToShow { get; set; }
 	[Parameter] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
 
-	BibleBookPrevNext? Previous;
+	BibleBookPrevNext? Previous; // only null when Gen 1
 
 	protected override void OnParametersSet()
 	{
-		//CurrentBookAndChapter = BookAndChapterParameter;
-		Previous = PreviousBookAndChapter!.BibleBook!.NavigationPrevious(PreviousBookAndChapter.Chapter); // only null when Gen 1
+		Previous = PreviousBookAndChapter!.BibleBook!.NavigationPrevious(PreviousBookAndChapter.Chapter); 
 	}
 
-	private void ButtonClick(BibleBook bibleBook)
+	private void ButtonClick()
 	{
-		BookAndChapter? bookAndChapter = new BookAndChapter(bibleBook, PreviousBookAndChapter!.Chapter - 1);
+		BookAndChapter? bookAndChapter = new BookAndChapter(Previous!.BibleBook, Previous!.Chapter);
 		OnBookAndChapterSelected.InvokeAsync(bookAndChapter);
 	}
 }

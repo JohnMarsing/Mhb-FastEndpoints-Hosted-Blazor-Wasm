@@ -4,10 +4,17 @@
 @using System.ComponentModel.DataAnnotations
 @using MyHebrewBible.Client.Enums
 
+@* 
+<p class="my-0">@($"ShowChapterButtons: {ShowChapterButtons}")</p>
+<p class="my-0">@($"SelectedBibleBookString: {SelectedBibleBookString}")</p>
+<p class="my-0">@($"ReturnedBookAndChapterFromChapterButtons: {ReturnedBookAndChapterFromChapterButtons}")</p>
+<p class="my-0">@($"Chapter: {Chapter}")</p> 
+*@
+
 @if (SelectedBibleBook != BibleBook.Psalms)
 {
 	<EditForm class="d-flex" Model="VM" OnValidSubmit="HandleFormSubmit">
-
+		<DataAnnotationsValidator />
 		<BlazoredTypeahead SearchMethod="SearchBibleBooks"
 											 @bind-Value="VM!.SelectedBook"
 											 EnableDropDown="true"
@@ -71,15 +78,20 @@ else
 	</EditForm>
 }
 
-@if (SelectedBibleBook != null)
+@if (ShowChapterButtons)
 {
-	@if (SelectedBibleBook != BibleBook.Psalms)
+	@if (SelectedBibleBook != null)
 	{
-		<div class="row pt-2 pb-1 d-print-none">
-			<div class="col-12">
-				<ChapterButtons CurrentBibleBook="@BibleBook" ButtonsPerRow="ButtonsPerRow" OnChapterFilterSelected="OnChapterSelected" />
+		@if (SelectedBibleBook != BibleBook.Psalms)
+		{
+			<div class="row pt-2 pb-1 d-print-none">
+				<div class="col-12">
+					<ChapterButtons CurrentBibleBook="@SelectedBibleBook"
+													ButtonsPerRow="ButtonsPerRow"
+													OnChapterFilterSelected="OnChapterSelected" />
+				</div>
 			</div>
-		</div>
+		}
 	}
 }
 
@@ -88,11 +100,16 @@ else
 	private TypeaheadVM? VM;
 	private TypeaheadAndChapterVM? VMPsalms;
 
+	// `BibleBook` and `Chapter`? Why not `BookAndChapter`
+	// I separated BibleBook and Chapter because Chapter isn't required
+	// and why is that?
 	[Parameter, EditorRequired] public BibleBook? BibleBook { get; set; }
-	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
 	[Parameter] public int Chapter { get; set; }
-
+	
+	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
 	[Parameter] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
+
+	protected bool ShowChapterButtons = true;
 
 	public int SelectedChapter { get; set; }
 	public BibleBook? SelectedBibleBook { get; set; }
@@ -116,10 +133,10 @@ else
 		VMPsalms = new TypeaheadAndChapterVM() { SelectedBook = BibleBook.Psalms, Chapter = Chapter };
 	}
 
-
 	protected string? ReturnedBookAndChapterFromChapterButtons;
 	private void OnChapterSelected(BookAndChapter bookAndChapter)
 	{
+		ShowChapterButtons = false;
 		ReturnedBookAndChapterFromChapterButtons = bookAndChapter.ToString();
 		OnBookAndChapterSelected.InvokeAsync(bookAndChapter);
 	}
@@ -133,17 +150,17 @@ else
 
 	protected string? SelectedBibleBookString;
 
-	protected BookAndChapter? bookAndChapter;
 	private void HandleFormSubmit()
 	{
+		ShowChapterButtons = true;
 		SelectedBibleBook = VM!.SelectedBook;
 		SelectedBibleBookString = VM!.SelectedBook!.Name;
-		SelectedChapter = 1;
-		bookAndChapter = new BookAndChapter(VM!.SelectedBook, SelectedChapter);
-		OnBookAndChapterSelected.InvokeAsync(bookAndChapter);
+		//SelectedChapter = 1;
+		SelectedChapter = Chapter;
 	}
 
 
+	protected BookAndChapter? bookAndChapter;
 	private void HandleValidSubmitPsalms()
 	{
 		SelectedBibleBook = VMPsalms!.SelectedBook;
