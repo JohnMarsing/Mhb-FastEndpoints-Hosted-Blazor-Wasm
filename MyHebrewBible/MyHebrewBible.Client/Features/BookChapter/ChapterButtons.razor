@@ -1,19 +1,36 @@
 ﻿@using MyHebrewBible.Client.Enums
 
 
-@foreach (var r in ButtonRows)
+
+@if (ShowCloseButton)
 {
-	<div class="btn-group btn-group-sm">
-		@for (int i = r.ChapterStart; i <= r.ChapterEnd; i++)
-		{
-			int iLocal = i;
-			<button type="button" class="btn btn-outline-info font-monospace"
-							@onclick="@(e => ButtonClick(@iLocal))">
-				@((MarkupString)ButtonNumber(i))
+	<div class="card p-1 m-1">
+		<div class="card-header">
+			<h5>Chapters
+			<button type="button" class="mt-1 btn btn-danger btn-sm" @onclick="ButtonCloseClick">
+				<i class="fas fa-times"></i>
 			</button>
-		}
+			</h5>
+		</div>
+		<div class="card-body">
+			@foreach (var r in ButtonRows)
+			{
+				<div class="btn-group btn-group-sm">
+					@for (int i = r.ChapterStart; i <= r.ChapterEnd; i++)
+					{
+						int iLocal = i;
+						<button type="button" class="btn btn-outline-info font-monospace"
+										@onclick="@(e => ButtonClick(@iLocal))">
+							@((MarkupString)ButtonNumber(i))
+						</button>
+					}
+				</div>
+			}
+		</div>
 	</div>
 }
+
+
 
 @code {
 
@@ -21,8 +38,9 @@
 	[Parameter, EditorRequired] public int ButtonsPerRow { get; set; }
 	[Parameter] public EventCallback<BookAndChapter> OnChapterFilterSelected { get; set; }
 
-	public List<ButtonRow> ButtonRows { get; set; } = new List<ButtonRow>();
+	private bool ShowCloseButton;
 
+	public List<ButtonRow> ButtonRows { get; set; } = new List<ButtonRow>();
 
 	protected override void OnParametersSet()
 	{
@@ -30,8 +48,15 @@
 		PopulateButtonRows();
 	}
 
+	private void ButtonCloseClick()
+	{
+		ButtonRows.Clear();
+		ShowCloseButton = false;
+	}
+
 	private void PopulateButtonRows()
 	{
+		ShowCloseButton = true;
 		if (ButtonsPerRow >= CurrentBibleBook!.LastChapter)
 		{
 			// Add only one row
@@ -74,8 +99,10 @@
 
 	private void ButtonClick(int chapter)
 	{
-		ButtonRows.Clear();
+		//ButtonRows.Clear();
+		ShowCloseButton = false;
 		OnChapterFilterSelected.InvokeAsync(new BookAndChapter(CurrentBibleBook, chapter));
+		//StateHasChanged();  // this has no effect
 	}
 
 	protected MarkupString ButtonNumber(int i)
