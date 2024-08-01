@@ -8,8 +8,19 @@
 
 <PageTitle>Book Chapter</PageTitle>
 
+@* <p>@($"ShowSearch: {ShowSearch}")</p> *@
+
 <nav class="navbar navbar-light bg-light">
 	<div class="container-fluid">
+
+		@*
+		@if (ShowSearch)
+		{
+		}
+		else
+		{
+		}
+		*@
 
 		<div class="@MediaQuery.Xs.DivClass">
 			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter"
@@ -37,32 +48,35 @@
 												 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 		</div>
 
+		@* <ShowHideSearchToggle ShowSearch="@ShowSearch" OnToggleSelected="ReturnedSearchToggle" /> *@
+
 	</div>
 </nav>
 
-<div class="pb-n1 mt-2 mb-2 border-bottom border-info">
-	<div class="d-flex justify-content-between mb-3">
-		<div class="ps-2">
-			@if (CurrentBookAndChapter is not null)
-			{
-				<PreviousButton PreviousBookAndChapter="@CurrentBookAndChapter" 
-					buttonToShow="ButtonsToShow.PreviousOnly" 
-					OnBookAndChapterSelected="@ReturnedBookAndChapter" />
-			}
+@* <p class="my-0">@($"ReturnedBookAndChapterString: {ReturnedBookAndChapterString}")</p> *@
+
+@if (CurrentBookAndChapter is not null)
+{
+	<div class="pb-n1 mt-2 mb-2 border-bottom border-info">
+		<div class="d-flex justify-content-between mb-3">
+			<div class="ps-2">
+				<PreviousButton PreviousBookAndChapter="@CurrentBookAndChapter"
+												buttonToShow="ButtonsToShow.PreviousOnly"
+												OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+			</div>
+
+			<span class="text-center">@CurrentBookAndChapter.BibleBook!.Title @CurrentBookAndChapter.Chapter </span>
+
+			<div class="pe-2">
+				<NextButton NextBookAndChapter="@CurrentBookAndChapter"
+										buttonToShow="ButtonsToShow.NextOnly"
+										OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+			</div>
 		</div>
-		<div class="pe-2">
-			@if (CurrentBookAndChapter is not null)
-			{
-				<NextButton  NextBookAndChapter="@CurrentBookAndChapter" 
-					buttonToShow="ButtonsToShow.NextOnly" 
-					OnBookAndChapterSelected="@ReturnedBookAndChapter"/>
-			}
-		</div>
+
 	</div>
+}
 
- @* <h5 class="text-center">Book Chapter</h5> *@
-
-</div>
 
 
 @if (verses == null)
@@ -81,20 +95,18 @@ else
 		else
 		{
 			<small>why for how come you know have a pin</small>
-		} *@
+		}
 
-		@*
 		@if (item.DescH != null)
 		{
 			<h3 class="mt-2">@item.DescH</h3>
 		}
-		*@
 
-		@* 		@if (item.DescD is not null)
+		@if (item.DescD is not null)
 		{
 			<h5 class="text-end mt-3 mb-1 text-black-50 fst-italic">@item.DescD</h5>
 		}
-*@
+		*@
 
 		<p class="fs-5">
 			<a title="@item.BCV" href="https://www.blueletterbible.org/kjv/gen/1/1/" target="_blank"><sup class="btn btn-outline-primary py-0 px-1"><b>@item.Verse</b></sup></a>  @((MarkupString)@item.KJV!)
@@ -110,6 +122,7 @@ else
 
 	protected override async Task OnInitializedAsync()
 	{
+
 		SetBibleBookAndChapter();
 		//SetSubTitle(null);
 		//ShowSearch = true;
@@ -126,13 +139,17 @@ else
 		if (GottenFromLocalStorage)
 		{
 			CurrentBibleBook = BibleBook.Genesis;
-			CurrentChapter = 2;
+			CurrentChapter = 1;
 			CurrentBookAndChapter = new BookAndChapter(CurrentBibleBook, CurrentChapter);
 		}
 		else
 		{
-			CurrentBibleBook = BibleBook.Genesis;
-			CurrentChapter = 2;
+
+			//CurrentBibleBook = BibleBook.Genesis;
+			//CurrentChapter = 1;
+			CurrentBibleBook = BibleBook.Exodus;
+			CurrentChapter = 40; // LastChapter is 40
+
 			CurrentBookAndChapter = new BookAndChapter(CurrentBibleBook, CurrentChapter);
 		}
 	}
@@ -163,28 +180,27 @@ else
 
 	private ICollection<BookChapter>? verses = null;
 
-	public BibleBook? PrevBibleBook { get; set; }
+	//public BibleBook? PrevBibleBook { get; set; } // Why am I saving this, it's assigned but it's not being referenced any where else
 
+	protected string? ReturnedBookAndChapterString;
 	private async Task ReturnedBookAndChapter(BookAndChapter bookAndChapter)
 	{
-		PrevBibleBook = CurrentBibleBook;
+		ReturnedBookAndChapterString = bookAndChapter.ToString();
+		//PrevBibleBook = CurrentBibleBook;
 		CurrentBibleBook = bookAndChapter.BibleBook;
 		CurrentChapter = bookAndChapter.Chapter;
-		CurrentBookAndChapter = new BookAndChapter(CurrentBibleBook, CurrentChapter);
 
+		//CurrentBookAndChapter = new BookAndChapter(CurrentBibleBook, CurrentChapter); // WHY am I ASSIGNING THIS TWICE ???
 		CurrentBookAndChapter = bookAndChapter!;
-		//long b = bookAndChapter.BibleBook!.Value;
-		//long c = bookAndChapter.Chapter;
+
+		//ShowSearch = false;
 		verses = await Api!.GetBookChapterAsync((long)bookAndChapter.BibleBook, (long)bookAndChapter.Chapter);
-		//verses = await Api!.GetBookChapterAsync(b, c);
 	}
 
-
-	//ToDo: review, not being used
-	// private bool ShowSearch;
-	// private void ReturnedSearchToggle(bool showSearch)
-	// {
-	// 	ShowSearch = showSearch;
-		// }
+	private bool ShowSearch;
+	private void ReturnedSearchToggle(bool showSearch)
+	{
+		ShowSearch = showSearch;
+	}
 
 }
