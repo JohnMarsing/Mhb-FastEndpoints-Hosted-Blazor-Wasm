@@ -8,50 +8,34 @@
 
 <PageTitle>Book Chapter</PageTitle>
 
-@* <p>@($"ShowSearch: {ShowSearch}")</p> *@
 
-<nav class="navbar navbar-light bg-light">
-	<div class="container-fluid">
+<div class="@MediaQuery.Xs.DivClass">
 
-		@*
-		@if (ShowSearch)
-		{
-		}
-		else
-		{
-		}
-		*@
+	<Typeahead BookAndChapterTypeahead="@CurrentBookAndChapter"
+						 MediaQuery="@MediaQuery.Xs"
+						 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+</div>
+<div class="@MediaQuery.Sm.DivClass">
+	<Typeahead BookAndChapterTypeahead="@CurrentBookAndChapter"
+						 MediaQuery="@MediaQuery.Sm"
+						 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+</div>
+<div class="@MediaQuery.Md.DivClass">
+	<Typeahead BookAndChapterTypeahead="@CurrentBookAndChapter"
+						 MediaQuery="@MediaQuery.Md"
+						 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+</div>
+<div class="@MediaQuery.Lg.DivClass">
+	<Typeahead BookAndChapterTypeahead="@CurrentBookAndChapter"
+						 MediaQuery="@MediaQuery.Lg"
+						 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+</div>
+<div class="@MediaQuery.Xl.DivClass">
+	<Typeahead BookAndChapterTypeahead="@CurrentBookAndChapter"
+						 MediaQuery="@MediaQuery.Xl"
+						 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+</div>
 
-		<div class="@MediaQuery.Xs.DivClass">
-			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter"
-												 MediaQuery="@MediaQuery.Xs"
-												 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
-		</div>
-		<div class="@MediaQuery.Sm.DivClass">
-			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter"
-												 MediaQuery="@MediaQuery.Sm"
-												 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
-		</div>
-		<div class="@MediaQuery.Md.DivClass">
-			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter"
-												 MediaQuery="@MediaQuery.Md"
-												 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
-		</div>
-		<div class="@MediaQuery.Lg.DivClass">
-			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter"
-												 MediaQuery="@MediaQuery.Lg"
-												 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
-		</div>
-		<div class="@MediaQuery.Xl.DivClass">
-			<TypeaheadEditForm BibleBook="@CurrentBibleBook" Chapter="@CurrentChapter"
-												 MediaQuery="@MediaQuery.Xl"
-												 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
-		</div>
-
-		@* <ShowHideSearchToggle ShowSearch="@ShowSearch" OnToggleSelected="ReturnedSearchToggle" /> *@
-
-	</div>
-</nav>
 
 @* <p class="my-0">@($"ReturnedBookAndChapterString: {ReturnedBookAndChapterString}")</p> *@
 
@@ -144,7 +128,6 @@ else
 		}
 		else
 		{
-
 			//CurrentBibleBook = BibleBook.Genesis;
 			//CurrentChapter = 1;
 			CurrentBibleBook = BibleBook.Exodus;
