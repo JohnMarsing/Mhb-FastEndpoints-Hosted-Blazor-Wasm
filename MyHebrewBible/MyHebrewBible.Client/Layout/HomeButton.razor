@@ -1,0 +1,38 @@
+﻿@using Page = MyHebrewBible.Client.Enums.Nav
+
+@* btn-secondary  btn-sm *@
+
+<div class="d-sm-none">
+	<a class="btn btn-primary" title="<576px Xs" href="@Page.Home.Index">
+		<i class="@Page.Home.Icon"></i>
+	</a>
+</div>
+
+<div class="d-none d-sm-block d-md-none d-lg-none d-xl-none">
+	<a class="btn btn-primary" title="≥576px Sm" href="@Page.Home.Index">
+		<i class="@Page.Home.Icon"></i>
+	</a>
+</div>
+
+<div class="d-none d-md-block d-lg-none d-xl-none">
+	<a class="btn btn-primary" title="≥768px Md" href="@Page.Home.Index">
+		<i class="@Page.Home.Icon"></i>
+	</a>
+</div>
+
+<div class="d-none d-lg-block d-xl-none">
+	<a class="btn btn-primary" title="≥992px Lg" href="@Page.Home.Index">
+		<i class="@Page.Home.Icon"></i>
+	</a>
+</div>
+
+<div class="d-none d-xl-block">
+	<a class="btn btn-primary" title="≥1200px Xl" href="@Page.Home.Index">
+		<i class="@Page.Home.Icon"></i>
+	</a>
+</div>
+
+
+@code {
+
+}
