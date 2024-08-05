@@ -2,8 +2,8 @@
 @using MyHebrewBible.Client.Layout
 
 @* [Flex | Grow and shrink](https://getbootstrap.com/docs/5.3/utilities/flex/#grow-and-shrink) *@
-
 @* [Flex | Auto margins](https://getbootstrap.com/docs/5.3/utilities/flex/#auto-margins) *@
+
 <div class="d-flex mb-3">
 	<div class="me-auto p-2">
 
@@ -18,13 +18,30 @@
 											 MinimumLength="1"
 											 placeholder="Search bible...">
 			<SelectedTemplate Context="mycontext">
-				@mycontext!.Title &nbsp;&nbsp;&nbsp; <span class="hebrew">@mycontext.NameInHebrew</span>
+				@if (MediaQuery == MediaQuery.Xs)
+				{
+				@mycontext!.Title
+				}
+				else
+				{
+					<span>@mycontext!.Title</span> <text>&nbsp;&nbsp;&nbsp;</text>
+					<span class="hebrew">@mycontext.NameInHebrew</span>
+				}
 			</SelectedTemplate>
 			<HelpTemplate>
 				Please enter at least 1 characters to perform a search.
 			</HelpTemplate>
 			<ResultTemplate Context="mycontext">
-				@mycontext.Title &nbsp;&nbsp;&nbsp; <i>@mycontext.TransliterationInHebrew</i>
+				@if (MediaQuery == MediaQuery.Xs)
+				{
+					@mycontext!.Title
+				}
+				else
+				{
+					<div class="d-flex justify-content-between">
+						@mycontext!.Title <span class="hebrew">@mycontext.NameInHebrew</span>
+					</div>
+				}
 			</ResultTemplate>
 		</BlazoredTypeahead>
 	</div>
@@ -35,6 +52,12 @@
 
 	<div class="p-1">
 		<SitemapButton />
+	</div>
+
+	<div class="p-1">
+		<a href="/" class="btn btn-primary" title="Customize book chapter settings">
+			<i class="fas fa-cog"></i>
+		</a>
 	</div>
 
 </div>

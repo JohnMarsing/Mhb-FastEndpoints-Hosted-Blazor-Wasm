@@ -1,0 +1,121 @@
+﻿@inject ApiClient Api
+
+<div class="d-flex justify-content-start mb-3">
+	<div class="p-2 bd-highlight"><b>FocusScriptureId:</b> @FocusScriptureId</div>
+	<div class="p-2 bd-highlight"><b>VerseRowCount:</b> @VerseRowCount</div>
+	<div class="p-2 bd-highlight"><b>WordCount:</b> @WordCount</div>
+	@* 	
+	<div class="p-2 bd-highlight"><b>TopRC:</b> @TopRC</div>
+	<div class="p-2 bd-highlight"><b>BottomRC:</b> @BottomRC</div> 
+	*@
+	<div class="p-2 bd-highlight"><b>Strongs:</b> @Strongs ?? 0</div>
+	<div class="p-2 bd-highlight"><b>Hebrew:</b> <span class="hebrew16">@Hebrew</span></div>
+</div>
+
+
+
+@if (verses == null)
+{
+	<p><em>Loading verses...</em></p>
+}
+else
+{
+	if (FocusScriptureId == 0)
+	{
+		<ParagraphTop TopVerses="versesTop" OnVerseSelected="ReturnedVerse" />
+	}
+	else
+	{
+		@if (versesTop is not null)
+		{
+			<ParagraphTop TopVerses="versesTop" OnVerseSelected="ReturnedVerse" />
+		}
+		else
+		{
+			<p><b>versesTop:</b> is null</p>
+		}
+
+		<WordSegmentsCard ScriptureId="FocusScriptureId"
+											WordCount="WordCount"
+											OnStrongsSelected="ReturnedStrongs" />
+
+		@if (Strongs is not null)
+		{
+			<HebrewTable ScriptureId="FocusScriptureId"
+									 Strongs="Strongs2"
+									 OnHebrewSelected="ReturnedHebrew" />
+		}
+
+
+		@if (versesBottom is not null)
+		{
+			<ParagraphBottom BottomVerses="versesBottom" OnVerseSelected="ReturnedVerse" />
+		}
+		else
+		{
+			<p><b>versesBottom:</b> is null</p>
+		}
+
+	}
+
+}
+
+
+@code {
+	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
+
+	protected long FocusScriptureId; // = 0;
+	protected long VerseRowCount; // = 0;
+	protected long WordCount; // = 0;
+	protected long TopRC = 0;
+	protected long BottomRC = 0;
+	protected long? Strongs = null;
+	protected long Strongs2 = 0;
+	protected string? Hebrew;
+
+	public List<BookChapter>? versesTop;
+	public List<BookChapter>? versesBottom;
+
+	private ICollection<BookChapter>? verses = null;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		FocusScriptureId = 0;
+		verses = await Api!.GetBookChapterAsync((long)BookAndChapter!.BibleBook, (long)BookAndChapter.Chapter);
+		VerseRowCount = verses.Count;
+		PopulateTopAndBottom(VerseRowCount);
+	}
+
+	private void ReturnedVerse(ScriptureIdAndWordCount scriptureIdAndWordCount)
+	{
+		FocusScriptureId = scriptureIdAndWordCount.ScriptureID;
+		WordCount = scriptureIdAndWordCount.WordCount;
+		PopulateTopAndBottom(WordCount);
+	}
+
+	private void PopulateTopAndBottom(long verseSplit)
+	{
+		versesTop = verses!.Where(w => w.Verse < verseSplit).OrderBy(o => o.Verse).ToList();
+		TopRC = versesTop.Count();
+
+		if (FocusScriptureId != 0)
+		{
+			versesBottom = verses!.Where(w => w.Verse > verseSplit).OrderBy(o => o.Verse).ToList();
+			BottomRC = versesBottom.Count();
+		}
+	}
+
+
+	private void ReturnedStrongs(long? strongs)
+	{
+		Strongs = strongs;
+		Strongs2 = Strongs2 = Strongs ?? default(long);
+	}
+
+	private void ReturnedHebrew(string hebrew)
+	{
+		Hebrew = hebrew;
+	}
+
+
+}
