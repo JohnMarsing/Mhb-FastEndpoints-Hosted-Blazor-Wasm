@@ -1,0 +1,29 @@
+﻿@page "/Sitemap"
+
+@using Microsoft.AspNetCore.Components.Web
+@using MyHebrewBible.Client.Enums
+@using Page = MyHebrewBible.Client.Enums.Nav
+
+<PageHeader PageEnum="Page.Sitemap" />
+
+<div class="h5">
+
+	<ul class="fa-ul">
+		@foreach (var item in Nav.List.ToList()
+			.Where(w => w.IsPartOfList(PageListType.SitemapPage))
+			.OrderBy(o => o.Sort))
+		{
+			<li class="py-1">
+
+				<span class="fa-li"><i class="@item.Icon"></i></span>
+				<a href="@item.Index">
+					@item.Title
+				</a>
+
+			</li>
+		}
+	</ul>
+
+</div>
+
+

@@ -1,0 +1,28 @@
+﻿@if (TopVerses != null)
+{
+	@* <h6 class="mt-4 mb-1">Top</h6> *@
+
+	@foreach (var item in TopVerses)
+	{
+		<p class="fs-5">
+
+			<a title="@item.BCV" @onclick="@(e => ButtonClick(item.ID, item.Verse))">
+				<sup class="btn btn-outline-primary py-0 px-1">
+					<b>@item.Verse</b>
+				</sup>
+			</a>
+			@((MarkupString)@item.KJV!)
+
+		</p>
+	}
+}
+
+@code {
+	[Parameter, EditorRequired] public List<BookChapter>? TopVerses { get; set; }
+	[Parameter] public EventCallback<ScriptureIdAndWordCount> OnVerseSelected { get; set; }
+
+	private void ButtonClick(long scriptureId, long wordCount)
+	{
+		OnVerseSelected.InvokeAsync(new ScriptureIdAndWordCount(scriptureId, wordCount));
+	}
+}

@@ -3,11 +3,11 @@
 @using MyHebrewBible.Client.Helpers
 @using MyHebrewBible.Client.Features.BookChapter.Search
 @using MyHebrewBible.Client.Features.BookChapter.PrevNext
+@using MyHebrewBible.Client.Features.BookChapter.Verses
 
-@inject ApiClient Api
+@* @inject ApiClient Api *@
 
 <PageTitle>Book Chapter</PageTitle>
-
 
 <div class="@MediaQuery.Xs.DivClass">
 
@@ -61,129 +61,38 @@
 	</div>
 }
 
-
-
-@if (verses == null)
-{
-	<p>🤔</p>
-}
-else
-{
-	@foreach (var item in verses)
-	{
-		@*
-		@if (item.DescH.GetType() != typeof(DBNull))
-		{
-			<h3 class="mt-2">@item.DescH</h3>
-		}
-		else
-		{
-			<small>why for how come you know have a pin</small>
-		}
-
-		@if (item.DescH != null)
-		{
-			<h3 class="mt-2">@item.DescH</h3>
-		}
-
-		@if (item.DescD is not null)
-		{
-			<h5 class="text-end mt-3 mb-1 text-black-50 fst-italic">@item.DescD</h5>
-		}
-		*@
-
-		<p class="fs-5">
-			<a title="@item.BCV" href="https://www.blueletterbible.org/kjv/gen/1/1/" target="_blank"><sup class="btn btn-outline-primary py-0 px-1"><b>@item.Verse</b></sup></a>  @((MarkupString)@item.KJV!)
-		</p>
-
-	}
-}
+<Sections BookAndChapter="CurrentBookAndChapter" />
 
 @code {
 	public BookAndChapter? CurrentBookAndChapter { get; set; }
-	public BibleBook? CurrentBibleBook { get; set; }
-	public int CurrentChapter { get; set; }
 
-	protected override async Task OnInitializedAsync()
+	protected override void OnInitialized()
 	{
-
-		SetBibleBookAndChapter();
-		//SetSubTitle(null);
-		//ShowSearch = true;
-
-		CurrentBookAndChapter = new BookAndChapter(CurrentBibleBook, CurrentChapter);
-		verses = await Api!.GetBookChapterAsync(CurrentBibleBook!, CurrentChapter);
+		CurrentBookAndChapter = SetBibleBookAndChapter();
 	}
 
-	protected void SetBibleBookAndChapter()
+	protected BookAndChapter? SetBibleBookAndChapter()
 	{
 		//ToDo: finish LocalStorage solution
 
 		bool GottenFromLocalStorage = false;
 		if (GottenFromLocalStorage)
 		{
-			CurrentBibleBook = BibleBook.Genesis;
-			CurrentChapter = 1;
-			CurrentBookAndChapter = new BookAndChapter(CurrentBibleBook, CurrentChapter);
+			return new BookAndChapter(BibleBook.Genesis, 1);
 		}
 		else
 		{
-			//CurrentBibleBook = BibleBook.Genesis;
-			//CurrentChapter = 1;
-			CurrentBibleBook = BibleBook.Exodus;
-			CurrentChapter = 40; // LastChapter is 40
-
-			CurrentBookAndChapter = new BookAndChapter(CurrentBibleBook, CurrentChapter);
+			return new BookAndChapter(BibleBook.Exodus, 2);
+			//return BookAndChapter(BibleBook.Exodus, BibleBook.Exodus.LastChapter)
 		}
 	}
 
-	//ToDo: do I need this SubTitle, currently it's not being used
-	// protected string SubTitle = "";
-	// protected void SetSubTitle(string? TitleOverRide)
-	// {
-	// 	if (TitleOverRide is not null)
-	// 	{
-	// 		SubTitle = TitleOverRide;
-	// 	}
-	// 	else
-	// 	{
-	// 		/*
-	// 		if (CurrentChapter is not null)
-	// 		{
-	// 			SubTitle = $"{CurrentBibleBook!.Title} {CurrentChapter}";
-	// 		}
-	// 		else
-	// 		{
-	// 			SubTitle = $"{CurrentBibleBook!.Title}";
-	// 		}
-	// 		*/
-	// 		SubTitle = $"{CurrentBibleBook!.Title} {CurrentChapter}";
-	// 	}
-	// }
-
-	private ICollection<BookChapter>? verses = null;
-
-	//public BibleBook? PrevBibleBook { get; set; } // Why am I saving this, it's assigned but it's not being referenced any where else
-
 	protected string? ReturnedBookAndChapterString;
-	private async Task ReturnedBookAndChapter(BookAndChapter bookAndChapter)
+
+	private void ReturnedBookAndChapter(BookAndChapter bookAndChapter)
 	{
 		ReturnedBookAndChapterString = bookAndChapter.ToString();
-		//PrevBibleBook = CurrentBibleBook;
-		CurrentBibleBook = bookAndChapter.BibleBook;
-		CurrentChapter = bookAndChapter.Chapter;
-
-		//CurrentBookAndChapter = new BookAndChapter(CurrentBibleBook, CurrentChapter); // WHY am I ASSIGNING THIS TWICE ???
 		CurrentBookAndChapter = bookAndChapter!;
-
-		//ShowSearch = false;
-		verses = await Api!.GetBookChapterAsync((long)bookAndChapter.BibleBook, (long)bookAndChapter.Chapter);
-	}
-
-	private bool ShowSearch;
-	private void ReturnedSearchToggle(bool showSearch)
-	{
-		ShowSearch = showSearch;
 	}
 
 }

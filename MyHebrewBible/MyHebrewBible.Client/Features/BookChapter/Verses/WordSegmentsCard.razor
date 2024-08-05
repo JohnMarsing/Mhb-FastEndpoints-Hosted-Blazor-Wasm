@@ -1,0 +1,52 @@
+﻿@inject ApiClient Api
+
+@if (kjvWords == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<div class="card border-primary mb-3">
+		@* <div class="card-header"><h6 class="">Verse: @WordCount</h6></div> *@
+		<div class="card-header">
+			<h6>
+				<span class="btn btn-outline-success py-0 px-1"><b>@WordCount</b></span>
+				<button type="button" class="mt-1 btn btn-danger btn-sm" @onclick="ButtonCloseClick">
+					<i class="fas fa-times"></i>
+				</button>
+			</h6>
+		</div>
+		<div class="card-body pb-0">
+			<p class="fs-5">
+				
+				@foreach (var item in kjvWords)
+				{
+					<span class="bg-info-subtle me-2" @onclick="@(e => ButtonClick(item.Strongs))">@item.Word</span>
+				}
+			</p>
+		</div>
+	</div>
+}
+
+@code {
+	[Parameter, EditorRequired] public long ScriptureId { get; set; }
+	[Parameter, EditorRequired] public long WordCount { get; set; }
+	[Parameter] public EventCallback<long?> OnStrongsSelected { get; set; }
+
+	private ICollection<WordPartKjv>? kjvWords = null;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		kjvWords = await Api.GetWordPartKjvAsync(ScriptureId);
+	}
+
+	private void ButtonClick(long? strongs)
+	{
+		OnStrongsSelected.InvokeAsync(strongs);
+	}
+
+	private void ButtonCloseClick()
+	{
+		OnStrongsSelected.InvokeAsync(null);
+	}
+}

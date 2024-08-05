@@ -41,6 +41,21 @@ ORDER BY WordCount, SegmentCount
 		return wordParts;
 	}
 
+	public async Task<IEnumerable<WordPart?>> GetWordPartsByStrongs(long scriptureID, long strongs)
+	{
+		using var connection = await _connectionFactory.CreateConnectionAsync();
+		Parms = new DynamicParameters(new { ScriptureID = scriptureID, Strongs = strongs });
+
+		var wordParts = await connection.QueryAsync<WordPart>(@"
+SELECT ScriptureID, WordCount, SegmentCount, WordEnum, Hebrew1, Hebrew2, Hebrew3, KjvWord, Strongs, Transliteration, FinalEnum
+FROM WordPart 
+WHERE ScriptureID=@ScriptureID and Strongs=@Strongs
+ORDER BY WordCount, SegmentCount
+", Parms);
+
+		return wordParts;
+	}
+
 	public async Task<IEnumerable<WordPartKjv?>> GetWordPartKjvs(long scriptureID)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
@@ -58,3 +73,4 @@ ORDER BY WordCount
 
 }
 
+// Ignore Spelling: strongs, Kjvs, Parms

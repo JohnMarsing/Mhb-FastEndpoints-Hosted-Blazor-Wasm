@@ -1,0 +1,31 @@
+﻿
+
+NOT SURE HOW THIS WORKS RIGHT NOW, JUST WANTED TO GET IT OUT OF THE WAY
+FYI: THE CALLS TO SQLITE ACT WIERD WHEN COLUNS LIKE DescH or DescD ARE NULL
+
+@*
+		@if (item.DescH.GetType() != typeof(DBNull))
+		{
+			<h3 class="mt-2">@item.DescH</h3>
+		}
+		else
+		{
+			<small>why for how come you know have a pin</small>
+		}
+
+		@if (item.DescH != null)
+		{
+			<h3 class="mt-2">@item.DescH</h3>
+		}
+
+		@if (item.DescD is not null)
+		{
+			<h5 class="text-end mt-3 mb-1 text-black-50 fst-italic">@item.DescD</h5>
+		}
+*@
+
+
+
+@code {
+
+}

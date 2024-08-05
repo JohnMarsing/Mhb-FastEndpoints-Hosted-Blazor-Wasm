@@ -10,9 +10,11 @@ public class WordPart
 	public string? Hebrew2 { get; set; }
 	public string? Hebrew3 { get; set; }
 	public string? KjvWord { get; set; }
-	public int Strongs { get; set; }
+	public long Strongs { get; set; }
 	public string? Transliteration { get; set; }
 	public int? FinalEnum { get; set; }
 }
+
+// Ignore Spelling: strongs, 
 
 //ScriptureID, WordCount, SegmentCount, WordEnum, Hebrew1, Hebrew2, Hebrew3, KjvWord, Strongs, Transliteration, FinalEnum
