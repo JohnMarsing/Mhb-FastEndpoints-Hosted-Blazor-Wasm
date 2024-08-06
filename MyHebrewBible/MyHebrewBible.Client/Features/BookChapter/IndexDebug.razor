@@ -1,0 +1,30 @@
+﻿<div class="card border-primary mb-2">
+	<div class="card-header"><h6>@nameof(Index)</h6></div>
+
+	<div class="card-body pb-0">
+		<div class="d-flex justify-content-start">
+			<div class="pe-2">
+				<b>Msg...</b><br /> @Msg
+			</div>
+			<div class="pe-2">
+				<b>ReturnedBookAndChapterString:</b><br /> @ReturnedBookAndChapterString
+			</div>
+		</div>
+	</div>
+
+	@if (!String.IsNullOrEmpty(Err))
+	{
+		<div class="card-footer">
+			<h6 class="badge rounded-pill bg-danger">Error</h6>
+			@Err
+		</div>
+	}
+
+</div>
+
+
+@code {
+	[Parameter, EditorRequired] public string? Msg { get; set; }
+	[Parameter, EditorRequired] public string? ReturnedBookAndChapterString { get; set; }
+	[Parameter] public string? Err { get; set; }
+}
