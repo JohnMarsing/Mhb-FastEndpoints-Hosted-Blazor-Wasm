@@ -4,6 +4,9 @@
 @* [Flex | Grow and shrink](https://getbootstrap.com/docs/5.3/utilities/flex/#grow-and-shrink) *@
 @* [Flex | Auto margins](https://getbootstrap.com/docs/5.3/utilities/flex/#auto-margins) *@
 
+
+@* <TypeaheadDebug Msg="@_msg" BibleBookGottenFromParent="@BibleBookGottenFromParent" SelectedBook="@SelectedBook" /> *@
+
 <div class="d-flex mb-3">
 	<div class="me-auto p-2">
 
@@ -20,7 +23,7 @@
 			<SelectedTemplate Context="mycontext">
 				@if (MediaQuery == MediaQuery.Xs)
 				{
-				@mycontext!.Title
+					@mycontext!.Title
 				}
 				else
 				{
@@ -64,12 +67,12 @@
 
 @if (ShowChapterButtons)
 {
-	@if (SelectedBibleBook != null)
+	@if (BibleBookGottenFromParent != null)
 	{
 		<div class="d-flex mt-3">
-		<ChapterButtons CurrentBibleBook="@SelectedBibleBook"
-										ButtonsPerRow="ButtonsPerRow"
-										OnChapterFilterSelected="OnChapterSelected" />
+			<ChapterButtons CurrentBibleBook="@BibleBookGottenFromParent"
+											ButtonsPerRow="ButtonsPerRow"
+											OnChapterFilterSelected="OnChapterSelected" />
 		</div>
 	}
 }
@@ -79,22 +82,34 @@
 	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
 	[Parameter] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
 
-	public BibleBook? SelectedBibleBook { get; set; }
+	public BibleBook? BibleBookGottenFromParent { get; set; }
 	protected int ButtonsPerRow;
 	protected bool ShowChapterButtons = false; // true;
+	protected BibleBook? SelectedBook { get; set; }
+
+	protected string _msg = string.Empty;
 
 	protected override void OnParametersSet()
 	{
-		SelectedBibleBook = BookAndChapterTypeahead!.BibleBook;
+		if (BookAndChapterTypeahead is not null && BookAndChapterTypeahead.BibleBook is not null)
+		{
+			_msg = $"Inside {nameof(OnParametersSet)}, setting BibleBookGottenFromParent and SelectedBook";
+			BibleBookGottenFromParent = BookAndChapterTypeahead!.BibleBook; /*Object reference not set to an instance of an object.*/
+			SelectedBook = BookAndChapterTypeahead!.BibleBook;
+		}
+		if (MediaQuery is not null) { SetMediaQuery(); }
+	}
 
+	private void SetMediaQuery()
+	{
 		MediaQuery!
 		.When(MediaQuery.Xs).Then(() => ButtonsPerRow = 5)
 		.When(MediaQuery.Sm).Then(() => ButtonsPerRow = 10)
 		.When(MediaQuery.Md).Then(() => ButtonsPerRow = 15)
 		.When(MediaQuery.Lg).Then(() => ButtonsPerRow = 20)
 		.When(MediaQuery.Xl).Then(() => ButtonsPerRow = 25);
-	}
 
+	}
 
 	protected string? ReturnedBookAndChapterFromChapterButtons;
 	private void OnChapterSelected(BookAndChapter bookAndChapter)
@@ -111,11 +126,9 @@
 			.OrderBy(o => o.Value));
 	}
 
-	private BibleBook? SelectedBook { get; set; }
 	private void SelectedResultChanged(BibleBook result)
 	{
 		ShowChapterButtons = true;
 		SelectedBook = result;
-		SelectedBibleBook = result;
 	}
 }

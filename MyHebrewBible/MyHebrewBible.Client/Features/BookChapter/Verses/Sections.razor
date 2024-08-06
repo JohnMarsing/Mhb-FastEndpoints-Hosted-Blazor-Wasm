@@ -1,18 +1,6 @@
 ﻿@inject ApiClient Api
 
-<div class="d-flex justify-content-start mb-3">
-	<div class="p-2 bd-highlight"><b>FocusScriptureId:</b> @FocusScriptureId</div>
-	<div class="p-2 bd-highlight"><b>VerseRowCount:</b> @VerseRowCount</div>
-	<div class="p-2 bd-highlight"><b>WordCount:</b> @WordCount</div>
-	@* 	
-	<div class="p-2 bd-highlight"><b>TopRC:</b> @TopRC</div>
-	<div class="p-2 bd-highlight"><b>BottomRC:</b> @BottomRC</div> 
-	*@
-	<div class="p-2 bd-highlight"><b>Strongs:</b> @Strongs ?? 0</div>
-	<div class="p-2 bd-highlight"><b>Hebrew:</b> <span class="hebrew16">@Hebrew</span></div>
-</div>
-
-
+@* <SectionsDebug FocusScriptureId="@FocusScriptureId" VerseRowCount="@VerseRowCount" WordCount="@WordCount" Strongs="@Strongs" Hebrew="@Hebrew" Msg="@_msg" /> *@
 
 @if (verses == null)
 {
@@ -78,12 +66,19 @@ else
 
 	private ICollection<BookChapter>? verses = null;
 
+	protected string _msg = nameof(Sections);
+
 	protected override async Task OnParametersSetAsync()
 	{
 		FocusScriptureId = 0;
-		verses = await Api!.GetBookChapterAsync((long)BookAndChapter!.BibleBook, (long)BookAndChapter.Chapter);
-		VerseRowCount = verses.Count;
-		PopulateTopAndBottom(VerseRowCount);
+
+		if (BookAndChapter is not null && BookAndChapter!.BibleBook is not null)
+		{
+			_msg = $"Inside {nameof(OnParametersSet)}, setting verses and VerseRowCount";
+			verses = await Api!.GetBookChapterAsync((long)BookAndChapter!.BibleBook, (long)BookAndChapter.Chapter);
+			VerseRowCount = verses.Count;
+			PopulateTopAndBottom(VerseRowCount);
+		}
 	}
 
 	private void ReturnedVerse(ScriptureIdAndWordCount scriptureIdAndWordCount)
