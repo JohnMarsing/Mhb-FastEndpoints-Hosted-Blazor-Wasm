@@ -5,7 +5,7 @@
 @* [Flex | Auto margins](https://getbootstrap.com/docs/5.3/utilities/flex/#auto-margins) *@
 
 
-@* <TypeaheadDebug Msg="@_msg" BibleBookGottenFromParent="@BibleBookGottenFromParent" SelectedBook="@SelectedBook" /> *@
+@* <TypeaheadDebug Msg="@_msg" BibleBookGottenFromParent="@BibleBookGottenFromParent" SelectedBook="@SelectedBook" ReturnedBookAndChapterFromChapterButtons="@ReturnedBookAndChapterFromChapterButtons" /> *@
 
 <div class="d-flex mb-3">
 	<div class="me-auto p-2">
@@ -67,10 +67,10 @@
 
 @if (ShowChapterButtons)
 {
-	@if (BibleBookGottenFromParent != null)
+	@if (SelectedBook != null)
 	{
 		<div class="d-flex mt-3">
-			<ChapterButtons CurrentBibleBook="@BibleBookGottenFromParent"
+			<ChapterButtons CurrentBibleBook="@SelectedBook"
 											ButtonsPerRow="ButtonsPerRow"
 											OnChapterFilterSelected="OnChapterSelected" />
 		</div>
@@ -94,7 +94,7 @@
 		if (BookAndChapterTypeahead is not null && BookAndChapterTypeahead.BibleBook is not null)
 		{
 			_msg = $"Inside {nameof(OnParametersSet)}, setting BibleBookGottenFromParent and SelectedBook";
-			BibleBookGottenFromParent = BookAndChapterTypeahead!.BibleBook; /*Object reference not set to an instance of an object.*/
+			BibleBookGottenFromParent = BookAndChapterTypeahead!.BibleBook;
 			SelectedBook = BookAndChapterTypeahead!.BibleBook;
 		}
 		if (MediaQuery is not null) { SetMediaQuery(); }
