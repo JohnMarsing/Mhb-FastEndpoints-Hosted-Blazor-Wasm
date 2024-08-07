@@ -22,6 +22,12 @@
 				</div>
 			</div>
 
+			<div class="pe-2">
+				<div class="pe-3">
+					<b>ReturnedBookAndChapterFromChapterButtons:</b><br /> @($"{ReturnedBookAndChapterFromChapterButtons}")
+				</div>
+			</div>
+
 		</div>
 		@*_err: *@
 	</div>
@@ -32,6 +38,8 @@
 	[Parameter, EditorRequired] public string? Msg { get; set; }
 	[Parameter, EditorRequired] public BibleBook? BibleBookGottenFromParent { get; set; }  
 	[Parameter, EditorRequired] public BibleBook? SelectedBook { get; set; }
+	[Parameter, EditorRequired] public string? ReturnedBookAndChapterFromChapterButtons { get; set; }
+	//
 
 
 }

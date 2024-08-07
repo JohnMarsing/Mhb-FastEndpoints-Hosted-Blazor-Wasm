@@ -4,15 +4,15 @@
 @using MyHebrewBible.Client.Features.BookChapter.Search
 @using MyHebrewBible.Client.Features.BookChapter.PrevNext
 @using MyHebrewBible.Client.Features.BookChapter.Verses
+@using MyHebrewBible.Client.State
 
 @* @inject ApiClient Api *@
 
-@inject Blazored.LocalStorage.ILocalStorageService localStorage
-
+@inject IBookChapterState bookChapterState
 
 <PageTitle>Book Chapter</PageTitle>
 
-@* <IndexDebug Msg="@_msg" ReturnedBookAndChapterString="@ReturnedBookAndChapterString" Err="@_err" /> *@
+ @* <IndexDebug Msg="@_msg" ReturnedBookAndChapterString="@ReturnedBookAndChapterString" Err="@_err" />  *@
 
 <div class="@MediaQuery.Xs.DivClass">
 
@@ -67,52 +67,27 @@
 <Sections BookAndChapter="CurrentBookAndChapter" />
 
 @code {
-	public BookAndChapter? CurrentBookAndChapter { get; set; }
-	const string Key = "biblebookidandchapter";
-
-	protected override async Task OnInitializedAsync()
-	{
-		await SetBibleBookAndChapter();
-	}
 
 	protected string _err = string.Empty;
 	protected string _msg = string.Empty;
 
-	protected async Task SetBibleBookAndChapter()
+	public BookAndChapter? CurrentBookAndChapter { get; set; }
+
+	//protected override async Task OnInitializedAsync()
+	protected override void OnInitialized()
 	{
-		try
-		{
-			_msg = $", try and get local storage, Key: {Key}";
-			BibleBookIdAndChapter? bibleBookIdAndChapter = await localStorage.GetItemAsync<BibleBookIdAndChapter>(Key);
-			if (bibleBookIdAndChapter is null)
-			{
-				_msg += ", it is null, so add default Gen 1:1";
-				bibleBookIdAndChapter = new BibleBookIdAndChapter(BibleBook.Genesis.Value, 1);
-				await localStorage.SetItemAsync(Key, bibleBookIdAndChapter);
-				CurrentBookAndChapter = new BookAndChapter(BibleBook.Genesis, 1);
-			}
-			else
-			{
-				_msg += $", local storage is NOT null, BibleBookId: {bibleBookIdAndChapter.BibleBookId}, Chapter: {bibleBookIdAndChapter.Chapter}";
-				CurrentBookAndChapter = new BookAndChapter(BibleBook.FromValue(bibleBookIdAndChapter.BibleBookId), bibleBookIdAndChapter.Chapter);
-			}
-
-			_msg += $",  CurrentBookAndChapter: {CurrentBookAndChapter!.ToString()}";
-
-		}
-		catch (Exception ex)
-		{
-			_err = ex.ToString();
-		}
+		//await SetBibleBookAndChapter();
+		BibleBookIdAndChapter bibleBookIdAndChapter = bookChapterState.Get();
+		CurrentBookAndChapter = new BookAndChapter(BibleBook.FromValue(bibleBookIdAndChapter.BibleBookId), bibleBookIdAndChapter.Chapter);
 	}
 
 	protected string? ReturnedBookAndChapterString;
 
-	private async Task ReturnedBookAndChapter(BookAndChapter bookAndChapter)
+	private void ReturnedBookAndChapter(BookAndChapter bookAndChapter)  //async Task
 	{
 		ReturnedBookAndChapterString = bookAndChapter.ToString();
 		CurrentBookAndChapter = bookAndChapter!;
-		await localStorage.SetItemAsync(Key, new BibleBookIdAndChapter(CurrentBookAndChapter.BibleBook!.Value, CurrentBookAndChapter.Chapter));
+		bookChapterState.Update(new BibleBookIdAndChapter(CurrentBookAndChapter.BibleBook!.Value, CurrentBookAndChapter.Chapter));
 	}
 
 }
