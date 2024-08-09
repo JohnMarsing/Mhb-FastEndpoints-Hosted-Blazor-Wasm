@@ -1,9 +1,9 @@
 ﻿using Blazored.LocalStorage;
 //using Microsoft.Extensions.Logging;
 
-
 namespace MyHebrewBible.Client.State;
 
+// ToDo: this isn't being used as of yet
 public class AppState
 {
 	#region Constructor and DI
@@ -45,7 +45,7 @@ public class AppState
 				}
 				*/
 			}
-			catch (Exception ex)
+			catch (Exception) // ex
 			{
 				//Logger!.LogError(ex, "{Class}!{Method}", nameof(AppState), nameof(Initialize));
 			}
@@ -53,3 +53,5 @@ public class AppState
 		}
 	}
 }
+
+// Ignore Spelling: App

@@ -2,7 +2,6 @@ using MyHebrewBible.Components;
 using MyHebrewBible.Database;
 using FastEndpoints.ClientGen;
 using NJsonSchema.CodeGeneration.CSharp;
-using Microsoft.AspNetCore.Connections;
 using MyHebrewBible.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,6 +41,8 @@ else
 	app.UseExceptionHandler("/Error", createScopeForErrors: true);
 	app.UseHsts();
 }
+
+
 
 app.UseHttpsRedirection(); // Not in FastEndpoints e.g.
 

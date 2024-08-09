@@ -1,0 +1,33 @@
+﻿@inject IConfiguration Configuration
+
+<address>
+	@((MarkupString)_address!);
+</address>
+
+@code {
+	[Parameter] public string Name { get; set; } = "Name Here";
+	[Parameter] public string Street { get; set; } = "123 Main Street #123";
+	[Parameter] public string CityStateZip { get; set; } = "Anywhere USA 12345";
+	[Parameter] public bool OnOneLine { get; set; } = false;
+	[Parameter] public bool UseLabel { get; set; } = false;
+
+	string? _address;
+
+	protected override void OnInitialized()
+	{
+		_address = GetAddress(OnOneLine, UseLabel);
+	}
+
+	public string GetAddress(bool onOneLine, bool useLabel)
+	{
+		return onOneLine ?
+			$"{GetLabel(useLabel)}{Name}, {Street}, {CityStateZip}"
+			:
+			$"<br /><b>{Name}</b><br />{Street}<br />{CityStateZip}";
+	}
+
+	private string GetLabel(bool useLabel)
+	{
+		return useLabel ?	"<b>Mailing Address</b>: " : "";
+	}
+}

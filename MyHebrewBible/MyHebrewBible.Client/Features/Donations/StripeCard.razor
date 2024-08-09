@@ -1,0 +1,22 @@
+﻿@using Microsoft.Extensions.Options
+@* @inject IOptions<DonationSettings>? DonationSettings *@
+
+@inject IConfiguration Configuration
+
+<div class="card">
+
+	<div class="card-body text-center">
+		<span class="fs-3">Donations on-line using</span> <br /> <i class="fab fa-cc-stripe fa-fw fa-3x"></i>
+	</div>
+
+	<div class="card-footer bg-transparent border-success">
+		<stripe-buy-button buy-button-id=@Configuration["DonationSettings:StripeBuyButtonId"]
+											 publishable-key=@Configuration["DonationSettings:StripePublishableKey"]>
+		</stripe-buy-button>
+	</div>
+
+</div>
+
+@code {
+
+}
