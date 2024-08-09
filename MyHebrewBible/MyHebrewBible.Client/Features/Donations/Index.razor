@@ -1,0 +1,95 @@
+﻿@page "/donate"
+<PageHeader PageEnum="Client.Enums.Nav.Donate" />
+
+<h4 class="text-center shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+	<sup><small><i class="far fa-heart text-muted"></i></small></sup> Thank you for supporting my ministry <sup><small><i class="far fa-heart text-muted"></i></small></sup>
+</h4>
+
+<div class="d-flex justify-content-center">
+
+	<div class="card mb-2">
+
+		<div class="tab-content" id="myTabContent">
+
+			@foreach (var item in Enums.NavItem.List.OrderBy(o => o.Value))
+			{
+				<div class="tab-pane fade @TabPageActive(item)"
+						 id="@item.AriaControls" role="tabpanel"
+						 aria-labelledby="@item.ButtonId">
+
+					@if (item == Enums.NavItem.Stripe)
+					{
+						<StripeCard />
+					}
+					else
+					{
+						@if (item == Enums.NavItem.Zelle)
+						{
+							<ZelleCard />
+						}
+						else
+						{
+							@if (item == Enums.NavItem.Check)
+							{
+								<CheckCard />
+							}
+							else
+							{
+								<QrcCard />
+							}
+						}
+					}
+
+				</div>
+			}
+
+		</div>
+
+		<ul class="nav @navTabType justify-content-center" id="myTab" role="tablist">
+
+			@foreach (var item in Enums.NavItem.List.OrderBy(o => o.Value))
+			{
+				<li class="nav-item " role="presentation">
+					<button @onclick="@(e => OnButtonClicked(item))"
+									class="nav-link @NavLinkActive(@item)" type="button" role="tab"
+									id="@item.ButtonId"
+									data-bs-toggle="tab"
+									data-bs-target="@item.Target"
+									aria-controls="@item.AriaControls"
+									aria-selected="@AriaActive(item)">
+						@item.Name
+					</button>
+				</li>
+			}
+		</ul>
+
+
+	</div>
+</div>
+
+@code {
+	protected Enums.NavItem currentNavItem = Enums.NavItem.Stripe;
+
+	private const string navTabType = " nav-tabs";  //  nav-underlines,  nav-pills
+
+	private void OnButtonClicked(Enums.NavItem tabItem)
+	{
+		currentNavItem = tabItem;
+		StateHasChanged();
+	}
+
+	string AriaActive(Enums.NavItem navItem)
+	{
+		return currentNavItem == navItem ? "true" : "false";
+	}
+
+	string NavLinkActive(Enums.NavItem navItem)
+	{
+		return currentNavItem == navItem ? " active" : "";
+	}
+
+	string TabPageActive(Enums.NavItem navItem)
+	{
+		return currentNavItem == navItem ? " show active" : "";
+	}
+}

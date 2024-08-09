@@ -1,0 +1,15 @@
+﻿@inject IConfiguration Configuration
+
+<div class="card" style="width: 30rem;">
+
+	<div class="p-4">
+		<img src='@Configuration["DonationSettings:STRIPE_QRC_Image"]' class="img-fluid" alt="Stripe QR Code" />
+	</div>
+
+</div>
+
+@* <div class="card-body"> <QrcModal /> </div> *@
+
+@code {
+
+}

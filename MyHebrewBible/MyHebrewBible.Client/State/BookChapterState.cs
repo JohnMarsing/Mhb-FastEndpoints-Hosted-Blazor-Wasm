@@ -49,7 +49,7 @@ public class BookChapterState : IBookChapterState
 				_isInitialized = true;
 				NotifyStateHasChanged();
 			}
-			catch (Exception ex)
+			catch (Exception) // ex
 			{
 				//Logger!.LogError(ex, "{Class}!{Method}", nameof(BookChapterState), nameof(Initialize));
 			}
@@ -62,7 +62,7 @@ public class BookChapterState : IBookChapterState
 		{
 			_bibleBookIdAndChapter = localStorage!.GetItem<BibleBookIdAndChapter>(Key);
 		}
-		catch (Exception ex)
+		catch (Exception) // ex
 		{
 			//Logger!.LogError(ex, "{Class}!{Method}, Key: {Key}, trying to call localStorage!.GetItem<Profile>(Key)"
 			//, nameof(BookChapterState), nameof(Get), Key);
@@ -77,7 +77,7 @@ public class BookChapterState : IBookChapterState
 			localStorage!.SetItem(Key, bibleBookIdAndChapter);
 			NotifyStateHasChanged();
 		}
-		catch (Exception ex)
+		catch (Exception) // ex
 		{
 			//Logger!.LogError(ex, "{Class}!{Method}" , nameof(BookChapterState), nameof(Update));
 		}

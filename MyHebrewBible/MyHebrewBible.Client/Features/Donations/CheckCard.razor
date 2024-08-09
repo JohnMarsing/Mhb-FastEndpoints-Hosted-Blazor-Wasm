@@ -1,0 +1,15 @@
+﻿@inject IConfiguration Configuration
+
+<div class="card" style="width: 30rem;">
+	<img src='@Configuration["DonationSettings:BLANK_CHECK_Image"]' class="card-img-top" alt="...">
+	<div class="card-body">
+		<h5 class="card-title text-center">Write a check and send to</h5>
+		<p class="card-text text-center">
+			<Address OnOneLine=false 
+				UseLabel=true 
+				Name="@Configuration["MailingAddress:Name"]" 
+				Street="@Configuration["MailingAddress:Street"]" 
+				CityStateZip="@Configuration["MailingAddress:CityStateZip"]" />
+		</p>
+	</div>
+</div>
