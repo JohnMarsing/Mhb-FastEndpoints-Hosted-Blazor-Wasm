@@ -14,7 +14,7 @@ public interface IBookChapterState
 
 public class BookChapterState : IBookChapterState
 {
-#region Constructor and DI
+	#region Constructor and DI
 	//private readonly ILogger Logger;
 	private readonly ISyncLocalStorageService? localStorage;
 
@@ -24,14 +24,15 @@ public class BookChapterState : IBookChapterState
 		//Logger = logger;
 		//Logger!.LogInformation("{Class}!{MethodEvent}", nameof(BookChapterState), "CTOR");
 	}
-#endregion
+	#endregion
 
 	private const string Key = "biblebookidandchapter";
 	private bool _isInitialized;
 	private void NotifyStateHasChanged() => OnChange?.Invoke();
 	public event Action? OnChange;
-	BibleBookIdAndChapter? _bibleBookIdAndChapter; 
+	BibleBookIdAndChapter? _bibleBookIdAndChapter;
 
+	// ToDo: This is only called by AppState, and AppState is never called
 	public void Initialize()
 	{
 		//Logger!.LogInformation("{Class}!{Method}, _isInitialized: {_isInitialized}", 
@@ -43,7 +44,7 @@ public class BookChapterState : IBookChapterState
 				_bibleBookIdAndChapter = localStorage!.GetItem<BibleBookIdAndChapter>(Key);
 				if (_bibleBookIdAndChapter is null)
 				{
-					_bibleBookIdAndChapter = new BibleBookIdAndChapter(BibleBook.Genesis.Value, 1); 
+					_bibleBookIdAndChapter = new BibleBookIdAndChapter(BibleBook.Genesis.Value, 1);
 				}
 
 				_isInitialized = true;
@@ -61,6 +62,13 @@ public class BookChapterState : IBookChapterState
 		try
 		{
 			_bibleBookIdAndChapter = localStorage!.GetItem<BibleBookIdAndChapter>(Key);
+
+			// Code copied from Initialize
+			if (_bibleBookIdAndChapter is null)
+			{
+				_bibleBookIdAndChapter = new BibleBookIdAndChapter(BibleBook.Genesis.Value, 1);
+			}
+
 		}
 		catch (Exception) // ex
 		{
@@ -70,7 +78,7 @@ public class BookChapterState : IBookChapterState
 		return _bibleBookIdAndChapter!;
 	}
 
-	public void Update(BibleBookIdAndChapter bibleBookIdAndChapter) 
+	public void Update(BibleBookIdAndChapter bibleBookIdAndChapter)
 	{
 		try
 		{
