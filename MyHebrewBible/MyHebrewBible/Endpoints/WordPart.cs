@@ -13,8 +13,39 @@ public class WordPart
 	public long Strongs { get; set; }
 	public string? Transliteration { get; set; }
 	public int? FinalEnum { get; set; }
+
+	public string Hebrew
+	{
+		get
+		{
+			if (WordEnum == 1) // SimpleSingle
+			{
+				return $"<span class='hebrew30'>{Hebrew1}</span>";
+			}
+			else if (WordEnum == 2) // NRL_Prefix
+			{
+				return $"<span class='hebrew30 nrl'>{Hebrew1}</span><span class='hebrew30'>{Hebrew2}</span>";
+			}
+			else if (WordEnum == 3) // NRL_Suffix
+			{
+				return $"<span class='hebrew30'>{Hebrew1}</span><span class='hebrew30 nrl'>{Hebrew2}</span>";
+			}
+			else if (WordEnum == 4) // NRL_Prefix and NRL_Suffix
+			{
+				return $"<span class='hebrew30 nrl'>{Hebrew1}</span><span class='hebrew30'>{Hebrew2}</span><span class='hebrew30 nrl'>{Hebrew3}</span>";
+			}
+			else if (WordEnum == 5) // SAT
+			{
+				return $"<span class='hebrew30 at-red'>{Hebrew1}</span>"; 
+			}
+			else  // SAT and Paseq
+			{
+			 return $"<span class='hebrew30 at-red'>{Hebrew1}</span> <span class='last-seg-type-paseq'>׀</span>";
+			}
+		}
+	}
+
 }
 
-// Ignore Spelling: strongs, 
+// Ignore Spelling: strongs, Paseq
 
-//ScriptureID, WordCount, SegmentCount, WordEnum, Hebrew1, Hebrew2, Hebrew3, KjvWord, Strongs, Transliteration, FinalEnum

@@ -19,7 +19,7 @@ else
 			@foreach (var item in hebrewWords)
 			{
 				<tr>
-					<td class="hebrew30">@item.Hebrew1 @item.Hebrew2 @item.Hebrew3</td>
+					<td class="text-end">@((MarkupString)@item.Hebrew) </td>
 					<td>
 						<small>@item.KjvWord <br /><i>@item.Transliteration</i></small>
 					</td>
