@@ -12,17 +12,16 @@
 				</sup>
 			</a>
 			@((MarkupString)@item.KJV!)
-
 		</p>
 	}
 }
 
 @code {
 	[Parameter, EditorRequired] public List<BookChapter>? TopVerses { get; set; }
-	[Parameter] public EventCallback<ScriptureIdAndWordCount> OnVerseSelected { get; set; }
+	[Parameter] public EventCallback<ScriptureIdAndVerseNumber> OnVerseSelected { get; set; }
 
-	private void ButtonClick(long scriptureId, long wordCount)
+	private void ButtonClick(long scriptureId, long verse)
 	{
-		OnVerseSelected.InvokeAsync(new ScriptureIdAndWordCount(scriptureId, wordCount));
+		OnVerseSelected.InvokeAsync(new ScriptureIdAndVerseNumber(scriptureId, verse));
 	}
 }

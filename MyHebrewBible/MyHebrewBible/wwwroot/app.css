@@ -1,3 +1,34 @@
+
+@font-face {
+	font-family: 'david';
+	src: url('fonts/david.ttf') format('truetype');
+}
+
+/*(N)ot (R)eal (L)etter*/
+.nrl {
+	color: #b9b9b9;
+}
+
+.at-red {
+	color: #ff0000;
+}
+
+.last-seg-type-samekh {
+	color: #00ff21;
+}
+
+.last-seg-type-reversednun {
+	color: #00ff21;
+}
+
+.last-seg-type-paseq {
+	color: #00ff21;
+}
+
+.last-seg-type-pe {
+	color: #00e0ff;
+}
+
 h1:focus {
 	outline: none;
 }

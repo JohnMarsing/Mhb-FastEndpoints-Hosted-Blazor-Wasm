@@ -52,7 +52,13 @@
 												OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 			</div>
 
-			<span class="text-center">@CurrentBookAndChapter.BibleBook!.Title @CurrentBookAndChapter.Chapter </span>
+			<div class="ps-2">
+				<span class="fs-3">@CurrentBookAndChapter.BibleBook!.Title @CurrentBookAndChapter.Chapter </span>
+
+				<PageInstructions />
+			
+			</div>
+
 
 			<div class="pe-2">
 				<NextButton NextBookAndChapter="@CurrentBookAndChapter"
