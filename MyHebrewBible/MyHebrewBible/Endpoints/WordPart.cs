@@ -14,6 +14,15 @@ public class WordPart
 	public string? Transliteration { get; set; }
 	public int? FinalEnum { get; set; }
 
+
+	public string StrongsH
+	{
+		get
+		{
+			return $"<a href='https://www.blueletterbible.org/lexicon/h{Strongs}/kjv/wlc/0-1/' target='_blank'>H{Strongs}</a> <i class='fas fa-external-link-alt'></i>";   
+		}
+	}
+
 	public string Hebrew
 	{
 		get

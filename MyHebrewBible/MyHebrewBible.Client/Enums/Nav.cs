@@ -1,5 +1,4 @@
 ﻿using Ardalis.SmartEnum;
-using MyHebrewBible.Client.Features.BookChapter;
 
 namespace MyHebrewBible.Client.Enums;
 
@@ -40,10 +39,9 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int VerseList = 14;
 		internal const int Contact = 15;
 		internal const int DonateReplyConfirm = 16;
-		internal const int DonateReplyCancel = 17;
-		internal const int Profile = 18;
-		internal const int BibleSearch = 19;
-		internal const int HealthCheckBibleBook = 20;
+		internal const int Profile = 17;
+		internal const int BibleSearch = 18;
+		internal const int HealthCheckBibleBook = 19;
 	}
 	#endregion
 
@@ -64,7 +62,6 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav VerseList = new VerseListSE();
 	public static readonly Nav Contact = new ContactSE();
 	public static readonly Nav DonateReplyConfirm = new DonateReplyConfirmSE();
-	public static readonly Nav DonateReplyCancel = new DonateReplyCancelSE();
 	public static readonly Nav Profile = new ProfileSE();
 	public static readonly Nav BibleSearch = new BibleSearchSE();
 	public static readonly Nav HealthCheckBibleBook = new HealthCheckBibleBookSE();
@@ -298,19 +295,6 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string HomeTitleSuffix => "";
 		public override string HomeFloatRightHebrew => "";
 
-		public override PageListType PageListType => PageListType.Reply;
-		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
-	}
-
-	private sealed class DonateReplyCancelSE : Nav
-	{
-		public DonateReplyCancelSE() : base($"{nameof(Id.DonateReplyCancel)}", Id.DonateReplyCancel) { }
-		public override string Index => "/cancel_donation.html";
-		public override string Title => "Donation Canceled";
-		public override string Icon => "fab fa-cc-stripe";
-		public override int Sort => Id.DonateReplyCancel;
-		public override string HomeTitleSuffix => "";
-		public override string HomeFloatRightHebrew => "";
 		public override PageListType PageListType => PageListType.Reply;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 	}

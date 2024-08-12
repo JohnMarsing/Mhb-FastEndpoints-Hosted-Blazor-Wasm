@@ -1,6 +1,6 @@
 ﻿@inject ApiClient Api
 
-@* <SectionsDebug FocusScriptureId="@FocusScriptureId" VerseRowCount="@VerseRowCount" WordCount="@WordCount" Strongs="@Strongs" Hebrew="@Hebrew" Msg="@_msg" /> *@
+@* <SectionsDebug FocusScriptureId="@FocusScriptureId" VerseRowCount="@VerseRowCount" VerseNumber="@VerseNumber" Strongs="@Strongs" Hebrew="@Hebrew" Msg="@_msg" /> *@
 
 @if (verses == null)
 {
@@ -20,19 +20,22 @@ else
 		}
 		else
 		{
-			<p><b>versesTop:</b> is null</p>
+			<p><b>versesTop:</b> is null</p> @* Why would this ever happen? *@
 		}
 
 		<WordSegmentsCard ScriptureId="FocusScriptureId"
-											WordCount="WordCount"
+											VerseNumber="VerseNumber"
+											SelectedWordCount="WordCount"
+											BookAndChapter="BookAndChapter"
 											OnStrongsSelected="ReturnedStrongs" />
 
-		@if (Strongs is not null)
+		@if (Strongs != 0)
 		{
 			<HebrewTable ScriptureId="FocusScriptureId"
-									 Strongs="Strongs2"
+									 Strongs="Strongs"
 									 OnHebrewSelected="ReturnedHebrew" />
 		}
+
 
 
 		@if (versesBottom is not null)
@@ -54,12 +57,12 @@ else
 
 	protected long FocusScriptureId; // = 0;
 	protected long VerseRowCount; // = 0;
-	protected long WordCount; // = 0;
+	protected long VerseNumber; // = 0;
 	protected long TopRC = 0;
 	protected long BottomRC = 0;
-	protected long? Strongs = null;
-	protected long Strongs2 = 0;
+	protected long Strongs = 0;
 	protected string? Hebrew;
+	protected long WordCount = 0;
 
 	public List<BookChapter>? versesTop;
 	public List<BookChapter>? versesBottom;
@@ -81,36 +84,44 @@ else
 		}
 	}
 
-	private void ReturnedVerse(ScriptureIdAndWordCount scriptureIdAndWordCount)
+	private void ReturnedVerse(ScriptureIdAndVerseNumber scriptureIdAndVerseNumber)
 	{
-		FocusScriptureId = scriptureIdAndWordCount.ScriptureID;
-		WordCount = scriptureIdAndWordCount.WordCount;
-		PopulateTopAndBottom(WordCount);
+		FocusScriptureId = scriptureIdAndVerseNumber.ScriptureID;
+		VerseNumber = scriptureIdAndVerseNumber.VerseNumber;
+		WordCount = 0;
+		Strongs = 0;
+		PopulateTopAndBottom(VerseNumber);
 	}
 
 	private void PopulateTopAndBottom(long verseSplit)
 	{
-		versesTop = verses!.Where(w => w.Verse < verseSplit).OrderBy(o => o.Verse).ToList();
-		TopRC = versesTop.Count();
-
-		if (FocusScriptureId != 0)
+		if (FocusScriptureId == 0)
 		{
+			versesTop = verses!.Where(w => w.Verse <= verseSplit).OrderBy(o => o.Verse).ToList();
+		}
+		else
+		{
+			versesTop = verses!.Where(w => w.Verse < verseSplit).OrderBy(o => o.Verse).ToList();
 			versesBottom = verses!.Where(w => w.Verse > verseSplit).OrderBy(o => o.Verse).ToList();
 			BottomRC = versesBottom.Count();
 		}
+		TopRC = versesTop.Count();
 	}
 
-
-	private void ReturnedStrongs(long? strongs)
+	private void ReturnedStrongs(StrongsAndWordCount strongsAndWordCount)
 	{
-		Strongs = strongs;
-		Strongs2 = Strongs2 = Strongs ?? default(long);
+		if (strongsAndWordCount.Strongs == 0)
+		{
+			FocusScriptureId = 0;
+			PopulateTopAndBottom(VerseRowCount);
+		}
+		Strongs = strongsAndWordCount.Strongs;
+		WordCount = strongsAndWordCount.WordCount;
 	}
 
 	private void ReturnedHebrew(string hebrew)
 	{
 		Hebrew = hebrew;
 	}
-
 
 }

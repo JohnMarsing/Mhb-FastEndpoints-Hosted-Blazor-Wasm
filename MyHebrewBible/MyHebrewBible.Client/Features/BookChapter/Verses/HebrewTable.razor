@@ -23,7 +23,7 @@ else
 					<td>
 						<small>@item.KjvWord <br /><i>@item.Transliteration</i></small>
 					</td>
-					<td><text>H</text>@item.Strongs</td>
+					<td class="">@((MarkupString)@item.StrongsH) </td>
 					<td>
 						<button type="button" class="mt-1 btn btn-success btn-sm" @onclick="@(e => ButtonClick(item.Hebrew1))">
 							<i class="fas fa-plus"></i>

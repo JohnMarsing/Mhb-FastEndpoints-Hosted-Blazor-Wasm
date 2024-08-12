@@ -576,6 +576,9 @@ namespace MyHebrewBible.Client
         [System.Text.Json.Serialization.JsonPropertyName("FinalEnum")]
         public int? FinalEnum { get; set; }
 
+        [System.Text.Json.Serialization.JsonPropertyName("StrongsH")]
+        public string StrongsH { get; set; }
+
         [System.Text.Json.Serialization.JsonPropertyName("Hebrew")]
         public string Hebrew { get; set; }
 

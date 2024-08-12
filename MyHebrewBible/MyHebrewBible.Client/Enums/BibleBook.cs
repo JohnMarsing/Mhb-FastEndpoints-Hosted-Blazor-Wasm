@@ -1,7 +1,6 @@
 ﻿// Ignore Spelling: Abrv Songof Colossians Thessalonians Philemon
 
 using Ardalis.SmartEnum;
-using MyHebrewBible.Client.Features;
 
 namespace MyHebrewBible.Client.Enums;
 

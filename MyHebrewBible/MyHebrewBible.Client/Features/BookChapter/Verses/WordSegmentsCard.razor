@@ -7,31 +7,66 @@
 else
 {
 	<div class="card border-primary mb-3">
-		@* <div class="card-header"><h6 class="">Verse: @WordCount</h6></div> *@
 		<div class="card-header">
 			<h6>
-				<span class="btn btn-outline-success py-0 px-1"><b>@WordCount</b></span>
+				<span class="btn btn-outline-success py-0 px-1"><b>@VerseNumber</b></span>
 				<button type="button" class="mt-1 btn btn-danger btn-sm" @onclick="ButtonCloseClick">
 					<i class="fas fa-times"></i>
 				</button>
+				<span class='float-end'>@Enums.BLB.nkjv.Anchor(BookAndChapter, (int)VerseNumber)</span>
 			</h6>
 		</div>
-		<div class="card-body pb-0">
-			<p class="fs-5">
-				
-				@foreach (var item in kjvWords)
-				{
-					<span class="bg-info-subtle me-2" @onclick="@(e => ButtonClick(item.Strongs))">@item.Word</span>
-				}
+		
+
+		@if (BookAndChapter!.BibleBook!.Value > Helpers.VerseFacts.LastBookInOT)
+		{
+			<div class="card-body pb-0">
+				<h4 class="card-title  text-center">
+				<span class="badge text-bg-info">Not Yet Supported</span>
+			</h4>
+
+			<p class="fs-6 px-3 text-center">
+				Currently <code>MyHebrewBible.com</code> does not support Greek Strong's lookup.
 			</p>
-		</div>
+			</div>
+		}
+		else
+		{
+			<div class="card-body pb-0">
+				<p class="fs-5 px-3">
+					@foreach (var item in kjvWords)
+					{
+						if (item.Strongs is not null)
+						{
+							if (item.WordCount != SelectedWordCount | SelectedWordCount == 0)
+							{
+								<span class="bg-info-subtle text-decoration-underline me-2" @onclick="@(e => ButtonClick((long)item.Strongs, item.WordCount))">@item.Word</span>
+							}
+							else
+							{
+								<span class="bg-info-subtle me-2"> @item.Word</span>
+							}
+						}
+						else
+						{
+							<span class="bg-dark-subtle text-black-50 me-2 "> @item.Word</span>
+						}
+					}
+
+				</p>
+			</div>
+		}
+
+
 	</div>
 }
 
 @code {
 	[Parameter, EditorRequired] public long ScriptureId { get; set; }
-	[Parameter, EditorRequired] public long WordCount { get; set; }
-	[Parameter] public EventCallback<long?> OnStrongsSelected { get; set; }
+	[Parameter, EditorRequired] public long VerseNumber { get; set; }
+	[Parameter, EditorRequired] public long SelectedWordCount { get; set; }
+	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
+	[Parameter] public EventCallback<StrongsAndWordCount?> OnStrongsSelected { get; set; }
 
 	private ICollection<WordPartKjv>? kjvWords = null;
 
@@ -40,13 +75,14 @@ else
 		kjvWords = await Api.GetWordPartKjvAsync(ScriptureId);
 	}
 
-	private void ButtonClick(long? strongs)
+	private void ButtonClick(long strongs, long wordCount)
 	{
-		OnStrongsSelected.InvokeAsync(strongs);
+		OnStrongsSelected.InvokeAsync(new StrongsAndWordCount((int)strongs, wordCount));
 	}
 
 	private void ButtonCloseClick()
 	{
-		OnStrongsSelected.InvokeAsync(null);
+		OnStrongsSelected.InvokeAsync(new StrongsAndWordCount(0, 0));
 	}
+
 }

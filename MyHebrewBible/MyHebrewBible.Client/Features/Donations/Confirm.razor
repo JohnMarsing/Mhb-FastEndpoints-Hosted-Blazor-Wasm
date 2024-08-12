@@ -1,0 +1,26 @@
+﻿@page "/confirm_donation.html"
+@page "/confirm_donation"
+
+<PageHeader PageEnum="MyHebrewBible.Client.Enums.Nav.DonateReplyConfirm" />
+
+<div id="content">
+	<div class="post">
+		<h2 class="title">Thank you for your support&nbsp;!</h2><br />
+		<div class="entry">
+
+			@*
+			<p>
+			We're confident that God will bless you for supporting our ministry.
+			If you have any questions concerning your donation, please feel free to contact us at @((MarkupString)AnchorEmail).
+			</p>
+			*@
+			<p>I greatly appreciate your support of my ministry.</p>
+			<br>
+		</div>
+	</div>
+</div>
+<!-- end #content -->
+@code {
+	// protected readonly MarkupString AnchorEmail =
+	// 	new MarkupString($"<a href='mailto:{Emails.Donations.Email()}'>{Emails.Donations.Email()}</a>");
+}
