@@ -1,0 +1,51 @@
+﻿@page "/HealthChecks/ThrowError"
+@using MyHebrewBible.Client.Enums
+@using Page = MyHebrewBible.Client.Enums.Nav
+
+<PageHeader PageEnum="Page.HealthCheckThrowError" />
+
+@inject ILogger<ThrowError>? Logger
+
+@switch (_status)
+{
+	case LoadingStatusEnum.Loading:
+		<p class="text-warning"><em>Loading...</em></p>
+		break;
+
+	case LoadingStatusEnum.Loaded:
+		<h6 class="mb-1"><b>Math is broke:</b> how can you divide be zero</h6>
+		break;
+
+	case LoadingStatusEnum.Error:
+		<p class="text-danger"><em>Could not load because of an Error</em></p>
+		<p class="p-2">@_msg</p>
+		break;
+
+	default:
+		break;
+}
+
+
+@code {
+	protected Enums.LoadingStatusEnum _status;
+	protected string _msg = string.Empty;
+
+	protected override void OnInitialized()
+	{
+		Logger!.LogInformation("{Class}!{Method}", nameof(ThrowError), nameof(OnInitialized));
+		try
+		{
+			_status = LoadingStatusEnum.Loading;
+			int i = 1; int j = 0; int k = i/j;
+			_status = LoadingStatusEnum.Loaded;
+		}
+		catch (Exception ex)
+		{
+			_status = LoadingStatusEnum.Error;
+			_msg = $"Error calling divide by zero";
+
+			Logger!.LogError("{Class}!{Method}: {Type} Message: {Message}"
+				, nameof(ThrowError), nameof(OnInitialized), ex.GetType(), ex.Message);
+		}
+	}
+}

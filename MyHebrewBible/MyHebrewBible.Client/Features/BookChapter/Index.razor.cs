@@ -14,8 +14,6 @@ namespace MyHebrewBible.Client.Features.BookChapter
 
 		public BookAndChapter? CurrentBookAndChapter { get; set; }
 
-		//protected override async Task OnInitializedAsync()
-		//await Task.Delay(5);
 		protected override void OnInitialized()
 		{
 			Logger!.LogInformation("{Class}!{Method}", nameof(Index), nameof(OnInitialized));
@@ -29,6 +27,7 @@ namespace MyHebrewBible.Client.Features.BookChapter
 			catch (Exception ex)
 			{
 				Logger!.LogError(ex, "{Class}!{Method}", nameof(Index), nameof(OnInitialized));
+				//Logger!.LogError("{Class}!{Method}: {Type} Message: {Message}", nameof(Index), nameof(OnInitialized), ex.GetType(), ex.Message);
 			}
 		}
 
