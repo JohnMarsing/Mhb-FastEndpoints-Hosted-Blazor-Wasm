@@ -3,93 +3,125 @@ using MyHebrewBible.Database;
 using FastEndpoints.ClientGen;
 using NJsonSchema.CodeGeneration.CSharp;
 using MyHebrewBible.Endpoints;
+using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
-
-builder.Services
-	 .AddAuthenticationJwtBearer(s => s.SigningKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-	 .AddAuthorization()
-	 .AddFastEndpoints();
-
-if (builder.Environment.IsDevelopment())
+string appSettingJson;
+if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == Environments.Development)
 {
-	builder.Services.SwaggerDocument(
-			o =>
-			{
-				o.DocumentSettings = d => d.DocumentName = "MyHebrewBibleApi";
-				o.ShortSchemaNames = true;
-				o.RemoveEmptyRequestSchema = true;
-			});
-}
-
-builder.Services.AddSingleton<IDbConnectionFactory>(_ =>
-		new SqliteConnectionFactory(connectionString: builder.Configuration.GetConnectionString("Database")!));
-
-builder.Services.AddTransient<Repository>();
-
-builder.Services.AddRazorComponents()
-		.AddInteractiveWebAssemblyComponents();
-
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
-{
-	app.UseWebAssemblyDebugging();
+	appSettingJson = "appsettings.Development.json";
 }
 else
 {
-	app.UseExceptionHandler("/Error", createScopeForErrors: true);
-	app.UseHsts();
+	appSettingJson = "appsettings.Production.json";
 }
 
+var configuration = new ConfigurationBuilder()
+	.AddJsonFile(appSettingJson)
+	.Build();
 
+Log.Logger = new LoggerConfiguration()
+	.ReadFrom.Configuration(configuration)
+	.CreateLogger();
 
-app.UseHttpsRedirection(); // Not in FastEndpoints e.g.
+Log.Information("{Class}, {Environment}, {AppSettings}; save to Serilog console and file sinks."
+			, nameof(Program), Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"), appSettingJson);
 
-app.UseStaticFiles();
+try
+{
+	var builder = WebApplication.CreateBuilder(args);
 
-//app.MapFallbackToFile("index.html"); in FastEndpoints
+	builder.Host.UseSerilog((ctx, lc) =>
+	lc.ReadFrom.Configuration(configuration));
 
-app.UseAntiforgery(); // Not in FastEndpoints e.g.
+	builder.Services
+		 .AddAuthenticationJwtBearer(s => s.SigningKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+		 .AddAuthorization()
+		 .AddFastEndpoints();
 
-// FastEndpoints Begin
-app.UseAuthentication()
-	 .UseAuthorization()
-	 .UseFastEndpoints(
-			 c =>
-			 {
-				 c.Endpoints.ShortNames = true;
-				 c.Serializer.Options.PropertyNamingPolicy = null;
-			 });
+	if (builder.Environment.IsDevelopment())
+	{
+		builder.Services.SwaggerDocument(
+				o =>
+				{
+					o.DocumentSettings = d => d.DocumentName = "MyHebrewBibleApi";
+					o.ShortSchemaNames = true;
+					o.RemoveEmptyRequestSchema = true;
+				});
+	}
 
-if (app.Environment.IsDevelopment())
-	app.UseSwaggerGen();
+	builder.Services.AddSingleton<IDbConnectionFactory>(_ =>
+			new SqliteConnectionFactory(connectionString: builder.Configuration.GetConnectionString("Database")!));
 
-/*
-From the server project MyHebrewBible (NOT MyHebrewBible.Client).
-  To update the HttpClient/ApiClient.cs file run the following...
+	builder.Services.AddTransient<Repository>();
 
-dotnet run --generateclients true
+	builder.Services.AddRazorComponents()
+			.AddInteractiveWebAssemblyComponents();
 
-Note, for the first time, create MyHebrewBible.Client/HttpClient folder 
-  and an empty ApiClient.cs file
-*/
+	var app = builder.Build();
+	//await using var app = builder.Build();
 
-await app.GenerateClientsAndExitAsync(
-		documentName: "MyHebrewBibleApi",
-		destinationPath: "../MyHebrewBible.Client/HttpClient",
-		csSettings: c =>
-		{
-			c.ClassName = "ApiClient";
-			c.CSharpGeneratorSettings.Namespace = "MyHebrewBible.Client";
-			c.CSharpGeneratorSettings.JsonLibrary = CSharpJsonLibrary.SystemTextJson;
-		},
-		tsSettings: null);
+	if (app.Environment.IsDevelopment())
+	{
+		app.UseWebAssemblyDebugging();
+	}
+	else
+	{
+		app.UseExceptionHandler("/Error", createScopeForErrors: true);
+		app.UseHsts();
+	}
 
-// FastEndpoints End
+	app.UseHttpsRedirection(); // Not in FastEndpoints e.g.
 
-app.MapRazorComponents<App>()
-		.AddInteractiveWebAssemblyRenderMode()
-		.AddAdditionalAssemblies(typeof(MyHebrewBible.Client._Imports).Assembly);
+	app.UseStaticFiles();
 
-app.Run();
+	//app.MapFallbackToFile("index.html"); in FastEndpoints
+
+	app.UseAntiforgery(); // Not in FastEndpoints e.g.
+
+	#region FastEndpoints
+	app.UseAuthentication()
+		 .UseAuthorization()
+		 .UseFastEndpoints(
+				 c =>
+				 {
+					 c.Endpoints.ShortNames = true;
+					 c.Serializer.Options.PropertyNamingPolicy = null;
+				 });
+
+	if (app.Environment.IsDevelopment())
+		app.UseSwaggerGen();
+
+	/* See Program, Server.md ! FN 01	*/
+
+	await app.GenerateClientsAndExitAsync(
+			documentName: "MyHebrewBibleApi",
+			destinationPath: "../MyHebrewBible.Client/HttpClient",
+			csSettings: c =>
+			{
+				c.ClassName = "ApiClient";
+				c.CSharpGeneratorSettings.Namespace = "MyHebrewBible.Client";
+				c.CSharpGeneratorSettings.JsonLibrary = CSharpJsonLibrary.SystemTextJson;
+			},
+			tsSettings: null);
+
+	#endregion
+
+	app.MapRazorComponents<App>()
+			.AddInteractiveWebAssemblyRenderMode()
+			.AddAdditionalAssemblies(typeof(MyHebrewBible.Client._Imports).Assembly);
+
+	app.Run();
+	//await app.RunAsync();
+
+	Log.Information("{Class}, Stopped cleanly", nameof(Program));
+	return 0;
+}
+catch (Exception ex)
+{
+	Log.Fatal(ex, "{Class}, An unhandled exception occurred during bootstrapping", nameof(Program));
+	return 1;
+}
+finally
+{
+	Log.CloseAndFlush();
+}

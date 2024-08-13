@@ -1,14 +1,18 @@
 ﻿@page "/bookchapter"
 @using MyHebrewBible.Client.Enums
-@using MyHebrewBible.Client.Helpers
 @using MyHebrewBible.Client.Features.BookChapter.Search
-@using MyHebrewBible.Client.Features.BookChapter.PrevNext
 @using MyHebrewBible.Client.Features.BookChapter.Verses
-@using MyHebrewBible.Client.State
+@using MyHebrewBible.Client.Features.BookChapter.PrevNext
+
+@* 
+	@using Microsoft.Extensions.Logging
+@using MyHebrewBible.Client.Helpers
+@using MyHebrewBible.Client.State *@
 
 @* @inject ApiClient Api *@
 
-@inject IBookChapterState bookChapterState
+@* @inject IBookChapterState bookChapterState *@
+@* @inject ILogger<Index>? Logger  *@
 
 <PageTitle>Book Chapter</PageTitle>
 
@@ -72,28 +76,4 @@
 
 <Sections BookAndChapter="CurrentBookAndChapter" />
 
-@code {
 
-	protected string _err = string.Empty;
-	protected string _msg = string.Empty;
-
-	public BookAndChapter? CurrentBookAndChapter { get; set; }
-
-	//protected override async Task OnInitializedAsync()
-	protected override void OnInitialized()
-	{
-		//await SetBibleBookAndChapter();
-		BibleBookIdAndChapter bibleBookIdAndChapter = bookChapterState.Get();
-		CurrentBookAndChapter = new BookAndChapter(BibleBook.FromValue(bibleBookIdAndChapter.BibleBookId), bibleBookIdAndChapter.Chapter);
-	}
-
-	protected string? ReturnedBookAndChapterString;
-
-	private void ReturnedBookAndChapter(BookAndChapter bookAndChapter)  //async Task
-	{
-		ReturnedBookAndChapterString = bookAndChapter.ToString();
-		CurrentBookAndChapter = bookAndChapter!;
-		bookChapterState.Update(new BibleBookIdAndChapter(CurrentBookAndChapter.BibleBook!.Value, CurrentBookAndChapter.Chapter));
-	}
-
-}

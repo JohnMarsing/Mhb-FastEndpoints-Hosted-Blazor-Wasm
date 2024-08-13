@@ -15,14 +15,14 @@ public interface IBookChapterState
 public class BookChapterState : IBookChapterState
 {
 	#region Constructor and DI
-	//private readonly ILogger Logger;
+	private readonly ILogger Logger;
 	private readonly ISyncLocalStorageService? localStorage;
 
-	public BookChapterState(ISyncLocalStorageService localStorage) //, ILogger<BookChapterState> logger
+	public BookChapterState(ISyncLocalStorageService localStorage, ILogger<BookChapterState> logger) 
 	{
 		this.localStorage = localStorage;
-		//Logger = logger;
-		//Logger!.LogInformation("{Class}!{MethodEvent}", nameof(BookChapterState), "CTOR");
+		Logger = logger;
+		Logger!.LogInformation("{Class}!{MethodEvent}", nameof(BookChapterState), "CTOR");
 	}
 	#endregion
 
@@ -70,10 +70,10 @@ public class BookChapterState : IBookChapterState
 			}
 
 		}
-		catch (Exception) // ex
+		catch (Exception ex) 
 		{
-			//Logger!.LogError(ex, "{Class}!{Method}, Key: {Key}, trying to call localStorage!.GetItem<Profile>(Key)"
-			//, nameof(BookChapterState), nameof(Get), Key);
+			Logger!.LogError(ex, "{Class}!{Method}, Key: {Key}, trying to call localStorage!.GetItem<Profile>(Key)"
+			, nameof(BookChapterState), nameof(Get), Key);
 		}
 		return _bibleBookIdAndChapter!;
 	}
