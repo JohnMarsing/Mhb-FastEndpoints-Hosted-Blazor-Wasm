@@ -21,14 +21,12 @@ namespace MyHebrewBible.Client.Features.BookChapter
 			{
 				BibleBookIdAndChapter bibleBookIdAndChapter = bookChapterState!.Get();
 				CurrentBookAndChapter = new BookAndChapter(BibleBook.FromValue(bibleBookIdAndChapter.BibleBookId), bibleBookIdAndChapter.Chapter);
-
-				//int i = 1; int j = 0; int k = i/j;
 			}
 			catch (Exception ex)
 			{
-				Logger!.LogError(ex, "{Class}!{Method}", nameof(Index), nameof(OnInitialized));
-				//Logger!.LogError("{Class}!{Method}: {Type} Message: {Message}", nameof(Index), nameof(OnInitialized), ex.GetType(), ex.Message);
-			}
+        Logger!.LogError("BookChapter!{Class}!{Method}: ErrorType: {Type}; Message: {Message}"
+          , nameof(Index), nameof(OnInitialized), ex.GetType(), ex.Message);
+      }
 		}
 
 		protected string? ReturnedBookAndChapterString;

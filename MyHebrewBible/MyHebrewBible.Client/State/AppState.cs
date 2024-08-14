@@ -30,7 +30,7 @@ public class AppState
 		{
 			try
 			{
-				BookChapterState!.Initialize();
+				//BookChapterState!.Initialize();
 				_isInitialized = true;
 
 				BibleBookIdAndChapter? _bibleBookIdAndChapter = BookChapterState.Get();
