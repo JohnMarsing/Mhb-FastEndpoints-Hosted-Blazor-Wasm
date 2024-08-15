@@ -1,0 +1,57 @@
+﻿@page "/BibleList/Emendations"
+
+@using MyHebrewBible.Client.Enums;
+@using MyHebrewBible.Client.Features.Lists.Components;
+
+@using Page = MyHebrewBible.Client.Features.Lists.MenuItemConstants.Emendations
+<PageTitle>@Page.Title</PageTitle>
+
+<SubNavBar ActiveMenuItem="@MenuItems.Emendations" />
+
+@*
+	<PageHeader Page="@GlobalEnums.Link.BibleList" />
+	This is only on the Index.razor
+*@
+
+<SourceAnchor Url="https://en.wikipedia.org/wiki/Tiqqun_soferim" />
+
+<BlurbCard>
+	"<i>Tiqqūn sōferīm</i> ( <span class="hebrew16">תיקון סופרים</span>, plural <span class="hebrew16">תיקוני סופרים</span>)
+	is a term from rabbinic literature meaning "correction/<b>emendation</b> of the scribes"<sup>[2]</sup>
+	or "scribal correction" and refers to a change of wording in the Tanakh in order to preserve the honor of God or for a similar reason.
+</BlurbCard>
+
+
+@code {
+	/*
+		*
+		* 
+		private readonly IListRepository db;
+		private readonly ILogger _logger;
+
+		public IList<Emendation> Emendations { get; set; }
+		public IList<EmendationBook> EmendationBooks { get; set; }
+
+		public EmendationsModel(IListRepository repository,	ILogger<EmendationsModel> logger)
+			{
+			db = repository;
+			_logger = logger;
+			}
+
+		public async Task<IActionResult> OnGetAsync()
+			{
+			try
+				{
+				Emendations = await db.GetAllEmendationsAsync();
+				EmendationBooks = await db.GetEmendationBooksAsync();
+			}
+			catch (Exception ex)
+				{
+				_logger.LogError(ex, $"Inside {nameof(EmendationsModel)}, {nameof(OnGetAsync)}");
+				return Redirect(Anchors.Error.RedirectPageName);
+
+			}
+			return Page();
+	}
+	*/
+}

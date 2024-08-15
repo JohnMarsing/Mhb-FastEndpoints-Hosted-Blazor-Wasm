@@ -1,0 +1,11 @@
+﻿<div class="card bg-light mb-3">
+	@if (HeaderContent is not null)
+	{
+		<div class="card-header">
+			<h5 class="text-primary text-center"><b>@HeaderContent</b></h5>
+		</div>
+	}
+	<div class="body p-2">
+		@ChildContent
+	</div>
+</div>

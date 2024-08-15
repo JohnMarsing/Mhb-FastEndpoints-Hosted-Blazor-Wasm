@@ -4,6 +4,7 @@ using FastEndpoints.ClientGen;
 using NJsonSchema.CodeGeneration.CSharp;
 using MyHebrewBible.Endpoints;
 using Serilog;
+using Blazored.Toast;
 
 string appSettingJson;
 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == Environments.Development)
@@ -29,6 +30,8 @@ Log.Information("{Class}, {Environment}, {AppSettings}; save to Serilog console 
 try
 {
 	var builder = WebApplication.CreateBuilder(args);
+
+	builder.Services.AddBlazoredToast();  // Need this here and in the Client
 
 	builder.Host.UseSerilog((ctx, lc) =>
 	lc.ReadFrom.Configuration(configuration));

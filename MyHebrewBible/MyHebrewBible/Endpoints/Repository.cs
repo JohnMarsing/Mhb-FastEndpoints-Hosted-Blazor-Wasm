@@ -26,7 +26,8 @@ public class Repository
 		return verseList;
 	}
 
-	public async Task<IEnumerable<WordPart?>> GetWordParts(long scriptureID)
+
+  public async Task<IEnumerable<WordPart?>> GetWordParts(long scriptureID)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
 		Parms = new DynamicParameters(new { ScriptureID = scriptureID});
@@ -41,7 +42,39 @@ ORDER BY WordCount, SegmentCount
 		return wordParts;
 	}
 
-	public async Task<IEnumerable<WordPart?>> GetWordPartsByStrongs(long scriptureID, long strongs)
+  public async Task<IEnumerable<Mitzvah?>> GetMitzvot(long bookId)
+  {
+    using var connection = await _connectionFactory.CreateConnectionAsync();
+    Parms = new DynamicParameters(new { BookId = bookId });
+
+    var mitzvot = await connection.QueryAsync<Mitzvah>(@"
+SELECT
+ID, Detail, BegId, EndID, Verse, Descr, BookID, BookAbrv
+FROM MitzVot
+WHERE BookId=@BookId
+ORDER BY BegId
+", Parms);
+
+    return mitzvot;
+  }
+
+  public async Task<IEnumerable<VerseList?>> GetVerseList(long begdId, long endId)
+  {
+    using var connection = await _connectionFactory.CreateConnectionAsync();
+    Parms = new DynamicParameters(new { BegId = begdId, EndId = endId });
+
+    var versList = await connection.QueryAsync<VerseList>(@"
+
+SELECT ID, BCV, Verse, KJV, VerseOffset
+FROM Scripture
+WHERE ID BETWEEN Id=@BegId AND Id=@EndId
+ORDER BY ID
+", Parms);
+
+    return versList;
+  }
+
+  public async Task<IEnumerable<WordPart?>> GetWordPartsByStrongs(long scriptureID, long strongs)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
 		Parms = new DynamicParameters(new { ScriptureID = scriptureID, Strongs = strongs });

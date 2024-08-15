@@ -1,0 +1,58 @@
+﻿@page "/BibleList/JotAndTittle"
+
+@using MyHebrewBible.Client.Features.Lists.Components;
+@using MyHebrewBible.Client.Enums;
+
+@using Page = MyHebrewBible.Client.Features.Lists.MenuItemConstants.JotAndTittle
+<PageTitle>@Page.Title</PageTitle>
+
+<SubNavBar ActiveMenuItem="@MenuItems.JotAndTittle" />
+
+
+<BlurbCard HeaderContent="Jots and Tittles | List">
+ 	It lists the verse and the type...
+	<ul>
+		<li>Enlarged</li>
+		<li>Jot or Tittle</li>
+		<li>Small</li>
+		<li>Suspended</li>
+	</ul>
+</BlurbCard>
+
+<div class="mt-3">
+	<LearnMoreToggleTemplate>
+		<ChildContent>
+			<h3>Why a Jot and Tittle List?</h3>
+			<blockquote>
+				<p class="text-danger">For verily I say unto you, Till heaven and earth pass, one <b>jot</b> or one <b>tittle</b> shall in no wise pass from the law, till all be fulfilled.</p>
+				<small>Mat 5:18 <cite title="Source Title">King James Bible (see also: Luk 16:17)</cite></small>
+			</blockquote>
+		</ChildContent>
+	</LearnMoreToggleTemplate>
+</div>
+
+
+@code {
+	/*
+	
+	await Html.PartialAsync(PartialViews.JotAndTittleList, Model.JotAndTittles)
+	
+	public List<JotAndTittle> JotAndTittles;
+
+	public async Task<ActionResult> OnGetAsync(TorahBook bookId = TorahBook.Genesis)
+
+	JotAndTittles = new List<JotAndTittle>();
+	try
+		{
+		JotAndTittles = await db.GetAllJotAndTittleAsync();
+	}
+	catch (Exception ex)
+		{
+		log.LogError(ex, $"Inside {nameof(JotAndTittleModel)}, {nameof(db.GetAllJotAndTittleAsync)}");
+		ExceptionMessage = ex.Message ?? "";
+		return RedirectToPage(Anchors.Error.RedirectPageName);
+	}
+	return Page();
+
+			*/
+}

@@ -5,7 +5,7 @@
 <PageHeader PageEnum="Page.HealthCheckThrowError" />
 
 @inject ILogger<ThrowError>? Logger
-@* @inject IToastService? Toast  *@
+@inject IToastService? Toast
 
 @switch (_status)
 {
@@ -48,7 +48,7 @@
 			Logger!.LogError("{Class}!{Method}: {Type} Message: {Message}"
 				, nameof(ThrowError), nameof(OnInitialized), ex.GetType(), ex.Message);
 			
-			 // Toast!.ShowError("...Exception thrown, see the Console in your Browsers Developer Tools");
+			 Toast!.ShowError("...Exception thrown, see the Console in your Browsers Developer Tools");
 		}
 	}
 }

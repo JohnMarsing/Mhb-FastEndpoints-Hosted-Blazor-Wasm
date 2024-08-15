@@ -1,0 +1,145 @@
+﻿@*
+@{
+	bool isXs = (ViewData[Other.ViewDataDictionaryIsXs] == null) ? false : (bool)ViewData[Other.ViewDataDictionaryIsXs];
+}
+
+@{
+	if (isXs)
+	{
+		<h4>Why have this list of verses</h4>
+	}
+}
+
+<button @onclick="ToggleButtonClick"
+*@
+
+
+@*
+	<div class="card mt-2 @CardCss" style="width: 100%">
+   <span class='badge @HeaderBadgeColor	 pb-15'>@Section.Title</span>
+*@
+
+<div class="card mt-2">
+	<div class="card-header h3 px-2">
+		<span class='badge bg-warning pb-15'>Introduction</span>
+
+		<button @onclick="@(e => ToggleButtonClick(IsCollapsed))"
+						class="@Color btn-sm float-end">
+			@Title <i class='@Icon'></i>
+		</button>
+
+		@if (!IsCollapsed)
+		{
+			<div class="card-body">
+				<blockquote>
+					@*<p class="card-text">*@
+					<p class="card-text fs-5">
+						The importance of these select verses is to show the theme and purpose of why I created <span class="mhb-site-title"><b>MHB</b></span> <sup>&dagger;</sup> and what I am trying to convey.
+						How better to express this intent than with the actual words of God by highlighting key verses.
+						The page follows the &quot;First state the facts and then give your opinion&quot; <sup>&Dagger;</sup> pattern.
+						<br />The theme of this list attempts to show, what <span class="mhb-site-title"><b>MHB</b></span> deems to be, the weightier matters of scripture which is the law and all that law encompasses.
+						For example the commentary is full of legal speak which could be thought of as a brief or a
+						<a title="memorandum of law" target="_blank"
+							 href="http://en.wikipedia.org/wiki/Brief_(law)">
+							<b>memorandum of law</b>
+						</a>.
+						<sup>
+							<i class="fas fa-external-link-alt" aria-hidden="true">&nbsp;</i><i class="fab fa-wikipedia-w" aria-hidden="true"></i>
+						</sup>
+					</p>
+					<small class="float-end fs-5"><cite title="Author: John Marsing">John Marsing</cite></small>
+				</blockquote>
+
+			</div>
+			<div class="card-body">
+				<h5 class="card-title mt-3">Footnotes</h5>
+
+				<div class="fs-6">
+					@*class="list-unstyled"*@
+					<ul class="">
+						<li>
+							<sup>&dagger; &dagger;</sup>: For now (circa Jan 2015) &quot;We&quot; at <span class="mhb-site-title"><b>MHB</b></span> (<span class="mhb-site-title"><b>M</b>y <b>H</b>ebrew <b>B</b>ible</span>)
+							consists of the opinions of <a href="@Enums.Nav.HomeMhbVer6.Index">John Marsing</a>
+						</li>
+						<li>
+							<sup>&Dagger;</sup>: This pattern comes from radio talk show host
+							<a title="Dennis Prager" target="_blank"
+								 href="http://en.wikipedia.org/wiki/Dennis_Prager">
+								<b>Dennis Prager</b>
+							</a>
+							<sup>
+								<i class="fas fa-external-link-alt" aria-hidden="true">&nbsp;</i><i class="fab fa-wikipedia-w" aria-hidden="true"></i>
+							</sup>
+							where he instructs his callers to first state the fact about the topic at hand and then give your opinion.
+							I am applying this pattern by using the scriptural <b>verses</b> as the <em>facts</em> and then follow with my opinion.
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		}
+
+
+
+	</div>
+</div>
+@*
+<button @onclick="@(e => ToggleButtonClick(IsCollapsed))"
+				class="@Color btn-sm float-end">
+	@Title <i class='@Icon'></i>
+</button>
+
+@if (!IsCollapsed)
+{
+	<blockquote>
+		The importance of these select verses is to show the theme and purpose of why I created <span class="mhb-site-title"><b>MHB</b></span> <sup>&dagger;</sup> and what I am trying to convey.
+		How better to express this intent than with the actual words of God by highlighting key verses.
+		The page follows the &quot;First state the facts and then give your opinion&quot; <sup>&Dagger;</sup> pattern.
+		<br />The theme of this list attempts to show, what <span class="mhb-site-title"><b>MHB</b></span> deems to be, the weightier matters of scripture which is the law and all that law encompasses.
+		For example the commentary is full of legal speak which could be thought of as a brief or a
+		<a title="memorandum of law" target="_blank"
+		 href="http://en.wikipedia.org/wiki/Brief_(law)">
+			<b>memorandum of law</b>
+		</a>.
+		<sup>
+			<i class="fas fa-external-link-alt" aria-hidden="true">&nbsp;</i><i class="fab fa-wikipedia-w" aria-hidden="true"></i>
+		</sup>
+		<small><cite title="Author: John Marsing">John Marsing</cite></small>
+	</blockquote>
+
+	<h5> <span class="label label-info">Footnotes</span></h5>
+
+	<ul class="list-unstyled">
+		<li>
+			<sup>&dagger; &dagger;</sup>: For now (circa Jan 2015) &quot;We&quot; at <span class="mhb-site-title"><b>MHB</b></span> (<span class="mhb-site-title"><b>M</b>y <b>H</b>ebrew <b>B</b>ible</span>)
+			consists of the opinions of <a href="@Enums.Nav.HomeMhbVer6.Index">John Marsing</a>
+		</li>
+		<li>
+			<sup>&Dagger;</sup>: This pattern comes from radio talk show host
+			<a title="Dennis Prager" target="_blank"
+			 href="http://en.wikipedia.org/wiki/Dennis_Prager">
+				<b>Dennis Prager</b>
+			</a>
+			<sup>
+				<i class="fas fa-external-link-alt" aria-hidden="true">&nbsp;</i><i class="fab fa-wikipedia-w" aria-hidden="true"></i>
+			</sup>
+			where he instructs his callers to first state the fact about the topic at hand and then give your opinion.
+			I am applying this pattern by using the scriptural <b>verses</b> as the <em>facts</em> and followed by my opinion follows.
+		</li>
+	</ul>
+
+}
+
+*@
+
+@code {
+	private string Color => IsCollapsed ? "btn-primary" : "btn-primary";
+	private string Title => IsCollapsed ? "Show" : "Hide";
+	private string Icon => IsCollapsed ? "fas fa-chevron-down" : "fas fa-chevron-up";
+
+	public bool IsCollapsed { get; set; } = true;
+	protected void ToggleButtonClick(bool isCollapsed)
+	{
+		IsCollapsed = !isCollapsed;
+	}
+}

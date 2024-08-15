@@ -1,0 +1,15 @@
+﻿<div class="list-group">
+	@foreach (var item in EnumsFV.Verses.List.OrderBy(o => o.Value).ToList())
+	{
+		<button type="button" class="list-group-item list-group-item-action px-1 py-0">
+			<small>@item.VerseNameAbrv
+				@(item.HasExtraInfo ? "*" : "")
+			</small>
+		</button>
+	}
+
+</div>
+
+@code {
+}
+

@@ -1,0 +1,53 @@
+﻿@page "/BibleList/Mitzvot"
+
+@using MyHebrewBible.Client.Enums;
+@using MyHebrewBible.Client.Features.Lists.Components
+@using MyHebrewBible.Client.Components
+
+@using Page = MyHebrewBible.Client.Features.Lists.MenuItemConstants.Mitzvot
+
+@inject ILogger<Index>? Logger
+
+<PageTitle>@Page.Title</PageTitle>
+
+<SubNavBar ActiveMenuItem="@MenuItems.Mitzvot" />
+
+@*<SourceAnchor Url="https://jewsforjesus.org/publications/newsletter/july-1985/08_joseph_jesus" />*@
+
+<BlurbCard>
+	A list of the 613 Commandments of Torah.
+</BlurbCard>
+
+<div class="mt-3">
+	<LearnMoreToggleTemplate>
+		<ChildContent>
+			<LearnMore />
+		</ChildContent>
+	</LearnMoreToggleTemplate>
+</div>
+
+<Filter CurrentFilter="CurrentFilter" OnFilterSelected="@HandleFilterSelected" />
+
+@**@
+<MitzvotTable torahFilter="2" />
+
+
+
+@code{
+	public Enums.TorahBookFilter CurrentFilter { get; set; } = Enums.TorahBookFilter.Genesis;
+
+	protected override async Task OnInitializedAsync()
+	{
+		Logger!.LogInformation("Lists!MitzvahPage!{Class}!{Method}; {CurrentFilter} "
+		, nameof(Index), nameof(OnInitializedAsync), CurrentFilter);  //Page.Title
+
+		//await PopulateMitzvot(CurrentFilter);  // <MitzvotTable is populating itself, so why do I need this?
+	}
+
+	private async Task HandleFilterSelected(Enums.TorahBookFilter selectedFilter)
+	{
+		CurrentFilter = selectedFilter;
+		//await PopulateMitzvot(selectedFilter); // <MitzvotTable is populating itself, so why do I need this?
+	}
+
+}

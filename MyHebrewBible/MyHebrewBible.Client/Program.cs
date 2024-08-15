@@ -1,5 +1,5 @@
 using Blazored.LocalStorage;
-//using Blazored.Toast;
+using Blazored.Toast;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MyHebrewBible.Client;
 using MyHebrewBible.Client.State;
@@ -15,5 +15,5 @@ builder.Services.AddSingleton(
 builder.Services.AddScoped<IBookChapterState, BookChapterState>();
 builder.Services.AddBlazoredLocalStorage();
 
-//builder.Services.AddBlazoredToast();
+builder.Services.AddBlazoredToast();  // Need this here and in the Server
 await builder.Build().RunAsync();
