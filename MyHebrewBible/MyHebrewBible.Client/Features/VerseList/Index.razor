@@ -1,12 +1,32 @@
-﻿@page "/VerseList/{BegId:int}/{EndId:int}"
+﻿@page "/VerseList"
+@page "/VerseList/{BegId:long?}/{EndId:long?}"
 @using MyHebrewBible.Client.Enums;
 
-@*https://myhebrewbible.com/Verse/jer-31-1-9/Englishonly*@
 
-@rendermode InteractiveWebAssembly
+@*
+This is how it used to be
+https://myhebrewbible.com/Verse/jer-31-1-9/Englishonly
+*@
+
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.VerseList" />
 
+@* <IndexDebug BegId="BegId" EndId="EndId" BegId2="BegId2" EndId2="EndId2" /> *@
 
-<VerseListParagraph  BegId="1" EndId="2" />
+<p class="text-warning">ToDo: Add a typeahead / search component</p>
 
+<VerseListParagraph BegId="BegId2" EndId="EndId2" />
 
+@code {
+	[Parameter] public long? BegId { get; set; }
+	[Parameter] public long? EndId { get; set; }
+
+	protected long BegId2;
+	protected long EndId2;
+
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+		BegId2 = BegId ?? 3;
+		EndId2 = EndId ?? 4;
+	}
+}

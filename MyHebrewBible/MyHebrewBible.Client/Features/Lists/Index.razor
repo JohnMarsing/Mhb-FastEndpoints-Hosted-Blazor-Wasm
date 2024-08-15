@@ -1,7 +1,6 @@
 ﻿@page "/BibleList"
 @page "/List"
 
-@rendermode InteractiveWebAssembly
 @using MyHebrewBible.Client.Features.Lists.Components
 
 
@@ -9,50 +8,44 @@
 
 <SubNavBar ActiveMenuItem="@MenuItems.Home" />
 
-
-
-
-@*@inject IOptions<AppSettings> AppSettings*@
-
 <div class="list-group">
 
-@*	<a class="list-group-item" href="@MenuItemConstants.ParablesOfYeshua">
+@*	*@
+	<a class="list-group-item" href="@MenuItemConstants.ParablesOfYeshua.Index">
 		<i class="fa fa-blind fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Parables of Yeshua
 	</a>
-*@
-	@*	
-	<a class="list-group-item" href="@MenuItemConstants.GospelHarmony.PageIndexFromRoot">
+
+	@* PageIndexFromRoot	*@
+	<a class="list-group-item" href="@MenuItemConstants.GospelHarmony.Index">
 		<i class="fa fa-fighter-jet fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Gospel Harmony
 	</a>
-	*@
 	
-@*	<a class="list-group-item" href="@MenuItemConstants.YosephAndYeshuaComparison">
+	
+	<a class="list-group-item" href="@MenuItemConstants.YosephAndYeshuaComparison.Index">
 		<i class="fa fa-bars fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Yoseph and Yeshua Comparison
 	</a>
-	<a class="list-group-item" href="@MenuItemConstants.MapCanaanOT">
+	<a class="list-group-item" href="@MenuItemConstants.MapCanaanOT.Index">
 		<i class="fas fa-map fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Map of Canaan
 	</a>
-	<a class="list-group-item" href="@MenuItemConstants.TimeLine">
+	<a class="list-group-item" href="@MenuItemConstants.TimeLine.Index">
 		<i class="fas fa-clock fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Timeline
 	</a>
 	<a class="list-group-item" href="@MenuItemConstants.Feasts">
 		<i class="fa fa-calendar fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Feasts <i>Moadim</i>
 	</a>
-	<a class="list-group-item" href="@MenuItemConstants.PeopleKilled">
+	<a class="list-group-item" href="@MenuItemConstants.PeopleKilled.Index">
 		<i class="fa fa-battery-empty fa-fw fa-2x" aria-hidden="true"></i>&nbsp; People Killed
 	</a>
 
-	<a class="list-group-item" href="/BibleList/@MenuItemConstants.Emendations.Index">
+	<a class="list-group-item" href="@MenuItemConstants.Emendations.Index">
 		<i class="fa fa-letter-emendations fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Emendations
 	</a>
-	<a class="list-group-item" href="/BibleList/@MenuItemConstants.JotAndTittle.Index">
+	<a class="list-group-item" href="@MenuItemConstants.JotAndTittle.Index">
 		<i class="fa fa-letter-jot-tittle fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Jots and Tittles
 	</a>
-	<a class="list-group-item" href="Mitzvot">
+	<a class="list-group-item" href="@MenuItemConstants.Mitzvot.Index">
 		<i class="fa fa-balance-scale fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Mitzvot
 	</a>
-*@
-	@* <a class="list-group-item" asp-page="@MenuItemConstants.Mitzvot"><i class="fa fa-balance-scale fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Mitzvot</a> *@
 
 </div>
 

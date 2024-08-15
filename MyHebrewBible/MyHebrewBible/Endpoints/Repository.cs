@@ -67,11 +67,10 @@ ORDER BY BegId
 
 SELECT ID, BCV, Verse, KJV, VerseOffset
 FROM Scripture
-WHERE ID BETWEEN Id=@BegId AND Id=@EndId
+WHERE ID BETWEEN @BegId AND @EndId
 ORDER BY ID
 ", Parms);
-
-    return versList;
+		return versList;
   }
 
   public async Task<IEnumerable<WordPart?>> GetWordPartsByStrongs(long scriptureID, long strongs)

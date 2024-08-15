@@ -4,7 +4,7 @@ public static class MenuItemConstants
 {
 	public static class Emendations
 	{
-		public const string Index = "/Emendations";
+		public const string Index = "/BibleList/Emendations";
 		public const string Title = "Emendations";
 		public const string Icon = "fab fa-wordpress";
 	}
@@ -13,49 +13,49 @@ public static class MenuItemConstants
 
 	public static class GospelHarmony
 	{
-		public const string Index = "/GospelHarmony";
+		public const string Index = "/BibleList/GospelHarmony";
 		public const string Title = "GospelHarmony";
 		public const string Icon = "fab fa-wordpress";
 	}
 
 	public static class JotAndTittle
 	{
-		public const string Index = "/JotAndTittle";
+		public const string Index = "/BibleList/JotAndTittle";
 		public const string Title = "Jots and Tittles";
 		public const string Icon = "fab fa-wordpress";
 	}
 
 	public static class MapCanaanOT
 	{
-		public const string Index = "/MapCanaanOT";
+		public const string Index = "/BibleList/MapCanaanOT";
 		public const string Title = "Map or Canaan OT";
 		public const string Icon = "fab fa-wordpress";
 	}
 
 	public static class Mitzvot
 	{
-		public const string Index = "/Mitzvot";
+		public const string Index = "/BibleList/Mitzvot";
 		public const string Title = "Mitzvot";
 		public const string Icon = "fab fa-wordpress";
 	}
 
 	public static class ParablesOfYeshua
 	{
-		public const string Index = "/ParablesOfYeshua";
+		public const string Index = "/BibleList/ParablesOfYeshua";
 		public const string Title = "Parables of Yeshua in the OT";
 		public const string Icon = "fab fa-wordpress";
 	}
 
 	public static class PeopleKilled
 	{
-		public const string Index = "/PeopleKilled";
+		public const string Index = "/BibleList/PeopleKilled";
 		public const string Title = "People Killed";
 		public const string Icon = "fas fa-battery-empty";
 	}
 
 	public static class TimeLine
 	{
-		public const string Index = "/TimeLine";
+		public const string Index = "/BibleList/TimeLine";
 		public const string Title = "Time line";
 		public const string Icon = "fab fa-wordpress";
 	}
@@ -63,7 +63,7 @@ public static class MenuItemConstants
 
 	public static class YosephAndYeshuaComparison
 	{
-		public const string Index = "/ParablesOfYeshua";
+		public const string Index = "/BibleList/ParablesOfYeshua";
 		public const string Title = "Parables of Yeshua in the OT";
 		public const string Icon = "fab fa-wordpress";
 	}

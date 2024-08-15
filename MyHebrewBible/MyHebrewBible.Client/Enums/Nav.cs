@@ -43,6 +43,7 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int BibleSearch = 18;
 		internal const int HealthCheckBibleBook = 19;
 		internal const int HealthCheckThrowError = 20;
+		internal const int HealthCheckVerseList = 21;
 	}
 	#endregion
 
@@ -67,6 +68,7 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav BibleSearch = new BibleSearchSE();
 	public static readonly Nav HealthCheckBibleBook = new HealthCheckBibleBookSE();
 	public static readonly Nav HealthCheckThrowError = new HealthCheckThrowErrorSE();
+	public static readonly Nav HealthCheckVerseList = new HealthCheckVerseListSE();
 	#endregion
 
 	private Nav(string name, int value) : base(name, value)  // Constructor
@@ -354,6 +356,19 @@ public abstract class Nav : SmartEnum<Nav>
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 	}
 
+	private sealed class HealthCheckVerseListSE : Nav
+	{
+		public HealthCheckVerseListSE() : base($"{nameof(Id.HealthCheckVerseList)}", Id.HealthCheckVerseList) { }
+		public override string Index => "HealthChecks/VerseList";
+		public override string Title => "HealthChecks Verse List";
+		public override string Icon => "fas fa-wrench";  
+		public override int Sort => Id.Profile;
+		public override string HomeTitleSuffix => " ";
+		public override string HomeFloatRightHebrew => "";
+		public override PageListType PageListType => PageListType.SitemapPage;
+		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+	}
+	
 
 	#endregion
 

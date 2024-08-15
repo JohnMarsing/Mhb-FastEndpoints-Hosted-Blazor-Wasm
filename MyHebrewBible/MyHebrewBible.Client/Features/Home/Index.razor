@@ -1,8 +1,56 @@
 ﻿@page "/"
+@using MyHebrewBible.Client.Enums
+
 <PageTitle>Home | MHB</PageTitle>
 
-<PageHeader PageEnum="Enums.Nav.Home" />
+@* <PageHeader PageEnum="Enums.Nav.Home" /> *@
 
 <div class="text-center">
   <img src="/images/MyHebrewBible.svg" class="filter-green" />
+</div>
+
+<div class="@MediaQuery.Xs.DivClass">
+	<div class="row">
+		<div class="col-12">
+			<div class="d-grid gap-0 row-gap-2">
+				<MainBody />
+				<SidebarButtons />
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="@MediaQuery.Sm.DivClass">
+	<div class="row">
+		<div class="col-6">
+			<MainBody />
+		</div>
+		<div class="col-6">
+			<SidebarButtons />
+		</div>
+	</div>
+</div>
+
+<div class="@MediaQuery.Md.DivClass">
+	<div class="row">
+		<div class="col-7">
+			<MainBody />
+		</div>
+		<div class="col-5">
+			<SidebarButtons />
+		</div>
+	</div>
+</div>
+
+<div class="@MediaQuery.LgOrXl.DivClass">
+	<div class="row">
+
+		<div class="col-8">
+			<MainBody />
+		</div>
+
+		<div class="col-4">
+			<SidebarButtons />
+		</div>
+	</div>
 </div>

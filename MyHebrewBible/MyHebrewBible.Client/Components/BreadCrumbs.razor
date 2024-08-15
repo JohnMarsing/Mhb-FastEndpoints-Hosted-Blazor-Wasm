@@ -1,29 +1,37 @@
-﻿@if (IsValid)
+﻿@using MyHebrewBible.Client.Enums
+
+@if (IsValid)
 {
 	<ol class="breadcrumb">
 		<li>
 			<i class="fas fa-chevron-left"></i>&nbsp;
-			<a href='@Href' title="@Title"> @ParentTitle</a>
-			&nbsp;<i class="@Icon"></i>
+			<a href='@Href'> @ParentTitle</a>
 		</li>
 	</ol>
 
-@* 	<div class="pb-2 mt-4 mb-2 border-bottom">
-		<h2><span class="text-warning @Icon"></span> @Title</h2>
+	@*
+	ToDo: can I use <PageHeader or maybe a <SubPageHeader
+	<PageHeader Page="@GlobalEnums.Link.Teaching" />
+*@
+
+	<div class="pb-2 mt-4 mb-2 border-bottom">
+		@*<h2><span class="text-warning @Icon"></span> @Title</h2>*@
+		<h2> @IconMarkup @Title</h2>
 	</div>
- *@
+
 }
 else
 {
 	<small>bread crumb invalid</small>
 }
 
-
 @code {
 	[Parameter] public string? Href { get; set; }
 	[Parameter] public string? ParentTitle { get; set; }
 	[Parameter] public string? Title { get; set; }
-	[Parameter] public string? Icon { get; set; }
+	//[Parameter] public string? Icon { get; set; }
+	[Parameter] public MarkupString IconMarkup { get; set; }
+	[Parameter, EditorRequired] public Nav? ParentPage { get; set; }
 
 	protected bool IsValid;
 
@@ -50,4 +58,5 @@ else
 
 		return base.OnInitializedAsync();
 	}
+
 }
