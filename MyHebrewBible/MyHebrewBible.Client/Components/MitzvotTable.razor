@@ -1,0 +1,46 @@
+﻿@inject ApiClient Api
+
+<h3>Mitzvot Table</h3>
+
+ @if (mitzvot == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Verse</th>
+				<th>Scripture ID</th>
+				<th>Description</th>
+				<th>Detail</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in mitzvot)
+			{
+				<tr>
+					<td>@item.Verse</td>
+					<td>@item.Verse</td>
+					<td>@item.BegId - @item.BegId</td>
+					<td><i>@item.Descr</i></td>
+					<td>@item.Detail</td>
+				
+				</tr>
+			}
+		</tbody>
+	</table>
+}  
+@code {
+	[Parameter, EditorRequired] public long torahFilter { get; set; }
+
+	private ICollection<Mitzvah>? mitzvot = null;
+
+	protected override async Task OnInitializedAsync()
+	{
+		mitzvot = await Api.GetMitzvotAsync(torahFilter, 2);
+	}
+}

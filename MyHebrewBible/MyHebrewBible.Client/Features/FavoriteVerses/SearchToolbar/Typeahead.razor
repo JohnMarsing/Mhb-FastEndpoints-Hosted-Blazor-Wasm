@@ -1,0 +1,62 @@
+﻿@using MyHebrewBible.Client.Features.FavoriteVerses.EnumsFV
+@using MyHebrewBible.Client.Features.FavoriteVerses
+@using Blazored.Typeahead
+
+<BlazoredTypeahead SearchMethod="SearchVerses"
+									 @bind-Value="SelectedVerse"
+									 EnableDropDown="true"
+									 MinimumLength="2"
+									 placeholder="Search favorite verse...">
+	<SelectedTemplate Context="mycontext">
+		@mycontext!.VerseNameAbrv
+	</SelectedTemplate>
+	<HelpTemplate>
+		Please enter at least 2 characters to perform a search.
+	</HelpTemplate>
+	<ResultTemplate Context="mycontext">
+		@mycontext.VerseName
+	</ResultTemplate>
+</BlazoredTypeahead>
+
+@if (SelectedVerse != null)
+{
+	<div class="card mt-2">
+		<div class="card-header h3 px-2">@SelectedVerse!.VerseName</div>
+
+		<div class="card-body">
+			<h6 class="card-title float-end fst-italic text-black-50">@SelectedVerse!.VerseDescription</h6>
+		</div>
+
+		<div class="card-body bg-warning">
+			<p class="card-text fs-5 ">
+				@((MarkupString)@SelectedVerse!.ConcatenatedVerses!)
+			</p>
+		</div>
+
+		<div class="card-body">
+			<h5 class="card-title">Comments</h5>
+			<p class="card-text fs-6 ml-2">
+				@((MarkupString)@SelectedVerse!.Commentary!)
+			</p>
+
+			@if (SelectedVerse!.HasExtraInfo)
+			{
+				<button type="button" class="btn btn-outline-info"
+						@onclick="@(e => ButtonClick(SelectedVerse))">
+					Details
+				</button>
+
+				@if (selectedType is not null)
+				{
+					if (SelectedVerse!.BegId == SelectedVerse!.BegId)
+					{
+						<div class="border border-primary my-3 p-2">
+							<DynamicComponent Type="@selectedType" />
+						</div>
+					}
+				}
+			}
+		</div>
+	</div>
+}
+

@@ -1,0 +1,152 @@
+﻿@page "/BibleSearch"
+@rendermode InteractiveWebAssembly
+
+<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.BibleSearch" />
+
+<p class="text-danger">
+	NOT DONE YET!
+	I dirtied the file so I can come back to it and finish this off
+</p>
+
+<h1>
+	Eliyah.com
+	<small><a href="https://www.eliyah.com/lexicon.html" title="www.Eliyah.com/lexicon.html">Source</a></small>
+</h1>
+
+@*
+    <meta name="description" content="Strong's Concordance with Hebrew and Greek Lexicon">
+    <title>Strong's Concordance with Hebrew and Greek Lexicon - EliYah Ministries</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="lexicon-assets/css/fonts.css" rel="stylesheet">
+    <link href="lexicon-assets/css/lexicon-styles.css" rel="stylesheet">
+
+	<main class="container text-center my-3">
+<div class="row col-12 mx-auto justify-content-center"></div>
+*@
+
+
+<div class="col-12 col-md-9 col-lg-7 mx-auto">
+	<div id="strongsconcordance" class="row my-5">
+		<h3 class="text-dark mx-auto"><strong>Use Strong's Concordance (KJV)</strong></h3>
+		<p class="fs-h6 text-dark mx-auto mb-3">Use Strong's Concordance - King James Version</p>
+		<form class="row my-2 align-items-center mx-auto"
+					action="https://www.blueletterbible.org/search/preSearch.cfm" method="GET">
+			<div class="col-12 col-sm-11 col-md-10 mx-auto">
+				<div class="row g-2 mt-2">
+					<div class="col-12 col-sm-4 col-md-4 col-lg-3">
+						<input type="hidden" name="hr" value="https://www.eliyah.com/lexicon/">
+						<input type="hidden" name="textcolor" value="000000">
+						<input type="hidden" name="linkcolor" value="0000FF">
+						<input type="hidden" name="vlinkcolor" value="A000FF">
+						<input type="hidden" name="show_strongs" value="yes">
+						<select class="form-select form-select" name="Version" aria-label="Version">
+							<option value="KJV" selected>KJV</option>
+							<option value="NKJV">NKJV</option>
+							<option value="NIV">NIV</option>
+							<option value="NASB">NASB</option>
+							<option value="RSV">RSV</option>
+							<option value="ASV">ASV</option>
+							<option value="ESV">ESV</option>
+							<option value="NLT">NLT</option>
+							<option value="HCSB">HCSB</option>
+							<option value="RVR60">RVR60</option>
+							<option value="YLT">YLT</option>
+							<option value="DBY">DBY</option>
+							<option value="WEB">WEB</option>
+							<option value="HNV">HNV</option>
+							<option value="VUL">VUL</option>
+							<option value="WLC">WLC</option>
+							<option value="LXX">LXX</option>
+							<option value="mGNT">mGNT</option>
+							<option value="TR">TR</option>
+						</select>
+					</div>
+					<div class="col-12 col-sm-8 col-md-8 col-lg-9">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search Strongs..." name="word"
+										 aria-label="Search Strongs Concordance..." aria-describedby="submit-button">
+							<button class="btn btn-cta-solid" type="submit" id="submit-   button">Search</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+@* <h5>Search Condensed Brown-Driver-Briggs Hebrew Lexicon or Thayer's Greek Lexicon</h5> *@
+
+<div class="col-12 col-md-10 col-lg-7 mx-auto">
+	<div class="row my-5">
+		<h3 class="text-dark mx-2"><strong>Search Condensed Brown-Driver-Briggs Hebrew Lexicon or Thayer's Greek Lexicon</strong></h3>
+		<p class="fs-h6 text-dark mx-2 mb-3">Search by Strong's word number [e.g. 2424 Greek]</p>
+		<form class="row m-2 align-items-center" action="https://www.blueletterbible.org/search/preSearch.cfm" method="GET">
+			<div class="col-12 col-sm-11 col-md-10 mx-auto">
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="language" id="bdbthayerslexiconhebrewradio" value="H" checked>
+					<label class="form-check-label" for="bdbthayerslexiconhebrewradio">Hebrew</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="language" id="bdbthayerslexicongreekradio" value="G">
+					<label class="form-check-label" for="bdbthayerslexicongreekradio">Greek</label>
+				</div>
+				<div class="input-group my-3">
+					<input type="text" class="form-control" placeholder="Search BDB/Thayers..." name="strongs" aria-label="Search BDB/Thayers..." aria-describedby="submit-button">
+					<button class="btn btn-cta-solid" type="submit" id="submit-   button">Search</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+
+<div class="col-12 col-md-9 col-lg-7 mx-auto">
+	<div class="row my-5">
+		<h3 class="text-dark mx-auto"><strong>Search Strong's Lexicon</strong></h3>
+		<p class="fs-h6 text-dark mx-auto mb-3">FULL Search by Strong's word number [e.g. 3091 Hebrew] OR English word!</p>
+		<p><code>https://www.eliyah.com/cgi-bin/strongs.cgi?file=hebrewlexicon&isindex=1234</code></p>
+		<form class="row my-2 mx-auto align-items-center" action="https://www.eliyah.com/cgi-bin/strongs.cgi">
+			<div class="col-12 col-sm-11 col-md-10 mx-auto">
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="file" id="strongslexiconhebrewradio" value="hebrewlexicon" checked>
+					<label class="form-check-label" for="strongslexiconhebrewradio">Hebrew</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="file" id="strongslexicongreekradio" value="greeklexicon">
+					<label class="form-check-label" for="strongslexicongreekradio">Greek</label>
+				</div>
+				<div class="input-group my-3">
+					<input type="text" class="form-control" placeholder="Search Strongs Lexicon..." 
+						name="isindex" aria-label="Search Strongs Lexicon..." aria-describedby="submit-button">
+					<button class="btn btn-cta-solid" type="submit" id="submit-   button">
+						Search
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+@* <h1>WikiPedia</h1> *@
+<div class="col-12 col-md-10 col-lg-7 mx-auto">
+	<div class="row my-5">
+		<h3 class="text-dark mx-auto"><strong>Search Wikipedia Encyclopedia</strong></h3>
+		<p class="fs-h6 text-dark mx-auto mb-3">Search Wikipedia with the option to go to the page if one exists for the search term</p>
+		<form class="row my-2 mx-auto align-items-center" action="https://en.wikipedia.org/wiki/Special:Search">
+			<input type="hidden" name="file" value="search.htm">
+			<div class="col-12 col-sm-11 col-md-10 mx-auto">
+				<div class="input-group my-3">
+					<input type="text" class="form-control" placeholder="Search Wikipedia Encyclopedia..." name="search" title="Search Wikipedia [alt-shift-f]" accesskey="f" value="" aria-label="Search Wikipedia Encyclopedia..." aria-describedby="submit-button">
+					<input class="btn btn-cta-solid" name="go" id="searchGoButton" value="Go" title="Go to a page with this exact name if one exists" type="submit">
+					<input class="btn btn-cta-solid" name="fulltext" id="mw-searchButton" value="Search" title="Search the wiki for this text" type="submit">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+@* </main> *@
+
+
+

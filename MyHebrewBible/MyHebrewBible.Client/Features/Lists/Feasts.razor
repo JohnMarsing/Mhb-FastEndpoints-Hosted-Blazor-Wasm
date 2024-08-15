@@ -1,0 +1,229 @@
+﻿@page "/BibleList/Feasts"
+
+@using MyHebrewBible.Client.Features.Lists.Components
+@*
+@using Page = MyHebrewBible.Client.Features.Lists.MenuItemConstants
+<PageTitle>@Page.Title</PageTitle>
+*@
+
+<SubNavBar ActiveMenuItem="@MenuItems.Feasts" />
+
+
+<SourceAnchor Url="http://www.torahtogether.com/order.shtml"  
+		Url2="https://en.wikipedia.org/wiki/High_Sabbaths"
+		Url2Name="High Sabbaths" />
+
+<BlurbCard>
+	Often translated as 'feast,' the Hebrew word <i>mo'ed</i> is best translated 'appointed time.' (The plural is
+	<i>mo'edim</i>.) The word also carries the idea of 'rehearsal,' or 'practice.' Each of God's <i>mo'edim</i> serves
+	two purposes: one purpose is to remember a past event in the lives of God's people where we were
+	blessed (memorial) and a second purpose is to rehearse or practice for an event yet to come
+	(prophetic). The chart below lists the seven annual <i>mo'edim</i>, each with its' memorial and prophetic
+	meanings.
+</BlurbCard>
+
+<div class="row mb-2">
+	<div class="col-sm-3">
+		<h4 class="text-primary"><u>Feasts</u></h4>
+	</div>
+	<div class="col-sm-3">
+		<h4 class="text-primary"><u>When</u></h4>
+	</div>
+	<div class="col-sm-3">
+		<h4 class="text-primary"><u>Memorial Meanings</u></h4>
+	</div>
+	<div class="col-sm-3">
+		<h4 class="text-primary"><u>Prophetic Meanings</u></h4>
+	</div>
+</div>
+
+<div class="row mb-2">
+	<div class="col-sm-12">
+		@*<h4 class="bg-success">Spring</h4>*@
+		<h4><span class="bg-success text-white p-2">Spring</span></h4>
+	</div>
+</div>
+
+<div class="row mb-2">
+	<div class="col-sm-3">
+		<span class="badge rounded-pill bg-success">1</span>
+		Passover<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>Pesach</i>
+	</div>
+	<div class="col-sm-3">
+		14-15 Nisan<br /><i>Abib</i>
+	</div>
+	<div class="col-sm-3">
+		<ul style="padding-left:10px">
+			<li>Passover lamb sacrificed</li>
+			<li>Salvation from angel of death</li>
+		</ul>
+	</div>
+	<div class="col-sm-3">
+		<ul style="padding-left:10px">
+			<li>Yeshua crucified</li>
+			<li>Salvation from sin</li>
+		</ul>
+	</div>
+</div>
+
+<div class="row mb-2">
+	<div class="col-sm-3">
+		<span class="badge rounded-pill bg-success">2</span>
+		Unleavened Bread<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>Hag Hamatzot</i>
+	</div>
+	<div class="col-sm-3">
+		15-21 Nisan<br /><i>Abib</i>
+	</div>
+	<div class="col-sm-3">
+		<ul style="padding-left:10px">
+			<li>Delivery from Egypt / slavery</li>
+			<li>Holiness, separation from sin</li>
+		</ul>
+	</div>
+	<div class="col-sm-3">
+		<ul style="padding-left:10px">
+			<li>Yeshua's sinlessness</li>
+			<li>Yeshua, Bread of Life sin</li>
+		</ul>
+	</div>
+</div>
+
+
+<div class="row mb-2">
+	<div class="col-sm-3">
+		<span class="badge rounded-pill bg-success">3</span>
+		Firstfruits<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>Bikkurim</i>
+	</div>
+	<div class="col-sm-3">
+		Day following	Sabbath during Passover week
+	</div>
+	<div class="col-sm-3">
+		<ul style="padding-left:10px">
+			<li>Firstfruits of barley harvest</li>
+			<li>Begin counting the omer</li>
+		</ul>
+	</div>
+	<div class="col-sm-3">
+		<ul style="padding-left:10px">
+			<li>Yeshua's resurrection, the firstfruits of the	redeemed</li>
+		</ul>
+	</div>
+</div>
+
+<div class="row mb-2">
+	<div class="col-sm-12">
+		<h4><span class="bg-warning text-white p-2">Summer</span></h4>
+	</div>
+</div>
+
+<div class="row mb-2">
+	<div class="col-sm-3">
+		<span class="badge rounded-pill bg-warning">4</span>
+		Weeks<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>Shavu'ot</i>
+	</div>
+	<div class="col-sm-3">
+		Fifty days after Firstfruits
+	</div>
+	<div class="col-sm-3">
+		<ul style="padding-left:10px">
+			<li>Firstfruits of wheat harvest</li>
+			<li>Torah given at Mt.Sinai</li>
+		</ul>
+	</div>
+	<div class="col-sm-3">
+		<ul style="padding-left:10px">
+			<li>Believers first filled with Holy Spirit</li>
+		</ul>
+	</div>
+</div>
+
+<div class="row mb-2">
+	<div class="col-sm-12">
+		<h4><span class="bg-info text-white p-2">Autumn</span></h4>
+	</div>
+</div>
+
+<div class="row mb-2">
+	<div class="col-sm-3">
+		<span class="badge rounded-pill bg-info">5</span>
+		Trumpets<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>Yom Teru'ah</i>
+	</div>
+	<div class="col-sm-3">
+		1<sup>st</sup> of <i>Tishri</i>
+	</div>
+	<div class="col-sm-3">
+		<ul style="padding-left:10px">
+			<li>General harvest</li>
+			<li>Military victories</li>
+		</ul>
+	</div>
+	<div class="col-sm-3">
+		<ul style="padding-left:10px">
+			<li>Yeshua's return</li>
+		</ul>
+	</div>
+</div>
+
+<div class="row mb-2">
+	<div class="col-sm-3">
+		<span class="badge rounded-pill bg-info">6</span>
+		Day of Atonement<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>Yom Kippur</i>
+	</div>
+	<div class="col-sm-3">
+		10<sup>th</sup> of <i>Tishri</i>
+	</div>
+	<div class="col-sm-3">
+		<ul style="padding-left:10px">
+			<li>Fasting, repentance</li>
+			<li>Sacrifice of Atonement</li>
+		</ul>
+	</div>
+	<div class="col-sm-3">
+		<ul style="padding-left:10px">
+			<li>Judgement of God</li>
+		</ul>
+	</div>
+</div>
+
+<div class="row mb-2">
+	<div class="col-sm-3">
+		<span class="badge rounded-pill bg-info">7</span>
+		Tabernacles<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>Sukkot</i>
+		<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Leviticus 23:33-44
+	</div>
+	<div class="col-sm-3">
+		15<sup>th</sup>-22<sup>nd</sup> of <i>Tishri</i>
+	</div>
+	<div class="col-sm-3">
+		<ul style="padding-left:10px">
+			<li>Thanksgiving for harvest</li>
+			<li>God's provision in the desert</li>
+		</ul>
+	</div>
+	<div class="col-sm-3">
+		<ul style="padding-left:10px">
+			<li>Millennial Kingdom</li>
+			<li>Marriage of the Lamb</li>
+		</ul>
+	</div>
+</div>
+
+<hr />
+
+<p>
+	Notice that the prophetic meanings of the first four <i>mo'dim</i> were fulfilled at Yeshua's first coming.
+	However, the last three <i>mo'edim</i> have yet to be fulfilled. Do you think that the time for the fulfillment
+	of these final feasts is near?
+</p>
+
+<p>
+	For many believers, when they first come into an understanding of the Hebrew roots of their faith, they
+	begin to walk out this new understanding by observing God's <i>mo'edim</i> as laid out in this section of
+	Leviticus. This often leads to passionate discussions with relatives and acquaintances. While it's
+	always good to work to improve our walk with our heavenly father, it's important to remember that the
+	commandment to love one another is a key aspect of that walk.
+</p>
+
+@code {
+
+}

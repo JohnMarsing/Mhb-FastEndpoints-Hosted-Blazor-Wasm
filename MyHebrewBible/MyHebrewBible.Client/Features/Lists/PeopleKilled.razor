@@ -1,0 +1,53 @@
+﻿@page "/BibleList/PeopleKilled"
+@using MyHebrewBible.Client.Enums;
+@using MyHebrewBible.Client.Features.Lists.Components
+
+@using Page = MyHebrewBible.Client.Features.Lists.MenuItemConstants.PeopleKilled
+<PageTitle>@Page.Title</PageTitle>
+
+<SubNavBar ActiveMenuItem="@MenuItems.PeopleKilled" />
+
+<SourceAnchor Url="http://dwindlinginunbelief.blogspot.com/2010/04/drunk-with-blood-gods-killings-in-bible.html" />
+
+<BlurbCard>
+	<p class="">
+		Why write such a morbid list?  My motivation was to show how many Israelites died and show that rebellion against God was the root cause.
+		To put it another way I am trying to emphasis that the enemy of the camp is <b>internal</b> not external.
+	</p>
+	<p>
+		<b>Note.</b> The source for this list was gotten from someone who obviously is <span class="text-warning"><b>NOT A FAN of the scriptures</b></span> and I in no way endorse their sentiment.
+	</p>
+</BlurbCard>
+
+<div class="d-print-none">
+	<div class="row  pb-1 pt-2">
+		<div class="col-6">
+				<span class='badge bg-warning fs-4'>@Title</span>
+		</div>
+		<div class="col-6 ">
+			<button @onclick="PeopleKilledToggleButtonClick"
+							class="btn btn-outline-primary float-end">
+				<i class='@Icon'></i> @Opposite
+			</button>
+			
+		</div>
+	
+	</div>
+</div>
+
+<PeopleKilledContent ShowAll="@ParentShowAll" />
+
+
+@code {
+
+	bool ParentShowAll { get; set; } = false;
+
+	private string Title => ParentShowAll ? "All people" : "Only people in the wilderness";
+	private string Icon => ParentShowAll ? "fas fa-toggle-on" : "fas fa-toggle-off";
+	private string Opposite => ParentShowAll ? "Show in the wilderness only" : "Show All";
+
+	void PeopleKilledToggleButtonClick()
+	{
+		ParentShowAll = !ParentShowAll;
+	}
+}

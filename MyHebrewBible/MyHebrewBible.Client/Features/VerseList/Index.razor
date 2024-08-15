@@ -1,0 +1,12 @@
+﻿@page "/VerseList/{BegId:int}/{EndId:int}"
+@using MyHebrewBible.Client.Enums;
+
+@*https://myhebrewbible.com/Verse/jer-31-1-9/Englishonly*@
+
+@rendermode InteractiveWebAssembly
+<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.VerseList" />
+
+
+<VerseListParagraph  BegId="1" EndId="2" />
+
+

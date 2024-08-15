@@ -1,0 +1,12 @@
+﻿@page "/Teaching/MarsingsRules"
+
+@using Page = MyHebrewBible.Client.Features.Teaching.BreadCrumbLinks
+
+<PageTitle>@Page.MarsingsRules.Title</PageTitle>
+
+<BreadCrumbs Href="@Page.Parent.Index"
+						 ParentTitle="@Page.Parent.Title"
+						 Title="@Page.MarsingsRules.Title"
+						 IconMarkup="@Page.MarsingsRules.IconMarkup"
+						 ParentPage="@Enums.Nav.Teaching">
+</BreadCrumbs>

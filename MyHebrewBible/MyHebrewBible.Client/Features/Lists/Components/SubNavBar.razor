@@ -1,0 +1,39 @@
+﻿
+<nav id="subNavBar" class="navbar navbar-expand-sm navbar-toggleable-md border-bottom box-shadow p-0 mb-3 @NavBarColor">
+	<div class="container">
+
+		<a class="nav-link @GetActive(MenuItems.Home)" title="" href="@MenuItems.Home.Page">
+			<i class="fas fa-home"></i>
+			@MenuItems.Home
+		</a>
+
+		<button class="navbar-toggler" @onclick="ToggleSubNavBar" type="button"
+						data-bs-toggle="collapse" data-target=".navbar-collapse"
+						aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="@SubNavBarCssClass navbar-collapse d-sm-inline-flex flex-sm-row-reverse"
+				 @onclick="ToggleSubNavBar">
+
+			<ul class="navbar-nav flex-grow-1">
+				@foreach (var item in MenuItems.List
+				.Where(w => w.Value != MenuItems.Home.Value)
+				.OrderBy(o => o.Value))
+				{
+					<li class="nav-item">
+						<a class="nav-link @GetActive(item)" href="@item.Page">
+							<small>@item.Title</small>
+						</a>
+					</li>
+				}
+			</ul>
+
+			@*<i class="@item.Icon"></i>*@
+
+
+		</div>
+
+	</div>
+</nav>

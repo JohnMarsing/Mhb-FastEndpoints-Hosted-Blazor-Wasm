@@ -1,0 +1,37 @@
+﻿<div class="row mt-3">
+	<div class="col-12">
+		<div class="float-end">
+			@foreach (var item in Enums.TorahBookFilter.List.OrderBy(o => o.Value))
+			{
+				<a @onclick="@(() => OnClick(item))" title="Filter by @item.Name"
+				 class="btn btn-outline-primary btn-sm @ActiveFilter(item)">
+					@item.Name
+				</a>
+			}
+		</div>
+	</div>
+</div>
+
+<div class="row mt-0">
+	<div class="col-12">
+		<div class="float-end">
+			<p class="mb-2 ">Filter <span class="fas fa-filter"></span></p>
+		</div>
+	</div>
+</div>
+
+@code{
+	[Parameter] public Enums.TorahBookFilter? CurrentFilter { get; set; }
+	[Parameter] public EventCallback<Enums.TorahBookFilter> OnFilterSelected { get; set; }
+
+	private async Task OnClick(Enums.TorahBookFilter filter)
+	{
+		await OnFilterSelected.InvokeAsync(filter);
+	}
+
+	public string ActiveFilter(Enums.TorahBookFilter filter)
+	{
+		if (filter == CurrentFilter) { return "active"; }
+		else { return ""; }
+	}
+}

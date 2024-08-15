@@ -1,0 +1,18 @@
+﻿@page "/Teaching/TorahGatedCommunity"
+
+@using Page = MyHebrewBible.Client.Features.Teaching.BreadCrumbLinks
+
+<PageTitle>@Page.TorahGatedCommunity.Title</PageTitle>
+
+<BreadCrumbs Href="@Page.Parent.Index"
+						 ParentTitle="@Page.Parent.Title"
+						 Title="@Page.TorahGatedCommunity.Title"
+						 IconMarkup="@Page.TorahGatedCommunity.IconMarkup"
+						 ParentPage="@Enums.Nav.Teaching">
+</BreadCrumbs>
+
+
+@*
+ MyHebrewBible.Client.GlobalEnums.Link
+<PageHeader Page="@GlobalEnums.Link.Teaching" />
+*@

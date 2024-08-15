@@ -1,0 +1,25 @@
+﻿<div class="row">
+	<div class="col-12">
+		<p class="text-muted float-end">
+			<sup>
+				<a href="@Url" target="_blank">
+					Source <i class="fas fa-external-link-alt" aria-hidden="true">&nbsp;</i>
+				</a>&nbsp;
+				@if (Url2 is not null)
+				{
+					<a href="@Url2" target="_blank">
+						@Url2Name <i class="fas fa-external-link-alt" aria-hidden="true">&nbsp;</i>
+					</a>
+
+				}
+			</sup>
+
+		</p>
+	</div>
+</div>
+
+@code {
+	[Parameter, EditorRequired] public string? Url { get; set; }
+	[Parameter] public string? Url2 { get; set; }
+	[Parameter] public string? Url2Name { get; set; }
+}
