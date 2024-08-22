@@ -1,0 +1,63 @@
+﻿@using MyHebrewBible.Client.Features.Article.Search.Enums
+
+@if (StrongsType == StrongsType.Hebrew)
+{
+	<EditForm Model="@Hebrew_VM" OnValidSubmit="@HandleValidSubmit">
+		<DataAnnotationsValidator />
+
+		<div class="d-inline-flex p-1 ">
+			<div class="p-1">
+				<InputNumber id="@StrongsType!.InputNumberId" @bind-Value="Hebrew_VM.Number" class="form-control" placeholder="@StrongsType!.PlaceHolder" />
+				<ValidationMessage For="@(() => Hebrew_VM.Number)" />
+			</div>
+
+			<div class="p-1">
+				<button type="submit"><i class="fas fa-check-square"></i></button>
+			</div>
+
+		</div>
+
+	</EditForm>
+}
+else
+{
+	<EditForm Model="@Greek_VM" OnValidSubmit="@HandleValidSubmit">
+		<DataAnnotationsValidator />
+
+		<div class="d-inline-flex p-1 ">
+			<div class="p-1">
+				<InputNumber id="@StrongsType!.InputNumberId" @bind-Value="Greek_VM.Number" class="form-control" placeholder="@StrongsType!.PlaceHolder" />
+				<ValidationMessage For="@(() => Greek_VM.Number)" />
+			</div>
+
+			<div class="p-1">
+				<button type="submit"><i class="fas fa-check-square"></i></button>
+			</div>
+
+		</div>
+
+	</EditForm>
+}
+
+@code {
+	[Parameter, EditorRequired] public StrongsType? StrongsType { get; set; }
+	[Parameter] public EventCallback<SearchType> OnStrongsNumberSelected { get; set; }
+
+	private HebrewStrongsFormVM Hebrew_VM = new HebrewStrongsFormVM();
+	private GreekStrongsFormVM Greek_VM = new GreekStrongsFormVM();
+
+	private void HandleValidSubmit()
+	{
+		if (StrongsType == StrongsType.Hebrew)
+		{
+			OnStrongsNumberSelected.InvokeAsync(new SearchType(StrongsType.Hebrew, Hebrew_VM.Number));
+		}
+		else
+		{
+			OnStrongsNumberSelected.InvokeAsync(new SearchType(StrongsType.Greek, Greek_VM.Number));
+		}
+
+	}
+
+
+}

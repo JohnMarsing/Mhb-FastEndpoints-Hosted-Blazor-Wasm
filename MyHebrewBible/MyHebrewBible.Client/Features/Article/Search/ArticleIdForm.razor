@@ -1,0 +1,28 @@
+﻿
+<EditForm Model="@VM" OnValidSubmit="@HandleValidSubmit">
+	<DataAnnotationsValidator />
+
+	<div class="d-inline-flex p-1 ">
+		<div class="p-1">
+			<InputNumber id="articleid" @bind-Value="VM.Id" 
+				class="form-control" placeholder="Article Id" />
+			<ValidationMessage For="@(() => VM.Id)" />
+		</div>
+
+		<div class="p-1">
+			<button type="submit"><i class="fas fa-check-square"></i></button>
+		</div>
+
+	</div>
+</EditForm>
+
+@code {
+	[Parameter] public EventCallback<long> OnArticleIdSelected { get; set; }
+	
+	private ArticleIdFormVM VM = new ArticleIdFormVM();
+
+	private void HandleValidSubmit()
+	{
+		OnArticleIdSelected.InvokeAsync(VM.Id);
+	}
+}

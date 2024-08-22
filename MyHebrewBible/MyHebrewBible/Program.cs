@@ -5,6 +5,7 @@ using NJsonSchema.CodeGeneration.CSharp;
 using MyHebrewBible.Endpoints;
 using Serilog;
 using Blazored.Toast;
+//using MyHebrewBible.Client.Features.Article;
 
 string appSettingJson;
 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == Environments.Development)
@@ -59,6 +60,8 @@ try
 
 	builder.Services.AddRazorComponents()
 			.AddInteractiveWebAssemblyComponents();
+
+	//builder.Services.AddArticle();
 
 	var app = builder.Build();
 	//await using var app = builder.Build();

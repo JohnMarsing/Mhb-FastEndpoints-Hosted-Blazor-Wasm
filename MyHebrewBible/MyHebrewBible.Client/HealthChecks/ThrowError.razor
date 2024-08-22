@@ -47,8 +47,7 @@
 
 			Logger!.LogError("{Class}!{Method}: {Type} Message: {Message}"
 				, nameof(ThrowError), nameof(OnInitialized), ex.GetType(), ex.Message);
-			
-			 Toast!.ShowError("...Exception thrown, see the Console in your Browsers Developer Tools");
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(ThrowError)}!{nameof(OnInitialized)}");
 		}
 	}
 }

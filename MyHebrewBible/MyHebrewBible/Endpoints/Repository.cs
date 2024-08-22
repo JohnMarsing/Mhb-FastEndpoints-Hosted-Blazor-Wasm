@@ -103,6 +103,24 @@ ORDER BY WordCount
 		return wordParts;
 	}
 
+
+	//var article = await connection.QuerySingleOrDefaultAsync<Article>(@"
+	public async Task<Article?> GetArticle(long id)
+	{
+		using var connection = await _connectionFactory.CreateConnectionAsync();
+		Parms = new DynamicParameters(new { Id = id});
+		var article = await connection.QuerySingleOrDefaultAsync<Article>(@"
+SELECT a.Id, FileNameNoExt, Title, Details, DetailsMD, PrimaryScriptureId, CreateDate
+, DocBlobID, PdfBlobID, IsPlaceHolder, IsFavorite, ExtraVerses, IsWordStudy, IsParasha
+, s.BCV, s.BookID, s.Chapter, s.Verse
+--, LEFT(BCV,3) AS BookAbrv
+FROM Article a 
+LEFT OUTER JOIN Scripture s ON a.PrimaryScriptureId = s.ID
+WHERE a.Id = @Id", Parms);
+		return article;
+	}
+
+
 }
 
 // Ignore Spelling: strongs, Kjvs, Parms

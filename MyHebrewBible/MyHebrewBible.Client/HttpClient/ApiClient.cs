@@ -67,6 +67,88 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<Article> GetArticleAsync(long id)
+        {
+            return GetArticleAsync(id, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Article> GetArticleAsync(long id, System.Threading.CancellationToken cancellationToken)
+        {
+            if (id == null)
+                throw new System.ArgumentNullException("id");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "article/{id}"
+                    urlBuilder_.Append("article/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Article>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BookChapter>> GetBookChapterAsync(long bookid, long chapter)
         {
             return GetBookChapterAsync(bookid, chapter, System.Threading.CancellationToken.None);
@@ -685,6 +767,72 @@ namespace MyHebrewBible.Client
             var result = System.Convert.ToString(value, cultureInfo);
             return result == null ? "" : result;
         }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class Article
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("Id")]
+        public long Id { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("FileNameNoExt")]
+        public string FileNameNoExt { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Title")]
+        public string Title { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Uri")]
+        public string Uri { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Details")]
+        public string Details { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("DetailsMD")]
+        public string DetailsMD { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("PrimaryScriptureId")]
+        public long PrimaryScriptureId { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("CreateDate")]
+        public System.DateTimeOffset CreateDate { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("DocBlobID")]
+        public long? DocBlobID { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("PdfBlobID")]
+        public long? PdfBlobID { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("IsPlaceHolder")]
+        public bool IsPlaceHolder { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("IsFavorite")]
+        public bool IsFavorite { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("ExtraVerses")]
+        public long ExtraVerses { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("IsWordStudy")]
+        public bool IsWordStudy { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("IsParasha")]
+        public bool IsParasha { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("BookAbrv")]
+        public string BookAbrv { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("BookID")]
+        public long BookID { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Chapter")]
+        public long Chapter { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Verse")]
+        public long Verse { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("IsFavoriteHtml")]
+        public string IsFavoriteHtml { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]

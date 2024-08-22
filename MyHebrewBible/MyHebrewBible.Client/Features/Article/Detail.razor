@@ -1,0 +1,91 @@
+﻿@inject ApiClient Api
+@inject ILogger<Detail>? Logger
+@inject IToastService? Toast
+
+<LoadingComponent IsLoading="article == null" TurnSpinnerOff="TurnSpinnerOff">
+	<div class="card bg-light mb-3">
+		<div class="card-header">
+			<h5 class="text-primary text-center"><b>@article!.Title</b> @((MarkupString)@article.IsFavoriteHtml)  </h5>
+		</div>
+
+@* 		<div class="card-body">
+			<h5 class="card-title"></h5>
+			<h6 class="card-subtitle mb-2 text-body-secondary">@article.FileNameNoExt</h6>
+		</div>
+ *@	
+		<div class="card-body">
+			@if (!String.IsNullOrEmpty(@article.DetailsMD))
+			{
+				<div class="card-text">
+					<b>Details MD</b> <br />
+					@((MarkupString)@article.DetailsMD)
+				</div>
+			}
+			else
+			{
+				<p class="text-muted">No details(md) at this time.&nbsp;<span class="fa fa-frown-o"></span></p>
+			}
+
+			@if (!String.IsNullOrEmpty(@article.Details))
+			{
+				<div class="card-text">
+					<b>Details</b> <br />
+					@((MarkupString)@article.Details)
+				</div>
+			}
+			else
+			{
+				<p class="text-muted">No details at this time.&nbsp;<span class="fa fa-frown-o"></span></p>
+			}
+
+			@if (@article.DocBlobID != null)
+			{
+				<a class="btn btn-sm btn-success" role="button" href='@($"{Blobs.ArticleUrl}{@article.FileNameNoExt}.doc")'>
+					<i class="fas fa-cloud-download-als fa-2x pull-left"></i>
+					<span class="far fa-file-word-o fa-2x"></span> <br />@($"{@article.DocBlobID}")
+				</a>
+			}
+
+		</div>
+
+	</div>
+
+
+}
+
+</LoadingComponent>
+
+@code {
+
+	[Parameter, EditorRequired] public long ArticleId { get; set; }
+
+	protected Article? article;
+	protected bool TurnSpinnerOff = false;
+
+	protected override async Task OnInitializedAsync()
+	{
+		Logger!.LogInformation("{Class}!{Method}; ArticleId: {ArticleId}", nameof(Detail), nameof(OnInitializedAsync), ArticleId);
+		try
+		{
+			//await Task.Delay(500);  // ToDo: comment this out in production
+			article = await Api.GetArticleAsync(ArticleId);
+			if (article is null)
+			{
+				Logger!.LogInformation("{Class}!{Method}; {ArticleId} NOT FOUND", nameof(Detail), nameof(OnInitializedAsync), ArticleId);
+				Toast!.ShowInfo($"Article Id {ArticleId} not found");
+			}
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError("{Class}!{Method}: {Type} Message: {Message}"
+				, nameof(Detail), nameof(OnInitializedAsync), ex.GetType(), ex.Message);
+
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Detail)}!{nameof(OnInitializedAsync)}");
+			//Toast!.ShowError($"Type: {ex.GetType()} Message: {ex.Message}");
+		}
+		finally
+		{
+			TurnSpinnerOff = true;
+		}
+	}
+}

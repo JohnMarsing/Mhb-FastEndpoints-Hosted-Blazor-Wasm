@@ -15,4 +15,12 @@ public static class VerseFacts
 	public const int FirstChapterId = 1;
 	public const int LargestVerseInAChapter = 176; //Psa 119:176
 	public const int LargestNumberOfChapterInABook = 150; //Psa
+	public const int StrongsLastHebrewNumber = 8674;
+	public const int StrongsLastGreekNumber = 5624;
+}
+
+public static class StrongsFacts
+{
+	public const int LastHebrewNumber = 8674;
+	public const int LastGreekNumber = 5624;
 }
