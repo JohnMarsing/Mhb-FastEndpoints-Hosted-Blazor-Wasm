@@ -22,6 +22,6 @@ public class GetWordPart : Endpoint<WordPartRequest, IEnumerable<WordPart>>
 	public override async Task HandleAsync(WordPartRequest request, CancellationToken ct)
 	{
 		IEnumerable<WordPart?> verses = await _db.GetWordParts(request.ScriptureId);
-		await SendAsync(verses.ToList()!);
+		await SendAsync(verses.ToList()!);  // , cancellation: ct);
 	}
 }

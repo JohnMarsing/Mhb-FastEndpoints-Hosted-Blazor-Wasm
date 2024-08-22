@@ -1,9 +1,82 @@
 ﻿@page "/Articles"
+@page "/Article"
+
+@using MyHebrewBible.Client.Features.Article.Search
+@using MyHebrewBible.Client.Features.Article.Search.Enums
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.Article" />
 
-<p class="text-danger">NOT DONE YET!</p>
+@* *@ <div class="card">
+	<div class="card-header">
+		Search Article by...
+	</div>
+
+	<div class="row">
+		<div class="col-3">
+
+			<div class="card-body">
+				<h5 class="card-title">Title</h5>
+				@* <BlazoredTypeahead SearchMethod="SearchPeople" @bind-Value="person.Name" Placeholder="Search for a person..." /> *@
+			</div>
+
+		</div>
+
+		<div class="col-3">
+			<div class="card-body">
+				<h5 class="card-title">Article Id</h5>
+				<ArticleIdForm OnArticleIdSelected="ReturnedArticleId" />
+			</div>
+
+		</div>
+
+		<div class="col-3">
+			<div class="card-body">
+				<h5 class="card-title">Strong's: H[1234]</h5>
+				<StrongsForm StrongsType="@StrongsType.Hebrew" OnStrongsNumberSelected="ReturnedStrongsNumber" />
+			</div>
+		</div>
+
+		<div class="col-3">
+			<div class="card-body">
+				<h5 class="card-title">Strong's: G[1234]</h5>
+				<StrongsForm StrongsType="@StrongsType.Greek" OnStrongsNumberSelected="ReturnedStrongsNumber" />
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<p><b>CurrentArticleId: </b>@CurrentArticleId</p>
+<p><b>H</b>@ReturnedStrongsHebrewNumberString</p>
+<p><b>G</b>@ReturnedStrongsGreekNumberString</p>
+
+
+@if (CurrentArticleId != 0)
+{
+	<Detail ArticleId="@CurrentArticleId" />
+}
 
 @code {
 
+	protected long CurrentArticleId;
+	private void ReturnedArticleId(long articleId)
+	{
+		CurrentArticleId = articleId;
+	}
+
+
+	protected string? ReturnedStrongsHebrewNumberString;
+	protected string? ReturnedStrongsGreekNumberString;
+	private void ReturnedStrongsNumber(SearchType searchType) 
+	{
+		if (searchType.StrongsType == StrongsType.Hebrew)
+		{
+			ReturnedStrongsHebrewNumberString = searchType.ArticleId.ToString();
+		}
+		else
+		{
+			ReturnedStrongsGreekNumberString = searchType.ArticleId.ToString();
+		}
+	}
 }

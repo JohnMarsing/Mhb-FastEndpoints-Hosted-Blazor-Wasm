@@ -346,7 +346,7 @@
 		Many of these articles can be found here...
 		<a href="@Anchors.Article.PagedListFromRoot" asp-route-pagenumber="1" asp-route-searchText="" asp-route-filterId="@MyHebrewBible.Global.Enums.ArticleQuery.Filter.Favorites"
 			 class="btn btn-sm btn-default">
-			<i class="text-danger fa fa-star" aria-hidden="true"></i>&nbsp; <span class="text-danger">Favorites Articles</span> <i class="fas fa-external-link-alt-square"></i>
+			<i class="text-danger fas fa-star" aria-hidden="true"></i>&nbsp; <span class="text-danger">Favorites Articles</span> <i class="fas fa-external-link-alt-square"></i>
 		</a>
 	</li>
 	<li>

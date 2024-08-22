@@ -33,7 +33,7 @@ public class AppState
 				//BookChapterState!.Initialize();
 				_isInitialized = true;
 
-				BibleBookIdAndChapter? _bibleBookIdAndChapter = BookChapterState.Get();
+				BibleBookIdAndChapter? _bibleBookIdAndChapter = BookChapterState!.Get();
 				if (_bibleBookIdAndChapter is null)
 				{
 					//Logger!.LogWarning("{ Class}!{Method}, _bookAndChapter is null after trying to Get from local storage", nameof(AppState), nameof(Initialize));

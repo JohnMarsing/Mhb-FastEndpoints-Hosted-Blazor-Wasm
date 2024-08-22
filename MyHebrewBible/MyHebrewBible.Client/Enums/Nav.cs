@@ -150,7 +150,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public override int Sort => Id.Article;
 		public override string HomeTitleSuffix => " Mispar H4557 ";
 		public override string HomeFloatRightHebrew => "מִסְפָּר";
-		public override PageListType PageListType => PageListType.SitemapPage;
+		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 	}
 

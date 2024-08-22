@@ -38,6 +38,7 @@
 
 	protected override async Task OnInitializedAsync()
 	{
+		await Task.Delay(5);
 		Logger!.LogInformation("Lists!MitzvahPage!{Class}!{Method}; {CurrentFilter} "
 		, nameof(Index), nameof(OnInitializedAsync), CurrentFilter);  //Page.Title
 
@@ -46,6 +47,7 @@
 
 	private async Task HandleFilterSelected(Enums.TorahBookFilter selectedFilter)
 	{
+		await Task.Delay(5);
 		CurrentFilter = selectedFilter;
 		//await PopulateMitzvot(selectedFilter); // <MitzvotTable is populating itself, so why do I need this?
 	}
