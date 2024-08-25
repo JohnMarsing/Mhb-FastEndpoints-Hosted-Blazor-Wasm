@@ -818,8 +818,8 @@ namespace MyHebrewBible.Client
         [System.Text.Json.Serialization.JsonPropertyName("IsParasha")]
         public bool IsParasha { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("BookAbrv")]
-        public string BookAbrv { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("BCV")]
+        public string BCV { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("BookID")]
         public long BookID { get; set; }
@@ -832,6 +832,9 @@ namespace MyHebrewBible.Client
 
         [System.Text.Json.Serialization.JsonPropertyName("IsFavoriteHtml")]
         public string IsFavoriteHtml { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("RelatedVersesHtml")]
+        public string RelatedVersesHtml { get; set; }
 
     }
 

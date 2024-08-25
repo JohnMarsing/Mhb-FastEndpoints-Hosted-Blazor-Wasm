@@ -5,7 +5,7 @@ using NJsonSchema.CodeGeneration.CSharp;
 using MyHebrewBible.Endpoints;
 using Serilog;
 using Blazored.Toast;
-//using MyHebrewBible.Client.Features.Article;
+//using MyHebrewBible.Client.Features.Articles;
 
 string appSettingJson;
 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == Environments.Development)

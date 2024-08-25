@@ -1,18 +1,20 @@
 ﻿@page "/Articles"
 @page "/Article"
 
-@using MyHebrewBible.Client.Features.Article.Search
-@using MyHebrewBible.Client.Features.Article.Search.Enums
+@using MyHebrewBible.Client.Features.Articles.Search
+@using MyHebrewBible.Client.Features.Articles.Search.Enums
+
+@inject IToastService? Toast
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.Article" />
 
-@* *@ <div class="card">
+<div class="card">
 	<div class="card-header">
 		Search Article by...
 	</div>
 
 	<div class="row">
-		<div class="col-3">
+		<div class="col-md-3">
 
 			<div class="card-body">
 				<h5 class="card-title">Title</h5>
@@ -21,7 +23,7 @@
 
 		</div>
 
-		<div class="col-3">
+		<div class="col-md-3">
 			<div class="card-body">
 				<h5 class="card-title">Article Id</h5>
 				<ArticleIdForm OnArticleIdSelected="ReturnedArticleId" />
@@ -29,14 +31,14 @@
 
 		</div>
 
-		<div class="col-3">
+		<div class="col-md-3">
 			<div class="card-body">
 				<h5 class="card-title">Strong's: H[1234]</h5>
 				<StrongsForm StrongsType="@StrongsType.Hebrew" OnStrongsNumberSelected="ReturnedStrongsNumber" />
 			</div>
 		</div>
 
-		<div class="col-3">
+		<div class="col-md-3">
 			<div class="card-body">
 				<h5 class="card-title">Strong's: G[1234]</h5>
 				<StrongsForm StrongsType="@StrongsType.Greek" OnStrongsNumberSelected="ReturnedStrongsNumber" />
@@ -47,14 +49,10 @@
 
 </div>
 
-<p><b>CurrentArticleId: </b>@CurrentArticleId</p>
-<p><b>H</b>@ReturnedStrongsHebrewNumberString</p>
-<p><b>G</b>@ReturnedStrongsGreekNumberString</p>
-
 
 @if (CurrentArticleId != 0)
 {
-	<Detail ArticleId="@CurrentArticleId" />
+	<Details ArticleId="@CurrentArticleId" />
 }
 
 @code {
@@ -66,17 +64,15 @@
 	}
 
 
-	protected string? ReturnedStrongsHebrewNumberString;
-	protected string? ReturnedStrongsGreekNumberString;
 	private void ReturnedStrongsNumber(SearchType searchType) 
 	{
 		if (searchType.StrongsType == StrongsType.Hebrew)
 		{
-			ReturnedStrongsHebrewNumberString = searchType.ArticleId.ToString();
+			Toast!.ShowWarning($"This feature is in the works | H{searchType.StrongsNumber}. ");
 		}
 		else
 		{
-			ReturnedStrongsGreekNumberString = searchType.ArticleId.ToString();
+			Toast!.ShowWarning($"This feature is in the works | G{searchType.StrongsNumber}. ");
 		}
 	}
 }
