@@ -1,6 +1,6 @@
 ﻿using Ardalis.SmartEnum;
 
-namespace MyHebrewBible.Client.Features.Article.Search.Enums;
+namespace MyHebrewBible.Client.Features.Articles.Search.Enums;
 
 public abstract class StrongsType : SmartEnum<StrongsType>
 {

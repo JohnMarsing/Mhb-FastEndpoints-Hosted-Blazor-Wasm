@@ -5,8 +5,7 @@ public class ArticleRequest
 	public long Id { get; set; }
 }
 
-//                                               , IEnumerable<Article>
-public class GetArticle : Endpoint<ArticleRequest, Article>  //Endpoint<ArticleRequest, Article>
+public class GetArticle : Endpoint<ArticleRequest, Article>
 {
 	public override void Configure()
 	{
@@ -20,18 +19,9 @@ public class GetArticle : Endpoint<ArticleRequest, Article>  //Endpoint<ArticleR
 		_db = repository;
 	}
 
-	public override async Task HandleAsync(ArticleRequest request, CancellationToken ct)
+	public override async Task HandleAsync(ArticleRequest request, CancellationToken c)
 	{
 		Article? article = await _db.GetArticle(request.Id);
-		if (article == null)
-		{
-			//https://fast-endpoints.com/docs/misc-conveniences#send-methods
-			//await SendNoContentAsync(ct); 
-			await SendNotFoundAsync(ct);
-		}
-		else
-		{
-			await SendAsync(article!);  // , cancellation: ct);
-		}
+		await SendAsync(article);
 	}
 }

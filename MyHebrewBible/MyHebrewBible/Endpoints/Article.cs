@@ -17,10 +17,11 @@ public class Article
 	public long ExtraVerses { get; set; }
 	public bool IsWordStudy { get; set; }
 	public bool IsParasha { get; set; }
-	public string? BookAbrv { get; set; }
+	public string? BCV { get; set; }
 	public long BookID { get; set; }
 	public long Chapter { get; set; }
 	public long Verse { get; set; }
+	//public string? BookAbrv { get; set; }
 
 	public string IsFavoriteHtml
 	{
@@ -29,9 +30,38 @@ public class Article
 			return $"{(IsFavorite ? "<span class='text-danger'><span class='fas fa-star'></span></span>" : "")}";
 		}
 	}
+
+
+	public string RelatedVersesHtml
+	{
+		get
+		{
+			if (PrimaryScriptureId != 31102 && !String.IsNullOrEmpty(BCV))
+			{
+				if (ExtraVerses != 0)
+				{
+					return $"{BCV}-{Verse+ExtraVerses}";
+				}
+				else
+				{
+					return $"{BCV}";
+				}
+
+			} 
+			else 
+			{
+				return "";
+			}
+			
+			
+		}
+	}
+
 }
 
 /*
+IsPlaceHolder, ExtraVerses, IsWordStudy, IsParasha
+
 , s.BCV, s.BookID, s.Chapter, s.Verse, LEFT(BCV,3) AS BookAbrv
 LEFT OUTER JOIN Scripture s ON a.PrimaryScriptureId = s.ID
 */

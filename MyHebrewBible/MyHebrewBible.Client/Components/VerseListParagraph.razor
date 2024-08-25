@@ -4,7 +4,7 @@
 @inject ILogger<VerseListParagraph>? Logger
 @inject IToastService? Toast
 
-<h3>Verse Paragraph <sup>@BegId-@EndId</sup> </h3>
+<h3>@VerseRangeDTO!.BCV</h3>
 
 <LoadingComponent IsLoading="verses == null" TurnSpinnerOff="TurnSpinnerOff">
 	@foreach (var item in verses!)
@@ -17,8 +17,7 @@
 </LoadingComponent>
 
 @code {
-	[Parameter, EditorRequired] public long BegId { get; set; }
-	[Parameter, EditorRequired] public long EndId { get; set; }
+	[Parameter, EditorRequired] public VerseRangeDTO? VerseRangeDTO { get; set; }
 
 	//protected long VerseRowCount;
 
@@ -31,15 +30,14 @@
 		try
 		{
 			await Task.Delay(500);  // ToDo: comment this out in production
-			if (BegId >= EndId) throw new System.ApplicationException("BegId >= EndId");
-			if (EndId - BegId > 300) throw new System.ApplicationException("Verse range can not exceed 300"); // ToDo: extract this 
-			verses = await Api!.GetVerseListAsync(BegId, EndId);
+			if (VerseRangeDTO!.BegId >= VerseRangeDTO.EndId) throw new System.ApplicationException("BegId >= EndId");
+			if (VerseRangeDTO!.EndId - VerseRangeDTO.BegId > 300) throw new System.ApplicationException("Verse range can not exceed 300"); // ToDo: extract this
+			verses = await Api!.GetVerseListAsync(VerseRangeDTO.BegId, VerseRangeDTO.EndId);
 			//VerseRowCount = verses.Count;
 		}
 		catch (Exception ex)
 		{
-			Logger!.LogError("{Class}!{Method}: ErrorType: {Type}; Message: {Message}"
-				, nameof(VerseListParagraph), nameof(OnInitialized), ex.GetType(), ex.Message);
+			Logger!.LogError(ex, "{Class}!{Method}", nameof(VerseListParagraph), nameof(OnInitializedAsync));
 			Toast!.ShowError($"{Global.ToastShowError} {nameof(VerseListParagraph)}!{nameof(OnInitialized)}");
 		}
 		finally

@@ -1,4 +1,4 @@
-﻿namespace MyHebrewBible.Client.Features.Article;
+﻿namespace MyHebrewBible.Client.Features.Articles;
 
 public static class Blobs
 {

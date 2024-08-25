@@ -1,0 +1,70 @@
+﻿
+<LoadingComponent IsLoading="article == null" TurnSpinnerOff="TurnSpinnerOff">
+	<div class="card bg-light mb-3">
+		<div class="card-header">
+			<h5 class="text-primary text-center"><b>@article!.Title</b> @((MarkupString)@article.IsFavoriteHtml)  </h5>
+		</div>
+
+		<div class="card-body">
+			@if (!String.IsNullOrEmpty(@article.DetailsMD))
+			{
+				<div class="card-text">
+					<b>Details MD</b> <br />
+					@((MarkupString)@article.DetailsMD)
+				</div>
+			}
+			else
+			{
+				@* <p class="text-muted">No details(md) at this time.&nbsp;<span class="fa fa-frown-o"></span></p> *@
+			}
+
+			@if (!String.IsNullOrEmpty(@article.Details))
+			{
+				<div class="card-text">
+					<b>Details</b> <br />
+					@((MarkupString)@article.Details)
+				</div>
+			}
+			else
+			{
+				@* <p class="text-muted">No details at this time.&nbsp;<span class="fa fa-frown-o"></span></p> *@
+			}
+		</div>
+
+		@if (article.PrimaryScriptureId != 31102)
+		{
+			<div class="card-body">
+				<div class="card-text">
+					<VerseListParagraph VerseRangeDTO="VerseRangeDTO" />
+				</div>
+			</div>
+		}
+
+		<div class="card-footer mt-2">
+
+			<div class="card-body text-center">
+				@if (article.DocBlobID != null)
+				{
+					<a class="btn btn-sm btn-outline-success" role="button" href='@($"{Blobs.ArticleUrl}{article.FileNameNoExt}.doc")'>
+						<i class="fas fa-cloud-download-alt fa-2x pull-left"></i>
+						<span class="fas fa-file-word fa-2x"></span> <br />@($"{article.DocBlobID}")  @* far fa-file-word-o   *@
+					</a>
+				}
+
+				@if (article.PdfBlobID != null)
+				{
+					<a class="btn btn-sm btn-outline-primary" role="button" href='@($"{Blobs.ArticleUrl}{article.FileNameNoExt}.doc")'>
+						<i class="fas fa-cloud-download-alt fa-2x pull-left"></i>
+						<span class="far fa-file-pdf fa-2x"></span> <br />@($"{article.PdfBlobID}")
+					</a>
+				}
+			</div>
+		</div>
+
+
+
+	</div>
+
+
+</LoadingComponent>
+

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MyHebrewBible.Client.Features.Article.Search;
+namespace MyHebrewBible.Client.Features.Articles.Search;
 
 public class ArticleIdFormVM
 {
