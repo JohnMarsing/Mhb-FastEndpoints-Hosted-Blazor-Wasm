@@ -3,76 +3,113 @@
 
 @using MyHebrewBible.Client.Features.Articles.Search
 @using MyHebrewBible.Client.Features.Articles.Search.Enums
+@using Microsoft.AspNetCore.Components.QuickGrid
 
-@inject IToastService? Toast
+@inject ApiClient Api
 
-<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.Article" />
+<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.Article" BorderCSS="" />
 
-<div class="card">
-	<div class="card-header">
-		Search Article by...
-	</div>
-
-	<div class="row">
-		<div class="col-md-3">
-
-			<div class="card-body">
-				<h5 class="card-title">Title</h5>
-				@* <BlazoredTypeahead SearchMethod="SearchPeople" @bind-Value="person.Name" Placeholder="Search for a person..." /> *@
-			</div>
-
-		</div>
-
-		<div class="col-md-3">
-			<div class="card-body">
-				<h5 class="card-title">Article Id</h5>
-				<ArticleIdForm OnArticleIdSelected="ReturnedArticleId" />
-			</div>
-
-		</div>
-
-		<div class="col-md-3">
-			<div class="card-body">
-				<h5 class="card-title">Strong's: H[1234]</h5>
-				<StrongsForm StrongsType="@StrongsType.Hebrew" OnStrongsNumberSelected="ReturnedStrongsNumber" />
-			</div>
-		</div>
-
-		<div class="col-md-3">
-			<div class="card-body">
-				<h5 class="card-title">Strong's: G[1234]</h5>
-				<StrongsForm StrongsType="@StrongsType.Greek" OnStrongsNumberSelected="ReturnedStrongsNumber" />
-			</div>
-		</div>
-
-	</div>
-
+<div class="page-size-chooser mb-2">
+	Items per page:
+	<select @bind="@pagination.ItemsPerPage">
+		<option>5</option>
+		<option>10</option>
+		<option>20</option>
+		<option>50</option>
+	</select>
 </div>
 
+<div class="card border-info">
+	<div class="card-header text-end">
+		<small><b>WS</b>: Word Study, <b>PH</b>: Place Holder</small>
+	</div>
+
+		<QuickGrid Items="@FilteredItems" Pagination="@pagination">
+
+			<TemplateColumn Title="Details" Align="Align.Center">
+				<button @onclick="@(() => ButtonClicked(context.Id))" 
+					title="@context.Id" class="btn btn-sm btn-outline-primary"><i class="fas fa-chevron-down"></i>
+				</button>
+			</TemplateColumn>
+
+			<PropertyColumn Property="@(a => a.Title)" Sortable="true" Class="title-name">
+				<ColumnOptions>
+					<div class="search-box">
+						<input type="search" autofocus @bind="titleFilter" @bind:event="oninput" placeholder="Article title..." />
+					</div>
+				</ColumnOptions>
+			</PropertyColumn>
+			<TemplateColumn Title="Fav" Align="Align.Center">
+				@if (context.IsFavorite)
+				{
+					<input type="checkbox" checked />
+				}
+				else
+				{
+					<input type="checkbox" />
+				}
+			</TemplateColumn>
+			<TemplateColumn Title="Parasha" Align="Align.Center">
+				@if (context.IsParasha)
+				{
+					<input type="checkbox" checked />
+				}
+				else
+				{
+					<input type="checkbox" />
+				}
+			</TemplateColumn>
+			<TemplateColumn Title="WS" Align="Align.Center">
+				@if (context.IsParasha)
+				{
+					<input type="checkbox" checked />
+				}
+				else
+				{
+					<input type="checkbox" />
+				}
+			</TemplateColumn>
+			<TemplateColumn Title="PH" Align="Align.Center">
+				@if (context.IsPlaceHolder)
+				{
+					<input type="checkbox" checked />
+				}
+				else
+				{
+					<input type="checkbox" />
+				}
+			</TemplateColumn>
+		</QuickGrid>
+	
+</div>
+
+<Paginator State="@pagination" />
 
 @if (CurrentArticleId != 0)
 {
 	<Details ArticleId="@CurrentArticleId" />
-}
+} 
 
 @code {
+	string titleFilter = string.Empty;
+	PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
+
+	IQueryable<ArticleList>? items;
+
+	private ICollection<ArticleList>? collection = null;
+	IQueryable<ArticleList>? FilteredItems => items?.Where(x => x.Title.Contains(titleFilter, StringComparison.CurrentCultureIgnoreCase)).OrderBy(o => o.Title);
+
+	protected override async Task OnInitializedAsync()
+	{
+		collection = await Api.GetArticleListAsync(""); //"law"
+		items = collection.AsQueryable();
+	}
 
 	protected long CurrentArticleId;
-	private void ReturnedArticleId(long articleId)
+	private void ButtonClicked(long id)
 	{
-		CurrentArticleId = articleId;
+		CurrentArticleId = id;
+		
 	}
 
-
-	private void ReturnedStrongsNumber(SearchType searchType) 
-	{
-		if (searchType.StrongsType == StrongsType.Hebrew)
-		{
-			Toast!.ShowWarning($"This feature is in the works | H{searchType.StrongsNumber}. ");
-		}
-		else
-		{
-			Toast!.ShowWarning($"This feature is in the works | G{searchType.StrongsNumber}. ");
-		}
-	}
 }

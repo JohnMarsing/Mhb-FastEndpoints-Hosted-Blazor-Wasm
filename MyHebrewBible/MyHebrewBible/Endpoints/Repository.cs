@@ -104,7 +104,6 @@ ORDER BY WordCount
 	}
 
 
-	//var article = await connection.QuerySingleOrDefaultAsync<Article>(@"
 	public async Task<Article?> GetArticle(long id)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
@@ -120,6 +119,17 @@ WHERE a.Id = @Id", Parms);
 		return article;
 	}
 
+
+	public async Task<IEnumerable<ArticleList?>> GetArticleList()
+	{
+		using var connection = await _connectionFactory.CreateConnectionAsync();
+		var articleList = await connection.QueryAsync<ArticleList>(@"
+SELECT Id, Title, IsFavorite, IsPlaceHolder, IsParasha
+FROM Article 
+ORDER BY Id
+");
+		return articleList;
+	}
 
 }
 

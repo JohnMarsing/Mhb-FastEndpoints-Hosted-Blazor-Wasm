@@ -1,35 +1,20 @@
 ﻿namespace MyHebrewBible.Endpoints;
 
-public class Article
+public class ArticleList
 {
 	public long Id { get; set; }
-	public string? FileNameNoExt { get; set; }
 	public string? Title { get; set; }
-	//public string? Uri { get; set; }
-	public string? Details { get; set; }
-	public string? DetailsMD { get; set; }
-	public long PrimaryScriptureId { get; set; }
-	public DateTime CreateDate { get; set; }
-	public long? DocBlobID { get; set; }
-	public long? PdfBlobID { get; set; }
 	public bool IsPlaceHolder { get; set; }
 	public bool IsFavorite { get; set; }
-	public long ExtraVerses { get; set; }
 	public bool IsWordStudy { get; set; }
 	public bool IsParasha { get; set; }
-	public string? BCV { get; set; }
+
+	/*
+	Fiter ver. 2.0	
 	public long BookID { get; set; }
 	public long Chapter { get; set; }
 	public long Verse { get; set; }
-	//public string? BookAbrv { get; set; }
-
-	public string IsFavoriteHtml
-	{
-		get
-		{
-			return $"{(IsFavorite ? "<span class='text-danger'><span class='fas fa-star'></span></span>" : "")}";
-		}
-	}
+	public string? BCV { get; set; }
 
 	public string RelatedVersesHtml
 	{
@@ -45,7 +30,6 @@ public class Article
 				{
 					return $"{BCV}";
 				}
-
 			} 
 			else 
 			{
@@ -53,5 +37,17 @@ public class Article
 			}
 		}
 	}
+	 
+	*/
 
+	/*
+	Do I need this?
+	public string IsFavoriteHtml
+	{
+		get
+		{
+			return $"{(IsFavorite ? "<span class='text-danger'><span class='fas fa-star'></span></span>" : "")}";
+		}
+	}
+	*/
 }

@@ -45,7 +45,7 @@
 			<div class="card-body text-center">
 				@if (article.DocBlobID != null)
 				{
-					<a class="btn btn-sm btn-outline-success" role="button" href='@($"{Blobs.ArticleUrl}{article.FileNameNoExt}.doc")'>
+					<a class="btn btn-sm btn-outline-success" target="_blank" role="button" href='@($"{Blobs.ArticleUrl}{article.FileNameNoExt}.doc")'>
 						<i class="fas fa-cloud-download-alt fa-2x pull-left"></i>
 						<span class="fas fa-file-word fa-2x"></span> <br />@($"{article.DocBlobID}")  @* far fa-file-word-o   *@
 					</a>
@@ -53,7 +53,7 @@
 
 				@if (article.PdfBlobID != null)
 				{
-					<a class="btn btn-sm btn-outline-primary" role="button" href='@($"{Blobs.ArticleUrl}{article.FileNameNoExt}.doc")'>
+					<a class="btn btn-sm btn-outline-primary" target="_blank"  role="button" href='@($"{Blobs.ArticleUrl}{article.FileNameNoExt}.pdf")'>
 						<i class="fas fa-cloud-download-alt fa-2x pull-left"></i>
 						<span class="far fa-file-pdf fa-2x"></span> <br />@($"{article.PdfBlobID}")
 					</a>
