@@ -1,9 +1,27 @@
 ﻿@page "/Parasha"
 
-<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.Parasha" />
+@using Microsoft.AspNetCore.Components.QuickGrid
 
-<p class="text-danger">NOT DONE YET!</p>
+<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.Parasha" BorderCSS="" />
 
-@code {
+ <div class="card border-info">
+	<QuickGrid Items="@items" Pagination="@pagination">
+		<PropertyColumn Property="@(p => p.TriNum)" Align="Align.Center" />
+		<PropertyColumn Property="@(p => p.ParashaName)" Sortable="false" Align="Align.Center" />
+		<PropertyColumn Property="@(p => p.Date.ToString(DateFormat.YYYY_MM_DD))" Align="Align.Center" />
+		<PropertyColumn Property="@(p => p.Torah)"  />
+		<PropertyColumn Property="@(p => p.TorahVerse.BibleBook.Abrv)" />
+		<PropertyColumn Property="@(p => p.TorahVerse.ChapterVerse)" />
 
-}
+		@* 
+		<PropertyColumn Property="@(p => p.HaftorahVerses)" />
+
+		<th><i class="fas fa-external-link-square-alt"></i></th>
+		<PropertyColumn Property="@(p => p.TorahVerse.BibleBook.Abrv) p.TorahVerse.BibleBook.Abrv)" />
+		*@
+
+	</QuickGrid>
+</div>
+ <Paginator State="@pagination" /> 
+
+
