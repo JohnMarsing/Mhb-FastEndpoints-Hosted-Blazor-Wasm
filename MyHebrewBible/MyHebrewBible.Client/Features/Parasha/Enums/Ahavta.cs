@@ -1,7 +1,5 @@
 ﻿using Ardalis.SmartEnum;
 using MyHebrewBible.Client.Enums;
-using System.Diagnostics.Metrics;
-using System.Net.NetworkInformation;
 
 namespace MyHebrewBible.Client.Features.Parasha.Enums;
 
@@ -354,7 +352,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 	{
 		get
 		{
-			return Constants.ShabbatDateSeed.AddDays(7 * this.Value);
+			return Constants.TriennialSeedDate.AddDays(7 * (this.Value - 1));
 		}
 	}
 	public string Title // 1.1, Gen 1:1-19, Sep 29 2018; 
@@ -364,6 +362,15 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			return $" {this.TriNum}, {BibleBook.FromValue(this.TorahVerse.BibleBook).Abrv} {this.TorahVerse.ChapterVerse}, {this.Date.ToString(DateFormat.YYYY_MM_DD)}";
 		}
 	}
+
+	public TorahBookFilter TorahBookFilter
+	{
+		get
+		{
+			return TorahBookFilter.FromValue(this.TorahVerse.BibleBook.Value);
+		}
+	}
+
 	public string Torah  // Genesis 1:1-19
 	{
 		get
@@ -371,6 +378,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			return $" {BibleBook.FromValue(this.TorahVerse.BibleBook).Name} {this.TorahVerse.ChapterVerse}";
 		}
 	}
+
 	public string TorahAbrv // Gen 1:1-19
 	{
 		get
@@ -400,7 +408,10 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 
 		public override List<VerseRange> BritVerses =>
 		[
-			new VerseRange(BibleBook.Matthew, "4:5", 23215, 23215),     new VerseRange(BibleBook.John, "1:1-5", 26046, 26050),    new VerseRange(BibleBook.Colossians, "1:1-23", 29467, 29489),     new VerseRange(BibleBook.Revelation, "22:6-21", 31087, 31102),
+			new VerseRange(BibleBook.Matthew, "4:5", 23215, 23215)
+			,     new VerseRange(BibleBook.John, "1:1-5", 26046, 26050)
+			,    new VerseRange(BibleBook.Colossians, "1:1-23", 29467, 29489)
+			,     new VerseRange(BibleBook.Revelation, "22:6-21", 31087, 31102),
 		];
 	}
 	private sealed class Gen_01bSE : Ahavta
