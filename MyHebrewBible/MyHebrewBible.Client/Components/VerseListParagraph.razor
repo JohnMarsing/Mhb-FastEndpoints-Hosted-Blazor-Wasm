@@ -9,10 +9,18 @@
 <LoadingComponent IsLoading="verses == null" TurnSpinnerOff="TurnSpinnerOff">
 	@foreach (var item in verses!)
 	{
-		<p class="ps-2 mb-2">
-			<sup class="fw-bold">@item.Verse</sup>
-			@item.KJV
+@* 		
+	@onclick="@(e => ButtonClick(item.ID, item.Verse))"
+ *@
+		<p class="fs-5">
+			<a title="@item.BCV">
+				<sup class="btn btn-outline-primary py-0 px-1">
+					<b>@item.Verse</b>
+				</sup>
+			</a>
+			@((MarkupString)@item.KJV!)
 		</p>
+
 	}
 </LoadingComponent>
 

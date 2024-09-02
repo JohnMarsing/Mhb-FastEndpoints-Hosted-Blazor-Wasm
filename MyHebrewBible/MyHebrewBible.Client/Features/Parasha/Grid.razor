@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Components.QuickGrid
+@using MyHebrewBible.Client.Enums
+
+@inject IToastService? Toast
+
+
+ <div class="card border-info">
+	<div class="card-header text-end">
+		 @TorahBookFilter.Name <i class="fas fa-filter"></i>
+	</div>
+
+	<QuickGrid Items="@items">
+		<PropertyColumn Property="@(p => p.TorahAbrv)" />
+		<PropertyColumn Property="@(p => p.Date.ToString(DateFormat.YYYY_MM_DD))" Align="Align.Center" />
+		<PropertyColumn Property="@(p => p.ParashaName)" Sortable="false" Align="Align.Left" />
+	</QuickGrid>
+</div>
+
+@code {
+	IQueryable<Enums.Ahavta>? items; 
+
+	[Parameter, EditorRequired] public TorahBookFilter? TorahBookFilter { get; set; }
+
+
+	protected override void OnParametersSet()
+	{
+		items = Enums.Ahavta.List.Where(w => w.TorahBookFilter == TorahBookFilter.Value).OrderBy(o => o.Date).AsQueryable();
+	}
+
+}

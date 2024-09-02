@@ -1,27 +1,115 @@
 ﻿@page "/Parasha"
 
 @using Microsoft.AspNetCore.Components.QuickGrid
+@using MyHebrewBible.Client.Enums
+
+@inject IToastService? Toast
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.Parasha" BorderCSS="" />
 
- <div class="card border-info">
-	<QuickGrid Items="@items" Pagination="@pagination">
-		<PropertyColumn Property="@(p => p.TriNum)" Align="Align.Center" />
-		<PropertyColumn Property="@(p => p.ParashaName)" Sortable="false" Align="Align.Center" />
-		<PropertyColumn Property="@(p => p.Date.ToString(DateFormat.YYYY_MM_DD))" Align="Align.Center" />
-		<PropertyColumn Property="@(p => p.Torah)"  />
-		<PropertyColumn Property="@(p => p.TorahVerse.BibleBook.Abrv)" />
-		<PropertyColumn Property="@(p => p.TorahVerse.ChapterVerse)" />
+@if (TorahBookFilter is not null)
+{
+	<Grid TorahBookFilter="TorahBookFilter" />
+}
 
-		@* 
-		<PropertyColumn Property="@(p => p.HaftorahVerses)" />
+<p>Next Shabbat Date: <b>@Enums.Constants.GetNextShabbatDate().ToString(DateFormat.YYYY_MM_DD)</b></p>
 
-		<th><i class="fas fa-external-link-square-alt"></i></th>
-		<PropertyColumn Property="@(p => p.TorahVerse.BibleBook.Abrv) p.TorahVerse.BibleBook.Abrv)" />
-		*@
+@if (CurrentAhvata is not null)
+{
+	<div class="card bg-light mb-3">
+		<div class="card-header">
+			<h3 class="text-primary text-center"><b>Torah Verses</b> </h3>
+		</div>
+		<div class="card-body">
+			<VerseListParagraph VerseRangeDTO="TorahVerses" />
+		</div>
+	</div>
 
-	</QuickGrid>
-</div>
- <Paginator State="@pagination" /> 
+}
+
+@if (HaftorahVerses is not null && HaftorahVerses.Any())
+{
+	<div class="card bg-light mb-3">
+		<div class="card-header">
+			<h3 class="text-warning text-center"><b>Haftorah Verses</b> </h3>
+		</div>
+		@foreach (var item in HaftorahVerses)
+		{
+			<div class="card-body">
+				<VerseListParagraph VerseRangeDTO="item" />
+			</div>
+		}
+	</div>
+}
+
+@if (BritVerses is not null && BritVerses.Any())
+{
+	<div class="card bg-light mb-3">
+		<div class="card-header">
+			<h3 class="text-info text-center"><b>Brit Verses</b> </h3>
+		</div>
+		@foreach (var item in BritVerses)
+		{
+			<div class="card-body">
+				<VerseListParagraph VerseRangeDTO="item" />
+			</div>
+		}
+	</div>
+}
 
 
+
+@code {
+
+	public Enums.Ahavta? CurrentAhvata { get; set; }
+
+	private VerseRangeDTO? TorahVerses;
+	private List<VerseRangeDTO>? HaftorahVerses;
+	private List<VerseRangeDTO>? BritVerses;
+
+	public TorahBookFilter? TorahBookFilter { get; set; }
+
+	protected override void OnInitialized()
+	{
+		CurrentAhvata = Enums.Ahavta.List.Where(w => w.Date == Enums.Constants.GetNextShabbatDate()).SingleOrDefault();
+		if (CurrentAhvata is null)
+		{
+			Toast!.ShowWarning($"Current Ahvata is not found; inside {nameof(Index)}");
+		}
+		else
+		{
+			TorahVerses = new VerseRangeDTO(
+				CurrentAhvata.TorahVerse.BegId, CurrentAhvata.TorahVerse.EndId
+				, CurrentAhvata.TorahVerse.BibleBook.Title + CurrentAhvata.TorahVerse.ChapterVerse);
+
+			TorahBookFilter = CurrentAhvata.TorahBookFilter;
+
+			if (CurrentAhvata.HaftorahVerses is not null)
+			{
+				if (CurrentAhvata.HaftorahVerses.Any())
+				{
+					HaftorahVerses = new List<VerseRangeDTO>();
+					foreach (var item in CurrentAhvata.HaftorahVerses)
+					{
+						HaftorahVerses.Add(new VerseRangeDTO(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
+					}
+				}
+			}
+
+			if (CurrentAhvata.BritVerses is not null)
+			{
+				if (CurrentAhvata.BritVerses.Any())
+				{
+					BritVerses = new List<VerseRangeDTO>();
+					foreach (var item in CurrentAhvata.BritVerses)
+					{
+						BritVerses.Add(new VerseRangeDTO(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
+					}
+				}
+			}
+
+			
+		}
+	}
+
+}
