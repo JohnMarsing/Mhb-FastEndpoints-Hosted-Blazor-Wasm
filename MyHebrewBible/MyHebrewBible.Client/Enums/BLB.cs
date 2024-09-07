@@ -1,5 +1,6 @@
 ﻿using Ardalis.SmartEnum;
 using Microsoft.AspNetCore.Components;
+using MyHebrewBible.Client.Components;
 using MyHebrewBible.Client.Features.BookChapter;
 
 namespace MyHebrewBible.Client.Enums;
@@ -101,6 +102,7 @@ public abstract class BLB : SmartEnum<BLB>
 
 	#endregion
 
+	// Deprecated
 	public MarkupString Anchor(BookAndChapter? bookAndChapter, int verseNumber)
 	{
 		if (bookAndChapter is not null && bookAndChapter.BibleBook is not null)
@@ -125,20 +127,20 @@ public abstract class BLB : SmartEnum<BLB>
 		}
 	}
 
-	public MarkupString Anchor(BibleBook? bibleBook, int chapter, int verseNumber)
+	public MarkupString AnchorBCVVM(BookChapterVerseVM? bookChapterVerseVM)
 	{
-		if (bibleBook is not null)
+		if (bookChapterVerseVM is not null && bookChapterVerseVM.BibleBook is not null)
 		{
 			string
 			s = "<a";                                           // Start anchor attribute
 			s += " href='https://www.blueletterbible.org/";     // start href with a '
 			s += $"{this.Name}/";
-			s += $"{bibleBook.Abrv}/{chapter}/{verseNumber}/";
+			s += $"{bookChapterVerseVM!.BibleBook!.Abrv}/{bookChapterVerseVM!.Chapter}/{bookChapterVerseVM.Verse}/";
 			s += $"t_bibles_2001";
 			s += "'";                                           // end href with a '
 			s += $" title='{this.Name} BLB' target='_blank'";
 			s += ">";                                           // End anchor attribute
-			s += $"{bibleBook.Abrv} {chapter} {verseNumber}";
+			s += $"{bookChapterVerseVM!.BibleBook.Abrv} {bookChapterVerseVM!.Chapter} {bookChapterVerseVM.Verse}";
 			s += "</a>";
 			s += " <i class='fas fa-external-link-alt'></i>";
 			return (MarkupString)s;

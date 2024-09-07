@@ -1,0 +1,160 @@
+﻿@using MyHebrewBible.Client.Enums
+
+@inject ILogger<VerseButtons>? Logger
+@inject IToastService? Toast
+
+@if (ShowCloseButton)
+{
+	<div class="card p-1 border-danger">
+		<div class="card-header">
+			<h5>
+				Verses
+				<button type="button" class="mt-1 btn btn-danger btn-sm" @onclick="ButtonCloseClick">
+					<i class="fas fa-times"></i>
+				</button>
+			</h5>
+		</div>
+		<div class="card-body">
+			@foreach (var r in ButtonRowVerses)
+			{
+				<div class="btn-group btn-group-sm">
+					@for (int i = r.VerseStart; i <= r.VerseEnd; i++)
+					{
+						int iLocal = i;
+						<button type="button" class="btn btn-outline-info font-monospace"
+										@onclick="@(e => ButtonClick(@iLocal))">
+							@((MarkupString)ButtonNumber(i))
+						</button>
+					}
+				</div>
+			}
+		</div>
+	</div>
+}
+
+@code {
+
+	[Parameter, EditorRequired] public int VerseCount { get; set; }
+	[Parameter, EditorRequired] public int ButtonsPerRow { get; set; }
+	[Parameter] public EventCallback<int> OnVerseFilterSelected { get; set; }
+
+	private bool ShowCloseButton;
+
+	public List<ButtonRowVerse> ButtonRowVerses { get; set; } = new List<ButtonRowVerse>();
+
+	protected override void OnParametersSet()
+	{
+		ButtonRowVerses.Clear();
+		PopulateButtonRows();
+	}
+
+	private void PopulateButtonRows()
+	{
+		Logger!.LogInformation("{Class}!{Method}; VerseCount: {VerseCount}, ButtonsPerRow: {ButtonsPerRow}"
+		, nameof(VerseButtons), nameof(PopulateButtonRows), VerseCount, ButtonsPerRow);
+		
+		int wholeRowCount = 0;
+		int lastRowButtonCount = 0;
+
+		try
+		{
+			ShowCloseButton = true;
+			if (ButtonsPerRow >= VerseCount)
+			{
+				// Add only one row
+				ButtonRowVerses.Add(new ButtonRowVerse()
+					{
+						VerseStart = 1,
+						VerseEnd = VerseCount
+					});
+			}
+			else
+			{
+				// Multiple Rows
+				wholeRowCount = VerseCount / ButtonsPerRow; 
+				lastRowButtonCount = VerseCount % ButtonsPerRow;
+				int s = 1;
+				int e = ButtonsPerRow;
+				for (int r = 1; r <= wholeRowCount; r++)
+				{
+
+					ButtonRowVerses.Add(new ButtonRowVerse()
+						{
+							VerseStart = s,
+							VerseEnd = e
+						});
+					s = e + 1;
+					e += ButtonsPerRow;
+				}
+
+				if (lastRowButtonCount > 0)
+				{
+					ButtonRowVerses.Add(new ButtonRowVerse()
+						{
+							VerseStart = (VerseCount - lastRowButtonCount) + 1, // 50-5=45+1=46
+							VerseEnd = VerseCount
+						});
+
+				}
+			}
+
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Class}!{Method}. wholeRowCount: {wholeRowCount}, lastRowButtonCount: {lastRowButtonCount}, "
+				, nameof(VerseButtons), nameof(PopulateButtonRows), wholeRowCount, lastRowButtonCount);
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(VerseButtons)}!{nameof(PopulateButtonRows)}");
+		}
+
+	}
+
+	private void ButtonCloseClick()
+	{
+		ButtonRowVerses.Clear();
+		ShowCloseButton = false;
+	}
+
+	private void ButtonClick(int verse)
+	{
+		ShowCloseButton = false;
+		OnVerseFilterSelected.InvokeAsync(verse); 
+	}
+
+
+	protected MarkupString ButtonNumber(int i)
+	{
+
+		if (VerseCount > 99)
+		{
+			if (i < 10)
+			{
+				return new MarkupString($"&nbsp;&nbsp;{i}");  // return new MarkupString($"&nbsp;{i}");
+			}
+			else
+			{
+				if (i < 100)
+				{
+					return new MarkupString($"&nbsp;{i}");
+				}
+				else
+				{
+					return new MarkupString($"{i}");
+				}
+			}
+
+		}
+		else
+		{
+			if (i < 10)
+			{
+				return new MarkupString($"&nbsp;{i}");  // return new MarkupString($"&nbsp;{i}");
+			}
+			else
+			{
+				return new MarkupString($"{i}");
+			}
+		}
+
+	}
+
+}

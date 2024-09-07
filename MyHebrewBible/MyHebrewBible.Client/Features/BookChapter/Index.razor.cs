@@ -1,6 +1,9 @@
 using MyHebrewBible.Client.Enums;
 using MyHebrewBible.Client.State;
 using Microsoft.AspNetCore.Components;
+using MyHebrewBible.Client.Components;
+using Blazored.Toast.Services;
+
 
 namespace MyHebrewBible.Client.Features.BookChapter
 {
@@ -8,6 +11,7 @@ namespace MyHebrewBible.Client.Features.BookChapter
 	{
 		[Inject] public ILogger<Index>? Logger { get; set; }
 		[Inject] public IBookChapterState? bookChapterState { get; set; }
+		[Inject] public IToastService? Toast { get; set; }
 
 		protected string _err = string.Empty;
 		protected string _msg = string.Empty;
@@ -24,9 +28,9 @@ namespace MyHebrewBible.Client.Features.BookChapter
 			}
 			catch (Exception ex)
 			{
-        Logger!.LogError("BookChapter!{Class}!{Method}: ErrorType: {Type}; Message: {Message}"
-          , nameof(Index), nameof(OnInitialized), ex.GetType(), ex.Message);
-      }
+				Logger!.LogError(ex, "BookChapter!{Class}!{Method}", nameof(Index), nameof(OnInitialized));
+				Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnInitialized)}");
+			}
 		}
 
 		protected string? ReturnedBookAndChapterString;

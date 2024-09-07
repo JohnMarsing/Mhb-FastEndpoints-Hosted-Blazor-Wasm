@@ -36,8 +36,6 @@ else
 									 OnHebrewSelected="ReturnedHebrew" />
 		}
 
-
-
 		@if (versesBottom is not null)
 		{
 			<ParagraphBottom BottomVerses="versesBottom" OnVerseSelected="ReturnedVerse" />
@@ -55,19 +53,22 @@ else
 @code {
 	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
 
+	// When set by ReturnedVerse then the chapter is split into versesTop and versesBottom
 	protected long FocusScriptureId; // = 0;
+	
+	
 	protected long VerseRowCount; // = 0;
 	protected long VerseNumber; // = 0;
 	protected long TopRC = 0;
 	protected long BottomRC = 0;
 	protected long Strongs = 0;
-	protected string? Hebrew;
+	protected string? Hebrew;  // ToDo: Not fully implemented
 	protected long WordCount = 0;
 
-	public List<BookChapter>? versesTop;
-	public List<BookChapter>? versesBottom;
+	public List<BibleVerse>? versesTop;
+	public List<BibleVerse>? versesBottom;
 
-	private ICollection<BookChapter>? verses = null;
+	private ICollection<BibleVerse>? verses = null;
 
 	protected string _msg = nameof(Sections);
 
@@ -84,6 +85,7 @@ else
 		}
 	}
 
+	// From the ButtonClick of either ParagraphTop or ParagraphBottom
 	private void ReturnedVerse(ScriptureIdAndVerseNumber scriptureIdAndVerseNumber)
 	{
 		FocusScriptureId = scriptureIdAndVerseNumber.ScriptureID;
@@ -93,6 +95,11 @@ else
 		PopulateTopAndBottom(VerseNumber);
 	}
 
+	// Called by
+	// - OnParametersSetAsync
+	// - ReturnedVerse
+	// - ReturnedStrongs only if (strongsAndWordCount.Strongs == 0)
+	//   
 	private void PopulateTopAndBottom(long verseSplit)
 	{
 		if (FocusScriptureId == 0)
@@ -119,6 +126,8 @@ else
 		WordCount = strongsAndWordCount.WordCount;
 	}
 
+	// ToDo: Not fully implemented
+	// hebrew will be added to local storage
 	private void ReturnedHebrew(string hebrew)
 	{
 		Hebrew = hebrew;

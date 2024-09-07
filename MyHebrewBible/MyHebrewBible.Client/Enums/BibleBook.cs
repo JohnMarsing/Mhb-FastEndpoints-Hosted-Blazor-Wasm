@@ -177,6 +177,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 	public abstract string TransliterationInHebrew { get; }
 	public abstract string NameInHebrew { get; }
 
+	public abstract List<int> LastVerses { get; }
+
 	public abstract BibleBookPrevNext NavigationPrevious(int Chapter);
 	public abstract BibleBookPrevNext NavigationNext(int Chapter);
 
@@ -195,6 +197,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 50;
 		public override string TransliterationInHebrew => "Beresheeth";
 		public override string NameInHebrew => "בְּרֵאשִׁית";
+
+		public override List<int> LastVerses => [31, 25, 24, 26, 32, 22, 24, 22, 29, 32, 32, 20, 18, 24, 21, 16, 27, 33, 38, 18, 34, 24, 20, 67, 34, 35, 46, 22, 35, 43, 55, 32, 20, 31, 29, 43, 36, 30, 23, 23, 57, 38, 34, 34, 28, 34, 31, 22, 33, 26,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -217,6 +221,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 40;
 		public override string TransliterationInHebrew => "Shemoth";
 		public override string NameInHebrew => "שְׁמֹות";
+
+		public override List<int> LastVerses => [22, 25, 22, 31, 23, 30, 25, 32, 35, 29, 10, 51, 22, 31, 27, 36, 16, 27, 25, 26, 36, 31, 33, 18, 40, 37, 21, 43, 46, 38, 18, 35, 23, 35, 35, 38, 29, 31, 43, 38,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -241,6 +247,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Vayiqra";
 		public override string NameInHebrew => "וַיִּקְרָא";
 
+		public override List<int> LastVerses => [17, 16, 17, 35, 19, 30, 38, 36, 24, 20, 47, 8, 59, 57, 33, 34, 16, 30, 37, 27, 24, 33, 44, 23, 55, 46, 34,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Leviticus, Chapter - 1, (Chapter - 1).ToString())
@@ -262,6 +270,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 36;
 		public override string TransliterationInHebrew => "Bamidbar";
 		public override string NameInHebrew => "בְּמִדְבַּר";
+
+		public override List<int> LastVerses => [54, 34, 51, 49, 31, 27, 89, 26, 23, 36, 35, 16, 33, 45, 41, 50, 13, 32, 22, 29, 35, 41, 30, 25, 18, 65, 23, 31, 40, 16, 54, 42, 56, 29, 34, 13,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -285,6 +295,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Devarim";
 		public override string NameInHebrew => "דְּבָרִים";
 
+		public override List<int> LastVerses => [46, 37, 29, 49, 33, 25, 26, 20, 29, 22, 32, 32, 18, 29, 23, 22, 20, 22, 21, 20, 23, 30, 25, 22, 19, 19, 26, 68, 29, 20, 30, 52, 29, 12,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Deuteronomy, Chapter - 1, (Chapter - 1).ToString())
@@ -307,6 +319,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Yahoshua";
 		public override string NameInHebrew => "יְהוֹשֻׁעַ";
 
+		public override List<int> LastVerses => [18, 24, 17, 24, 15, 27, 26, 35, 27, 43, 23, 24, 33, 15, 63, 10, 18, 28, 51, 9, 45, 34, 16, 33,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Joshua, Chapter - 1, (Chapter - 1).ToString())
@@ -328,6 +342,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 21;
 		public override string TransliterationInHebrew => "Shophtim";
 		public override string NameInHebrew => "שׁוֹפְטִים";
+		
+		public override List<int> LastVerses => [36, 23, 31, 24, 31, 40, 25, 35, 57, 18, 40, 15, 25, 20, 20, 31, 13, 31, 30, 48, 25,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -350,6 +366,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 4;
 		public override string TransliterationInHebrew => "Root";
 		public override string NameInHebrew => "רוּת";
+
+		public override List<int> LastVerses => [22, 23, 18, 22,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -374,6 +392,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Schmuel Alef";
 		public override string NameInHebrew => "שְׁמוּאֵל א";
 
+		public override List<int> LastVerses => [28, 36, 21, 22, 12, 21, 17, 22, 27, 27, 15, 25, 23, 52, 35, 23, 58, 30, 24, 42, 15, 23, 29, 22, 44, 25, 12, 25, 11, 31, 13,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(FirstSamuel, Chapter - 1, (Chapter - 1).ToString())
@@ -395,6 +415,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 24;
 		public override string TransliterationInHebrew => "Schmuel Bet";
 		public override string NameInHebrew => "שְׁמוּאֵל ב";
+
+		public override List<int> LastVerses => [27, 32, 39, 12, 25, 23, 29, 18, 13, 19, 27, 31, 39, 33, 37, 23, 29, 33, 43, 26, 22, 51, 39, 25,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -418,6 +440,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Melechim Alef";
 		public override string NameInHebrew => "מְלָכִים א";
 
+		public override List<int> LastVerses => [53, 46, 28, 34, 18, 38, 51, 66, 28, 29, 43, 33, 34, 31, 34, 34, 24, 46, 21, 43, 29, 53,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(FirstKings, Chapter - 1, (Chapter - 1).ToString())
@@ -439,6 +463,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 25;
 		public override string TransliterationInHebrew => "Melechim Bet";
 		public override string NameInHebrew => "מְלָכִים ב";
+
+		public override List<int> LastVerses => [18, 25, 27, 44, 27, 33, 20, 29, 37, 36, 21, 21, 25, 29, 38, 20, 41, 37, 37, 21, 26, 20, 37, 20, 30,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -462,6 +488,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Divre HaYamim Alef";
 		public override string NameInHebrew => "דִּבְרֵי הַיָּמִים א";
 
+		public override List<int> LastVerses => [54, 55, 24, 43, 26, 81, 40, 40, 44, 14, 47, 40, 14, 17, 29, 43, 27, 17, 19, 8, 30, 19, 32, 31, 31, 32, 34, 21, 30,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(FirstChronicles, Chapter - 1, (Chapter - 1).ToString())
@@ -483,6 +511,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 36;
 		public override string TransliterationInHebrew => "Divre HaYamim Bet";
 		public override string NameInHebrew => "דִּבְרֵי הַיָּמִים ב";
+
+		public override List<int> LastVerses => [17, 18, 17, 22, 14, 42, 22, 18, 31, 19, 23, 16, 22, 15, 19, 14, 19, 34, 11, 37, 20, 12, 21, 27, 28, 23, 9, 27, 36, 27, 21, 33, 25, 33, 27, 23,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -506,6 +536,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Ezrah";
 		public override string NameInHebrew => "עֶזְרָא";
 
+		public override List<int> LastVerses => [11, 70, 13, 24, 17, 22, 28, 36, 15, 44,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Ezra, Chapter - 1, (Chapter - 1).ToString())
@@ -527,6 +559,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 13;
 		public override string TransliterationInHebrew => "Nechemyah";
 		public override string NameInHebrew => "נְחֶמְיָה";
+
+		public override List<int> LastVerses => [11, 20, 32, 23, 19, 19, 73, 18, 38, 39, 36, 47, 31,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -550,6 +584,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Hadasah";
 		public override string NameInHebrew => "אֶסְתֵּר";
 
+		public override List<int> LastVerses => [22, 23, 15, 17, 14, 14, 10, 17, 32, 3,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Esther, Chapter - 1, (Chapter - 1).ToString())
@@ -571,6 +607,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 42;
 		public override string TransliterationInHebrew => "Iyov";
 		public override string NameInHebrew => "אִיּוֹב";
+
+		public override List<int> LastVerses => [22, 13, 26, 21, 27, 30, 21, 22, 35, 22, 20, 25, 28, 22, 35, 22, 16, 21, 29, 29, 34, 30, 17, 25, 6, 14, 23, 28, 25, 31, 40, 22, 33, 37, 16, 33, 24, 41, 30, 24, 34, 17,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -594,6 +632,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Tehillim";
 		public override string NameInHebrew => "תְּהִלִּים";
 
+		public override List<int> LastVerses => [6, 12, 8, 8, 12, 10, 17, 9, 20, 18, 7, 8, 6, 7, 5, 11, 15, 50, 14, 9, 13, 31, 6, 10, 22, 12, 14, 9, 11, 12, 24, 11, 22, 22, 28, 12, 40, 22, 13, 17, 13, 11, 5, 26, 17, 11, 9, 14, 20, 23, 19, 9, 6, 7, 23, 13, 11, 11, 17, 12, 8, 12, 11, 10, 13, 20, 7, 35, 36, 5, 24, 20, 28, 23, 10, 12, 20, 72, 13, 19, 16, 8, 18, 12, 13, 17, 7, 18, 52, 17, 16, 15, 5, 23, 11, 13, 12, 9, 9, 5, 8, 28, 22, 35, 45, 48, 43, 13, 31, 7, 10, 10, 9, 8, 18, 19, 2, 29, 176, 7, 8, 9, 4, 8, 5, 6, 5, 6, 8, 8, 3, 18, 3, 3, 21, 26, 9, 8, 24, 13, 10, 7, 12, 15, 21, 10, 20, 14, 9, 6,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Psalms, Chapter - 1, (Chapter - 1).ToString())
@@ -615,6 +655,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 31;
 		public override string TransliterationInHebrew => "Mishle";
 		public override string NameInHebrew => "מִשְׁלֵי";
+
+		public override List<int> LastVerses => [33, 22, 35, 27, 23, 35, 27, 36, 18, 32, 31, 28, 25, 35, 33, 33, 28, 24, 29, 30, 31, 29, 35, 34, 28, 28, 27, 28, 27, 33, 31,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -638,6 +680,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Koheleth";
 		public override string NameInHebrew => "קֹהֶלֶת";
 
+		public override List<int> LastVerses => [18, 26, 22, 16, 20, 12, 29, 17, 18, 20, 10, 14,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -661,6 +704,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Shir HaShirim";
 		public override string NameInHebrew => "שִׁיר הַשִּׁירִים";
 
+		public override List<int> LastVerses => [17, 17, 11, 16, 16, 13, 13, 14,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(SongofSolomon, Chapter - 1, (Chapter - 1).ToString())
@@ -682,6 +727,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 66;
 		public override string TransliterationInHebrew => "Yeshayahu";
 		public override string NameInHebrew => "יְשַׁעְיָהוּ";
+
+		public override List<int> LastVerses => [31, 22, 26, 6, 30, 13, 25, 22, 21, 34, 16, 6, 22, 32, 9, 14, 14, 7, 25, 6, 17, 25, 18, 23, 12, 21, 13, 29, 24, 33, 9, 20, 24, 17, 10, 22, 38, 22, 8, 31, 29, 25, 28, 28, 25, 13, 15, 22, 26, 11, 23, 15, 12, 17, 13, 12, 21, 14, 21, 22, 11, 12, 19, 12, 25, 24,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -705,6 +752,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Yirmeyahu";
 		public override string NameInHebrew => "יִרְמְיָהוּ";
 
+		public override List<int> LastVerses => [19, 37, 25, 31, 31, 30, 34, 22, 26, 25, 23, 17, 27, 22, 21, 21, 27, 23, 15, 18, 14, 30, 40, 10, 38, 24, 22, 17, 32, 24, 40, 44, 26, 22, 19, 32, 21, 28, 18, 16, 18, 22, 13, 30, 5, 28, 7, 47, 39, 46, 64, 34,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Jeremiah, Chapter - 1, (Chapter - 1).ToString())
@@ -726,6 +775,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 5;
 		public override string TransliterationInHebrew => "Echah";
 		public override string NameInHebrew => "אֵיכָה";
+
+		public override List<int> LastVerses => [22, 22, 66, 22, 22,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -749,6 +800,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Yechezkel";
 		public override string NameInHebrew => "יְחֶזְקֵאל";
 
+		public override List<int> LastVerses => [28, 10, 27, 17, 17, 14, 27, 18, 11, 22, 25, 28, 23, 23, 8, 63, 24, 32, 14, 49, 32, 31, 49, 27, 17, 21, 36, 26, 21, 26, 18, 32, 33, 31, 15, 38, 28, 23, 29, 49, 26, 20, 27, 31, 25, 24, 23, 35,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Ezekiel, Chapter - 1, (Chapter - 1).ToString())
@@ -770,6 +823,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 12;
 		public override string TransliterationInHebrew => "Daniyel";
 		public override string NameInHebrew => "דָּנִיֵּאל";
+
+		public override List<int> LastVerses => [21, 49, 30, 37, 31, 28, 28, 27, 27, 21, 45, 13,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -793,6 +848,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Hoshea";
 		public override string NameInHebrew => "הוֹשֵׁעַ";
 
+		public override List<int> LastVerses => [11, 23, 5, 19, 15, 11, 16, 14, 17, 15, 12, 14, 16, 9,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Hosea, Chapter - 1, (Chapter - 1).ToString())
@@ -814,6 +871,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 3;
 		public override string TransliterationInHebrew => "Yoel";
 		public override string NameInHebrew => "יוֹאֵל";
+
+		public override List<int> LastVerses => [20, 32, 21,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -837,6 +896,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Ahmos";
 		public override string NameInHebrew => "עָמוֹס";
 
+		public override List<int> LastVerses => [15, 16, 15, 13, 27, 14, 17, 14, 15,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Amos, Chapter - 1, (Chapter - 1).ToString())
@@ -858,6 +919,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 1;
 		public override string TransliterationInHebrew => "Ovadyah";
 		public override string NameInHebrew => "עֹבַדְיָה";
+
+		public override List<int> LastVerses => [21,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -881,6 +944,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Yonah";
 		public override string NameInHebrew => "יוֹנָה";
 
+		public override List<int> LastVerses => [17, 10, 10, 11,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Jonah, Chapter - 1, (Chapter - 1).ToString())
@@ -902,6 +967,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 7;
 		public override string TransliterationInHebrew => "Micha";
 		public override string NameInHebrew => "מִיכָה";
+
+		public override List<int> LastVerses => [16, 13, 12, 13, 15, 16, 20,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -925,6 +992,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Nachum";
 		public override string NameInHebrew => "נַחוּם";
 
+		public override List<int> LastVerses => [15, 13, 19,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Nahum, Chapter - 1, (Chapter - 1).ToString())
@@ -946,6 +1015,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 3;
 		public override string TransliterationInHebrew => "Chabakook";
 		public override string NameInHebrew => "חֲבַקּוּק";
+
+		public override List<int> LastVerses => [17, 20, 19,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -969,6 +1040,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Tzephanyah";
 		public override string NameInHebrew => "צְפַנְיָה";
 
+		public override List<int> LastVerses => [18, 15, 20,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Zephaniah, Chapter - 1, (Chapter - 1).ToString())
@@ -990,6 +1063,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 2;
 		public override string TransliterationInHebrew => "Chaggai";
 		public override string NameInHebrew => "חַגַּי";
+
+		public override List<int> LastVerses => [15, 23,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -1013,6 +1088,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Zecharyah";
 		public override string NameInHebrew => "זְכַרְיָה";
 
+		public override List<int> LastVerses => [21, 13, 10, 14, 11, 15, 14, 23, 17, 12, 17, 14, 9, 21,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Zechariah, Chapter - 1, (Chapter - 1).ToString())
@@ -1034,6 +1111,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 4;
 		public override string TransliterationInHebrew => "Malachi";
 		public override string NameInHebrew => "מַלְאָכִי";
+
+		public override List<int> LastVerses => [14, 17, 18, 6,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -1057,6 +1136,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Mattityahu";
 		public override string NameInHebrew => "מַתִּתְיָהוּ";
 
+		public override List<int> LastVerses => [25, 23, 17, 25, 48, 34, 29, 34, 38, 42, 30, 50, 58, 36, 39, 28, 27, 35, 30, 34, 46, 46, 39, 51, 46, 75, 66, 20,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Matthew, Chapter - 1, (Chapter - 1).ToString())
@@ -1078,6 +1159,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 16;
 		public override string TransliterationInHebrew => "Yochanan-Moshe";
 		public override string NameInHebrew => "מַרְקוֹס";
+
+		public override List<int> LastVerses => [45, 28, 35, 41, 43, 56, 37, 38, 50, 52, 33, 44, 37, 72, 47, 20,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -1101,6 +1184,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Luka";
 		public override string NameInHebrew => "לוּקָס";
 
+		public override List<int> LastVerses => [80, 52, 38, 44, 39, 49, 50, 56, 62, 42, 54, 59, 35, 35, 32, 31, 37, 43, 48, 47, 38, 71, 56, 53,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Luke, Chapter - 1, (Chapter - 1).ToString())
@@ -1122,6 +1207,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 21;
 		public override string TransliterationInHebrew => "Yochanan";
 		public override string NameInHebrew => "יוֹחָנָן";
+
+		public override List<int> LastVerses => [51, 25, 36, 54, 47, 71, 53, 59, 41, 42, 57, 50, 38, 31, 27, 33, 26, 40, 42, 31, 25,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -1145,6 +1232,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Maaseh Shlichim";  // Emissaries Acts
 		public override string NameInHebrew => "מַעֲשֶׂה שליחים";
 
+		public override List<int> LastVerses => [26, 47, 26, 37, 42, 15, 60, 40, 43, 48, 30, 25, 52, 28, 41, 40, 34, 28, 41, 38, 40, 30, 35, 27, 27, 32, 44, 31,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Acts, Chapter - 1, (Chapter - 1).ToString())
@@ -1166,6 +1255,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 16;
 		public override string TransliterationInHebrew => "Romiyah";
 		public override string NameInHebrew => "";
+
+		public override List<int> LastVerses => [32, 29, 31, 25, 21, 23, 25, 39, 33, 21, 36, 21, 14, 23, 33, 27,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -1189,6 +1280,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Qorintyah Alef";
 		public override string NameInHebrew => "";
 
+		public override List<int> LastVerses => [31, 16, 23, 21, 13, 20, 40, 13, 27, 33, 34, 31, 13, 40, 58, 24,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(FirstCorinthians, Chapter - 1, (Chapter - 1).ToString())
@@ -1210,6 +1303,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 13;
 		public override string TransliterationInHebrew => "Qorintyah Bet";
 		public override string NameInHebrew => "";
+
+		public override List<int> LastVerses => [24, 17, 18, 18, 21, 18, 16, 24, 15, 18, 33, 21, 14,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -1233,6 +1328,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Galutyah";
 		public override string NameInHebrew => "";
 
+		public override List<int> LastVerses => [24, 21, 29, 31, 26, 18,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Galatians, Chapter - 1, (Chapter - 1).ToString())
@@ -1254,6 +1351,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 6;
 		public override string TransliterationInHebrew => "Ephsiyah";
 		public override string NameInHebrew => "";
+
+		public override List<int> LastVerses => [23, 22, 21, 32, 33, 24,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -1277,6 +1376,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Phylypsiyah";
 		public override string NameInHebrew => "";
 
+		public override List<int> LastVerses => [30, 30, 21, 23,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Philippians, Chapter - 1, (Chapter - 1).ToString())
@@ -1298,6 +1399,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 4;
 		public override string TransliterationInHebrew => "Qolesayah";
 		public override string NameInHebrew => "";
+
+		public override List<int> LastVerses => [29, 23, 25, 18,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -1321,6 +1424,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Tesloniqyah Alef";
 		public override string NameInHebrew => "";
 
+		public override List<int> LastVerses => [10, 20, 13, 18, 28,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(FirstThessalonians, Chapter - 1, (Chapter - 1).ToString())
@@ -1342,6 +1447,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 3;
 		public override string TransliterationInHebrew => "Tesloniqyah Bet";
 		public override string NameInHebrew => "";
+
+		public override List<int> LastVerses => [12, 17, 18,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -1365,6 +1472,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Timtheous Alef";
 		public override string NameInHebrew => "";
 
+		public override List<int> LastVerses => [20, 15, 16, 16, 25, 21,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(FirstTimothy, Chapter - 1, (Chapter - 1).ToString())
@@ -1386,6 +1495,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 4;
 		public override string TransliterationInHebrew => "Timtheous Bet";
 		public override string NameInHebrew => "";
+
+		public override List<int> LastVerses => [18, 26, 17, 22,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -1409,6 +1520,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Teitus";
 		public override string NameInHebrew => "";
 
+		public override List<int> LastVerses => [16, 15, 15,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Titus, Chapter - 1, (Chapter - 1).ToString())
@@ -1430,6 +1543,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 1;
 		public override string TransliterationInHebrew => "Phileymon";
 		public override string NameInHebrew => "";
+
+		public override List<int> LastVerses => [25,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -1453,6 +1568,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Ivrim";
 		public override string NameInHebrew => "";
 
+		public override List<int> LastVerses => [14, 18, 19, 16, 14, 20, 28, 13, 28, 39, 40, 29, 25,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Hebrews, Chapter - 1, (Chapter - 1).ToString())
@@ -1474,6 +1591,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 5;
 		public override string TransliterationInHebrew => "Yaakov";
 		public override string NameInHebrew => "";
+
+		public override List<int> LastVerses => [27, 26, 18, 17, 20,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -1497,6 +1616,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Kepha Alef";
 		public override string NameInHebrew => "";
 
+		public override List<int> LastVerses => [25, 25, 22, 19, 14,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(FirstPeter, Chapter - 1, (Chapter - 1).ToString())
@@ -1518,6 +1639,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 3;
 		public override string TransliterationInHebrew => "Kepha Bet";
 		public override string NameInHebrew => "";
+
+		public override List<int> LastVerses => [21, 22, 18,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -1541,6 +1664,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Yochanan Alef";
 		public override string NameInHebrew => "";
 
+		public override List<int> LastVerses => [10, 29, 24, 21, 21,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(FirstJohn, Chapter - 1, (Chapter - 1).ToString())
@@ -1562,6 +1687,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 1;
 		public override string TransliterationInHebrew => "Yochanan Bet";
 		public override string NameInHebrew => "";
+		
+		public override List<int> LastVerses => [13,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
@@ -1585,6 +1712,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Yochanan Gimel";
 		public override string NameInHebrew => "";
 
+		public override List<int> LastVerses => [14,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(ThirdJohn, Chapter - 1, (Chapter - 1).ToString())
@@ -1607,6 +1736,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Yahudah";
 		public override string NameInHebrew => "";
 
+		public override List<int> LastVerses => [25,];
+
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1
 				? new BibleBookPrevNext(Jude, Chapter - 1, (Chapter - 1).ToString())
@@ -1628,6 +1759,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 22;
 		public override string TransliterationInHebrew => "Gilyahna";
 		public override string NameInHebrew => "";
+
+		public override List<int> LastVerses => [20, 29, 22, 11, 14, 17, 17, 13, 21, 11, 19, 17, 18, 20, 8, 21, 18, 24, 21, 15, 27, 21,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
 				=> Chapter != 1

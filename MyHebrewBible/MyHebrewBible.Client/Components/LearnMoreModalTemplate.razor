@@ -1,9 +1,9 @@
 ﻿@if (ModalIsNotShownToggle)
 {
-	<button type="button" class="btn btn-warning btn-md"
-					@onclick="() => ShowModal()">
-		<i class="fas fa-question"></i>
-	</button>
+	<button type="button" class="btn btn-outline-info btn-lg ms-3 px-2"
+						@onclick="() => ShowModal()">
+			<i class="fas fa-info"></i>
+		</button>
 }
 else
 {
@@ -25,12 +25,12 @@ else
 
 				</div>
 
-@* 				<div class="modal-footer bg-warning">
-					<button type="button" class="btn btn-primary" @onclick="CloseModal">
-						Cancel
-					</button>
-				</div>
- *@
+				@* 				<div class="modal-footer bg-warning">
+			<button type="button" class="btn btn-primary" @onclick="CloseModal">
+			Cancel
+			</button>
+			</div>
+			*@
 			</div>
 		</div>
 	</div>

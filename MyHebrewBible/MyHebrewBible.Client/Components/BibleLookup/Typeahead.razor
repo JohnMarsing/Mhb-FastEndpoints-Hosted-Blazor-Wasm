@@ -1,12 +1,6 @@
 ﻿@using MyHebrewBible.Client.Enums
 @using MyHebrewBible.Client.Layout
 
-@* [Flex | Grow and shrink](https://getbootstrap.com/docs/5.3/utilities/flex/#grow-and-shrink) *@
-@* [Flex | Auto margins](https://getbootstrap.com/docs/5.3/utilities/flex/#auto-margins) *@
-
-
-@* <TypeaheadDebug Msg="@_msg" BibleBookGottenFromParent="@BibleBookGottenFromParent" SelectedBook="@SelectedBook" ReturnedBookAndChapterFromChapterButtons="@ReturnedBookAndChapterFromChapterButtons" /> *@
-
 <div class="d-flex mb-3">
 	<div class="me-auto p-2">
 
@@ -50,14 +44,6 @@
 	</div>
 
 	<div class="p-1">
-		<HomeButton />
-	</div>
-
-	<div class="p-1">
-		<SitemapButton />
-	</div>
-
-	<div class="p-1">
 		<a href="/" class="btn btn-primary" title="Customize book chapter settings">
 			<i class="fas fa-cog"></i>
 		</a>
@@ -77,47 +63,54 @@
 	}
 }
 
+@if (ShowVerseButtons)
+{
+ 	<div class="d-flex mt-3">
+
+		 <VerseButtons VerseCount="VerseCount"
+			 ButtonsPerRow="ButtonsPerRow" 
+			 OnVerseFilterSelected="OnVerseSelected" />
+	</div>
+} 
+ 
+
 @code {
-	[Parameter, EditorRequired] public BookAndChapter? BookAndChapterTypeahead { get; set; }
 	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
-	[Parameter] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
+	[Parameter] public EventCallback<BookChapterVerseVM> OnBookAndChapterSelected { get; set; }
 
-	public BibleBook? BibleBookGottenFromParent { get; set; } // Only used for testing
+	public BookChapterVerseVM? CurrentBookChapterVerseVM { get; set; }
+
 	protected int ButtonsPerRow;
-	protected bool ShowChapterButtons = false; // true;
+	protected bool ShowChapterButtons = false; 
 	protected BibleBook? SelectedBook { get; set; }
+	protected int VerseCount { get; set; }
 
-	protected string _msg = string.Empty;
+	protected bool ShowVerseButtons = false;
 
 	protected override void OnParametersSet()
 	{
-		if (BookAndChapterTypeahead is not null && BookAndChapterTypeahead.BibleBook is not null)
-		{
-			_msg = $"Inside {nameof(OnParametersSet)}, setting BibleBookGottenFromParent and SelectedBook";
-			BibleBookGottenFromParent = BookAndChapterTypeahead!.BibleBook;
-			SelectedBook = BookAndChapterTypeahead!.BibleBook;
-		}
-
+		// if (BookAndChapterTypeahead is not null && BookAndChapterTypeahead.BibleBook is not null)
+		// {
+		// 	BibleBookGottenFromParent = BookAndChapterTypeahead!.BibleBook;
+		// 	SelectedBook = BookAndChapterTypeahead!.BibleBook;
+		// }
 		if (MediaQuery is not null) { SetMediaQuery(); }
 	}
 
-	private void SetMediaQuery()
+	private void OnChapterSelected(BookChapterVerseVM bookChapterVerseVM)
 	{
-		MediaQuery!
-		.When(MediaQuery.Xs).Then(() => ButtonsPerRow = 5)
-		.When(MediaQuery.Sm).Then(() => ButtonsPerRow = 10)
-		.When(MediaQuery.Md).Then(() => ButtonsPerRow = 15)
-		.When(MediaQuery.Lg).Then(() => ButtonsPerRow = 20)
-		.When(MediaQuery.Xl).Then(() => ButtonsPerRow = 25);
-
+		CurrentBookChapterVerseVM = bookChapterVerseVM;
+		ShowChapterButtons = false;
+		ShowVerseButtons = true;
+		VerseCount = bookChapterVerseVM.BibleBook!.LastVerses[bookChapterVerseVM.Chapter - 1];
 	}
 
-	//protected string? ReturnedBookAndChapterFromChapterButtons;
-	private void OnChapterSelected(BookAndChapter bookAndChapter)
+	private void OnVerseSelected(int verse)
 	{
 		ShowChapterButtons = false;
-		//ReturnedBookAndChapterFromChapterButtons = bookAndChapter.ToString();
-		OnBookAndChapterSelected.InvokeAsync(bookAndChapter);
+		ShowVerseButtons = false;
+		BookChapterVerseVM bookChapterVerseVM = new(CurrentBookChapterVerseVM!.BibleBook, CurrentBookChapterVerseVM.Chapter, verse);
+		OnBookAndChapterSelected.InvokeAsync(bookChapterVerseVM);
 	}
 
 	private async Task<IEnumerable<BibleBook>> SearchBibleBooks(string searchText)
@@ -131,5 +124,16 @@
 	{
 		ShowChapterButtons = true;
 		SelectedBook = result;
+	}
+
+	private void SetMediaQuery()
+	{
+		MediaQuery!
+		.When(MediaQuery.Xs).Then(() => ButtonsPerRow = 5)
+		.When(MediaQuery.Sm).Then(() => ButtonsPerRow = 10)
+		.When(MediaQuery.Md).Then(() => ButtonsPerRow = 15)
+		.When(MediaQuery.Lg).Then(() => ButtonsPerRow = 20)
+		.When(MediaQuery.Xl).Then(() => ButtonsPerRow = 25);
+
 	}
 }

@@ -7,7 +7,7 @@ public class BookChapterRequest
 	public long Chapter { get; set; }
 }
 
-public class GetBookChapter : Endpoint<BookChapterRequest, IEnumerable<BookChapter>>
+public class GetBookChapter : Endpoint<BookChapterRequest, IEnumerable<BibleVerse>>
 {
 	public override void Configure()
 	{
@@ -23,7 +23,7 @@ public class GetBookChapter : Endpoint<BookChapterRequest, IEnumerable<BookChapt
 
 	public override async Task HandleAsync(BookChapterRequest request, CancellationToken ct)
 	{
-		IEnumerable<BookChapter?> verses = await _db.GetBookChapter(request.BookID, request.Chapter);
+		IEnumerable<BibleVerse?> verses = await _db.GetBookChapter(request.BookID, request.Chapter);
 		await SendAsync(verses.ToList()!);
 	}
 }

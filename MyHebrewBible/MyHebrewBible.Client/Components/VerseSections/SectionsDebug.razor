@@ -1,0 +1,33 @@
+﻿<div class="card border-success mb-2">
+	<div class="card-header"><h6>@nameof(Sections)</h6></div>
+
+	<div class="card-body pb-0">
+		<div class="d-flex justify-content-start">
+			<div class="pe-3"><b>FocusScriptureId:</b><br /> @FocusScriptureId</div>
+			<div class="pe-3"><b>VerseRowCount:</b><br /> @VerseRowCount</div>
+			<div class="pe-3"><b>VerseNumber:</b><br /> @VerseNumber</div>
+			@*
+			<div class="pe-3"><b>TopRC:</b> @TopRC</div>
+			<div class="pe-3"><b>BottomRC:</b> @BottomRC</div>
+			@Strongs ?? 0
+
+			*@
+			<div class="pe-3"><b>Strongs:</b><br /> @Strongs </div>
+			<div class="pe-3"><b>Hebrew:</b><br /> <span class="hebrew16">@Hebrew</span></div>
+
+		</div>
+		@*Err: *@
+	</div>
+
+</div>
+
+
+@code {
+	[Parameter, EditorRequired] public long FocusScriptureId { get; set; }
+	[Parameter, EditorRequired] public long VerseRowCount { get; set; }
+	[Parameter, EditorRequired] public long VerseNumber { get; set; }
+	[Parameter] public long TopRC { get; set; }
+	[Parameter] public long BottomRC { get; set; }
+	[Parameter, EditorRequired] public long Strongs { get; set; }
+	[Parameter, EditorRequired] public string? Hebrew { get; set; }
+}

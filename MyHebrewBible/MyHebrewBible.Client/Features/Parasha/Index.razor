@@ -21,7 +21,7 @@
 			<h3 class="text-primary text-center"><b>Torah Verses</b> </h3>
 		</div>
 		<div class="card-body">
-			<VerseListParagraph VerseRangeDTO="TorahVerses" />
+			<VerseParagraph VerseParagraphRange="TorahVerses" />
 		</div>
 	</div>
 
@@ -36,7 +36,7 @@
 		@foreach (var item in HaftorahVerses)
 		{
 			<div class="card-body">
-				<VerseListParagraph VerseRangeDTO="item" />
+				<VerseParagraph VerseParagraphRange="item" />
 			</div>
 		}
 	</div>
@@ -51,7 +51,7 @@
 		@foreach (var item in BritVerses)
 		{
 			<div class="card-body">
-				<VerseListParagraph VerseRangeDTO="item" />
+				<VerseParagraph VerseParagraphRange="item" />
 			</div>
 		}
 	</div>
@@ -63,9 +63,9 @@
 
 	public Enums.Ahavta? CurrentAhvata { get; set; }
 
-	private VerseRangeDTO? TorahVerses;
-	private List<VerseRangeDTO>? HaftorahVerses;
-	private List<VerseRangeDTO>? BritVerses;
+	private VerseParagraphRange? TorahVerses;
+	private List<VerseParagraphRange>? HaftorahVerses;
+	private List<VerseParagraphRange>? BritVerses;
 
 	public TorahBookFilter? TorahBookFilter { get; set; }
 
@@ -78,7 +78,7 @@
 		}
 		else
 		{
-			TorahVerses = new VerseRangeDTO(
+			TorahVerses = new VerseParagraphRange(
 				CurrentAhvata.TorahVerse.BegId, CurrentAhvata.TorahVerse.EndId
 				, CurrentAhvata.TorahVerse.BibleBook.Title + CurrentAhvata.TorahVerse.ChapterVerse);
 
@@ -88,10 +88,10 @@
 			{
 				if (CurrentAhvata.HaftorahVerses.Any())
 				{
-					HaftorahVerses = new List<VerseRangeDTO>();
+					HaftorahVerses = new List<VerseParagraphRange>();
 					foreach (var item in CurrentAhvata.HaftorahVerses)
 					{
-						HaftorahVerses.Add(new VerseRangeDTO(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
+						HaftorahVerses.Add(new VerseParagraphRange(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
 					}
 				}
 			}
@@ -100,10 +100,10 @@
 			{
 				if (CurrentAhvata.BritVerses.Any())
 				{
-					BritVerses = new List<VerseRangeDTO>();
+					BritVerses = new List<VerseParagraphRange>();
 					foreach (var item in CurrentAhvata.BritVerses)
 					{
-						BritVerses.Add(new VerseRangeDTO(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
+						BritVerses.Add(new VerseParagraphRange(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
 					}
 				}
 			}
