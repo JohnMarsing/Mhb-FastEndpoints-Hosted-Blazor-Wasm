@@ -17,7 +17,7 @@
 }
 
 @code {
-	[Parameter, EditorRequired] public List<BookChapter>? TopVerses { get; set; }
+	[Parameter, EditorRequired] public List<BibleVerse>? TopVerses { get; set; }
 	[Parameter] public EventCallback<ScriptureIdAndVerseNumber> OnVerseSelected { get; set; }
 
 	private void ButtonClick(long scriptureId, long verse)

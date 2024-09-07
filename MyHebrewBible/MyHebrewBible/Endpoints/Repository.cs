@@ -13,11 +13,11 @@ public class Repository
 		_connectionFactory = connectionFactory;
 	}
 
-	public async Task<IEnumerable<BookChapter?>> GetBookChapter(long bookID, long chapter)
+	public async Task<IEnumerable<BibleVerse?>> GetBookChapter(long bookID, long chapter)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
 		Parms = new DynamicParameters(new { BookId = bookID, Chapter = chapter });
-		var verseList = await connection.QueryAsync<BookChapter>(@"
+		var verseList = await connection.QueryAsync<BibleVerse>(@"
 		SELECT ID, BCV, Verse, VerseOffset, KJV, DescH, DescD  
 		FROM Scripture 
 		WHERE BookID=@BookId and Chapter=@Chapter
@@ -25,7 +25,6 @@ public class Repository
 
 		return verseList;
 	}
-
 
   public async Task<IEnumerable<WordPart?>> GetWordParts(long scriptureID)
 	{
@@ -58,14 +57,14 @@ ORDER BY BegId
     return mitzvot;
   }
 
-  public async Task<IEnumerable<VerseList?>> GetVerseList(long begdId, long endId)
+  public async Task<IEnumerable<BibleVerse?>> GetVerseList(long begdId, long endId)
   {
     using var connection = await _connectionFactory.CreateConnectionAsync();
     Parms = new DynamicParameters(new { BegId = begdId, EndId = endId });
 
-    var versList = await connection.QueryAsync<VerseList>(@"
+    var versList = await connection.QueryAsync<BibleVerse>(@"
 
-SELECT ID, BCV, Verse, KJV, VerseOffset
+SELECT ID, BCV, Verse, KJV, VerseOffset, DescH, DescD
 FROM Scripture
 WHERE ID BETWEEN @BegId AND @EndId
 ORDER BY ID
@@ -73,7 +72,25 @@ ORDER BY ID
 		return versList;
   }
 
-  public async Task<IEnumerable<WordPart?>> GetWordPartsByStrongs(long scriptureID, long strongs)
+	public async Task<IEnumerable<BibleVerse?>> GetVerseListByBCV(long bookId, long chapter, long begVerse, long endVerse)
+	{
+		using var connection = await _connectionFactory.CreateConnectionAsync();
+		Parms = new DynamicParameters(new { BookId = bookId, Chapter = chapter, BegVerse = begVerse, EndVerse = endVerse });
+
+		//DECLARE  @BookId int=1,  @Chapter int=12,  @BegVerse int=2,  @EndVerse int=3
+		//ToDo: I don't really need DescH and DescD
+		var versList = await connection.QueryAsync<BibleVerse>(@"
+SELECT ID, BCV, Verse, KJV, VerseOffset, DescH, DescD
+FROM Scripture
+WHERE BookId=@BookId AND Chapter=@Chapter AND Verse BETWEEN @BegVerse AND @EndVerse
+ORDER BY ID
+", Parms);
+
+		return versList;
+	}
+
+
+	public async Task<IEnumerable<WordPart?>> GetWordPartsByStrongs(long scriptureID, long strongs)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
 		Parms = new DynamicParameters(new { ScriptureID = scriptureID, Strongs = strongs });

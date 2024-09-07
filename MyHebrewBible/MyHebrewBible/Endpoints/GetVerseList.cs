@@ -6,7 +6,7 @@ public class GetVerseListRequest
 	public long EndId { get; set; }
 }
 
-public class GetVerseList : Endpoint<GetVerseListRequest, IEnumerable<VerseList>>
+public class GetVerseList : Endpoint<GetVerseListRequest, IEnumerable<BibleVerse>>
 {
 	public override void Configure()
 	{
@@ -25,7 +25,7 @@ public class GetVerseList : Endpoint<GetVerseListRequest, IEnumerable<VerseList>
 
 	public override async Task HandleAsync(GetVerseListRequest request, CancellationToken ct)
 	{
-		IEnumerable<VerseList?> verses = await _db.GetVerseList(request.BegId, request.EndId);
+		IEnumerable<BibleVerse?> verses = await _db.GetVerseList(request.BegId, request.EndId);
 		await SendAsync(verses.ToList()!);
 	}
 }

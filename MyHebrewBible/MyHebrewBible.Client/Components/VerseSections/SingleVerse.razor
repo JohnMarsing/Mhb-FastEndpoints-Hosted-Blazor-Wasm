@@ -1,0 +1,37 @@
+﻿
+@if (VerseList is null)
+{
+	<p class="text-danger fs-3"><em>Could not load because <code>VerseList is null</code></em></p>
+}
+else
+{
+	if (!VerseList.Any())
+	{
+		<p class="text-danger fs-3"><em>Could not load because <code>VerseList</code> list is empty</em></p>
+	}
+	else
+	{
+		@foreach (var item in VerseList)
+		{
+			<p class="fs-5">
+
+				<a title="@item.BCV" @onclick="@(e => ButtonClick(item.ID, item.Verse))">
+					<sup class="btn btn-outline-primary py-0 px-1">
+						<b>@item.Verse</b>
+					</sup>
+				</a>
+				@((MarkupString)@item.KJV!)
+			</p>
+		}
+	}
+}
+
+@code {
+	[Parameter, EditorRequired] public List<BibleVerse>? VerseList { get; set; }
+	[Parameter] public EventCallback<ScriptureIdAndVerseNumber> OnVerseSelected { get; set; }
+
+	private void ButtonClick(long scriptureId, long verse)
+	{
+		OnVerseSelected.InvokeAsync(new ScriptureIdAndVerseNumber(scriptureId, verse));
+	}
+}

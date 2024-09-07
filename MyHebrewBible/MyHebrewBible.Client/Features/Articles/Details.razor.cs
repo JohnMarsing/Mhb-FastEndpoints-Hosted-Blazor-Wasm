@@ -13,7 +13,7 @@ public partial class Details
 	[Parameter, EditorRequired] public long ArticleId { get; set; }
 
 	protected Article? article;
-	private VerseRangeDTO? VerseRangeDTO; 
+	private VerseParagraphRange? VerseParagraphRange; 
 
 	protected bool TurnSpinnerOff = false;
 
@@ -37,7 +37,7 @@ public partial class Details
 		{
 			if (!String.IsNullOrEmpty(article.RelatedVersesHtml))
 			{
-				VerseRangeDTO = new VerseRangeDTO(article.PrimaryScriptureId, article.PrimaryScriptureId + article.ExtraVerses, article.RelatedVersesHtml);
+				VerseParagraphRange = new VerseParagraphRange(article.PrimaryScriptureId, article.PrimaryScriptureId + article.ExtraVerses, article.RelatedVersesHtml);
 			}
 
 			//Toast!.ShowInfo($"Article Id {ArticleId} FileNameNoExt: {article.FileNameNoExt}");

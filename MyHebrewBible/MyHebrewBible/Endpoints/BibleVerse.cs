@@ -1,6 +1,6 @@
 ﻿namespace MyHebrewBible.Endpoints;
 
-public class BookChapter
+public class BibleVerse
 {
 	public long ID { get; set; }
 	public string? BCV { get; set; }
