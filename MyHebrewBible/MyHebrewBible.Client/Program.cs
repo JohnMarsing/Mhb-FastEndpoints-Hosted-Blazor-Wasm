@@ -3,6 +3,7 @@ using Blazored.Toast;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MyHebrewBible.Client;
 using MyHebrewBible.Client.State;
+using MyHebrewBible.Client.State.VerseList;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -13,6 +14,8 @@ builder.Services.AddSingleton(
 
 
 builder.Services.AddScoped<IBookChapterState, BookChapterState>();
+builder.Services.AddScoped<IVerseListState, VerseListState>();
+
 builder.Services.AddBlazoredLocalStorage();
 
 builder.Services.AddBlazoredToast();  // Need this here and in the Server
