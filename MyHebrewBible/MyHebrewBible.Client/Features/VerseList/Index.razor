@@ -4,10 +4,11 @@
 @using MyHebrewBible.Client.Components.BibleLookup
 @using MyHebrewBible.Client.Components.VerseSections
 @using EnumCalledBy = MyHebrewBible.Client.Components.VerseSections.Enums.CalledBy
+@using MyHebrewBible.Client.State.VerseList
 
 @inject ILogger<Index>? Logger
-@* @inject IToastService? Toast *@
-@* @inject IBookChapterState? bookChapterState *@
+@inject IVerseListState? state
+@inject IToastService? Toast
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.VerseList" />
 
@@ -59,19 +60,35 @@
 
 @code {
 
+	public Header? CurrentHeader { get; set; }
+
 	public BookChapterVerseVM? CurrentVM { get; set; }
 
 	protected override void OnInitialized()
 	{
-		//base.OnInitialized();
 		Logger!.LogInformation("{Class}!{Method}", nameof(Index), nameof(OnInitialized));
+		try
+		{
+			/*
+			Header header = state!.GetHeader();
+			CurrentHeader = new BookAndChapter(BibleBook.FromValue(_state.BibleBookId), _state.Chapter);
+			*/
+			DetailRecord bcv = state!.GetBCV();
+			CurrentVM = new BookChapterVerseVM(BibleBook.FromValue(bcv.BibleBookId), bcv.Chapter, bcv.BegVerse);
+
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "VerseList!{Class}!{Method}", nameof(Index), nameof(OnInitialized));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnInitialized)}");
+		}
 	}
 
-	private void ReturnedBookChapterVerse(BookChapterVerseVM bookChapterVerseVM)  //async Task
+	private void ReturnedBookChapterVerse(BookChapterVerseVM vm)  //async Task
 	{
-		CurrentVM = bookChapterVerseVM!;
-		//ToDo Add VerseListState logic
-		//bookChapterState!.Update(new BibleBookIdAndChapter(CurrentBookAndChapter.BibleBook!.Value, CurrentBookAndChapter.Chapter));
+		CurrentVM = vm!;
+		//state!.UpdateHeader(new VerseListState(CurrentBookAndChapter.BibleBook!.Value, CurrentBookAndChapter.Chapter));
+		state!.UpdateBCV(new DetailRecord(vm.BibleBook, vm.Chapter, vm.Verse, vm.Verse, "Just Got Updated"));
 	}
 
 }
