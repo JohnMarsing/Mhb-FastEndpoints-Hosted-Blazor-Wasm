@@ -379,6 +379,24 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 		}
 	}
 
+	public string Haftorah
+	{
+		get
+		{
+			return HaftorahVerses is not null ? String.Join(", ", HaftorahVerses.Select(s => s.BibleBook.Name + " " + s.ChapterVerse)) : "";
+		}
+	}
+
+	public string Brit
+	{
+		get
+		{
+			return BritVerses is not null ? String.Join(", ", BritVerses.Select(s => s.BibleBook.Name + " " + s.ChapterVerse)) : "";
+		}
+	}
+
+
+
 	public string TorahAbrv // Gen 1:1-19
 	{
 		get

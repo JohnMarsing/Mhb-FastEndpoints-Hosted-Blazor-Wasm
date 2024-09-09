@@ -1,0 +1,25 @@
+﻿@using MyHebrewBible.Client.Features.Parasha.Enums
+
+<div class="card">
+
+	<div class="card-body pb-0">
+		<div class="d-flex justify-content-start">
+			<div class="pe-3 text-center"><b>Next Shabbat</b><br /><b>@Constants.GetNextShabbatDate().ToString(DateFormat.YYYY_MM_DD)</b></div>
+			<div class="pe-3 text-center"><b>Name</b><br /><i>@CurrentAhavta!.ParashaName</i></div>
+			<div class="pe-3 text-center"><b>Meaning</b><br />@CurrentAhavta!.Meaning</div>
+			<div class="pe-3 text-center">
+				<b>Ahavta <i class="fas fa-external-link-square-alt"></i></b><br />
+				@CurrentAhavta!.AhavtaURL
+				<a href="@CurrentAhavta.AhavtaURL"
+					 title="Ahavta URL [@CurrentAhavta.Value]" target="_blank">
+					<i class="fas fa-external-link-alt"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+@code {
+	[Parameter, EditorRequired] public Ahavta? CurrentAhavta { get; set; }
+}
