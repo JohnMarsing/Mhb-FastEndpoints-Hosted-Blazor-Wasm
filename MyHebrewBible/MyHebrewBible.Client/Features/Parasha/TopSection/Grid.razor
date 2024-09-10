@@ -28,14 +28,14 @@
 </div>
 
 @code {
-	IQueryable<Enums.Ahavta>? items; 
+	IQueryable<Enums.Triennial>? items; 
 
 	[Parameter, EditorRequired] public TorahBookFilter? TorahBookFilter { get; set; }
 
 
 	protected override void OnParametersSet()
 	{
-		items = Enums.Ahavta.List.Where(w => w.TorahBookFilter == TorahBookFilter!.Value).OrderBy(o => o.Date).AsQueryable();
+		items = Enums.Triennial.List.Where(w => w.TorahBookFilter == TorahBookFilter!.Value).OrderBy(o => o.Date).AsQueryable();
 	}
 
 }

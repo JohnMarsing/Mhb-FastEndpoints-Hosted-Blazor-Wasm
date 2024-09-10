@@ -2,6 +2,7 @@ using Blazored.LocalStorage;
 using Blazored.Toast;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MyHebrewBible.Client;
+using MyHebrewBible.Client.Features.Parasha.State;
 using MyHebrewBible.Client.State;
 using MyHebrewBible.Client.State.VerseList;
 
@@ -15,6 +16,7 @@ builder.Services.AddSingleton(
 
 builder.Services.AddScoped<IBookChapterState, BookChapterState>();
 builder.Services.AddScoped<IVerseListState, VerseListState>();
+builder.Services.AddParasha();
 
 builder.Services.AddBlazoredLocalStorage();
 

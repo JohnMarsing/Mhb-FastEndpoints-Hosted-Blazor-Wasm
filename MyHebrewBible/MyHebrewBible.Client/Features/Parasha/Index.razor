@@ -2,8 +2,11 @@
 
 @using MyHebrewBible.Client.Enums
 @using MyHebrewBible.Client.Features.Parasha.TopSection
+@using MyHebrewBible.Client.Features.Parasha.State
 
+@inject ILogger<Index>? Logger
 @inject IToastService? Toast
+@inject IParashaState? state
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.Parasha" BorderCSS="" />
 
@@ -28,19 +31,19 @@
 		}
 		else
 		{
-			<Header CurrentAhavta="CurrentAhavta" />
+			<Header CurrentReading="CurrentReading" />
 		}
 	</div>
 }
 
-@if (CurrentAhavta is not null)
+@if (CurrentReading is not null)
 {
 	<div class="card bg-light mb-3">
 		<div class="card-header">
 			<div class="d-flex justify-content-between">
 				<div>
 					<h3 class="@Enums.VerseGroup.Torah.HeaderColor"><b>@Enums.VerseGroup.Torah.Title</b> </h3>
-					<h6>@CurrentAhavta.Torah</h6>
+					<h6>@CurrentReading.Torah</h6>
 				</div>
 				<div>
 					<VerseGroupShowHideToggle ToggleValue="ToggleValueTorah"
@@ -59,7 +62,6 @@
 	</div>
 }
 
-
 @if (HaftorahVerses is not null && HaftorahVerses.Any())
 {
 	<div class="card bg-light mb-3">
@@ -68,7 +70,7 @@
 
 				<div>
 					<h3 class="@Enums.VerseGroup.Haftorah.HeaderColor"><b>@Enums.VerseGroup.Haftorah.Title</b></h3>
-					<h6>@CurrentAhavta!.Haftorah</h6>
+					<h6>@CurrentReading!.Haftorah</h6>
 				</div>
 
 				<div>
@@ -91,18 +93,17 @@
 	</div>
 }
 
-
 @if (BritVerses is not null && BritVerses.Any())
 {
 	<div class="card bg-light mb-3">
 		<div class="card-header">
 			<div class="d-flex justify-content-between">
-				
+
 				<div>
 					<h3 class="@Enums.VerseGroup.Brit.HeaderColor"><b>@Enums.VerseGroup.Brit.Title</b></h3>
-					<h6>@CurrentAhavta!.Brit</h6>
+					<h6>@CurrentReading!.Brit</h6>
 				</div>
-				
+
 				<div>
 					<VerseGroupShowHideToggle ToggleValue="ToggleValueBrit"
 																		VerseGroup="Enums.VerseGroup.Brit"
@@ -123,15 +124,13 @@
 	</div>
 }
 
-
-
 @code {
-	bool ToggleValueShowGrid = false;
-	bool ToggleValueTorah = false;
-	bool ToggleValueHaftorah = false;
-	bool ToggleValueBrit = false;
+	bool ToggleValueShowGrid;
+	bool ToggleValueTorah;
+	bool ToggleValueHaftorah;
+	bool ToggleValueBrit;
 
-	public Enums.Ahavta? CurrentAhavta { get; set; }
+	public Enums.Triennial? CurrentReading { get; set; }
 
 	private VerseParagraphRange? TorahVerses;
 	private List<VerseParagraphRange>? HaftorahVerses;
@@ -139,59 +138,96 @@
 
 	public TorahBookFilter? TorahBookFilter { get; set; }
 
-	protected override void OnInitialized()
+	protected override async Task OnInitializedAsync()
 	{
-		CurrentAhavta = Enums.Ahavta.List.Where(w => w.Date == Enums.Constants.GetNextShabbatDate()).SingleOrDefault();
-		if (CurrentAhavta is null)
+		try
 		{
-			Toast!.ShowWarning($"Current Ahavta is not found; inside {nameof(Index)}");
+			ToggleValueShowGrid = await state!.Get(Enums.LocalStorage.Grid);
+			ToggleValueTorah = await state!.Get(Enums.LocalStorage.Torah);
+			ToggleValueHaftorah = await state!.Get(Enums.LocalStorage.Haftorah);
+			ToggleValueBrit = await state!.Get(Enums.LocalStorage.Brit);
+
+			Logger!.LogInformation("{Class}!{Method}, G:{Grid}, T:{Torah}, H:{Haftorah}, B:{Brit}"
+				, nameof(Index), nameof(OnInitializedAsync)
+				, ToggleValueShowGrid, ToggleValueTorah, ToggleValueHaftorah, ToggleValueBrit);
+
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "Parasha!{Class}!{Method}", nameof(Index), nameof(OnInitialized));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnInitialized)}");
+		}
+
+		CurrentReading = Enums.Triennial.List.Where(w => w.Date == Enums.Constants.GetNextShabbatDate()).SingleOrDefault();
+		if (CurrentReading is null)
+		{
+			Logger!.LogWarning("{Class}!{Method}; CurrentReading is null"
+			, nameof(Index), nameof(OnInitialized));
+			Toast!.ShowWarning($"Current reading is not found; inside {nameof(Index)}");
 		}
 		else
 		{
-			TorahVerses = new VerseParagraphRange(
-				CurrentAhavta.TorahVerse.BegId, CurrentAhavta.TorahVerse.EndId
-				, CurrentAhavta.TorahVerse.BibleBook.Title + CurrentAhavta.TorahVerse.ChapterVerse);
-
-			TorahBookFilter = CurrentAhavta.TorahBookFilter;
-
-			if (CurrentAhavta.HaftorahVerses is not null)
-			{
-				if (CurrentAhavta.HaftorahVerses.Any())
-				{
-					HaftorahVerses = new List<VerseParagraphRange>();
-					foreach (var item in CurrentAhavta.HaftorahVerses)
-					{
-						HaftorahVerses.Add(new VerseParagraphRange(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
-					}
-				}
-			}
-
-			if (CurrentAhavta.BritVerses is not null)
-			{
-				if (CurrentAhavta.BritVerses.Any())
-				{
-					BritVerses = new List<VerseParagraphRange>();
-					foreach (var item in CurrentAhavta.BritVerses)
-					{
-						BritVerses.Add(new VerseParagraphRange(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
-					}
-				}
-			}
-
-
+			Populate();
 		}
+	}
+
+	private void Populate()
+	{
+		TorahVerses = new VerseParagraphRange(
+			CurrentReading!.TorahVerse.BegId, CurrentReading.TorahVerse.EndId
+			, CurrentReading.TorahVerse.BibleBook.Title + CurrentReading.TorahVerse.ChapterVerse);
+
+		TorahBookFilter = CurrentReading.TorahBookFilter;
+
+		if (CurrentReading.HaftorahVerses is not null)
+		{
+			if (CurrentReading.HaftorahVerses.Any())
+			{
+				HaftorahVerses = new List<VerseParagraphRange>();
+				foreach (var item in CurrentReading.HaftorahVerses)
+				{
+					HaftorahVerses.Add(new VerseParagraphRange(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
+				}
+			}
+		}
+
+		if (CurrentReading.BritVerses is not null)
+		{
+			if (CurrentReading.BritVerses.Any())
+			{
+				BritVerses = new List<VerseParagraphRange>();
+				foreach (var item in CurrentReading.BritVerses)
+				{
+					BritVerses.Add(new VerseParagraphRange(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
+				}
+			}
+		}
+
 	}
 
 	private void ReturnedHeaderToggle(bool headerToggle)
 	{
 		ToggleValueShowGrid = headerToggle;
+		state!.Update(headerToggle, Enums.LocalStorage.Grid);
 	}
 
 	private void ReturnedToggle(VerseGroupShowHideToggleVM vm)
 	{
 		vm.VerseGroup!
-		.When(Enums.VerseGroup.Torah).Then(() => ToggleValueTorah = vm.ToggleValue)
-		.When(Enums.VerseGroup.Haftorah).Then(() => ToggleValueHaftorah = vm.ToggleValue)
-		.When(Enums.VerseGroup.Brit).Then(() => ToggleValueBrit = vm.ToggleValue);
+		.When(Enums.VerseGroup.Torah).Then(() =>
+			{
+				ToggleValueTorah = vm.ToggleValue;
+				state!.Update(vm.ToggleValue, Enums.LocalStorage.Torah);
+			})
+		.When(Enums.VerseGroup.Haftorah).Then(() => 
+		{
+			ToggleValueHaftorah = vm.ToggleValue;
+			state!.Update(vm.ToggleValue, Enums.LocalStorage.Haftorah);
+		})
+		.When(Enums.VerseGroup.Brit).Then(() =>
+		{
+			ToggleValueBrit = vm.ToggleValue;
+			state!.Update(vm.ToggleValue, Enums.LocalStorage.Brit);
+		});
 	}
 }
