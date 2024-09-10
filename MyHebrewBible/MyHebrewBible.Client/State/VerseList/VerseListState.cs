@@ -40,7 +40,7 @@ public class VerseListState : IVerseListState
 
 	public Header GetHeader()
 	{
-		Logger!.LogInformation("{Class}!{MethodEvent}", nameof(VerseListState), nameof(GetHeader));
+		Logger!.LogInformation("{Class}!{Method}", nameof(VerseListState), nameof(GetHeader));
 		try
 		{
 			_header = localStorage!.GetItem<Header>(Key);
@@ -81,7 +81,7 @@ public class VerseListState : IVerseListState
 
 	public DetailRecord GetBCV()
 	{
-		Logger!.LogInformation("{Class}!{MethodEvent}", nameof(VerseListState), nameof(GetBCV));
+		Logger!.LogInformation("{Class}!{Method}", nameof(VerseListState), nameof(GetBCV));
 		try
 		{
 			_detailRecord = localStorage!.GetItem<DetailRecord>(KeyBCV);

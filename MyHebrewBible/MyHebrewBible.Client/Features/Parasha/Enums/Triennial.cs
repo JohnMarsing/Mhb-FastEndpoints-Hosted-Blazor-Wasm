@@ -4,7 +4,7 @@ using MyHebrewBible.Client.Enums;
 namespace MyHebrewBible.Client.Features.Parasha.Enums;
 
 
-public abstract class Ahavta : SmartEnum<Ahavta>
+public abstract class Triennial : SmartEnum<Triennial>
 {
 
 	#region Id's
@@ -172,167 +172,167 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 
 	#region  Declared Public Instances
 
-	public static readonly Ahavta Gen_01a = new Gen_01aSE();
-	public static readonly Ahavta Gen_01b = new Gen_01bSE();
-	public static readonly Ahavta Gen_02 = new Gen_02SE();
-	public static readonly Ahavta Gen_03a = new Gen_03aSE();
-	public static readonly Ahavta Gen_03b = new Gen_03bSE();
-	public static readonly Ahavta Gen_05 = new Gen_05SE();
-	public static readonly Ahavta Gen_06 = new Gen_06SE();
-	public static readonly Ahavta Gen_08a = new Gen_08aSE();
-	public static readonly Ahavta Gen_08b = new Gen_08bSE();
-	public static readonly Ahavta Gen_09 = new Gen_09SE();
-	public static readonly Ahavta Gen_11 = new Gen_11SE();
-	public static readonly Ahavta Gen_12 = new Gen_12SE();
-	public static readonly Ahavta Gen_14 = new Gen_14SE();
-	public static readonly Ahavta Gen_15 = new Gen_15SE();
-	public static readonly Ahavta Gen_16 = new Gen_16SE();
-	public static readonly Ahavta Gen_17 = new Gen_17SE();
-	public static readonly Ahavta Gen_18 = new Gen_18SE();
-	public static readonly Ahavta Gen_19 = new Gen_19SE();
-	public static readonly Ahavta Gen_20 = new Gen_20SE();
-	public static readonly Ahavta Gen_21 = new Gen_21SE();
-	public static readonly Ahavta Gen_22 = new Gen_22SE();
-	public static readonly Ahavta Gen_23 = new Gen_23SE();
-	public static readonly Ahavta Gen_24a = new Gen_24aSE();
-	public static readonly Ahavta Gen_24b = new Gen_24bSE();
-	public static readonly Ahavta Gen_25a = new Gen_25aSE();
-	public static readonly Ahavta Gen_25b = new Gen_25bSE();
-	public static readonly Ahavta Gen_26 = new Gen_26SE();
-	public static readonly Ahavta Gen_27a = new Gen_27aSE();
-	public static readonly Ahavta Gen_27b = new Gen_27bSE();
-	public static readonly Ahavta Gen_28 = new Gen_28SE();
-	public static readonly Ahavta Gen_29 = new Gen_29SE();
-	public static readonly Ahavta Gen_30 = new Gen_30SE();
-	public static readonly Ahavta Gen_31 = new Gen_31SE();
-	public static readonly Ahavta Gen_32 = new Gen_32SE();
-	public static readonly Ahavta Gen_33 = new Gen_33SE();
-	public static readonly Ahavta Gen_35 = new Gen_35SE();
-	public static readonly Ahavta Gen_37 = new Gen_37SE();
-	public static readonly Ahavta Gen_38 = new Gen_38SE();
-	public static readonly Ahavta Gen_39 = new Gen_39SE();
-	public static readonly Ahavta Gen_40 = new Gen_40SE();
-	public static readonly Ahavta Gen_41a = new Gen_41aSE();
-	public static readonly Ahavta Gen_41b = new Gen_41bSE();
-	public static readonly Ahavta Gen_42 = new Gen_42SE();
-	public static readonly Ahavta Gen_43 = new Gen_43SE();
-	public static readonly Ahavta Gen_44 = new Gen_44SE();
-	public static readonly Ahavta Gen_46 = new Gen_46SE();
-	public static readonly Ahavta Gen_48 = new Gen_48SE();
-	public static readonly Ahavta Gen_49 = new Gen_49SE();
-	public static readonly Ahavta Exo_01 = new Exo_01SE();
-	public static readonly Ahavta Exo_03 = new Exo_03SE();
-	public static readonly Ahavta Exo_04 = new Exo_04SE();
-	public static readonly Ahavta Exo_06 = new Exo_06SE();
-	public static readonly Ahavta Exo_07 = new Exo_07SE();
-	public static readonly Ahavta Exo_08 = new Exo_08SE();
-	public static readonly Ahavta Exo_10 = new Exo_10SE();
-	public static readonly Ahavta Exo_11 = new Exo_11SE();
-	public static readonly Ahavta Exo_12 = new Exo_12SE();
-	public static readonly Ahavta Exo_13a = new Exo_13aSE();
-	public static readonly Ahavta Exo_13b = new Exo_13bSE();
-	public static readonly Ahavta Exo_15 = new Exo_15SE();
-	public static readonly Ahavta Exo_16 = new Exo_16SE();
-	public static readonly Ahavta Exo_18 = new Exo_18SE();
-	public static readonly Ahavta Exo_19 = new Exo_19SE();
-	public static readonly Ahavta Exo_21 = new Exo_21SE();
-	public static readonly Ahavta Exo_22 = new Exo_22SE();
-	public static readonly Ahavta Exo_24 = new Exo_24SE();
-	public static readonly Ahavta Exo_25 = new Exo_25SE();
-	public static readonly Ahavta Exo_27a = new Exo_27aSE();
-	public static readonly Ahavta Exo_27b = new Exo_27bSE();
-	public static readonly Ahavta Exo_29 = new Exo_29SE();
-	public static readonly Ahavta Exo_30a = new Exo_30aSE();
-	public static readonly Ahavta Exo_30b = new Exo_30bSE();
-	public static readonly Ahavta Exo_31 = new Exo_31SE();
-	public static readonly Ahavta Exo_32 = new Exo_32SE();
-	public static readonly Ahavta Exo_34 = new Exo_34SE();
-	public static readonly Ahavta Exo_37 = new Exo_37SE();
-	public static readonly Ahavta Exo_38 = new Exo_38SE();
-	public static readonly Ahavta Exo_39 = new Exo_39SE();
-	public static readonly Ahavta Lev_01 = new Lev_01SE();
-	public static readonly Ahavta Lev_03 = new Lev_03SE();
-	public static readonly Ahavta Lev_04 = new Lev_04SE();
-	public static readonly Ahavta Lev_05 = new Lev_05SE();
-	public static readonly Ahavta Lev_06 = new Lev_06SE();
-	public static readonly Ahavta Lev_07 = new Lev_07SE();
-	public static readonly Ahavta Lev_08 = new Lev_08SE();
-	public static readonly Ahavta Lev_09 = new Lev_09SE();
-	public static readonly Ahavta Lev_12 = new Lev_12SE();
-	public static readonly Ahavta Lev_13 = new Lev_13SE();
-	public static readonly Ahavta Lev_14 = new Lev_14SE();
-	public static readonly Ahavta Lev_15 = new Lev_15SE();
-	public static readonly Ahavta Lev_16 = new Lev_16SE();
-	public static readonly Ahavta Lev_17 = new Lev_17SE();
-	public static readonly Ahavta Lev_18 = new Lev_18SE();
-	public static readonly Ahavta Lev_19 = new Lev_19SE();
-	public static readonly Ahavta Lev_21 = new Lev_21SE();
-	public static readonly Ahavta Lev_22 = new Lev_22SE();
-	public static readonly Ahavta Lev_24 = new Lev_24SE();
-	public static readonly Ahavta Lev_25a = new Lev_25aSE();
-	public static readonly Ahavta Lev_25b = new Lev_25bSE();
-	public static readonly Ahavta Lev_26 = new Lev_26SE();
-	public static readonly Ahavta Num_01 = new Num_01SE();
-	public static readonly Ahavta Num_02 = new Num_02SE();
-	public static readonly Ahavta Num_03 = new Num_03SE();
-	public static readonly Ahavta Num_04 = new Num_04SE();
-	public static readonly Ahavta Num_05 = new Num_05SE();
-	public static readonly Ahavta Num_06a = new Num_06aSE();
-	public static readonly Ahavta Num_06b = new Num_06bSE();
-	public static readonly Ahavta Num_08 = new Num_08SE();
-	public static readonly Ahavta Num_10 = new Num_10SE();
-	public static readonly Ahavta Num_11 = new Num_11SE();
-	public static readonly Ahavta Num_12 = new Num_12SE();
-	public static readonly Ahavta Num_13 = new Num_13SE();
-	public static readonly Ahavta Num_14 = new Num_14SE();
-	public static readonly Ahavta Num_15 = new Num_15SE();
-	public static readonly Ahavta Num_16 = new Num_16SE();
-	public static readonly Ahavta Num_17 = new Num_17SE();
-	public static readonly Ahavta Num_19 = new Num_19SE();
-	public static readonly Ahavta Num_20 = new Num_20SE();
-	public static readonly Ahavta Num_22 = new Num_22SE();
-	public static readonly Ahavta Num_23 = new Num_23SE();
-	public static readonly Ahavta Num_25 = new Num_25SE();
-	public static readonly Ahavta Num_26 = new Num_26SE();
-	public static readonly Ahavta Num_28 = new Num_28SE();
-	public static readonly Ahavta Num_30 = new Num_30SE();
-	public static readonly Ahavta Num_32 = new Num_32SE();
-	public static readonly Ahavta Num_33 = new Num_33SE();
-	public static readonly Ahavta Num_34 = new Num_34SE();
-	public static readonly Ahavta Num_35 = new Num_35SE();
-	public static readonly Ahavta Deu_01 = new Deu_01SE();
-	public static readonly Ahavta Deu_02 = new Deu_02SE();
-	public static readonly Ahavta Deu_03 = new Deu_03SE();
-	public static readonly Ahavta Deu_04 = new Deu_04SE();
-	public static readonly Ahavta Deu_05 = new Deu_05SE();
-	public static readonly Ahavta Deu_06 = new Deu_06SE();
-	public static readonly Ahavta Deu_08 = new Deu_08SE();
-	public static readonly Ahavta Deu_09 = new Deu_09SE();
-	public static readonly Ahavta Deu_10 = new Deu_10SE();
-	public static readonly Ahavta Deu_11 = new Deu_11SE();
-	public static readonly Ahavta Deu_12 = new Deu_12SE();
-	public static readonly Ahavta Deu_15 = new Deu_15SE();
-	public static readonly Ahavta Deu_16 = new Deu_16SE();
-	public static readonly Ahavta Deu_17 = new Deu_17SE();
-	public static readonly Ahavta Deu_18 = new Deu_18SE();
-	public static readonly Ahavta Deu_20 = new Deu_20SE();
-	public static readonly Ahavta Deu_21 = new Deu_21SE();
-	public static readonly Ahavta Deu_22 = new Deu_22SE();
-	public static readonly Ahavta Deu_23a = new Deu_23aSE();
-	public static readonly Ahavta Deu_23b = new Deu_23bSE();
-	public static readonly Ahavta Deu_24 = new Deu_24SE();
-	public static readonly Ahavta Deu_26 = new Deu_26SE();
-	public static readonly Ahavta Deu_28 = new Deu_28SE();
-	public static readonly Ahavta Deu_29 = new Deu_29SE();
-	public static readonly Ahavta Deu_30 = new Deu_30SE();
-	public static readonly Ahavta Deu_31 = new Deu_31SE();
-	public static readonly Ahavta Deu_32 = new Deu_32SE();
-	public static readonly Ahavta Deu_33 = new Deu_33SE();
-	public static readonly Ahavta Deu_34 = new Deu_34SE();
+	public static readonly Triennial Gen_01a = new Gen_01aSE();
+	public static readonly Triennial Gen_01b = new Gen_01bSE();
+	public static readonly Triennial Gen_02 = new Gen_02SE();
+	public static readonly Triennial Gen_03a = new Gen_03aSE();
+	public static readonly Triennial Gen_03b = new Gen_03bSE();
+	public static readonly Triennial Gen_05 = new Gen_05SE();
+	public static readonly Triennial Gen_06 = new Gen_06SE();
+	public static readonly Triennial Gen_08a = new Gen_08aSE();
+	public static readonly Triennial Gen_08b = new Gen_08bSE();
+	public static readonly Triennial Gen_09 = new Gen_09SE();
+	public static readonly Triennial Gen_11 = new Gen_11SE();
+	public static readonly Triennial Gen_12 = new Gen_12SE();
+	public static readonly Triennial Gen_14 = new Gen_14SE();
+	public static readonly Triennial Gen_15 = new Gen_15SE();
+	public static readonly Triennial Gen_16 = new Gen_16SE();
+	public static readonly Triennial Gen_17 = new Gen_17SE();
+	public static readonly Triennial Gen_18 = new Gen_18SE();
+	public static readonly Triennial Gen_19 = new Gen_19SE();
+	public static readonly Triennial Gen_20 = new Gen_20SE();
+	public static readonly Triennial Gen_21 = new Gen_21SE();
+	public static readonly Triennial Gen_22 = new Gen_22SE();
+	public static readonly Triennial Gen_23 = new Gen_23SE();
+	public static readonly Triennial Gen_24a = new Gen_24aSE();
+	public static readonly Triennial Gen_24b = new Gen_24bSE();
+	public static readonly Triennial Gen_25a = new Gen_25aSE();
+	public static readonly Triennial Gen_25b = new Gen_25bSE();
+	public static readonly Triennial Gen_26 = new Gen_26SE();
+	public static readonly Triennial Gen_27a = new Gen_27aSE();
+	public static readonly Triennial Gen_27b = new Gen_27bSE();
+	public static readonly Triennial Gen_28 = new Gen_28SE();
+	public static readonly Triennial Gen_29 = new Gen_29SE();
+	public static readonly Triennial Gen_30 = new Gen_30SE();
+	public static readonly Triennial Gen_31 = new Gen_31SE();
+	public static readonly Triennial Gen_32 = new Gen_32SE();
+	public static readonly Triennial Gen_33 = new Gen_33SE();
+	public static readonly Triennial Gen_35 = new Gen_35SE();
+	public static readonly Triennial Gen_37 = new Gen_37SE();
+	public static readonly Triennial Gen_38 = new Gen_38SE();
+	public static readonly Triennial Gen_39 = new Gen_39SE();
+	public static readonly Triennial Gen_40 = new Gen_40SE();
+	public static readonly Triennial Gen_41a = new Gen_41aSE();
+	public static readonly Triennial Gen_41b = new Gen_41bSE();
+	public static readonly Triennial Gen_42 = new Gen_42SE();
+	public static readonly Triennial Gen_43 = new Gen_43SE();
+	public static readonly Triennial Gen_44 = new Gen_44SE();
+	public static readonly Triennial Gen_46 = new Gen_46SE();
+	public static readonly Triennial Gen_48 = new Gen_48SE();
+	public static readonly Triennial Gen_49 = new Gen_49SE();
+	public static readonly Triennial Exo_01 = new Exo_01SE();
+	public static readonly Triennial Exo_03 = new Exo_03SE();
+	public static readonly Triennial Exo_04 = new Exo_04SE();
+	public static readonly Triennial Exo_06 = new Exo_06SE();
+	public static readonly Triennial Exo_07 = new Exo_07SE();
+	public static readonly Triennial Exo_08 = new Exo_08SE();
+	public static readonly Triennial Exo_10 = new Exo_10SE();
+	public static readonly Triennial Exo_11 = new Exo_11SE();
+	public static readonly Triennial Exo_12 = new Exo_12SE();
+	public static readonly Triennial Exo_13a = new Exo_13aSE();
+	public static readonly Triennial Exo_13b = new Exo_13bSE();
+	public static readonly Triennial Exo_15 = new Exo_15SE();
+	public static readonly Triennial Exo_16 = new Exo_16SE();
+	public static readonly Triennial Exo_18 = new Exo_18SE();
+	public static readonly Triennial Exo_19 = new Exo_19SE();
+	public static readonly Triennial Exo_21 = new Exo_21SE();
+	public static readonly Triennial Exo_22 = new Exo_22SE();
+	public static readonly Triennial Exo_24 = new Exo_24SE();
+	public static readonly Triennial Exo_25 = new Exo_25SE();
+	public static readonly Triennial Exo_27a = new Exo_27aSE();
+	public static readonly Triennial Exo_27b = new Exo_27bSE();
+	public static readonly Triennial Exo_29 = new Exo_29SE();
+	public static readonly Triennial Exo_30a = new Exo_30aSE();
+	public static readonly Triennial Exo_30b = new Exo_30bSE();
+	public static readonly Triennial Exo_31 = new Exo_31SE();
+	public static readonly Triennial Exo_32 = new Exo_32SE();
+	public static readonly Triennial Exo_34 = new Exo_34SE();
+	public static readonly Triennial Exo_37 = new Exo_37SE();
+	public static readonly Triennial Exo_38 = new Exo_38SE();
+	public static readonly Triennial Exo_39 = new Exo_39SE();
+	public static readonly Triennial Lev_01 = new Lev_01SE();
+	public static readonly Triennial Lev_03 = new Lev_03SE();
+	public static readonly Triennial Lev_04 = new Lev_04SE();
+	public static readonly Triennial Lev_05 = new Lev_05SE();
+	public static readonly Triennial Lev_06 = new Lev_06SE();
+	public static readonly Triennial Lev_07 = new Lev_07SE();
+	public static readonly Triennial Lev_08 = new Lev_08SE();
+	public static readonly Triennial Lev_09 = new Lev_09SE();
+	public static readonly Triennial Lev_12 = new Lev_12SE();
+	public static readonly Triennial Lev_13 = new Lev_13SE();
+	public static readonly Triennial Lev_14 = new Lev_14SE();
+	public static readonly Triennial Lev_15 = new Lev_15SE();
+	public static readonly Triennial Lev_16 = new Lev_16SE();
+	public static readonly Triennial Lev_17 = new Lev_17SE();
+	public static readonly Triennial Lev_18 = new Lev_18SE();
+	public static readonly Triennial Lev_19 = new Lev_19SE();
+	public static readonly Triennial Lev_21 = new Lev_21SE();
+	public static readonly Triennial Lev_22 = new Lev_22SE();
+	public static readonly Triennial Lev_24 = new Lev_24SE();
+	public static readonly Triennial Lev_25a = new Lev_25aSE();
+	public static readonly Triennial Lev_25b = new Lev_25bSE();
+	public static readonly Triennial Lev_26 = new Lev_26SE();
+	public static readonly Triennial Num_01 = new Num_01SE();
+	public static readonly Triennial Num_02 = new Num_02SE();
+	public static readonly Triennial Num_03 = new Num_03SE();
+	public static readonly Triennial Num_04 = new Num_04SE();
+	public static readonly Triennial Num_05 = new Num_05SE();
+	public static readonly Triennial Num_06a = new Num_06aSE();
+	public static readonly Triennial Num_06b = new Num_06bSE();
+	public static readonly Triennial Num_08 = new Num_08SE();
+	public static readonly Triennial Num_10 = new Num_10SE();
+	public static readonly Triennial Num_11 = new Num_11SE();
+	public static readonly Triennial Num_12 = new Num_12SE();
+	public static readonly Triennial Num_13 = new Num_13SE();
+	public static readonly Triennial Num_14 = new Num_14SE();
+	public static readonly Triennial Num_15 = new Num_15SE();
+	public static readonly Triennial Num_16 = new Num_16SE();
+	public static readonly Triennial Num_17 = new Num_17SE();
+	public static readonly Triennial Num_19 = new Num_19SE();
+	public static readonly Triennial Num_20 = new Num_20SE();
+	public static readonly Triennial Num_22 = new Num_22SE();
+	public static readonly Triennial Num_23 = new Num_23SE();
+	public static readonly Triennial Num_25 = new Num_25SE();
+	public static readonly Triennial Num_26 = new Num_26SE();
+	public static readonly Triennial Num_28 = new Num_28SE();
+	public static readonly Triennial Num_30 = new Num_30SE();
+	public static readonly Triennial Num_32 = new Num_32SE();
+	public static readonly Triennial Num_33 = new Num_33SE();
+	public static readonly Triennial Num_34 = new Num_34SE();
+	public static readonly Triennial Num_35 = new Num_35SE();
+	public static readonly Triennial Deu_01 = new Deu_01SE();
+	public static readonly Triennial Deu_02 = new Deu_02SE();
+	public static readonly Triennial Deu_03 = new Deu_03SE();
+	public static readonly Triennial Deu_04 = new Deu_04SE();
+	public static readonly Triennial Deu_05 = new Deu_05SE();
+	public static readonly Triennial Deu_06 = new Deu_06SE();
+	public static readonly Triennial Deu_08 = new Deu_08SE();
+	public static readonly Triennial Deu_09 = new Deu_09SE();
+	public static readonly Triennial Deu_10 = new Deu_10SE();
+	public static readonly Triennial Deu_11 = new Deu_11SE();
+	public static readonly Triennial Deu_12 = new Deu_12SE();
+	public static readonly Triennial Deu_15 = new Deu_15SE();
+	public static readonly Triennial Deu_16 = new Deu_16SE();
+	public static readonly Triennial Deu_17 = new Deu_17SE();
+	public static readonly Triennial Deu_18 = new Deu_18SE();
+	public static readonly Triennial Deu_20 = new Deu_20SE();
+	public static readonly Triennial Deu_21 = new Deu_21SE();
+	public static readonly Triennial Deu_22 = new Deu_22SE();
+	public static readonly Triennial Deu_23a = new Deu_23aSE();
+	public static readonly Triennial Deu_23b = new Deu_23bSE();
+	public static readonly Triennial Deu_24 = new Deu_24SE();
+	public static readonly Triennial Deu_26 = new Deu_26SE();
+	public static readonly Triennial Deu_28 = new Deu_28SE();
+	public static readonly Triennial Deu_29 = new Deu_29SE();
+	public static readonly Triennial Deu_30 = new Deu_30SE();
+	public static readonly Triennial Deu_31 = new Deu_31SE();
+	public static readonly Triennial Deu_32 = new Deu_32SE();
+	public static readonly Triennial Deu_33 = new Deu_33SE();
+	public static readonly Triennial Deu_34 = new Deu_34SE();
 
 	#endregion
 
-	private Ahavta(string name, int value) : base(name, value) { } // Constructor
+	private Triennial(string name, int value) : base(name, value) { } // Constructor
 
 
 	#region Extra Fields
@@ -408,7 +408,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 	#endregion
 
 	#region Private Instantiation
-	private sealed class Gen_01aSE : Ahavta
+	private sealed class Gen_01aSE : Triennial
 	{
 		public Gen_01aSE() : base($"{nameof(Id.Gen_01a)}", Id.Gen_01a) { }
 		public override string TriNum => "1.1";
@@ -432,7 +432,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			,     new VerseRange(BibleBook.Revelation, "22:6-21", 31087, 31102),
 		];
 	}
-	private sealed class Gen_01bSE : Ahavta
+	private sealed class Gen_01bSE : Triennial
 	{
 		public Gen_01bSE() : base($"{nameof(Id.Gen_01b)}", Id.Gen_01b) { }
 		public override string TriNum => "1.2";
@@ -447,7 +447,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 
 		public override List<VerseRange>? BritVerses => null;
 	}
-	private sealed class Gen_02SE : Ahavta
+	private sealed class Gen_02SE : Triennial
 	{
 		public Gen_02SE() : base($"{nameof(Id.Gen_02)}", Id.Gen_02) { }
 		public override string TriNum => "1.3";
@@ -468,7 +468,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "1:6-28", 26051, 26073),     new VerseRange(BibleBook.Romans, "5:12-21", 28060, 28069),    new VerseRange(BibleBook.Hebrews, "11:1-7", 30174, 30180),
 		];
 	}
-	private sealed class Gen_03aSE : Ahavta
+	private sealed class Gen_03aSE : Triennial
 	{
 		public Gen_03aSE() : base($"{nameof(Id.Gen_03a)}", Id.Gen_03a) { }
 		public override string TriNum => "1.4";
@@ -483,7 +483,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 
 		public override List<VerseRange>? BritVerses => null;
 	}
-	private sealed class Gen_03bSE : Ahavta
+	private sealed class Gen_03bSE : Triennial
 	{
 		public Gen_03bSE() : base($"{nameof(Id.Gen_03b)}", Id.Gen_03b) { }
 		public override string TriNum => "1.5";
@@ -504,7 +504,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Luke, "1:24", 24918, 24918),     new VerseRange(BibleBook.Luke, "2:39-41", 25013, 25015),    new VerseRange(BibleBook.John, "2:23", 26119, 26119),
 		];
 	}
-	private sealed class Gen_05SE : Ahavta
+	private sealed class Gen_05SE : Triennial
 	{
 		public Gen_05SE() : base($"{nameof(Id.Gen_05)}", Id.Gen_05) { }
 		public override string TriNum => "1.6";
@@ -525,7 +525,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "1:11-23", 26056, 26068),
 		];
 	}
-	private sealed class Gen_06SE : Ahavta
+	private sealed class Gen_06SE : Triennial
 	{
 		public Gen_06SE() : base($"{nameof(Id.Gen_06)}", Id.Gen_06) { }
 		public override string TriNum => "2.1";
@@ -546,7 +546,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "24:4-14", 23962, 23972),     new VerseRange(BibleBook.John, "1:24-34", 26069, 26079),
 		];
 	}
-	private sealed class Gen_08aSE : Ahavta
+	private sealed class Gen_08aSE : Triennial
 	{
 		public Gen_08aSE() : base($"{nameof(Id.Gen_08a)}", Id.Gen_08a) { }
 		public override string TriNum => "2.2";
@@ -567,7 +567,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Acts, "1:1-14", 26925, 26938),     new VerseRange(BibleBook.FirstPeter, "3:20", 30445, 30445),     new VerseRange(BibleBook.Revelation, "1:9-20", 30707, 30718),
 		];
 	}
-	private sealed class Gen_08bSE : Ahavta
+	private sealed class Gen_08bSE : Triennial
 	{
 		public Gen_08bSE() : base($"{nameof(Id.Gen_08b)}", Id.Gen_08b) { }
 		public override string TriNum => "2.3";
@@ -588,7 +588,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "24:4-14", 23962, 23972),     new VerseRange(BibleBook.SecondTimothy, "2:8-19", 29836, 29847),
 		];
 	}
-	private sealed class Gen_09SE : Ahavta
+	private sealed class Gen_09SE : Triennial
 	{
 		public Gen_09SE() : base($"{nameof(Id.Gen_09)}", Id.Gen_09) { }
 		public override string TriNum => "2.4";
@@ -609,7 +609,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Acts, "17:26-28", 27550, 27552),     new VerseRange(BibleBook.Revelation, "5", 30781, 30794),
 		];
 	}
-	private sealed class Gen_11SE : Ahavta
+	private sealed class Gen_11SE : Triennial
 	{
 		public Gen_11SE() : base($"{nameof(Id.Gen_11)}", Id.Gen_11) { }
 		public override string TriNum => "2.5";
@@ -630,7 +630,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.FirstCorinthians, "14:20-33", 28699, 28712),
 		];
 	}
-	private sealed class Gen_12SE : Ahavta
+	private sealed class Gen_12SE : Triennial
 	{
 		public Gen_12SE() : base($"{nameof(Id.Gen_12)}", Id.Gen_12) { }
 		public override string TriNum => "3.1";
@@ -651,7 +651,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Galatians, "2:20", 29102, 29102),    new VerseRange(BibleBook.SecondTimothy, "2:11", 29839, 29839),    new VerseRange(BibleBook.Hebrews, "11:1-10", 30174, 30183),
 		];
 	}
-	private sealed class Gen_14SE : Ahavta
+	private sealed class Gen_14SE : Triennial
 	{
 		public Gen_14SE() : base($"{nameof(Id.Gen_14)}", Id.Gen_14) { }
 		public override string TriNum => "3.2";
@@ -672,7 +672,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Hebrews, "7:1-19", 30066, 30084),
 		];
 	}
-	private sealed class Gen_15SE : Ahavta
+	private sealed class Gen_15SE : Triennial
 	{
 		public Gen_15SE() : base($"{nameof(Id.Gen_15)}", Id.Gen_15) { }
 		public override string TriNum => "3.3";
@@ -693,7 +693,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Romans, "4:1-9", 28024, 28032),
 		];
 	}
-	private sealed class Gen_16SE : Ahavta
+	private sealed class Gen_16SE : Triennial
 	{
 		public Gen_16SE() : base($"{nameof(Id.Gen_16)}", Id.Gen_16) { }
 		public override string TriNum => "3.4";
@@ -714,7 +714,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Galatians, "4:21-31", 29153, 29163),
 		];
 	}
-	private sealed class Gen_17SE : Ahavta
+	private sealed class Gen_17SE : Triennial
 	{
 		public Gen_17SE() : base($"{nameof(Id.Gen_17)}", Id.Gen_17) { }
 		public override string TriNum => "3.5";
@@ -735,7 +735,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Romans, "4:10-25", 28033, 28048),
 		];
 	}
-	private sealed class Gen_18SE : Ahavta
+	private sealed class Gen_18SE : Triennial
 	{
 		public Gen_18SE() : base($"{nameof(Id.Gen_18)}", Id.Gen_18) { }
 		public override string TriNum => "4.1";
@@ -756,7 +756,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Luke, "8:40-56", 25286, 25302),    new VerseRange(BibleBook.Hebrews, "11:8-18", 30181, 30191),
 		];
 	}
-	private sealed class Gen_19SE : Ahavta
+	private sealed class Gen_19SE : Triennial
 	{
 		public Gen_19SE() : base($"{nameof(Id.Gen_19)}", Id.Gen_19) { }
 		public override string TriNum => "4.2";
@@ -777,7 +777,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Luke, "17:20-37", 25672, 25689),
 		];
 	}
-	private sealed class Gen_20SE : Ahavta
+	private sealed class Gen_20SE : Triennial
 	{
 		public Gen_20SE() : base($"{nameof(Id.Gen_20)}", Id.Gen_20) { }
 		public override string TriNum => "4.3";
@@ -798,7 +798,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "8:1-13", 23347, 23359),    new VerseRange(BibleBook.FirstCorinthians, "7:1-2", 28489, 28490),    new VerseRange(BibleBook.Galatians, "3:15-29", 29118, 29132),
 		];
 	}
-	private sealed class Gen_21SE : Ahavta
+	private sealed class Gen_21SE : Triennial
 	{
 		public Gen_21SE() : base($"{nameof(Id.Gen_21)}", Id.Gen_21) { }
 		public override string TriNum => "4.4";
@@ -819,7 +819,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "1:18-25", 23163, 23170),     new VerseRange(BibleBook.Hebrews, "11:11", 30184, 30184),
 		];
 	}
-	private sealed class Gen_22SE : Ahavta
+	private sealed class Gen_22SE : Triennial
 	{
 		public Gen_22SE() : base($"{nameof(Id.Gen_22)}", Id.Gen_22) { }
 		public override string TriNum => "4.5";
@@ -840,7 +840,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "27:27-66", 24157, 24196),    new VerseRange(BibleBook.John, "19:16-17", 26842, 26843),
 		];
 	}
-	private sealed class Gen_23SE : Ahavta
+	private sealed class Gen_23SE : Triennial
 	{
 		public Gen_23SE() : base($"{nameof(Id.Gen_23)}", Id.Gen_23) { }
 		public override string TriNum => "5.1";
@@ -861,7 +861,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "19:41", 26867, 26867),    new VerseRange(BibleBook.Acts, "7:1-18", 27118, 27135),     new VerseRange(BibleBook.FirstCorinthians, "15:50-57", 28769, 28776),
 		];
 	}
-	private sealed class Gen_24aSE : Ahavta
+	private sealed class Gen_24aSE : Triennial
 	{
 		public Gen_24aSE() : base($"{nameof(Id.Gen_24a)}", Id.Gen_24a) { }
 		public override string TriNum => "5.2";
@@ -882,7 +882,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "4:7-15", 26164, 26172),     new VerseRange(BibleBook.Ephesians, "5:15-33", 29320, 29338),
 		];
 	}
-	private sealed class Gen_24bSE : Ahavta
+	private sealed class Gen_24bSE : Triennial
 	{
 		public Gen_24bSE() : base($"{nameof(Id.Gen_24b)}", Id.Gen_24b) { }
 		public override string TriNum => "5.3";
@@ -903,7 +903,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.James, "4:13-17", 30351, 30355),
 		];
 	}
-	private sealed class Gen_25aSE : Ahavta
+	private sealed class Gen_25aSE : Triennial
 	{
 		public Gen_25aSE() : base($"{nameof(Id.Gen_25a)}", Id.Gen_25a) { }
 		public override string TriNum => "5.4";
@@ -924,7 +924,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Romans, "7", 28093, 28117),
 		];
 	}
-	private sealed class Gen_25bSE : Ahavta
+	private sealed class Gen_25bSE : Triennial
 	{
 		public Gen_25bSE() : base($"{nameof(Id.Gen_25b)}", Id.Gen_25b) { }
 		public override string TriNum => "6.1";
@@ -945,7 +945,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Romans, "9:9-14", 28165, 28170),     new VerseRange(BibleBook.Hebrews, "12:14-29", 30227, 30242),
 		];
 	}
-	private sealed class Gen_26SE : Ahavta
+	private sealed class Gen_26SE : Triennial
 	{
 		public Gen_26SE() : base($"{nameof(Id.Gen_26)}", Id.Gen_26) { }
 		public override string TriNum => "6.2";
@@ -966,7 +966,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Luke, "16:1-15", 25622, 25636),    new VerseRange(BibleBook.Romans, "9:1-8", 28157, 28164),
 		];
 	}
-	private sealed class Gen_27aSE : Ahavta
+	private sealed class Gen_27aSE : Triennial
 	{
 		public Gen_27aSE() : base($"{nameof(Id.Gen_27a)}", Id.Gen_27a) { }
 		public override string TriNum => "6.3";
@@ -987,7 +987,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Hebrews, "2:14-18", 29992, 29996),     new VerseRange(BibleBook.Hebrews, "11:20", 30193, 30193),
 		];
 	}
-	private sealed class Gen_27bSE : Ahavta
+	private sealed class Gen_27bSE : Triennial
 	{
 		public Gen_27bSE() : base($"{nameof(Id.Gen_27b)}", Id.Gen_27b) { }
 		public override string TriNum => "6.4";
@@ -1008,7 +1008,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Romans, "10:20-11:36", 28209, 28246),
 		];
 	}
-	private sealed class Gen_28SE : Ahavta
+	private sealed class Gen_28SE : Triennial
 	{
 		public Gen_28SE() : base($"{nameof(Id.Gen_28)}", Id.Gen_28) { }
 		public override string TriNum => "7.1";
@@ -1029,7 +1029,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "9:18-19", 23398, 23399),     new VerseRange(BibleBook.Luke, "2:1-31", 24975, 25005),     new VerseRange(BibleBook.Ephesians, "6:5-9", 29343, 29347),
 		];
 	}
-	private sealed class Gen_29SE : Ahavta
+	private sealed class Gen_29SE : Triennial
 	{
 		public Gen_29SE() : base($"{nameof(Id.Gen_29)}", Id.Gen_29) { }
 		public override string TriNum => "7.2";
@@ -1050,7 +1050,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Romans, "11:25-36", 28235, 28246),     new VerseRange(BibleBook.Revelation, "19", 31019, 31039),
 		];
 	}
-	private sealed class Gen_30SE : Ahavta
+	private sealed class Gen_30SE : Triennial
 	{
 		public Gen_30SE() : base($"{nameof(Id.Gen_30)}", Id.Gen_30) { }
 		public override string TriNum => "7.3";
@@ -1071,7 +1071,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "2:13", 23183, 23183),    new VerseRange(BibleBook.Acts, "13:16-41", 27379, 27404),     new VerseRange(BibleBook.Revelation, "20:4-15", 31043, 31054),
 		];
 	}
-	private sealed class Gen_31SE : Ahavta
+	private sealed class Gen_31SE : Triennial
 	{
 		public Gen_31SE() : base($"{nameof(Id.Gen_31)}", Id.Gen_31) { }
 		public override string TriNum => "7.4";
@@ -1092,7 +1092,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "1:24-28", 26069, 26073),    new VerseRange(BibleBook.James, "4:1-12", 30339, 30350),
 		];
 	}
-	private sealed class Gen_32SE : Ahavta
+	private sealed class Gen_32SE : Triennial
 	{
 		public Gen_32SE() : base($"{nameof(Id.Gen_32)}", Id.Gen_32) { }
 		public override string TriNum => "8.1";
@@ -1113,7 +1113,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.James, "1:1-12", 30268, 30279),
 		];
 	}
-	private sealed class Gen_33SE : Ahavta
+	private sealed class Gen_33SE : Triennial
 	{
 		public Gen_33SE() : base($"{nameof(Id.Gen_33)}", Id.Gen_33) { }
 		public override string TriNum => "8.2";
@@ -1134,7 +1134,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Revelation, "22:8-21", 31089, 31102),
 		];
 	}
-	private sealed class Gen_35SE : Ahavta
+	private sealed class Gen_35SE : Triennial
 	{
 		public Gen_35SE() : base($"{nameof(Id.Gen_35)}", Id.Gen_35) { }
 		public override string TriNum => "8.3";
@@ -1155,7 +1155,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "5:1-12", 23236, 23247),
 		];
 	}
-	private sealed class Gen_37SE : Ahavta
+	private sealed class Gen_37SE : Triennial
 	{
 		public Gen_37SE() : base($"{nameof(Id.Gen_37)}", Id.Gen_37) { }
 		public override string TriNum => "9.1";
@@ -1176,7 +1176,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "19:1-20:10", 26827, 26878),
 		];
 	}
-	private sealed class Gen_38SE : Ahavta
+	private sealed class Gen_38SE : Triennial
 	{
 		public Gen_38SE() : base($"{nameof(Id.Gen_38)}", Id.Gen_38) { }
 		public override string TriNum => "9.2";
@@ -1197,7 +1197,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Romans, "9:22-29", 28178, 28185),
 		];
 	}
-	private sealed class Gen_39SE : Ahavta
+	private sealed class Gen_39SE : Triennial
 	{
 		public Gen_39SE() : base($"{nameof(Id.Gen_39)}", Id.Gen_39) { }
 		public override string TriNum => "9.3";
@@ -1218,7 +1218,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Acts, "7:9-37", 27126, 27154),
 		];
 	}
-	private sealed class Gen_40SE : Ahavta
+	private sealed class Gen_40SE : Triennial
 	{
 		public Gen_40SE() : base($"{nameof(Id.Gen_40)}", Id.Gen_40) { }
 		public override string TriNum => "9.4";
@@ -1239,7 +1239,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.SecondCorinthians, "9:6-15", 28963, 28972),
 		];
 	}
-	private sealed class Gen_41aSE : Ahavta
+	private sealed class Gen_41aSE : Triennial
 	{
 		public Gen_41aSE() : base($"{nameof(Id.Gen_41a)}", Id.Gen_41a) { }
 		public override string TriNum => "10.1";
@@ -1260,7 +1260,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "2", 23171, 23193),
 		];
 	}
-	private sealed class Gen_41bSE : Ahavta
+	private sealed class Gen_41bSE : Triennial
 	{
 		public Gen_41bSE() : base($"{nameof(Id.Gen_41b)}", Id.Gen_41b) { }
 		public override string TriNum => "10.2";
@@ -1281,7 +1281,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Acts, "7:1-19", 27118, 27136),
 		];
 	}
-	private sealed class Gen_42SE : Ahavta
+	private sealed class Gen_42SE : Triennial
 	{
 		public Gen_42SE() : base($"{nameof(Id.Gen_42)}", Id.Gen_42) { }
 		public override string TriNum => "10.3";
@@ -1302,7 +1302,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Luke, "1:68-79", 24962, 24973),
 		];
 	}
-	private sealed class Gen_43SE : Ahavta
+	private sealed class Gen_43SE : Triennial
 	{
 		public Gen_43SE() : base($"{nameof(Id.Gen_43)}", Id.Gen_43) { }
 		public override string TriNum => "10.4";
@@ -1323,7 +1323,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Luke, "19:37-48", 25769, 25780),
 		];
 	}
-	private sealed class Gen_44SE : Ahavta
+	private sealed class Gen_44SE : Triennial
 	{
 		public Gen_44SE() : base($"{nameof(Id.Gen_44)}", Id.Gen_44) { }
 		public override string TriNum => "11.1";
@@ -1344,7 +1344,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Acts, "2:23", 26973, 26973),     new VerseRange(BibleBook.Acts, "2:36", 26986, 26986),     new VerseRange(BibleBook.Revelation, "12:1-6", 30893, 30898),
 		];
 	}
-	private sealed class Gen_46SE : Ahavta
+	private sealed class Gen_46SE : Triennial
 	{
 		public Gen_46SE() : base($"{nameof(Id.Gen_46)}", Id.Gen_46) { }
 		public override string TriNum => "11.2";
@@ -1365,7 +1365,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Revelation, "21:1-10", 31055, 31064),    new VerseRange(BibleBook.Revelation, "22:1-10", 31082, 31091),
 		];
 	}
-	private sealed class Gen_48SE : Ahavta
+	private sealed class Gen_48SE : Triennial
 	{
 		public Gen_48SE() : base($"{nameof(Id.Gen_48)}", Id.Gen_48) { }
 		public override string TriNum => "12.1";
@@ -1386,7 +1386,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "19:39-20:9", 26865, 26877),
 		];
 	}
-	private sealed class Gen_49SE : Ahavta
+	private sealed class Gen_49SE : Triennial
 	{
 		public Gen_49SE() : base($"{nameof(Id.Gen_49)}", Id.Gen_49) { }
 		public override string TriNum => "12.2";
@@ -1407,7 +1407,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "21:12-19", 26911, 26918),
 		];
 	}
-	private sealed class Exo_01SE : Ahavta
+	private sealed class Exo_01SE : Triennial
 	{
 		public Exo_01SE() : base($"{nameof(Id.Exo_01)}", Id.Exo_01) { }
 		public override string TriNum => "13.1";
@@ -1428,7 +1428,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Acts, "7:17-29", 27134, 27146),    new VerseRange(BibleBook.SecondCorinthians, "6:1-10", 28900, 28909),
 		];
 	}
-	private sealed class Exo_03SE : Ahavta
+	private sealed class Exo_03SE : Triennial
 	{
 		public Exo_03SE() : base($"{nameof(Id.Exo_03)}", Id.Exo_03) { }
 		public override string TriNum => "13.2";
@@ -1449,7 +1449,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "12:26", 23516, 23516),     new VerseRange(BibleBook.Luke, "20:37", 25817, 25817),    new VerseRange(BibleBook.Acts, "7:30", 27147, 27147),
 		];
 	}
-	private sealed class Exo_04SE : Ahavta
+	private sealed class Exo_04SE : Triennial
 	{
 		public Exo_04SE() : base($"{nameof(Id.Exo_04)}", Id.Exo_04) { }
 		public override string TriNum => "13.3";
@@ -1470,7 +1470,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "8:26-59", 26408, 26441),
 		];
 	}
-	private sealed class Exo_06SE : Ahavta
+	private sealed class Exo_06SE : Triennial
 	{
 		public Exo_06SE() : base($"{nameof(Id.Exo_06)}", Id.Exo_06) { }
 		public override string TriNum => "14.1";
@@ -1491,7 +1491,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.ThirdJohn, "1:1-7", 30660, 30666),
 		];
 	}
-	private sealed class Exo_07SE : Ahavta
+	private sealed class Exo_07SE : Triennial
 	{
 		public Exo_07SE() : base($"{nameof(Id.Exo_07)}", Id.Exo_07) { }
 		public override string TriNum => "14.2";
@@ -1512,7 +1512,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Revelation, "16:1-17", 30956, 30972),
 		];
 	}
-	private sealed class Exo_08SE : Ahavta
+	private sealed class Exo_08SE : Triennial
 	{
 		public Exo_08SE() : base($"{nameof(Id.Exo_08)}", Id.Exo_08) { }
 		public override string TriNum => "14.3";
@@ -1533,7 +1533,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Luke, "11:20", 25426, 25426),    new VerseRange(BibleBook.John, "11:47-53", 26571, 26577),     new VerseRange(BibleBook.Revelation, "8:1-9:6", 30829, 30847),
 		];
 	}
-	private sealed class Exo_10SE : Ahavta
+	private sealed class Exo_10SE : Triennial
 	{
 		public Exo_10SE() : base($"{nameof(Id.Exo_10)}", Id.Exo_10) { }
 		public override string TriNum => "15.1";
@@ -1554,7 +1554,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "24:29-44", 23987, 24002),    new VerseRange(BibleBook.Matthew, "25:31", 24040, 24040),     new VerseRange(BibleBook.Matthew, "26:30", 24085, 24085),
 		];
 	}
-	private sealed class Exo_11SE : Ahavta
+	private sealed class Exo_11SE : Triennial
 	{
 		public Exo_11SE() : base($"{nameof(Id.Exo_11)}", Id.Exo_11) { }
 		public override string TriNum => "15.2";
@@ -1575,7 +1575,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "3:13-25", 26134, 26146),
 		];
 	}
-	private sealed class Exo_12SE : Ahavta
+	private sealed class Exo_12SE : Triennial
 	{
 		public Exo_12SE() : base($"{nameof(Id.Exo_12)}", Id.Exo_12) { }
 		public override string TriNum => "15.3";
@@ -1596,7 +1596,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "6:4-15", 26262, 26273),     new VerseRange(BibleBook.John, "21:1", 26900, 26900),     new VerseRange(BibleBook.Revelation, "18", 30995, 31018),
 		];
 	}
-	private sealed class Exo_13aSE : Ahavta
+	private sealed class Exo_13aSE : Triennial
 	{
 		public Exo_13aSE() : base($"{nameof(Id.Exo_13a)}", Id.Exo_13a) { }
 		public override string TriNum => "15.4";
@@ -1617,7 +1617,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Hebrews, "8:6-9:1", 30099, 30107),     new VerseRange(BibleBook.Hebrews, "9:13-15", 30119, 30121),
 		];
 	}
-	private sealed class Exo_13bSE : Ahavta
+	private sealed class Exo_13bSE : Triennial
 	{
 		public Exo_13bSE() : base($"{nameof(Id.Exo_13b)}", Id.Exo_13b) { }
 		public override string TriNum => "16.1";
@@ -1638,7 +1638,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "16:25", 26752, 26752),    new VerseRange(BibleBook.Philippians, "4:4-23", 29447, 29466),
 		];
 	}
-	private sealed class Exo_15SE : Ahavta
+	private sealed class Exo_15SE : Triennial
 	{
 		public Exo_15SE() : base($"{nameof(Id.Exo_15)}", Id.Exo_15) { }
 		public override string TriNum => "16.2";
@@ -1659,7 +1659,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Philippians, "4:4-23", 29447, 29466),
 		];
 	}
-	private sealed class Exo_16SE : Ahavta
+	private sealed class Exo_16SE : Triennial
 	{
 		public Exo_16SE() : base($"{nameof(Id.Exo_16)}", Id.Exo_16) { }
 		public override string TriNum => "16.3";
@@ -1680,7 +1680,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "6:35-59", 26293, 26317),
 		];
 	}
-	private sealed class Exo_18SE : Ahavta
+	private sealed class Exo_18SE : Triennial
 	{
 		public Exo_18SE() : base($"{nameof(Id.Exo_18)}", Id.Exo_18) { }
 		public override string TriNum => "17.1";
@@ -1701,7 +1701,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "6:1-35", 26259, 26293),     new VerseRange(BibleBook.John, "6:60-71", 26318, 26329),
 		];
 	}
-	private sealed class Exo_19SE : Ahavta
+	private sealed class Exo_19SE : Triennial
 	{
 		public Exo_19SE() : base($"{nameof(Id.Exo_19)}", Id.Exo_19) { }
 		public override string TriNum => "17.2";
@@ -1722,7 +1722,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Hebrews, "12:18", 30231, 30231),     new VerseRange(BibleBook.Hebrews, "12:29", 30242, 30242),
 		];
 	}
-	private sealed class Exo_21SE : Ahavta
+	private sealed class Exo_21SE : Triennial
 	{
 		public Exo_21SE() : base($"{nameof(Id.Exo_21)}", Id.Exo_21) { }
 		public override string TriNum => "18.1";
@@ -1743,7 +1743,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "7:1-5", 23318, 23322),
 		];
 	}
-	private sealed class Exo_22SE : Ahavta
+	private sealed class Exo_22SE : Triennial
 	{
 		public Exo_22SE() : base($"{nameof(Id.Exo_22)}", Id.Exo_22) { }
 		public override string TriNum => "18.2";
@@ -1764,7 +1764,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "5", 23236, 23283),
 		];
 	}
-	private sealed class Exo_24SE : Ahavta
+	private sealed class Exo_24SE : Triennial
 	{
 		public Exo_24SE() : base($"{nameof(Id.Exo_24)}", Id.Exo_24) { }
 		public override string TriNum => "18.3";
@@ -1785,7 +1785,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "26:26-30", 24081, 24085),
 		];
 	}
-	private sealed class Exo_25SE : Ahavta
+	private sealed class Exo_25SE : Triennial
 	{
 		public Exo_25SE() : base($"{nameof(Id.Exo_25)}", Id.Exo_25) { }
 		public override string TriNum => "19.1";
@@ -1806,7 +1806,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "7:25-32", 26354, 26361),    new VerseRange(BibleBook.Hebrews, "9", 30107, 30134),
 		];
 	}
-	private sealed class Exo_27aSE : Ahavta
+	private sealed class Exo_27aSE : Triennial
 	{
 		public Exo_27aSE() : base($"{nameof(Id.Exo_27a)}", Id.Exo_27a) { }
 		public override string TriNum => "19.2";
@@ -1827,7 +1827,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "23:1-28", 23920, 23947),
 		];
 	}
-	private sealed class Exo_27bSE : Ahavta
+	private sealed class Exo_27bSE : Triennial
 	{
 		public Exo_27bSE() : base($"{nameof(Id.Exo_27b)}", Id.Exo_27b) { }
 		public override string TriNum => "20.1";
@@ -1848,7 +1848,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Hebrews, "3", 29997, 30015),
 		];
 	}
-	private sealed class Exo_29SE : Ahavta
+	private sealed class Exo_29SE : Triennial
 	{
 		public Exo_29SE() : base($"{nameof(Id.Exo_29)}", Id.Exo_29) { }
 		public override string TriNum => "20.2";
@@ -1869,7 +1869,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.FirstPeter, "2", 30401, 30425),
 		];
 	}
-	private sealed class Exo_30aSE : Ahavta
+	private sealed class Exo_30aSE : Triennial
 	{
 		public Exo_30aSE() : base($"{nameof(Id.Exo_30a)}", Id.Exo_30a) { }
 		public override string TriNum => "20.3";
@@ -1890,7 +1890,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Luke, "1:1-25", 24895, 24919),
 		];
 	}
-	private sealed class Exo_30bSE : Ahavta
+	private sealed class Exo_30bSE : Triennial
 	{
 		public Exo_30bSE() : base($"{nameof(Id.Exo_30b)}", Id.Exo_30b) { }
 		public override string TriNum => "21.1";
@@ -1911,7 +1911,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Romans, "5:10-11", 28058, 28059),
 		];
 	}
-	private sealed class Exo_31SE : Ahavta
+	private sealed class Exo_31SE : Triennial
 	{
 		public Exo_31SE() : base($"{nameof(Id.Exo_31)}", Id.Exo_31) { }
 		public override string TriNum => "21.2";
@@ -1932,7 +1932,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.SecondTimothy, "1", 29811, 29828),
 		];
 	}
-	private sealed class Exo_32SE : Ahavta
+	private sealed class Exo_32SE : Triennial
 	{
 		public Exo_32SE() : base($"{nameof(Id.Exo_32)}", Id.Exo_32) { }
 		public override string TriNum => "21.3";
@@ -1953,7 +1953,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Romans, "9", 28157, 28189),
 		];
 	}
-	private sealed class Exo_34SE : Ahavta
+	private sealed class Exo_34SE : Triennial
 	{
 		public Exo_34SE() : base($"{nameof(Id.Exo_34)}", Id.Exo_34) { }
 		public override string TriNum => "22.1";
@@ -1974,7 +1974,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.SecondCorinthians, "3", 28843, 28860),
 		];
 	}
-	private sealed class Exo_37SE : Ahavta
+	private sealed class Exo_37SE : Triennial
 	{
 		public Exo_37SE() : base($"{nameof(Id.Exo_37)}", Id.Exo_37) { }
 		public override string TriNum => "22.2";
@@ -1995,7 +1995,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Hebrews, "9", 30107, 30134),     new VerseRange(BibleBook.FirstJohn, "1", 30542, 30551),
 		];
 	}
-	private sealed class Exo_38SE : Ahavta
+	private sealed class Exo_38SE : Triennial
 	{
 		public Exo_38SE() : base($"{nameof(Id.Exo_38)}", Id.Exo_38) { }
 		public override string TriNum => "23.1";
@@ -2016,7 +2016,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.SecondCorinthians, "4:1-5:19", 28861, 28897),
 		];
 	}
-	private sealed class Exo_39SE : Ahavta
+	private sealed class Exo_39SE : Triennial
 	{
 		public Exo_39SE() : base($"{nameof(Id.Exo_39)}", Id.Exo_39) { }
 		public override string TriNum => "23.2";
@@ -2037,7 +2037,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Hebrews, "8:1-5", 30094, 30098),     new VerseRange(BibleBook.Revelation, "15", 30948, 30955),
 		];
 	}
-	private sealed class Lev_01SE : Ahavta
+	private sealed class Lev_01SE : Triennial
 	{
 		public Lev_01SE() : base($"{nameof(Id.Lev_01)}", Id.Lev_01) { }
 		public override string TriNum => "24.1";
@@ -2058,7 +2058,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.FirstCorinthians, "3", 28412, 28434),
 		];
 	}
-	private sealed class Lev_03SE : Ahavta
+	private sealed class Lev_03SE : Triennial
 	{
 		public Lev_03SE() : base($"{nameof(Id.Lev_03)}", Id.Lev_03) { }
 		public override string TriNum => "24.2";
@@ -2079,7 +2079,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Revelation, "8", 30829, 30841),
 		];
 	}
-	private sealed class Lev_04SE : Ahavta
+	private sealed class Lev_04SE : Triennial
 	{
 		public Lev_04SE() : base($"{nameof(Id.Lev_04)}", Id.Lev_04) { }
 		public override string TriNum => "24.3";
@@ -2100,7 +2100,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Romans, "8:1-13", 28118, 28130),     new VerseRange(BibleBook.Hebrews, "10:1-18", 30135, 30152),
 		];
 	}
-	private sealed class Lev_05SE : Ahavta
+	private sealed class Lev_05SE : Triennial
 	{
 		public Lev_05SE() : base($"{nameof(Id.Lev_05)}", Id.Lev_05) { }
 		public override string TriNum => "24.4";
@@ -2121,7 +2121,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Revelation, "5 &amp; 6", 30781, 30811),
 		];
 	}
-	private sealed class Lev_06SE : Ahavta
+	private sealed class Lev_06SE : Triennial
 	{
 		public Lev_06SE() : base($"{nameof(Id.Lev_06)}", Id.Lev_06) { }
 		public override string TriNum => "25.1";
@@ -2142,7 +2142,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Mark, "12:28-34", 24702, 24708),
 		];
 	}
-	private sealed class Lev_07SE : Ahavta
+	private sealed class Lev_07SE : Triennial
 	{
 		public Lev_07SE() : base($"{nameof(Id.Lev_07)}", Id.Lev_07) { }
 		public override string TriNum => "25.2";
@@ -2163,7 +2163,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "23", 23920, 23958),    new VerseRange(BibleBook.John, "6:63-66", 26321, 26324),
 		];
 	}
-	private sealed class Lev_08SE : Ahavta
+	private sealed class Lev_08SE : Triennial
 	{
 		public Lev_08SE() : base($"{nameof(Id.Lev_08)}", Id.Lev_08) { }
 		public override string TriNum => "25.3";
@@ -2184,7 +2184,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "24:29-44", 23987, 24002),    new VerseRange(BibleBook.Matthew, "25:31", 24040, 24040),     new VerseRange(BibleBook.Matthew, "26:30", 24085, 24085),
 		];
 	}
-	private sealed class Lev_09SE : Ahavta
+	private sealed class Lev_09SE : Triennial
 	{
 		public Lev_09SE() : base($"{nameof(Id.Lev_09)}", Id.Lev_09) { }
 		public override string TriNum => "26.1";
@@ -2205,7 +2205,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Mark, "7:1-23", 24465, 24487),
 		];
 	}
-	private sealed class Lev_12SE : Ahavta
+	private sealed class Lev_12SE : Triennial
 	{
 		public Lev_12SE() : base($"{nameof(Id.Lev_12)}", Id.Lev_12) { }
 		public override string TriNum => "27.1";
@@ -2226,7 +2226,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "1:18-24", 23163, 23169),     new VerseRange(BibleBook.John, "7:37-44", 26366, 26373),
 		];
 	}
-	private sealed class Lev_13SE : Ahavta
+	private sealed class Lev_13SE : Triennial
 	{
 		public Lev_13SE() : base($"{nameof(Id.Lev_13)}", Id.Lev_13) { }
 		public override string TriNum => "27.2";
@@ -2244,7 +2244,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Hebrews, "2:11-18", 29979, 29996),
 		];
 	}
-	private sealed class Lev_14SE : Ahavta
+	private sealed class Lev_14SE : Triennial
 	{
 		public Lev_14SE() : base($"{nameof(Id.Lev_14)}", Id.Lev_14) { }
 		public override string TriNum => "28.1";
@@ -2265,7 +2265,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "8:1-4", 23347, 23350),     new VerseRange(BibleBook.Luke, "5:12-14", 25120, 25122),    new VerseRange(BibleBook.Ephesians, "4", 29274, 29305),
 		];
 	}
-	private sealed class Lev_15SE : Ahavta
+	private sealed class Lev_15SE : Triennial
 	{
 		public Lev_15SE() : base($"{nameof(Id.Lev_15)}", Id.Lev_15) { }
 		public override string TriNum => "28.2";
@@ -2286,7 +2286,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Philippians, "3", 29423, 29443),
 		];
 	}
-	private sealed class Lev_16SE : Ahavta
+	private sealed class Lev_16SE : Triennial
 	{
 		public Lev_16SE() : base($"{nameof(Id.Lev_16)}", Id.Lev_16) { }
 		public override string TriNum => "30.1";
@@ -2307,7 +2307,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Jude, "1:6-21", 30679, 30694),
 		];
 	}
-	private sealed class Lev_17SE : Ahavta
+	private sealed class Lev_17SE : Triennial
 	{
 		public Lev_17SE() : base($"{nameof(Id.Lev_17)}", Id.Lev_17) { }
 		public override string TriNum => "30.2";
@@ -2328,7 +2328,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.FirstJohn, "5", 30626, 30646),
 		];
 	}
-	private sealed class Lev_18SE : Ahavta
+	private sealed class Lev_18SE : Triennial
 	{
 		public Lev_18SE() : base($"{nameof(Id.Lev_18)}", Id.Lev_18) { }
 		public override string TriNum => "30.3";
@@ -2349,7 +2349,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.FirstCorinthians, "5:1-6:10", 28456, 28488),
 		];
 	}
-	private sealed class Lev_19SE : Ahavta
+	private sealed class Lev_19SE : Triennial
 	{
 		public Lev_19SE() : base($"{nameof(Id.Lev_19)}", Id.Lev_19) { }
 		public override string TriNum => "31.1";
@@ -2370,7 +2370,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "18", 23729, 23763),
 		];
 	}
-	private sealed class Lev_21SE : Ahavta
+	private sealed class Lev_21SE : Triennial
 	{
 		public Lev_21SE() : base($"{nameof(Id.Lev_21)}", Id.Lev_21) { }
 		public override string TriNum => "32.1";
@@ -2391,7 +2391,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.FirstCorinthians, "7:17", 28505, 28505),
 		];
 	}
-	private sealed class Lev_22SE : Ahavta
+	private sealed class Lev_22SE : Triennial
 	{
 		public Lev_22SE() : base($"{nameof(Id.Lev_22)}", Id.Lev_22) { }
 		public override string TriNum => "32.2";
@@ -2412,7 +2412,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.FirstCorinthians, "15:20-23", 28739, 28742),
 		];
 	}
-	private sealed class Lev_24SE : Ahavta
+	private sealed class Lev_24SE : Triennial
 	{
 		public Lev_24SE() : base($"{nameof(Id.Lev_24)}", Id.Lev_24) { }
 		public override string TriNum => "32.3";
@@ -2433,7 +2433,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "7", 26330, 26382),
 		];
 	}
-	private sealed class Lev_25aSE : Ahavta
+	private sealed class Lev_25aSE : Triennial
 	{
 		public Lev_25aSE() : base($"{nameof(Id.Lev_25a)}", Id.Lev_25a) { }
 		public override string TriNum => "33.1";
@@ -2454,7 +2454,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "10:1-33", 26483, 26515),
 		];
 	}
-	private sealed class Lev_25bSE : Ahavta
+	private sealed class Lev_25bSE : Triennial
 	{
 		public Lev_25bSE() : base($"{nameof(Id.Lev_25b)}", Id.Lev_25b) { }
 		public override string TriNum => "33.2";
@@ -2475,7 +2475,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Galatians, "4:1-5:1", 29133, 29164),
 		];
 	}
-	private sealed class Lev_26SE : Ahavta
+	private sealed class Lev_26SE : Triennial
 	{
 		public Lev_26SE() : base($"{nameof(Id.Lev_26)}", Id.Lev_26) { }
 		public override string TriNum => "34.1";
@@ -2496,7 +2496,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "15", 26701, 26727),
 		];
 	}
-	private sealed class Num_01SE : Ahavta
+	private sealed class Num_01SE : Triennial
 	{
 		public Num_01SE() : base($"{nameof(Id.Num_01)}", Id.Num_01) { }
 		public override string TriNum => "35.1";
@@ -2517,7 +2517,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Revelation, "7", 30812, 30828),
 		];
 	}
-	private sealed class Num_02SE : Ahavta
+	private sealed class Num_02SE : Triennial
 	{
 		public Num_02SE() : base($"{nameof(Id.Num_02)}", Id.Num_02) { }
 		public override string TriNum => "35.2";
@@ -2538,7 +2538,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Luke, "15:1-7", 25590, 25596),
 		];
 	}
-	private sealed class Num_03SE : Ahavta
+	private sealed class Num_03SE : Triennial
 	{
 		public Num_03SE() : base($"{nameof(Id.Num_03)}", Id.Num_03) { }
 		public override string TriNum => "35.3";
@@ -2559,7 +2559,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Acts, "5:1-16", 27061, 27076),     new VerseRange(BibleBook.Hebrews, "12", 30214, 30242),
 		];
 	}
-	private sealed class Num_04SE : Ahavta
+	private sealed class Num_04SE : Triennial
 	{
 		public Num_04SE() : base($"{nameof(Id.Num_04)}", Id.Num_04) { }
 		public override string TriNum => "37.1";
@@ -2580,7 +2580,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.FirstCorinthians, "12:12-18", 28647, 28653),
 		];
 	}
-	private sealed class Num_05SE : Ahavta
+	private sealed class Num_05SE : Triennial
 	{
 		public Num_05SE() : base($"{nameof(Id.Num_05)}", Id.Num_05) { }
 		public override string TriNum => "37.2";
@@ -2601,7 +2601,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.SecondPeter, "2", 30502, 30523),
 		];
 	}
-	private sealed class Num_06aSE : Ahavta
+	private sealed class Num_06aSE : Triennial
 	{
 		public Num_06aSE() : base($"{nameof(Id.Num_06a)}", Id.Num_06a) { }
 		public override string TriNum => "37.3";
@@ -2622,7 +2622,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Luke, "1:8-17", 24902, 24911),
 		];
 	}
-	private sealed class Num_06bSE : Ahavta
+	private sealed class Num_06bSE : Triennial
 	{
 		public Num_06bSE() : base($"{nameof(Id.Num_06b)}", Id.Num_06b) { }
 		public override string TriNum => "37.4";
@@ -2643,7 +2643,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "13:1-30", 26632, 26661),
 		];
 	}
-	private sealed class Num_08SE : Ahavta
+	private sealed class Num_08SE : Triennial
 	{
 		public Num_08SE() : base($"{nameof(Id.Num_08)}", Id.Num_08) { }
 		public override string TriNum => "38.1";
@@ -2664,7 +2664,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Revelation, "11", 30874, 30892),
 		];
 	}
-	private sealed class Num_10SE : Ahavta
+	private sealed class Num_10SE : Triennial
 	{
 		public Num_10SE() : base($"{nameof(Id.Num_10)}", Id.Num_10) { }
 		public override string TriNum => "38.2";
@@ -2685,7 +2685,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.FirstCorinthians, "14:1-9", 28680, 28688),
 		];
 	}
-	private sealed class Num_11SE : Ahavta
+	private sealed class Num_11SE : Triennial
 	{
 		public Num_11SE() : base($"{nameof(Id.Num_11)}", Id.Num_11) { }
 		public override string TriNum => "38.3";
@@ -2703,7 +2703,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Acts, "12:3-12", 27341, 27350),    new VerseRange(BibleBook.FirstCorinthians, "10", 28569, 28601),
 		];
 	}
-	private sealed class Num_12SE : Ahavta
+	private sealed class Num_12SE : Triennial
 	{
 		public Num_12SE() : base($"{nameof(Id.Num_12)}", Id.Num_12) { }
 		public override string TriNum => "38.4";
@@ -2721,7 +2721,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Romans, "11:22-13:4", 28232, 28271),     new VerseRange(BibleBook.Isaiah, "59:1-21", 18802, 18822),
 		];
 	}
-	private sealed class Num_13SE : Ahavta
+	private sealed class Num_13SE : Triennial
 	{
 		public Num_13SE() : base($"{nameof(Id.Num_13)}", Id.Num_13) { }
 		public override string TriNum => "39.1";
@@ -2742,7 +2742,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Hebrews, "11:24-31", 30197, 30204),
 		];
 	}
-	private sealed class Num_14SE : Ahavta
+	private sealed class Num_14SE : Triennial
 	{
 		public Num_14SE() : base($"{nameof(Id.Num_14)}", Id.Num_14) { }
 		public override string TriNum => "39.2";
@@ -2763,7 +2763,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Philippians, "3", 29423, 29443),
 		];
 	}
-	private sealed class Num_15SE : Ahavta
+	private sealed class Num_15SE : Triennial
 	{
 		public Num_15SE() : base($"{nameof(Id.Num_15)}", Id.Num_15) { }
 		public override string TriNum => "39.3";
@@ -2784,7 +2784,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.FirstJohn, "2 and 3", 30552, 30604),
 		];
 	}
-	private sealed class Num_16SE : Ahavta
+	private sealed class Num_16SE : Triennial
 	{
 		public Num_16SE() : base($"{nameof(Id.Num_16)}", Id.Num_16) { }
 		public override string TriNum => "40.1";
@@ -2805,7 +2805,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.SecondTimothy, "2:8-21", 29836, 29849),    new VerseRange(BibleBook.Jude, "1", 30674, 30698),
 		];
 	}
-	private sealed class Num_17SE : Ahavta
+	private sealed class Num_17SE : Triennial
 	{
 		public Num_17SE() : base($"{nameof(Id.Num_17)}", Id.Num_17) { }
 		public override string TriNum => "40.2";
@@ -2826,7 +2826,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Hebrews, "5:1-6", 30032, 30037),
 		];
 	}
-	private sealed class Num_19SE : Ahavta
+	private sealed class Num_19SE : Triennial
 	{
 		public Num_19SE() : base($"{nameof(Id.Num_19)}", Id.Num_19) { }
 		public override string TriNum => "41.1";
@@ -2847,7 +2847,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "20:1-31", 26869, 26899),
 		];
 	}
-	private sealed class Num_20SE : Ahavta
+	private sealed class Num_20SE : Triennial
 	{
 		public Num_20SE() : base($"{nameof(Id.Num_20)}", Id.Num_20) { }
 		public override string TriNum => "41.2";
@@ -2868,7 +2868,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "20:1-31", 26122, 26152),
 		];
 	}
-	private sealed class Num_22SE : Ahavta
+	private sealed class Num_22SE : Triennial
 	{
 		public Num_22SE() : base($"{nameof(Id.Num_22)}", Id.Num_22) { }
 		public override string TriNum => "42.1";
@@ -2889,7 +2889,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.FirstPeter, "5:5-7", 30471, 30473),
 		];
 	}
-	private sealed class Num_23SE : Ahavta
+	private sealed class Num_23SE : Triennial
 	{
 		public Num_23SE() : base($"{nameof(Id.Num_23)}", Id.Num_23) { }
 		public override string TriNum => "42.2";
@@ -2910,7 +2910,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.James, "3:1-4:17", 30321, 30355),
 		];
 	}
-	private sealed class Num_25SE : Ahavta
+	private sealed class Num_25SE : Triennial
 	{
 		public Num_25SE() : base($"{nameof(Id.Num_25)}", Id.Num_25) { }
 		public override string TriNum => "43.1";
@@ -2931,7 +2931,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "23:1-12", 23920, 23931),     new VerseRange(BibleBook.Ephesians, "4:1-16", 29274, 29289),
 		];
 	}
-	private sealed class Num_26SE : Ahavta
+	private sealed class Num_26SE : Triennial
 	{
 		public Num_26SE() : base($"{nameof(Id.Num_26)}", Id.Num_26) { }
 		public override string TriNum => "43.2";
@@ -2952,7 +2952,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Ephesians, "1:3-23", 29210, 29230),
 		];
 	}
-	private sealed class Num_28SE : Ahavta
+	private sealed class Num_28SE : Triennial
 	{
 		public Num_28SE() : base($"{nameof(Id.Num_28)}", Id.Num_28) { }
 		public override string TriNum => "43.3";
@@ -2973,7 +2973,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Hebrews, "10:1-39", 30135, 30173),
 		];
 	}
-	private sealed class Num_30SE : Ahavta
+	private sealed class Num_30SE : Triennial
 	{
 		public Num_30SE() : base($"{nameof(Id.Num_30)}", Id.Num_30) { }
 		public override string TriNum => "44.1";
@@ -2994,7 +2994,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "5:33-37", 23268, 23272),
 		];
 	}
-	private sealed class Num_32SE : Ahavta
+	private sealed class Num_32SE : Triennial
 	{
 		public Num_32SE() : base($"{nameof(Id.Num_32)}", Id.Num_32) { }
 		public override string TriNum => "44.2";
@@ -3015,7 +3015,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.James, "2:1-26", 30295, 30320),
 		];
 	}
-	private sealed class Num_33SE : Ahavta
+	private sealed class Num_33SE : Triennial
 	{
 		public Num_33SE() : base($"{nameof(Id.Num_33)}", Id.Num_33) { }
 		public override string TriNum => "45.1";
@@ -3036,7 +3036,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Acts, "6", 27103, 27117),    new VerseRange(BibleBook.James, "4:1-12", 30339, 30350),
 		];
 	}
-	private sealed class Num_34SE : Ahavta
+	private sealed class Num_34SE : Triennial
 	{
 		public Num_34SE() : base($"{nameof(Id.Num_34)}", Id.Num_34) { }
 		public override string TriNum => "45.2";
@@ -3057,7 +3057,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Ephesians, "2:1-22", 29231, 29252),
 		];
 	}
-	private sealed class Num_35SE : Ahavta
+	private sealed class Num_35SE : Triennial
 	{
 		public Num_35SE() : base($"{nameof(Id.Num_35)}", Id.Num_35) { }
 		public override string TriNum => "45.3";
@@ -3078,7 +3078,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "4:1-45", 26158, 26202),
 		];
 	}
-	private sealed class Deu_01SE : Ahavta
+	private sealed class Deu_01SE : Triennial
 	{
 		public Deu_01SE() : base($"{nameof(Id.Deu_01)}", Id.Deu_01) { }
 		public override string TriNum => "46.1";
@@ -3099,7 +3099,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.FirstTimothy, "3:1-7", 29733, 29739),    new VerseRange(BibleBook.Hebrews, "3", 29997, 30015),
 		];
 	}
-	private sealed class Deu_02SE : Ahavta
+	private sealed class Deu_02SE : Triennial
 	{
 		public Deu_02SE() : base($"{nameof(Id.Deu_02)}", Id.Deu_02) { }
 		public override string TriNum => "46.2";
@@ -3117,7 +3117,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Romans, "9", 28157, 28189),
 		];
 	}
-	private sealed class Deu_03SE : Ahavta
+	private sealed class Deu_03SE : Triennial
 	{
 		public Deu_03SE() : base($"{nameof(Id.Deu_03)}", Id.Deu_03) { }
 		public override string TriNum => "47.1";
@@ -3138,7 +3138,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Mark, "12:28-34", 24702, 24708),     new VerseRange(BibleBook.Romans, "2:1-3:31", 27964, 28023),
 		];
 	}
-	private sealed class Deu_04SE : Ahavta
+	private sealed class Deu_04SE : Triennial
 	{
 		public Deu_04SE() : base($"{nameof(Id.Deu_04)}", Id.Deu_04) { }
 		public override string TriNum => "47.2";
@@ -3159,7 +3159,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Luke, "3:1", 25027, 25027),
 		];
 	}
-	private sealed class Deu_05SE : Ahavta
+	private sealed class Deu_05SE : Triennial
 	{
 		public Deu_05SE() : base($"{nameof(Id.Deu_05)}", Id.Deu_05) { }
 		public override string TriNum => "47.3";
@@ -3180,7 +3180,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Romans, "10:1", 28190, 28190),
 		];
 	}
-	private sealed class Deu_06SE : Ahavta
+	private sealed class Deu_06SE : Triennial
 	{
 		public Deu_06SE() : base($"{nameof(Id.Deu_06)}", Id.Deu_06) { }
 		public override string TriNum => "47.4";
@@ -3198,7 +3198,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "4:1", 23211, 23211),
 		];
 	}
-	private sealed class Deu_08SE : Ahavta
+	private sealed class Deu_08SE : Triennial
 	{
 		public Deu_08SE() : base($"{nameof(Id.Deu_08)}", Id.Deu_08) { }
 		public override string TriNum => "48.1";
@@ -3219,7 +3219,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Luke, "4:11", 25075, 25075),     new VerseRange(BibleBook.Romans, "8:31-39", 28148, 28156),
 		];
 	}
-	private sealed class Deu_09SE : Ahavta
+	private sealed class Deu_09SE : Triennial
 	{
 		public Deu_09SE() : base($"{nameof(Id.Deu_09)}", Id.Deu_09) { }
 		public override string TriNum => "48.2";
@@ -3237,7 +3237,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Ephesians, "2:11", 29241, 29241),
 		];
 	}
-	private sealed class Deu_10SE : Ahavta
+	private sealed class Deu_10SE : Triennial
 	{
 		public Deu_10SE() : base($"{nameof(Id.Deu_10)}", Id.Deu_10) { }
 		public override string TriNum => "48.3";
@@ -3255,7 +3255,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Colossians, "3:1", 29519, 29519),
 		];
 	}
-	private sealed class Deu_11SE : Ahavta
+	private sealed class Deu_11SE : Triennial
 	{
 		public Deu_11SE() : base($"{nameof(Id.Deu_11)}", Id.Deu_11) { }
 		public override string TriNum => "49.1";
@@ -3276,7 +3276,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Luke, "6:20", 25167, 25167),     new VerseRange(BibleBook.FirstJohn, "4:1-6", 30605, 30610),
 		];
 	}
-	private sealed class Deu_12SE : Ahavta
+	private sealed class Deu_12SE : Triennial
 	{
 		public Deu_12SE() : base($"{nameof(Id.Deu_12)}", Id.Deu_12) { }
 		public override string TriNum => "49.2";
@@ -3294,7 +3294,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "7:15", 23332, 23332),
 		];
 	}
-	private sealed class Deu_15SE : Ahavta
+	private sealed class Deu_15SE : Triennial
 	{
 		public Deu_15SE() : base($"{nameof(Id.Deu_15)}", Id.Deu_15) { }
 		public override string TriNum => "49.3";
@@ -3312,7 +3312,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Luke, "4:14", 25078, 25078),
 		];
 	}
-	private sealed class Deu_16SE : Ahavta
+	private sealed class Deu_16SE : Triennial
 	{
 		public Deu_16SE() : base($"{nameof(Id.Deu_16)}", Id.Deu_16) { }
 		public override string TriNum => "50.1";
@@ -3333,7 +3333,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "5:1", 26212, 26212),    new VerseRange(BibleBook.FirstCorinthians, "5:9-13", 28464, 28468),
 		];
 	}
-	private sealed class Deu_17SE : Ahavta
+	private sealed class Deu_17SE : Triennial
 	{
 		public Deu_17SE() : base($"{nameof(Id.Deu_17)}", Id.Deu_17) { }
 		public override string TriNum => "50.2";
@@ -3354,7 +3354,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Jeremiah, "19:11-22", 19723, 19726),     new VerseRange(BibleBook.Acts, "13:13-44", 27376, 27407),
 		];
 	}
-	private sealed class Deu_18SE : Ahavta
+	private sealed class Deu_18SE : Triennial
 	{
 		public Deu_18SE() : base($"{nameof(Id.Deu_18)}", Id.Deu_18) { }
 		public override string TriNum => "50.3";
@@ -3375,7 +3375,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Galatians, "5:1-6:10", 29164, 29199),
 		];
 	}
-	private sealed class Deu_20SE : Ahavta
+	private sealed class Deu_20SE : Triennial
 	{
 		public Deu_20SE() : base($"{nameof(Id.Deu_20)}", Id.Deu_20) { }
 		public override string TriNum => "50.4";
@@ -3396,7 +3396,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "10:11-31", 26493, 26513),
 		];
 	}
-	private sealed class Deu_21SE : Ahavta
+	private sealed class Deu_21SE : Triennial
 	{
 		public Deu_21SE() : base($"{nameof(Id.Deu_21)}", Id.Deu_21) { }
 		public override string TriNum => "51.1";
@@ -3417,7 +3417,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Luke, "20:27-38", 25807, 25818),     new VerseRange(BibleBook.Galatians, "3:1-5:26", 29104, 29189),
 		];
 	}
-	private sealed class Deu_22SE : Ahavta
+	private sealed class Deu_22SE : Triennial
 	{
 		public Deu_22SE() : base($"{nameof(Id.Deu_22)}", Id.Deu_22) { }
 		public override string TriNum => "51.2";
@@ -3438,7 +3438,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "22:1-14", 23874, 23887),
 		];
 	}
-	private sealed class Deu_23aSE : Ahavta
+	private sealed class Deu_23aSE : Triennial
 	{
 		public Deu_23aSE() : base($"{nameof(Id.Deu_23a)}", Id.Deu_23a) { }
 		public override string TriNum => "51.3";
@@ -3459,7 +3459,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "8:1-14", 23347, 23360),
 		];
 	}
-	private sealed class Deu_23bSE : Ahavta
+	private sealed class Deu_23bSE : Triennial
 	{
 		public Deu_23bSE() : base($"{nameof(Id.Deu_23b)}", Id.Deu_23b) { }
 		public override string TriNum => "51.4";
@@ -3480,7 +3480,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "5:30-37", 23265, 23272),
 		];
 	}
-	private sealed class Deu_24SE : Ahavta
+	private sealed class Deu_24SE : Triennial
 	{
 		public Deu_24SE() : base($"{nameof(Id.Deu_24)}", Id.Deu_24) { }
 		public override string TriNum => "51.5";
@@ -3501,7 +3501,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Luke, "12:13-48", 25473, 25508),
 		];
 	}
-	private sealed class Deu_26SE : Ahavta
+	private sealed class Deu_26SE : Triennial
 	{
 		public Deu_26SE() : base($"{nameof(Id.Deu_26)}", Id.Deu_26) { }
 		public override string TriNum => "52.1";
@@ -3522,7 +3522,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Romans, "11:1-15", 28211, 28225),    new VerseRange(BibleBook.Revelation, "21:9-22:7", 31063, 31088),
 		];
 	}
-	private sealed class Deu_28SE : Ahavta
+	private sealed class Deu_28SE : Triennial
 	{
 		public Deu_28SE() : base($"{nameof(Id.Deu_28)}", Id.Deu_28) { }
 		public override string TriNum => "52.2";
@@ -3543,7 +3543,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "14:1-31", 26670, 26700),
 		];
 	}
-	private sealed class Deu_29SE : Ahavta
+	private sealed class Deu_29SE : Triennial
 	{
 		public Deu_29SE() : base($"{nameof(Id.Deu_29)}", Id.Deu_29) { }
 		public override string TriNum => "53.1";
@@ -3564,7 +3564,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Romans, "10:1-13", 28190, 28202),
 		];
 	}
-	private sealed class Deu_30SE : Ahavta
+	private sealed class Deu_30SE : Triennial
 	{
 		public Deu_30SE() : base($"{nameof(Id.Deu_30)}", Id.Deu_30) { }
 		public override string TriNum => "53.2";
@@ -3585,7 +3585,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "11:7-30", 23467, 23490),
 		];
 	}
-	private sealed class Deu_31SE : Ahavta
+	private sealed class Deu_31SE : Triennial
 	{
 		public Deu_31SE() : base($"{nameof(Id.Deu_31)}", Id.Deu_31) { }
 		public override string TriNum => "64.1";
@@ -3606,7 +3606,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "12:35-14:26", 26616, 26695),    new VerseRange(BibleBook.Hebrews, "13:5-8", 30247, 30250),
 		];
 	}
-	private sealed class Deu_32SE : Ahavta
+	private sealed class Deu_32SE : Triennial
 	{
 		public Deu_32SE() : base($"{nameof(Id.Deu_32)}", Id.Deu_32) { }
 		public override string TriNum => "66.1";
@@ -3627,7 +3627,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.John, "17:1-26", 26761, 26786),
 		];
 	}
-	private sealed class Deu_33SE : Ahavta
+	private sealed class Deu_33SE : Triennial
 	{
 		public Deu_33SE() : base($"{nameof(Id.Deu_33)}", Id.Deu_33) { }
 		public override string TriNum => "67.1";
@@ -3648,7 +3648,7 @@ public abstract class Ahavta : SmartEnum<Ahavta>
 			new VerseRange(BibleBook.Matthew, "19:25-20:16", 23788, 23809),     new VerseRange(BibleBook.Jude, "1:8-9", 30681, 30682),
 		];
 	}
-	private sealed class Deu_34SE : Ahavta
+	private sealed class Deu_34SE : Triennial
 	{
 		public Deu_34SE() : base($"{nameof(Id.Deu_34)}", Id.Deu_34) { }
 		public override string TriNum => "68.1";

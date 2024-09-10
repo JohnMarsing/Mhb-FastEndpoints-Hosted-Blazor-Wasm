@@ -53,7 +53,7 @@
 
 	protected override void OnParametersSet()
 	{
-		Logger!.LogInformation("{Class}!{MethodEvent}; CurrentBoolValue: {CurrentBoolValue}"
+		Logger!.LogInformation("{Class}!{Method}; CurrentBoolValue: {CurrentBoolValue}"
 		, nameof(ToggleButton), nameof(OnParametersSet), CurrentBoolValue);
 		_currentBoolValue = CurrentBoolValue;
 	}
