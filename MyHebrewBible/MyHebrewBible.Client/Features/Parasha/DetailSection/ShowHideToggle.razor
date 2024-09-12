@@ -10,9 +10,9 @@
 </button>
 
 @code {
-	[Parameter, EditorRequired]	public bool ToggleValue { get; set; }
+	[Parameter, EditorRequired] public bool ToggleValue { get; set; }
 	[Parameter, EditorRequired] public Enums.VerseGroup? VerseGroup { get; set; }
-	[Parameter, EditorRequired] public EventCallback<VerseGroupShowHideToggleVM> OnToggleSelected { get; set; }
+	[Parameter, EditorRequired] public EventCallback<ShowHideToggleVM> OnToggleSelected { get; set; }
 
 	bool SizeLarge = false;
 	bool ShowToggleIcon = false;
@@ -25,6 +25,6 @@
 	private string ButtonFontSize => SizeLarge ? " fs-4" : "";
 
 	private void ButtonClicked() =>
-		OnToggleSelected.InvokeAsync(new VerseGroupShowHideToggleVM(!ToggleValue, VerseGroup!));
+		OnToggleSelected.InvokeAsync(new ShowHideToggleVM(!ToggleValue, VerseGroup!));
 
 }

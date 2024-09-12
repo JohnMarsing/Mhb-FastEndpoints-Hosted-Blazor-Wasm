@@ -1,5 +1,14 @@
 ﻿
-<PageTitle>@PageEnum.Title</PageTitle>
+<PageTitle>
+	@if (String.IsNullOrEmpty(PageTitle))
+	{
+		@PageEnum.Title
+	}
+	else
+	{
+		@PageTitle
+	}
+</PageTitle>
 
 <div class="pb-n1 mt-2 mb-3 @BorderCSS">
 		 <h5 class="text-center"><i class="@PageEnum.Icon"></i>&nbsp;&nbsp;@PageEnum.Title</h5> 
@@ -8,5 +17,5 @@
 @code {
 	[Parameter, EditorRequired] public MyHebrewBible.Client.Enums.Nav PageEnum { get; set; } = MyHebrewBible.Client.Enums.Nav.Home;
 	[Parameter]	public string? BorderCSS { get; set; } = "border-bottom border-info";
-
+	[Parameter] public string? PageTitle { get; set; }
 }

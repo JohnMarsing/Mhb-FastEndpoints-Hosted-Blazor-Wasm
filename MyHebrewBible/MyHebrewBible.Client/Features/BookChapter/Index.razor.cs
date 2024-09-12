@@ -1,7 +1,6 @@
 using MyHebrewBible.Client.Enums;
 using MyHebrewBible.Client.State;
 using Microsoft.AspNetCore.Components;
-using MyHebrewBible.Client.Components;
 using Blazored.Toast.Services;
 
 

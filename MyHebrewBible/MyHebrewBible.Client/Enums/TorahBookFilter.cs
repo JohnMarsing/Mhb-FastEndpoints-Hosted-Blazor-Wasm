@@ -5,7 +5,7 @@ namespace MyHebrewBible.Client.Enums;
 public abstract class TorahBookFilter : SmartEnum<TorahBookFilter>
 {
 	#region  Declared Public Instances
-	public static readonly TorahBookFilter All = new AllSE();
+	//public static readonly TorahBookFilter All = new AllSE();
 	public static readonly TorahBookFilter Genesis = new GenesisSE();
 	public static readonly TorahBookFilter Exodus = new ExodusSE();
 	public static readonly TorahBookFilter Leviticus = new LeviticusSE();
@@ -20,11 +20,11 @@ public abstract class TorahBookFilter : SmartEnum<TorahBookFilter>
 	#endregion
 
 	#region Private Instantiation
-	private sealed class AllSE : TorahBookFilter
-	{
-		public AllSE() : base("All", 0) { }
-		public override BibleBook BibleBook => null;
-	}
+	//private sealed class AllSE : TorahBookFilter
+	//{
+	//	public AllSE() : base("All", 0) { }
+	//	public override BibleBook BibleBook => null;
+	//}
 
 	private sealed class GenesisSE : TorahBookFilter
 	{

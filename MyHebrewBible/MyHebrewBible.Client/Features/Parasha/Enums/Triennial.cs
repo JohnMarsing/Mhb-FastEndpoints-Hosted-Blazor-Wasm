@@ -1,4 +1,6 @@
-﻿using Ardalis.SmartEnum;
+﻿// Ignore Spelling: Abrv Deu
+
+using Ardalis.SmartEnum;
 using MyHebrewBible.Client.Enums;
 
 namespace MyHebrewBible.Client.Features.Parasha.Enums;

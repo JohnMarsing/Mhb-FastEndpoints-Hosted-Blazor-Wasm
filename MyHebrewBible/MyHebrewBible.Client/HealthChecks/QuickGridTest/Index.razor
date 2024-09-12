@@ -1,21 +1,21 @@
-﻿@using Microsoft.AspNetCore.Components.QuickGrid
-@using MyHebrewBible.Client.Enums
+﻿@page "/HealthChecks/QuickGrid"
+
+@using Microsoft.AspNetCore.Components.QuickGrid
 @using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
 
 <div class="card border-info">
-
 	<div class="card-header">
-		<FilterButtons CurrentFilter="TorahBookFilter" OnFilterSelected="ReturnedFilter" />
+		<FilterButtons CurrentFilter="CurrentFilter" OnFilterSelected="ReturnedFilter" />
 
 		<div class="d-flex justify-content-center mt-3">
 			<div class="pe-2 fs-4">
-				@TorahBookFilter!.Name
+				@CurrentFilter!.Name
 			</div>
 			<div class="pe-2 fs-4">
-				<i>@TorahBookFilter.BibleBook.TransliterationInHebrew</i>
+				<i>@CurrentFilter.BibleBook.TransliterationInHebrew</i>
 			</div>
 			<div class="pe-2">
-				<span class="hebrew">@TorahBookFilter.BibleBook.NameInHebrew</span>
+				<span class="hebrew">@CurrentFilter.BibleBook.NameInHebrew</span>
 			</div>
 		</div>
 	</div>
@@ -30,28 +30,29 @@
 </div>
 
 @code {
-	[Parameter, EditorRequired] public TorahBookFilter? TorahBookFilter { get; set; }
 
-	TorahBookFilter? CurrentFilter;
+	Enums.TorahBookFilter? CurrentFilter = Enums.TorahBookFilter.Deuteronomy;
 
 	List<ParashaEnums.Triennial>? itemList;
 	IQueryable<ParashaEnums.Triennial>? items;
 
-	IQueryable<Enums.Triennial>? filteredItems => items?
-		.Where(x => x.TorahBookFilter == CurrentFilter)
-		.OrderBy(o => o.Date);
+	IQueryable<ParashaEnums.Triennial>? filteredItems => items?
+	.Where(x => x.TorahBookFilter == CurrentFilter)
+	.OrderBy(o => o.Date);
 
 	protected override void OnInitialized()
 	{
-		CurrentFilter = TorahBookFilter;
-		itemList = Enums.Triennial.List.ToList();
+		itemList = ParashaEnums.Triennial.List.ToList();
 		items = itemList.AsQueryable();
+		// Set CurrentFilter
 	}
 
-	private void ReturnedFilter(TorahBookFilter filter)
+	//protected override void OnParametersSet()	{		}
+
+	private void ReturnedFilter(Enums.TorahBookFilter filter)
 	{
 		CurrentFilter = filter;
+
 	}
 
 }
-

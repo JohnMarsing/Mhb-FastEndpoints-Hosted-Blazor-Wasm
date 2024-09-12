@@ -29,7 +29,7 @@ public class VerseListState : IVerseListState
 
 	private const string Key = "verselists";
 	private const string KeyBCV = "verselistbcv";
-	private bool _isInitialized;
+	//private bool _isInitialized;
 	private void NotifyStateHasChanged() => OnChange?.Invoke();
 	public event Action? OnChange;
 	Header? _header;

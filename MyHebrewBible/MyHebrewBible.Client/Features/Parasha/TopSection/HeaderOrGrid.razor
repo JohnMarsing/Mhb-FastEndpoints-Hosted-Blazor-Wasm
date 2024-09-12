@@ -1,0 +1,64 @@
+﻿@using MyHebrewBible.Client.Enums
+
+@inject State.IParashaState? state
+@inject IToastService? Toast
+@inject ILogger<HeaderOrGrid>? Logger
+
+@* @if (TorahBookFilter is not null){ } *@
+
+<div class="card border-primary mb-3">
+
+	<div class="card-header">
+		<div class="d-flex justify-content-between">
+			<h2>  @(ToggleValueShowGrid ? "Parasha Grid" : "Current Parasha")  </h2>
+			<div>
+				<ShowHideToggle ToggleValue="ToggleValueShowGrid"
+												OnToggleSelected="ReturnedHeaderToggle" />
+			</div>
+
+		</div>
+	</div>
+
+	@if (ToggleValueShowGrid)
+	{
+		@if (TorahBookFilter is not null)
+		{
+		<Grid TorahBookFilter="TorahBookFilter" />
+		}
+	}
+	else
+	{
+		<Header CurrentReading="CurrentReading" />
+	}
+</div>
+
+
+
+@code {
+	[Parameter, EditorRequired] public Enums.Triennial? CurrentReading { get; set; }
+
+	TorahBookFilter? TorahBookFilter;
+	bool ToggleValueShowGrid;
+
+
+	protected override async Task OnParametersSetAsync()
+	{
+		Logger!.LogInformation("{Class}!{Method}", nameof(HeaderOrGrid), nameof(OnParametersSetAsync));
+		try
+		{
+			ToggleValueShowGrid = await state!.Get(Enums.LocalStorage.Grid!);
+			TorahBookFilter = CurrentReading!.TorahBookFilter;
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Class}!{Method}", nameof(HeaderOrGrid), nameof(OnParametersSetAsync));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(HeaderOrGrid)}!{nameof(OnParametersSetAsync)}");
+		}
+	}
+
+	private void ReturnedHeaderToggle(bool headerToggle)
+	{
+		state!.Update(headerToggle, Enums.LocalStorage.Grid);
+		ToggleValueShowGrid = headerToggle;
+	}
+}

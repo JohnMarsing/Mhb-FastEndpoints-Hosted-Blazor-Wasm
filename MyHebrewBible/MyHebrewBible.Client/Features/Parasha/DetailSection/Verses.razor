@@ -1,0 +1,128 @@
+﻿@inject State.IParashaState? state
+@inject IToastService? Toast
+@inject ILogger<Verses>? Logger
+
+@if (DataExists)
+{
+	<div class="card bg-light mb-3">
+		<div class="card-header">
+			<div class="d-flex justify-content-between">
+
+				<div>
+					<h3 class="@VerseGroup!.HeaderColor"><b>@VerseGroup!.Title</b></h3>
+					<h6>@SubTitle</h6>
+				</div>
+
+				<div>
+					<ShowHideToggle ToggleValue="ToggleValue"
+																		VerseGroup="VerseGroup"
+																		OnToggleSelected="ReturnedToggle" />
+				</div>
+			</div>
+		</div>
+
+
+		@if (ToggleValue)
+		{
+			@if (VerseGroup == Enums.VerseGroup.Torah)
+			{
+				<div class="card-body">
+					<VerseParagraph VerseParagraphRange="TorahVerses" />
+				</div>
+			}
+			else
+			{
+				@foreach (var item in HaftorahOrBritVersesList!)
+				{
+					<div class="card-body">
+						<VerseParagraph VerseParagraphRange="item" />
+					</div>
+				}
+			}
+		}
+	</div>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.Triennial? CurrentReading { get; set; }
+	[Parameter, EditorRequired] public Enums.VerseGroup? VerseGroup { get; set; }
+	[Parameter, EditorRequired] public string? SubTitle { get; set; }
+	[Parameter, EditorRequired] public Enums.LocalStorage? LocalStorage { get; set; }
+
+	bool ToggleValue;
+
+	private VerseParagraphRange? TorahVerses;
+	private List<VerseParagraphRange>? HaftorahOrBritVersesList;
+	private bool DataExists = false;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		Logger!.LogInformation("{Class}!{Method}", nameof(Verses), nameof(OnParametersSetAsync));
+
+		try
+		{
+			ToggleValue = await state!.Get(LocalStorage!);
+			if (VerseGroup == Enums.VerseGroup.Torah)
+			{
+				PopulateTorahVerses();
+			}
+			else
+			{
+				PopulateHaftorahOrBritVerses();
+			}
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Class}!{Method}", nameof(Verses), nameof(OnParametersSetAsync));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Verses)}!{nameof(OnParametersSetAsync)}");
+		}
+	}
+
+	private void PopulateTorahVerses()
+	{
+		TorahVerses = new VerseParagraphRange(
+			CurrentReading!.TorahVerse.BegId, CurrentReading.TorahVerse.EndId
+			, CurrentReading.TorahVerse.BibleBook.Title + CurrentReading.TorahVerse.ChapterVerse);
+		
+		DataExists = true;
+	}
+
+	private void PopulateHaftorahOrBritVerses()
+	{
+		if (VerseGroup == Enums.VerseGroup.Haftorah)
+		{
+			if (CurrentReading!.HaftorahVerses is not null && CurrentReading!.HaftorahVerses.Any())
+			{
+				HaftorahOrBritVersesList = new List<VerseParagraphRange>();
+				foreach (var item in CurrentReading.HaftorahVerses)
+				{
+					HaftorahOrBritVersesList.Add(new VerseParagraphRange(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
+				}
+				DataExists = true;
+			}
+		}
+		else
+		{
+			if (CurrentReading!.BritVerses is not null && CurrentReading!.BritVerses.Any())
+			{
+				HaftorahOrBritVersesList = new List<VerseParagraphRange>();
+				foreach (var item in CurrentReading.BritVerses)
+				{
+					HaftorahOrBritVersesList.Add(new VerseParagraphRange(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
+				}
+				DataExists = true;
+			}
+		}
+	}
+
+	private void ReturnedToggle(ShowHideToggleVM vm)
+	{
+		vm.VerseGroup!
+		.When(Enums.VerseGroup.Torah).Then(() => state!.Update(vm.ToggleValue, Enums.LocalStorage.Torah))
+		.When(Enums.VerseGroup.Haftorah).Then(() => state!.Update(vm.ToggleValue, Enums.LocalStorage.Haftorah))
+		.When(Enums.VerseGroup.Brit).Then(() => state!.Update(vm.ToggleValue, Enums.LocalStorage.Brit));
+
+		ToggleValue = vm.ToggleValue;
+	}
+
+}
