@@ -1,0 +1,33 @@
+﻿@using MyHebrewBible.Client.Enums
+
+<div class="d-flex justify-content-end mt-2">
+	@foreach (var item in TorahBookFilter.List.OrderBy(o => o.Value))
+	{
+		<button @onclick="@(() => OnButtonClicked(item))"
+						class="btn btn-outline-primary btn-sm @ActiveFilter(item)">
+			@item.Name &nbsp;<i class="fas fa-chevron-circle-right"></i>
+		</button>
+	}
+	<div class="mt-1 ms-2"><i class="fas fa-filter"></i></div>
+</div>
+
+@code {
+	[Parameter, EditorRequired] public required TorahBookFilter? CurrentFilter { get; set; }
+	[Parameter] public EventCallback<TorahBookFilter> OnFilterSelected { get; set; }
+
+	private TorahBookFilter? _SelectedFilter;
+	protected override void OnParametersSet()
+	{
+		_SelectedFilter = CurrentFilter;
+	}
+
+	public string ActiveFilter(TorahBookFilter filter)
+	{
+		return filter == CurrentFilter ? "active" : "";
+	}
+
+	private void OnButtonClicked(TorahBookFilter filter)
+	{
+		OnFilterSelected.InvokeAsync(filter);
+	}
+}

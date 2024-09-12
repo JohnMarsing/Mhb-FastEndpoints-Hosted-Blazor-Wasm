@@ -1,0 +1,32 @@
+﻿
+<div class="d-flex justify-content-end mt-2">
+	@foreach (var item in Enums.TorahBookFilter.List.OrderBy(o => o.Value))
+	{
+		<button @onclick="@(() => OnButtonClicked(item))"
+						class="btn btn-outline-primary btn-sm @ActiveFilter(item)">
+			@item.Name &nbsp;<i class="fas fa-chevron-circle-right"></i>
+		</button>
+	}
+	<div class="mt-1 ms-2"><i class="fas fa-filter"></i></div>
+</div>
+
+@code {
+	[Parameter, EditorRequired] public required Enums.TorahBookFilter? CurrentFilter { get; set; }
+	[Parameter] public EventCallback<Enums.TorahBookFilter> OnFilterSelected { get; set; }
+
+	private Enums.TorahBookFilter? _SelectedFilter;
+	protected override void OnParametersSet()
+	{
+		_SelectedFilter = CurrentFilter;
+	}
+
+	public string ActiveFilter(Enums.TorahBookFilter filter)
+	{
+		return filter == CurrentFilter ? "active" : "";
+	}
+
+	private void OnButtonClicked(Enums.TorahBookFilter filter)
+	{
+		OnFilterSelected.InvokeAsync(filter);
+	}
+}
