@@ -17,6 +17,7 @@ public abstract class TorahBookFilter : SmartEnum<TorahBookFilter>
 
 	#region Extra Fields
 	public abstract BibleBook BibleBook { get; }
+	public abstract string Abrv { get; }
 	#endregion
 
 	#region Private Instantiation
@@ -30,33 +31,38 @@ public abstract class TorahBookFilter : SmartEnum<TorahBookFilter>
 	{
 		public GenesisSE() : base(BibleBook.Genesis.Name, BibleBook.Genesis.Value) { }
 		public override BibleBook BibleBook => BibleBook.Genesis;
+		public override string Abrv =>  this.BibleBook.Abrv;
 	}
 
 	private sealed class ExodusSE : TorahBookFilter
 	{
 		public ExodusSE() : base(BibleBook.Exodus.Name, BibleBook.Exodus.Value) { }
 		public override BibleBook BibleBook => BibleBook.Exodus;
+		public override string Abrv =>  this.BibleBook.Abrv;
 	}
 
 	private sealed class LeviticusSE : TorahBookFilter
 	{
 		public LeviticusSE() : base(BibleBook.Leviticus.Name, BibleBook.Leviticus.Value) { }
 		public override BibleBook BibleBook => BibleBook.Leviticus;
+		public override string Abrv => this.BibleBook.Abrv;
 	}
 
 	private sealed class NumbersSE : TorahBookFilter
 	{
 		public NumbersSE() : base(BibleBook.Numbers.Name, BibleBook.Numbers.Value) { }
 		public override BibleBook BibleBook => BibleBook.Numbers;
+		public override string Abrv => this.BibleBook.Abrv;
 	}
 
 	private sealed class DeuteronomySE : TorahBookFilter
 	{
 		public DeuteronomySE() : base(BibleBook.Deuteronomy.Name, BibleBook.Deuteronomy.Value) { }
 		public override BibleBook BibleBook => BibleBook.Deuteronomy;
+		public override string Abrv => this.BibleBook.Abrv;
 	}
 	#endregion
 
 }
 
-
+// Ignore Spelling: Abrv

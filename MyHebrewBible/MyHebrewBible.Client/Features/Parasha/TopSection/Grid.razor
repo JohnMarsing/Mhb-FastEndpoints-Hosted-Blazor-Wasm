@@ -5,34 +5,75 @@
 <div class="card border-info">
 
 	<div class="card-header">
-		<FilterButtons CurrentFilter="TorahBookFilter" OnFilterSelected="ReturnedFilter" />
+		<FilterButtons CurrentFilter="CurrentFilter"
+									 OnFilterSelected="ReturnedFilter"
+									 MediaQuery="@MediaQuery" />
 
 		<div class="d-flex justify-content-center mt-3">
 			<div class="pe-2 fs-4">
-				@TorahBookFilter!.Name
+				@CurrentFilter!.Name
 			</div>
 			<div class="pe-2 fs-4">
-				<i>@TorahBookFilter.BibleBook.TransliterationInHebrew</i>
+				<i>@CurrentFilter.BibleBook.TransliterationInHebrew</i>
 			</div>
 			<div class="pe-2">
-				<span class="hebrew">@TorahBookFilter.BibleBook.NameInHebrew</span>
+				<span class="hebrew">@CurrentFilter.BibleBook.NameInHebrew</span>
 			</div>
 		</div>
 	</div>
 
 	<QuickGrid Items="@filteredItems">
-		<PropertyColumn Property="@(p => p.TorahAbrv)" Title="Torah" />
-		<PropertyColumn Property="@(p => p.Date.ToString(DateFormat.YYYY_MM_DD))" Align="Align.Center" Title="Date" />
-		<PropertyColumn Property="@(p => p.ParashaName)" Sortable="false" Align="Align.Left" Title="Parasha Name" />
-		<PropertyColumn Property="@(p => p.Haftorah)" Sortable="false" Align="Align.Left" />
-		<PropertyColumn Property="@(p => p.Brit)" Sortable="false" Align="Align.Left" />
+
+		@if (MediaQuery == MediaQuery.MdOrLgOrXl)
+		{
+			<TemplateColumn Title="Torah">
+				<a @onclick="@(() => ButtonClicked(context.Value))" class="text-decoration-underline"
+					 title="Id: @context.Value @context.Date.ToString(DateFormat.YYYY_MM_DD)">
+					@context.TorahAbrv
+				</a>
+				@* <i class="fas fa-chevron-right"></i> *@
+			</TemplateColumn>
+		}
+		else
+		{
+			<TemplateColumn Title="Torah">
+				<button @onclick="@(() => ButtonClicked(context.Value))" 
+						class="btn btn-outline-info btn-sm"
+						title="Id: @context.Value @context.Date.ToString(DateFormat.YYYY_MM_DD)">
+					@context.TorahAbrvXsSm 
+				</button>
+				@* <i class="fas fa-chevron-right"></i> *@
+			</TemplateColumn>
+
+		}
+
+		<PropertyColumn Property="@(p => p.Date.ToString(@dateFormat))" Align="Align.Center" Title="Date" />
+
+		@if (MediaQuery == MediaQuery.MdOrLgOrXl)
+		{
+			<PropertyColumn Property="@(p => p.ParashaName)" Sortable="false" Align="Align.Left" Title="Parasha Name" />
+			<PropertyColumn Property="@(p => p.Meaning)" Sortable="false" Align="Align.Left" />
+			<PropertyColumn Property="@(p => p.Haftorah)" Sortable="false" Align="Align.Left" />
+			<PropertyColumn Property="@(p => p.Brit)" Sortable="false" Align="Align.Left" />
+		}
+		else
+		{
+			<TemplateColumn Title="Haftorah / Brit">
+				@context.HaftorahAbrv <br /> @context.BritAbrv
+			</TemplateColumn>
+		}
 	</QuickGrid>
 </div>
 
 @code {
 	[Parameter, EditorRequired] public TorahBookFilter? TorahBookFilter { get; set; }
+	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
+	[Parameter, EditorRequired] public EventCallback<int> OnTriennialReadingSelected { get; set; }
 
 	TorahBookFilter? CurrentFilter;
+
+	//private string dateFormat => (MediaQuery == MediaQuery.MdOrLgOrXl ? DateFormat.YYYY_MM_DD : DateFormat.MMM_d);  
+	private string dateFormat => DateFormat.MMM_d;
 
 	List<ParashaEnums.Triennial>? itemList;
 	IQueryable<ParashaEnums.Triennial>? items;
@@ -46,6 +87,13 @@
 		CurrentFilter = TorahBookFilter;
 		itemList = Enums.Triennial.List.ToList();
 		items = itemList.AsQueryable();
+	}
+
+	protected int TriennialReadingId;
+	private void ButtonClicked(int id)
+	{
+		TriennialReadingId = id;
+		OnTriennialReadingSelected.InvokeAsync(id);
 	}
 
 	private void ReturnedFilter(TorahBookFilter filter)

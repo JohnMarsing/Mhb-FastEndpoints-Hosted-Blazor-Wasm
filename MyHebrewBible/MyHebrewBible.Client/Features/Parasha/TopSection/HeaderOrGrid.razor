@@ -4,8 +4,6 @@
 @inject IToastService? Toast
 @inject ILogger<HeaderOrGrid>? Logger
 
-@* @if (TorahBookFilter is not null){ } *@
-
 <div class="card border-primary mb-3">
 
 	<div class="card-header">
@@ -19,27 +17,50 @@
 		</div>
 	</div>
 
-	@if (ToggleValueShowGrid)
-	{
-		@if (TorahBookFilter is not null)
+	<div class="@MediaQuery.XsOrSm.DivClass">
+		@if (ToggleValueShowGrid)
 		{
-		<Grid TorahBookFilter="TorahBookFilter" />
+			@if (TorahBookFilter is not null)
+			{
+				<Grid TorahBookFilter="TorahBookFilter"
+					 MediaQuery="@MediaQuery.XsOrSm"
+							OnTriennialReadingSelected="ReturnedTriennialReadingId" />
+			}
 		}
-	}
-	else
-	{
-		<Header CurrentReading="CurrentReading" />
-	}
-</div>
+		else
+		{
+			<Header CurrentReading="CurrentReading" MediaQuery="@MediaQuery.XsOrSm" />
+		}
 
+	</div>
+
+	<div class="@MediaQuery.MdOrLgOrXl.DivClass">
+		@if (ToggleValueShowGrid)
+		{
+			@if (TorahBookFilter is not null)
+			{
+				<Grid TorahBookFilter="TorahBookFilter"
+							MediaQuery="@MediaQuery.MdOrLgOrXl"
+							OnTriennialReadingSelected="ReturnedTriennialReadingId" />
+			}
+		}
+		else
+		{
+			<Header CurrentReading="CurrentReading" MediaQuery="@MediaQuery.MdOrLgOrXl" />
+		}
+
+	</div>
+
+</div>
 
 
 @code {
 	[Parameter, EditorRequired] public Enums.Triennial? CurrentReading { get; set; }
+	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
+	[Parameter, EditorRequired] public EventCallback<int> OnTriennialReadingSelected { get; set; }
 
 	TorahBookFilter? TorahBookFilter;
 	bool ToggleValueShowGrid;
-
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -61,4 +82,12 @@
 		state!.Update(headerToggle, Enums.LocalStorage.Grid);
 		ToggleValueShowGrid = headerToggle;
 	}
+
+	private void ReturnedTriennialReadingId(int id)
+	{
+		ToggleValueShowGrid = false;
+		state!.Update(false, Enums.LocalStorage.Grid);
+		OnTriennialReadingSelected.InvokeAsync(id);
+	}
+
 }

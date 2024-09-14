@@ -1,12 +1,19 @@
-﻿@using MyHebrewBible.Client.Features.Parasha.Enums
+﻿@using GlobalEnums = MyHebrewBible.Client.Enums
+@using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
 
 <div class="card">
 
 	<div class="card-body pb-0">
 		<div class="d-flex justify-content-start">
-			<div class="pe-3 text-center"><b>Next Shabbat</b><br /><b>@Constants.GetNextShabbatDate().ToString(DateFormat.YYYY_MM_DD)</b></div>
-			<div class="pe-3 text-center"><b>Name</b><br /><i>@CurrentReading!.ParashaName</i></div>
-			<div class="pe-3 text-center"><b>Meaning</b><br />@CurrentReading!.Meaning</div>
+			<div class="pe-3 text-center"><b>Torah</b><br /><b>@CurrentReading!.TorahAbrv</b></div>
+			<div class="pe-3 text-center"><b>Next Shabbat</b><br /><b>@ParashaEnums.Constants.GetNextShabbatDate().ToString(DateFormat.YYYY_MM_DD)</b></div>
+
+			@if (MediaQuery == GlobalEnums.MediaQuery.MdOrLgOrXl)
+			{
+				<div class="pe-3 text-center"><b>Name</b><br /><i>@CurrentReading!.ParashaName</i></div>
+				<div class="pe-3 text-center"><b>Meaning</b><br />@CurrentReading!.Meaning</div>
+			}
+
 			<div class="pe-3 text-center">
 				<b>Ahavta <i class="fas fa-external-link-square-alt"></i></b><br />
 				@CurrentReading!.AhavtaURL
@@ -15,11 +22,29 @@
 					<i class="fas fa-external-link-alt"></i>
 				</a>
 			</div>
+
+			<div class="pe-3 text-center">
+				<i class="fas fa-chevron-left"></i> Prev
+@* 				<button @onclick="@(() => ButtonClicked(context.Value))" 
+					class="btn btn-outline-info btn-sm"
+					 title="Id: @context.Value @context.Date.ToString(DateFormat.MMM_d)">
+				</button> *@
+			</div>
+
+			<div class="pe-3 text-center">
+				<i class="fas fa-chevron-right"></i> Next
+				@* 				<button @onclick="@(() => ButtonClicked(context.Value))"
+				class="btn btn-outline-info btn-sm"
+				title="Id: @context.Value @context.Date.ToString(DateFormat.MMM_d)">
+				</button> *@
+			</div>
+
 		</div>
 	</div>
 
 </div>
 
 @code {
-	[Parameter, EditorRequired] public Triennial? CurrentReading { get; set; }
+	[Parameter, EditorRequired] public ParashaEnums.Triennial? CurrentReading { get; set; }
+	[Parameter, EditorRequired] public GlobalEnums.MediaQuery? MediaQuery { get; set; }
 }
