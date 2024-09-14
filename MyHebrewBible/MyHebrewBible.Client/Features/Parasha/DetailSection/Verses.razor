@@ -10,13 +10,14 @@
 
 				<div>
 					<h3 class="@VerseGroup!.HeaderColor"><b>@VerseGroup!.Title</b></h3>
-					<h6>@SubTitle</h6>
+					@* <h6>@SubTitle</h6> *@
+					@((MarkupString)SubTitle!)
 				</div>
 
 				<div>
 					<ShowHideToggle ToggleValue="ToggleValue"
-																		VerseGroup="VerseGroup"
-																		OnToggleSelected="ReturnedToggle" />
+													VerseGroup="VerseGroup"
+													OnToggleSelected="ReturnedToggle" />
 				</div>
 			</div>
 		</div>
@@ -32,11 +33,23 @@
 			}
 			else
 			{
-				@foreach (var item in HaftorahOrBritVersesList!)
+				if (VerseGroup == Enums.VerseGroup.Haftorah)
 				{
-					<div class="card-body">
-						<VerseParagraph VerseParagraphRange="item" />
-					</div>
+					@foreach (var item in HaftorahVersesList!)
+					{
+						<div class="card-body">
+							<VerseParagraph VerseParagraphRange="item" />
+						</div>
+					}
+				}
+				else
+				{
+					@foreach (var item in BritVersesList!)
+					{
+						<div class="card-body">
+							<VerseParagraph VerseParagraphRange="item" />
+						</div>
+					}
 				}
 			}
 		}
@@ -52,7 +65,8 @@
 	bool ToggleValue;
 
 	private VerseParagraphRange? TorahVerses;
-	private List<VerseParagraphRange>? HaftorahOrBritVersesList;
+	private List<VerseParagraphRange>? HaftorahVersesList;
+	private List<VerseParagraphRange>? BritVersesList;
 	private bool DataExists = false;
 
 	protected override async Task OnParametersSetAsync()
@@ -62,13 +76,21 @@
 		try
 		{
 			ToggleValue = await state!.Get(LocalStorage!);
+
 			if (VerseGroup == Enums.VerseGroup.Torah)
 			{
 				PopulateTorahVerses();
 			}
 			else
 			{
-				PopulateHaftorahOrBritVerses();
+				if (VerseGroup == Enums.VerseGroup.Haftorah)
+				{
+					PopulateHaftorahVerses();
+				}
+				else
+				{
+					PopulateBritVerses();
+				}
 			}
 		}
 		catch (Exception ex)
@@ -82,37 +104,46 @@
 	{
 		TorahVerses = new VerseParagraphRange(
 			CurrentReading!.TorahVerse.BegId, CurrentReading.TorahVerse.EndId
-			, CurrentReading.TorahVerse.BibleBook.Title + CurrentReading.TorahVerse.ChapterVerse);
-		
+			, CurrentReading.TorahVerse.BibleBook.Title + " " + CurrentReading.TorahVerse.ChapterVerse);
+
 		DataExists = true;
 	}
 
-	private void PopulateHaftorahOrBritVerses()
+	private void PopulateHaftorahVerses()
 	{
-		if (VerseGroup == Enums.VerseGroup.Haftorah)
+		if (CurrentReading!.HaftorahVerses is not null && CurrentReading!.HaftorahVerses.Any())
 		{
-			if (CurrentReading!.HaftorahVerses is not null && CurrentReading!.HaftorahVerses.Any())
+			HaftorahVersesList = new List<VerseParagraphRange>();
+			foreach (var item in CurrentReading.HaftorahVerses)
 			{
-				HaftorahOrBritVersesList = new List<VerseParagraphRange>();
-				foreach (var item in CurrentReading.HaftorahVerses)
-				{
-					HaftorahOrBritVersesList.Add(new VerseParagraphRange(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
-				}
-				DataExists = true;
+				HaftorahVersesList.Add(new VerseParagraphRange(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
 			}
+			DataExists = true;
 		}
 		else
 		{
-			if (CurrentReading!.BritVerses is not null && CurrentReading!.BritVerses.Any())
-			{
-				HaftorahOrBritVersesList = new List<VerseParagraphRange>();
-				foreach (var item in CurrentReading.BritVerses)
-				{
-					HaftorahOrBritVersesList.Add(new VerseParagraphRange(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
-				}
-				DataExists = true;
-			}
+			HaftorahVersesList?.Clear();
+			//Toast!.ShowInfo($"Cleared Verses {nameof(PopulateHaftorahVerses)}");
 		}
+	}
+
+	private void PopulateBritVerses()
+	{
+		if (CurrentReading!.BritVerses is not null && CurrentReading!.BritVerses.Any())
+		{
+			BritVersesList = new List<VerseParagraphRange>();
+			foreach (var item in CurrentReading.BritVerses)
+			{
+				BritVersesList.Add(new VerseParagraphRange(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
+			}
+			DataExists = true;
+		}
+		else
+		{
+			BritVersesList?.Clear();
+			//Toast!.ShowInfo($"Cleared Verses {nameof(PopulateBritVerses)}");
+		}
+
 	}
 
 	private void ReturnedToggle(ShowHideToggleVM vm)

@@ -1,0 +1,116 @@
+﻿@page "/HealthChecks/Parasha"
+
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
+@using MyHebrewBible.Client.Features.Parasha
+
+<div class="card mb-3 border-warning">
+	<div class="card-header">
+		<h4 class="card-title text-center"><code>HaftorahVerses is null</code></h4>
+	</div>
+	<div class="card-body">
+		<TableTemplate Items="ParashaEnums.Triennial.List.Where(w => w.HaftorahVerses is null).OrderBy(o => o.Value).ToList()">
+			<TableHeader>
+				<th class="text-info">Id</th>
+				<th class="text-primary">Name</th>
+				<th class="text-danger">Haftorah</th>
+			</TableHeader>
+			<RowTemplate>
+				<td>@context.Value</td>
+				<td>@context.Name</td>
+				<td></td>
+			</RowTemplate>
+		</TableTemplate>
+	</div>
+	
+</div>
+
+<div class="card mb-3 border-warning">
+	<div class="card-header">
+		<h4 class="card-title text-center"><code>BritVerses is null</code></h4>
+	</div>
+	<div class="card-body">
+		<TableTemplate Items="ParashaEnums.Triennial.List.Where(w => w.BritVerses is null).OrderBy(o => o.Value).ToList()">
+			<TableHeader>
+				<th class="text-info">Id</th>
+				<th class="text-primary">Name</th>
+				<th class="text-danger">BritVerses</th>
+			</TableHeader>
+			<RowTemplate>
+				<td>@context.Value</td>
+				<td>@context.Name</td>
+				<td>
+				</td>
+			</RowTemplate>
+		</TableTemplate>
+	</div>
+</div>
+
+
+<div class="card mb-3 border-warning">
+	<div class="card-header">
+		<h4 class="card-title text-center"><code>HaftorahVerses is not null</code></h4>
+	</div>
+	<div class="card-body">
+		<TableTemplate Items="ParashaEnums.Triennial.List.Where(w => w.HaftorahVerses is not null).OrderBy(o => o.Value).ToList()">
+			<TableHeader>
+				<th class="text-info">Id</th>
+				<th class="text-primary">Name</th>
+				<th class="text-danger">Haftorah</th>
+			</TableHeader>
+			<RowTemplate>
+				<td>@context.Value</td>
+				<td>@context.Name</td>
+				<td>
+					@foreach (var item in @context.HaftorahVerses!)
+					{
+						if (item.BegId > item.EndId)
+						{
+							<span>@item.BibleBook.Title @item.ChapterVerse</span> <br />
+							<span>@item.BegId; @item.EndId</span>
+						}
+					    
+					}
+				</td>
+			</RowTemplate>
+		</TableTemplate>
+	</div>
+	@* <p class="card-footer text-center"><code><small>BibleBook.List.Count</small></code>: @BibleBook.List.Count</p> *@
+</div>
+
+
+
+<div class="card mb-3 border-warning">
+	<div class="card-header">
+		<h4 class="card-title text-center"><code>BritVerses is not null</code></h4>
+	</div>
+	<div class="card-body">
+		<TableTemplate Items="ParashaEnums.Triennial.List.Where(w => w.BritVerses is not null).OrderBy(o => o.Value).ToList()">
+			<TableHeader>
+				<th class="text-info">Id</th>
+				<th class="text-primary">Name</th>
+				<th class="text-danger">BritVerses</th>
+			</TableHeader>
+			<RowTemplate>
+				<td>@context.Value</td>
+				<td>@context.Name</td>
+				<td>
+					@foreach (var item in @context.BritVerses!)
+					{
+						if (item.BegId > item.EndId)
+						{
+							<span>@item.BibleBook.Title @item.ChapterVerse</span> <br />
+							<span>@item.BegId; @item.EndId</span>
+						}
+					}
+				</td>
+			</RowTemplate>
+		</TableTemplate>
+	</div>
+</div>
+
+
+
+@code {
+
+}

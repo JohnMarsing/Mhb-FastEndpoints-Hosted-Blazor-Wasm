@@ -1,4 +1,15 @@
-﻿namespace MyHebrewBible.Client.Features.Parasha.Enums;
+﻿using Microsoft.AspNetCore.Components;
+
+namespace MyHebrewBible.Client.Features.Parasha.Enums;
+
+public static class ParashaFacts
+{
+	//public abstract BibleBookPrevNext NavigationPrevious(int Chapter);
+	//public abstract BibleBookPrevNext NavigationNext(int Chapter);
+
+	public const int FirstParashaId = 1;
+	public const int LastParashaId = 157;
+}
 
 public static class Constants
 {
@@ -18,6 +29,27 @@ public static class Constants
 		DateTimeOffset localTime = DateTimeOffset.Now;
 		TimeSpan utcOffset = localZone.GetUtcOffset(localTime);
 		return utcOffset;
+	}
+
+	public static MarkupString DaysFromOrToShabbat(DateTime dt)
+	{
+		TimeSpan timeSpan = dt - GetNextShabbatDate();
+		int days = timeSpan.Days;
+		if (days < 0)
+		{
+				return (MarkupString)$" <b>{Math.Abs(days)}</b> days <b class='text-danger'>before</b> next Shabbat";
+		}
+		else 
+		{
+			if (days > 0)
+			{
+				return (MarkupString)$" <b>{Math.Abs(days)}</b> days <b class='text-primary'>after</b> next Shabbat";
+			}
+			else 
+			{
+				return (MarkupString)$" today is Shabbat! <b class='text-success fs-5'>Shabbat Shalom!</b>";
+			}
+		}
 	}
 
 	// ToDo: probable need to remove `bool OverRideWithSaturday6PM` and `GetNextArizonaSaturday6PM` and write some unit tests

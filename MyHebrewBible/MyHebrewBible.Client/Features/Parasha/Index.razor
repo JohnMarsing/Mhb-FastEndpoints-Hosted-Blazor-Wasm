@@ -13,22 +13,33 @@
 
 @if (CurrentReading is not null)
 {
-	<HeaderOrGrid CurrentReading="CurrentReading" />
+
+	<div class="@MediaQuery.XsOrSm.DivClass">
+		<HeaderOrGrid CurrentReading="CurrentReading"
+									OnTriennialReadingSelected="ReturnedTriennialReadingId" MediaQuery="@MediaQuery.XsOrSm" />
+
+	</div>
+
+	<div class="@MediaQuery.MdOrLgOrXl.DivClass">
+		<HeaderOrGrid CurrentReading="CurrentReading"
+									OnTriennialReadingSelected="ReturnedTriennialReadingId" MediaQuery="@MediaQuery.MdOrLgOrXl" />
+
+	</div>
+	
+	<Verses CurrentReading="CurrentReading"
+					SubTitle="@CurrentReading!.TorahPlusDaysFromOrToShabbat"
+					LocalStorage="Enums.LocalStorage.Torah"
+					VerseGroup="Enums.VerseGroup.Torah" />
 
 	<Verses CurrentReading="CurrentReading"
-												SubTitle="@CurrentReading!.Torah"
-												LocalStorage="Enums.LocalStorage.Torah"
-												VerseGroup="Enums.VerseGroup.Torah" />
+					SubTitle="@CurrentReading!.Haftorah"
+					LocalStorage="Enums.LocalStorage.Haftorah"
+					VerseGroup="Enums.VerseGroup.Haftorah" />
 
 	<Verses CurrentReading="CurrentReading"
-												SubTitle="@CurrentReading!.Haftorah"
-												LocalStorage="Enums.LocalStorage.Haftorah"
-												VerseGroup="Enums.VerseGroup.Haftorah" />
-
-	<Verses CurrentReading="CurrentReading"
-												SubTitle="@CurrentReading!.Brit"
-												LocalStorage="Enums.LocalStorage.Brit"
-												VerseGroup="Enums.VerseGroup.Brit" />
+					SubTitle="@CurrentReading!.Brit"
+					LocalStorage="Enums.LocalStorage.Brit"
+					VerseGroup="Enums.VerseGroup.Brit" />
 }
 else
 {
@@ -36,24 +47,71 @@ else
 }
 
 @code {
+	//@($"{CurrentReading!.Torah} {CurrentReading!.DaysFromOrToShabbat})"
 	public Enums.Triennial? CurrentReading { get; set; }
+
 	protected string? PageTitle;
+	protected bool IsReadingCurrent;
 
 	protected override void OnInitialized()
 	{
-		CurrentReading = Enums.Triennial.List
-		.Where(w => w.Date == Enums.Constants.GetNextShabbatDate())  // .GetNextShabbatDate(OverRideWithSaturday6PM:true)) or .GetNextShabbatDate())
-		.SingleOrDefault();
+		CurrentReading = GetCurrentReading($"{nameof(Index)}!{nameof(OnInitialized)}");
+	}
 
-		if (CurrentReading is null)
+	private Enums.Triennial? GetCurrentReading(string calledBy)
+	{
+		Enums.Triennial? _reading =
+			Enums.Triennial.List
+			.Where(w => w.Date == Enums.Constants.GetNextShabbatDate())
+			.SingleOrDefault();
+
+		if (_reading is null)
 		{
-			Logger!.LogWarning("{Class}!{Method}; CurrentReading is null", nameof(Index), nameof(OnInitialized));
-			Toast!.ShowWarning($"Current reading is not found; inside {nameof(Index)}");
+			Logger!.LogWarning("{CalledBy}; _reading is null", calledBy);
+			Toast!.ShowWarning($"Current reading is not found; called by: {calledBy}");
+
+			//ToDo: maybe I should set it to a default e.g. Gen 1:1
+
+			PageTitle = "Parasha ?";
+
+			return null;
 		}
 		else
 		{
-			PageTitle = $"{CurrentReading.ParashaName} {CurrentReading.TorahAbrv}";
+			PageTitle = $"{_reading.ParashaName} {_reading.TorahAbrv}";
+			return _reading;
 		}
+
 	}
 
+	private void ReturnedTriennialReadingId(int id)
+	{
+		Enums.Triennial? _returnedReading = _returnedReading = Enums.Triennial.List.Where(w => w.Value == id).SingleOrDefault();
+		Enums.Triennial? _currentReading = GetCurrentReading($"{nameof(Index)}!{nameof(ReturnedTriennialReadingId)}, [id: {id}]");
+
+		if (_returnedReading is null)
+		{
+			Logger!.LogWarning("{Class}!{Method}; NonCurrentReading is null", nameof(Index), nameof(ReturnedTriennialReadingId));
+			Toast!.ShowWarning($"Requested reading [Id:{id}] is not found; inside {nameof(Index)}");
+		}
+		else
+		{
+			if (_currentReading is not null)
+			{
+				if (_returnedReading.Value != _currentReading.Value)
+				{
+					PageTitle = $"{_returnedReading.ParashaName} {_returnedReading.TorahAbrv}";
+					CurrentReading = _returnedReading;
+					Toast!.ShowSuccess($"Now viewing {CurrentReading.ParashaName} {CurrentReading.TorahAbrv}, see below or hide the grid to see the verses");
+				}
+				else
+				{
+					Toast!.ShowInfo($"Now viewing the Current Parasha Reading {_currentReading.ParashaName} {_currentReading.TorahAbrv}");
+				}
+				//StateHasChanged();
+			}
+		}
+
+
+	}
 }

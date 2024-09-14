@@ -9,11 +9,8 @@
 <LoadingComponent IsLoading="verses == null" TurnSpinnerOff="TurnSpinnerOff">
 	@foreach (var item in verses!)
 	{
-@* 		
-	
- *@
 		<p class="fs-5">
-			<a title="@item.BCV" @onclick="@(e => ButtonClick(item.ID, item.Verse))">
+			<a title="@item.BCV [@item.ID]" @onclick="@(e => ButtonClick(item.ID, item.Verse))">
 				<sup class="btn btn-outline-primary py-0 px-1">
 					<b>@item.Verse</b>
 				</sup>
@@ -28,26 +25,24 @@
 	[Parameter, EditorRequired] public VerseParagraphRange? VerseParagraphRange { get; set; }
 	[Parameter] public EventCallback<VerseSelected> OnVerseSelected { get; set; }
 
-	//protected long VerseRowCount;
-
 	private ICollection<BibleVerse>? verses = null;
 	protected bool TurnSpinnerOff = false;
 
-	protected override async Task OnInitializedAsync()
+	protected override async Task OnParametersSetAsync()
 	{
-		Logger!.LogInformation("{Class}!{Method}", nameof(VerseParagraph), nameof(OnInitializedAsync));
+		Logger!.LogInformation("{Class}!{Method}", nameof(VerseParagraph), nameof(OnParametersSetAsync));
 		try
 		{
-			await Task.Delay(500);  // ToDo: comment this out in production
-			if (VerseParagraphRange!.BegId >= VerseParagraphRange.EndId) throw new System.ApplicationException("BegId >= EndId");
-			if (VerseParagraphRange!.EndId - VerseParagraphRange.BegId > 300) throw new System.ApplicationException("Verse range can not exceed 300"); // ToDo: extract this
+			//await Task.Delay(200);  // ToDo: comment this out in production
+			if (VerseParagraphRange!.BegId >= VerseParagraphRange.EndId) 
+				throw new System.ApplicationException($"BegId [{VerseParagraphRange!.BegId}] >= EndId [{VerseParagraphRange!.EndId}]");
+			if (VerseParagraphRange!.EndId - VerseParagraphRange!.BegId > 300) throw new System.ApplicationException("Verse range can not exceed 300"); // ToDo: extract this
 			verses = await Api!.GetVerseListAsync(VerseParagraphRange.BegId, VerseParagraphRange.EndId);
-			//VerseRowCount = verses.Count;
 		}
 		catch (Exception ex)
 		{
-			Logger!.LogError(ex, "{Class}!{Method}", nameof(VerseParagraph), nameof(OnInitializedAsync));
-			Toast!.ShowError($"{Global.ToastShowError} {nameof(VerseParagraph)}!{nameof(OnInitialized)}");
+			Logger!.LogError(ex, "{Class}!{Method}", nameof(VerseParagraph), nameof(OnParametersSetAsync));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(VerseParagraph)}!{nameof(OnParametersSetAsync)}");
 		}
 		finally
 		{

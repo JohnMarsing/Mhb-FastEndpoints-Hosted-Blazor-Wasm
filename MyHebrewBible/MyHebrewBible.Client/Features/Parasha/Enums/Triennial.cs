@@ -1,4 +1,4 @@
-﻿// Ignore Spelling: Abrv Deu
+﻿// Ignore Spelling: Abrv Deu Tri
 
 using Ardalis.SmartEnum;
 using MyHebrewBible.Client.Enums;
@@ -373,30 +373,13 @@ public abstract class Triennial : SmartEnum<Triennial>
 		}
 	}
 
-	public string Torah  // Genesis 1:1-19
+	public string TorahPlusDaysFromOrToShabbat
 	{
 		get
 		{
-			return $" {BibleBook.FromValue(this.TorahVerse.BibleBook).Name} {this.TorahVerse.ChapterVerse}";
+			return $" {BibleBook.FromValue(this.TorahVerse.BibleBook).Name} {this.TorahVerse.ChapterVerse} {Enums.Constants.DaysFromOrToShabbat(this.Date).ToString()}";
 		}
 	}
-
-	public string Haftorah
-	{
-		get
-		{
-			return HaftorahVerses is not null ? String.Join(", ", HaftorahVerses.Select(s => s.BibleBook.Name + " " + s.ChapterVerse)) : "";
-		}
-	}
-
-	public string Brit
-	{
-		get
-		{
-			return BritVerses is not null ? String.Join(", ", BritVerses.Select(s => s.BibleBook.Name + " " + s.ChapterVerse)) : "";
-		}
-	}
-
 
 
 	public string TorahAbrv // Gen 1:1-19
@@ -406,6 +389,49 @@ public abstract class Triennial : SmartEnum<Triennial>
 			return $" {BibleBook.FromValue(this.TorahVerse.BibleBook).Abrv} {this.TorahVerse.ChapterVerse}";
 		}
 	}
+
+	public string TorahAbrvXsSm 
+	{
+		get
+		{
+			return $" {BibleBook.FromValue(this.TorahVerse.BibleBook).Abrv} {this.TorahVerse.ChapterVerse}";
+		}
+	}
+
+	public string Haftorah
+	{
+		get
+		{
+			return HaftorahVerses is not null ? String.Join(", ", HaftorahVerses.Select(s => s.BibleBook.Title + " " + s.ChapterVerse)) : ""; // s.BibleBook.Name
+		}
+	}
+
+	public string HaftorahAbrv
+	{
+		get
+		{
+			return HaftorahVerses is not null ? String.Join(", ", HaftorahVerses.Select(s => s.BibleBook.Abrv + " " + s.ChapterVerse)) : "";
+		}
+	}
+
+	public string Brit
+	{
+		get
+		{
+			return BritVerses is not null ? String.Join(", ", BritVerses.Select(s => s.BibleBook.Title + " " + s.ChapterVerse)) : ""; // s.BibleBook.Name
+		}
+	}
+
+
+	public string BritAbrv
+	{
+		get
+		{
+			return BritVerses is not null ? String.Join(", ", BritVerses.Select(s => s.BibleBook.Abrv + " " + s.ChapterVerse)) : "";
+		}
+	}
+
+
 
 	#endregion
 

@@ -60,10 +60,10 @@ public class ParashaState : IParashaState
 	{
 		try
 		{
-			Logger!.LogInformation("{Class}!{Method}"
-				, nameof(ParashaState), nameof(Update));
+			Logger!.LogInformation("{Class}!{Method}", nameof(ParashaState), nameof(Update));
 			await this.localStorage!.SetItemAsync(localStorage.Key, toggle);
 			NotifyStateHasChanged();
+			Logger!.LogInformation("{Class}!{Method}, localStorage: {localStorage}", nameof(ParashaState), nameof(Update), localStorage.Name);
 		}
 		catch (Exception ex)
 		{
