@@ -1,0 +1,87 @@
+﻿@using Client.Enums
+
+
+@* <h2>IsXsOrSm: @IsXsOrSm</h2> *@
+
+@if (IsXsOrSm)
+{
+	<div class="list-group">
+
+		@foreach (var item in Nav.List.ToList()
+		.Where(w => w.IsPartOfList(PageListType.Layout))
+		.OrderBy(o => o.Sort))
+		{
+			<a href="@item.Index" title="@item.Title @item.HomeTitleSuffix"
+				 class="list-group-item list-group-item-warning ">
+				<div class="d-flex w-100 justify-content-between">
+					<i class="@item.Icon fa-fw fa-3x" aria-hidden="true"></i>
+					<span class="fs-4">@item.Title</span>
+					<span class="float-end text-info">
+						<span class="hebrew">@item.HomeFloatRightHebrew</span>
+					</span>
+				</div>
+			</a>
+		}
+
+	</div>
+}
+else
+{
+	<div class="row">
+		<div class="col-6">
+
+			<div class="list-group">
+
+				@foreach (var item in Nav.List.ToList()
+					.Where(w => w.IsPartOfList(PageListType.Layout)).Where(w => w.Value <= 8)
+					.OrderBy(o => o.Sort))
+				{
+					<a href="@item.Index" title="@item.Title @item.HomeTitleSuffix"
+						 class="list-group-item list-group-item-warning ">
+						<div class="d-flex w-100 justify-content-between">
+							<i class="@item.Icon fa-fw fa-3x" aria-hidden="true"></i>
+							<span class="fs-4">@item.Title</span>
+							<span class="float-end text-info">
+								<span class="hebrew">@item.HomeFloatRightHebrew</span>
+							</span>
+						</div>
+					</a>
+				}
+
+			</div>
+
+
+		</div>
+
+
+		<div class="col-6">
+
+			<div class="list-group">
+
+				@foreach (var item in Nav.List.ToList()
+					.Where(w => w.IsPartOfList(PageListType.Layout)).Where(w => w.Value > 8)
+					.OrderBy(o => o.Sort))
+				{
+					<a href="@item.Index" title="@item.Title @item.HomeTitleSuffix"
+						 class="list-group-item list-group-item-warning ">
+						<div class="d-flex w-100 justify-content-between">
+							<i class="@item.Icon fa-fw fa-3x" aria-hidden="true"></i>
+							<span class="fs-4">@item.Title</span>
+							<span class="float-end text-info">
+								<span class="hebrew">@item.HomeFloatRightHebrew</span>
+							</span>
+						</div>
+					</a>
+				}
+
+			</div>
+
+		</div>
+	</div>
+
+}
+
+
+@code {
+	[Parameter, EditorRequired] public bool IsXsOrSm { get; set; }
+}

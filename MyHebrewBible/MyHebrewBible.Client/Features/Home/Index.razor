@@ -1,56 +1,27 @@
 ﻿@page "/"
 @using MyHebrewBible.Client.Enums
 
-<PageTitle>Home | MHB</PageTitle>
-
+<PageTitle>My Hebrew Bible</PageTitle>
+@* <PageTitle>Home | MHB</PageTitle> *@
 @* <PageHeader PageEnum="Enums.Nav.Home" /> *@
 
 <div class="text-center">
-  <img src="/images/MyHebrewBible.svg" class="filter-green" />
+  @* <img src="/images/MyHebrewBible.svg" class="filter-green" /> *@
+	<h2>My Hebrew Bible</h2>
 </div>
 
-<div class="@MediaQuery.Xs.DivClass">
-	<div class="row">
-		<div class="col-12">
-			<div class="d-grid gap-0 row-gap-2">
-				<MainBody />
-				<SidebarButtons />
-			</div>
+<div class="card border-info">
+
+	<div class="@MediaQuery.XsOrSm.DivClass">
+		<div class="card-body">
+		<SidebarButtonsFlex IsXsOrSm="true" />
 		</div>
 	</div>
-</div>
 
-<div class="@MediaQuery.Sm.DivClass">
-	<div class="row">
-		<div class="col-6">
-			<MainBody />
-		</div>
-		<div class="col-6">
-			<SidebarButtons />
+	<div class="@MediaQuery.MdOrLgOrXl.DivClass">
+		<div class="card-body">
+		<SidebarButtonsFlex IsXsOrSm="false" />
 		</div>
 	</div>
-</div>
 
-<div class="@MediaQuery.Md.DivClass">
-	<div class="row">
-		<div class="col-7">
-			<MainBody />
-		</div>
-		<div class="col-5">
-			<SidebarButtons />
-		</div>
-	</div>
-</div>
-
-<div class="@MediaQuery.LgOrXl.DivClass">
-	<div class="row">
-
-		<div class="col-8">
-			<MainBody />
-		</div>
-
-		<div class="col-4">
-			<SidebarButtons />
-		</div>
-	</div>
 </div>

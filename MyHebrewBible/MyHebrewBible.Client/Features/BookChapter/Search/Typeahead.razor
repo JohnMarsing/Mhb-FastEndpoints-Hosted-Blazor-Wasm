@@ -1,16 +1,7 @@
 ﻿@using MyHebrewBible.Client.Enums
 @using MyHebrewBible.Client.Layout
 
-@* [Flex | Grow and shrink](https://getbootstrap.com/docs/5.3/utilities/flex/#grow-and-shrink) *@
-@* [Flex | Auto margins](https://getbootstrap.com/docs/5.3/utilities/flex/#auto-margins) *@
-
-
-@* <TypeaheadDebug Msg="@_msg" BibleBookGottenFromParent="@BibleBookGottenFromParent" SelectedBook="@SelectedBook" ReturnedBookAndChapterFromChapterButtons="@ReturnedBookAndChapterFromChapterButtons" /> *@
-
-<div class="d-flex mb-3">
-	<div class="me-auto p-2">
-
-		<BlazoredTypeahead SearchMethod="SearchBibleBooks"
+<BlazoredTypeahead SearchMethod="SearchBibleBooks"
 											 TValue="BibleBook"
 											 TItem="BibleBook"
 											 Value="SelectedBook"
@@ -47,23 +38,6 @@
 				}
 			</ResultTemplate>
 		</BlazoredTypeahead>
-	</div>
-
-	<div class="p-1">
-		<HomeButton />
-	</div>
-
-	<div class="p-1">
-		<SitemapButton />
-	</div>
-
-	<div class="p-1">
-		<a href="/" class="btn btn-primary" title="Customize book chapter settings">
-			<i class="fas fa-cog"></i>
-		</a>
-	</div>
-
-</div>
 
 @if (ShowChapterButtons)
 {
