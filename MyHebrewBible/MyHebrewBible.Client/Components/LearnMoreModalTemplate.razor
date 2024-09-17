@@ -1,6 +1,6 @@
 ﻿@if (ModalIsNotShownToggle)
 {
-	<button type="button" class="btn btn-outline-info btn-lg ms-3 px-2"
+	<button type="button" class="btn btn-info"
 						@onclick="() => ShowModal()">
 			<i class="fas fa-info"></i>
 		</button>
@@ -24,13 +24,6 @@ else
 					@ChildBodyContent
 
 				</div>
-
-				@* 				<div class="modal-footer bg-warning">
-			<button type="button" class="btn btn-primary" @onclick="CloseModal">
-			Cancel
-			</button>
-			</div>
-			*@
 			</div>
 		</div>
 	</div>

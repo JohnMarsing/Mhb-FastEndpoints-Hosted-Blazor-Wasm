@@ -1,8 +1,10 @@
-﻿
+﻿@using MyHebrewBible.Client.Layout
+
 <PageTitle>@PageEnum.Title</PageTitle>
 
 <div class="pb-n1 mt-2 mb-3 @BorderCSS">
-		 <h5 class="text-center"><i class="@PageEnum.Icon"></i>&nbsp;&nbsp;@PageEnum.Title</h5> 
+<HomeButton />
+	<h5 class="text-center"><i class="@PageEnum.Icon"></i>&nbsp;&nbsp;@PageEnum.Title</h5> 
 </div>
 
 @code {

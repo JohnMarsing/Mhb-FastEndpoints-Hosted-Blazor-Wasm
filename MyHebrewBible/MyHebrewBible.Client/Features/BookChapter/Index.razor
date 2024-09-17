@@ -1,71 +1,149 @@
 ﻿@page "/bookchapter"
+
 @using MyHebrewBible.Client.Enums
-@using MyHebrewBible.Client.Features.BookChapter.Search
+
+@using MyHebrewBible.Client.State
+@using MyHebrewBible.Client.Layout
+@using MyHebrewBible.Client.Features.BookChapter
+
 @using MyHebrewBible.Client.Features.BookChapter.Verses
 @using MyHebrewBible.Client.Features.BookChapter.PrevNext
+@using MyHebrewBible.Client.Features.BookChapter.Search
 
-<PageTitle>Book Chapter</PageTitle>
+@inject IBookChapterState? bookChapterState
 
- @* <IndexDebug Msg="@_msg" ReturnedBookAndChapterString="@ReturnedBookAndChapterString" Err="@_err" />  *@
+<nav class="navbar navbar-expand bg-primary-subtle fixed-top mb-25">
 
-<div class="@MediaQuery.Xs.DivClass">
+	<div class="collapse navbar-collapse justify-content-start">
 
-	<Typeahead BookAndChapterTypeahead="@CurrentBookAndChapter"
-						 MediaQuery="@MediaQuery.Xs"
-						 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
-</div>
-<div class="@MediaQuery.Sm.DivClass">
-	<Typeahead BookAndChapterTypeahead="@CurrentBookAndChapter"
-						 MediaQuery="@MediaQuery.Sm"
-						 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
-</div>
-<div class="@MediaQuery.Md.DivClass">
-	<Typeahead BookAndChapterTypeahead="@CurrentBookAndChapter"
-						 MediaQuery="@MediaQuery.Md"
-						 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
-</div>
-<div class="@MediaQuery.Lg.DivClass">
-	<Typeahead BookAndChapterTypeahead="@CurrentBookAndChapter"
-						 MediaQuery="@MediaQuery.Lg"
-						 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
-</div>
-<div class="@MediaQuery.Xl.DivClass">
-	<Typeahead BookAndChapterTypeahead="@CurrentBookAndChapter"
-						 MediaQuery="@MediaQuery.Xl"
-						 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
-</div>
+		<div class="pe-2">
+			<HomeButton />
+		</div>
+
+		<div class="pe-2">
+			@* 			<a href="/" class="btn btn-outline-info" title="Customize book chapter settings"><i class="fas fa-cog"></i></a> *@
+			<PageInstructions />
+
+		</div>
 
 
-@if (CurrentBookAndChapter is not null)
+	</div>
+
+	<div class="collapse navbar-collapse justify-content-center">
+		<div class="ps-2">
+			<PreviousButton PreviousBookAndChapter="@CurrentBookAndChapter"
+											buttonToShow="ButtonsToShow.PreviousOnly"
+											OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+		</div>
+
+		<div class="px-2">
+			<span class="fs-5 badge text-bg-danger">@CurrentBookAndChapter!.BibleBook!.Title @CurrentBookAndChapter!.Chapter</span>
+		</div>
+
+		<div class="">
+			<NextButton NextBookAndChapter="@CurrentBookAndChapter"
+									buttonToShow="ButtonsToShow.NextOnly"
+									OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+		</div>
+	</div>
+
+	<div class="collapse navbar-collapse justify-content-end">
+
+		<div class="pe-2">
+			@if (!ToggleValueShowLookup)
+			{
+				<div class="card-body">
+					<LookupShowHideToggle ToggleValue="ToggleValueShowLookup" OnToggleSelected="ReturnedToggle" />
+				</div>
+			}
+		</div>
+		@* 		<div class="pe-2">
+		<a href="/" class="btn btn-outline-warning" title="Zoom In">
+		<i class="fas fa-search-plus"></i>
+		</a>
+		</div> *@
+
+
+	</div>
+
+</nav>
+
+@if (ToggleValueShowLookup)
 {
-	<div class="pb-n1 mt-2 mb-2 border-bottom border-info">
-		<div class="d-flex justify-content-between mb-3">
-			<div class="ps-2">
-				<PreviousButton PreviousBookAndChapter="@CurrentBookAndChapter"
-												buttonToShow="ButtonsToShow.PreviousOnly"
-												OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+	<br />
+	<div class="card bg-light mt-5 mb-3">
+		<div class="card-header">
+			<button type="button" class="mt-1 btn btn-danger btn-sm" @onclick="ButtonCloseClick">
+				<i class="fas fa-times"></i>
+			</button>
+		</div>
+
+		<div class="card-body">
+			<div class="@MediaQuery.Xs.DivClass">
+				<Typeahead BookAndChapterTypeahead="@CurrentBookAndChapter"
+									 MediaQuery="@MediaQuery.Xs"
+									 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+			</div>
+			<div class="@MediaQuery.Sm.DivClass">
+				<Typeahead BookAndChapterTypeahead="@CurrentBookAndChapter"
+									 MediaQuery="@MediaQuery.Sm"
+									 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+			</div>
+			<div class="@MediaQuery.Md.DivClass">
+				<Typeahead BookAndChapterTypeahead="@CurrentBookAndChapter"
+									 MediaQuery="@MediaQuery.Md"
+									 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+			</div>
+			<div class="@MediaQuery.Lg.DivClass">
+				<Typeahead BookAndChapterTypeahead="@CurrentBookAndChapter"
+									 MediaQuery="@MediaQuery.Lg"
+									 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+			</div>
+			<div class="@MediaQuery.Xl.DivClass">
+				<Typeahead BookAndChapterTypeahead="@CurrentBookAndChapter"
+									 MediaQuery="@MediaQuery.Xl"
+									 OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 			</div>
 
-			<div class="ps-1">
-				<span class="fs-3">@CurrentBookAndChapter.BibleBook!.Title @CurrentBookAndChapter.Chapter </span>
-				<PageInstructions />
-			</div>
-
-@* 			<div class="ps-1">
-				<PageInstructions />
-			</div>
- *@
-
-			<div class="pe-2">
-				<NextButton NextBookAndChapter="@CurrentBookAndChapter"
-										buttonToShow="ButtonsToShow.NextOnly"
-										OnBookAndChapterSelected="@ReturnedBookAndChapter" />
-			</div>
 		</div>
 
 	</div>
+
 }
 
-<Sections BookAndChapter="CurrentBookAndChapter" />
+<div class="mt-5">
+	<br />
+	<Sections BookAndChapter="CurrentBookAndChapter" />
+</div>
 
+<AlephBetFooter MediaQuery="Enums.MediaQuery.Md" />
+
+@code {
+	public BookAndChapter? CurrentBookAndChapter { get; set; }
+
+	bool ToggleValueShowLookup = false;
+
+	protected override void OnInitialized()
+	{
+		BibleBookIdAndChapter bibleBookIdAndChapter = bookChapterState!.Get();
+		CurrentBookAndChapter = new BookAndChapter(Enums.BibleBook.FromValue(bibleBookIdAndChapter.BibleBookId), bibleBookIdAndChapter.Chapter);
+	}
+
+	private void ReturnedBookAndChapter(BookAndChapter bookAndChapter)
+	{
+		CurrentBookAndChapter = bookAndChapter!;
+		bookChapterState!.Update(new BibleBookIdAndChapter(CurrentBookAndChapter.BibleBook!.Value, CurrentBookAndChapter.Chapter));
+	}
+
+	private void ReturnedToggle(bool toggle)
+	{
+		ToggleValueShowLookup = toggle;
+	}
+
+	private void ButtonCloseClick()
+	{
+		ToggleValueShowLookup = false;
+	}
+
+}
 
