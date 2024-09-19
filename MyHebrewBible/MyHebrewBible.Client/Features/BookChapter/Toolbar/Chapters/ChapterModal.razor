@@ -1,0 +1,122 @@
+﻿@using MyHebrewBible.Client.Enums
+
+<ChapterModalTemplate CurrentBookAndChapter="CurrentBookAndChapter">
+	<ChildHeaderContent>
+		<h5>@CurrentBookAndChapter!.BibleBook!.Title Chapters</h5>
+	</ChildHeaderContent>
+	<ChildBodyContent>
+		@foreach (var r in ButtonRows)
+		{
+			<div class="btn-group btn-group-sm">
+				@for (int i = r.ChapterStart; i <= r.ChapterEnd; i++)
+				{
+					int iLocal = i;
+					<button type="button" class="btn btn-outline-info font-monospace"
+									@onclick="@(e => ButtonClick(@iLocal))">
+						@((MarkupString)ButtonNumber(i))
+					</button>
+				}
+			</div>
+		}
+	</ChildBodyContent>
+</ChapterModalTemplate>
+
+
+@code {
+	[Parameter, EditorRequired] public BookAndChapter? CurrentBookAndChapter { get; set; }
+	[Parameter, EditorRequired] public int ButtonsPerRow { get; set; }
+	[Parameter] public EventCallback<BookAndChapter> OnChapterFilterSelected { get; set; }
+
+	public List<ButtonRow> ButtonRows { get; set; } = new List<ButtonRow>();
+
+	protected override void OnParametersSet()
+	{
+		ButtonRows.Clear();
+		PopulateButtonRows();
+	}
+
+
+	private void PopulateButtonRows()
+	{
+		if (ButtonsPerRow >= CurrentBookAndChapter!.BibleBook!.LastChapter)
+		{
+			// Add only one row
+			ButtonRows.Add(new ButtonRow()
+				{
+					ChapterStart = 1,
+					ChapterEnd = CurrentBookAndChapter!.BibleBook!.LastChapter
+				});
+		}
+		else
+		{
+			// Multiple Rows
+			int wholeRowCount = CurrentBookAndChapter!.BibleBook!.LastChapter / ButtonsPerRow;
+			int lastRowButtonCount = CurrentBookAndChapter!.BibleBook!.LastChapter % ButtonsPerRow;
+			int s = 1;
+			int e = ButtonsPerRow;
+			for (int r = 1; r <= wholeRowCount; r++)
+			{
+
+				ButtonRows.Add(new ButtonRow()
+					{
+						ChapterStart = s,
+						ChapterEnd = e
+					});
+				s = e + 1;
+				e += ButtonsPerRow;
+			}
+
+			if (lastRowButtonCount > 0)
+			{
+				ButtonRows.Add(new ButtonRow()
+					{
+						ChapterStart = (CurrentBookAndChapter!.BibleBook!.LastChapter - lastRowButtonCount) + 1, // 50-5=45+1=46
+						ChapterEnd = CurrentBookAndChapter!.BibleBook!.LastChapter
+					});
+
+			}
+		}
+	}
+
+	private void ButtonClick(int chapter)
+	{
+		OnChapterFilterSelected.InvokeAsync(new BookAndChapter(CurrentBookAndChapter!.BibleBook, chapter));
+	}
+
+	protected MarkupString ButtonNumber(int i)
+	{
+
+		if (CurrentBookAndChapter!.BibleBook!.LastChapter > 99)
+		{
+			if (i < 10)
+			{
+				return new MarkupString($"&nbsp;&nbsp;{i}");  // return new MarkupString($"&nbsp;{i}");
+			}
+			else
+			{
+				if (i < 100)
+				{
+					return new MarkupString($"&nbsp;{i}");
+				}
+				else
+				{
+					return new MarkupString($"{i}");
+				}
+			}
+
+		}
+		else
+		{
+			if (i < 10)
+			{
+				return new MarkupString($"&nbsp;{i}");  // return new MarkupString($"&nbsp;{i}");
+			}
+			else
+			{
+				return new MarkupString($"{i}");
+			}
+		}
+
+	}
+
+}

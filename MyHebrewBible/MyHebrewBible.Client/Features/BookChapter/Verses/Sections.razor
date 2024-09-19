@@ -79,6 +79,7 @@ else
 		if (BookAndChapter is not null && BookAndChapter!.BibleBook is not null)
 		{
 			_msg = $"Inside {nameof(OnParametersSet)}, setting verses and VerseRowCount";
+			await Task.Delay(200);  // ToDo: comment this out in production
 			verses = await Api!.GetBookChapterAsync((long)BookAndChapter!.BibleBook, (long)BookAndChapter.Chapter);
 			VerseRowCount = verses.Count;
 			PopulateTopAndBottom(VerseRowCount);

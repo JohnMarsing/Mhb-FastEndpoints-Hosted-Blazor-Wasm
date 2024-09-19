@@ -1,0 +1,70 @@
+﻿@using MyHebrewBible.Client.Layout
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar.PrevNext
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar.Books
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar.Chapters
+
+<nav class="navbar navbar-expand bg-primary-subtle fixed-top">
+
+	<div class="collapse navbar-collapse justify-content-start">
+
+		<div class="pe-2">
+			<HomeButton />
+		</div>
+
+	</div>
+
+	<div class="collapse navbar-collapse justify-content-center">
+		<div class="ps-2">
+			<PreviousButton PreviousBookAndChapter="@CurrentBookAndChapter"
+											buttonToShow="ButtonsToShow.PreviousOnly"
+											OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+		</div>
+
+	  <div class="px-1">
+			<BookModal CurrentBookAndChapter="CurrentBookAndChapter" 
+				MediaQuery="MediaQuery" 
+				OnBookSelected="ReturnedBook" />
+		</div> 
+
+		<div class="pe-2">
+			<ChapterModal CurrentBookAndChapter="CurrentBookAndChapter"
+						 ButtonsPerRow="MediaQuery!.ChapterButtonsPerRow"
+						 OnChapterFilterSelected="OnBookAndChapterSelected" />
+		</div>
+
+		<div class="">
+			<NextButton NextBookAndChapter="@CurrentBookAndChapter"
+									buttonToShow="ButtonsToShow.NextOnly"
+									OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+		</div>
+
+	</div>
+
+	<div class="collapse navbar-collapse justify-content-end">
+		<div class="pe-2">
+			<PageInstructions />
+		</div>
+	</div>
+</nav>
+
+
+@code {
+	[Parameter, EditorRequired] public BookAndChapter? CurrentBookAndChapter { get; set; }
+	[Parameter, EditorRequired] public GlobalEnums.MediaQuery? MediaQuery { get; set; }
+	[Parameter, EditorRequired] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
+
+	private string TitleOrAbrv => MediaQuery == GlobalEnums.MediaQuery.Xs ? CurrentBookAndChapter!.BibleBook!.Abrv : CurrentBookAndChapter!.BibleBook!.Title;
+
+	private void ReturnedBook(Enums.BibleBook bibleBook)
+	{
+		CurrentBookAndChapter = new BookAndChapter(bibleBook, 1);
+		OnBookAndChapterSelected.InvokeAsync(CurrentBookAndChapter);
+	}
+
+	private void ReturnedBookAndChapter(BookAndChapter bookAndChapter)
+	{
+		CurrentBookAndChapter = bookAndChapter!;
+		OnBookAndChapterSelected.InvokeAsync(bookAndChapter);
+	}
+
+}

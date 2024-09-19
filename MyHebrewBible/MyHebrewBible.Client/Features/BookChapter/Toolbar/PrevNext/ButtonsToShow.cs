@@ -1,4 +1,4 @@
-﻿namespace MyHebrewBible.Client.Features.BookChapter.PrevNext;
+﻿namespace MyHebrewBible.Client.Features.BookChapter.Toolbar.PrevNext;
 
 public enum ButtonsToShow
 {
