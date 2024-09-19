@@ -1,4 +1,4 @@
-﻿namespace MyHebrewBible.Client.Features.BookChapter;
+﻿namespace MyHebrewBible.Client.Features.BookChapter.Toolbar.Chapters;
 
 public class ButtonRow
 {

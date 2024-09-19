@@ -1,0 +1,55 @@
+﻿@if (ModalIsNotShownToggle)
+{
+	<button type="button" class="btn btn-info"
+					@onclick="() => ShowModal()">
+		@CurrentBookAndChapter!.Chapter <i class="fas fa-angle-down"></i>
+	</button>
+}
+else
+{
+	<div class="@modalClass" style="display:@(modalOpen?"block":"none");">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header bg-warning">
+
+					@ChildHeaderContent
+
+					<button type="button" class="close" @onclick="CloseModal">
+						<span>&times;</span>
+					</button>
+				</div>
+
+				<div class="modal-body bg-warning-subtle">
+
+					@ChildBodyContent
+
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+@code {
+	[Parameter, EditorRequired] public BookAndChapter? CurrentBookAndChapter { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? ChildHeaderContent { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? ChildBodyContent { get; set; }
+
+	bool modalOpen = false;
+	string modalClass = "modal";
+	bool ModalIsNotShownToggle = true;
+
+	void ShowModal()
+	{
+		modalOpen = true;
+		ModalIsNotShownToggle = false;
+		modalClass += " show";
+		StateHasChanged();
+	}
+
+	void CloseModal()
+	{
+		modalOpen = false;
+		ModalIsNotShownToggle = true;
+		modalClass = "modal";
+	}
+}
