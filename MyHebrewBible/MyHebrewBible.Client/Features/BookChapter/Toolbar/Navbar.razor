@@ -7,7 +7,7 @@
 
 	<div class="collapse navbar-collapse justify-content-start">
 
-		<div class="pe-2">
+		<div class="px-1">
 			<HomeButton />
 		</div>
 
@@ -17,31 +17,33 @@
 		<div class="ps-2">
 			<PreviousButton PreviousBookAndChapter="@CurrentBookAndChapter"
 											buttonToShow="ButtonsToShow.PreviousOnly"
+											IsXs="isXs"
 											OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 		</div>
 
-	  <div class="px-1">
-			<BookModal CurrentBookAndChapter="CurrentBookAndChapter" 
-				MediaQuery="MediaQuery" 
-				OnBookSelected="ReturnedBook" />
-		</div> 
+		<div class="px-1">
+			<BookModal CurrentBookAndChapter="CurrentBookAndChapter"
+								 MediaQuery="MediaQuery"
+								 OnBookSelected="ReturnedBook" />
+		</div>
 
 		<div class="pe-2">
 			<ChapterModal CurrentBookAndChapter="CurrentBookAndChapter"
-						 ButtonsPerRow="MediaQuery!.ChapterButtonsPerRow"
-						 OnChapterFilterSelected="OnBookAndChapterSelected" />
+										MediaQuery="MediaQuery"
+										OnChapterFilterSelected="OnBookAndChapterSelected" />
 		</div>
 
 		<div class="">
 			<NextButton NextBookAndChapter="@CurrentBookAndChapter"
 									buttonToShow="ButtonsToShow.NextOnly"
+									IsXs="isXs"
 									OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 		</div>
 
 	</div>
 
 	<div class="collapse navbar-collapse justify-content-end">
-		<div class="pe-2">
+		<div class="pe-1">
 			<PageInstructions />
 		</div>
 	</div>
@@ -54,6 +56,7 @@
 	[Parameter, EditorRequired] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
 
 	private string TitleOrAbrv => MediaQuery == GlobalEnums.MediaQuery.Xs ? CurrentBookAndChapter!.BibleBook!.Abrv : CurrentBookAndChapter!.BibleBook!.Title;
+	private bool isXs => MediaQuery == GlobalEnums.MediaQuery.Xs ? true : false;
 
 	private void ReturnedBook(Enums.BibleBook bibleBook)
 	{

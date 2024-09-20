@@ -6,10 +6,7 @@
 	{
 		<button type="button" class="btn btn-outline-primary"
 						@onclick="ButtonClick">
-			<sup>
-				@Previous.ButtonText &nbsp;
-			</sup><i class="@Enums.BibleBook.NavigationIcon.Previous"></i>
-			@* <br /><small>Prev</small> *@
+			@Text<i class="@Enums.BibleBook.NavigationIcon.Previous"></i>
 		</button>
 	}
 	else
@@ -21,13 +18,15 @@
 @code {
 	[Parameter, EditorRequired] public BookAndChapter? PreviousBookAndChapter { get; set; }
 	[Parameter, EditorRequired] public ButtonsToShow buttonToShow { get; set; }
+	[Parameter, EditorRequired] public bool IsXs { get; set; }
 	[Parameter] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
 
 	BibleBookPrevNext? Previous; // only null when Gen 1
+	MarkupString Text => IsXs ? (MarkupString)"" : (MarkupString)$"<sup>{Previous!.ButtonText}</sup> ";
 
 	protected override void OnParametersSet()
 	{
-		Previous = PreviousBookAndChapter!.BibleBook!.NavigationPrevious(PreviousBookAndChapter.Chapter); 
+		Previous = PreviousBookAndChapter!.BibleBook!.NavigationPrevious(PreviousBookAndChapter.Chapter);
 	}
 
 	private void ButtonClick()

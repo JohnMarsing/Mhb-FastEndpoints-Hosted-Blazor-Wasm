@@ -67,7 +67,7 @@ public abstract class MediaQuery : SmartEnum<MediaQuery>
 	{
 		public MdSE() : base($"{nameof(Id.Md)}", Id.Md) { }
 		public override string DivClass => "d-none d-md-block d-lg-none d-xl-none";
-		public override int ChapterButtonsPerRow => 15;
+		public override int ChapterButtonsPerRow => 10; //15
 	}
 
 	private sealed class LgSE : MediaQuery
