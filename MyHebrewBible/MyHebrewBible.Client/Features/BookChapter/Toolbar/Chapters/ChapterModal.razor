@@ -1,30 +1,51 @@
 ﻿@using MyHebrewBible.Client.Enums
 
-<ChapterModalTemplate CurrentBookAndChapter="CurrentBookAndChapter">
-	<ChildHeaderContent>
-		<h5>@CurrentBookAndChapter!.BibleBook!.Title Chapters</h5>
-	</ChildHeaderContent>
-	<ChildBodyContent>
-		@foreach (var r in ButtonRows)
-		{
-			<div class="btn-group btn-group-sm">
-				@for (int i = r.ChapterStart; i <= r.ChapterEnd; i++)
-				{
-					int iLocal = i;
-					<button type="button" class="btn btn-outline-info font-monospace"
-									@onclick="@(e => ButtonClick(@iLocal))">
-						@((MarkupString)ButtonNumber(i))
-					</button>
-				}
-			</div>
-		}
-	</ChildBodyContent>
-</ChapterModalTemplate>
+@if (ModalIsNotShownToggle)
+{
+	<button type="button" class="btn btn-info"
+					@onclick="() => ShowModal()">
+		@CurrentBookAndChapter!.Chapter <i class="fas fa-angle-down"></i>
+	</button>
+}
+else
+{
+	<div class="@modalClass" style="display:@(modalOpen?"block":"none");">
+		<div class="modal-dialog @modalSize">
+			<div class="modal-content">
+				<div class="modal-header @modalHeaderColor">
 
+					<h5>@CurrentBookAndChapter!.BibleBook!.Title Chapters</h5>
+
+					<button type="button" class="close" @onclick="CloseModal">
+						<span>&times;</span>
+					</button>
+				</div>
+
+				<div class="modal-body @modalBodyColor">
+
+					@foreach (var r in ButtonRows)
+					{
+						<div class="btn-group btn-group-sm">
+							@for (int i = r.ChapterStart; i <= r.ChapterEnd; i++)
+							{
+								int iLocal = i;
+								<button type="button" class="btn btn-outline-info font-monospace"
+												@onclick="@(e => ButtonClick(@iLocal))">
+									@((MarkupString)ButtonNumber(i))
+								</button>
+							}
+						</div>
+					}
+
+				</div>
+			</div>
+		</div>
+	</div>
+}
 
 @code {
 	[Parameter, EditorRequired] public BookAndChapter? CurrentBookAndChapter { get; set; }
-	[Parameter, EditorRequired] public int ButtonsPerRow { get; set; }
+	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
 	[Parameter] public EventCallback<BookAndChapter> OnChapterFilterSelected { get; set; }
 
 	public List<ButtonRow> ButtonRows { get; set; } = new List<ButtonRow>();
@@ -35,10 +56,34 @@
 		PopulateButtonRows();
 	}
 
+	bool modalOpen = false;
+	string modalClass = "modal";
+	string modalHeaderColor = " bg-warning";
+	string modalBodyColor = "bg-warning-subtle"; 
+	bool ModalIsNotShownToggle = true;
+
+	string modalSize => MediaQuery == MediaQuery.Xs ? "modal-md" : "modal-lg";
+	int buttonsPerRow => MediaQuery == MediaQuery.Xs ? 10 : MediaQuery!.ChapterButtonsPerRow;
+
+	void ShowModal()
+	{
+		modalOpen = true;
+		ModalIsNotShownToggle = false;
+		modalClass += " show";
+		StateHasChanged();
+	}
+
+	void CloseModal()
+	{
+		modalOpen = false;
+		ModalIsNotShownToggle = true;
+		modalClass = "modal";
+	}
 
 	private void PopulateButtonRows()
 	{
-		if (ButtonsPerRow >= CurrentBookAndChapter!.BibleBook!.LastChapter)
+
+		if (buttonsPerRow >= CurrentBookAndChapter!.BibleBook!.LastChapter)
 		{
 			// Add only one row
 			ButtonRows.Add(new ButtonRow()
@@ -50,10 +95,10 @@
 		else
 		{
 			// Multiple Rows
-			int wholeRowCount = CurrentBookAndChapter!.BibleBook!.LastChapter / ButtonsPerRow;
-			int lastRowButtonCount = CurrentBookAndChapter!.BibleBook!.LastChapter % ButtonsPerRow;
+			int wholeRowCount = CurrentBookAndChapter!.BibleBook!.LastChapter / buttonsPerRow;
+			int lastRowButtonCount = CurrentBookAndChapter!.BibleBook!.LastChapter % buttonsPerRow;
 			int s = 1;
-			int e = ButtonsPerRow;
+			int e = buttonsPerRow;
 			for (int r = 1; r <= wholeRowCount; r++)
 			{
 
@@ -63,7 +108,7 @@
 						ChapterEnd = e
 					});
 				s = e + 1;
-				e += ButtonsPerRow;
+				e += buttonsPerRow;
 			}
 
 			if (lastRowButtonCount > 0)
@@ -80,6 +125,7 @@
 
 	private void ButtonClick(int chapter)
 	{
+		CloseModal();
 		OnChapterFilterSelected.InvokeAsync(new BookAndChapter(CurrentBookAndChapter!.BibleBook, chapter));
 	}
 

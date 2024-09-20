@@ -696,7 +696,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 	private sealed class SongofSolomonSE : BibleBook
 	{
 		public SongofSolomonSE() : base("SongofSolomon", 22) { }
-		public override string Title => "SongofSolomon";
+		public override string Title => "Song of Solomon";
 		public override string Abrv => "Song";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Poetry;
 		public override BookEnum BookEnum => BookEnum.SongofSolomon;
