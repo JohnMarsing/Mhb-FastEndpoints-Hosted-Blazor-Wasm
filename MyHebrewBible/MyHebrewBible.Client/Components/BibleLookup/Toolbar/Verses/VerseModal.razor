@@ -1,0 +1,172 @@
+﻿@using MyHebrewBible.Client.Enums
+
+@inject ILogger<VerseModal>? Logger
+@inject IToastService? Toast
+
+@if (ModalIsNotShownToggle)
+{
+	<button type="button" class="btn btn-info" @onclick="() => ShowModal()">
+		@CurrentBookChapterVerse!.Verse
+		<i class="fas fa-angle-down"></i>
+	</button>
+}
+else
+{
+	<div class="@modalClass" style="display:@(modalOpen?"block":"none");">
+		<div class="modal-dialog @modalSize">
+			<div class="modal-content">
+				<div class="modal-header @modalHeaderColor">
+					<h5>@CurrentBookChapterVerse!.BookAndChapter.BibleBook!.Title @CurrentBookChapterVerse!.BookAndChapter.Chapter Verses</h5>
+					<button type="button" class="close" @onclick="CloseModal">
+						<span>&times;</span>
+					</button>
+				</div>
+
+				<div class="modal-body @modalBodyColor">
+
+					@foreach (var r in ButtonRows)
+					{
+						<div class="btn-group btn-group-sm">
+							@for (int i = r.Start; i <= r.End; i++)
+							{
+								int iLocal = i;
+								<button type="button" class="btn btn-outline-info font-monospace"
+												@onclick="@(e => ButtonClick(@iLocal))">
+									@((MarkupString)ButtonNumber(i))
+								</button>
+							}
+						</div>
+					}
+
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+@code {
+	[Parameter, EditorRequired] public BookChapterVerse? CurrentBookChapterVerse { get; set; }
+	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
+
+	[Parameter] public EventCallback<int> OnVerseFilterSelected { get; set; }
+
+	public List<ButtonRange> ButtonRows { get; set; } = new List<ButtonRange>();
+
+	protected override void OnParametersSet()
+	{
+		ButtonRows.Clear();
+		PopulateButtonRows(Helper.LastVerseCount(CurrentBookChapterVerse!.BookAndChapter.BibleBook, CurrentBookChapterVerse!.BookAndChapter.Chapter));
+	}
+
+	bool modalOpen = false;
+	string modalClass = "modal";
+	string modalHeaderColor = " bg-warning";
+	string modalBodyColor = "bg-warning-subtle";
+	bool ModalIsNotShownToggle = true;
+
+	string modalSize => MediaQuery == MediaQuery.Xs ? "modal-md" : "modal-lg";
+	int buttonsPerRow => MediaQuery == MediaQuery.Xs ? 10 : MediaQuery!.ChapterButtonsPerRow;
+
+	void ShowModal()
+	{
+		modalOpen = true;
+		ModalIsNotShownToggle = false;
+		modalClass += " show";
+		StateHasChanged();
+	}
+
+	void CloseModal()
+	{
+		modalOpen = false;
+		ModalIsNotShownToggle = true;
+		modalClass = "modal";
+	}
+
+	private void PopulateButtonRows(int verseCount)
+	{
+		Logger!.LogInformation("{Class}!{Method}; verseCount: {VerseCount}, buttonsPerRow: {buttonsPerRow}"
+		, nameof(VerseModal), nameof(PopulateButtonRows), verseCount, buttonsPerRow);
+
+		try
+		{
+			if (buttonsPerRow >= verseCount)
+			{
+				ButtonRows.Add(new ButtonRange(1, verseCount));
+
+				Logger!.LogInformation("{Class}!{Method}; Add only 1 row, ButtonRows: {ButtonRows}"
+					, nameof(VerseModal), nameof(PopulateButtonRows), ButtonRows);
+			}
+			else
+			{
+				// Multiple Rows
+				int wholeRowCount = verseCount / buttonsPerRow; ;
+				int lastRowButtonCount = verseCount % buttonsPerRow; ;
+				int s = 1;
+				int e = buttonsPerRow;
+
+				Logger!.LogInformation("{Class}!{Method}; wholeRowCount: {wholeRowCount}, lastRowButtonCount: {lastRowButtonCount}"
+					, nameof(VerseModal), nameof(PopulateButtonRows), wholeRowCount, lastRowButtonCount);
+
+				for (int r = 1; r <= wholeRowCount; r++)
+				{
+					ButtonRows.Add(new ButtonRange(s, e));
+					s = e + 1;
+					e += buttonsPerRow;
+				}
+
+				if (lastRowButtonCount > 0)
+				{
+					ButtonRows.Add(new ButtonRange(verseCount - lastRowButtonCount + 1, verseCount));
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Class}!{Method}", nameof(VerseModal), nameof(PopulateButtonRows));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(VerseModal)}!{nameof(PopulateButtonRows)}");
+		}
+	}
+
+	private void ButtonClick(int verse)
+	{
+		CloseModal();
+		OnVerseFilterSelected.InvokeAsync(verse);
+	}
+
+	protected MarkupString ButtonNumber(int i)
+	{
+
+		if (CurrentBookChapterVerse!.Verse > 99)
+		{
+			if (i < 10)
+			{
+				return new MarkupString($"&nbsp;&nbsp;{i}");
+			}
+			else
+			{
+				if (i < 100)
+				{
+					return new MarkupString($"&nbsp;{i}");
+				}
+				else
+				{
+					return new MarkupString($"{i}");
+				}
+			}
+
+		}
+		else
+		{
+			if (i < 10)
+			{
+				return new MarkupString($"&nbsp;{i}");
+			}
+			else
+			{
+				return new MarkupString($"{i}");
+			}
+		}
+
+	}
+
+}

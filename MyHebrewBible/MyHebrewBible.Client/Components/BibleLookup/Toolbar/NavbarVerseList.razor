@@ -1,0 +1,68 @@
+﻿@using MyHebrewBible.Client.Layout
+@using MyHebrewBible.Client.Components.BibleLookup.Toolbar.Books
+@using MyHebrewBible.Client.Components.BibleLookup.Toolbar.Chapters
+@using MyHebrewBible.Client.Components.BibleLookup.Toolbar.Verses
+
+<nav class="navbar navbar-expand bg-primary-subtle fixed-top">
+
+	<div class="collapse navbar-collapse justify-content-start">
+
+		<div class="px-1">
+			<HomeButton />
+		</div>
+
+	</div>
+
+	<div class="collapse navbar-collapse justify-content-center">
+
+		<div class="px-1">
+			<BookModal CurrentBookAndChapter="CurrentBookChapterVerse!.BookAndChapter"
+								 MediaQuery="MediaQuery"
+								 OnBookSelected="ReturnedBook" />
+		</div>
+
+		<div class="pe-2">
+			<ChapterModal CurrentBookAndChapter="CurrentBookChapterVerse!.BookAndChapter"
+										MediaQuery="MediaQuery"
+										OnChapterFilterSelected="ReturnedBookAndChapter" />
+		</div>
+
+		<div class="">
+			<VerseModal CurrentBookChapterVerse="CurrentBookChapterVerse!"
+									MediaQuery="MediaQuery"
+									OnVerseFilterSelected="ReturnedBookAndChapterAndVerse" />
+		</div>
+
+	</div>
+
+	<div class="collapse navbar-collapse justify-content-end">
+		<div class="pe-1">
+			<PageInstructions />
+		</div>
+	</div>
+</nav>
+
+@code {
+	[Parameter, EditorRequired] public BookChapterVerse? CurrentBookChapterVerse { get; set; }
+	[Parameter, EditorRequired] public GlobalEnums.MediaQuery? MediaQuery { get; set; }
+	[Parameter, EditorRequired] public EventCallback<BookChapterVerse> OnBookChapterVerseSelected { get; set; }
+
+	private void ReturnedBook(Enums.BibleBook bibleBook)
+	{
+		BookAndChapter bookAndChapter = new BookAndChapter(bibleBook, 1);
+		BookChapterVerse bookChapterVerse = new BookChapterVerse(bookAndChapter, 1);
+		OnBookChapterVerseSelected.InvokeAsync(bookChapterVerse);
+	}
+
+	private void ReturnedBookAndChapter(BookAndChapter bookAndChapter)
+	{
+		BookChapterVerse bookChapterVerse = new BookChapterVerse(bookAndChapter, 1);
+		OnBookChapterVerseSelected.InvokeAsync(bookChapterVerse);
+	}
+
+	private void ReturnedBookAndChapterAndVerse(int verse)
+	{
+		OnBookChapterVerseSelected.InvokeAsync(CurrentBookChapterVerse! with { Verse = verse });
+	}
+
+}

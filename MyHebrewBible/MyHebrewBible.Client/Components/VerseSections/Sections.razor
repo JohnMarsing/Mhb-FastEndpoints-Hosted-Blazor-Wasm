@@ -30,7 +30,7 @@ else
 			<WordSegmentsCard ScriptureId="FocusScriptureId"
 												VerseNumber="VerseNumber"
 												SelectedWordCount="WordCount"
-												BookChapterVerseVM="VM"
+												BookChapterVerse="VM"
 												OnStrongsSelected="ReturnedStrongs" />
 
 			@if (Strongs != 0)
@@ -64,7 +64,7 @@ else
 			<WordSegmentsCard ScriptureId="FocusScriptureId"
 												VerseNumber="VerseNumber"
 												SelectedWordCount="WordCount"
-												BookChapterVerseVM="VM"
+												BookChapterVerse="VM"
 												OnStrongsSelected="ReturnedStrongs" />
 
 			@if (Strongs != 0)
@@ -84,7 +84,7 @@ else
 
 
 @code {
-	[Parameter, EditorRequired] public BookChapterVerseVM? VM { get; set; }
+	[Parameter, EditorRequired] public BookChapterVerse? VM { get; set; }
 	[Parameter, EditorRequired] public Enums.CalledBy? CalledBy { get; set; }
 
 	//protected bool TurnSpinnerOff = false;
@@ -109,9 +109,9 @@ else
 
 		FocusScriptureId = 0;
 
-		if (VM is null | VM!.BibleBook is null)
+		if (VM is null | VM!.BookAndChapter.BibleBook is null)
 		{
-			Toast!.ShowWarning($"Parameter BookChapterVerseVM is null");
+			Toast!.ShowWarning($"Parameter BookChapterVerse is null");
 		}
 		else
 		{
@@ -120,12 +120,12 @@ else
 				if (CalledBy==Enums.CalledBy.VerseList)
 				{
 					await Task.Delay(5);
-					verses = await Api!.GetVerseListByBCVAsync((long)VM!.BibleBook, (long)VM.Chapter, (long)VM.Verse, (long)VM.Verse);
+					verses = await Api!.GetVerseListByBCVAsync((long)VM.BookAndChapter.BibleBook, (long)VM.BookAndChapter.Chapter, (long)VM.Verse, (long)VM.Verse);
 				}
 				else
 				{
 					await Task.Delay(5);
-					verses = await Api!.GetBookChapterAsync((long)VM!.BibleBook, (long)VM.Chapter);
+					verses = await Api!.GetBookChapterAsync((long)VM!.BookAndChapter.BibleBook, (long)VM.BookAndChapter.Chapter);
 				}
 
 				VerseRowCount = verses.Count;

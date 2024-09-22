@@ -26,7 +26,7 @@ else
 					@foreach (var r in ButtonRows)
 					{
 						<div class="btn-group btn-group-sm">
-							@for (int i = r.ChapterStart; i <= r.ChapterEnd; i++)
+							@for (int i = r.Start; i <= r.End; i++)
 							{
 								int iLocal = i;
 								<button type="button" class="btn btn-outline-info font-monospace"
@@ -48,7 +48,7 @@ else
 	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
 	[Parameter] public EventCallback<BookAndChapter> OnChapterFilterSelected { get; set; }
 
-	public List<ButtonRow> ButtonRows { get; set; } = new List<ButtonRow>();
+	public List<ButtonRange> ButtonRows { get; set; } = new List<ButtonRange>();
 
 	protected override void OnParametersSet()
 	{
@@ -85,12 +85,7 @@ else
 
 		if (buttonsPerRow >= CurrentBookAndChapter!.BibleBook!.LastChapter)
 		{
-			// Add only one row
-			ButtonRows.Add(new ButtonRow()
-				{
-					ChapterStart = 1,
-					ChapterEnd = CurrentBookAndChapter!.BibleBook!.LastChapter
-				});
+			ButtonRows.Add(new ButtonRange(1, CurrentBookAndChapter!.BibleBook!.LastChapter)); // Add only one row
 		}
 		else
 		{
@@ -101,24 +96,16 @@ else
 			int e = buttonsPerRow;
 			for (int r = 1; r <= wholeRowCount; r++)
 			{
-
-				ButtonRows.Add(new ButtonRow()
-					{
-						ChapterStart = s,
-						ChapterEnd = e
-					});
+				ButtonRows.Add(new ButtonRange(s, e));
 				s = e + 1;
 				e += buttonsPerRow;
 			}
 
 			if (lastRowButtonCount > 0)
 			{
-				ButtonRows.Add(new ButtonRow()
-					{
-						ChapterStart = (CurrentBookAndChapter!.BibleBook!.LastChapter - lastRowButtonCount) + 1, // 50-5=45+1=46
-						ChapterEnd = CurrentBookAndChapter!.BibleBook!.LastChapter
-					});
-
+				ButtonRows.Add(new ButtonRange(
+					CurrentBookAndChapter!.BibleBook!.LastChapter - lastRowButtonCount - lastRowButtonCount + 1, 
+					CurrentBookAndChapter!.BibleBook!.LastChapter));
 			}
 		}
 	}
