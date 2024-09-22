@@ -1,20 +1,20 @@
 ﻿@using MyHebrewBible.Client.Layout
-@using MyHebrewBible.Client.Features.BookChapter.Toolbar.PrevNext
-@using MyHebrewBible.Client.Features.BookChapter.Toolbar.Books
-@using MyHebrewBible.Client.Features.BookChapter.Toolbar.Chapters
+@using MyHebrewBible.Client.Components.BibleLookup.Toolbar.PrevNext
+@using MyHebrewBible.Client.Components.BibleLookup.Toolbar.Books
+@using MyHebrewBible.Client.Components.BibleLookup.Toolbar.Chapters
 
 <nav class="navbar navbar-expand bg-primary-subtle fixed-top">
 
 	<div class="collapse navbar-collapse justify-content-start">
 
-		<div class="px-1">
+		<div class="ps-1">
 			<HomeButton />
 		</div>
 
 	</div>
 
 	<div class="collapse navbar-collapse justify-content-center">
-		<div class="ps-2">
+		<div class="">
 			<PreviousButton PreviousBookAndChapter="@CurrentBookAndChapter"
 											buttonToShow="ButtonsToShow.PreviousOnly"
 											IsXs="isXs"
@@ -27,7 +27,7 @@
 								 OnBookSelected="ReturnedBook" />
 		</div>
 
-		<div class="pe-2">
+		<div class="pe-1">
 			<ChapterModal CurrentBookAndChapter="CurrentBookAndChapter"
 										MediaQuery="MediaQuery"
 										OnChapterFilterSelected="OnBookAndChapterSelected" />
@@ -49,7 +49,6 @@
 	</div>
 </nav>
 
-
 @code {
 	[Parameter, EditorRequired] public BookAndChapter? CurrentBookAndChapter { get; set; }
 	[Parameter, EditorRequired] public GlobalEnums.MediaQuery? MediaQuery { get; set; }
@@ -60,13 +59,11 @@
 
 	private void ReturnedBook(Enums.BibleBook bibleBook)
 	{
-		CurrentBookAndChapter = new BookAndChapter(bibleBook, 1);
-		OnBookAndChapterSelected.InvokeAsync(CurrentBookAndChapter);
+		OnBookAndChapterSelected.InvokeAsync(new BookAndChapter(bibleBook, 1)); 
 	}
 
 	private void ReturnedBookAndChapter(BookAndChapter bookAndChapter)
 	{
-		CurrentBookAndChapter = bookAndChapter!;
 		OnBookAndChapterSelected.InvokeAsync(bookAndChapter);
 	}
 

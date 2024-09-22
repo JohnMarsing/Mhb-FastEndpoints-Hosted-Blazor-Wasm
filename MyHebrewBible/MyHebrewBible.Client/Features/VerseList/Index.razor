@@ -1,7 +1,7 @@
 ﻿@page "/VerseList"
 
-@using MyHebrewBible.Client.Enums
 @using MyHebrewBible.Client.Components.BibleLookup
+@using MyHebrewBible.Client.Components.BibleLookup.Toolbar;
 @using MyHebrewBible.Client.Components.VerseSections
 @using EnumCalledBy = MyHebrewBible.Client.Components.VerseSections.Enums.CalledBy
 @using MyHebrewBible.Client.State.VerseList
@@ -10,59 +10,50 @@
 @inject IVerseListState? state
 @inject IToastService? Toast
 
-<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.VerseList" />
+<PageTitle>@PageTitle</PageTitle>
 
-<div class="@MediaQuery.Xs.DivClass">
-	<Typeahead MediaQuery="@MediaQuery.Xs"
-						 OnBookAndChapterSelected="@ReturnedBookChapterVerse"  />
+<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+	<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
+									 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
+									 MediaQuery="GlobalEnums.MediaQuery.Xs" />
 </div>
-<div class="@MediaQuery.Sm.DivClass">
-	<Typeahead MediaQuery="@MediaQuery.Sm"
-						 OnBookAndChapterSelected="@ReturnedBookChapterVerse" />
+<div class="@GlobalEnums.MediaQuery.Sm.DivClass">
+	<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
+									 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
+									 MediaQuery="GlobalEnums.MediaQuery.Sm" />
 </div>
-<div class="@MediaQuery.Md.DivClass">
-	<Typeahead MediaQuery="@MediaQuery.Md"
-						 OnBookAndChapterSelected="@ReturnedBookChapterVerse" />
+<div class="@GlobalEnums.MediaQuery.Md.DivClass">
+	<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
+									 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
+									 MediaQuery="GlobalEnums.MediaQuery.Md" />
 </div>
-<div class="@MediaQuery.Lg.DivClass">
-	<Typeahead MediaQuery="@MediaQuery.Lg"
-						 OnBookAndChapterSelected="@ReturnedBookChapterVerse" />
+<div class="@GlobalEnums.MediaQuery.Lg.DivClass">
+	<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
+									 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
+									 MediaQuery="GlobalEnums.MediaQuery.Lg" />
 </div>
-<div class="@MediaQuery.Xl.DivClass">
-	<Typeahead MediaQuery="@MediaQuery.Xl"
-						 OnBookAndChapterSelected="@ReturnedBookChapterVerse" />
+<div class="@GlobalEnums.MediaQuery.Xl.DivClass">
+	<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
+									 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
+									 MediaQuery="GlobalEnums.MediaQuery.Xl" />
 </div>
-
 
 @if (CurrentVM is not null)
 {
-	<div class="pb-n1 mt-2 mb-2 border-bottom border-info">
-		<div class="d-flex justify-content-center">
-
-			<div class="">
-				<span class="fs-3">@CurrentVM.BibleBook!.Title @CurrentVM.Chapter : @CurrentVM.Verse</span>
-			</div>
-
-			<div class="ps-1">
-				<PageInstructions />
-			</div>
-
-		</div>
+	<div class="mt-5">
+		<br />
+		<Sections VM="CurrentVM" CalledBy="EnumCalledBy.VerseList" />
 	</div>
 }
 
-
-@if (CurrentVM is not null)
-{
-	<Sections VM="CurrentVM" CalledBy="EnumCalledBy.VerseList" />
-}
-
+<AlephBetFooter MediaQuery="GlobalEnums.MediaQuery.Md" />  @*	ToDo: Not dynamic *@
 
 @code {
 
 	public Header? CurrentHeader { get; set; }
+	public BookChapterVerse? CurrentVM { get; set; }
 
-	public BookChapterVerseVM? CurrentVM { get; set; }
+	protected string PageTitle => GlobalEnums.BibleBookFormat.BCV(CurrentVM, useAbrv: false);
 
 	protected override void OnInitialized()
 	{
@@ -74,7 +65,9 @@
 			CurrentHeader = new BookAndChapter(BibleBook.FromValue(_state.BibleBookId), _state.Chapter);
 			*/
 			DetailRecord bcv = state!.GetBCV();
-			CurrentVM = new BookChapterVerseVM(BibleBook.FromValue(bcv.BibleBookId), bcv.Chapter, bcv.BegVerse);
+			BookAndChapter bookAndChapter = new BookAndChapter(GlobalEnums.BibleBook.FromValue(bcv.BibleBookId), bcv.Chapter);
+			CurrentVM = new BookChapterVerse(bookAndChapter, bcv.BegVerse);
+			//PageTitle = GlobalEnums.BibleBookFormat.BCV(CurrentVM); 
 
 		}
 		catch (Exception ex)
@@ -84,11 +77,11 @@
 		}
 	}
 
-	private void ReturnedBookChapterVerse(BookChapterVerseVM vm)  //async Task
+	private void ReturnedBookChapterVerse(BookChapterVerse vm)  //async Task
 	{
 		CurrentVM = vm!;
 		//state!.UpdateHeader(new VerseListState(CurrentBookAndChapter.BibleBook!.Value, CurrentBookAndChapter.Chapter));
-		state!.UpdateBCV(new DetailRecord(vm.BibleBook, vm.Chapter, vm.Verse, vm.Verse, "Just Got Updated"));
+		state!.UpdateBCV(new DetailRecord(vm.BookAndChapter.BibleBook, vm.BookAndChapter.Chapter, vm.Verse, vm.Verse, "Just Got Updated"));
 	}
 
 }
