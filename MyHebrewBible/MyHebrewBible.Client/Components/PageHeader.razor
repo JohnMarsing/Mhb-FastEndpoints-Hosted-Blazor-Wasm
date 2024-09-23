@@ -1,4 +1,5 @@
 ﻿@using MyHebrewBible.Client.Layout
+
 <PageTitle>
 	@if (String.IsNullOrEmpty(PageTitle))
 	{
@@ -10,10 +11,34 @@
 	}
 </PageTitle>
 
-<div class="pb-n1 mt-2 mb-3 @BorderCSS">
-<HomeButton />
-	<h5 class="text-center"><i class="@PageEnum.Icon"></i>&nbsp;&nbsp;@PageEnum.Title</h5> 
+<nav class="navbar navbar-expand bg-info-subtle fixed-top">
+
+	<div class="collapse navbar-collapse justify-content-start">
+		<div class="ps-1">
+			<HomeButton />
+		</div>
+	</div>
+
+	<div class="collapse navbar-collapse justify-content-center">
+		<div class="">
+			<h5 class="text-center"><i class="@PageEnum.Icon"></i>&nbsp;&nbsp;@PageEnum.Title</h5>
+		</div>
+	</div>
+
+	<div class="collapse navbar-collapse justify-content-end">
+		<div class="ps-1">
+			<a class="btn btn-primary" title="Configuration" href="">
+				<i class="fas fa-cog"></i>
+			</a>
+		</div>
+	</div>
+
+</nav>
+
+<div class="mt-5">
+	<br />
 </div>
+
 
 @code {
 	[Parameter, EditorRequired] public MyHebrewBible.Client.Enums.Nav PageEnum { get; set; } = MyHebrewBible.Client.Enums.Nav.Home;

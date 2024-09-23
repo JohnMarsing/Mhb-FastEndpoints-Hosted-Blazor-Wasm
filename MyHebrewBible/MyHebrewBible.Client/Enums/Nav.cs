@@ -84,6 +84,23 @@ public abstract class Nav : SmartEnum<Nav>
 	public abstract string HomeFloatRightHebrew { get; }
 	public abstract bool IsPartOfList(PageListType pageListType);
 	public abstract PageListType PageListType { get; }
+	public abstract bool Disabled { get; }
+
+	public string DisabledHtml
+	{
+		get
+		{
+			return $"{(Disabled ? " disabled" : "")}";
+		}
+	}
+
+	public string DisabledColor
+	{
+		get
+		{
+			return $"{(Disabled ? " text-black-50" : "")}";
+		}
+	}
 
 	#endregion
 
@@ -100,6 +117,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string HomeFloatRightHebrew => "בַּיִת";
 		public override PageListType PageListType => PageListType.Footer;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 	}
 
 	private sealed class BookChapterSE : Nav
@@ -113,6 +131,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string HomeFloatRightHebrew => "מִסְפָּר";
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Footer | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 	}
 
 	private sealed class ParashaSE : Nav
@@ -126,6 +145,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string HomeFloatRightHebrew => "פָּרָשַׁת";
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 	}
 
 	private sealed class DonateSE : Nav
@@ -139,6 +159,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string HomeFloatRightHebrew => "צַדִּיק";
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Footer | PageListType.Layout | PageListType.LayoutMd;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 	}
 
 	private sealed class ArticleSE : Nav
@@ -152,6 +173,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string HomeFloatRightHebrew => "מִסְפָּר";
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 	}
 
 	private sealed class FavoriteVersesSE : Nav
@@ -165,6 +187,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string HomeFloatRightHebrew => "אָוָה";
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 	}
 
 	private sealed class HebrewSE : Nav
@@ -178,19 +201,21 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string HomeFloatRightHebrew => "עִבְרִי";
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 	}
 
 	private sealed class AlephTavsSE : Nav
 	{
 		public AlephTavsSE() : base($"{nameof(Id.AlephTavs)}", Id.AlephTavs) { }
 		public override string Index => "/AlephTavs";
-		public override string Title => "Aleph Tavs";  
+		public override string Title => "Aleph Tavs";
 		public override string Icon => "fa-letter-aleph-tav";
 		public override int Sort => Id.AlephTavs;
 		public override string HomeTitleSuffix => " Aleph Tav H853";
 		public override string HomeFloatRightHebrew => "אֵת";
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => true;
 	}
 
 	private sealed class BibleListSE : Nav
@@ -201,9 +226,10 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string Icon => "fas fa-torah";
 		public override int Sort => Id.BibleList;
 		public override string HomeTitleSuffix => " Mispar H4557 ";
-		public override string HomeFloatRightHebrew => "מִסְפָּר"; 
+		public override string HomeFloatRightHebrew => "מִסְפָּר";
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout | PageListType.LayoutSm;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 	}
 
 	private sealed class TeachingSE : Nav
@@ -217,6 +243,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string HomeFloatRightHebrew => "לְלַמֵד";
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout | PageListType.LayoutSm | PageListType.LayoutMd;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 	}
 
 	private sealed class SitemapSE : Nav
@@ -230,6 +257,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string HomeFloatRightHebrew => "נָהַל";
 		public override PageListType PageListType => PageListType.Footer | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 	}
 
 	private sealed class AboutSE : Nav
@@ -243,6 +271,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string HomeFloatRightHebrew => "אוֹדוֹת";
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => true;
 	}
 
 	private sealed class HomeMhbVer6SE : Nav
@@ -256,19 +285,21 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string HomeFloatRightHebrew => "";
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 	}
 
 	private sealed class VerseListSE : Nav
 	{
 		public VerseListSE() : base($"{nameof(Id.VerseList)}", Id.VerseList) { }
 		public override string Index => "/VerseList";
-		public override string Title => "Verse List";  
+		public override string Title => "Verse List";
 		public override string Icon => "fas fa-list";
 		public override int Sort => Id.VerseList;
 		public override string HomeTitleSuffix => " mispar H4557";
 		public override string HomeFloatRightHebrew => "מִסְפָּר";
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 	}
 
 	private sealed class ContactSE : Nav
@@ -280,13 +311,14 @@ public abstract class Nav : SmartEnum<Nav>
 		public override int Sort => Id.Contact;
 		public override string HomeTitleSuffix => "Shalom  H7695";
 		public override string HomeFloatRightHebrew => "שָׁלוֹם";
-		
+
 		//LMM Leadership
 		//public override string HomeTitleSuffix => "Zaken  H2205";
 		//public override string HomeFloatRightHebrew => "זָקֵן";
 
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout | PageListType.Footer;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => true;
 	}
 
 	private sealed class DonateReplyConfirmSE : Nav
@@ -301,6 +333,7 @@ public abstract class Nav : SmartEnum<Nav>
 
 		public override PageListType PageListType => PageListType.Reply;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false; // N/A
 	}
 
 	private sealed class ProfileSE : Nav
@@ -312,8 +345,9 @@ public abstract class Nav : SmartEnum<Nav>
 		public override int Sort => Id.Profile;
 		public override string HomeTitleSuffix => "Netser H5342";
 		public override string HomeFloatRightHebrew => "נֵצֶר";
-		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Footer;
+		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => true;
 	}
 
 	private sealed class BibleSearchSE : Nav
@@ -325,8 +359,9 @@ public abstract class Nav : SmartEnum<Nav>
 		public override int Sort => Id.Profile;
 		public override string HomeTitleSuffix => " Bawkar H1239";
 		public override string HomeFloatRightHebrew => "בָּקַר";
-		public override PageListType PageListType => PageListType.SitemapPage;
+		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 	}
 
 	private sealed class HealthCheckBibleBookSE : Nav
@@ -340,6 +375,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string HomeFloatRightHebrew => "יָכַח";
 		public override PageListType PageListType => PageListType.SitemapPage;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 	}
 
 	//ToDo This should only be for Admin users
@@ -354,6 +390,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string HomeFloatRightHebrew => "";
 		public override PageListType PageListType => PageListType.SitemapPage;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 	}
 
 	private sealed class HealthCheckVerseListSE : Nav
@@ -361,14 +398,15 @@ public abstract class Nav : SmartEnum<Nav>
 		public HealthCheckVerseListSE() : base($"{nameof(Id.HealthCheckVerseList)}", Id.HealthCheckVerseList) { }
 		public override string Index => "HealthChecks/VerseList";
 		public override string Title => "HealthChecks Verse List";
-		public override string Icon => "fas fa-wrench";  
+		public override string Icon => "fas fa-wrench";
 		public override int Sort => Id.Profile;
 		public override string HomeTitleSuffix => " ";
 		public override string HomeFloatRightHebrew => "";
 		public override PageListType PageListType => PageListType.SitemapPage;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 	}
-	
+
 
 	#endregion
 
@@ -398,7 +436,7 @@ public abstract class Nav : SmartEnum<Nav>
 	{
 		get { return this.PageListType == PageListType.LayoutXl ? true : false; }
 	}
-#endregion
+	#endregion
 
 }
 

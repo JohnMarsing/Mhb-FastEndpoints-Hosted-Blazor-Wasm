@@ -1,0 +1,23 @@
+﻿@using Client.Enums
+
+@inject NavigationManager NavigationManager
+
+<button @onclick="@(() => ButtonClicked(Nav!.Value))" title="@Nav!.Title @Nav!.HomeTitleSuffix"
+				class="list-group-item list-group-item-warning  @Nav!.DisabledHtml">
+	<div class="d-flex w-100 justify-content-between">
+		<i class="@Nav!.Icon fa-fw fa-3x" aria-hidden="true"></i>
+		<span class="fs-4 @Nav!.DisabledColor">@Nav!.Title</span>
+		<span class="float-end text-info">
+			<span class="hebrew">@Nav!.HomeFloatRightHebrew</span>
+		</span>
+	</div>
+</button>
+
+@code {
+	[Parameter, EditorRequired] public Nav? Nav { get; set; }
+
+	private void ButtonClicked(int id)
+	{
+		NavigationManager!.NavigateTo(Nav.FromValue(id) + "/");
+	}
+}
