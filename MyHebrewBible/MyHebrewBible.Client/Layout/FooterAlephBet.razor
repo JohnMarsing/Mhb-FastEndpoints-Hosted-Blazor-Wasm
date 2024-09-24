@@ -24,16 +24,16 @@
 		<a class="@FontSize pe-1 text-decoration-none" title='Resh'>ר</a>
 		<a class="@FontSize pe-1 text-decoration-none" title='Shin'>ש</a>
 		<a class="@FontSize pe-1 text-decoration-none" title='Tav'>ת</a>
-		
-		@* 	</div> *@
-		@* <span class="@FontSize" > ־ </span> *@
-		<span>&nbsp;&nbsp;&nbsp;</span>
-		@* 	<div class="d-flex justify-content-center hebrew"> *@
-		<a class="@FontSize pe-1 text-decoration-none text-info" title='Kaph Sofit'>ך</a>
-		<a class="@FontSize pe-1 text-decoration-none text-info" title='Mem Sofit'>ם</a>
-		<a class="@FontSize pe-1 text-decoration-none text-info" title='Nun Sofit'>ן</a>
-		<a class="@FontSize pe-1 text-decoration-none text-info" title='Pe Sofit'>ף</a>
-		<a class="@FontSize pe-1 text-decoration-none text-info" title='Tsade Sofit'>ץ</a>
+
+		@if (MediaQuery == MediaQuery.SmOrMdOrLgOrXl)
+		{
+			<span>&nbsp;&nbsp;&nbsp;</span>
+			<a class="@FontSize pe-1 text-decoration-none text-info" title='Kaph Sofit'>ך</a>
+			<a class="@FontSize pe-1 text-decoration-none text-info" title='Mem Sofit'>ם</a>
+			<a class="@FontSize pe-1 text-decoration-none text-info" title='Nun Sofit'>ן</a>
+			<a class="@FontSize pe-1 text-decoration-none text-info" title='Pe Sofit'>ף</a>
+			<a class="@FontSize pe-1 text-decoration-none text-info" title='Tsade Sofit'>ץ</a>
+		}
 	</div>
 
 </div>
