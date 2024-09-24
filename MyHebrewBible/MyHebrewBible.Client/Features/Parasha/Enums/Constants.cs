@@ -13,7 +13,22 @@ public static class ParashaFacts
 
 public static class Constants
 {
+
+	public static string CurrentReadDateTextFormat(DateTime readDate)
+	{
+		DateTime compareDate = DateTime.Today;
+		if (readDate >= compareDate & readDate <= compareDate.AddDays(6))
+		{
+			return "text-danger";
+		}
+		else
+		{
+			return "";
+		}
+	}
+
 	public static DateTime TriennialSeedDate = DateTime.Parse("2021-10-02"); // 2021-09-25 Last date from previous triennial
+	//public static DateTime TriennialSeedDate = DateTime.Parse("2024-10-26");
 
 	// Not used
 	public static DateTime GetUsersUTC()

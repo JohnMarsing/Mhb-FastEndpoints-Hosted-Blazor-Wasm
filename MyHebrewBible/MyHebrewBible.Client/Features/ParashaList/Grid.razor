@@ -24,18 +24,10 @@
 
 	<QuickGrid Items="@filteredItems">
 		@* <i class="fas fa-chevron-right"></i> *@
-		@if (MediaQuery == MediaQuery.MdOrLgOrXl)
-		{
-			<TemplateColumn Title="Torah">
-				@context.TorahAbrv @context.Value @context.Date.ToString(DateFormat.YYYY_MM_DD)
-			</TemplateColumn>
-		}
-		else
-		{
-			<TemplateColumn Title="Torah">
-				@context.TorahAbrvXsSm @context.Value @context.Date.ToString(DateFormat.YYYY_MM_DD)
-			</TemplateColumn>
-		}
+
+		<TemplateColumn Title="Torah">
+			@context.TorahAbrv @context.Value @context.Date.ToString(DateFormat.YYYY_MM_DD)
+		</TemplateColumn>
 
 		<PropertyColumn Property="@(p => p.Date.ToString(@dateFormat))" Align="Align.Center" Title="Date" />
 
