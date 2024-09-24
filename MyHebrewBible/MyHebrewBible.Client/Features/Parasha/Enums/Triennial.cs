@@ -1,4 +1,4 @@
-﻿// Ignore Spelling: Abrv Deu Tri
+﻿// Ignore Spelling: Abrv Deu Tri YomKippur Yom Kippur Teruah
 
 using Ardalis.SmartEnum;
 using MyHebrewBible.Client.Enums;
@@ -169,6 +169,9 @@ public abstract class Triennial : SmartEnum<Triennial>
 		internal const int Deu_32 = 155;
 		internal const int Deu_33 = 156;
 		internal const int Deu_34 = 157;
+		internal const int AppendTrumpets = 158;
+		internal const int AppendYomKippur = 159;
+		internal const int AppendSukkot = 160;
 	}
 	#endregion
 
@@ -331,6 +334,9 @@ public abstract class Triennial : SmartEnum<Triennial>
 	public static readonly Triennial Deu_32 = new Deu_32SE();
 	public static readonly Triennial Deu_33 = new Deu_33SE();
 	public static readonly Triennial Deu_34 = new Deu_34SE();
+	public static readonly Triennial AppendTrumpets = new AppendTrumpetsSE();
+	public static readonly Triennial AppendYomKippur = new AppendYomKippurSE();
+	public static readonly Triennial AppendSukkot = new AppendSukkotSE();
 
 	#endregion
 
@@ -390,13 +396,6 @@ public abstract class Triennial : SmartEnum<Triennial>
 		}
 	}
 
-	public string TorahAbrvXsSm 
-	{
-		get
-		{
-			return $" {BibleBook.FromValue(this.TorahVerse.BibleBook).Abrv} {this.TorahVerse.ChapterVerse}";
-		}
-	}
 
 	public string Haftorah
 	{
@@ -3452,7 +3451,7 @@ public abstract class Triennial : SmartEnum<Triennial>
 		public override string ParashaName => "Kein Tzipor";
 		public override string NameUrl => NameUrl;
 		public override string AhavtaURL => "";
-		public override string Meaning => "A Bird|s Nest";
+		public override string Meaning => "A Bird's Nest";
 
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "22:6-23:8", 5477, 5509);
 
@@ -3697,6 +3696,49 @@ public abstract class Triennial : SmartEnum<Triennial>
 			new VerseRange(BibleBook.Matthew, "4:5-11", 23215, 23221),
 		];
 	}
+
+	private sealed class AppendTrumpetsSE : Triennial
+	{
+		public AppendTrumpetsSE() : base($"{nameof(Id.AppendTrumpets)}", Id.AppendTrumpets) { } // Oct 5
+		public override string TriNum => "69.1";
+		public override string ParashaName => "Yom Teruah";
+		public override string NameUrl => NameUrl;
+		public override string AhavtaURL => "";
+		public override string Meaning => "Trumpets";
+
+		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "23:23-25", 3426, 3428);
+		public override List<VerseRange>? HaftorahVerses => null;
+		public override List<VerseRange>? BritVerses => null;
+	}
+
+	private sealed class AppendYomKippurSE : Triennial
+	{
+		public AppendYomKippurSE() : base($"{nameof(Id.AppendYomKippur)}", Id.AppendYomKippur) { } // Oct 12
+		public override string TriNum => "69.2";
+		public override string ParashaName => "Yom Kippur";
+		public override string NameUrl => NameUrl;
+		public override string AhavtaURL => "";
+		public override string Meaning => "Day of Atonements";
+
+		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "23:26-32", 3429, 3435);
+		public override List<VerseRange>? HaftorahVerses => null;
+		public override List<VerseRange>? BritVerses => null;
+	}
+
+	private sealed class AppendSukkotSE : Triennial
+	{
+		public AppendSukkotSE() : base($"{nameof(Id.AppendSukkot)}", Id.AppendSukkot) { } // Oct 19
+		public override string TriNum => "69.3";
+		public override string ParashaName => "Sukkot";
+		public override string NameUrl => NameUrl;
+		public override string AhavtaURL => "";
+		public override string Meaning => "Tabernacles";
+
+		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "23:33-38", 3436, 3441);
+		public override List<VerseRange>? HaftorahVerses => null;
+		public override List<VerseRange>? BritVerses => null;
+	}
+
 	#endregion
 
 }

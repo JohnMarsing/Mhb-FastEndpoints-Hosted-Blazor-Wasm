@@ -1,0 +1,45 @@
+﻿
+<div class="d-flex justify-content-start mt-2">
+	@* nav-pills nav-tabs *@
+	<ul class="nav nav-tabs">	@* justify-content-center *@
+
+		<li class="nav-item">
+			<a @onclick="@(() => OnClickFilter(ParashaButtonToShow.TableTab))" title=""
+				 class="nav-link @ActiveFilter(ParashaButtonToShow.TableTab)">
+				<small>Table</small>
+			</a>
+		</li>
+
+		<li class="nav-item">
+			<a @onclick="@(() => OnClickFilter(ParashaButtonToShow.PrintFriendlyTableTab))" title=""
+				 class="nav-link @ActiveFilter(ParashaButtonToShow.PrintFriendlyTableTab)">
+				<small>Print Friendly</small>
+			</a>
+		</li>
+
+		<li class="nav-item">
+			<a @onclick="@(() => OnClickFilter(ParashaButtonToShow.GridTab))" title=""
+				 class="nav-link @ActiveFilter(ParashaButtonToShow.GridTab)">
+				<small>Grid</small>
+			</a>
+		</li>
+
+	</ul>
+</div>
+
+@code {
+	[Parameter, EditorRequired] public required ParashaButtonToShow? CurrentFilter { get; set; }
+	[Parameter] public EventCallback<ParashaButtonToShow> OnFilterSelected { get; set; }
+
+	protected void OnClickFilter(ParashaButtonToShow filter)
+	{
+		OnFilterSelected.InvokeAsync(filter);
+	}
+
+	public string ActiveFilter(ParashaButtonToShow filter)
+	{
+		return filter == CurrentFilter ? "active" : "";
+	}
+
+
+}

@@ -1,0 +1,35 @@
+﻿@using MyHebrewBible.Client.Enums
+@using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
+
+<div class="pb-n1  mb-3 border-bottom border-info"></div>
+
+<table class="table table-sm ">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Book</th>
+			<th>Read Date</th>
+			<th>Torah</th>
+			<th>Haftorah</th>
+			<th>Brit Chadashah</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		@foreach (var item in ParashaEnums.Triennial.List.ToList().OrderBy(o => o.Date))
+		{
+			<tr>
+				<td>@item.Value</td>
+				<td>@item.TorahBookFilter.BibleBook.Abrv</td>
+				<td>@item.Date.ToString(DateFormat.YYYY_MM_DD)</td>
+				<td>@item.TorahAbrv</td>
+				<td>@item.Haftorah</td>
+				<td>@item.Brit</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+
+@code {
+}
