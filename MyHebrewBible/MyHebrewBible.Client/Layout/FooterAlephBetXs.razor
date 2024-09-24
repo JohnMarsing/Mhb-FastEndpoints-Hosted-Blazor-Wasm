@@ -24,30 +24,9 @@
 		<a class="@FontSize pe-1 text-decoration-none" title='Resh'>ר</a>
 		<a class="@FontSize pe-1 text-decoration-none" title='Shin'>ש</a>
 		<a class="@FontSize pe-1 text-decoration-none" title='Tav'>ת</a>
-		<span>&nbsp;&nbsp;&nbsp;</span>
-		<a class="@FontSize pe-1 text-decoration-none text-info" title='Kaph Sofit'>ך</a>
-		<a class="@FontSize pe-1 text-decoration-none text-info" title='Mem Sofit'>ם</a>
-		<a class="@FontSize pe-1 text-decoration-none text-info" title='Nun Sofit'>ן</a>
-		<a class="@FontSize pe-1 text-decoration-none text-info" title='Pe Sofit'>ף</a>
-		<a class="@FontSize pe-1 text-decoration-none text-info" title='Tsade Sofit'>ץ</a>
 	</div>
 </div>
 
 @code {
-	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
-
-	protected string? FontSize;
-
-	protected override void OnParametersSet()
-	{
-		MediaQuery!
-		.When(MediaQuery.Xs).Then(() => FontSize = "hebrew16")
-		.When(MediaQuery.Sm).Then(() => FontSize = "hebrew")
-		.When(MediaQuery.Md).Then(() => FontSize = "hebrew30")
-		.When(MediaQuery.Lg).Then(() => FontSize = "hebrew36")
-		.When(MediaQuery.Xl).Then(() => FontSize = "hebrew44");
-	}
-
-
-	protected string alephbet2 = "אָלֶף־בֵּית עִבְרִי";
+	protected string? FontSize = "hebrew16";
 }

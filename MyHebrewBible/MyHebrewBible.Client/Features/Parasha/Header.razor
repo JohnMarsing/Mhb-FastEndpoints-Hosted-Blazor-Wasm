@@ -1,7 +1,5 @@
 ﻿@using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
 
-<div class="card">
-
 	<div class="card-body pb-0">
 		<div class="d-flex justify-content-start">
 			<div class="pe-3 text-center"><b>Torah</b><br /><b>@CurrentReading!.TorahAbrv</b></div>
@@ -22,26 +20,17 @@
 				</a>
 			</div>
 
+			@* ToDo: These could be moved to the Navbar *@
 			<div class="pe-3 text-center">
 				<i class="fas fa-chevron-left"></i> Prev
-@* 				<button @onclick="@(() => ButtonClicked(context.Value))" 
-					class="btn btn-outline-info btn-sm"
-					 title="Id: @context.Value @context.Date.ToString(DateFormat.MMM_d)">
-				</button> *@
 			</div>
 
 			<div class="pe-3 text-center">
 				<i class="fas fa-chevron-right"></i> Next
-				@* 				<button @onclick="@(() => ButtonClicked(context.Value))"
-				class="btn btn-outline-info btn-sm"
-				title="Id: @context.Value @context.Date.ToString(DateFormat.MMM_d)">
-				</button> *@
 			</div>
 
 		</div>
 	</div>
-
-</div>
 
 @code {
 	[Parameter, EditorRequired] public ParashaEnums.Triennial? CurrentReading { get; set; }

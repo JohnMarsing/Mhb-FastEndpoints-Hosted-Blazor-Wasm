@@ -44,6 +44,7 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int HealthCheckBibleBook = 19;
 		internal const int HealthCheckThrowError = 20;
 		internal const int HealthCheckVerseList = 21;
+		internal const int ParashaList = 22;
 	}
 	#endregion
 
@@ -69,6 +70,7 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav HealthCheckBibleBook = new HealthCheckBibleBookSE();
 	public static readonly Nav HealthCheckThrowError = new HealthCheckThrowErrorSE();
 	public static readonly Nav HealthCheckVerseList = new HealthCheckVerseListSE();
+	public static readonly Nav ParashaList = new ParashaListSE();
 	#endregion
 
 	private Nav(string name, int value) : base(name, value)  // Constructor
@@ -91,6 +93,7 @@ public abstract class Nav : SmartEnum<Nav>
 		get
 		{
 			return $"{(Disabled ? " disabled" : "")}";
+			//return $"{(Disabled ? "" : "")}";
 		}
 	}
 
@@ -281,8 +284,8 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string Title => "Old Home Page";
 		public override string Icon => "fas fa-history";
 		public override int Sort => Id.HomeMhbVer6;
-		public override string HomeTitleSuffix => "";
-		public override string HomeFloatRightHebrew => "";
+		public override string HomeTitleSuffix => " zaken H2204";  // bawlah H1086
+		public override string HomeFloatRightHebrew => "זָקֵן";  // בָּלָה
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 		public override bool Disabled => false;
@@ -408,6 +411,21 @@ public abstract class Nav : SmartEnum<Nav>
 	}
 
 
+	private sealed class ParashaListSE : Nav
+	{
+		public ParashaListSE() : base($"{nameof(Id.ParashaList)}", Id.ParashaList) { }
+		public override string Index => "/ParashaList";
+		public override string Title => "Parasha List";
+		public override string Icon => "fas fa-table";
+		public override int Sort => Id.ParashaList;
+		public override string HomeTitleSuffix => "";
+		public override string HomeFloatRightHebrew => "";
+
+		public override PageListType PageListType => PageListType.None;
+		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false; // N/A
+	}
+
 	#endregion
 
 
@@ -441,4 +459,4 @@ public abstract class Nav : SmartEnum<Nav>
 }
 
 //  Title2 = "Welcome 😄";  https://github.com/anton-bot/Full-Emoji-List/blob/master/Emoji.cs
-// Ignore Spelling: Nav Parasha QRC Descr loggedout Tavs
+// Ignore Spelling: Nav Parasha QRC Descr loggedout Tavs Mhb Ver

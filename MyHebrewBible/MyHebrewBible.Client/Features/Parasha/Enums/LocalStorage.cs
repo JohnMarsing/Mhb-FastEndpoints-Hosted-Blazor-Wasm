@@ -1,5 +1,4 @@
 ﻿using Ardalis.SmartEnum;
-using MyHebrewBible.Client.Features.Parasha.TopSection;
 
 namespace MyHebrewBible.Client.Features.Parasha.Enums;
 

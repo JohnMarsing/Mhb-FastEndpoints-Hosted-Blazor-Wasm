@@ -23,28 +23,18 @@
 	</div>
 
 	<QuickGrid Items="@filteredItems">
-
+		@* <i class="fas fa-chevron-right"></i> *@
 		@if (MediaQuery == MediaQuery.MdOrLgOrXl)
 		{
 			<TemplateColumn Title="Torah">
-				<a @onclick="@(() => ButtonClicked(context.Value))" class="text-decoration-underline"
-					 title="Id: @context.Value @context.Date.ToString(DateFormat.YYYY_MM_DD)">
-					@context.TorahAbrv
-				</a>
-				@* <i class="fas fa-chevron-right"></i> *@
+				@context.TorahAbrv @context.Value @context.Date.ToString(DateFormat.YYYY_MM_DD)
 			</TemplateColumn>
 		}
 		else
 		{
 			<TemplateColumn Title="Torah">
-				<button @onclick="@(() => ButtonClicked(context.Value))" 
-						class="btn btn-outline-info btn-sm"
-						title="Id: @context.Value @context.Date.ToString(DateFormat.YYYY_MM_DD)">
-					@context.TorahAbrvXsSm 
-				</button>
-				@* <i class="fas fa-chevron-right"></i> *@
+				@context.TorahAbrvXsSm @context.Value @context.Date.ToString(DateFormat.YYYY_MM_DD)
 			</TemplateColumn>
-
 		}
 
 		<PropertyColumn Property="@(p => p.Date.ToString(@dateFormat))" Align="Align.Center" Title="Date" />
@@ -66,34 +56,25 @@
 </div>
 
 @code {
-	[Parameter, EditorRequired] public TorahBookFilter? TorahBookFilter { get; set; }
 	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
-	[Parameter, EditorRequired] public EventCallback<int> OnTriennialReadingSelected { get; set; }
 
 	TorahBookFilter? CurrentFilter;
 
-	//private string dateFormat => (MediaQuery == MediaQuery.MdOrLgOrXl ? DateFormat.YYYY_MM_DD : DateFormat.MMM_d);  
 	private string dateFormat => DateFormat.MMM_d;
 
 	List<ParashaEnums.Triennial>? itemList;
 	IQueryable<ParashaEnums.Triennial>? items;
 
-	IQueryable<Enums.Triennial>? filteredItems => items?
+	IQueryable<ParashaEnums.Triennial>? filteredItems => items?
 		.Where(x => x.TorahBookFilter == CurrentFilter)
 		.OrderBy(o => o.Date);
 
 	protected override void OnInitialized()
 	{
-		CurrentFilter = TorahBookFilter;
-		itemList = Enums.Triennial.List.ToList();
+		//CurrentFilter = TorahBookFilter;
+		CurrentFilter = TorahBookFilter.Genesis;
+		itemList = ParashaEnums.Triennial.List.ToList();
 		items = itemList.AsQueryable();
-	}
-
-	protected int TriennialReadingId;
-	private void ButtonClicked(int id)
-	{
-		TriennialReadingId = id;
-		OnTriennialReadingSelected.InvokeAsync(id);
 	}
 
 	private void ReturnedFilter(TorahBookFilter filter)

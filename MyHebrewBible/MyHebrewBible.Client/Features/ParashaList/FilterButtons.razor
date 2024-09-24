@@ -3,7 +3,6 @@
 <div class="d-flex justify-content-end mt-2">
 	@foreach (var item in TorahBookFilter.List.OrderBy(o => o.Value))
 	{
-
 		<button @onclick="@(() => OnButtonClicked(item))"
 						class="btn btn-outline-primary btn-sm @ActiveFilter(item)">
 

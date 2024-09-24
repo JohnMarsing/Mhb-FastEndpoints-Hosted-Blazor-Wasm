@@ -2,28 +2,17 @@
 @using MyHebrewBible.Client.Enums
 
 <PageTitle>My Hebrew Bible</PageTitle>
-@* <PageTitle>Home | MHB</PageTitle> *@
-@* <PageHeader PageEnum="Enums.Nav.Home" /> *@
 
 <div class="text-center">
-	@* <img src="/images/MyHebrewBible.svg" class="filter-green" /> *@
-	<h2>My Hebrew Bible</h2>
+	<img src="/images/MyHebrewBible.svg" class="img-fluid" />
 </div>
 
 <div class="card card border-0 ">
-
-	<div class="@MediaQuery.XsOrSm.DivClass">
-		<div class="card-body px-0">
-			<SidebarButtonsFlex IsXsOrSm="true" />
-		</div>
-	</div>
-
-	<div class="@MediaQuery.MdOrLgOrXl.DivClass">
-		<div class="card-body px-0">
-			<SidebarButtonsFlex IsXsOrSm="false" />
-		</div>
-	</div>
-
+	<div class="@MediaQuery.Xs.DivClass"><SidebarButtonsFlex MediaQuery="MediaQuery.Xs" /></div>
+	<div class="@MediaQuery.Sm.DivClass"><SidebarButtonsFlex MediaQuery="MediaQuery.Sm" /></div>
+	<div class="@MediaQuery.Md.DivClass"><SidebarButtonsFlex MediaQuery="MediaQuery.Md" /></div>
+	<div class="@MediaQuery.Lg.DivClass"><SidebarButtonsFlex MediaQuery="MediaQuery.Lg" /></div>
+	<div class="@MediaQuery.Xl.DivClass"><SidebarButtonsFlex MediaQuery="MediaQuery.Xl" /></div>
 </div>
 
 
