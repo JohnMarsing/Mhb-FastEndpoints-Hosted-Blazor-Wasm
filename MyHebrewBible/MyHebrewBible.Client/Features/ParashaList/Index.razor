@@ -1,0 +1,19 @@
+﻿@page "/ParashaList"
+
+@using MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Features.Parasha.State
+
+<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.ParashaList" BorderCSS="" />
+
+<div class="@MediaQuery.XsOrSm.DivClass">
+	<Grid  MediaQuery="@MediaQuery.XsOrSm" />
+</div>
+
+<div class="@MediaQuery.MdOrLgOrXl.DivClass">
+	<Grid  MediaQuery="@MediaQuery.MdOrLgOrXl" />
+</div>
+
+@code {
+
+
+}

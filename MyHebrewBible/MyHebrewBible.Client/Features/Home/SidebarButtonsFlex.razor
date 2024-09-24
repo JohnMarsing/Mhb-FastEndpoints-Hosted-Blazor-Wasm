@@ -1,49 +1,46 @@
 ﻿@using Client.Enums
 
-@inject NavigationManager NavigationManager
-
-@if (IsXsOrSm)
+@if (MediaQuery == MediaQuery.Xs)
 {
-	<div class="list-group">
-		@foreach (var item in Nav.List.ToList()
-		.Where(w => w.IsPartOfList(PageListType.Layout))
-		.OrderBy(o => o.Sort))
-		{
-			<FancyFatNavButton Nav="item" />
-		}
+	<div class="card-body px-0">
+		<div class="list-group">
+			@foreach (var item in Nav.List.ToList()
+				.Where(w => w.IsPartOfList(PageListType.Layout))
+				.OrderBy(o => o.Sort))
+			{
+				<FancyFatNavButton Nav="item" MediaQuery="MediaQuery" />
+			}
+		</div>
 	</div>
 }
 else
 {
-	<div class="row">
-		<div class="col-6">
-			<div class="list-group">
-				@foreach (var item in Nav.List.ToList()
-					.Where(w => w.IsPartOfList(PageListType.Layout)).Where(w => w.Value <= 9)
-					.OrderBy(o => o.Sort))
-				{
-					<FancyFatNavButton Nav="item" />
-				}
+	<div class="card-body px-0">
+		<div class="row">
+			<div class="col-6">
+				<div class="list-group">
+					@foreach (var item in Nav.List.ToList()
+							.Where(w => w.IsPartOfList(PageListType.Layout)).Where(w => w.Value <= 9)
+							.OrderBy(o => o.Sort))
+					{
+						<FancyFatNavButton Nav="item" MediaQuery="MediaQuery" />
+					}
+				</div>
 			</div>
-		</div>
-		<div class="col-6">
-			<div class="list-group">
-				@foreach (var item in Nav.List.ToList()
-					.Where(w => w.IsPartOfList(PageListType.Layout)).Where(w => w.Value > 9)
-					.OrderBy(o => o.Sort))
-				{
-					<FancyFatNavButton Nav="item" />
-				}
+			<div class="col-6">
+				<div class="list-group">
+					@foreach (var item in Nav.List.ToList()
+							.Where(w => w.IsPartOfList(PageListType.Layout)).Where(w => w.Value > 9)
+							.OrderBy(o => o.Sort))
+					{
+						<FancyFatNavButton Nav="item" MediaQuery="MediaQuery" />
+					}
+				</div>
 			</div>
 		</div>
 	</div>
 }
 
 @code {
-	[Parameter, EditorRequired] public bool IsXsOrSm { get; set; }
-
-	private void ButtonClicked(int id)
-	{
-		NavigationManager!.NavigateTo(Nav.FromValue(id) + "/");
-	}
+	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
 }
