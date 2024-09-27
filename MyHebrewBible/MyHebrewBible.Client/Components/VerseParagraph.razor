@@ -34,7 +34,7 @@
 		try
 		{
 			//await Task.Delay(200);  // ToDo: comment this out in production
-			if (VerseParagraphRange!.BegId >= VerseParagraphRange.EndId) 
+			if (VerseParagraphRange!.BegId > VerseParagraphRange.EndId) 
 				throw new System.ApplicationException($"BegId [{VerseParagraphRange!.BegId}] >= EndId [{VerseParagraphRange!.EndId}]");
 			if (VerseParagraphRange!.EndId - VerseParagraphRange!.BegId > 300) throw new System.ApplicationException("Verse range can not exceed 300"); // ToDo: extract this
 			verses = await Api!.GetVerseListAsync(VerseParagraphRange.BegId, VerseParagraphRange.EndId);
