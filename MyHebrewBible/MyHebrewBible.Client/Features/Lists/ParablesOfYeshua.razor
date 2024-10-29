@@ -3,8 +3,8 @@
 @using MyHebrewBible.Client.Features.Lists.Components
 
 @using Page = MyHebrewBible.Client.Features.Lists.MenuItemConstants.ParablesOfYeshua
-<PageTitle>@Page.Title</PageTitle>
 
+<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.BibleList" PageTitle="@Page.Title" />
 <SubNavBar ActiveMenuItem="@MenuItems.ParablesOfYeshua" />
 
 <SourceAnchor Url="https://en.wikipedia.org/wiki/Parables_of_Jesus#Harmony_of_parables" />

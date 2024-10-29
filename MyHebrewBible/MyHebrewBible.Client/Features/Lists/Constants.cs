@@ -8,14 +8,12 @@ public static class MenuItemConstants
 		public const string Title = "Emendations";
 		public const string Icon = "fab fa-wordpress";
 	}
-
-	public const string Feasts = "/BibleList/Feasts";
-
+	
 	public static class GospelHarmony
 	{
 		public const string Index = "/BibleList/GospelHarmony";
-		public const string Title = "GospelHarmony";
-		public const string Icon = "fab fa-wordpress";
+		public const string Title = "Gospel Harmony";
+		public const string Icon = "fas fa-fighter-jet";
 	}
 
 	public static class JotAndTittle
@@ -60,14 +58,20 @@ public static class MenuItemConstants
 		public const string Icon = "fab fa-wordpress";
 	}
 
-
 	public static class YosephAndYeshuaComparison
 	{
-		public const string Index = "/BibleList/ParablesOfYeshua";
-		public const string Title = "Parables of Yeshua in the OT";
-		public const string Icon = "fab fa-wordpress";
+		public const string Index = "/BibleList/YosephAndYeshuaComparison";
+		public const string Title = "Yoseph and Yeshua Comparison";
+		public const string Icon = "fas fa-bars";
 	}
-	
+		
+	public static class Feasts
+	{
+		public const string Index = "/BibleList/Feasts";
+		public const string Title = "Feasts";
+		public const string Icon = "fas fa-calendar";
+	}
+
 
 	/*
 	- From  MyHebrewBible.Client.Features.Hebrew;

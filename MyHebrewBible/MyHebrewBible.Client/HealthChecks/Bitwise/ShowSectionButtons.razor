@@ -1,0 +1,30 @@
+﻿@using MyHebrewBible.Client.Features.Parasha.Enums
+
+@foreach (var item in ShowSection.List.OrderBy(o => o.Value))
+{
+	if (CurrentPermutations.HasFlag(item.Permutation))
+	{
+		<button @onclick="@(() => OnButtonSubtractClicked(item))"
+						class="btn btn-outline-warning btn-sm me-1">
+			Hide @item.ButtonLabel <i class="fas fa-chevron-up"></i>
+		</button>
+	}
+	else
+	{
+		<button @onclick="@(() => OnButtonAddClicked(item))"
+						class="btn btn-outline-success btn-sm me-1">
+			Show @item.ButtonLabel <i class="fas fa-chevron-down"></i>
+		</button>
+	}
+}
+@code {
+
+	[Parameter, EditorRequired] public Permutation CurrentPermutations { get; set; }
+	[Parameter] public EventCallback<Permutation> OnShowSectionSelected { get; set; }
+
+	private void OnButtonAddClicked(ShowSection showSection)
+		=> OnShowSectionSelected.InvokeAsync(CurrentPermutations | showSection.Permutation);
+
+	private void OnButtonSubtractClicked(ShowSection showSection) 
+		=> OnShowSectionSelected.InvokeAsync(CurrentPermutations &= ~showSection.Permutation);
+}

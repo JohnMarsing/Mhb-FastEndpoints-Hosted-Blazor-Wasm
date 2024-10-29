@@ -12,15 +12,14 @@
 			}
 
 			<div class="pe-3 text-center">
-				<b>Ahavta <i class="fas fa-external-link-square-alt"></i></b><br />
-				@CurrentReading!.AhavtaURL
+				<b>Ahavta</b><br />
 				<a href="@CurrentReading.AhavtaURL"
-					 title="Ahavta URL [@CurrentReading.Value]" target="_blank">
+				 title="@CurrentReading!.AhavtaURL [@CurrentReading.Value] " target="_blank">
 					<i class="fas fa-external-link-alt"></i>
 				</a>
 			</div>
 
-			@* ToDo: These could be moved to the Navbar *@
+		@* ToDo: These could be moved to the Navbar 
 			<div class="pe-3 text-center">
 				<i class="fas fa-chevron-left"></i> Prev
 			</div>
@@ -28,6 +27,7 @@
 			<div class="pe-3 text-center">
 				<i class="fas fa-chevron-right"></i> Next
 			</div>
+		*@
 
 		</div>
 	</div>

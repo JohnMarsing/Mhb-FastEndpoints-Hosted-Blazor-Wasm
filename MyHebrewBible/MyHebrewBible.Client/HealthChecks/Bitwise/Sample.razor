@@ -1,0 +1,73 @@
+﻿@page "/HealthChecks/bitwisesample"
+
+<h3>Sample</h3>
+
+<a class="float-end" href="https://github.com/ardalis/SmartEnum#smartflagenum">SmartFlagEnum</a>
+
+
+<h3 class="mt-4">SmartFlagTestEnum</h3>
+<h4><code>foreach SmartFlagTestEnum</code></h4>
+<ul>
+	@foreach (var item in SmartFlagTestEnum.List)
+	{
+		<li>@item.Value @item.Name</li>
+	}
+</ul>
+
+<h4><code>FromValue SmartFlagTestEnum</code></h4>
+<ul>
+	<li>1: @FromValue(1)</li>
+	<li>3: @FromValue(3)</li>
+	<li>16: @FromValue(16)</li>
+	@* <li>17: @FromValue(17)</li>  Sequence contains more than one element *@
+	@* <li>-1: @FromValue(-1)</li> *@
+</ul>
+
+<h3 class="mt-4">SmartFlagTestEnum</h3>
+<ul>
+	@foreach (var item in EmployeeType.List)
+	{
+		<li>@item.Value @item.Name</li>
+	}
+</ul>
+
+<h4><code>FromValueToString</code></h4>
+<p><b>UseSmartFlagEnumOne</b>; <code>EmployeeType.FromValue(3)</code>: @UseSmartFlagEnumOne()</p>
+<p><b>UseSmartFlagEnumTwo</b>; <code>EmployeeType.FromValueToString(-1)</code>: @UseSmartFlagEnumTwo()</p>
+<p><b>UseSmartFlagEnumTwoV2</b>; <code>EmployeeType.FromValueToString(EmployeeType.Assistant | EmployeeType.Director)</code>: @UseSmartFlagEnumTwoV2()</p>
+
+
+@code {
+
+	public string UseSmartFlagEnumOne()
+	{
+		var result = EmployeeType.FromValue(3).ToList();
+
+		var outputString = "";
+		foreach (var employeeType in result)
+		{
+			outputString += $"{employeeType.Name} earns ${employeeType.BonusSize} bonus this year.";
+		}
+
+		return outputString; // => "Director earns $100000 bonus this year. Manager earns $10000 bonus this year."
+	}
+
+
+	private string FromValue(int i)
+	{
+		var myFlagEnums = SmartFlagTestEnum.FromValue(i).SingleOrDefault();
+		return myFlagEnums.Name;
+		//return SmartFlagTestEnum.FromValue(i);
+	}
+
+	public string UseSmartFlagEnumTwo()
+	{
+		return EmployeeType.FromValueToString(-1); // => "Director, Manager, Assistant"
+	}
+
+	public string UseSmartFlagEnumTwoV2()
+	{
+		return EmployeeType.FromValueToString(EmployeeType.Assistant | EmployeeType.Director);  //=> "Director, Assistant"
+	}
+
+}

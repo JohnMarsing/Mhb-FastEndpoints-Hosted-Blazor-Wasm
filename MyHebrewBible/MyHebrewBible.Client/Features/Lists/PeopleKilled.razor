@@ -3,8 +3,8 @@
 @using MyHebrewBible.Client.Features.Lists.Components
 
 @using Page = MyHebrewBible.Client.Features.Lists.MenuItemConstants.PeopleKilled
-<PageTitle>@Page.Title</PageTitle>
 
+<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.BibleList" PageTitle="@Page.Title" />
 <SubNavBar ActiveMenuItem="@MenuItems.PeopleKilled" />
 
 <SourceAnchor Url="http://dwindlinginunbelief.blogspot.com/2010/04/drunk-with-blood-gods-killings-in-bible.html" />

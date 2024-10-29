@@ -1,0 +1,11 @@
+﻿@page "/environmentvars"
+
+<h1>Environment Vars</h1>
+
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@inject IWebAssemblyHostEnvironment Env
+
+<p>Environment: @Env.Environment</p>
+
+<p>IsProduction: @Env.IsProduction()</p>
+<p>IsDevelopment: @Env.IsDevelopment()</p>

@@ -13,34 +13,41 @@
 
 	</div>
 
-	<div class="collapse navbar-collapse justify-content-center">
-		<div class="">
-			<PreviousButton PreviousBookAndChapter="@CurrentBookAndChapter"
-											buttonToShow="ButtonsToShow.PreviousOnly"
-											IsXs="isXs"
-											OnBookAndChapterSelected="@ReturnedBookAndChapter" />
-		</div>
+	@if (CurrentBookAndChapter is null)
+	{
+		<text><span class="text-center fw-bold fst-italic">CurrentBookAndChapter is null</span></text>
+	}
+	else
+	{
+		<div class="collapse navbar-collapse justify-content-center">
+			<div class="">
+				<PreviousButton PreviousBookAndChapter="@CurrentBookAndChapter"
+												buttonToShow="ButtonsToShow.PreviousOnly"
+												IsXs="isXs"
+												OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+			</div>
 
-		<div class="px-1">
-			<BookModal CurrentBookAndChapter="CurrentBookAndChapter"
-								 MediaQuery="MediaQuery"
-								 OnBookSelected="ReturnedBook" />
-		</div>
+			<div class="px-1">
+				<BookModal CurrentBookAndChapter="CurrentBookAndChapter"
+									 MediaQuery="MediaQuery"
+									 OnBookSelected="ReturnedBook" />
+			</div>
 
-		<div class="pe-1">
-			<ChapterModal CurrentBookAndChapter="CurrentBookAndChapter"
-										MediaQuery="MediaQuery"
-										OnChapterFilterSelected="OnBookAndChapterSelected" />
-		</div>
+			<div class="pe-1">
+				<ChapterModal CurrentBookAndChapter="CurrentBookAndChapter"
+											MediaQuery="MediaQuery"
+											OnChapterFilterSelected="OnBookAndChapterSelected" />
+			</div>
 
-		<div class="">
-			<NextButton NextBookAndChapter="@CurrentBookAndChapter"
-									buttonToShow="ButtonsToShow.NextOnly"
-									IsXs="isXs"
-									OnBookAndChapterSelected="@ReturnedBookAndChapter" />
-		</div>
+			<div class="">
+				<NextButton NextBookAndChapter="@CurrentBookAndChapter"
+										buttonToShow="ButtonsToShow.NextOnly"
+										IsXs="isXs"
+										OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+			</div>
 
-	</div>
+		</div>
+	}
 
 	<div class="collapse navbar-collapse justify-content-end">
 		<div class="pe-1">

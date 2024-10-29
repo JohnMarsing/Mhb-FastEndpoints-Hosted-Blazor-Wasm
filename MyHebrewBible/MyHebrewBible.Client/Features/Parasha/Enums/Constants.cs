@@ -27,8 +27,8 @@ public static class Constants
 		}
 	}
 
-	public static DateTime TriennialSeedDate = DateTime.Parse("2021-10-02"); // 2021-09-25 Last date from previous triennial
-	//public static DateTime TriennialSeedDate = DateTime.Parse("2024-10-26");
+	//public static DateTime TriennialSeedDate = DateTime.Parse("2021-10-02"); // 2021-09-25 Last date from previous triennial
+	public static DateTime TriennialSeedDate = DateTime.Parse("2024-10-05");  //2024-10-26
 
 	// Not used
 	public static DateTime GetUsersUTC()

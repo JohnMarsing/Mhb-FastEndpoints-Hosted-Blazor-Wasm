@@ -45,6 +45,7 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int HealthCheckThrowError = 20;
 		internal const int HealthCheckVerseList = 21;
 		internal const int ParashaList = 22;
+		internal const int HealthCheckBitwise = 23;
 	}
 	#endregion
 
@@ -71,6 +72,7 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav HealthCheckThrowError = new HealthCheckThrowErrorSE();
 	public static readonly Nav HealthCheckVerseList = new HealthCheckVerseListSE();
 	public static readonly Nav ParashaList = new ParashaListSE();
+	public static readonly Nav HealthCheckBitwise = new HealthCheckBitwiseSE();
 	#endregion
 
 	private Nav(string name, int value) : base(name, value)  // Constructor
@@ -410,7 +412,6 @@ public abstract class Nav : SmartEnum<Nav>
 		public override bool Disabled => false;
 	}
 
-
 	private sealed class ParashaListSE : Nav
 	{
 		public ParashaListSE() : base($"{nameof(Id.ParashaList)}", Id.ParashaList) { }
@@ -425,6 +426,21 @@ public abstract class Nav : SmartEnum<Nav>
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 		public override bool Disabled => false; // N/A
 	}
+
+	private sealed class HealthCheckBitwiseSE : Nav
+	{
+		public HealthCheckBitwiseSE() : base($"{nameof(Id.HealthCheckBitwise)}", Id.HealthCheckBitwise) { }
+		public override string Index => "HealthChecks/Bitwise";
+		public override string Title => "HealthChecks Bitwise";
+		public override string Icon => "fas fa-teeth";  // fab fa-perbyte
+		public override int Sort => Id.Profile;
+		public override string HomeTitleSuffix => " ";
+		public override string HomeFloatRightHebrew => "";
+		public override PageListType PageListType => PageListType.SitemapPage;
+		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
+	}
+
 
 	#endregion
 

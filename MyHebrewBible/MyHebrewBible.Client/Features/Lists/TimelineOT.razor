@@ -3,8 +3,8 @@
 @using MyHebrewBible.Client.Features.Lists.Components
 
 @using Page = MyHebrewBible.Client.Features.Lists.MenuItemConstants.TimeLine
-<PageTitle>@Page.Title</PageTitle>
 
+<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.BibleList" PageTitle="@Page.Title" />
 <SubNavBar ActiveMenuItem="@MenuItems.TimeLine" />
 
 <SourceAnchor Url="https://levendwater.org/companion/append50_VIII.html" />

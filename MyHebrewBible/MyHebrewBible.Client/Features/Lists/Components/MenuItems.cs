@@ -18,6 +18,7 @@ public abstract class MenuItems : SmartEnum<MenuItems>
 		internal const int PeopleKilled = 7;
 		internal const int TimeLine = 8;
 		internal const int YosephAndYeshuaComparison = 9;
+		internal const int GospelHarmony = 10;
 	}
 	#endregion
 
@@ -32,6 +33,7 @@ public abstract class MenuItems : SmartEnum<MenuItems>
 	public static readonly MenuItems PeopleKilled = new PeopleKilledSE();
 	public static readonly MenuItems TimeLine = new TimeLineSE();
 	public static readonly MenuItems YosephAndYeshuaComparison = new YosephAndYeshuaComparisonSE();
+	public static readonly MenuItems GospelHarmony = new GospelHarmonySE();
 	// SE=SmartEnum
 	#endregion
 
@@ -120,9 +122,17 @@ public abstract class MenuItems : SmartEnum<MenuItems>
 	private sealed class YosephAndYeshuaComparisonSE : MenuItems
 	{
 		public YosephAndYeshuaComparisonSE() : base($"{nameof(Id.YosephAndYeshuaComparison)}", Id.YosephAndYeshuaComparison) { }
-		public override string Icon => "fa fa-bars";
+		public override string Icon => "fas fa-bars";
 		public override string Title => "Yoseph and Yeshua Comparison";
 		public override string Page => PageLink.BibleList.Index + "/" + nameof(Id.YosephAndYeshuaComparison);
+	}
+
+	private sealed class GospelHarmonySE : MenuItems
+	{
+		public GospelHarmonySE() : base($"{nameof(Id.GospelHarmony)}", Id.GospelHarmony) { }
+		public override string Icon => "fas fa-fighter-jet";
+		public override string Title => "Gospel Harmony";
+		public override string Page => PageLink.BibleList.Index + "/" + nameof(Id.GospelHarmony);
 	}
 
 	#endregion

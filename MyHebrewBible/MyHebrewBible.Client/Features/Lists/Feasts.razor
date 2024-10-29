@@ -1,13 +1,10 @@
 ﻿@page "/BibleList/Feasts"
 
 @using MyHebrewBible.Client.Features.Lists.Components
-@*
-@using Page = MyHebrewBible.Client.Features.Lists.MenuItemConstants
-<PageTitle>@Page.Title</PageTitle>
-*@
+@using Page = MyHebrewBible.Client.Features.Lists.MenuItemConstants.Feasts
 
+<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.BibleList" PageTitle="@Page.Title" />
 <SubNavBar ActiveMenuItem="@MenuItems.Feasts" />
-
 
 <SourceAnchor Url="http://www.torahtogether.com/order.shtml"  
 		Url2="https://en.wikipedia.org/wiki/High_Sabbaths"

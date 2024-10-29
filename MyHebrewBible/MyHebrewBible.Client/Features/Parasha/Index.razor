@@ -1,45 +1,72 @@
 ﻿@page "/Parasha"
 
 @using MyHebrewBible.Client.Enums
-@using MyHebrewBible.Client.Features.Parasha.DetailSection
-@using MyHebrewBible.Client.Features.Parasha.State
+@using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
 
 @inject ILogger<Index>? Logger
 @inject IToastService? Toast
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.Parasha" BorderCSS="" />
 
+@* *@
+<div class="card border-warning mb-2">
+	<div class="card-header text-center">Current Permutation[s]: @CurrentPermutations</div>
+</div>
+
 
 @if (CurrentReading is not null)
 {
-<div class="card border-primary mb-3">
-	<div class="card-header">
+	<div class="card border-primary mb-3">
+		<div class="card-header">
 			<h2>Current Parasha</h2>
-	</div>
-	
-	 <div class="@MediaQuery.XsOrSm.DivClass">
-		<Header CurrentReading="CurrentReading" MediaQuery="@MediaQuery.XsOrSm" />
+		</div>
+
+		<div class="@MediaQuery.XsOrSm.DivClass">
+			<Header CurrentReading="CurrentReading" MediaQuery="@MediaQuery.XsOrSm" />
+		</div>
+
+		<div class="@MediaQuery.MdOrLgOrXl.DivClass">
+			<Header CurrentReading="CurrentReading" MediaQuery="@MediaQuery.MdOrLgOrXl" />
+		</div>
+
 	</div>
 
-	<div class="@MediaQuery.MdOrLgOrXl.DivClass">
-		<Header CurrentReading="CurrentReading" MediaQuery="@MediaQuery.MdOrLgOrXl" />
-	</div>
+	@foreach (var item in ParashaEnums.ShowSection.List.OrderBy(o => o.Value))
+	{
+		<div class="card bg-light mb-3">
+			<div class="card-header">
+				<div class="d-flex justify-content-between">
+					<div>
+						<h3 class="@item!.HeaderColor"><b>@item!.Title</b></h3>
+					</div>
 
-	</div>
-	<Verses CurrentReading="CurrentReading"
-					SubTitle="@CurrentReading!.TorahPlusDaysFromOrToShabbat"
-					LocalStorage="Enums.LocalStorage.Torah"
-					VerseGroup="Enums.VerseGroup.Torah" />
+					<div>
+						<ShowSectionButtons ShowSection="item"
+																CurrentPermutations="CurrentPermutations"
+																OnShowSectionSelected="ReturnedPermutation" />
 
-	<Verses CurrentReading="CurrentReading"
-					SubTitle="@CurrentReading!.Haftorah"
-					LocalStorage="Enums.LocalStorage.Haftorah"
-					VerseGroup="Enums.VerseGroup.Haftorah" />
+					</div>
+				</div>
 
-	<Verses CurrentReading="CurrentReading"
-					SubTitle="@CurrentReading!.Brit"
-					LocalStorage="Enums.LocalStorage.Brit"
-					VerseGroup="Enums.VerseGroup.Brit" />
+				@if (CurrentPermutations.HasFlag(ParashaEnums.Permutation.Torah) && item == ParashaEnums.ShowSection.Torah)
+				{
+					<TorahVerses CurrentReading="CurrentReading" />
+				}
+
+				@if (CurrentPermutations.HasFlag(ParashaEnums.Permutation.Haftorah) && item == ParashaEnums.ShowSection.Haftorah)
+				{
+					<HaftorahVerses CurrentReading="CurrentReading" />
+				}
+
+				@if (CurrentPermutations.HasFlag(ParashaEnums.Permutation.Brit) && item == ParashaEnums.ShowSection.Brit)
+				{
+					<BritVerses CurrentReading="CurrentReading" />
+				}
+
+			</div>
+		</div>
+	}
+
 }
 else
 {
@@ -47,20 +74,24 @@ else
 }
 
 @code {
-	public Enums.Triennial? CurrentReading { get; set; }
+	public ParashaEnums.Triennial? CurrentReading { get; set; }
+
+	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+	protected ParashaEnums.Permutation CurrentPermutations;
 
 	protected bool IsReadingCurrent;
 
 	protected override void OnInitialized()
 	{
 		CurrentReading = GetCurrentReading($"{nameof(Index)}!{nameof(OnInitialized)}");
+		CurrentPermutations = GetCurrentPermutation();
 	}
 
-	private Enums.Triennial? GetCurrentReading(string calledBy)
+	private ParashaEnums.Triennial? GetCurrentReading(string calledBy)
 	{
-		Enums.Triennial? _reading =
-			Enums.Triennial.List
-			.Where(w => w.Date == Enums.Constants.GetNextShabbatDate())
+		ParashaEnums.Triennial? _reading =
+			ParashaEnums.Triennial.List
+			.Where(w => w.Date == ParashaEnums.Constants.GetNextShabbatDate())
 			.SingleOrDefault();
 
 		if (_reading is null)
@@ -75,8 +106,21 @@ else
 		{
 			return _reading;
 		}
-
 	}
 
+	private ParashaEnums.Permutation GetCurrentPermutation()
+	{
+		int _permutation = CascadingAppState!.AppState!.ParashaState!.Get();
+		//Logger!.LogInformation("{Method}, _permutation: {_permutation}", nameof(GetCurrentPermutation), _permutation);
+		return (ParashaEnums.Permutation)_permutation;
+	}
+
+
+	private async Task ReturnedPermutation(ParashaEnums.Permutation permutation)
+	{
+		CurrentPermutations = permutation;
+		//Logger!.LogInformation("{Method} CurrentPermutations: {CurrentPermutations}", nameof(ReturnedPermutation), CurrentPermutations);
+		await CascadingAppState!.AppState!.ParashaState!.Update(CurrentPermutations);
+	}
 
 }

@@ -4,8 +4,8 @@
 @using MyHebrewBible.Client.Enums;
 
 @using Page = MyHebrewBible.Client.Features.Lists.MenuItemConstants.JotAndTittle
-<PageTitle>@Page.Title</PageTitle>
 
+<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.BibleList" PageTitle="@Page.Title" />
 <SubNavBar ActiveMenuItem="@MenuItems.JotAndTittle" />
 
 

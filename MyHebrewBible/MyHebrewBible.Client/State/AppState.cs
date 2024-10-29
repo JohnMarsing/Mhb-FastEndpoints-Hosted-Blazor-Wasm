@@ -1,53 +1,44 @@
 ﻿using Blazored.LocalStorage;
-//using Microsoft.Extensions.Logging;
 
 namespace MyHebrewBible.Client.State;
 
-// ToDo: this isn't being used as of yet
-public class AppState
+public class AppState 
 {
+	public BookChapterState? BookChapterState { get; }
+	public ParashaState? ParashaState { get; }
+
 	#region Constructor and DI
-	//private readonly ILogger? Logger;
-	private readonly ISyncLocalStorageService? localStorage;  // ILocalStorageService?
-	public IBookChapterState? BookChapterState { get; }
+	private readonly ILogger? Logger;
+	private readonly ILocalStorageService?  localStorage; 
 
-	public AppState(ISyncLocalStorageService localStorage, IBookChapterState bookChapterState) //, ILogger<AppState> logger
+	public AppState(ILocalStorageService localStorage, ILogger<AppState> logger) 
 	{
-		//Logger = logger;
+		Logger = logger;
 		this.localStorage = localStorage;
-		BookChapterState = bookChapterState;
-
+		BookChapterState = new BookChapterState(localStorage);
+		ParashaState = new ParashaState(localStorage, logger);
 		//Logger!.LogInformation("ctor of {Project}!{Class}", nameof(MyHebrewBible.Client), nameof(AppState));
 	}
 	#endregion
 
 	private bool _isInitialized;
 
-	public void Initialize()
+	public async Task Initialize()
 	{
-		//Logger!.LogInformation("{Class}!{Method}, _isInitialized: {_isInitialized}", nameof(AppState), nameof(Initialize), _isInitialized);
+		//Logger!.LogInformation("{Method}, _isInitialized: {_isInitialized}", nameof(Initialize), _isInitialized);
 		if (!_isInitialized)
 		{
 			try
 			{
-				//BookChapterState!.Initialize();
+				await BookChapterState!.Initialize();
+				await ParashaState!.Initialize();
+				//Logger!.LogWarning("{Method} ParashaState.Get: {ParashaState}"
+				//	, nameof(Initialize), ParashaState.Get());
 				_isInitialized = true;
-
-				BibleBookIdAndChapter? _bibleBookIdAndChapter = BookChapterState!.Get();
-				if (_bibleBookIdAndChapter is null)
-				{
-					//Logger!.LogWarning("{ Class}!{Method}, _bookAndChapter is null after trying to Get from local storage", nameof(AppState), nameof(Initialize));
-				}
-				/*
-				else
-				{
-					Logger!.LogInformation("...
-				}
-				*/
 			}
-			catch (Exception) // ex
+			catch (Exception ex) 
 			{
-				//Logger!.LogError(ex, "{Class}!{Method}", nameof(AppState), nameof(Initialize));
+				Logger!.LogError(ex, "{Class}!{Method}", nameof(AppState), nameof(Initialize));
 			}
 
 		}
