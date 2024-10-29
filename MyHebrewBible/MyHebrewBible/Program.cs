@@ -5,6 +5,8 @@ using NJsonSchema.CodeGeneration.CSharp;
 using MyHebrewBible.Endpoints;
 using Serilog;
 using Blazored.Toast;
+using Blazored.LocalStorage;
+using MyHebrewBible.Client.State;
 //using MyHebrewBible.Client.Features.Articles;
 
 string appSettingJson;
@@ -57,6 +59,9 @@ try
 			new SqliteConnectionFactory(connectionString: builder.Configuration.GetConnectionString("Database")!));
 
 	builder.Services.AddTransient<Repository>();
+	builder.Services.AddBlazoredLocalStorage();
+	//builder.Services.AddScoped<IBookChapterState, BookChapterState>();
+	builder.Services.AddScoped<AppState>();
 
 	builder.Services.AddRazorComponents()
 			.AddInteractiveWebAssemblyComponents();

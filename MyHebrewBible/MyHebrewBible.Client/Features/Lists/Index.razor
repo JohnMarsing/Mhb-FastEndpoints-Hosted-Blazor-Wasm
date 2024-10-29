@@ -5,7 +5,6 @@
 
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.BibleList" />
-
 <SubNavBar ActiveMenuItem="@MenuItems.Home" />
 
 <div class="list-group">
@@ -15,9 +14,9 @@
 		<i class="fa fa-blind fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Parables of Yeshua
 	</a>
 
-	@* PageIndexFromRoot	*@
+	@* PageIndexFromRoot 	*@
 	<a class="list-group-item" href="@MenuItemConstants.GospelHarmony.Index">
-		<i class="fa fa-fighter-jet fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Gospel Harmony
+		<i class="fas fa-fighter-jet fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Gospel Harmony
 	</a>
 	
 	
@@ -30,8 +29,9 @@
 	<a class="list-group-item" href="@MenuItemConstants.TimeLine.Index">
 		<i class="fas fa-clock fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Timeline
 	</a>
-	<a class="list-group-item" href="@MenuItemConstants.Feasts">
-		<i class="fa fa-calendar fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Feasts <i>Moadim</i>
+	<a class="list-group-item" href="@MenuItemConstants.Feasts.Index">
+		<i class="@MenuItemConstants.Feasts.Icon fa-fw fa-2x" aria-hidden="true"></i>&nbsp; @MenuItemConstants.Feasts.Title <i>Moadim</i>
+		
 	</a>
 	<a class="list-group-item" href="@MenuItemConstants.PeopleKilled.Index">
 		<i class="fa fa-battery-empty fa-fw fa-2x" aria-hidden="true"></i>&nbsp; People Killed

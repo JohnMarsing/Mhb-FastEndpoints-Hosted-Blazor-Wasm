@@ -1,0 +1,20 @@
+﻿@inject ILogger<ProcessError> Logger
+
+<CascadingValue Value="this">
+  @ChildContent
+</CascadingValue>
+
+@code {
+  [Parameter]  public RenderFragment? ChildContent { get; set; }
+
+  public void LogError(Exception ex)
+  {
+    Logger.LogError("ProcessError.LogError: {Type} Message: {Message}",
+        ex.GetType(), ex.Message);
+
+    // Call StateHasChanged if LogError directly participates in
+    // rendering. If LogError only logs or records the error,
+    // there's no need to call StateHasChanged.
+    //StateHasChanged();
+  }
+}

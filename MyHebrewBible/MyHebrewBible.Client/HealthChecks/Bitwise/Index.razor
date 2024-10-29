@@ -1,0 +1,47 @@
+﻿@page "/HealthChecks/bitwise"
+
+@using Page = MyHebrewBible.Client.Enums.Nav
+@using MyHebrewBible.Client.State
+@using MyHebrewBible.Client.Features.Parasha.Enums
+
+@inject ILogger<Index>? Logger
+
+<PageHeader PageEnum="Page.HealthCheckBitwise" />
+
+<div class="card border-success mb-2">
+	
+	 <div class="card-header text-center">Current Permutation[s]: @CurrentPermutations</div> 
+
+	<div class="card-body">
+		<div class="d-flex justify-content-center mt-2">
+			 <ShowSectionButtons CurrentPermutations="CurrentPermutations"	OnShowSectionSelected="ReturnedPermutation" />  
+		</div>
+	</div>
+</div>
+
+
+@code {
+
+	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }  
+	protected Permutation CurrentPermutations;
+
+
+	protected override void OnInitialized()
+	{
+		Logger!.LogInformation("{Class}!{Method}", nameof(Index), nameof(OnInitialized));
+		int _permutation = CascadingAppState!.AppState!.ParashaState!.Get();
+		Logger!.LogInformation("..._permutation: {_permutation}", _permutation);
+		CurrentPermutations = (Permutation)_permutation;
+	}
+
+	private async Task ReturnedPermutation(Permutation permutation)
+	{
+		CurrentPermutations = permutation;
+		Logger!.LogInformation("{Method} CurrentPermutations: {CurrentPermutations}"
+		, nameof(ReturnedPermutation), CurrentPermutations);
+
+		await CascadingAppState!.AppState!.ParashaState!.Update(CurrentPermutations);
+	}
+
+
+}

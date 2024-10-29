@@ -2,10 +2,9 @@
 
 @using MyHebrewBible.Client.Enums;
 @using MyHebrewBible.Client.Features.Lists.Components;
-
 @using Page = MyHebrewBible.Client.Features.Lists.MenuItemConstants.Emendations
-<PageTitle>@Page.Title</PageTitle>
 
+<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.BibleList" PageTitle="@Page.Title" />
 <SubNavBar ActiveMenuItem="@MenuItems.Emendations" />
 
 @*

@@ -1,0 +1,39 @@
+﻿@using MyHebrewBible.Client.Features.Parasha.Enums
+
+@inject ILogger<BritVerses>? Logger
+
+@if (DataExists)
+{
+	@foreach (var item in BritVersesList!)
+	{
+		@* <div class="card-body">	</div> *@
+		<VerseParagraph VerseParagraphRange="item" />
+	}
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.Triennial? CurrentReading { get; set; }
+
+	private bool DataExists = false;
+	private List<VerseParagraphRange>? BritVersesList;
+
+	protected override void OnParametersSet()
+	{
+		if (CurrentReading!.BritVerses is not null && CurrentReading!.BritVerses.Any())
+		{
+			BritVersesList = new List<VerseParagraphRange>();
+			foreach (var item in CurrentReading.BritVerses)
+			{
+				BritVersesList.Add(new VerseParagraphRange(item.BegId, item.EndId, item.BibleBook.Title + " " + item.ChapterVerse));
+			}
+			DataExists = true;
+		}
+		else
+		{
+			BritVersesList?.Clear();
+		}
+
+		DataExists = true;
+	}
+
+}

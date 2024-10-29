@@ -3,15 +3,23 @@
 @using MyHebrewBible.Client.Features.Lists.Components
 
 @using Page = MyHebrewBible.Client.Features.Lists.MenuItemConstants.YosephAndYeshuaComparison
-<PageTitle>@Page.Title</PageTitle>
 
+<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.BibleList" PageTitle="@Page.Title" />
 <SubNavBar ActiveMenuItem="@MenuItems.YosephAndYeshuaComparison" />
 
-<SourceAnchor Url="https://jewsforjesus.org/publications/newsletter/july-1985/08_joseph_jesus" />
+<SourceAnchor Url="https://jewsforjesus.org/learn/a-comparison-between-joseph-and-jesus" />
 
 <BlurbCard>
 	The story of Joseph which is told in the last part of Genesis is a type shadow of Yeshua
 </BlurbCard>
+
+<BlurbCard>
+	<b>They both left an empty tomb.</b>
+	<br />
+	<small>Recent addition; ToDo: add link to Matthew Shaw (of Son of David) short video</small>
+</BlurbCard>
+
+
 
 <div class="table-responsive">
 	<table class="table table-condensed table-bordered">

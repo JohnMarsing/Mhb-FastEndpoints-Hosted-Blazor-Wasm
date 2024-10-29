@@ -1,22 +1,36 @@
-﻿using CsvHelper;
-using CsvHelper.Configuration;
-using System.Globalization;
-using Utility;
+﻿using Utility;
+using Utility.Jobs;
 
-var records = new List<Reading>();
-var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+internal class Program
 {
-	HasHeaderRecord = true,
-};
+	private static async Task Main(string[] args)
+	{
+		var arguments = Helpers.ParseArguments(args);
 
-foreach (var item in Triennial.List.ToList().OrderBy(o => o.Value))
-{
-	records.Add(new Reading(item.Value, item.Date.ToString(DateFormat.YYYY_MM_DD_Slash), item.TorahAbrv.Trim(), item.Haftorah, item.Brit));
+		if (arguments.Count == 0 || arguments.ContainsKey("--help"))
+		{
+			Helpers.PrintHelp();
+			return; 
+		}
+
+		// Example: Check if a specific argument is defined
+		if (arguments.ContainsKey("--verbose"))
+		{
+			Console.WriteLine("Verbose mode enabled.");
+		}
+
+		// Example: Retrieve the value of a named argument
+		if (arguments.TryGetValue("--output", out string outputValue))
+		{
+			Console.WriteLine($"Output file: {outputValue}");
+		}
+
+
+		//await ShowAnimation.Run();
+		//ExportTriennialCSV.Run();
+	}
 }
 
-string folder = "C:\\Source\\repos\\FastEndpoints\\Mhb-FastEndpoints-Hosted-Blazor-Wasm-Backup\\033-new-Utility-console\\";
-using (var writer = new StreamWriter(folder + "TriennialSmartEnum.csv"))
-using (var csv = new CsvWriter(writer, config)) // , CultureInfo.InvariantCulture
-{
-	csv.WriteRecords(records);  //Triennial.List.ToList().OrderBy(o => o.Date)
-}
+
+
+

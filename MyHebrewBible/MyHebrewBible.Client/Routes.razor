@@ -1,7 +1,34 @@
-﻿@* <ProcessError></ProcessError> *@
-<Router AppAssembly="typeof(Program).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
-        <FocusOnNavigate RouteData="routeData" Selector="h1" />
-    </Found>
-</Router>
+﻿@using MyHebrewBible.Client.State
+
+@inject AppState AppState
+@inject ILogger<Routes>? Logger
+
+<CascadingAppState>
+	<ProcessError>
+		<Router AppAssembly="typeof(Program).Assembly">
+			<Found Context="routeData">
+				<RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
+				<FocusOnNavigate RouteData="routeData" Selector="h1" />
+			</Found>
+		</Router>
+	</ProcessError>
+</CascadingAppState>
+
+
+@code {
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		try
+		{
+			if (firstRender)
+			{
+				await AppState.Initialize();
+			}
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Class}!{Method}; firstRender: {firstRender}"
+				, nameof(Routes), nameof(OnAfterRenderAsync), firstRender);
+		}
+	}
+}
