@@ -1,15 +1,12 @@
-﻿@page "/bookchapter"
+﻿@page "/bookchapter/{BookId:int}/{Chapter:int}/{slug?}"
 
 @using MyHebrewBible.Client.State
 @using MyHebrewBible.Client.Layout
-
 @using MyHebrewBible.Client.Components.BibleLookup.Toolbar;
 @using MyHebrewBible.Client.Features.BookChapter.Verses
 
-@inject IToastService? Toast
-
-@inject AppState? AppState
-@implements IDisposable
+@inject ILogger<Index>? Logger
+@inject NavigationManager NavigationManager
 
 <PageTitle>@PageTitle</PageTitle>
 
@@ -46,47 +43,39 @@
 
 @code {
 	[CascadingParameter] public ProcessError? ProcessError { get; set; }
+	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+
+	[Parameter, EditorRequired] public int BookId { get; set; }
+	[Parameter, EditorRequired] public int Chapter { get; set; }
+	[Parameter] public string? Slug { get; set; }
 
 	public BookAndChapter? CurrentBookAndChapter { get; set; }
-	//protected string PageTitle => GlobalEnums.BibleBookFormat.BC(CurrentBookAndChapter, useAbrv: false);
 
 	protected string PageTitle = string.Empty;
 
-	void IDisposable.Dispose() => AppState!.BookChapterState!.OnChange -= StateHasChanged;
-
 	protected override void OnInitialized()
 	{
-		try
-		{
-			AppState!.BookChapterState!.OnChange += StateHasChanged;
-			if (AppState.BookChapterState is null)
-			{
-				Toast!.ShowWarning($"AppState.BookChapterState is null");
-			}
-			else
-			{
-				BibleBookIdAndChapter bibleBookIdAndChapter = AppState.BookChapterState.Get();
-				BookAndChapter bc = new BookAndChapter(GlobalEnums.BibleBook.FromValue(bibleBookIdAndChapter.BibleBookId), bibleBookIdAndChapter.Chapter);
-				PageTitle = GlobalEnums.BibleBookFormat.BC(bc);
-				CurrentBookAndChapter = new BookAndChapter(GlobalEnums.BibleBook.FromValue(bibleBookIdAndChapter.BibleBookId), bibleBookIdAndChapter.Chapter);
-			}
-		}
-		catch (Exception ex)
-		{
-			ProcessError?.LogError(ex);
-		}
+		Logger!.LogInformation("{Method}, Route: {BookId}/{Chapter}", nameof(OnInitialized), BookId, Chapter);
+		CurrentBookAndChapter = GetBookAndChapterViaRoutes(BookId, Chapter);
 	}
 
-
-	private void ReturnedBookAndChapter(BookAndChapter bookAndChapter)  //  record BookAndChapter(BibleBook? BibleBook, int Chapter);
+	private BookAndChapter GetBookAndChapterViaRoutes(int bookId, int chapter)
 	{
-		/*
-		CurrentBookAndChapter = bookAndChapter!;
-		AppState!.BookChapterState!.Update(new State.BibleBookIdAndChapter(CurrentBookAndChapter.BibleBook!.Value, CurrentBookAndChapter.Chapter));
-		*/
-		BibleBookIdAndChapter x = new BibleBookIdAndChapter(bookAndChapter.BibleBook!.Value, bookAndChapter.Chapter);
-		//AppState!.BookChapterState!.Update(bookAndChapter);
-		AppState!.BookChapterState!.Update(x);
+		BookAndChapter bc;
+		bc = new BookAndChapter(GlobalEnums.BibleBook.FromValue(bookId), chapter);
+
+		PageTitle = GlobalEnums.BibleBookFormat.BC(bc);
+		return bc;
+	}
+
+	private async Task ReturnedBookAndChapter(BookAndChapter bookAndChapter)
+	{
+		BibleBookIdAndChapter rec = new BibleBookIdAndChapter(bookAndChapter.BibleBook!.Value, bookAndChapter.Chapter);
+		string slug = $"{Enums.BibleBook.FromValue(rec.BibleBookId).Abrv}-{rec.Chapter}";
+		Logger!.LogInformation("{Method}, Route: {BookId}/{Chapter}", nameof(ReturnedBookAndChapter), rec.BibleBookId, rec.Chapter);
+		NavigationManager!.NavigateTo($"BookChapter/{rec.BibleBookId}/{rec.Chapter}/{slug}");
+
+		await CascadingAppState!.AppState!.BookChapterState!.Update(rec);
 		CurrentBookAndChapter = bookAndChapter!;
 	}
 

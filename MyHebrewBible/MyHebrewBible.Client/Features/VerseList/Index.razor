@@ -7,7 +7,6 @@
 @using MyHebrewBible.Client.State.VerseList
 
 @inject ILogger<Index>? Logger
-@inject IVerseListState? state
 @inject IToastService? Toast
 
 <PageTitle>@PageTitle</PageTitle>
@@ -51,18 +50,20 @@
 	public Header? CurrentHeader { get; set; }
 	public BookChapterVerse? CurrentVM { get; set; }
 
+	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+
 	protected string PageTitle => GlobalEnums.BibleBookFormat.BCV(CurrentVM, useAbrv: false);
 
 	protected override void OnInitialized()
 	{
-		Logger!.LogInformation("{Class}!{Method}", nameof(Index), nameof(OnInitialized));
+		Logger!.LogInformation("{Method}", nameof(OnInitialized));
 		try
 		{
 			/*
 			Header header = state!.GetHeader();
 			CurrentHeader = new BookAndChapter(BibleBook.FromValue(_state.BibleBookId), _state.Chapter);
 			*/
-			DetailRecord bcv = state!.GetBCV();
+			DetailRecord bcv = CascadingAppState!.AppState!.VerseListState2!.GetBCV();
 			BookAndChapter bookAndChapter = new BookAndChapter(GlobalEnums.BibleBook.FromValue(bcv.BibleBookId), bcv.Chapter);
 			CurrentVM = new BookChapterVerse(bookAndChapter, bcv.BegVerse);
 			//PageTitle = GlobalEnums.BibleBookFormat.BCV(CurrentVM); 
@@ -75,11 +76,11 @@
 		}
 	}
 
-	private void ReturnedBookChapterVerse(BookChapterVerse vm)  //async Task
+	private async Task ReturnedBookChapterVerse(BookChapterVerse vm)  //async Task
 	{
 		CurrentVM = vm!;
 		//state!.UpdateHeader(new VerseListState(CurrentBookAndChapter.BibleBook!.Value, CurrentBookAndChapter.Chapter));
-		state!.UpdateBCV(new DetailRecord(vm.BookAndChapter.BibleBook, vm.BookAndChapter.Chapter, vm.Verse, vm.Verse, "Just Got Updated"));
+		await CascadingAppState!.AppState!.VerseListState2!.UpdateBCV(new DetailRecord(vm.BookAndChapter.BibleBook, vm.BookAndChapter.Chapter, vm.Verse, vm.Verse, "Just Got Updated"));
 	}
 
 }

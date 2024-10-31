@@ -1,4 +1,5 @@
-﻿@using Client.Enums
+﻿@using MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.State
 
 @inject NavigationManager NavigationManager
 
@@ -17,11 +18,33 @@
 	[Parameter, EditorRequired] public Nav? Nav { get; set; }
 	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
 
+	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+
 	protected string IconSize => $"{(MediaQuery == MediaQuery.Sm ? " fa-2x" : " fa-3x")}";
 	protected string FontSize => $"{(MediaQuery == MediaQuery.Sm ? " fs-5" : " fs-4")}";
 
+	
 	private void ButtonClicked(int id)
 	{
-		NavigationManager!.NavigateTo(Nav.FromValue(id) + "/");
+		// ToDo: this is a hack but it works. thinking I need to move much of this code to `Client.Enums.Nav`
+		// ToDo: do something similar with Parasha and probable VerseList
+		if (Nav.FromValue(id) == Nav.BookChapter)
+		{
+			BibleBookIdAndChapter? rec = CascadingAppState!.AppState!.BookChapterState!.Get();
+			if (rec is not null)
+			{
+				string slug = $"{Enums.BibleBook.FromValue(rec.BibleBookId).Abrv}-{rec.Chapter}";
+				NavigationManager!.NavigateTo($"{Nav.FromValue(id).Name}/{rec.BibleBookId}/{rec.Chapter}/{slug}");
+			}
+			else
+			{
+				NavigationManager!.NavigateTo($"{Nav.FromValue(id).Name}/1/1/gen-1-1"); // Default to Gen 1:1
+			}
+		}
+		else
+		{
+			NavigationManager!.NavigateTo(Nav.FromValue(id) + "/");
+		}
+		
 	}
 }

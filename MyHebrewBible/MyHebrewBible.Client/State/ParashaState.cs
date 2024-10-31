@@ -43,13 +43,7 @@ public class ParashaState
 			else
 			{
 				bool _success = int.TryParse(s, out _permutation);
-				if (_success)
-				{
-					//Logger!.LogWarning("calling {Update}, _permutation: {_permutation}", nameof(Update), _permutation);
-					await Update((Permutation)_permutation);
-					//await Update(_permutation);
-				}
-				else 
+				if (!_success)
 				{
 					//Logger!.LogWarning("... TryParse failed, using {defaultPermutation}, calling {Update}", defaultPermutation, nameof(Update));
 					await Update(defaultPermutation);

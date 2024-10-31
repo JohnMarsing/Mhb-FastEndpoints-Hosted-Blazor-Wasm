@@ -6,6 +6,7 @@ public class AppState
 {
 	public BookChapterState? BookChapterState { get; }
 	public ParashaState? ParashaState { get; }
+	public VerseList.VerseListState2? VerseListState2 { get; }
 
 	#region Constructor and DI
 	private readonly ILogger? Logger;
@@ -15,8 +16,9 @@ public class AppState
 	{
 		Logger = logger;
 		this.localStorage = localStorage;
-		BookChapterState = new BookChapterState(localStorage);
+		BookChapterState = new BookChapterState(localStorage, logger);
 		ParashaState = new ParashaState(localStorage, logger);
+		VerseListState2 = new VerseList.VerseListState2(localStorage, logger);
 		//Logger!.LogInformation("ctor of {Project}!{Class}", nameof(MyHebrewBible.Client), nameof(AppState));
 	}
 	#endregion
@@ -32,6 +34,7 @@ public class AppState
 			{
 				await BookChapterState!.Initialize();
 				await ParashaState!.Initialize();
+				await VerseListState2!.Initialize();
 				//Logger!.LogWarning("{Method} ParashaState.Get: {ParashaState}"
 				//	, nameof(Initialize), ParashaState.Get());
 				_isInitialized = true;

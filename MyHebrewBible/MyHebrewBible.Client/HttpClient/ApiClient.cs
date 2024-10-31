@@ -91,8 +91,8 @@ namespace MyHebrewBible.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "article/{id}"
-                    urlBuilder_.Append("article/");
+                    // Operation Path: "api/article/{id}"
+                    urlBuilder_.Append("api/article/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -170,8 +170,8 @@ namespace MyHebrewBible.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "articlelist"
-                    urlBuilder_.Append("articlelist");
+                    // Operation Path: "api/articlelist"
+                    urlBuilder_.Append("api/articlelist");
                     urlBuilder_.Append('?');
                     if (dummyString != null)
                     {
@@ -260,8 +260,8 @@ namespace MyHebrewBible.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "bookchapter/{bookid}/{chapter}"
-                    urlBuilder_.Append("bookchapter/");
+                    // Operation Path: "api/bookchapter/{bookid}/{chapter}"
+                    urlBuilder_.Append("api/bookchapter/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(bookid, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(chapter, System.Globalization.CultureInfo.InvariantCulture)));
@@ -347,8 +347,8 @@ namespace MyHebrewBible.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "mitzvot/book/{torahBookfilter}"
-                    urlBuilder_.Append("mitzvot/book/");
+                    // Operation Path: "api/mitzvot/book/{torahBookfilter}"
+                    urlBuilder_.Append("api/mitzvot/book/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(torahBookfilter, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('?');
                     urlBuilder_.Append(System.Uri.EscapeDataString("Filter")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
@@ -435,8 +435,8 @@ namespace MyHebrewBible.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "VerseList/{begId}/{endId}"
-                    urlBuilder_.Append("VerseList/");
+                    // Operation Path: "api/VerseList/{begId}/{endId}"
+                    urlBuilder_.Append("api/VerseList/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(begId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(endId, System.Globalization.CultureInfo.InvariantCulture)));
@@ -528,8 +528,8 @@ namespace MyHebrewBible.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "verselist/{bookid}/{chapter}/{begverse}/{endverse}"
-                    urlBuilder_.Append("verselist/");
+                    // Operation Path: "api/verselist/{bookid}/{chapter}/{begverse}/{endverse}"
+                    urlBuilder_.Append("api/verselist/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(bookid, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(chapter, System.Globalization.CultureInfo.InvariantCulture)));
@@ -616,8 +616,8 @@ namespace MyHebrewBible.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "wordpart/{scriptureid}"
-                    urlBuilder_.Append("wordpart/");
+                    // Operation Path: "api/wordpart/{scriptureid}"
+                    urlBuilder_.Append("api/wordpart/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(scriptureid, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -701,8 +701,8 @@ namespace MyHebrewBible.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "wordpart/{scriptureid}/{strongs}"
-                    urlBuilder_.Append("wordpart/");
+                    // Operation Path: "api/wordpart/{scriptureid}/{strongs}"
+                    urlBuilder_.Append("api/wordpart/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(scriptureid, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(strongs, System.Globalization.CultureInfo.InvariantCulture)));
@@ -785,8 +785,8 @@ namespace MyHebrewBible.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "wordpartkjv/{scriptureid}"
-                    urlBuilder_.Append("wordpartkjv/");
+                    // Operation Path: "api/wordpartkjv/{scriptureid}"
+                    urlBuilder_.Append("api/wordpartkjv/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(scriptureid, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
