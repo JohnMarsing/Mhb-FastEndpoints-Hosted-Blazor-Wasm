@@ -5,12 +5,16 @@ namespace MyHebrewBible.Client.State;
 
 public class BookChapterState
 {
-	#region Constructor and DI
-	private readonly ILocalStorageService? localStorage;
+	//private readonly ILocalStorageService? localStorage;
 
-	public BookChapterState(ILocalStorageService localStorage)  
+	#region Constructor and DI
+	private readonly ILogger Logger;
+	private readonly ILocalStorageService? localStorage;
+	public BookChapterState(ILocalStorageService localStorage, ILogger<AppState> logger)  
 	{
 		this.localStorage = localStorage;
+		Logger = logger;
+		//Logger!.LogInformation("{Class}!{MethodEvent}", nameof(ParashaState), "CTOR");
 	}
 	#endregion
 
@@ -19,21 +23,26 @@ public class BookChapterState
 	private void NotifyStateHasChanged() => OnChange?.Invoke();
 	public event Action? OnChange;
 
-	private BibleBookIdAndChapter _bibleBookIdAndChapter;
-	private BibleBookIdAndChapter _bibleBookIdAndChapterDefault = new(BibleBook.Genesis.Value, 1);
+	private BibleBookIdAndChapter _defaultBibleBookIdAndChapter = new(BibleBook.Genesis.Value, 1);
+	private BibleBookIdAndChapter? _bibleBookIdAndChapter;
 
 	public async Task Initialize()
 	{
 		if (!_isInitialized)
 		{
 			_bibleBookIdAndChapter = await localStorage!.GetItemAsync<BibleBookIdAndChapter>(Key);
-			if (_bibleBookIdAndChapter is null)
+			if (_bibleBookIdAndChapter is not null)
 			{
-				_bibleBookIdAndChapter = _bibleBookIdAndChapterDefault;
+				await Update(_bibleBookIdAndChapter);
+			}
+			else 
+			{
+				_bibleBookIdAndChapter = _defaultBibleBookIdAndChapter;
+				await Update(_defaultBibleBookIdAndChapter);
 			}
 
 			_isInitialized = true;
-			NotifyStateHasChanged();
+			
 		}
 	}
 
@@ -42,9 +51,10 @@ public class BookChapterState
 		return _bibleBookIdAndChapter!;
 	}
 
-	public void Update(BibleBookIdAndChapter bibleBookIdAndChapter)  
+	public async Task Update(BibleBookIdAndChapter bibleBookIdAndChapter)  
 	{
-		localStorage!.SetItemAsync(Key, bibleBookIdAndChapter);
+		await this.localStorage!.SetItemAsync(Key, bibleBookIdAndChapter);
+		_bibleBookIdAndChapter = bibleBookIdAndChapter;
 		NotifyStateHasChanged();
 	}
 

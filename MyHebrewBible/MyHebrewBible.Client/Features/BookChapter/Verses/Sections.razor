@@ -1,6 +1,6 @@
-﻿@inject ApiClient Api
-
-@* <SectionsDebug FocusScriptureId="@FocusScriptureId" VerseRowCount="@VerseRowCount" VerseNumber="@VerseNumber" Strongs="@Strongs" Hebrew="@Hebrew" Msg="@_msg" /> *@
+﻿@* when a URL is entered directly, I get an error Cannot provide a value for property 'Api' *@
+@inject ApiClient Api 
+@inject ILogger<Index>? Logger
 
 @if (verses == null)
 {
@@ -20,7 +20,7 @@ else
 		}
 		else
 		{
-			<p><b>versesTop:</b> is null</p> @* Why would this ever happen? *@
+			<p><b>versesTop:</b> is null | why would this ever happen?</p>
 		}
 
 		<WordSegmentsCard ScriptureId="FocusScriptureId"
@@ -55,8 +55,7 @@ else
 
 	// When set by ReturnedVerse then the chapter is split into versesTop and versesBottom
 	protected long FocusScriptureId; // = 0;
-	
-	
+
 	protected long VerseRowCount; // = 0;
 	protected long VerseNumber; // = 0;
 	protected long TopRC = 0;
@@ -72,6 +71,7 @@ else
 
 	protected string _msg = nameof(Sections);
 
+
 	protected override async Task OnParametersSetAsync()
 	{
 		FocusScriptureId = 0;
@@ -79,7 +79,7 @@ else
 		if (BookAndChapter is not null && BookAndChapter!.BibleBook is not null)
 		{
 			_msg = $"Inside {nameof(OnParametersSet)}, setting verses and VerseRowCount";
-			await Task.Delay(200);  // ToDo: comment this out in production
+			//await Task.Delay(200);  // ToDo: comment this out in production
 			verses = await Api!.GetBookChapterAsync((long)BookAndChapter!.BibleBook, (long)BookAndChapter.Chapter);
 			VerseRowCount = verses.Count;
 			PopulateTopAndBottom(VerseRowCount);
@@ -100,7 +100,7 @@ else
 	// - OnParametersSetAsync
 	// - ReturnedVerse
 	// - ReturnedStrongs only if (strongsAndWordCount.Strongs == 0)
-	//   
+	//
 	private void PopulateTopAndBottom(long verseSplit)
 	{
 		if (FocusScriptureId == 0)

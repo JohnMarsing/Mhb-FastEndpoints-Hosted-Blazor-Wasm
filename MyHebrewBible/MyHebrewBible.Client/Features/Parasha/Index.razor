@@ -8,12 +8,6 @@
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.Parasha" BorderCSS="" />
 
-@* *@
-<div class="card border-warning mb-2">
-	<div class="card-header text-center">Current Permutation[s]: @CurrentPermutations</div>
-</div>
-
-
 @if (CurrentReading is not null)
 {
 	<div class="card border-primary mb-3">
@@ -78,8 +72,6 @@ else
 
 	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
 	protected ParashaEnums.Permutation CurrentPermutations;
-
-	protected bool IsReadingCurrent;
 
 	protected override void OnInitialized()
 	{

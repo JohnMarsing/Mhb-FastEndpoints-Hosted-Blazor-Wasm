@@ -11,7 +11,7 @@ else
 {
 	<div class="@modalClass" style="display:@(modalOpen?"block":"none");">
 		<div class="modal-dialog @modalSize">
-			<div class="modal-content">
+			<div class="modal-content @modalContentColor">
 				<div class="modal-header @modalHeaderColor">
 
 					<p>Select a Book</p>
@@ -69,7 +69,8 @@ else
 	string modalSize => MediaQuery == MediaQuery.Xs ? "modal-sm" : "modal-md";
 
 	string modalHeaderColor = "bg-warning";
-	string modalBodyColor = "bg-warning-subtle";  //
+	string modalContentColor = " border-danger";
+	string modalBodyColor = "";  // bg-warning-subtle
 	bool ModalIsNotShownToggle = true;
 
 	protected override void OnParametersSet()

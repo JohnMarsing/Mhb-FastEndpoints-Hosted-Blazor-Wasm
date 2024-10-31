@@ -96,6 +96,7 @@ try
 				 c =>
 				 {
 					 c.Endpoints.ShortNames = true;
+					 c.Endpoints.RoutePrefix = "api";
 					 c.Serializer.Options.PropertyNamingPolicy = null;
 				 });
 

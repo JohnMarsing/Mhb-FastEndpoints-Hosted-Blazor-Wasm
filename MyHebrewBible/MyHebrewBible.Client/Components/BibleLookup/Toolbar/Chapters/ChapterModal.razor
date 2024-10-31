@@ -11,7 +11,7 @@ else
 {
 	<div class="@modalClass" style="display:@(modalOpen?"block":"none");">
 		<div class="modal-dialog @modalSize">
-			<div class="modal-content">
+			<div class="modal-content @modalContentColor">
 				<div class="modal-header @modalHeaderColor">
 
 					<h5>@CurrentBookAndChapter!.BibleBook!.Title Chapters</h5>
@@ -59,7 +59,8 @@ else
 	bool modalOpen = false;
 	string modalClass = "modal";
 	string modalHeaderColor = " bg-warning";
-	string modalBodyColor = "bg-warning-subtle"; 
+	string modalContentColor = " border-danger";
+	string modalBodyColor = " border-warning";  // bg-warning-subtle
 	bool ModalIsNotShownToggle = true;
 
 	string modalSize => MediaQuery == MediaQuery.Xs ? "modal-md" : "modal-lg";
