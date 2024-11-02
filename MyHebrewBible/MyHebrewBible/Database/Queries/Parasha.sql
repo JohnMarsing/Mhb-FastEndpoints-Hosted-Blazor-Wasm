@@ -1,0 +1,1 @@
+﻿SELECT Id, Torah, ParashaName, NameUrl FROM Parasha

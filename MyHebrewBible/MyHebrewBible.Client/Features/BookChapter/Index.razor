@@ -1,4 +1,4 @@
-﻿@page "/bookchapter/{BookId:int}/{Chapter:int}/{slug?}"
+﻿@page "/bookchapter/{BookId:int}/{Chapter:int}/{Slug}"
 
 @using MyHebrewBible.Client.State
 @using MyHebrewBible.Client.Layout
@@ -47,7 +47,7 @@
 
 	[Parameter, EditorRequired] public int BookId { get; set; }
 	[Parameter, EditorRequired] public int Chapter { get; set; }
-	[Parameter] public string? Slug { get; set; }
+	[Parameter] public string? Slug { get; set; } 
 
 	public BookAndChapter? CurrentBookAndChapter { get; set; }
 
@@ -77,6 +77,7 @@
 
 		await CascadingAppState!.AppState!.BookChapterState!.Update(rec);
 		CurrentBookAndChapter = bookAndChapter!;
+		PageTitle = GlobalEnums.BibleBookFormat.BC(bookAndChapter);
 	}
 
 }

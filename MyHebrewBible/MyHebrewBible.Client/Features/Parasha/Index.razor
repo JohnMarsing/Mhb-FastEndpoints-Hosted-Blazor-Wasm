@@ -1,31 +1,37 @@
-﻿@page "/Parasha"
-
+﻿@page "/Parasha/{Id:int}/{Slug}"
 @using MyHebrewBible.Client.Enums
-@using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
+
+@using MyHebrewBible.Client.Features.Parasha.Enums
+@using MyHebrewBible.Client.Features.Parasha.Toolbar
 
 @inject ILogger<Index>? Logger
 @inject IToastService? Toast
 
-<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.Parasha" BorderCSS="" />
+<PageTitle>@Nav.Parasha.Title @PageTitleDetail</PageTitle>
+
+<Buttons CurrentReading="CurrentReading"  OnTriennialSelected="ReturnedTriennial" /> 
 
 @if (CurrentReading is not null)
 {
-	<div class="card border-primary mb-3">
+	<br />
+	<div class="card border-primary mb-3 mt-5">
+@* 		
 		<div class="card-header">
 			<h2>Current Parasha</h2>
 		</div>
-
-		<div class="@MediaQuery.XsOrSm.DivClass">
-			<Header CurrentReading="CurrentReading" MediaQuery="@MediaQuery.XsOrSm" />
+ *@
+		<div class="@GlobalEnums.MediaQuery.XsOrSm.DivClass">
+			<Header CurrentReading="CurrentReading" MediaQuery="@GlobalEnums.MediaQuery.XsOrSm" />
 		</div>
 
-		<div class="@MediaQuery.MdOrLgOrXl.DivClass">
-			<Header CurrentReading="CurrentReading" MediaQuery="@MediaQuery.MdOrLgOrXl" />
+		<div class="@GlobalEnums.MediaQuery.MdOrLgOrXl.DivClass">
+
+			<Header CurrentReading="CurrentReading" MediaQuery="@GlobalEnums.MediaQuery.MdOrLgOrXl" />
 		</div>
 
 	</div>
 
-	@foreach (var item in ParashaEnums.ShowSection.List.OrderBy(o => o.Value))
+	@foreach (var item in ShowSection.List.OrderBy(o => o.Value))
 	{
 		<div class="card bg-light mb-3">
 			<div class="card-header">
@@ -42,17 +48,17 @@
 					</div>
 				</div>
 
-				@if (CurrentPermutations.HasFlag(ParashaEnums.Permutation.Torah) && item == ParashaEnums.ShowSection.Torah)
+				@if (CurrentPermutations.HasFlag(Permutation.Torah) && item == ShowSection.Torah)
 				{
 					<TorahVerses CurrentReading="CurrentReading" />
 				}
 
-				@if (CurrentPermutations.HasFlag(ParashaEnums.Permutation.Haftorah) && item == ParashaEnums.ShowSection.Haftorah)
+				@if (CurrentPermutations.HasFlag(Permutation.Haftorah) && item == ShowSection.Haftorah)
 				{
 					<HaftorahVerses CurrentReading="CurrentReading" />
 				}
 
-				@if (CurrentPermutations.HasFlag(ParashaEnums.Permutation.Brit) && item == ParashaEnums.ShowSection.Brit)
+				@if (CurrentPermutations.HasFlag(Permutation.Brit) && item == ShowSection.Brit)
 				{
 					<BritVerses CurrentReading="CurrentReading" />
 				}
@@ -68,30 +74,34 @@ else
 }
 
 @code {
-	public ParashaEnums.Triennial? CurrentReading { get; set; }
+	[Parameter, EditorRequired] public int Id { get; set; }
+	[Parameter] public string? Slug { get; set; } // not used
 
 	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
-	protected ParashaEnums.Permutation CurrentPermutations;
+	protected Permutation CurrentPermutations;
+
+	public Triennial? CurrentReading { get; set; }
+
+	private string? PageTitleDetail = string.Empty;
 
 	protected override void OnInitialized()
 	{
-		CurrentReading = GetCurrentReading($"{nameof(Index)}!{nameof(OnInitialized)}");
+		Logger!.LogInformation("{Method}, Id: {Id}", nameof(OnInitialized), Id);
+		CurrentReading = GetCurrentReadingViaRoutes(Id);
+
+		if (CurrentReading is not null) {	PageTitleDetail = CurrentReading.TorahAbrv;	}
+
 		CurrentPermutations = GetCurrentPermutation();
 	}
 
-	private ParashaEnums.Triennial? GetCurrentReading(string calledBy)
+	private Triennial? GetCurrentReadingViaRoutes(int id)
 	{
-		ParashaEnums.Triennial? _reading =
-			ParashaEnums.Triennial.List
-			.Where(w => w.Date == ParashaEnums.Constants.GetNextShabbatDate())
-			.SingleOrDefault();
+		Triennial? _reading = Triennial.List.Where(w => w.Value == id).SingleOrDefault();
 
 		if (_reading is null)
 		{
-			Logger!.LogWarning("{CalledBy}; _reading is null", calledBy);
-			Toast!.ShowWarning($"Current reading is not found; called by: {calledBy}");
-
-			//ToDo: maybe I should set it to a default e.g. Gen 1:1
+			Logger!.LogWarning("{id}; _reading is null", id);
+			Toast!.ShowWarning($"Current reading is not found; id: {id}");
 			return null;
 		}
 		else
@@ -100,19 +110,23 @@ else
 		}
 	}
 
-	private ParashaEnums.Permutation GetCurrentPermutation()
+	private Permutation GetCurrentPermutation()
 	{
 		int _permutation = CascadingAppState!.AppState!.ParashaState!.Get();
 		//Logger!.LogInformation("{Method}, _permutation: {_permutation}", nameof(GetCurrentPermutation), _permutation);
-		return (ParashaEnums.Permutation)_permutation;
+		return (Permutation)_permutation;
 	}
 
-
-	private async Task ReturnedPermutation(ParashaEnums.Permutation permutation)
+	private async Task ReturnedPermutation(Permutation permutation)
 	{
 		CurrentPermutations = permutation;
 		//Logger!.LogInformation("{Method} CurrentPermutations: {CurrentPermutations}", nameof(ReturnedPermutation), CurrentPermutations);
 		await CascadingAppState!.AppState!.ParashaState!.Update(CurrentPermutations);
 	}
 
+	private void ReturnedTriennial(Triennial triennial)
+	{
+		CurrentReading = triennial;
+		if (CurrentReading is not null) { PageTitleDetail = CurrentReading.TorahAbrv; }
+	}
 }

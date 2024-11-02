@@ -1,0 +1,23 @@
+﻿@using MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Components.BibleLookup.Toolbar.PrevNext
+@using MyHebrewBible.Client.Features.Parasha.Enums
+
+<button type="button" class="btn btn-outline-primary" title="@Title"
+				@onclick="ButtonClick">
+	<i class="@Icon"></i>
+</button>
+
+@code {
+	[Parameter, EditorRequired] public PrevNextVM? PrevNextVM { get; set; }
+	[Parameter, EditorRequired] public EventCallback<PrevNextVM> OnTriennialSelected { get; set; }
+
+	private string Icon => PrevNextVM!.Icon;
+	private string Title => PrevNextVM!.Triennial.TorahAbrv;
+
+	private void ButtonClick()
+	{
+		OnTriennialSelected.InvokeAsync(PrevNextVM);
+	}
+
+}
+

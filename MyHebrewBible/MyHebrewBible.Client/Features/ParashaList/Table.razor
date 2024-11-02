@@ -1,6 +1,7 @@
 ﻿@using MyHebrewBible.Client.Enums
 @using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
 
+@inject NavigationManager NavigationManager
 
 <div class="pb-n1  mb-3 border-bottom border-info"></div>
 
@@ -39,7 +40,13 @@
 			}
 
 			<tr>
-				<td>@item.TriNum</td>
+				<td>
+					<button type="button" class="btn btn-sm btn-outline-primary" title="@item.TriNum"
+									@onclick="@(e => ButtonClick(item.Url))">
+						 <i class="fas fa-arrow-down"></i>
+						@*  "						*@
+					</button>
+				</td>
 
 				@if (MediaQuery != MediaQuery.XsOrSm)
 				{
@@ -96,5 +103,10 @@
 		//CurrentFilter = TorahBookFilter;
 		//CurrentFilter = TorahBookFilter.Genesis;
 		Colspan = (MediaQuery != MediaQuery.XsOrSm) ? "8" : "6";
+	}
+
+	private void ButtonClick(string url)
+	{
+		NavigationManager!.NavigateTo(url);
 	}
 }

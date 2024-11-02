@@ -1,0 +1,19 @@
+﻿@using MyHebrewBible.Client.Enums
+@using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
+
+@inject NavigationManager NavigationManager
+
+<button @onclick="ButtonClicked" class="btn btn-primary" title="@Nav.Parasha.Title"
+				href="@Nav.Parasha.Index">
+	<i class="@Nav.Parasha.Icon"></i>
+</button>
+
+@code {
+	
+	[Parameter, EditorRequired] public string? ReturnUrl { get; set; }
+
+	private void ButtonClicked() 
+	{
+		NavigationManager!.NavigateTo(ReturnUrl!);
+	}
+}

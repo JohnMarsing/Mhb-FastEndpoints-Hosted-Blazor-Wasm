@@ -1,0 +1,76 @@
+﻿@using MyHebrewBible.Client.Features.Parasha.Enums
+@using MyHebrewBible.Client.Enums
+
+@inject NavigationManager NavigationManager
+
+<nav class="navbar navbar-expand bg-primary-subtle fixed-top">
+
+	<div class="collapse navbar-collapse justify-content-start">
+		<div class="ps-1">
+			<MyHebrewBible.Client.Layout.HomeButton />
+		</div>
+	</div>
+
+	@if (CurrentReading is null)
+	{
+		<text><span class="text-center fw-bold fst-italic">CurrentReading is null</span></text>
+	}
+	else
+	{
+		<div class="collapse navbar-collapse justify-content-center">
+			@if (CurrentReading.HasPrevious)
+			{
+				<div class="pe-2">
+					<PreviousOrNextButton PrevNextVM="CurrentReading.PreviousVM"
+																OnTriennialSelected="ReturnedPrevNextVM" />
+				</div>
+			}
+			else
+			{
+				<div class="pe-2">
+					<OnEdgeButton />
+				</div>
+			}
+
+			<div class="px-1">
+				<h4 class=""><i class="@Nav.Parasha.Icon"></i>&nbsp;@Nav.Parasha.Title</h4>
+			</div>
+
+			@if (CurrentReading.HasNext)
+			{
+				<div class="ps-2">
+					<PreviousOrNextButton PrevNextVM="CurrentReading.NextVM"
+																OnTriennialSelected="ReturnedPrevNextVM" />
+				</div>
+			}
+			else
+			{
+				<div class="ps-2">
+					<OnEdgeButton />
+				</div>
+			}
+
+
+		</div>
+	}
+	<div class="collapse navbar-collapse justify-content-end">
+		<div class="pe-1">
+			<NavToParashaListButton />
+		</div>
+		<div class="pe-1">
+			<PageInstructions />
+		</div>
+	</div>
+
+</nav>
+
+@code {
+	[Parameter, EditorRequired] public Triennial? CurrentReading { get; set; }
+	[Parameter, EditorRequired] public EventCallback<Triennial> OnTriennialSelected { get; set; }
+
+	private void ReturnedPrevNextVM(PrevNextVM prevNextVM)
+	{
+		NavigationManager!.NavigateTo(prevNextVM.Url);
+		OnTriennialSelected.InvokeAsync(prevNextVM.Triennial);
+	}
+}
