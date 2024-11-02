@@ -1,18 +1,47 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MyHebrewBible.Client.Enums;
 
 namespace MyHebrewBible.Client.Features.Parasha.Enums;
 
 public static class ParashaFacts
 {
-	//public abstract BibleBookPrevNext NavigationPrevious(int Chapter);
-	//public abstract BibleBookPrevNext NavigationNext(int Chapter);
-
-	public const int FirstParashaId = 1;
+	public const int FirstParashaId = 1; 
 	public const int LastParashaId = 157;
 }
 
 public static class Constants
 {
+
+	public static string PrevNextUrl(Triennial triennial) 
+	{
+		return $"parasha/{triennial.Value}/{BibleBook.FromValue(triennial.TorahVerse.BibleBook).Abrv}_{triennial.TorahVerse.ChapterVerse.Replace("-", "-to-").Replace(":", "-")}";
+	}
+
+	public static string? GetUrl()
+	{
+		string? url = null; 
+
+		Triennial? _reading =
+			Triennial.List
+			.Where(w => w.Date == Constants.GetNextShabbatDate())
+			.SingleOrDefault();
+
+		if (_reading is not null)
+		{
+			url = _reading.Url;
+		}
+		else
+		{
+			Triennial? _defaultReading = Triennial.List.FirstOrDefault();
+			if (_defaultReading is not null)
+			{
+				url = _defaultReading.Url;
+			}
+			//else {//ToDo: Throw Exception?	}
+		}
+
+		return url;
+	}
 
 	public static string CurrentReadDateTextFormat(DateTime readDate)
 	{
@@ -52,15 +81,15 @@ public static class Constants
 		int days = timeSpan.Days;
 		if (days < 0)
 		{
-				return (MarkupString)$" <b>{Math.Abs(days)}</b> days <b class='text-danger'>before</b> next Shabbat";
+			return (MarkupString)$" <b>{Math.Abs(days)}</b> days <b class='text-danger'>before</b> next Shabbat";
 		}
-		else 
+		else
 		{
 			if (days > 0)
 			{
 				return (MarkupString)$" <b>{Math.Abs(days)}</b> days <b class='text-primary'>after</b> next Shabbat";
 			}
-			else 
+			else
 			{
 				return (MarkupString)$" today is Shabbat! <b class='text-success fs-5'>Shabbat Shalom!</b>";
 			}
@@ -128,5 +157,5 @@ public static class Constants
 		DateTime nextSundayAt1AM = nextSunday.AddHours(1);
 		return nextSundayAt1AM;
 	}
-	
+
 }

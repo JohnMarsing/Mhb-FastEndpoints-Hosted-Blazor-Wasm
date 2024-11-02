@@ -1,0 +1,31 @@
+﻿@using MyHebrewBible.Client.Enums
+@using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
+
+
+<nav class="navbar navbar-expand bg-primary-subtle fixed-top">
+
+	<div class="collapse navbar-collapse justify-content-start">
+
+		<div class="ps-1">
+			<MyHebrewBible.Client.Layout.HomeButton />
+		</div>
+	</div>
+
+	<div class="collapse navbar-collapse justify-content-center">
+		<div class="px-1">
+			<h4 class=""><i class="@Nav.ParashaList.Icon"></i>&nbsp;@Nav.ParashaList.Title</h4>
+		</div>
+	</div>
+
+	<div class="collapse navbar-collapse justify-content-end">
+		<div class="pe-1">
+			<NavBackToParashaButton ReturnUrl="@ReturnUrl" />
+		</div>
+
+	</div>
+
+</nav>
+
+@code {
+	private string? ReturnUrl => ParashaEnums.Constants.GetUrl();
+}

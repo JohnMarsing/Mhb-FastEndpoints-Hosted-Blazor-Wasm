@@ -1,5 +1,6 @@
 ﻿@using MyHebrewBible.Client.Enums
 @using MyHebrewBible.Client.State
+@using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
 
 @inject NavigationManager NavigationManager
 
@@ -23,13 +24,13 @@
 	protected string IconSize => $"{(MediaQuery == MediaQuery.Sm ? " fa-2x" : " fa-3x")}";
 	protected string FontSize => $"{(MediaQuery == MediaQuery.Sm ? " fs-5" : " fs-4")}";
 
-	
+
 	private void ButtonClicked(int id)
 	{
-		// ToDo: this is a hack but it works. thinking I need to move much of this code to `Client.Enums.Nav`
-		// ToDo: do something similar with Parasha and probable VerseList
+
 		if (Nav.FromValue(id) == Nav.BookChapter)
 		{
+			// ToDo: this is a hack but it works. thinking I need to move much of this code to `Client.Enums.Nav`
 			BibleBookIdAndChapter? rec = CascadingAppState!.AppState!.BookChapterState!.Get();
 			if (rec is not null)
 			{
@@ -43,8 +44,15 @@
 		}
 		else
 		{
-			NavigationManager!.NavigateTo(Nav.FromValue(id) + "/");
+			if (Nav.FromValue(id) == Nav.Parasha)
+			{
+				NavigationManager!.NavigateTo(ParashaEnums.Constants.GetUrl() ?? "");
+			}
+			else
+			{
+				NavigationManager!.NavigateTo(Nav.FromValue(id) + "/");
+			}
 		}
-		
+
 	}
 }

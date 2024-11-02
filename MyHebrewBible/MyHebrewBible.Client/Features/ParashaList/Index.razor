@@ -1,9 +1,13 @@
 ﻿@page "/ParashaList"
 
 @using MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Features.ParashaList.Toolbar
 
+<PageTitle>@Nav.ParashaList.Title</PageTitle> 
 
-<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.ParashaList" BorderCSS="" />
+<Buttons />
+<br />
+<br />
 
 <FilterPills CurrentFilter="@CurrentFilter"
              OnFilterSelected="@ReturnedFilter" />

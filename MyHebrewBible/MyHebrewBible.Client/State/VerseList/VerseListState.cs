@@ -3,18 +3,18 @@ using MyHebrewBible.Client.Enums;
 
 namespace MyHebrewBible.Client.State.VerseList;
 
-public class VerseListState2
+public class VerseListState
 {
 	//private readonly ILocalStorageService? localStorage;
 	#region Constructor and DI
 	private readonly ILogger Logger;
 	private readonly ILocalStorageService? localStorage;
 
-	public VerseListState2(ILocalStorageService localStorage, ILogger<AppState> logger)
+	public VerseListState(ILocalStorageService localStorage, ILogger<AppState> logger)
 	{
 		this.localStorage = localStorage;
 		Logger = logger;
-		//Logger!.LogInformation("{Class}!{MethodEvent}", nameof(VerseListState2), "CTOR");
+		//Logger!.LogInformation("{Class}!{MethodEvent}", nameof(VerseListState), "CTOR");
 	}
 	#endregion
 

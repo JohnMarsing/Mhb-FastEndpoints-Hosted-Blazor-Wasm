@@ -2,6 +2,7 @@
 
 using Ardalis.SmartEnum;
 using MyHebrewBible.Client.Enums;
+using MyHebrewBible.Client.Features.Parasha.Toolbar;
 
 namespace MyHebrewBible.Client.Features.Parasha.Enums;
 
@@ -186,7 +187,7 @@ public abstract class Triennial : SmartEnum<Triennial>
 	/**/
 	public static readonly Triennial Gen_01a = new Gen_01aSE();
 	public static readonly Triennial Gen_01b = new Gen_01bSE();
-	
+
 	//public static readonly Triennial Gen_01b = new Gen_01SE();
 
 	public static readonly Triennial Gen_02 = new Gen_02SE();
@@ -367,7 +368,54 @@ public abstract class Triennial : SmartEnum<Triennial>
 	public abstract List<VerseRange>? HaftorahVerses { get; }
 	public abstract List<VerseRange>? BritVerses { get; }
 
-	//Methods
+	//Properties
+
+	public bool HasPrevious => this.Value > ParashaFacts.FirstParashaId ? true : false;
+	public bool HasNext => this.Value < ParashaFacts.LastParashaId ? true : false;
+
+	public PrevNextVM? PreviousVM
+	{
+		get
+		{
+			if (HasPrevious)
+			{
+				Triennial _prev = Triennial.FromValue(this.Value - 1);
+				return new PrevNextVM(_prev, Constants.PrevNextUrl(_prev), "fas fa-arrow-left");
+			}
+			else
+			{
+				return null;
+			}
+		}
+	}
+
+	public PrevNextVM? NextVM
+	{
+		get
+		{
+			if (HasNext)
+			{
+				Triennial _next = Triennial.FromValue(this.Value + 1);
+				return new PrevNextVM(_next, Constants.PrevNextUrl(_next), "fas fa-arrow-right");
+			}
+			else
+			{
+				return null;
+			}
+		}
+	}
+
+
+	public string Url 
+	{
+		get
+		{
+			string slug = $"{BibleBook.FromValue(this.TorahVerse.BibleBook).Abrv}_{this.TorahVerse.ChapterVerse.Replace("-", "-to-").Replace(":", "-")}";
+			return ($"parasha/{this.Value}/{slug}");
+		}
+	}
+
+
 	public DateTime Date
 	{
 		get
@@ -375,6 +423,7 @@ public abstract class Triennial : SmartEnum<Triennial>
 			return Constants.TriennialSeedDate.AddDays(7 * (this.Value - 1));
 		}
 	}
+
 	public string Title // 1.1, Gen 1:1-19, Sep 29 2018; 
 	{
 		get
@@ -448,7 +497,7 @@ public abstract class Triennial : SmartEnum<Triennial>
 
 
 	#region Private Instantiation
-	
+
 	private sealed class Gen_01aSE : Triennial
 	{
 		public Gen_01aSE() : base($"{nameof(Id.Gen_01a)}", Id.Gen_01a) { }
@@ -480,7 +529,7 @@ public abstract class Triennial : SmartEnum<Triennial>
 		public override List<VerseRange>? HaftorahVerses => null;
 		public override List<VerseRange>? BritVerses => null;
 	}
-	
+
 	/*
 	private sealed class Gen_01SE : Triennial
 	{

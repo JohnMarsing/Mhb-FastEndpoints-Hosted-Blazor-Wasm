@@ -63,7 +63,7 @@
 			Header header = state!.GetHeader();
 			CurrentHeader = new BookAndChapter(BibleBook.FromValue(_state.BibleBookId), _state.Chapter);
 			*/
-			DetailRecord bcv = CascadingAppState!.AppState!.VerseListState2!.GetBCV();
+			DetailRecord bcv = CascadingAppState!.AppState!.VerseListState!.GetBCV();
 			BookAndChapter bookAndChapter = new BookAndChapter(GlobalEnums.BibleBook.FromValue(bcv.BibleBookId), bcv.Chapter);
 			CurrentVM = new BookChapterVerse(bookAndChapter, bcv.BegVerse);
 			//PageTitle = GlobalEnums.BibleBookFormat.BCV(CurrentVM); 
@@ -80,7 +80,7 @@
 	{
 		CurrentVM = vm!;
 		//state!.UpdateHeader(new VerseListState(CurrentBookAndChapter.BibleBook!.Value, CurrentBookAndChapter.Chapter));
-		await CascadingAppState!.AppState!.VerseListState2!.UpdateBCV(new DetailRecord(vm.BookAndChapter.BibleBook, vm.BookAndChapter.Chapter, vm.Verse, vm.Verse, "Just Got Updated"));
+		await CascadingAppState!.AppState!.VerseListState!.UpdateBCV(new DetailRecord(vm.BookAndChapter.BibleBook, vm.BookAndChapter.Chapter, vm.Verse, vm.Verse, "Just Got Updated"));
 	}
 
 }

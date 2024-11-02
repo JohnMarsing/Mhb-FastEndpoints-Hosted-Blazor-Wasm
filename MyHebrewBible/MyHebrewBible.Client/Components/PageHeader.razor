@@ -28,24 +28,6 @@
 
 	<div class="collapse navbar-collapse justify-content-end">
 
-		@if (PageEnum == Nav.Parasha)
-		{
-		<div class="ps-1">
-				<a class="btn btn-primary" title="@Nav.ParashaList.Title" href="@Nav.ParashaList.Index">
-				<i class="@Nav.ParashaList.Icon"></i>
-			</a>
-		</div>
-		}
-
-		@if (PageEnum == Nav.ParashaList)
-		{
-			<div class="ps-1">
-				<a class="btn btn-primary" title="@Nav.Parasha.Title" href="@Nav.Parasha.Index">
-					<i class="@Nav.Parasha.Icon"></i>
-				</a>
-			</div>
-		}
-
 		<div class="ps-1">
 			<a class="btn btn-primary" title="Configuration" href="">
 				<i class="fas fa-cog"></i>
@@ -62,6 +44,7 @@
 
 @code {
 	[Parameter, EditorRequired] public Nav PageEnum { get; set; } = Nav.Home;
-	[Parameter]	public string? BorderCSS { get; set; } = "border-bottom border-info";
+	[Parameter] public string? BorderCSS { get; set; } = "border-bottom border-info";
 	[Parameter] public string? PageTitle { get; set; }
+
 }
