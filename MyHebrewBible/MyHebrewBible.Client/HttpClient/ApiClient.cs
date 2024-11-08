@@ -149,16 +149,19 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ArticleList>> GetArticleListAsync(string dummyString)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ArticleList>> GetArticleListAsync(long filter)
         {
-            return GetArticleListAsync(dummyString, System.Threading.CancellationToken.None);
+            return GetArticleListAsync(filter, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ArticleList>> GetArticleListAsync(string dummyString, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ArticleList>> GetArticleListAsync(long filter, System.Threading.CancellationToken cancellationToken)
         {
+            if (filter == null)
+                throw new System.ArgumentNullException("filter");
+
             var client_ = _httpClient;
             var disposeClient_ = false;
             try
@@ -170,14 +173,9 @@ namespace MyHebrewBible.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/articlelist"
-                    urlBuilder_.Append("api/articlelist");
-                    urlBuilder_.Append('?');
-                    if (dummyString != null)
-                    {
-                        urlBuilder_.Append(System.Uri.EscapeDataString("DummyString")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(dummyString, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
-                    }
-                    urlBuilder_.Length--;
+                    // Operation Path: "api/articlelist/{filter}"
+                    urlBuilder_.Append("api/articlelist/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 

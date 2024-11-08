@@ -1,0 +1,96 @@
+﻿@inject ILogger<Typeahead>? Logger
+@inject ApiClient? Api
+@inject IToastService? Toast
+
+@if (IsXs)
+{
+	<FilterXsModal OnFilterSelected="@ReturnedFilter"
+								 CurrentFilter="CurrentFilter" />
+}
+else
+{
+	<Filter CurrentFilter="CurrentFilter"
+					OnFilterSelected="@ReturnedFilter" />
+}
+
+
+@*
+<p>CurrentFilter: @CurrentFilter</p>
+<p>ArticleRowCount: @ArticleRowCount</p>
+*@
+
+<BlazoredTypeahead SearchMethod="SearchContent"
+									 TValue="ArticleList"
+									 TItem="ArticleList"
+									 Value="SelectedArticle"
+									 ValueChanged="SelectedResultChanged"
+									 ValueExpression="@(() => SelectedArticle)"
+									 EnableDropDown="true"
+									 MinimumLength="2"
+									 MaximumSuggestions="100"
+									 placeholder="Search articles...">
+	<SelectedTemplate Context="mycontext">
+		@mycontext!.Title
+	</SelectedTemplate>
+	<HelpTemplate>
+		Please enter at least 2 characters to perform a search.
+	</HelpTemplate>
+	<ResultTemplate Context="mycontext">
+		@mycontext.Title
+	</ResultTemplate>
+</BlazoredTypeahead>
+
+@code {
+	[Parameter, EditorRequired] public EventCallback<long> OnArticleIdSelected { get; set; }
+	[Parameter, EditorRequired] public bool IsXs { get; set; }
+
+	protected Enums.Filter CurrentFilter { get; set; } = Enums.Filter.All;
+
+	private ArticleList? SelectedArticle;
+
+	private ICollection<ArticleList>? collection = null;
+	protected long ArticleRowCount = 0;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		Logger!.LogInformation("{Method} CurrentFilter: {CurrentFilter}", nameof(OnParametersSetAsync), CurrentFilter);
+		await PopulateCollection(CurrentFilter);
+	}
+
+	protected async Task PopulateCollection(Enums.Filter filter)
+	{
+		long longValue = (long)filter.Value;
+		Logger!.LogInformation("{Method} filter: {FilterName}, longValue:{longValue}"
+		, nameof(PopulateCollection), filter.Name, longValue);
+		try
+		{
+			collection = await Api!.GetArticleListAsync(longValue);  // filter.Value
+			ArticleRowCount = collection.Count;
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(PopulateCollection));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(PopulateCollection)}");
+		}
+	}
+
+	private async Task<IEnumerable<ArticleList>?> SearchContent(string searchText)
+	{
+		return await Task.FromResult(collection!
+			.Where(x => x.Title.Contains(searchText, StringComparison.CurrentCultureIgnoreCase))
+			.OrderBy(o => o.Title)
+			.ToList());
+	}
+
+	private async Task ReturnedFilter(Enums.Filter filter)
+	{
+		CurrentFilter = filter;
+		await OnArticleIdSelected.InvokeAsync(0);
+		await PopulateCollection(filter);
+	}
+
+	private void SelectedResultChanged(ArticleList articleList)
+	{
+		OnArticleIdSelected.InvokeAsync(articleList.Id);
+	}
+}

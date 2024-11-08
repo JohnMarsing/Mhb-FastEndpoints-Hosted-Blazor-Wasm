@@ -1,4 +1,10 @@
-﻿
+﻿@using Blazored.Toast.Services
+@* @using MyHebrewBible.Client.Components *@
+
+@inject ILogger<Details>? Logger 
+@inject ApiClient? Api 
+@inject IToastService? Toast 
+
 <LoadingComponent IsLoading="article == null" TurnSpinnerOff="TurnSpinnerOff">
 	<div class="card bg-light mb-3">
 		<div class="card-header">
@@ -68,3 +74,40 @@
 
 </LoadingComponent>
 
+@code{
+
+	[Parameter, EditorRequired] public long ArticleId { get; set; }
+
+	protected Article? article;
+	private VerseParagraphRange? VerseParagraphRange; 
+
+	protected bool TurnSpinnerOff = false;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		Logger!.LogInformation("{Class}!{Method}; ArticleId: {ArticleId}", nameof(Details), nameof(OnParametersSetAsync), ArticleId);
+		try
+		{
+			article = await Api!.GetArticleAsync(ArticleId);
+		}
+		catch (Exception)
+		{
+			// ToDo: figure out how to do Fast-Endpoints Union Types / TypedResults-thinga-muh-jigger
+		}
+
+		if (article is null)
+		{
+			Toast!.ShowWarning($"Article Id {ArticleId} not found");
+		}
+		else
+		{
+			if (!String.IsNullOrEmpty(article.RelatedVersesHtml))
+			{
+				VerseParagraphRange = new VerseParagraphRange(article.PrimaryScriptureId, article.PrimaryScriptureId + article.ExtraVerses, article.RelatedVersesHtml);
+			}
+		}
+
+		TurnSpinnerOff = true;
+	}
+
+}

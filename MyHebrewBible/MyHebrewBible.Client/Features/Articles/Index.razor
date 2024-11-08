@@ -2,114 +2,31 @@
 @page "/Article"
 
 @using MyHebrewBible.Client.Features.Articles.Search
-@using MyHebrewBible.Client.Features.Articles.Search.Enums
-@using Microsoft.AspNetCore.Components.QuickGrid
-
-@inject ApiClient Api
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.Article" BorderCSS="" />
 
-<div class="page-size-chooser mb-2">
-	Items per page:
-	<select @bind="@pagination.ItemsPerPage">
-		<option>5</option>
-		<option>10</option>
-		<option>20</option>
-		<option>50</option>
-	</select>
+<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+	<Typeahead OnArticleIdSelected="ReturnedArticleId" IsXs=true /> 
 </div>
 
-<div class="card border-info">
-	<div class="card-header text-end">
-		<small><b>WS</b>: Word Study, <b>PH</b>: Place Holder</small>
-	</div>
-
-		<QuickGrid Items="@FilteredItems" Pagination="@pagination">
-
-			<TemplateColumn Title="Details" Align="Align.Center">
-				<button @onclick="@(() => ButtonClicked(context.Id))" 
-					title="@context.Id" class="btn btn-sm btn-outline-primary"><i class="fas fa-chevron-down"></i>
-				</button>
-			</TemplateColumn>
-
-			<PropertyColumn Property="@(a => a.Title)" Sortable="true" Class="title-name">
-				<ColumnOptions>
-					<div class="search-box">
-						<input type="search" autofocus @bind="titleFilter" @bind:event="oninput" placeholder="Article title..." />
-					</div>
-				</ColumnOptions>
-			</PropertyColumn>
-			<TemplateColumn Title="Fav" Align="Align.Center">
-				@if (context.IsFavorite)
-				{
-					<input type="checkbox" checked />
-				}
-				else
-				{
-					<input type="checkbox" />
-				}
-			</TemplateColumn>
-			<TemplateColumn Title="Parasha" Align="Align.Center">
-				@if (context.IsParasha)
-				{
-					<input type="checkbox" checked />
-				}
-				else
-				{
-					<input type="checkbox" />
-				}
-			</TemplateColumn>
-			<TemplateColumn Title="WS" Align="Align.Center">
-				@if (context.IsParasha)
-				{
-					<input type="checkbox" checked />
-				}
-				else
-				{
-					<input type="checkbox" />
-				}
-			</TemplateColumn>
-			<TemplateColumn Title="PH" Align="Align.Center">
-				@if (context.IsPlaceHolder)
-				{
-					<input type="checkbox" checked />
-				}
-				else
-				{
-					<input type="checkbox" />
-				}
-			</TemplateColumn>
-		</QuickGrid>
-	
+<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+	<Typeahead OnArticleIdSelected="ReturnedArticleId" IsXs=false />
 </div>
 
-<Paginator State="@pagination" />
+@* <p>SelectedArticleId: @SelectedArticleId</p> *@
 
-@if (CurrentArticleId != 0)
+@if (SelectedArticleId != 0)  
 {
-	<Details ArticleId="@CurrentArticleId" />
-} 
+	<Details ArticleId="SelectedArticleId" />
+}
 
 @code {
-	string titleFilter = string.Empty;
-	PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
+	
+	public long SelectedArticleId=0;
 
-	IQueryable<ArticleList>? items;
-
-	private ICollection<ArticleList>? collection = null;
-	IQueryable<ArticleList>? FilteredItems => items?.Where(x => x.Title.Contains(titleFilter, StringComparison.CurrentCultureIgnoreCase)).OrderBy(o => o.Title);
-
-	protected override async Task OnInitializedAsync()
+	private void ReturnedArticleId(long articleId)
 	{
-		collection = await Api.GetArticleListAsync(""); //"law"
-		items = collection.AsQueryable();
-	}
-
-	protected long CurrentArticleId;
-	private void ButtonClicked(long id)
-	{
-		CurrentArticleId = id;
-		
+		SelectedArticleId = articleId;
 	}
 
 }
