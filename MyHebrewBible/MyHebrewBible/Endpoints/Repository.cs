@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using MyHebrewBible.Database;
+using ArticleEnums = MyHebrewBible.Client.Features.Articles.Search.Enums;
 
 namespace MyHebrewBible.Endpoints;
 
@@ -26,10 +27,10 @@ public class Repository
 		return verseList;
 	}
 
-  public async Task<IEnumerable<WordPart?>> GetWordParts(long scriptureID)
+	public async Task<IEnumerable<WordPart?>> GetWordParts(long scriptureID)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
-		Parms = new DynamicParameters(new { ScriptureID = scriptureID});
+		Parms = new DynamicParameters(new { ScriptureID = scriptureID });
 
 		var wordParts = await connection.QueryAsync<WordPart>(@"
 SELECT ScriptureID, WordCount, SegmentCount, WordEnum, Hebrew1, Hebrew2, Hebrew3, KjvWord, Strongs, Transliteration, FinalEnum
@@ -41,12 +42,12 @@ ORDER BY WordCount, SegmentCount
 		return wordParts;
 	}
 
-  public async Task<IEnumerable<Mitzvah?>> GetMitzvot(long bookId)
-  {
-    using var connection = await _connectionFactory.CreateConnectionAsync();
-    Parms = new DynamicParameters(new { BookId = bookId });
+	public async Task<IEnumerable<Mitzvah?>> GetMitzvot(long bookId)
+	{
+		using var connection = await _connectionFactory.CreateConnectionAsync();
+		Parms = new DynamicParameters(new { BookId = bookId });
 
-    var mitzvot = await connection.QueryAsync<Mitzvah>(@"
+		var mitzvot = await connection.QueryAsync<Mitzvah>(@"
 SELECT
 ID, Detail, BegId, EndID, Verse, Descr, BookID, BookAbrv
 FROM MitzVot
@@ -54,15 +55,15 @@ WHERE BookId=@BookId
 ORDER BY BegId
 ", Parms);
 
-    return mitzvot;
-  }
+		return mitzvot;
+	}
 
-  public async Task<IEnumerable<BibleVerse?>> GetVerseList(long begdId, long endId)
-  {
-    using var connection = await _connectionFactory.CreateConnectionAsync();
-    Parms = new DynamicParameters(new { BegId = begdId, EndId = endId });
+	public async Task<IEnumerable<BibleVerse?>> GetVerseList(long begdId, long endId)
+	{
+		using var connection = await _connectionFactory.CreateConnectionAsync();
+		Parms = new DynamicParameters(new { BegId = begdId, EndId = endId });
 
-    var versList = await connection.QueryAsync<BibleVerse>(@"
+		var versList = await connection.QueryAsync<BibleVerse>(@"
 
 SELECT ID, BCV, Verse, KJV, VerseOffset, DescH, DescD
 FROM Scripture
@@ -70,7 +71,7 @@ WHERE ID BETWEEN @BegId AND @EndId
 ORDER BY ID
 ", Parms);
 		return versList;
-  }
+	}
 
 	public async Task<IEnumerable<BibleVerse?>> GetVerseListByBCV(long bookId, long chapter, long begVerse, long endVerse)
 	{
@@ -124,7 +125,7 @@ ORDER BY WordCount
 	public async Task<Article?> GetArticle(long id)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
-		Parms = new DynamicParameters(new { Id = id});
+		Parms = new DynamicParameters(new { Id = id });
 		var article = await connection.QuerySingleOrDefaultAsync<Article>(@"
 SELECT a.Id, FileNameNoExt, Title, Details, DetailsMD, PrimaryScriptureId, CreateDate
 , DocBlobID, PdfBlobID, IsPlaceHolder, IsFavorite, ExtraVerses, IsWordStudy, IsParasha
@@ -136,15 +137,19 @@ WHERE a.Id = @Id", Parms);
 		return article;
 	}
 
-
-	public async Task<IEnumerable<ArticleList?>> GetArticleList()
+	
+	public async Task<IEnumerable<ArticleList?>> GetArticleList(long filter)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
-		var articleList = await connection.QueryAsync<ArticleList>(@"
-SELECT Id, Title, IsFavorite, IsPlaceHolder, IsParasha
-FROM Article 
-ORDER BY Id
-");
+
+		const string select = "SELECT Id, Title FROM Article ";
+		const string order = " ORDER BY Title";
+
+		ArticleEnums.Filter filterSmartEnum = ArticleEnums.Filter.FromValue((int)filter);
+		string where = filterSmartEnum.Where;
+		string sql = $"{select} {where} {order}";
+
+		var articleList = await connection.QueryAsync<ArticleList>(sql); 
 		return articleList;
 	}
 

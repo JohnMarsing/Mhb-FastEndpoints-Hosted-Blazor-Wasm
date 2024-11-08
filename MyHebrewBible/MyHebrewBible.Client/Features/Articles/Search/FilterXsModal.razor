@@ -1,0 +1,87 @@
+﻿@if (ModalIsNotShownToggle)
+{
+	<div class="d-flex justify-content-end my-2">
+		<div class="pe-1">
+			<i class="fas fa-filter"></i>
+		</div>
+		<div class="pe-1">
+			<button type="button" class="btn btn-outline-primary btn-sm float-end"
+							@onclick="() => ShowModal()">
+				@CurrentFilter!.Title <i class="fas fa-angle-down"></i>
+			</button>
+		</div>
+	</div>
+}
+else
+{
+	<div class="@modalClass" style="display:@(modalOpen?"block":"none");">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<p>Select Filter</p>
+					<button type="button" class="btn-close" @onclick="CloseModal"></button>
+				</div>
+
+				<div class="modal-body @modalBodyColor">
+
+						<div class="d-flex justify-content-center">
+					<div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+
+							@foreach (var item in Enums.Filter.List.OrderBy(o => o.Value))
+							{
+								<button @onclick="@(() => OnClick(item))" title="Filter by @item.Title"
+												class="btn btn-outline-primary btn-sm @ActiveFilter(item)">
+									@item.Title
+								</button>
+							}
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.Filter? CurrentFilter { get; set; }
+	[Parameter, EditorRequired] public EventCallback<Enums.Filter> OnFilterSelected { get; set; }
+
+	bool ModalIsNotShownToggle = true;
+	bool modalOpen = false;
+
+	string modalClass = "modal";
+	//string modalSize = "modal-sm"; // : "modal-md"
+	string modalHeaderColor = "bg-warning-subtle";
+	string modalContentColor = " border-danger";
+	string modalBodyColor = "";  // bg-warning-subtle
+
+	private async Task OnClick(Enums.Filter filter)
+	{
+		CloseModal();
+		await OnFilterSelected.InvokeAsync(filter);
+	}
+
+	void ShowModal()
+	{
+		modalOpen = true;
+		ModalIsNotShownToggle = false;
+		modalClass += " show";
+		StateHasChanged();
+	}
+
+	void CloseModal()
+	{
+		modalOpen = false;
+		ModalIsNotShownToggle = true;
+		modalClass = "modal";
+	}
+
+	public string ActiveFilter(Enums.Filter filter)
+	{
+		if (filter == CurrentFilter) { return "active"; }
+		else { return ""; }
+	}
+}

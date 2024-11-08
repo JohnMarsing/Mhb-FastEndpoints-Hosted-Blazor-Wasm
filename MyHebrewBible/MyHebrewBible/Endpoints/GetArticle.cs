@@ -22,6 +22,6 @@ public class GetArticle : Endpoint<ArticleRequest, Article>
 	public override async Task HandleAsync(ArticleRequest request, CancellationToken c)
 	{
 		Article? article = await _db.GetArticle(request.Id);
-		await SendAsync(article);
+		await SendAsync(article!);
 	}
 }
