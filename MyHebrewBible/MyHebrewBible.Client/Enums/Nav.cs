@@ -212,7 +212,8 @@ public abstract class Nav : SmartEnum<Nav>
 	private sealed class AlephTavsSE : Nav
 	{
 		public AlephTavsSE() : base($"{nameof(Id.AlephTavs)}", Id.AlephTavs) { }
-		public override string Index => "/AlephTavs";
+		//public override string Index => "/AlephTavs";
+		public override string Index => "/alephTavlist";
 		public override string Title => "Aleph Tavs";
 		public override string Icon => "fa-letter-aleph-tav";
 		public override int Sort => Id.AlephTavs;
@@ -220,7 +221,17 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string HomeFloatRightHebrew => "אֵת";
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
-		public override bool Disabled => true;
+		public override bool Disabled => false;
+
+		/*
+			public const string PageIndexFromRoot = "/AlephTav/Index";
+			public const string PageIntroductionFromRoot = "/AlephTav/Introduction";
+			public const string PageIndex = "./Index";
+			public const string PageSummaryAndAnomalies = "./SummaryAndAnomalies";
+			public const string PageDetails = "./Details";
+			
+		 */
+
 	}
 
 	private sealed class BibleListSE : Nav

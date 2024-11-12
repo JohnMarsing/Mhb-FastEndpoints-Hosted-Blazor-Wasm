@@ -1,0 +1,62 @@
+﻿<h3><span class="text-danger">את</span> Standalone Aleph Tav List</h3>
+
+<p>
+	This is a list of all the Standalone Aleph Tav's <span class="text-danger">את</span> by book.
+	<br /><br />
+	The table has two columns with a count of <i>Aleph Tav</i> occurrences for each book.
+	The first column is a count of the verses and the second column is the actual count of <i>Aleph Tav's</i>.
+	Since some verses have two <i>Aleph Tav's</i> in the same verse, that column will have a larger count.
+	The totals are listed on the bottom.
+</p>
+
+<p>
+	Below the table is a list of anomalies that I acquired when I created the list.
+</p>
+
+<div class="table-responsive">
+
+	<table class="table table-striped table-condensed">
+		<tr>
+			<th><br /><br />Book</th>
+			<th>Verses<br />with<br />Aleph Tavs</th>
+			<th>Actual<br />Aleph Tav<br />Count</th>
+		</tr>
+
+		@foreach (var item in AlephTavSummaryList!)
+		{
+			verseCnt += item.RowCntVerses;
+			alephTavCnt += item.RowCntAlephTavs;
+			<tr>
+				<td>
+					@item.Abrv @* <a asp-page="@Anchors.ParentIndex" asp-route-id="@item.Id" title="@item.Abrv">@item.Abrv</a> *@
+				</td>
+				<td>
+					@item.RowCntVerses
+				</td>
+				<td>
+					@item.RowCntAlephTavs
+				</td>
+			</tr>
+		}
+
+		<tfoot>
+			<tr>
+				<td><b>Total</b></td>
+				<td><span class="text-danger"><b>@verseCnt</b></span></td>
+				<td><span class="text-danger"><b>@alephTavCnt</b></span></td>
+			</tr>
+		</tfoot>
+	</table>
+
+</div>
+
+
+@code {
+	int verseCnt = 0;
+	int alephTavCnt = 0;
+
+	public IEnumerable<AlephTavSummary>? AlephTavSummaryList  => AlephTavSummaryFactory.GetAlephTavSummaryBooks();
+
+	//protected override void OnInitialized() 	{	}
+
+}

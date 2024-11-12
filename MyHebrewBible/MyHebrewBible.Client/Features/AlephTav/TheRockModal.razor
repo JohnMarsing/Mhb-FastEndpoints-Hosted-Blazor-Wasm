@@ -1,0 +1,59 @@
+﻿@if (ModalIsNotShownToggle)
+{
+	<button type="button" class="btn btn-outline-primary btn-sm float-end"
+					@onclick="() => ShowModal()">
+		<i class="far fa-image fa-2x"></i> The Rock<br> at <i>Kadesh</i>
+	</button>
+
+}
+else
+{
+	<div class="@modalClass" style="display:@(modalOpen?"block":"none");">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content @modalContentColor">
+				<div class="modal-header @modalHeaderColor">
+					<p>Select Filter</p>
+					<button type="button" class="btn-close" @onclick="CloseModal"></button>
+				</div>
+
+				<div class="modal-body @modalBodyColor">
+			
+					<img src="@BlobContent.ImagesUrl("Mt_Horev_Aleph_Tav.png")" alt="Mt. Horev Aleph Tav" class="img-thumbnail" />
+
+					<blockquote>
+						<sup>10:4</sup>
+						And did all drink the same spiritual drink: for they drank of that <b>spiritual Rock</b> that followed them: and that Rock was Christ.
+						<small>1Co 10:4<cite></cite></small>
+					</blockquote>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+@code {
+	bool ModalIsNotShownToggle = true;
+	bool modalOpen = false;
+
+	//<modal title="The Rock!" id="alephTav">
+	string modalClass = "modal";
+	//string modalSize = "modal-sm"; // : "modal-md"
+	string modalHeaderColor = "bg-warning-subtle";
+	string modalContentColor = " border-danger";
+	string modalBodyColor = "bg-warning-subtle"; 
+
+	void ShowModal()
+	{
+		modalOpen = true;
+		ModalIsNotShownToggle = false;
+		modalClass += " show";
+		StateHasChanged();
+	}
+
+	void CloseModal()
+	{
+		modalOpen = false;
+		ModalIsNotShownToggle = true;
+		modalClass = "modal";
+	}
+}

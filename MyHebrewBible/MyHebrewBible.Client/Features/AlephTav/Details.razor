@@ -1,0 +1,91 @@
+﻿<h3>Details</h3>
+
+
+<h3 class="text-center">
+	<b>@VM.AlephTavScripture.BCV</b> <em>@VM.AlephTavScripture.VerseOffset</em>
+
+@* 	<a asp-page="@Anchors.AlephTav.PageDetails ./Details " asp-route-id="@VM.AlephTavScripture.ID"
+		 title="@VM.AlephTavScripture.ID">
+		<span class="text-muted"><sup><small><i class="fa fa-location-arrow" aria-hidden="true">&nbsp;</i></small></sup></span>
+	</a>
+ *@
+</h3>
+
+<div class="row">
+	<div class="col-md-6">
+		<h4><span class="label label-info">KJV</span></h4>
+		<p>
+			@((MarkupString)VM.AlephTavScripture.KJV!)
+		</p>
+
+		<h4><span class="label label-info">Interlinear KJV</span></h4>
+		<p>
+			<span class="hebrew">
+				@((MarkupString)VM.AlephTavScripture.InterlinearKjv!)
+			</span>
+		</p>
+
+		<h4><span class="label label-info">Interlinear</span></h4>
+		<p class="hebrew medium">
+			@((MarkupString)VM.AlephTavScripture.Interlinear!)
+		</p>
+
+		<h4><span class="label label-info">Hebrew2</span></h4>
+		<p class="hebrew medium">
+			@((MarkupString)VM.AlephTavScripture.Hebrew2!)
+		</p>
+
+		@if (!String.IsNullOrEmpty(VM.AlephTavScripture.CommentsMD))
+		{
+			<h3><span class="text-info">Comments</span><br /></h3>
+			<p>
+				@((MarkupString)VM.AlephTavScripture.CommentsMD!)
+			</p>
+		}
+
+	</div>
+
+	<div class="col-md-6">
+		@* 		
+		<div class="visible-xs">
+		@await Html.PartialAsync(PartialViews.WordsMinimal, Model.Words, new ViewDataDictionary(this.ViewData) { { VDD.ScriptureID, Model.AlephTavScripture.ID }, { VDD.IsXs, true } })
+		</div>
+		<div class="hidden-xs">
+			@await Html.PartialAsync(PartialViews.WordsMinimal,
+			Model.Words, new ViewDataDictionary(this.ViewData) { { VDD.ScriptureID, Model.AlephTavScripture.ID }, { VDD.IsXs, false } })
+		</div> 
+		*@
+
+	</div>
+
+</div>
+
+@code {
+	public DetailsVM VM { get; set; }
+
+	protected override void OnInitialized()
+	{
+		VM = new DetailsVM
+			{
+				AlephTavSummaryBooks = AlephTavSummaryFactory.GetAlephTavSummaryBooks()
+			};
+
+		//VM.AlephTavScripture = await db.ScriptureByIdAsync(id);
+		//VM.Words = await db.WordsByScriptureIdAsync(id);
+	}
+
+
+
+	//@await Html.PartialAsync(PartialViews.AlephTavPopover, Model.VM.AlephTavSummaryBooks)
+
+		/*
+	*
+	private readonly IAlephTavRepository db;
+
+	AlephTavSummaryBooks = AlephTavSummaryFactory.GetAlephTavSummaryBooks()
+
+				VM.AlephTavScripture = await db.ScriptureByIdAsync(id);
+			log.LogInformation($"ScriptureByIdAsync");
+			VM.Words = await db.WordsByScriptureIdAsync(id);
+	*/
+}
