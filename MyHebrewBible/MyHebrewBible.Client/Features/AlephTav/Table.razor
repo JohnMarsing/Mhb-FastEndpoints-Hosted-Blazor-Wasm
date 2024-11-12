@@ -1,0 +1,49 @@
+﻿@using MyHebrewBible.Client.Enums
+
+@inject ApiClient Api
+
+<h3>Aleph Tav Table</h3>
+
+ @if (alephTavList == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Detail</th>
+				<th>BCV</th>
+				<th>Hebrew</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in alephTavList)
+			{
+				<tr>
+					<td><i>@item.ScriptureID</i></td>
+					<td>@item.Detail</td>
+					<td>@item.BCV</td>
+					<td class="text-end">@((MarkupString)@item.Hebrew) </td>
+					
+
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+@code {
+	[Parameter, EditorRequired] public BibleBook? _bibleBook { get; set; } 
+
+	private ICollection<AlephTavList>? alephTavList = null;
+
+	 protected override async Task OnParametersSetAsync()
+	 {
+		alephTavList = await Api.GetAlephTavByBookAsync((long)_bibleBook!.Value);
+	 }
+
+}
+

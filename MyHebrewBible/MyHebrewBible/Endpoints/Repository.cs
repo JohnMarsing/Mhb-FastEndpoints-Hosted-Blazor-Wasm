@@ -27,6 +27,34 @@ public class Repository
 		return verseList;
 	}
 
+	private const string alephTavSelect = @"
+		SELECT at.ScriptureID, at.Detail, s.BCV, s.BookID, s.Chapter
+		, wp.WordCount, wp.WordEnum, wp.Hebrew1, wp.Hebrew2, wp.Hebrew3 
+		FROM WordPart wp
+		INNER JOIN AlephTav at ON wp.ScriptureID = at.ScriptureID AND wp.WordCount = at.Word
+		INNER JOIN Scripture s ON wp.ScriptureID = s.ID";
+
+	private const string alephTavOrderBy = "ORDER BY at.ScriptureID, Detail";
+
+	public async Task<IEnumerable<AlephTav?>> GetAlephTav(long bookID, long chapter)
+	{
+		using var connection = await _connectionFactory.CreateConnectionAsync();
+		Parms = new DynamicParameters(new { BookId = bookID, Chapter = chapter });
+		var verseList = await connection.QueryAsync<AlephTav>(
+			$"{alephTavSelect} WHERE BookID=@BookId and Chapter=@Chapter {alephTavOrderBy}", Parms);
+		return verseList;
+	}
+
+	public async Task<IEnumerable<AlephTavList?>> GetAlephTavByBook(long bookID)
+	{
+		using var connection = await _connectionFactory.CreateConnectionAsync();
+		Parms = new DynamicParameters(new { BookId = bookID});
+		//string sql = $"{alephTavSelect} WHERE BookID=@BookId {alephTavOrderBy}";
+		var verseList = await connection.QueryAsync<AlephTavList>(
+			$"{alephTavSelect} WHERE BookID=@BookId {alephTavOrderBy}", Parms);
+		return verseList;
+	}
+
 	public async Task<IEnumerable<WordPart?>> GetWordParts(long scriptureID)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();

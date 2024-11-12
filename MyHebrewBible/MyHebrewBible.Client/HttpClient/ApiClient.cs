@@ -67,6 +67,175 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTav>> GetAlephTavAsync(long bookid, long chapter)
+        {
+            return GetAlephTavAsync(bookid, chapter, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTav>> GetAlephTavAsync(long bookid, long chapter, System.Threading.CancellationToken cancellationToken)
+        {
+            if (bookid == null)
+                throw new System.ArgumentNullException("bookid");
+
+            if (chapter == null)
+                throw new System.ArgumentNullException("chapter");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/aleptav/{bookid}/{chapter}"
+                    urlBuilder_.Append("api/aleptav/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(bookid, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(chapter, System.Globalization.CultureInfo.InvariantCulture)));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<AlephTav>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTavList>> GetAlephTavByBookAsync(long bookid)
+        {
+            return GetAlephTavByBookAsync(bookid, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTavList>> GetAlephTavByBookAsync(long bookid, System.Threading.CancellationToken cancellationToken)
+        {
+            if (bookid == null)
+                throw new System.ArgumentNullException("bookid");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/aleptavlist/{bookid}"
+                    urlBuilder_.Append("api/aleptavlist/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(bookid, System.Globalization.CultureInfo.InvariantCulture)));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<AlephTavList>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<Article> GetArticleAsync(long id)
         {
             return GetArticleAsync(id, System.Threading.CancellationToken.None);
@@ -946,6 +1115,84 @@ namespace MyHebrewBible.Client
             var result = System.Convert.ToString(value, cultureInfo);
             return result == null ? "" : result;
         }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AlephTav
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("ScriptureID")]
+        public long ScriptureID { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Detail")]
+        public long Detail { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("BCV")]
+        public string BCV { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("BookID")]
+        public long BookID { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Chapter")]
+        public long Chapter { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("WordCount")]
+        public long WordCount { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("WordEnum")]
+        public long WordEnum { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Hebrew1")]
+        public string Hebrew1 { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Hebrew2")]
+        public string Hebrew2 { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Hebrew3")]
+        public string Hebrew3 { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Hebrew")]
+        public string Hebrew { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AlephTavList
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("ScriptureID")]
+        public long ScriptureID { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Detail")]
+        public long Detail { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("BCV")]
+        public string BCV { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("BookID")]
+        public long BookID { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Chapter")]
+        public long Chapter { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("WordCount")]
+        public long WordCount { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("WordEnum")]
+        public long WordEnum { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Hebrew1")]
+        public string Hebrew1 { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Hebrew2")]
+        public string Hebrew2 { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Hebrew3")]
+        public string Hebrew3 { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Hebrew")]
+        public string Hebrew { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]

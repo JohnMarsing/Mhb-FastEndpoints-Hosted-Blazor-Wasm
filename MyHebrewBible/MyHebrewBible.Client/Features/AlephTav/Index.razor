@@ -1,11 +1,55 @@
-﻿@page "/AlephTavs"
+﻿@page "/alephtavlist/{BookId:int}"
+
+@using MyHebrewBible.Client.Enums
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.AlephTavs" />
 
-<p class="text-danger">NOT DONE YET!</p>
+<Table _bibleBook="CurrentBibleBook" />
+
+<Filter CurrentFilter="CurrentFilter"
+				OnFilterSelected="@ReturnedFilter" />
+
+<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+	<Introduction IsXs=true />
+</div>
+
+<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+	<Introduction IsXs=false />
+</div>
+
+<PageSummaryAndAnomalies />
+
+<SummaryTable />
 
 @code {
+	protected Enums.Filter CurrentFilter { get; set; } = Enums.Filter.Summary;
+
+	[Parameter, EditorRequired] public int BookId { get; set; }
+
+	protected override void OnInitialized()
+	{
+		//Logger!.LogInformation("{Method}, Route: {BookId}/{Chapter}", nameof(OnInitialized), BookId, Chapter);
+		CurrentBibleBook = GetBookViaRoutes(BookId);
+	}
+
+		private BibleBook GetBookViaRoutes(int bookId)
+	{
+		BibleBook bibleBook = BibleBook.FromValue(bookId); ;
+		//bibleBook = new BibleBook(BibleBook.FromValue(bookId));
+		//PageTitle = GlobalEnums.BibleBookFormat.BC(bc);
+		return bibleBook;
+	}
+	public BibleBook? CurrentBibleBook { get; set; }
+
+	private async Task ReturnedFilter(Enums.Filter filter)
+	{
+		await Task.Delay(5);
+		CurrentFilter = filter;
+		//await OnArticleIdSelected.InvokeAsync(0);
+		//await PopulateCollection(filter);
+	}
+
 	// protected override void OnInitialized()
 	// {
-	// }
+		// }
 }
