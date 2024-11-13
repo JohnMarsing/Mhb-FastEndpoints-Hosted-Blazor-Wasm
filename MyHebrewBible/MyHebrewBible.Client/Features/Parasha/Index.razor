@@ -9,23 +9,22 @@
 
 <PageTitle>@Nav.Parasha.Title @PageTitleDetail</PageTitle>
 
-<Buttons CurrentReading="CurrentReading"  OnTriennialSelected="ReturnedTriennial" /> 
+<Buttons CurrentReading="CurrentReading" OnTriennialSelected="ReturnedTriennial" />
 
 @if (CurrentReading is not null)
 {
 	<br />
 	<div class="card border-primary mb-3 mt-5">
-@* 		
-		<div class="card-header">
-			<h2>Current Parasha</h2>
-		</div>
- *@
+		@*
+	<div class="card-header">
+	<h2>Current Parasha</h2>
+	</div>
+	*@
 		<div class="@GlobalEnums.MediaQuery.XsOrSm.DivClass">
 			<Header CurrentReading="CurrentReading" MediaQuery="@GlobalEnums.MediaQuery.XsOrSm" />
 		</div>
 
 		<div class="@GlobalEnums.MediaQuery.MdOrLgOrXl.DivClass">
-
 			<Header CurrentReading="CurrentReading" MediaQuery="@GlobalEnums.MediaQuery.MdOrLgOrXl" />
 		</div>
 
@@ -48,20 +47,24 @@
 					</div>
 				</div>
 
-				@if (CurrentPermutations.HasFlag(Permutation.Torah) && item == ShowSection.Torah)
-				{
-					<TorahVerses CurrentReading="CurrentReading" />
-				}
+				<LoadingProgress>
 
-				@if (CurrentPermutations.HasFlag(Permutation.Haftorah) && item == ShowSection.Haftorah)
-				{
-					<HaftorahVerses CurrentReading="CurrentReading" />
-				}
+					@if (CurrentPermutations.HasFlag(Permutation.Torah) && item == ShowSection.Torah)
+					{
+						<TorahVerses CurrentReading="CurrentReading" />
+					}
 
-				@if (CurrentPermutations.HasFlag(Permutation.Brit) && item == ShowSection.Brit)
-				{
-					<BritVerses CurrentReading="CurrentReading" />
-				}
+					@if (CurrentPermutations.HasFlag(Permutation.Haftorah) && item == ShowSection.Haftorah)
+					{
+						<HaftorahVerses CurrentReading="CurrentReading" />
+					}
+
+					@if (CurrentPermutations.HasFlag(Permutation.Brit) && item == ShowSection.Brit)
+					{
+						<BritVerses CurrentReading="CurrentReading" />
+					}
+
+				</LoadingProgress>
 
 			</div>
 		</div>
@@ -89,7 +92,7 @@ else
 		Logger!.LogInformation("{Method}, Id: {Id}", nameof(OnInitialized), Id);
 		CurrentReading = GetCurrentReadingViaRoutes(Id);
 
-		if (CurrentReading is not null) {	PageTitleDetail = CurrentReading.TorahAbrv;	}
+		if (CurrentReading is not null) { PageTitleDetail = CurrentReading.TorahAbrv; }
 
 		CurrentPermutations = GetCurrentPermutation();
 	}

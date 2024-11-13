@@ -1,28 +1,32 @@
 ﻿@page "/Articles"
 @page "/Article"
 
+@* ToDo Should this have route parameters? *@
+
 @using MyHebrewBible.Client.Features.Articles.Search
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.Article" BorderCSS="" />
 
-<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
-	<Typeahead OnArticleIdSelected="ReturnedArticleId" IsXs=true /> 
-</div>
+<LoadingProgress>
+	<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+		<Typeahead OnArticleIdSelected="ReturnedArticleId" IsXs=true />
+	</div>
 
-<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
-	<Typeahead OnArticleIdSelected="ReturnedArticleId" IsXs=false />
-</div>
+	<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+		<Typeahead OnArticleIdSelected="ReturnedArticleId" IsXs=false />
+	</div>
 
-@* <p>SelectedArticleId: @SelectedArticleId</p> *@
+	@* <p>SelectedArticleId: @SelectedArticleId</p> *@
 
-@if (SelectedArticleId != 0)  
-{
-	<Details ArticleId="SelectedArticleId" />
-}
+	@if (SelectedArticleId != 0)
+	{
+		<Details ArticleId="SelectedArticleId" />
+	}
+</LoadingProgress>
 
 @code {
-	
-	public long SelectedArticleId=0;
+
+	public long SelectedArticleId = 0;
 
 	private void ReturnedArticleId(long articleId)
 	{

@@ -1,5 +1,4 @@
-﻿@* when a URL is entered directly, I get an error Cannot provide a value for property 'Api' *@
-@inject ApiClient Api 
+﻿@inject ApiClient Api 
 @inject ILogger<Index>? Logger
 
 @if (verses == null)
@@ -46,9 +45,7 @@ else
 		}
 
 	}
-
 }
-
 
 @code {
 	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
@@ -69,17 +66,11 @@ else
 
 	private ICollection<BibleVerse>? verses = null;
 
-	protected string _msg = nameof(Sections);
-
-
 	protected override async Task OnParametersSetAsync()
 	{
 		FocusScriptureId = 0;
-
 		if (BookAndChapter is not null && BookAndChapter!.BibleBook is not null)
 		{
-			_msg = $"Inside {nameof(OnParametersSet)}, setting verses and VerseRowCount";
-			//await Task.Delay(200);  // ToDo: comment this out in production
 			verses = await Api!.GetBookChapterAsync((long)BookAndChapter!.BibleBook, (long)BookAndChapter.Chapter);
 			VerseRowCount = verses.Count;
 			PopulateTopAndBottom(VerseRowCount);

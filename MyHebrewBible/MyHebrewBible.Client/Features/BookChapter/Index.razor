@@ -10,36 +10,38 @@
 
 <PageTitle>@PageTitle</PageTitle>
 
-<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
-	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-										 OnBookAndChapterSelected="ReturnedBookAndChapter"
-										 MediaQuery="GlobalEnums.MediaQuery.Xs" />
-</div>
-<div class="@GlobalEnums.MediaQuery.Sm.DivClass">
-	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-										 OnBookAndChapterSelected="ReturnedBookAndChapter"
-										 MediaQuery="GlobalEnums.MediaQuery.Sm" />
-</div>
-<div class="@GlobalEnums.MediaQuery.Md.DivClass">
-	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-										 OnBookAndChapterSelected="ReturnedBookAndChapter"
-										 MediaQuery="GlobalEnums.MediaQuery.Md" />
-</div>
-<div class="@GlobalEnums.MediaQuery.Lg.DivClass">
-	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-										 OnBookAndChapterSelected="ReturnedBookAndChapter"
-										 MediaQuery="GlobalEnums.MediaQuery.Lg" />
-</div>
-<div class="@GlobalEnums.MediaQuery.Xl.DivClass">
-	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-										 OnBookAndChapterSelected="ReturnedBookAndChapter"
-										 MediaQuery="GlobalEnums.MediaQuery.Xl" />
-</div>
+	<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+		<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
+											 OnBookAndChapterSelected="ReturnedBookAndChapter"
+											 MediaQuery="GlobalEnums.MediaQuery.Xs" />
+	</div>
+	<div class="@GlobalEnums.MediaQuery.Sm.DivClass">
+		<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
+											 OnBookAndChapterSelected="ReturnedBookAndChapter"
+											 MediaQuery="GlobalEnums.MediaQuery.Sm" />
+	</div>
+	<div class="@GlobalEnums.MediaQuery.Md.DivClass">
+		<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
+											 OnBookAndChapterSelected="ReturnedBookAndChapter"
+											 MediaQuery="GlobalEnums.MediaQuery.Md" />
+	</div>
+	<div class="@GlobalEnums.MediaQuery.Lg.DivClass">
+		<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
+											 OnBookAndChapterSelected="ReturnedBookAndChapter"
+											 MediaQuery="GlobalEnums.MediaQuery.Lg" />
+	</div>
+	<div class="@GlobalEnums.MediaQuery.Xl.DivClass">
+		<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
+											 OnBookAndChapterSelected="ReturnedBookAndChapter"
+											 MediaQuery="GlobalEnums.MediaQuery.Xl" />
+	</div>
 
-<div class="mt-5">
-	<br />
-	<Sections BookAndChapter="CurrentBookAndChapter" />
-</div>
+<LoadingProgress>
+	<div class="mt-5">
+		<br />
+		<Sections BookAndChapter="CurrentBookAndChapter" />
+	</div>
+</LoadingProgress>
 
 @code {
 	[CascadingParameter] public ProcessError? ProcessError { get; set; }
@@ -47,7 +49,7 @@
 
 	[Parameter, EditorRequired] public int BookId { get; set; }
 	[Parameter, EditorRequired] public int Chapter { get; set; }
-	[Parameter] public string? Slug { get; set; } 
+	[Parameter] public string? Slug { get; set; }
 
 	public BookAndChapter? CurrentBookAndChapter { get; set; }
 
