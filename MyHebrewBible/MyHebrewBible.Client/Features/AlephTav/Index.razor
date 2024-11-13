@@ -4,7 +4,9 @@
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.AlephTavs" />
 
-<Table _bibleBook="CurrentBibleBook" />
+<LoadingProgress>
+	<Table BibleBook="CurrentBibleBook" />
+</LoadingProgress>
 
 <Filter CurrentFilter="CurrentFilter"
 				OnFilterSelected="@ReturnedFilter" />
@@ -17,7 +19,10 @@
 	<Introduction IsXs=false />
 </div>
 
-<PageSummaryAndAnomalies />
+<LoadingProgress>
+	<PageSummaryAndAnomalies /> 
+</LoadingProgress>
+
 
 <SummaryTable />
 

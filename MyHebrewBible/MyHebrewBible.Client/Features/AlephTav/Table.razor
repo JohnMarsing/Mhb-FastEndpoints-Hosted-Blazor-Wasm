@@ -35,14 +35,15 @@ else
 		</tbody>
 	</table>
 }
+
 @code {
-	[Parameter, EditorRequired] public BibleBook? _bibleBook { get; set; } 
+	[Parameter, EditorRequired] public BibleBook? BibleBook { get; set; } 
 
 	private ICollection<AlephTavList>? alephTavList = null;
 
 	 protected override async Task OnParametersSetAsync()
 	 {
-		alephTavList = await Api.GetAlephTavByBookAsync((long)_bibleBook!.Value);
+		alephTavList = await Api.GetAlephTavByBookAsync((long)BibleBook!.Value);
 	 }
 
 }

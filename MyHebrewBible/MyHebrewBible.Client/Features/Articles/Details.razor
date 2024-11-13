@@ -1,11 +1,11 @@
 ﻿@using Blazored.Toast.Services
-@* @using MyHebrewBible.Client.Components *@
 
 @inject ILogger<Details>? Logger 
 @inject ApiClient? Api 
 @inject IToastService? Toast 
 
-<LoadingComponent IsLoading="article == null" TurnSpinnerOff="TurnSpinnerOff">
+@if (article is not null)
+{
 	<div class="card bg-light mb-3">
 		<div class="card-header">
 			<h5 class="text-primary text-center"><b>@article!.Title</b> @((MarkupString)@article.IsFavoriteHtml)  </h5>
@@ -70,28 +70,28 @@
 
 
 	</div>
-
-
-</LoadingComponent>
+}
+else
+{
+	<p><em>Loading article...</em></p>
+}
 
 @code{
-
 	[Parameter, EditorRequired] public long ArticleId { get; set; }
 
 	protected Article? article;
 	private VerseParagraphRange? VerseParagraphRange; 
 
-	protected bool TurnSpinnerOff = false;
-
 	protected override async Task OnParametersSetAsync()
 	{
-		Logger!.LogInformation("{Class}!{Method}; ArticleId: {ArticleId}", nameof(Details), nameof(OnParametersSetAsync), ArticleId);
+		Logger!.LogInformation("{Method}; ArticleId: {ArticleId}", nameof(OnParametersSetAsync), ArticleId);
 		try
 		{
 			article = await Api!.GetArticleAsync(ArticleId);
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
+			Logger!.LogError(ex, "{Method}", nameof(OnParametersSetAsync));
 			// ToDo: figure out how to do Fast-Endpoints Union Types / TypedResults-thinga-muh-jigger
 		}
 
@@ -106,8 +106,6 @@
 				VerseParagraphRange = new VerseParagraphRange(article.PrimaryScriptureId, article.PrimaryScriptureId + article.ExtraVerses, article.RelatedVersesHtml);
 			}
 		}
-
-		TurnSpinnerOff = true;
 	}
 
 }

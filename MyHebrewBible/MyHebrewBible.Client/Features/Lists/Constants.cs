@@ -99,7 +99,6 @@ public static class MenuItemConstants
 		public const string JotAndTittleList = "_JotAndTittleList";  
 
 		public const string MitzvotModal = "~/Pages/List/ListIntro/_MitzvotModal.cshtml";
-		public const string MitzvotTable = "_MitzvotTable";
 		public const string MitzvotContent = "~/Pages/List/Listintro/_MitzvotContent.cshtml";
 
 	}

@@ -30,12 +30,13 @@
 
 <Filter CurrentFilter="CurrentFilter" OnFilterSelected="@HandleFilterSelected" />
 
-@**@
-<MitzvotTable torahFilter="2" />
+<LoadingProgress>
+	<MitzvotTable torahFilter="2" />
+</LoadingProgress>
 
 
 
-@code{
+@code {
 	public Enums.TorahBookFilter CurrentFilter { get; set; } = Enums.TorahBookFilter.Genesis;
 
 	protected override async Task OnInitializedAsync()
