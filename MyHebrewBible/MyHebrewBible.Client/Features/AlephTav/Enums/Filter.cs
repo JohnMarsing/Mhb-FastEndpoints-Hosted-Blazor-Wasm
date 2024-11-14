@@ -8,10 +8,10 @@ public abstract class Filter : SmartEnum<Filter>
 	#region Id's
 	private static class Id
 	{
-		// Class ArticleList
 		//internal const int All = 0;
 		internal const int Summary = 1;       
-		internal const int All613 = 2;    
+		internal const int All613 = 2;
+		internal const int Anomalies = 3;
 	}
 	#endregion
 
@@ -19,6 +19,7 @@ public abstract class Filter : SmartEnum<Filter>
 	//public static readonly Filter All = new AllSE();
 	public static readonly Filter Summary = new SummarySE();
 	public static readonly Filter All613 = new All613SE();
+	public static readonly Filter Anomalies = new AnomaliesSE();
 	#endregion
 
 	private Filter(string name, int value) : base(name, value)  // Constructor
@@ -43,14 +44,18 @@ public abstract class Filter : SmartEnum<Filter>
 	{
 		public SummarySE() : base($"{nameof(Id.Summary)}", Id.Summary) { }
 		public override string Title => "Summary";
-		//public override string Where => " WHERE zzz ";
 	}
 
 	private sealed class All613SE : Filter
 	{
 		public All613SE() : base($"{nameof(Id.All613)}", Id.All613) { }
 		public override string Title => "See all 634";
-		//public override string Where => " WHERE zzz ";
+	}
+
+	private sealed class AnomaliesSE : Filter
+	{
+		public AnomaliesSE() : base($"{nameof(Id.Anomalies)}", Id.Anomalies) { }
+		public override string Title => "Anomalies";
 	}
 
 	#endregion
