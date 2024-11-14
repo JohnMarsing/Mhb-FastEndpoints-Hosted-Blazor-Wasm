@@ -2,7 +2,7 @@
 
 public class DetailsVM
 {
-	public AlephTavScripture AlephTavScripture { get; set; }
-	public List<WordHtmlMinimal> Words { get; set; }
-	public IEnumerable<AlephTavSummary> AlephTavSummaryBooks { get; set; }
+	public AlephTavScripture? AlephTavScripture { get; set; }
+	public List<WordHtmlMinimal>? Words { get; set; }
+	public IEnumerable<AlephTavSummaryOLD>? AlephTavSummaryBooks { get; set; }
 }

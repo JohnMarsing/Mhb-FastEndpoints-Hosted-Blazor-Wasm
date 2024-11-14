@@ -4,27 +4,39 @@
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.AlephTavs" />
 
-<LoadingProgress>
+@* <LoadingProgress>
 	<Table BibleBook="CurrentBibleBook" />
 </LoadingProgress>
-
+ *@
 <Filter CurrentFilter="CurrentFilter"
 				OnFilterSelected="@ReturnedFilter" />
 
-<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
-	<Introduction IsXs=true />
-</div>
+@if (CurrentFilter == Enums.Filter.Summary)
+{
+	<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+		<Introduction IsXs=true />
+	</div>
 
-<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
-	<Introduction IsXs=false />
-</div>
+	<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+		<Introduction IsXs=false />
+	</div>
 
-<LoadingProgress>
-	<PageSummaryAndAnomalies /> 
-</LoadingProgress>
+}
+else
+{
+	@if (CurrentFilter == Enums.Filter.All613)
+	{
+		<SummaryTable />
+	}
+	else
+	{
+		<LoadingProgress>
+			<Anomalies />
+		</LoadingProgress>
+	}
+}
 
 
-<SummaryTable />
 
 @code {
 	protected Enums.Filter CurrentFilter { get; set; } = Enums.Filter.Summary;
@@ -37,7 +49,7 @@
 		CurrentBibleBook = GetBookViaRoutes(BookId);
 	}
 
-		private BibleBook GetBookViaRoutes(int bookId)
+	private BibleBook GetBookViaRoutes(int bookId)
 	{
 		BibleBook bibleBook = BibleBook.FromValue(bookId); ;
 		//bibleBook = new BibleBook(BibleBook.FromValue(bookId));

@@ -52,7 +52,7 @@
 				@if (article.DocBlobID != null)
 				{
 					<a class="btn btn-sm btn-outline-success" target="_blank" role="button" href='@($"{Blobs.ArticleUrl}{article.FileNameNoExt}.doc")'>
-						<i class="fas fa-cloud-download-alt fa-2x pull-left"></i>
+						<i class="fas fa-cloud-download-alt fa-2x float-end"></i>
 						<span class="fas fa-file-word fa-2x"></span> <br />@($"{article.DocBlobID}")  @* far fa-file-word-o   *@
 					</a>
 				}
@@ -60,7 +60,7 @@
 				@if (article.PdfBlobID != null)
 				{
 					<a class="btn btn-sm btn-outline-primary" target="_blank"  role="button" href='@($"{Blobs.ArticleUrl}{article.FileNameNoExt}.pdf")'>
-						<i class="fas fa-cloud-download-alt fa-2x pull-left"></i>
+						<i class="fas fa-cloud-download-alt fa-2x float-end"></i>
 						<span class="far fa-file-pdf fa-2x"></span> <br />@($"{article.PdfBlobID}")
 					</a>
 				}
