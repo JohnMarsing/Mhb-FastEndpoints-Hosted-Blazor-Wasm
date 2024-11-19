@@ -58,7 +58,7 @@ public abstract class MenuItems : SmartEnum<MenuItems>
 	private sealed class EmendationsSE : MenuItems
 	{
 		public EmendationsSE() : base($"{nameof(Id.Emendations)}", Id.Emendations) { }
-		public override string Icon => "fa fa-table";
+		public override string Icon => "fa-letter-emendations"; //fa fa-table
 		public override string Title => nameof(Id.Emendations);
 		public override string Page => PageLink.BibleList.Index + "/" + nameof(Id.Emendations);
 	}
@@ -66,7 +66,7 @@ public abstract class MenuItems : SmartEnum<MenuItems>
 	private sealed class FeastsSE : MenuItems
 	{
 		public FeastsSE() : base($"{nameof(Id.Feasts)}", Id.Feasts) { }
-		public override string Icon => "fa fa-Feasts";
+		public override string Icon => "fas fa-calendar"; // fa fa-Feasts fas fa-pizza-slice
 		public override string Title => nameof(Id.Feasts);
 		public override string Page => PageLink.BibleList.Index + "/" + nameof(Id.Feasts); 
 	}
@@ -74,7 +74,7 @@ public abstract class MenuItems : SmartEnum<MenuItems>
 	private sealed class JotAndTittleSE : MenuItems
 	{
 		public JotAndTittleSE() : base($"{nameof(Id.JotAndTittle)}", Id.JotAndTittle) { }
-		public override string Icon => "fa fa-plane";
+		public override string Icon => "fa-letter-jot-tittle";  //fas fa-plane
 		public override string Title => "Jots and Tittles";
 		public override string Page => PageLink.BibleList.Index + "/" + nameof(Id.JotAndTittle); 
 	}
@@ -90,7 +90,7 @@ public abstract class MenuItems : SmartEnum<MenuItems>
 	private sealed class MitzvotSE : MenuItems
 	{
 		public MitzvotSE() : base($"{nameof(Id.Mitzvot)}", Id.Mitzvot) { }
-		public override string Icon => "fas fa-map";
+		public override string Icon => "fas fa-balance-scale";  // fas fa-map
 		public override string Title => "Mitzvot";
 		public override string Page => PageLink.BibleList.Index + "/" + nameof(Id.Mitzvot);
 	}
@@ -122,7 +122,7 @@ public abstract class MenuItems : SmartEnum<MenuItems>
 	private sealed class YosephAndYeshuaComparisonSE : MenuItems
 	{
 		public YosephAndYeshuaComparisonSE() : base($"{nameof(Id.YosephAndYeshuaComparison)}", Id.YosephAndYeshuaComparison) { }
-		public override string Icon => "fas fa-bars";
+		public override string Icon => "fas fa-equals";  //fas fa-bars fa-compress-alt
 		public override string Title => "Yoseph and Yeshua Comparison";
 		public override string Page => PageLink.BibleList.Index + "/" + nameof(Id.YosephAndYeshuaComparison);
 	}
@@ -130,7 +130,7 @@ public abstract class MenuItems : SmartEnum<MenuItems>
 	private sealed class GospelHarmonySE : MenuItems
 	{
 		public GospelHarmonySE() : base($"{nameof(Id.GospelHarmony)}", Id.GospelHarmony) { }
-		public override string Icon => "fas fa-fighter-jet";
+		public override string Icon => "fas fa-music";  //fas fa-fighter-jet 
 		public override string Title => "Gospel Harmony";
 		public override string Page => PageLink.BibleList.Index + "/" + nameof(Id.GospelHarmony);
 	}

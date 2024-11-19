@@ -1,13 +1,11 @@
-﻿@page "/alephtavlist/{BookId:int}"
+﻿@page "/alephtav"
+@page "/alephtavs"
 
 @using MyHebrewBible.Client.Enums
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.AlephTavs" />
 
-@* <LoadingProgress>
-	<Table BibleBook="CurrentBibleBook" />
-</LoadingProgress>
- *@
+
 <Filter CurrentFilter="CurrentFilter"
 				OnFilterSelected="@ReturnedFilter" />
 
@@ -24,39 +22,16 @@
 }
 else
 {
-	@if (CurrentFilter == Enums.Filter.All613)
-	{
-		<SummaryTable />
-	}
-	else
-	{
-		<LoadingProgress>
-			<Anomalies />
-		</LoadingProgress>
-	}
+	<LoadingProgress>
+		<Anomalies />
+	</LoadingProgress>
 }
 
-
-
 @code {
+
+	[Parameter, EditorRequired] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
+
 	protected Enums.Filter CurrentFilter { get; set; } = Enums.Filter.Summary;
-
-	[Parameter, EditorRequired] public int BookId { get; set; }
-
-	protected override void OnInitialized()
-	{
-		//Logger!.LogInformation("{Method}, Route: {BookId}/{Chapter}", nameof(OnInitialized), BookId, Chapter);
-		CurrentBibleBook = GetBookViaRoutes(BookId);
-	}
-
-	private BibleBook GetBookViaRoutes(int bookId)
-	{
-		BibleBook bibleBook = BibleBook.FromValue(bookId); ;
-		//bibleBook = new BibleBook(BibleBook.FromValue(bookId));
-		//PageTitle = GlobalEnums.BibleBookFormat.BC(bc);
-		return bibleBook;
-	}
-	public BibleBook? CurrentBibleBook { get; set; }
 
 	private async Task ReturnedFilter(Enums.Filter filter)
 	{
@@ -66,7 +41,4 @@ else
 		//await PopulateCollection(filter);
 	}
 
-	// protected override void OnInitialized()
-	// {
-		// }
 }

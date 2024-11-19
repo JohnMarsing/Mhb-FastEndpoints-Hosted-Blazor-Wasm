@@ -1,4 +1,4 @@
-
+﻿
 @font-face {
 	font-family: 'david';
 	src: url('fonts/david.ttf') format('truetype');
@@ -128,16 +128,38 @@ hr.warning {
 }
 
 
-/*
-  MISSING BECAUSE THEY HAVE HEBREW LETTERS
-  .fa-letter-aleph-tav:
-  .fa-letter-bet:before {
-  .fa-letter-tav:before {
-  .fa-letter-aleph-bet:before {
-  .fa-letter-emendations:before {
-  .fa-letter-jot-tittle:before {
+.fa-letter-aleph:before {
+	font-weight: bold;
+	content: "א";
+}
 
-*/
+
+.fa-letter-bet:before {
+	font-weight: bold;
+	content: "בּ";
+}
+
+
+.fa-letter-tav:before {
+	font-weight: bold;
+	content: "ת";
+}
+
+.fa-letter-aleph-tav:before {
+	font-weight: bold;
+	content: "את";
+}
+
+.fa-letter-emendations:before {
+	font-weight: bold;
+	content: "𝕸";
+}
+
+/* U+2655  &#9813; */
+.fa-letter-jot-tittle:before {
+	font-weight: bold;
+	content: "♕";
+}
 
 /*C:\Source\MyHebrewBible_ConvertToCore\MyHebrewBible\MyHebrewBible.Web\wwwroot\css\site.css*/
 

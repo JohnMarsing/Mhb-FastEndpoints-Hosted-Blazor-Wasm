@@ -3,7 +3,6 @@
 
 @using MyHebrewBible.Client.Features.Lists.Components
 
-
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.BibleList" />
 <SubNavBar ActiveMenuItem="@MenuItems.Home" />
 
@@ -11,40 +10,40 @@
 
 @*	*@
 	<a class="list-group-item" href="@MenuItemConstants.ParablesOfYeshua.Index">
-		<i class="fa fa-blind fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Parables of Yeshua
+		<i class="@MenuItems.ParablesOfYeshua.Icon fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Parables of Yeshua
 	</a>
 
 	@* PageIndexFromRoot 	*@
 	<a class="list-group-item" href="@MenuItemConstants.GospelHarmony.Index">
-		<i class="fas fa-fighter-jet fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Gospel Harmony
+		<i class="@MenuItems.GospelHarmony.Icon fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Gospel Harmony
 	</a>
-	
-	
+
+
 	<a class="list-group-item" href="@MenuItemConstants.YosephAndYeshuaComparison.Index">
-		<i class="fa fa-bars fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Yoseph and Yeshua Comparison
+		<i class="@MenuItems.YosephAndYeshuaComparison.Icon fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Yoseph and Yeshua Comparison
 	</a>
+
 	<a class="list-group-item" href="@MenuItemConstants.MapCanaanOT.Index">
-		<i class="fas fa-map fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Map of Canaan
+		<i class="@MenuItems.MapCanaanOT.Icon fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Map of Canaan
 	</a>
 	<a class="list-group-item" href="@MenuItemConstants.TimeLine.Index">
-		<i class="fas fa-clock fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Timeline
+		<i class="@MenuItems.TimeLine.Icon fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Timeline
 	</a>
 	<a class="list-group-item" href="@MenuItemConstants.Feasts.Index">
-		<i class="@MenuItemConstants.Feasts.Icon fa-fw fa-2x" aria-hidden="true"></i>&nbsp; @MenuItemConstants.Feasts.Title <i>Moadim</i>
-		
+		<i class="@MenuItems.Feasts.Icon fa-fw fa-2x" aria-hidden="true"></i>&nbsp; @MenuItems.Feasts.Title <i>Moadim</i>
 	</a>
 	<a class="list-group-item" href="@MenuItemConstants.PeopleKilled.Index">
-		<i class="fa fa-battery-empty fa-fw fa-2x" aria-hidden="true"></i>&nbsp; People Killed
+		<i class="@MenuItems.PeopleKilled.Icon fa-fw fa-2x" aria-hidden="true"></i>&nbsp; People Killed
 	</a>
 
 	<a class="list-group-item" href="@MenuItemConstants.Emendations.Index">
-		<i class="fa fa-letter-emendations fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Emendations
+		<i class="@MenuItems.Emendations.Icon fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Emendations
 	</a>
 	<a class="list-group-item" href="@MenuItemConstants.JotAndTittle.Index">
-		<i class="fa fa-letter-jot-tittle fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Jots and Tittles
+		<i class="@MenuItems.JotAndTittle.Icon fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Jots and Tittles
 	</a>
 	<a class="list-group-item" href="@MenuItemConstants.Mitzvot.Index">
-		<i class="fa fa-balance-scale fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Mitzvot
+		<i class="@MenuItems.Mitzvot.Icon fa-fw fa-2x" aria-hidden="true"></i>&nbsp; Mitzvot
 	</a>
 
 </div>
