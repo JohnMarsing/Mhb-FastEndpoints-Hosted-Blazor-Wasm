@@ -10,8 +10,8 @@ public abstract class BLB : SmartEnum<BLB>
 	#region Id's
 	private static class Id
 	{
-		internal const int kjv = 1;
-		internal const int nkjv = 2;
+		internal const int KJV = 1;
+		internal const int NKJV = 2;
 		internal const int nlt = 3;
 		internal const int niv = 4;
 		internal const int esv = 5;
@@ -21,7 +21,7 @@ public abstract class BLB : SmartEnum<BLB>
 		internal const int lsb = 9;
 		internal const int amp = 10;
 		internal const int net = 11;
-		internal const int rsv = 12; 
+		internal const int rsv = 12;
 		internal const int asv = 13;
 		internal const int ylt = 14;
 		internal const int dby = 15;
@@ -41,7 +41,9 @@ public abstract class BLB : SmartEnum<BLB>
 
 	#region  Declared Public Instances
 
-	public static readonly BLB nkjv = new nkjvSE();
+	public static readonly BLB KJV = new KJV_SE();
+	public static readonly BLB NKJV = new NKJV_SE();
+	public static readonly BLB WLC = new WLC_SE();
 	// SE=SmartEnum
 
 	#endregion
@@ -58,16 +60,24 @@ public abstract class BLB : SmartEnum<BLB>
 
 	#region Private Instantiation
 
-	private sealed class kjvSE : BLB
+	private sealed class KJV_SE : BLB
 	{
-		public kjvSE() : base($"{nameof(Id.kjv)}", Id.kjv) { }
+		public KJV_SE() : base($"{nameof(Id.KJV)}", Id.KJV) { }
 		public override string Title => "King James Version";
 	}
 
-	private sealed class nkjvSE : BLB
+	private sealed class NKJV_SE : BLB
 	{
-		public nkjvSE() : base($"{nameof(Id.nkjv)}", Id.nkjv) { }
+		public NKJV_SE() : base($"{nameof(Id.NKJV)}", Id.NKJV) { }
 		public override string Title => "New King James Version";
+	}
+
+	private sealed class WLC_SE : BLB
+	{
+		// https://www.blueletterbible.org/NKJV/Gen/1/1/t_bibles_2001
+		// https://www.blueletterbible.org/wlc/gen/1/1/s_1001
+		public WLC_SE() : base($"{nameof(Id.WLC)}", Id.WLC) { }
+		public override string Title => "Westminster Leningrad Codex"; // (WLC)
 	}
 
 	/*
@@ -90,7 +100,7 @@ public abstract class BLB : SmartEnum<BLB>
 			public override string Title => "Hebrew Names Version";
 			public override string Title => "Reina-Valera 1960 Version"; // (RVR60)
 			public override string Title => "Latin Vulgate"; // (VUL)
-			public override string Title => "Westminster Leningrad Codex"; // (WLC)
+
 			public override string Title => "Brenton's English Septuagint"; // (BES)
 			public override string Title => "Septuagint"; // (LXX)
 			public override string Title => "Morphological Greek New Testament"; // (mGNT)
@@ -107,14 +117,14 @@ public abstract class BLB : SmartEnum<BLB>
 		if (bookAndChapter is not null && bookAndChapter.BibleBook is not null)
 		{
 			string
-			s = "<a";																						// Start anchor attribute
-			s += " href='https://www.blueletterbible.org/";			// start href with a '
+			s = "<a";                                           // Start anchor attribute
+			s += " href='https://www.blueletterbible.org/";     // start href with a '
 			s += $"{this.Name}/";
 			s += $"{BibleBookFormat.BLB_HrefSuffix(bookAndChapter, verseNumber)}";
-			s += $"t_bibles_2001";      
-			s += "'";																						// end href with a '
+			s += $"t_bibles_2001";
+			s += "'";                                           // end href with a '
 			s += $" title='{this.Name} BLB' target='_blank'";
-			s += ">";																						// End anchor attribute
+			s += ">";                                           // End anchor attribute
 			s += $"{BibleBookFormat.BCV(bookAndChapter!, verseNumber)}";
 			s += "</a>";
 			s += " <i class='fas fa-external-link-alt'></i>";
@@ -135,12 +145,14 @@ public abstract class BLB : SmartEnum<BLB>
 			s = "<a";                                           // Start anchor attribute
 			s += " href='https://www.blueletterbible.org/";     // start href with a '
 			s += $"{this.Name}/";
-			s += $"{BibleBookFormat.BLB_HrefSuffix(bookChapterVerse)}";
-			s += $"t_bibles_2001";
+			s += $"{BibleBookFormat.BLB_HrefSuffix(bookChapterVerse)}"; //NKJV/Mal/2/4/t_bibles_2001
+
+			//s += $"t_bibles_2001"; // or /s_50001
+			
 			s += "'";                                           // end href with a '
 			s += $" title='{this.Name} BLB' target='_blank'";
 			s += ">";                                           // End anchor attribute
-			s += $"{BibleBookFormat.BCV(bookChapterVerse)}";
+			s += $"{BibleBookFormat.BCV(bookChapterVerse, useAbrv:false)}";
 			s += "</a>";
 			s += " <i class='fas fa-external-link-alt'></i>";
 			return (MarkupString)s;
@@ -151,8 +163,32 @@ public abstract class BLB : SmartEnum<BLB>
 		}
 	}
 
+	public MarkupString AnchorBCV(int book, int chapter, int verse)
+	{
+		BookChapterVerse? bcv = null;
+		BookAndChapter? bc = new BookAndChapter(BibleBook.FromValue(book), chapter);
+		if (bc is not null)
+		{
+			bcv = new BookChapterVerse(bc, verse);
+			if (bcv is not null)
+			{
+				return AnchorBCV(bcv);
+			}
+			else
+			{
+				return (MarkupString)"<a href='https://www.blueletterbible.org> <i class='fas fa-external-link-alt'></i></a>";
+			}
+		}
+		else
+		{
+			return (MarkupString)"<a href='https://www.blueletterbible.org> <i class='fas fa-external-link-alt'></i></a>";
+		}
+	}
+
+
 }
 
+// Ignore Spelling: KJV NKJV WLC
 
 /*
 s += $"{bookChapterVerse.BookAndChapter.BibleBook.Abrv} {bookChapterVerse.BookAndChapter.Chapter} {bookChapterVerse.Verse}";

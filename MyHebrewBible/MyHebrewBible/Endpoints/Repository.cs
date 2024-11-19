@@ -27,34 +27,6 @@ public class Repository
 		return verseList;
 	}
 
-	private const string alephTavSelect = @"
-		SELECT at.ScriptureID, at.Detail, s.BCV, s.BookID, s.Chapter
-		, wp.WordCount, wp.WordEnum, wp.Hebrew1, wp.Hebrew2, wp.Hebrew3 
-		FROM WordPart wp
-		INNER JOIN AlephTav at ON wp.ScriptureID = at.ScriptureID AND wp.WordCount = at.Word
-		INNER JOIN Scripture s ON wp.ScriptureID = s.ID";
-
-	private const string alephTavOrderBy = "ORDER BY at.ScriptureID, Detail";
-
-	public async Task<IEnumerable<AlephTav?>> GetAlephTav(long bookID, long chapter)
-	{
-		using var connection = await _connectionFactory.CreateConnectionAsync();
-		Parms = new DynamicParameters(new { BookId = bookID, Chapter = chapter });
-		var verseList = await connection.QueryAsync<AlephTav>(
-			$"{alephTavSelect} WHERE BookID=@BookId and Chapter=@Chapter {alephTavOrderBy}", Parms);
-		return verseList;
-	}
-
-	public async Task<IEnumerable<AlephTavList?>> GetAlephTavByBook(long bookID)
-	{
-		using var connection = await _connectionFactory.CreateConnectionAsync();
-		Parms = new DynamicParameters(new { BookId = bookID});
-		//string sql = $"{alephTavSelect} WHERE BookID=@BookId {alephTavOrderBy}";
-		var verseList = await connection.QueryAsync<AlephTavList>(
-			$"{alephTavSelect} WHERE BookID=@BookId {alephTavOrderBy}", Parms);
-		return verseList;
-	}
-
 	public async Task<IEnumerable<WordPart?>> GetWordParts(long scriptureID)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
@@ -86,10 +58,10 @@ ORDER BY BegId
 		return mitzvot;
 	}
 
-	public async Task<IEnumerable<BibleVerse?>> GetVerseList(long begdId, long endId)
+	public async Task<IEnumerable<BibleVerse?>> GetVerseList(long begId, long endId)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
-		Parms = new DynamicParameters(new { BegId = begdId, EndId = endId });
+		Parms = new DynamicParameters(new { BegId = begId, EndId = endId });
 
 		var versList = await connection.QueryAsync<BibleVerse>(@"
 
@@ -118,6 +90,41 @@ ORDER BY ID
 		return versList;
 	}
 
+	#region AlephTavHebrewVerse
+	private const string alephTavHebrewVerseSelect = @"
+SELECT 
+	s.Id AS ScriptureID, s.BCV, s.Chapter, s.Verse, wp.WordCount, wp.WordEnum
+, wp.Hebrew1, wp.Hebrew2, wp.Hebrew3, wp.KjvWord, wp.Strongs, wp.Transliteration, wp.FinalEnum
+, atv.HasTwo
+FROM WordPart wp 
+	INNER JOIN AlephTavVerse atv 
+		ON wp.ScriptureID = atv.ScriptureID 
+	INNER JOIN Scripture s 
+		ON wp.ScriptureID = s.Id
+		";
+
+	private const string alephTavHebrewVerseOrderBy = "ORDER BY wp.ScriptureID, wp.WordCount";
+
+	public async Task<IEnumerable<AlephTavHebrewVerse?>> GetAlephTavHebrewVerses(long bookId, long chapter)
+	{
+		using var connection = await _connectionFactory.CreateConnectionAsync();
+		if (chapter == 0)
+		{
+			Parms = new DynamicParameters(new { BookId = bookId });
+			var verseList = await connection.QueryAsync<AlephTavHebrewVerse>(
+				$"{alephTavHebrewVerseSelect} WHERE s.BookID=@BookId {alephTavHebrewVerseOrderBy}", Parms);
+			return verseList;
+		}
+		else
+		{
+			Parms = new DynamicParameters(new { BookId = bookId, Chapter = chapter });
+			var verseList = await connection.QueryAsync<AlephTavHebrewVerse>(
+				$"{alephTavHebrewVerseSelect} WHERE s.BookID=@BookId and s.Chapter=@Chapter {alephTavHebrewVerseOrderBy}", Parms);
+			return verseList;
+		}
+		#endregion
+
+	}
 
 	public async Task<IEnumerable<WordPart?>> GetWordPartsByStrongs(long scriptureID, long strongs)
 	{
@@ -165,7 +172,7 @@ WHERE a.Id = @Id", Parms);
 		return article;
 	}
 
-	
+
 	public async Task<IEnumerable<ArticleList?>> GetArticleList(long filter)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
@@ -177,10 +184,10 @@ WHERE a.Id = @Id", Parms);
 		string where = filterSmartEnum.Where;
 		string sql = $"{select} {where} {order}";
 
-		var articleList = await connection.QueryAsync<ArticleList>(sql); 
+		var articleList = await connection.QueryAsync<ArticleList>(sql);
 		return articleList;
 	}
 
 }
 
-// Ignore Spelling: strongs, Kjvs, Parms
+// Ignore Spelling: strongs, Kjvs, Parms, atv, Mitzvot

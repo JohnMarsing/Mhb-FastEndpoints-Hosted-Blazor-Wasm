@@ -46,6 +46,7 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int HealthCheckVerseList = 21;
 		internal const int ParashaList = 22;
 		internal const int HealthCheckBitwise = 23;
+		internal const int AlephTavList = 24;
 	}
 	#endregion
 
@@ -58,6 +59,7 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav FavoriteVerses = new FavoriteVersesSE();
 	public static readonly Nav Hebrew = new HebrewSE();
 	public static readonly Nav AlephTavs = new AlephTavsSE();
+	public static readonly Nav AlephTavList = new AlephTavListSE();
 	public static readonly Nav BibleList = new BibleListSE();
 	public static readonly Nav Teaching = new TeachingSE();
 	public static readonly Nav Sitemap = new SitemapSE();
@@ -200,7 +202,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public HebrewSE() : base($"{nameof(Id.Hebrew)}", Id.Hebrew) { }
 		public override string Index => "/Hebrew";
 		public override string Title => "Hebrew";
-		public override string Icon => "fa-letter-aleph-bet";
+		public override string Icon => "fa fa-letter-aleph";  //   fa-letter-aleph-bet
 		public override int Sort => Id.Hebrew;
 		public override string HomeTitleSuffix => " Ivri H5680";
 		public override string HomeFloatRightHebrew => "עִבְרִי";
@@ -212,10 +214,9 @@ public abstract class Nav : SmartEnum<Nav>
 	private sealed class AlephTavsSE : Nav
 	{
 		public AlephTavsSE() : base($"{nameof(Id.AlephTavs)}", Id.AlephTavs) { }
-		//public override string Index => "/AlephTavs";
-		public override string Index => "/alephTavlist";
+		public override string Index => "/alephTav";
 		public override string Title => "Aleph Tavs";
-		public override string Icon => "fa-letter-aleph-tav";
+		public override string Icon => "fa fa-letter-aleph-tav text-danger";
 		public override int Sort => Id.AlephTavs;
 		public override string HomeTitleSuffix => " Aleph Tav H853";
 		public override string HomeFloatRightHebrew => "אֵת";
@@ -223,14 +224,20 @@ public abstract class Nav : SmartEnum<Nav>
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 		public override bool Disabled => false;
 
-		/*
-			public const string PageIndexFromRoot = "/AlephTav/Index";
-			public const string PageIntroductionFromRoot = "/AlephTav/Introduction";
-			public const string PageIndex = "./Index";
-			public const string PageSummaryAndAnomalies = "./SummaryAndAnomalies";
-			public const string PageDetails = "./Details";
-			
-		 */
+	}
+
+	private sealed class AlephTavListSE : Nav
+	{
+		public AlephTavListSE() : base($"{nameof(Id.AlephTavList)}", Id.AlephTavList) { }
+		public override string Index => "/alephTavlist";
+		public override string Title => "Aleph Tav List";
+		public override string Icon => "fas fa-table";
+		public override int Sort => Id.AlephTavList;
+		public override string HomeTitleSuffix => "";
+		public override string HomeFloatRightHebrew => "";
+		public override PageListType PageListType => PageListType.None;
+		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
 
 	}
 

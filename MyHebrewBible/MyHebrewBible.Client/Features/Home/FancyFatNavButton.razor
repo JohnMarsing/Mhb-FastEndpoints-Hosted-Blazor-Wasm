@@ -50,14 +50,7 @@
 			}
 			else
 			{
-				if (Nav.FromValue(id) == Nav.AlephTavs)
-				{
-					NavigationManager!.NavigateTo($"{Nav.FromValue(id).Index}/1");
-				}
-				else
-				{
-					NavigationManager!.NavigateTo(Nav.FromValue(id) + "/");
-				}
+				NavigationManager!.NavigateTo(Nav.FromValue(id) + "/");
 			}
 		}
 
