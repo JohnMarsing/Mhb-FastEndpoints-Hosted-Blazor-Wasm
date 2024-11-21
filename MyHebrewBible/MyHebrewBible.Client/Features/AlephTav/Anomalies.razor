@@ -1,32 +1,25 @@
-﻿<h3>@Title</h3>
-
-<p>
-	A list of anomalies that I acquired when I created the list.
-</p>
-
-<div class="card border-success mb-2">
-	@* <div class="card-header">Environment</div> *@
+﻿
+<div class="card border-danger mb-2">
 	<div class="card-body bg-light">
 		<VerseParagraph VerseParagraphRange="Neh_09_06" />
 	</div>
 
 	<div class="card-body">
-		<p>
-			This <b>SAT</b> is unique because it is found in the <b>written</b> portion as opposed to the <b>read</b> portion.  So what do I mean by this?
-			In the Hebrew Bible called the <b>Westminster Leningrad Codex </b>(WLC)
-			<small><a href="https://en.wikipedia.org/wiki/Leningrad_Codex"><sup><i class="fas fa-external-link-alt" aria-hidden="true">&nbsp;</i><i class="fab fa-wikipedia-w" aria-hidden="true"></i></sup></a></small>.
-			there are what are called the <b><i>Qere</i></b> <span class="hebrew small">קְרֵי </span><sup>(what is <b>read</b>)</sup> and <b><i>Ketiv</i></b> <span class="hebrew small">כְּתִיב </span><sup>(what is <b>written</b>)</sup>
-			<a href="https://en.wikipedia.org/wiki/Qere_and_Ketiv"><i>Qere Ketiv</i></a> <sup><i class="fas fa-external-link-alt">&nbsp;</i><i class="fab fa-wikipedia-w"></i></sup>.
-			For the fifth word of Nehemiah 9:6 the <i>Ketiv</i>, the written part, it is a Standalone Aleph Tav (SAT), but the <i>Qere</i>, read part, it is an <i>Aleph Tav Hey</i>.
-			<br />
-			<img class="img-fluid" src="@BlobContent.ImagesUrl("e_sword_Neh_Chap_9_Verse_6d.png")" />
-		</p>
+		This <b>SAT</b> is unique because it is found in the <b>written</b> portion as opposed to the <b>read</b> portion.  So what do I mean by this?
+		In the Hebrew Bible called the <b>Westminster Leningrad Codex </b>(WLC)
+		<small><a href="https://en.wikipedia.org/wiki/Leningrad_Codex"><sup><i class="fas fa-external-link-alt" aria-hidden="true">&nbsp;</i><i class="fab fa-wikipedia-w" aria-hidden="true"></i></sup></a></small>.
+		there are what are called the <b><i>Qere</i></b> <span class="hebrew small">קְרֵי </span><sup>(what is <b>read</b>)</sup> and <b><i>Ketiv</i></b> <span class="hebrew small">כְּתִיב </span><sup>(what is <b>written</b>)</sup>
+		<a href="https://en.wikipedia.org/wiki/Qere_and_Ketiv"><i>Qere Ketiv</i></a> <sup><i class="fas fa-external-link-alt">&nbsp;</i><i class="fab fa-wikipedia-w"></i></sup>.
+		For the fifth word of Nehemiah 9:6 the <i>Ketiv</i>, the written part, it is a Standalone Aleph Tav (SAT), but the <i>Qere</i>, read part, it is an <i>Aleph Tav Hey</i>.
+	</div>
+
+	<div class="card-body">
+		<img class="img-fluid" src="@BlobContent.ImagesUrl("e_sword_Neh_Chap_9_Verse_6d.png")" />
 	</div>
 
 </div>
 
-
-<div class="card border-warning mb-2">
+<div class="card border-danger mb-2">
 	<div class="card-body bg-light">
 		<VerseParagraph VerseParagraphRange="Job_01_10" />
 	</div>
@@ -38,7 +31,6 @@
 	</div>
 
 </div>
-
 
 <div class="card border-danger mb-2">
 	<div class="card-body bg-light">
@@ -53,18 +45,8 @@
 
 </div>
 
-
-
-
 @code {
-	string Title = "Standalone Aleph Tav Anomalies";
-
 	private VerseParagraphRange Neh_09_06 = new VerseParagraphRange(12518, 12518, "Nehemiah 9:6");
 	private VerseParagraphRange Job_01_10 = new VerseParagraphRange(12880, 12880, "Job 1:10");
 	private VerseParagraphRange Psa_60_01 = new VerseParagraphRange(14809, 14809, "Psalms 60:1");
-
-	//public IEnumerable<Bible.Domain.AlephTavSummary> AlephTavSummaryList { get; set; }
-	//AlephTavSummaryList = AlephTavSummaryFactory.GetAlephTavSummaryBooks();
-	// /SummaryAndAnomalies
-
 }

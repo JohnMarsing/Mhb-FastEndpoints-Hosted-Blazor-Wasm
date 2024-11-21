@@ -15,8 +15,6 @@
 
 </div>
 
-
-
 <div class="card border-primary mt-3 mb-2">
 	<div class="card-header text-center">
 		<h4>Why a Standalone Aleph Tav List?</h4>
@@ -90,10 +88,10 @@
 
 
 	<div class="card-body">
-			<div class="float-end">
-				<span class="text-muted">Transliteration "...<b>aretz</b><sup> of the earth</sup> <span class="text-danger"><b>et</b></span> <b>yeshuat</b><sup> the salvation</sup> <b>eloHeinu</b><sup> of our God</sup></span> "
-			</div>
-		
+		<div class="float-end">
+			<span class="text-muted">Transliteration "...<b>aretz</b><sup> of the earth</sup> <span class="text-danger"><b>et</b></span> <b>yeshuat</b><sup> the salvation</sup> <b>eloHeinu</b><sup> of our God</sup></span> "
+		</div>
+
 	</div>
 
 	<div class="card-body">
@@ -163,6 +161,48 @@
 
 </div>
 
+
+<div class="card border-danger mt-4 mb-1">
+	<div class="card-header">
+
+		<div class="d-flex justify-content-between">
+
+			<div class="px-1">
+				<span class="fs-3">Aleph Tav Anomalies</span>
+			</div>
+			<div class="px-1">
+				<button @onclick="LearnMoreToggleButtonClick"
+								class="btn btn-outline-primary btn-sm">
+					@Title <i class='@Icon'></i>
+				</button>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="card-body text-center">
+		A list of anomalies that I acquired when I created the list.
+	</div>
+</div>
+
+@if (ContentIsShowing)
+{
+	<LoadingProgress>
+		<Anomalies />
+	</LoadingProgress>
+}
+
+<br />
+
 @code {
 	[Parameter, EditorRequired] public bool IsXs { get; set; }
+
+	public bool ContentIsShowing = false;
+	private string Title => ContentIsShowing ? "Hide " : "Learn more...";
+	private string Icon => ContentIsShowing ? "fas fa-chevron-up" : "fas fa-chevron-down";
+
+	protected void LearnMoreToggleButtonClick()
+	{
+		ContentIsShowing = !ContentIsShowing;
+	}
 }

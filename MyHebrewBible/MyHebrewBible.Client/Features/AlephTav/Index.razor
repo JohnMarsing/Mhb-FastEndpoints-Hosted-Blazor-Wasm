@@ -2,43 +2,72 @@
 @page "/alephtavs"
 
 @using MyHebrewBible.Client.Enums
+@using Page = MyHebrewBible.Client.Enums.Nav
+@using MyHebrewBible.Client.Features.AlephTav.Toolbar
 
-<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.AlephTavs" />
+@* @inject IToastService? Toast *@
 
+<PageTitle>@Page.AlephTavs.Title</PageTitle>
 
-<Filter CurrentFilter="CurrentFilter"
-				OnFilterSelected="@ReturnedFilter" />
+<NavbarAlephTavList CurrentAlephTavSummary="CurrentAlephTavSummary"
+										ShowIntroToggle="ShowIntro"
+										OnAlephTavSummarySelected="ReturnedAlephTavSummary"
+										OnShowIntroSelected="ReturnedShowIntro" />
 
-@if (CurrentFilter == Enums.Filter.Summary)
+@if (@CurrentAlephTavSummary is not null)
 {
-	<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
-		<Introduction IsXs=true />
-	</div>
+	<div class="mt-5">
+		<br />
 
-	<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
-		<Introduction IsXs=false />
-	</div>
+		<ChapterList AlephTavSummary="CurrentAlephTavSummary"
+								 OnChapterSelected="ReturnedChapter" />
 
+		@if (@VM is not null)
+		{
+			<LoadingProgress>
+				<VerseList VM="VM" />
+			</LoadingProgress>
+		}
+	</div>
 }
 else
 {
-	<LoadingProgress>
-		<Anomalies />
-	</LoadingProgress>
+	<div class="mt-5">
+		<br />
+		<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+			<Introduction IsXs=true />
+		</div>
+
+		<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+			<Introduction IsXs=false />
+		</div>
+	</div>
 }
 
 @code {
 
-	[Parameter, EditorRequired] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
+	public Enums.AlephTavSummary? CurrentAlephTavSummary { get; set; }
 
-	protected Enums.Filter CurrentFilter { get; set; } = Enums.Filter.Summary;
-
-	private async Task ReturnedFilter(Enums.Filter filter)
+	private void ReturnedAlephTavSummary(Enums.AlephTavSummary alephTavSummary)
 	{
-		await Task.Delay(5);
-		CurrentFilter = filter;
-		//await OnArticleIdSelected.InvokeAsync(0);
-		//await PopulateCollection(filter);
+		//Toast!.ShowWarning($"AlephTavSummary Selected {alephTavSummary.BibleBook.Title}");
+		ShowIntro = true;
+		CurrentAlephTavSummary = alephTavSummary!;
+	}
+
+	protected VerseListVM? VM;
+	private void ReturnedChapter(int chapter)
+	{
+		//Toast!.ShowSuccess($"{nameof(Index)}!{nameof(ReturnedChapter)}; chapter: {chapter}");
+		VM = new VerseListVM(CurrentAlephTavSummary!, chapter);
+	}
+
+
+	protected bool ShowIntro = false;
+	private void ReturnedShowIntro(bool toggle)
+	{
+		ShowIntro = toggle;
+		CurrentAlephTavSummary = null;
 	}
 
 }

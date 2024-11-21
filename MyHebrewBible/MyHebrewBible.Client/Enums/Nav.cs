@@ -46,7 +46,6 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int HealthCheckVerseList = 21;
 		internal const int ParashaList = 22;
 		internal const int HealthCheckBitwise = 23;
-		internal const int AlephTavList = 24;
 	}
 	#endregion
 
@@ -59,7 +58,6 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav FavoriteVerses = new FavoriteVersesSE();
 	public static readonly Nav Hebrew = new HebrewSE();
 	public static readonly Nav AlephTavs = new AlephTavsSE();
-	public static readonly Nav AlephTavList = new AlephTavListSE();
 	public static readonly Nav BibleList = new BibleListSE();
 	public static readonly Nav Teaching = new TeachingSE();
 	public static readonly Nav Sitemap = new SitemapSE();
@@ -223,22 +221,6 @@ public abstract class Nav : SmartEnum<Nav>
 		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 		public override bool Disabled => false;
-
-	}
-
-	private sealed class AlephTavListSE : Nav
-	{
-		public AlephTavListSE() : base($"{nameof(Id.AlephTavList)}", Id.AlephTavList) { }
-		public override string Index => "/alephTavlist";
-		public override string Title => "Aleph Tav List";
-		public override string Icon => "fas fa-table";
-		public override int Sort => Id.AlephTavList;
-		public override string HomeTitleSuffix => "";
-		public override string HomeFloatRightHebrew => "";
-		public override PageListType PageListType => PageListType.None;
-		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
-		public override bool Disabled => false;
-
 	}
 
 	private sealed class BibleListSE : Nav

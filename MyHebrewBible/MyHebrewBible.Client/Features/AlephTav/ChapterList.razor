@@ -1,0 +1,48 @@
+﻿@* @inject IToastService? Toast *@
+
+@if (AlephTavSummary is not null)
+{
+	<div class="card border-success">
+		<div class="card-body pb-2 pb-0">
+			<h5 class="card-title">Select a chapter</h5>
+		</div>
+		<div class="card-body ms-3 py-0">
+			<ul class="list-inline">
+
+				<li class="list-inline-item">
+					<a class="font-monospace" title="@AlephTavSummary.BibleBook.Abrv All Chapters"
+						 @onclick="@(e => ButtonClick(0))">
+						[All]
+					</a>
+
+				</li>
+
+				@foreach (var item in AlephTavSummary!.Chapters!)
+				{
+					<li class="list-inline-item">
+						<a class="font-monospace" title="@AlephTavSummary.BibleBook.Abrv:@item"
+							 @onclick="@(e => ButtonClick(item))">
+							@item
+						</a>
+					</li>
+				}
+			</ul>
+		</div>
+	</div>
+
+}
+else
+{
+	<p>AlephTavSummary IS null</p>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.AlephTavSummary? AlephTavSummary { get; set; }
+	[Parameter] public EventCallback<int> OnChapterSelected { get; set; }
+
+	private void ButtonClick(int chapter)
+	{
+		//Toast!.ShowInfo($"{nameof(ChapterList)}!{nameof(ButtonClick)}; chapter{chapter}");
+		OnChapterSelected.InvokeAsync(chapter);
+	}
+}

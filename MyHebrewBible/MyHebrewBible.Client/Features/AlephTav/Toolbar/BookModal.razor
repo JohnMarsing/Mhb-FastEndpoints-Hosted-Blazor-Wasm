@@ -1,0 +1,115 @@
+﻿@* @using MyHebrewBible.Client.Enums *@
+
+@if (ModalIsNotShownToggle)
+{
+	<button type="button" class="btn btn-info"
+					@onclick="() => ShowModal()">
+		@Title <i class="fas fa-angle-down"></i>
+	</button>
+}
+else
+{
+	<div class="@modalClass" style="display:@(modalOpen?"block":"none");">
+		<div class="modal-dialog @modalSize">
+			<div class="modal-content @modalContentColor">
+				<div class="modal-header @modalHeaderColor">
+
+					<p>Select a Book</p>
+
+					<button type="button" class="close" @onclick="CloseModal">
+						<span>&times;</span>
+					</button>
+				</div>
+
+				<div class="modal-body @modalBodyColor">
+
+					<BlazoredTypeahead SearchMethod="SearchBibleBooks"
+														 TValue="Enums.AlephTavSummary"
+														 TItem="Enums.AlephTavSummary"
+														 Value="SelectedBook"
+														 ValueChanged="SelectedResultChanged"
+														 ValueExpression="@(() => SelectedBook)"
+														 EnableDropDown="true"
+														 MaximumSuggestions="66"
+														 MinimumLength="1"
+														 placeholder="Search bible...">
+						<SelectedTemplate Context="mycontext">
+							<span class="fs-4">@mycontext!.BibleBook.Title</span> <text>&nbsp;&nbsp;&nbsp;</text>
+							<span class="hebrew">@mycontext.BibleBook.NameInHebrew</span>
+						</SelectedTemplate>
+						<HelpTemplate>
+							Please enter at least 1 characters to perform a search.
+						</HelpTemplate>
+						<ResultTemplate Context="mycontext">
+							<div class="d-flex justify-content-between">
+								@mycontext!.BibleBook.Title <span class="hebrew">@mycontext.BibleBook.NameInHebrew</span>
+							</div>
+						</ResultTemplate>
+					</BlazoredTypeahead>
+
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.AlephTavSummary? CurrentAlephTavSummary { get; set; }
+	[Parameter, EditorRequired] public bool ShowIntroToggle { get; set; }
+	[Parameter] public EventCallback<Enums.AlephTavSummary> OnAlephTavSummarySelected { get; set; }
+
+	protected Enums.AlephTavSummary? SelectedBook { get; set; }
+
+	//string Title = "Select Book";
+	string? Title;
+
+	bool modalOpen = false;
+	string modalClass = "modal";
+
+	string modalSize = "modal-sm";
+
+	string modalHeaderColor = "bg-warning";
+	string modalContentColor = " border-danger";
+	string modalBodyColor = "";  // bg-warning-subtle
+	bool ModalIsNotShownToggle = true;
+
+	protected override void OnParametersSet()
+	{
+		SelectedBook = CurrentAlephTavSummary;
+		if (!ShowIntroToggle) { Title = "Select Book"; }
+	}
+
+	private async Task<IEnumerable<Enums.AlephTavSummary>> SearchBibleBooks(string searchText)
+	{
+		return await Task.FromResult(Enums.AlephTavSummary.List
+			.Where(x => x.BibleBook.Title.ToLower().Contains(searchText.ToLower()))
+			.OrderBy(o => o.Value));
+	}
+
+	private void SelectedResultChanged(Enums.AlephTavSummary? bibleBook)
+	{
+		if (bibleBook is not null)
+		{
+			Title = bibleBook.BibleBook.Title;
+			CloseModal();
+			SelectedBook = bibleBook;
+			OnAlephTavSummarySelected.InvokeAsync(bibleBook);
+		}
+	}
+
+	void ShowModal()
+	{
+		modalOpen = true;
+		ModalIsNotShownToggle = false;
+		modalClass += " show";
+		StateHasChanged();
+	}
+
+	void CloseModal()
+	{
+		modalOpen = false;
+		ModalIsNotShownToggle = true;
+		modalClass = "modal";
+	}
+
+}
