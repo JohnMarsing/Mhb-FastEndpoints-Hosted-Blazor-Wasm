@@ -1,7 +1,8 @@
 ﻿using Ardalis.SmartEnum;
 using MyHebrewBible.Client.Enums;
 
-namespace MyHebrewBible.Client.Features.AlephTavList.Enums;
+namespace MyHebrewBible.Client.Features.AlephTav.Enums;
+
 
 public abstract class AlephTavSummary : SmartEnum<AlephTavSummary>
 {

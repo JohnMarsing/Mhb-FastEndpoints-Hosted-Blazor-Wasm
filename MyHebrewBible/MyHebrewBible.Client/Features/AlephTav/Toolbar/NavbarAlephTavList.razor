@@ -1,0 +1,60 @@
+﻿@using MyHebrewBible.Client.Layout
+
+<nav class="navbar navbar-expand bg-primary-subtle fixed-top">
+
+	<div class="collapse navbar-collapse justify-content-start">
+
+		<div class="px-1">
+			<HomeButton />
+		</div>
+
+	</div>
+
+	<div class="collapse navbar-collapse justify-content-center">
+
+		<div class="px-1">
+			<BookModal CurrentAlephTavSummary="CurrentAlephTavSummary"
+								 ShowIntroToggle="ShowIntroToggle"
+								 OnAlephTavSummarySelected="ReturnedAlephTavSummary" />
+		</div>
+
+	</div>
+
+
+	<div class="collapse navbar-collapse justify-content-end">
+
+		@if (ShowIntroToggle)
+		{
+			<div class="pe-1">
+				<a class="btn btn-primary" title="return to intro" @onclick="@(e => ToggleClick())">
+					<i class="fas fa-arrow-left"></i>
+				</a>
+			</div>
+		}
+
+		<div class="pe-1">
+			<PageInstructions />
+		</div>
+	</div>
+</nav>
+
+@code {
+	[Parameter, EditorRequired] public Enums.AlephTavSummary? CurrentAlephTavSummary { get; set; }
+	[Parameter, EditorRequired] public bool ShowIntroToggle { get; set; }
+
+	[Parameter] public EventCallback<Enums.AlephTavSummary> OnAlephTavSummarySelected { get; set; }
+	[Parameter] public EventCallback<bool> OnShowIntroSelected { get; set; }
+
+	private void ToggleClick()
+	{
+		//Toast!.ShowInfo($"{nameof(ChapterList)}!{nameof(ButtonClick)}; chapter{chapter}");
+		CurrentAlephTavSummary = null;
+		OnShowIntroSelected.InvokeAsync(!ShowIntroToggle);
+	}
+
+	private void ReturnedAlephTavSummary(Enums.AlephTavSummary alephTavSummary)
+	{
+		OnAlephTavSummarySelected.InvokeAsync(alephTavSummary);
+	}
+
+}
