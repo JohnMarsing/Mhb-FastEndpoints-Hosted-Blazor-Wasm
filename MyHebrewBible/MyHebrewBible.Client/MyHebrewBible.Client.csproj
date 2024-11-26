@@ -24,4 +24,8 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Translations\NGIHR\Enums\" />
+  </ItemGroup>
+
 </Project>

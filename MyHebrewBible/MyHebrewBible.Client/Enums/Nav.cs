@@ -46,6 +46,7 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int HealthCheckVerseList = 21;
 		internal const int ParashaList = 22;
 		internal const int HealthCheckBitwise = 23;
+		internal const int HebrewRevelation = 24;
 	}
 	#endregion
 
@@ -73,6 +74,7 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav HealthCheckVerseList = new HealthCheckVerseListSE();
 	public static readonly Nav ParashaList = new ParashaListSE();
 	public static readonly Nav HealthCheckBitwise = new HealthCheckBitwiseSE();
+	public static readonly Nav HebrewRevelation = new HebrewRevelationSE();
 	#endregion
 
 	private Nav(string name, int value) : base(name, value)  // Constructor
@@ -433,6 +435,20 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string Index => "HealthChecks/Bitwise";
 		public override string Title => "HealthChecks Bitwise";
 		public override string Icon => "fas fa-teeth";  // fab fa-perbyte
+		public override int Sort => Id.Profile;
+		public override string HomeTitleSuffix => " ";
+		public override string HomeFloatRightHebrew => "";
+		public override PageListType PageListType => PageListType.SitemapPage;
+		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
+	}
+
+	private sealed class HebrewRevelationSE : Nav
+	{
+		public HebrewRevelationSE() : base($"{nameof(Id.HebrewRevelation)}", Id.HebrewRevelation) { }
+		public override string Index => "HR";
+		public override string Title => "Hebrew Revelation";
+		public override string Icon => "fas fa-eye";  
 		public override int Sort => Id.Profile;
 		public override string HomeTitleSuffix => " ";
 		public override string HomeFloatRightHebrew => "";

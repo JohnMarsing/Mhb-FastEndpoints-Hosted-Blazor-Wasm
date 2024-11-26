@@ -1,0 +1,49 @@
+﻿@using MyHebrewBible.Client.Helpers
+
+<div class="card border-primary p-2 my-1">
+
+
+	<div class="row mt-2">
+		<div class="col-6">
+			[1r] 1
+		</div>
+		<div class="col-6 @HebrewSize">
+			[1r] א
+		</div>
+	</div>
+
+
+	<div class="row mb-2">
+		<div class="col-6 fs-5">
+			[1v] The of Revelation Holy Yochanan God speaking the One Who is Sent and Announcing Good News.
+		</div>
+		<div class="col-6 @HebrewSize">
+			חֲזוֹן יוֹחָנָן הַקֹּדֶשׁ הַמְּדַבֶּרְאֵל מְשֻׁלׇּח וּמְבַשֵּׂר׃
+		</div>
+	</div>
+
+	<div class="card-body">
+		
+			@HtmlGeneration.FootnoteNG(1) The original text may have read,
+			<span class="@HebrewSize">הַמְּדַבֶּר אֵל אֶל מְּשֻׁלָּח  וּמְּבַשֵּׂר</span>
+			"God speaking to the one who is sent and announcing the good news"
+			(i.e. God speaking to John) or
+			<span class="@HebrewSize">הַמְּדַבֶּר אֶל מְּשֻׁלָּח וּמְּבַשֵּׂר</span>
+			"speaking to the one who is sent and announcing the good news"
+			(i.e. John speaking to the angel who is sent).
+			Currently the manuscript has
+			<span class="@HebrewSize">הַמְּדַבֶּרְאֵל</span>
+
+			(as one word and with Sheva underneath the Resh),
+			literally: "God-speaking".
+			The word
+			<span class="@HebrewSize">אֶל</span>
+			is missing or misspelled with a Tsere.
+		
+	</div>
+
+</div>
+
+@code {
+	string HebrewSize = "hebrew"; // hebrew30
+}

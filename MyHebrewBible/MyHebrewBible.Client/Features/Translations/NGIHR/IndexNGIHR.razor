@@ -1,0 +1,624 @@
+﻿@page "/hr"
+
+@using MyHebrewBible.Client.Layout
+@using BLBEnum=MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Studies
+@using MyHebrewBible.Client.Helpers
+
+<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.HebrewRevelation" />
+
+<h2 class="mt-4 mb-1 text-center"><span class="badge bg-warning-subtle text-black">Preface</span></h2>
+<Preface />
+
+<h2 class="mt-4 mb-1 text-center"><span class="badge bg-warning-subtle text-black">Title</span></h2>
+<Title />
+
+<h2 class="mt-4 mb-1 text-center"><span class="badge bg-warning-subtle text-black">Chapter 1</span></h2>
+
+@HtmlGeneration.SubTitle("Introduction and Benediction <sup>1:1-3</sup>")
+
+<Verse3ColGridTemplate VerseNumber="1" VerseHebrew="א" AddGridHeader="true">
+	<Col1>
+		The vision of Yehoshua Mashiach, that the Elohim gave	him to show his servants that which	was necessary to be with wrath
+		, and he taught <i>(horah)</i> sending bythe hand of his angel to his servant	Yochanan.
+	</Col1>
+	<Col2>
+		The Revelation of Jesus Christ, which God gave unto him, to shew unto his servants things which must shortly come to pass;
+		and he sent and signified it by his angel unto his servant John:
+	</Col2>
+	<Col3>
+		חֲזוֹן יְהשֻׁעַ מָשֻׁיחַ שֶׁנְּתָנְּנוֹ הָאֱלהִׁים לְהַרְאוֹת עֲבָדָיו אֲשֶׁר  הֻצרָךְ לִהְיוֹת בְּשֶׁצֶף וְהוֹרָה שֹוֹלֵחַ בְּיַד הַמַּלְאָכוֹ לָעַבְדּוֹ יוֹחָנָן:
+	</Col3>
+	<FootNote>@HtmlGeneration.FootnoteNG(2)  @TranscriptFootnotes.FN02</FootNote>
+</Verse3ColGridTemplate>
+
+<Verse3ColGridTemplate VerseNumber="2" VerseHebrew="ב" AddGridHeader="false">
+	<Col1>
+		That he testified the word of the Elohim and the witness of
+		Yehoshua Mashiach, which he saw, and that are here,	@HtmlGeneration.FootnoteNG(3)
+		and that which was necessary to do after this.
+	</Col1>
+	<Col2>
+		Who bare record of the word of God, and of the testimony of Jesus Christ, and of all things that he saw.
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+	<FootNote>@HtmlGeneration.FootnoteNG(3) @TranscriptFootnotes.FN03</FootNote>
+</Verse3ColGridTemplate>
+
+<Verse3ColGridTemplate VerseNumber="3" VerseHebrew="ג" AddGridHeader="false">
+	<Col1>
+		Happy is the man who reads and the ones who hear the words of
+		the prophecy and guard here, those that are written in it.
+		For the time is near.
+	</Col1>
+	<Col2>
+		Blessed is he that readeth, and they that hear the words of this prophecy, and keep those things which are written therein: for the time is at hand.
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+@HtmlGeneration.SubTitle("Greeting the Seven Churches <sup>1:4-8</sup>")
+
+<Verse3ColGridTemplate VerseNumber="4" VerseHebrew="ד" AddGridHeader="true">
+	<Col1>
+		Yochanan to the seven	congregations, that are in Asia.
+		Grace to you and Shalom from him who is, and who will be,
+		and who will come and from the seven souls that are opposite his throne.
+	</Col1>
+	<Col2>
+		John to the seven churches which are in Asia: Grace be unto you, and peace, from him which is, and which was,
+		and which is to come; and from the seven Spirits which are before his throne;
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+<Verse3ColGridTemplate VerseNumber="5" VerseHebrew="ה" AddGridHeader="false">
+	<Col1>
+		And from Yehoshua Mashiach who is the witness of faithfulness.
+		the firstborn of the men and the prince of the kings
+		of the Earth, who loved us and baptized us from our sins
+		with his blood.
+	</Col1>
+	<Col2>
+		And from Jesus Christ, who is the faithful witness, and the first begotten of the dead, and the prince of the kings of the earth.
+		Unto him that loved us, and washed us from our sins in his own blood,
+	</Col2>
+	<Col3>
+		ומִיהוֹשֻׁעַ מָשִׁיחַ שֶׁעֵד הַנֶּאֱמָן הַבְּכֹר-מִן-הַמְּתִים וְהַשַּׂר-הַמְּלָכִים הׇאָרֶץ אֲשֶׁר אֲהַבָנוּ וַיִּטְבּוֹלֵנוּ מֵחֲטָאֵינוּ בַּדָּמוֹ:
+	</Col3>
+	<FootNote>@HtmlGeneration.FootnoteNG(4) @TranscriptFootnotes.FN04</FootNote>
+</Verse3ColGridTemplate>
+
+<Verse3ColGridTemplate VerseNumber="6" VerseHebrew="ו" AddGridHeader="false">
+	<Col1>
+		And he made us a kingdom and priests
+		to Elohim and his Father. To him is glory
+		and dominion, forever. Amen.
+	</Col1>
+	<Col2>
+		And hath made us <b>kings</b> @Enums.BibleAnchors.StrongsG(935, "basileus") and
+		<b>priests</b> @Enums.BibleAnchors.StrongsG(2409, "hiereus") unto God and his Father;
+		to him be <b>glory</b>@Enums.BibleAnchors.StrongsG(1391, "doxa") and <b>dominion</b>@Enums.BibleAnchors.StrongsG(2904, "kratos") for ever and ever.
+		<b>Amen</b> @Enums.BibleAnchors.StrongsG(281, "amēn").
+	</Col2>
+	<Col3> 
+
+		וַעֲשָׂנוּ אֶת-מַלְכוּת וְכֹהֲנִים לֵﭏ‌לֹחִים וְאָבִיהוּ׃ לוֹ-כָּבוֹד וְהַשִּׁ‌‌לְטוֹן עַד-עוֹ‌‌‌לְמֵי עָד: אָמֵן
+		:
+	</Col3>
+</Verse3ColGridTemplate>
+
+
+
+
+<Verse3ColGridTemplate VerseNumber="7" VerseHebrew="ז" AddGridHeader="true">
+	<Col1>
+		Behold, he has come with the
+		cloud and every eye saw him
+		and these that stabbed him. And they will mourn
+		him, all the tribes of the Earth. Also, Amen.
+	</Col1>
+	<Col2>
+		Behold, he cometh with clouds; and <mark>every eye shall see him</mark>, and they also which <mark>pierced him</mark>:
+		and all kindreds of the earth shall wail because of him. Even so, Amen.
+	</Col2>
+	<Col3>
+		הִנֵּה בָּא עִם הֶעָנָן וְחָזָחוּ  כָּל-עַיִן רְהָאֵלֶּא שֶׁבִּׁתְּקוּהוּ: רְסָפְדוּ ע עָלָיו כָּל-הַשִּׁבְטֵי הָאָרֶץ : גַּם  אָמֵן:
+	</Col3>
+	<FootNote>@HtmlGeneration.FootnoteNG(5) @TranscriptFootnotes.FN05</FootNote>
+</Verse3ColGridTemplate>
+
+<RevOneEight ShowRed="ShowRed" OnShowRedSelected="ReturnedShowRed" />
+
+<Zechariah1210Pierced />
+
+@HtmlGeneration.SubTitle("Vision of the Son of Man <sup>1:9-20</sup>")
+
+<Verse3ColGridTemplate VerseNumber="9" VerseHebrew="ט" AddGridHeader="true">
+	<Col1>
+		I am Yochanan your brother and a participant in the suffering,
+		and in the kingdom, and in the hope in Mashiach Yehoshua.
+		I was on the island that is called Patmos for
+		the word of the Elohim and for the testimony of
+		Yehoshua Mashiach.
+	</Col1>
+	<Col2>
+		I John, who also am your brother, and companion in tribulation,
+		and in the kingdom and patience of Jesus Christ, was in the isle that is called Patmos,
+		for the word of God, and for the testimony of Jesus Christ.
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+<Verse3ColGridTemplate VerseNumber="10" VerseHebrew="י" AddGridHeader="false">
+	<Col1>
+		I was in the spirit on the lordly @HtmlGeneration.FootnoteNG(6) day
+		and I heard a great voice behind me like a trumpet,
+	</Col1>
+	<Col2>
+		I was in the Spirit on the Lord's day, and heard behind me a great voice, as of a trumpet,
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+	<FootNote>@HtmlGeneration.FootnoteNG(6) @TranscriptFootnotes.FN06</FootNote>
+</Verse3ColGridTemplate>
+
+<Verse3ColGridTemplate VerseNumber="11" VerseHebrew="יא" AddGridHeader="false">
+	<Col1>
+		that says, That which you see, write
+		in a book, and send to the seven congregations,
+		to Ephesus, and to Smyrna, and to
+		Pergamus, and to Thyatira, and to Sardis,
+		and to Philadelphia, and to Laodicea.
+	</Col1>
+	<Col2>
+		Saying, I am Alpha and Omega, the first and the last: and, What
+		thou seest, write in a book, and send it unto the seven churches which are in Asia; unto
+		Ephesus<sup class="text-black-50">[1]</sup>
+		, and unto Smyrna<sup class="text-black-50">[2]</sup>
+		, and unto Pergamos<sup class="text-black-50">[3]</sup>
+		, and unto Thyatira<sup class="text-black-50">[4]</sup>
+		, and unto Sardis<sup class="text-black-50">[5]</sup>
+		, and unto Philadelphia<sup class="text-black-50">[6]</sup>
+		, and unto Laodicea<sup class="text-black-50">[7]</sup>.
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+<Verse3ColGridTemplate VerseNumber="12" VerseHebrew="יב" AddGridHeader="false">
+	<Col1>
+		And there I turned to look at the voice that spoke
+		with me. And I was turning and saw seven golden lamps.
+	</Col1>
+	<Col2>
+		And I turned to see the voice that spake with me. And being turned,
+		I saw seven golden candlesticks;
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+<Verse3ColGridTemplate VerseNumber="13" VerseHebrew="יג" AddGridHeader="false">
+	<Col1>
+		And in the middle of the seven lamps
+		dominion for the Son of Man, dressed with a tunic
+		to the legs and girded to the chest with a golden belt.
+	</Col1>
+	<Col2>
+		And in the midst of the seven candlesticks one like unto the Son of man,
+		clothed with a garment down to the foot, and girt about the paps with a golden girdle.
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+<Verse3ColGridTemplate VerseNumber="14" VerseHebrew="יד" AddGridHeader="false">
+	<Col1>
+		And his head and the hairs are white like bright wool,
+		like snow, and his eyes like a flame of fire.
+	</Col1>
+	<Col2>
+		His head and his hairs were white like wool, as white as snow; and his eyes were as a flame of fire;
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+<div class="card border-danger mt-3 mb-2 mx-3">
+	<div class="card-body py-1">
+		<p class="text-center mb-1">&mdash; JKM Commentary &mdash;</p>
+		<p class="card-title">
+			In the Hebrew text on the PDF, there's a <b>[3r]</b> just to the right of the verse number for 14.
+			Not sure what that is about. Maybe it's for <b>footnote 7</b> which states "The Shin-dot is missing in the manuscript.".
+			I say that because I don't see where <b>footnote 7</b> is referenced.
+		</p>
+	</div>
+</div>
+
+<!-- 15 in Hebrew can be tet vav or yod hey -->
+<Verse3ColGridTemplate VerseNumber="15" VerseHebrew="יה" AddGridHeader="false">
+	<Col1>
+		And his feet are likened to polished copper,
+		when glowing in the furnace.
+		And his voice is like the sound of the deep- sea.
+	</Col1>
+	<Col2>
+		And his feet like unto fine brass, as if they burned in a furnace; and his voice as the sound of many waters.
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+<div class="card border-danger mt-3 mb-2 mx-3">
+	<div class="card-body py-1">
+		<p class="text-center mb-1">&mdash; JKM Commentary &mdash;</p>
+		<p class="card-title">
+			In the Hebrew text on the PDF, there's not verse number
+		</p>
+	</div>
+</div>
+
+<!-- 16 in Hebrew can be tet zion or yod vav -->
+<Verse3ColGridTemplate VerseNumber="16" VerseHebrew="טו" AddGridHeader="true">
+	<Col1>
+		And he is holding in his right hand seven stars.
+		And from his mouth goes forth a double-edged sword.
+		And his face is like the light of the sun	in its strength.
+	</Col1>
+	<Col2>
+		And he had in his right hand seven stars: and out of his mouth went a sharp twoedged sword:
+		and his countenance was as the sun shineth in his strength.
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+<Verse3ColGridTemplate VerseNumber="17" VerseHebrew="יז" AddGridHeader="false">
+	<Col1>
+		And when I saw him,	I fell to his feet like a dead person. And he put
+		his right hand on me and he said, Do not be afraid.
+		I am the <b>first</b> and the <b>last</b>.
+	</Col1>
+	<Col2>
+		And when I saw him, I fell at his feet as dead. And he laid his right hand upon me,
+		saying unto me, Fear not; I am the <b>first</b> and the <b>last</b>:
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+<IntroductionPart2 />
+
+<Verse3ColGridTemplate VerseNumber="18" VerseHebrew="יח" AddGridHeader="true">
+	<Col1>
+		And the one who lives, and I was dead,
+		and behold I live forever and ever.
+		Amen. And I have the <mark>nails</mark> <span class="@HebrewSize">אֶת-הַמַּסְמְרִים</span> @Enums.BibleAnchors.StrongsH(4548, "masmerim", superscript: true)
+		of death and She'ol.
+	</Col1>
+	<Col2>
+		I am he that liveth, and was dead; and, behold, I am alive for evermore, Amen;
+		and have the <mark>keys</mark> @Enums.BibleAnchors.StrongsG(2807, "kleis") of hell and of death.
+	</Col2>
+	<Col3>
+		וְהָחָי וְהָיִיתִי מֵת וְהִנֵּה חַי-אֲנִי לְעֹלְמֵי-עֹלָמִים אָמֵן וְיֵשׁ-לִי אֶת-הַמַּסְמְרִים הַמָּוֶת וְהַשְּׁאוֹל׃
+	</Col3>
+</Verse3ColGridTemplate>
+
+<NailsOrKeysAndSheol />
+
+<Verse3ColGridTemplate VerseNumber="19" VerseHebrew="יט" AddGridHeader="true">
+	<Col1>
+		Therefore, write that which you saw, and that are here,
+		and that which is necessary to do after this.
+	</Col1>
+	<Col2>
+		Write the things which thou hast seen, and the things which are, and the things which shall be hereafter;
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+<Verse3ColGridTemplate VerseNumber="20" VerseHebrew="כ" AddGridHeader="false">
+	<Col1>
+		The secret @Enums.BibleAnchors.StrongsH(5475, "sod", superscript: true) of the seven stars that you saw in my right hand
+		and the seven golden lamps, the seven
+		stars are angels of the seven
+		congregations and the seven lamps
+		that you saw, are the seven congregations.
+		[they are]
+	</Col1>
+	<Col2>
+		The mystery @Enums.BibleAnchors.StrongsG(3466, "mystērion") of the seven stars which thou sawest in my right hand, and the seven golden candlesticks.
+		The seven stars are the angels of the seven churches: and the seven candlesticks which thou sawest are the seven churches.
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+	<FootNote>@HtmlGeneration.FootnoteNG(8) @TranscriptFootnotes.FN08</FootNote>
+</Verse3ColGridTemplate>
+
+<KingandMessengerDifferentRoots />
+
+<h2 class="mt-4 mb-1 text-center"><span class="badge bg-warning-subtle text-black">Chapter 2</span></h2>
+
+
+<div class="row my-2 bg-light">
+	<div class="col-4">
+		The Second Gate
+	</div>
+	<div class="col-4">
+	</div>
+	<div class="col-4 @HebrewSize">
+		הַשַּׁעַר שֵׁנִי
+	</div>
+</div>
+
+<div class="card border-danger mt-3 mb-2 mx-3">
+	<div class="card-body py-1">
+		<p class="text-center mb-1">&mdash; JKM Commentary &mdash;</p>
+		<p class="card-title">
+			Not sure what this is?
+		</p>
+	</div>
+</div>
+
+@HtmlGeneration.SubTitle("1. Ephesus: The <b>Loveless</b> Church <sup>2:1-7</sup>")
+
+<Verse3ColGridTemplate VerseNumber="1" VerseHebrew="א" AddGridHeader="true">
+	<Col1>
+		To the angel of the congregation of Ephesus, write here:
+		The one who is holding the seven stars in his right hand
+		and that walks in the middle of the seven	golden lamps says.
+	</Col1>
+	<Col2>
+		Unto the angel of the church of Ephesus write;
+		These things saith he that holdeth the seven stars in his right hand,
+		who walketh in the midst of the seven golden candlesticks;
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+<Verse3ColGridTemplate VerseNumber="2" VerseHebrew="ב" AddGridHeader="false">
+	<Col1>
+		I know your labors,	and toil, and abundant patience, and that you are not
+		able to bear evil ones. And you tested it, those who say that they are sent
+		and they are not and you found them to be liars.
+	</Col1>
+	<Col2>
+		I know thy works, and thy labour, and thy patience, and how thou canst not bear them which are evil:
+		and thou hast tried them which say they are apostles, and are not, and hast found them liars:
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+	@* 	<FootNote>@HtmlGeneration.FootnoteNG(9) @TranscriptFootnotes.FN09</FootNote>
+	<FootNote2>@HtmlGeneration.FootnoteNG(10) @TranscriptFootnotes.FN10</FootNote2>
+	<FootNote>3@HtmlGeneration.FootnoteNG(11) @TranscriptFootnotes.FN11</FootNote> *@
+</Verse3ColGridTemplate>
+
+<Verse3ColGridTemplate VerseNumber="3" VerseHebrew="ג" AddGridHeader="false">
+	<Col1>
+		And you took and you have abundant patience for my name's sake and you have not perished.
+	</Col1>
+	<Col2>
+		And hast borne, and hast patience, and for my name's sake hast laboured, and hast not fainted.
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+<div class="card border-danger mt-3 mb-2 mx-3">
+	<div class="card-body py-1">
+		<p class="text-center mb-1">&mdash; JKM Commentary &mdash;</p>
+		<p class="card-title">
+			In the Hebrew text on the PDF, there's a <b>[4r]</b> just after footnote 10 and before verse number for 3.
+		</p>
+	</div>
+</div>
+
+<Verse3ColGridTemplate VerseNumber="4" VerseHebrew="ד" AddGridHeader="false">
+	<Col1>
+		But I have something against you for you left	your first love.
+	</Col1>
+	<Col2>
+		Nevertheless I have somewhat against thee, because thou hast left thy first love.
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+<Verse3ColGridTemplate VerseNumber="5" VerseHebrew="ה" AddGridHeader="false">
+	<Col1>
+		And remember from where you were thrown down and repent and do the first deeds.
+		And if not, I will come to you as a sudden surprise. And I will shake your lamp
+		from its place, if you do not repent.
+	</Col1>
+	<Col2>
+		Remember therefore from whence thou art fallen, and repent, and do the first works; or else I will come unto thee quickly,
+		and will remove thy candlestick out of his place, except thou repent.
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+<Verse3ColGridTemplate VerseNumber="6" VerseHebrew="ו" AddGridHeader="false">
+	<Col1>
+		But you have this, that you hate the deed of the Nicolaitans that I also hate.
+	</Col1>
+	<Col2>
+		But this thou hast, that thou hatest the deeds of the Nicolaitanes <span class="@HebrewSize">נִיקוֹלָאּטיִּׁיּם</span>, which I also hate.
+	</Col2>
+	<Col3>
+		כִּי־כִּי שׂוֹטֵם אַתָּה הַמַּעֲשֶׂה־ נִיקוֹלָאּטיִּׁיּם ׁשֶׁשֹּוֹטם גַּם-אֲנִי:
+	</Col3>
+</Verse3ColGridTemplate>
+
+
+<Verse3ColGridTemplate VerseNumber="7" VerseHebrew="ז" AddGridHeader="false">
+	<Col1>
+		He who has an ear	will hear what the spirit says to congregations.
+		I will let the victorious eat of the tree of life,
+		which is in the <b>divine orchard</b> (<i>pardes</i>) @Enums.BibleAnchors.StrongsH(6508, "pardes") <sup>13</sup>.
+	</Col1>
+	<Col2>
+		He that hath an ear, let him hear what the Spirit saith unto the churches;
+		To him that overcometh will I give to eat of the tree of life, which is in the midst of the
+		<b>paradise</b> @Enums.BibleAnchors.StrongsG(3857, "paradeisos") of God.
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+	<FootNote>@HtmlGeneration.FootnoteNG(13) @TranscriptFootnotes.FN13</FootNote>
+</Verse3ColGridTemplate>
+
+
+<DivineOrchardPardes />
+
+<Nicolaitans />
+
+<RevCh2Commentary />
+
+
+@HtmlGeneration.SubTitle("2. Smyrna: The <b>Persecuted</b> Church <sup>2:8-11</sup>")
+
+<Verse3ColGridTemplate VerseNumber="8" VerseHebrew="ח" AddGridHeader="true">
+	<Col1>
+		And write for the angel of the congregation of Smyrna
+		and here, say, the <b>first</b> and the <b>last</b> that was dead	and lives.
+	</Col1>
+	<Col2>
+		And unto the angel of the church in Smyrna write;
+		These things saith <b>first</b> and the <b>last</b>, which was dead, and is alive;
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+<RevTwoNine />
+
+<GenesisRabbahTenTribes />
+
+<SynagogueOfSatan />
+
+
+<Verse3ColGridTemplate VerseNumber="10" VerseHebrew="י" AddGridHeader="true">
+	<Col1>
+		Do not be afraid for suffering was necessary.
+		And behold destruction (Avadon <span class="@HebrewSize">הַאֲבַדּוֹן</span>  @Enums.BibleAnchors.StrongsH(11, "ăḇadôn")) will give some of you to the prison
+		to test you. And you will have suffering for ten days.
+		Be faithful until death and I will give you the <b>crown of life</b>.
+	</Col1>
+	<Col2>
+		Fear none of those things which thou shalt suffer:
+		behold, the devil @Enums.BibleAnchors.StrongsG(1228, "diabolos") shall cast some of you into prison,
+		that ye may be tried @Enums.BibleAnchors.StrongsG(3985, "peirazō"); and ye shall have tribulation @Enums.BibleAnchors.StrongsG(2347, "thlipsis") ten days:
+		be thou faithful unto death, and I will give thee a crown @Enums.BibleAnchors.StrongsG(4735, "stephanos") of life @Enums.BibleAnchors.StrongsG(2222, "zōē").
+	</Col2>
+	<Col3>
+		אַל תִּירָא שֶׁהֻצְרָךְ עֻנּוֹת הַאֲבַדּוֹן יִתֶּן מּכֶּם אֶל-בֵּית הַסֹּהַר לְנַסּוֹתְכֶם וְלָכֶם צָרָה עָשָׂר יָמִים׃ הֱיֵה נֶאֱמָן עַד מָרֶת וְנָתַתִּי לְךָ עֲטֶרֶת הָחַיִּים׃
+	</Col3>
+</Verse3ColGridTemplate>
+
+<div class="card border-danger mt-3 mb-2 mx-3">
+	<div class="card-body py-1">
+		<p class="text-center mb-1">&mdash; JKM Commentary &mdash;</p>
+		<p class="card-title">@HtmlGeneration.CommentaryHeader("Avadon | Rev 9:11")</p>
+	</div>
+
+	<div class="card-body py-1">
+		<p class="card-title">
+			Avadon is found here in the Hebrew translation but not in the Greek, but later in Revelation it is. See below.
+		</p>
+	</div>
+
+	<div class="card-body py-1">
+		@BLBEnum.BLB.KJV.AnchorBCV(Enums.BibleBook.Revelation.Value, 9, 11)
+		<p class="card-text bg-info-subtle mt-3 ps-4">
+			<i class="fas fa-quote-left"></i>
+			And they had a king over them, which is the angel of the bottomless pit,
+			whose name in the Hebrew tongue is Abaddon @Enums.BibleAnchors.StrongsG(3, "abaddōn"), but in the Greek tongue hath his name Apollyon @Enums.BibleAnchors.StrongsG(623, "apollyōn").
+		</p>
+	</div>
+
+</div>
+
+<Rev210AvadonTreeOfLife />
+
+<Verse3ColGridTemplate VerseNumber="11" VerseHebrew="יא" AddGridHeader="true">
+	<Col1>
+		He who has an ear will hear what the spirit says to the congregations.
+		The one who overcomes will not be smitten by the <b>Second Death</b>.
+	</Col1>
+	<Col2>
+		He that hath an ear, let him hear what the Spirit saith unto the churches;
+		He that overcometh shall not be hurt of the second death.
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+
+@HtmlGeneration.SubTitle("3. Pergamos: The <b>Compromising </b> Church <sup>2:18-29</sup>")
+
+<Verse3ColGridTemplate VerseNumber="12" VerseHebrew="יב" AddGridHeader="false">
+	<Col1>
+		And to the angel of the congregation in Pergamus write here saying,
+		To he who has the double-edged Cherub @HtmlGeneration.FootnoteNG(15)
+	</Col1>
+	<Col2>
+		And to the angel of the church in Pergamos write; These things saith he which hath the sharp sword with two edges;
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+	<FootNote>@HtmlGeneration.FootnoteNG(2)  @TranscriptFootnotes.FN15</FootNote>
+</Verse3ColGridTemplate>
+
+<Verse3ColGridTemplate VerseNumber="13" VerseHebrew="יג" AddGridHeader="false">
+	<Col1>
+		I know your deeds and where he is sitting, where the seat of Satan is ... <b><i>END OF HEBREW TRANSCRIPT ☹️</i></b>
+	</Col1>
+	<Col2>
+		I know thy works, and where thou dwellest, even where Satan's seat is: and thou holdest fast my name, and hast not denied my faith,
+		even in those days wherein Antipas was my faithful martyr, who was slain among you, where Satan dwelleth.
+	</Col2>
+	<Col3>
+		לביצוע
+	</Col3>
+</Verse3ColGridTemplate>
+
+@code {
+	string HebrewSize = "hebrew"; // hebrew30
+	bool ShowRed = false;
+
+	private void ReturnedShowRed(bool showRed)
+	{
+		ShowRed = showRed;
+	}
+}

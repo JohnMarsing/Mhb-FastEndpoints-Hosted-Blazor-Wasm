@@ -1,0 +1,94 @@
+﻿@using BLBEnum=MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Helpers
+
+<div class="card border-info my-2">
+
+	<div class="card-body py-1">
+		<p class="card-title">@HtmlGeneration.TranscriptHeader("C", "The divine orchard (pardes)", "14:30")</p>
+	</div>
+
+	<div class="card-body py-1">
+		<b>T-Bone</b>: I’m really interested in the divine orchard portion.
+	</div>
+	<div class="card-body py-1">
+
+		@* <i class="fas fa-quote-left fa-2x"></i> *@
+
+		<p class="card-text">
+			<b>Nehemia</b>: Oh, yeah. That’s awesome. So, the word there is “pardes”, and in the Greek I believe it says “paradise” or “paradisos”,
+			which is simply a transliteration of the word “pardes”. Now, scholars say the word “pardes” is not a Hebrew word originally,
+			that originally it is the <b>Persian</b> word for an orchard.
+			Whether that is true or not is an interesting question. That’s beyond the scope of this discussion.
+			But we do have the word “pardes” in the Tanakh.
+			It appears three times, and each time it is referring to a literal area where fruit trees are planted, meaning an orchard. 
+			So, for example @BLBEnum.BLB.KJV.AnchorBCV(Enums.BibleBook.Ecclesiastes.Value, 2, 5)
+		</p>
+
+		<p class="card-text bg-info-subtle mt-3 ps-4">
+			<i class="fas fa-quote-left"></i>
+			I made me gardens <span class="@HebrewSize">גַּנּוֹת</span> @Enums.BibleAnchors.StrongsH(1593, "gannâ") and
+			orchards <span class="@HebrewSize">וּפַרְדֵּסִים</span> @Enums.BibleAnchors.StrongsH(6508, "pardēs") and I planted trees in them of all kinds of fruits.
+		</p>
+
+		<p class="card-text">
+			And the word is “pardesim”, orchards.
+			Of course, the word “paradise” in English implies not just any orchard, but the Garden of Eden, meaning it’s a specific orchard, a holy orchard.
+			And here it says, “pardes haElohi”, the Divine orchard.
+		</p>
+
+		<div class="card-body py-2">
+			<p class="card-title">@HtmlGeneration.TranscriptHeader("", "mystical orchard | the Four Who Entered the Orchard", "15:36")</p>
+		</div>
+
+		<p class="card-text">
+			What’s interesting is we have a reference in the Talmud to four men who entered the pardes, and it’s this <b>mystical orchard</b>.
+			Let me just pull this up and read it, because it’s quite interesting, the reference to pardes in the Rabbinical text.
+			And this is a very famous story, it’s <b><i>Arba Nichnesu Lepardes</i></b>, <b>the Four Who Entered the Orchard</b>.
+
+			So, it’s in <b>Chagiga 14:B</b>, which is in the Talmud, but it’s quoting an earlier Mishnaic period source called a <b>Baraita</b>.
+			It says, “Four entered the pardes, and these are they: Ben Aza<sup>1</sup> and Ben Zoma<sup>2</sup>, one they call Acher<sup>3</sup>,”
+			the other one, they won’t even say his name, “and Rabbi Akiva.<sup>4</sup>”
+			It’s a fascinating story.  And basically, what comes out of this story is that...
+
+			<ol>
+				<li>one of the guys who went into the pardes died. </li>
+				<li>Another one went crazy.</li>
+				<li>And the third one became an apostate and that’s why they call him Acher, they won’t even say his name. </li>
+				<li>And of the four that entered, only <b>Rabbi Akiva</b> came out unscathed.</li>
+			</ol>
+
+			So, what is this pardes that they’re talking about, this mystical orchard, and what happened in the pardes?
+			Now is that <b>connected here to what Revelation (2:7) is talking about</b>, both in the Greek and the Hebrew,
+			because they have the same word?
+			I don’t know, but presumably it’s connected to this idea of the <b>Garden of Elohim</b>, the <span class="@HebrewSize">גַּן</span> @Enums.BibleAnchors.StrongsH(1588, "Gan") <span class="@HebrewSize">עֵדֶן</span> @Enums.BibleAnchors.StrongsH(5731, "Eden"),
+			the Garden of Eden, which was an orchard, right?
+			It had at least two fruit trees in it, perhaps more. I guess it had lots of fruit trees, because they ate from it.
+			So, we think of it as the “Garden of Eden”, but actually, it’s the <b>“Orchard of Eden”</b>.
+			It doesn’t sound as poetic in English. [laughing]
+		</p>
+
+		<p class="card-text">
+			<b>AJ Bernard</b>: Oh, cool.
+		</p>
+
+		<p class="card-text">
+			<b>Nehemia</b>: But it’s the pardes of Eden. And by the way, we do know the name of the man who became an apostate.
+			His name was <a href="https://en.wikipedia.org/wiki/Elisha_ben_Abuyah">Elisha ben Abuyah</a>,
+			but he’s usually referred to as <span class="@HebrewSize">אחר</span> @Enums.BibleAnchors.StrongsH(312, "Acher"), the other one, who entered the pardes and became a heretic.” [laughing] I wonder what he saw there.
+		</p>
+
+	</div>
+	<p class="card-footer">
+		<b>JKM References</b>
+		<br />
+		<ul>
+			<li>Ref Word-Study-H6508-PaRDeS-G3857-Paradeisos.doc</li>
+			<li>See also @BLBEnum.BLB.KJV.AnchorBCV(Enums.BibleBook.SongofSolomon.Value, 4, 12) which references a garden and @BLBEnum.BLB.KJV.AnchorBCV(Enums.BibleBook.SongofSolomon.Value, 4, 13) which uses the word <i>pardes</i>.</li>
+			<li>See also @BLBEnum.BLB.KJV.AnchorBCV(Enums.BibleBook.Nehemiah.Value, 2, 8). FWIW, the next verse, @BLBEnum.BLB.KJV.AnchorBCV(Enums.BibleBook.Nehemiah.Value, 2, 9), has a Standalone Aleph Tav</li>
+		</ul>
+	</p>
+</div>
+
+@code {
+	string HebrewSize = "hebrew"; // hebrew30
+}

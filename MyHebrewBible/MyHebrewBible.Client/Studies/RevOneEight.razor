@@ -1,0 +1,48 @@
+﻿@using MyHebrewBible.Client.Helpers
+@using MyHebrewBible.Client.Features.Translations.NGIHR
+
+<Verse3ColGridTemplate VerseNumber="8" VerseHebrew="ח" AddGridHeader="false">
+	<Col1>
+		I am the <span class="@AlephTavCSS">Aleph</span> and the <span class="@AlephTavCSS">Tav</span>,
+		says <span class="fw-bold">Yehovah</span> <span class="@HebrewSize">יְחוָה</span> <span class="fw-bold">the Elohim</span> <span class="@HebrewSize">הָאֶלֹחִים</span>.
+		He that is, and he was will be, and he that will come, the Shaddai.
+	</Col1>
+	<Col2>
+		I am <mark>Alpha</mark> and <mark>Omega</mark>, the beginning and the ending, saith the Lord,
+		which is, and which was, and which is to come, the Almighty @Enums.BibleAnchors.StrongsG(3841, "pantokratōr") [<span class="@HebrewSize">שַׁדַּי</span> @Enums.BibleAnchors.StrongsH(7706, "shaddai")].
+	</Col2>
+	<Col3>
+		אֲנִי הָאָלֶף וְהַתָּו אֹמֵר יְחוָה הָאֶלֹחִים חוֹיֶה וַיִּחְיֶה וְשֶׁיָּבוֹא הַשַּׁדָּי:
+	</Col3>
+
+	<FootNote>
+		@if (ShowRed)
+		{
+			<a @onclick="@(e => ToggleClick())" class="btn btn-outline-danger btn-sm" title="Make the Aleph and Tav be Black">	<i class="fas fa-toggle-on"></i></a>
+		}
+		else
+		{
+			<a @onclick="@(e => ToggleClick())" class="btn btn-outline-danger btn-sm" title="Make the Aleph and Tav be Red">	<i class="fas fa-toggle-off"></i></a>
+		}
+
+	</FootNote>
+
+</Verse3ColGridTemplate>
+
+
+@code {
+
+	[Parameter, EditorRequired] public bool ShowRed { get; set; }
+	[Parameter, EditorRequired] public EventCallback<bool> OnShowRedSelected { get; set; }
+
+	//
+
+	string HebrewSize = "hebrew"; // hebrew30
+	string AlephTavCSS => ShowRed ?  "fw-bold text-danger" : "";
+
+	private void ToggleClick()
+	{
+		ShowRed = !ShowRed;
+	}
+
+}

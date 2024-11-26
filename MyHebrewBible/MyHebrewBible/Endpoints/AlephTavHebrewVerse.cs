@@ -16,8 +16,8 @@ public class AlephTavHebrewVerse
 	public string? Transliteration { get; set; }
 	public int? FinalEnum { get; set; }
 	public long HasTwo { get; set; }
-	
 
+	// ToDo: should this be only on the client?
 	public string StrongsH
 	{
 		get

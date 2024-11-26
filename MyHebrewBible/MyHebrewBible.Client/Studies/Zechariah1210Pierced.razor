@@ -1,0 +1,83 @@
+﻿@using MyHebrewBible.Client.Helpers
+@using BLBEnum=MyHebrewBible.Client.Enums
+
+<div class="card border-danger mt-3 mb-2 mx-3">
+
+	<div class="card-body py-1">
+		<p class="text-center mb-1">&mdash; JKM Commentary &mdash;</p>
+		<p class="card-title">@HtmlGeneration.CommentaryHeader("Compare Rev 1:7-8 with Zec 12:10 and Isa 53:5")</p>
+	</div>
+
+	<div class="card-body my-1 py-1">
+		<p>
+			I subscribe to the idea that Yeshua is not only the Aleph and the Tav but that he can be found in the scripture as the <b>"standalone"</b> Aleph Tav (SAT).
+			I make a case for that in the <a href="@GlobalEnums.Nav.AlephTavs.Index">@GlobalEnums.Nav.AlephTavs.Title</a> <i class="fas fa-arrow-right"></i> page.
+		</p>
+
+		<p>
+			Below are two prime examples of what I am talking about in Zechariah and Isaiah both of which have an SAT.
+			I am injecting this commentary here because of the relevance that it has with Rev 1:7-8 and especially the "NG Translation"
+			because this Hebrew version says <span class="hebrew">הָאָלֶף וְהַתָּו</span> ("Aleph Tav") instead of the Greek translation which says <b>Alpha</b>
+			@Enums.BibleAnchors.StrongsG(1, "Aleph") and <b>Omega</b> @Enums.BibleAnchors.StrongsG(5598, "Omega").
+		</p>
+
+		<p>
+			The Hebrew version not only also uses <span class="fw-bold">Yehovah</span> <span class="hebrew">יְחוָה</span> <span class="fw-bold">the Elohim</span> <span class="hebrew">הָאֶלֹחִים</span> but gives the vowel points for Yehovah.
+		</p>
+
+		<p>
+			To help the user see the connection I would embellish Nehemia's translation by adding <span class="text-danger">red letters</span> to Aleph and Tav like this...
+		</p>
+	</div>
+
+
+	<div class="card-body py-1 mb-2">
+		<h5 class="card-title">Revelation 1:8 NGT</h5>
+		<p class="card-text bg-info-subtle mt-1 ps-4">
+			<i class="fas fa-quote-left"></i>
+			<sup>8</sup>
+			I am the <span class="fw-bold text-danger">Aleph</span> and the <span class="fw-bold text-danger">Tav</span>...
+		</p>
+	</div>
+
+	<div class="card-body my-1 py-1">
+
+		<p class="">
+			But out of respect for Nehemia's translation and to not impose my beliefs onto others, I didn't want to do that here.
+			What I did do however was to add a button that user could click to see the red lettered version
+			Note, I did leave the <b>bold</b> markup around Yehovah and Elohim (both the English and Hebrew) as I wouldn't think Nehemia would mind.
+		</p>
+	</div>
+
+	<div class="card-body py-1 mb-2">
+		<h5 class="card-title">@BLBEnum.BLB.KJV.AnchorBCV(Enums.BibleBook.Zechariah.Value, 12, 10)</h5>
+		<p class="card-text bg-info-subtle mt-1 ps-4">
+			<i class="fas fa-quote-left"></i>
+			<sup>10</sup>
+			I will pour upon the house of David, and upon the inhabitants of Jerusalem, the spirit of grace and of supplications:
+			and they shall <mark>look upon <b>me</b></mark> (<span class="text-danger fw-bold hebrew">תא</span>) <mark>whom they have pierced</mark>,
+			and they shall mourn for him, as one mourneth for his only son,
+			and shall be in bitterness for him, as one that is in bitterness for his firstborn.
+		</p>
+	</div>
+
+	<div class="card-body py-1 mb-2">
+		<h5 class="card-title">@BLBEnum.BLB.KJV.AnchorBCV(Enums.BibleBook.Isaiah.Value, 53, 5)</h5>
+		<p class="card-text bg-info-subtle mt-1 ps-4">
+			<i class="fas fa-quote-left"></i>
+			<sup>5</sup> But he <span class="text-muted"><i>was</i></span> <mark>wounded for our transgressions</mark>, <span class="text-muted"><i>he was</i></span> <mark>bruised for our iniquities</mark>:
+			the chastisement of our peace <span class="text-muted"><i>was</i></span> upon him; and with <b>his stripes we are healed</b>.
+			<sup>6</sup> All we like sheep have gone astray; we have turned every one to his own way; and <span class="@HebrewSize">יהוה</span>
+			hath laid on <b>him</b> (<span class="text-danger fw-bold hebrew">תא</span>) the iniquity of us all.
+		</p>
+	</div>
+
+</div>
+
+
+
+
+
+@code {
+	string HebrewSize = "hebrew"; // hebrew30
+}

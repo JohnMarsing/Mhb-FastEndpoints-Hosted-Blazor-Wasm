@@ -15,15 +15,29 @@
 <nav class="navbar navbar-expand bg-info-subtle fixed-top">
 
 	<div class="collapse navbar-collapse justify-content-start">
-		<div class="ps-1">
+		<div class="px-1">
 			<HomeButton />
 		</div>
 	</div>
 
 	<div class="collapse navbar-collapse justify-content-center">
-		<div class="">
+		<div class="px-1">
 			<h5 class="text-center"><i class="@PageEnum.Icon"></i>&nbsp;&nbsp;@PageEnum.Title</h5>
 		</div>
+	</div>
+
+	<div class="collapse navbar-collapse justify-content-end">
+		@if (PageEnum == Nav.BibleSearch)
+		{
+			<div class="pe-1">
+				<PageHeaderNavAnchor NavTo="NavToAnchor.HebrewKeyboard" />
+			</div>
+		}
+
+		<div class="pe-1">
+			<PageInstructionsDefault />
+		</div>
+
 	</div>
 
 </nav>

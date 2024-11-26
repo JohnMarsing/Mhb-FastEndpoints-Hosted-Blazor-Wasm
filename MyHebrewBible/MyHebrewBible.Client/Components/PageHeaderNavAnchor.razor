@@ -1,0 +1,9 @@
+﻿@using MyHebrewBible.Client.Enums
+
+<a class="btn btn-outline-primary" title="@NavTo?.Description" href="@NavTo?.Url" target="_blank">
+	<i class="@NavTo?.Icon"></i>
+</a>
+
+@code {
+	[Parameter, EditorRequired] public NavToAnchor? NavTo { get; set; }
+}

@@ -1,0 +1,45 @@
+﻿@using MyHebrewBible.Client.Helpers
+@using MyHebrewBible.Client.Features.Translations.NGIHR
+
+
+<Verse3ColGridTemplate VerseNumber="9" VerseHebrew="ט" AddGridHeader="true">
+	<Col1>
+		I know your deeds and the suffering	and the poverty, but you are rich.
+		and the despising of those who speak to be <mark>Judaic</mark> @HtmlGeneration.FootnoteNG(14)
+		and they are not, but rather the council of the satan.
+	</Col1>
+	<Col2>
+		I know thy works, and tribulation, and poverty, (but thou art rich) and I know the blasphemy @Enums.BibleAnchors.StrongsG(988, "blasphēmia")
+		of them which say they are Jews @Enums.BibleAnchors.StrongsG(2453, "ioudaios"), and are not,
+		but are the synagogue @Enums.BibleAnchors.StrongsG(4864, "synagōgē") of Satan @Enums.BibleAnchors.StrongsG(4567, "satanas").
+	</Col2>
+	<Col3>
+		יֹוֹדֵעַ-אֲנִי הַמַּעֲשֶׂיךׇ וְהַצָּרָה וְּהַו־דַּלָּה כִּׁי-אִם כָּבֵד-אָתָּה והַנְּאָצַת הַמְּדַבְּרִים יִּים לִהְיוֹת וְלֹא הֵמָה כּי־אִם כְּנֶסֶת הַשׇּׂטָן
+	</Col3>
+</Verse3ColGridTemplate>
+
+<div class="card border-primary p-2 my-1">
+
+	<div class="card-body">
+		@HtmlGeneration.FootnoteNG(14)
+		Yehud<mark>iy</mark>im is an adjective meaning "Judaic" and distinct from <b>Yehudim</b>, the normal word for "Jews".
+		Yehud<mark>iy</mark>im was understood as referring to the <mark>Ten Lost Tribes</mark> who labeled themselves "Judaic", but not "Jewish".
+		This is referred to in <a href="https://www.sefaria.org/Bereshit_Rabbah.98.2?lang=bi">Genesis Rabbah, Vayechi, Section 97</a>,
+	</div>
+
+	<div class="card-body">
+		<i class="fas fa-quote-left"></i>
+		also in this world you will be honored that all the tribes will call themselves Yehudiyim, just as you are called Yehudah
+	</div>
+
+	<div class="card-body @HebrewSize">
+		<sup><i class="fas fa-quote-right"></i></sup>
+		אף בעולם הזה תזכה שיקראו כל השבטים על שמך יהודיים, כשם שנקראת אתה יהודה
+	</div>
+
+</div>
+
+
+@code {
+	string HebrewSize = "hebrew"; // hebrew30
+}

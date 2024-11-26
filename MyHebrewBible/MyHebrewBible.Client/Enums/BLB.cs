@@ -48,7 +48,6 @@ public abstract class BLB : SmartEnum<BLB>
 
 	#endregion
 
-
 	private BLB(string name, int value) : base(name, value)  // Constructor
 	{
 	}
@@ -56,7 +55,6 @@ public abstract class BLB : SmartEnum<BLB>
 	#region Extra Fields
 	public abstract string Title { get; }
 	#endregion
-
 
 	#region Private Instantiation
 
@@ -163,6 +161,7 @@ public abstract class BLB : SmartEnum<BLB>
 		}
 	}
 
+	//ToDo: do a range of verses https://www.blueletterbible.org/kjv/ecc/2/5-6/s_661005
 	public MarkupString AnchorBCV(int book, int chapter, int verse)
 	{
 		BookChapterVerse? bcv = null;
@@ -185,10 +184,9 @@ public abstract class BLB : SmartEnum<BLB>
 		}
 	}
 
-
 }
 
-// Ignore Spelling: KJV NKJV WLC
+// Ignore Spelling: KJV NKJV WLC Strongs
 
 /*
 s += $"{bookChapterVerse.BookAndChapter.BibleBook.Abrv} {bookChapterVerse.BookAndChapter.Chapter} {bookChapterVerse.Verse}";
