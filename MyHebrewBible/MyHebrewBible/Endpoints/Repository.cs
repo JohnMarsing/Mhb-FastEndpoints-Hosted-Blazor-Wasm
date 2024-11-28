@@ -6,26 +6,41 @@ namespace MyHebrewBible.Endpoints;
 
 public class Repository
 {
+	private readonly ILogger<Repository> _logger;
 	private readonly IDbConnectionFactory _connectionFactory;
 	public DynamicParameters? Parms { get; set; }
 
-	public Repository(IDbConnectionFactory connectionFactory)
+	public Repository(IDbConnectionFactory connectionFactory, ILogger<Repository> logger)
 	{
 		_connectionFactory = connectionFactory;
+		_logger = logger;
 	}
+
+	#region GetBookChapter
+	private const string SqlGetBookChapter = @"
+		SELECT ID, BCV, Verse, VerseOffset, KJV, DescH, DescD  
+		FROM Scripture
+		WHERE BookID=@BookId and Chapter=@Chapter
+		ORDER BY ID";
 
 	public async Task<IEnumerable<BibleVerse?>> GetBookChapter(long bookID, long chapter)
 	{
-		using var connection = await _connectionFactory.CreateConnectionAsync();
-		Parms = new DynamicParameters(new { BookId = bookID, Chapter = chapter });
-		var verseList = await connection.QueryAsync<BibleVerse>(@"
-		SELECT ID, BCV, Verse, VerseOffset, KJV, DescH, DescD  
-		FROM Scripture 
-		WHERE BookID=@BookId and Chapter=@Chapter
-		ORDER BY ID", Parms);
-
-		return verseList;
+		try
+		{
+			_logger.LogDebug("{Method} Get B/C: {bookID}/{chapter}"
+				, nameof(GetBookChapter), bookID, chapter);
+			using var connection = await _connectionFactory.CreateConnectionAsync();
+			Parms = new DynamicParameters(new { BookId = bookID, Chapter = chapter });
+			var verseList = await connection.QueryAsync<BibleVerse>(SqlGetBookChapter, Parms);
+			return verseList;
+		}
+		catch (Exception ex)
+		{ 
+			_logger!.LogError(ex, "{Method} Sql:{Sql}", nameof(GetBookChapter), SqlGetBookChapter);
+			throw;
+		}
 	}
+	#endregion
 
 	public async Task<IEnumerable<WordPart?>> GetWordParts(long scriptureID)
 	{

@@ -1,5 +1,5 @@
 ﻿@inject ApiClient Api 
-@inject ILogger<Index>? Logger
+@inject ILogger<Sections>? Logger
 
 @if (verses == null)
 {
@@ -9,13 +9,13 @@ else
 {
 	if (FocusScriptureId == 0)
 	{
-		<ParagraphTop TopVerses="versesTop" OnVerseSelected="ReturnedVerse" />
+		<Paragraph BibleVerses="versesTop" OnVerseSelected="ReturnedVerse"  />
 	}
 	else
 	{
 		@if (versesTop is not null)
 		{
-			<ParagraphTop TopVerses="versesTop" OnVerseSelected="ReturnedVerse" />
+			<Paragraph BibleVerses="versesTop" OnVerseSelected="ReturnedVerse" />
 		}
 		else
 		{
@@ -37,7 +37,7 @@ else
 
 		@if (versesBottom is not null)
 		{
-			<ParagraphBottom BottomVerses="versesBottom" OnVerseSelected="ReturnedVerse" />
+			<Paragraph BibleVerses="versesBottom" OnVerseSelected="ReturnedVerse" />
 		}
 		else
 		{
@@ -77,7 +77,7 @@ else
 		}
 	}
 
-	// From the ButtonClick of either ParagraphTop or ParagraphBottom
+	// From the ButtonClick of either Paragraph
 	private void ReturnedVerse(ScriptureIdAndVerseNumber scriptureIdAndVerseNumber)
 	{
 		FocusScriptureId = scriptureIdAndVerseNumber.ScriptureID;

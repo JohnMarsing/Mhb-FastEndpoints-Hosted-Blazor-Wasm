@@ -5,7 +5,7 @@
 @inject NavigationManager NavigationManager
 
 <button @onclick="@(() => ButtonClicked(Nav!.Value))" title="@Nav!.Title @Nav!.HomeTitleSuffix"
-				class="list-group-item list-group-item-warning mt-1 @Nav!.DisabledHtml">
+				class="list-group-item @ButtonCollor mt-1 @Nav!.DisabledHtml">
 	<div class="d-flex w-100 justify-content-between">
 		<i class="@Nav!.Icon fa-fw @IconSize" aria-hidden="true"></i>
 		<span class="@FontSize @Nav!.DisabledColor">@Nav!.Title</span>
@@ -18,12 +18,14 @@
 @code {
 	[Parameter, EditorRequired] public Nav? Nav { get; set; }
 	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
+	[Parameter] public bool IsFeatured { get; set; } = false;
 
 	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
 
 	protected string IconSize => $"{(MediaQuery == MediaQuery.Sm ? " fa-2x" : " fa-3x")}";
 	protected string FontSize => $"{(MediaQuery == MediaQuery.Sm ? " fs-5" : " fs-4")}";
-
+	protected string ButtonCollor => $"{(IsFeatured ? " list-group-item-danger" : " list-group-item-warning")}";
+	
 
 	private void ButtonClicked(int id)
 	{

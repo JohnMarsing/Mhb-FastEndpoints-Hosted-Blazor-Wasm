@@ -79,6 +79,7 @@
 
 		await CascadingAppState!.AppState!.BookChapterState!.Update(rec);
 		CurrentBookAndChapter = bookAndChapter!;
+		//Logger!.LogInformation("{Method}, CurrentBookAndChapter: {CurrentBookAndChapter}", nameof(ReturnedBookAndChapter), CurrentBookAndChapter);
 		PageTitle = GlobalEnums.BibleBookFormat.BC(bookAndChapter);
 	}
 
