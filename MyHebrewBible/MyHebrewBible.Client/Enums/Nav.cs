@@ -446,7 +446,7 @@ public abstract class Nav : SmartEnum<Nav>
 	private sealed class HebrewRevelationSE : Nav
 	{
 		public HebrewRevelationSE() : base($"{nameof(Id.HebrewRevelation)}", Id.HebrewRevelation) { }
-		public override string Index => "HR";
+		public override string Index => "HebrewRevelation";
 		public override string Title => "Hebrew Revelation";
 		public override string Icon => "fas fa-eye";  
 		public override int Sort => Id.Profile;

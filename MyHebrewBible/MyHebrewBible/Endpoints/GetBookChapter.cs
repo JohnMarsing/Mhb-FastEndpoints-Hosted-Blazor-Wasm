@@ -16,14 +16,27 @@ public class GetBookChapter : Endpoint<BookChapterRequest, IEnumerable<BibleVers
 	}
 
 	private readonly Repository _db;
-	public GetBookChapter(Repository repository)
+	private readonly ILogger<GetBookChapter> _logger;
+	public GetBookChapter(Repository repository, ILogger<GetBookChapter> logger)
 	{
 		_db = repository;
+		_logger = logger;
 	}
 
 	public override async Task HandleAsync(BookChapterRequest request, CancellationToken ct)
 	{
-		IEnumerable<BibleVerse?> verses = await _db.GetBookChapter(request.BookID, request.Chapter);
-		await SendAsync(verses.ToList()!);
+		_logger.LogDebug("{Method} Get B/C: {BookID}/{Chapter}"
+			, nameof(BookChapterRequest), request.BookID, request.Chapter);
+		try
+		{
+			IEnumerable<BibleVerse?> verses = await _db.GetBookChapter(request.BookID, request.Chapter);
+			_logger.LogDebug($"Retrieved {verses.Count()} verses from the database.");
+			await SendAsync(verses.ToList()!);
+		}
+		catch (Exception ex)
+		{
+			_logger!.LogError(ex, "{Method}", nameof(BookChapterRequest));
+			throw;
+		}
 	}
 }

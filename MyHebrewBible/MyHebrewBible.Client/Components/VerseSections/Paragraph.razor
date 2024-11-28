@@ -1,11 +1,19 @@
-﻿@if (TopVerses != null)
+﻿@if (BibleVerses != null)
 {
 	@* <h6 class="mt-4 mb-1">Top</h6> *@
 
-	@foreach (var item in TopVerses)
+	@foreach (var item in BibleVerses)
 	{
-		<p class="fs-5">
+		@if (item.DescH != "NULL")
+		{
+			<p class="text-primary text-center fs-4 mt-1 mb-2">@item.DescH</p>
+		}
+		@if (item.DescD != "NULL")
+		{
+			<p class="text-secondary fs-6 text-end mb-0"><em>@item.DescD</em></p>
+		}
 
+		<p class="fs-5">
 			<a title="@item.BCV [@item.ID]" @onclick="@(e => ButtonClick(item.ID, item.Verse))">
 				<sup class="btn btn-outline-primary py-0 px-1">
 					<b>@item.Verse</b>
@@ -17,7 +25,7 @@
 }
 
 @code {
-	[Parameter, EditorRequired] public List<BibleVerse>? TopVerses { get; set; }
+	[Parameter, EditorRequired] public List<BibleVerse>? BibleVerses { get; set; }
 	[Parameter] public EventCallback<ScriptureIdAndVerseNumber> OnVerseSelected { get; set; }
 
 	private void ButtonClick(long scriptureId, long verse)

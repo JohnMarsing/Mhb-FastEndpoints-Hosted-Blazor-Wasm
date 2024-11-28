@@ -39,12 +39,7 @@ else
 										 Strongs="Strongs"
 										 OnHebrewSelected="ReturnedHebrew" />
 			}
-			@* 
-				@if (versesBottom is not null)
-				{
-					<ParagraphBottom BottomVerses="versesBottom" OnVerseSelected="ReturnedVerse" />
-				}
-			*@		
+
 		}
 
 	}
@@ -52,13 +47,13 @@ else
 	{
 		if (FocusScriptureId == 0)
 		{
-			<ParagraphTop TopVerses="versesTop" OnVerseSelected="ReturnedVerse" />
+			<Paragraph BibleVerses="versesTop" OnVerseSelected="ReturnedVerse" />
 		}
 		else
 		{
 			@if (versesTop is not null)
 			{
-				<ParagraphTop TopVerses="versesTop" OnVerseSelected="ReturnedVerse" />
+				<Paragraph BibleVerses="versesTop" OnVerseSelected="ReturnedVerse" />
 			}
 
 			<WordSegmentsCard ScriptureId="FocusScriptureId"
@@ -76,7 +71,7 @@ else
 
 			@if (versesBottom is not null)
 			{
-				<ParagraphBottom BottomVerses="versesBottom" OnVerseSelected="ReturnedVerse" />
+				<Paragraph BibleVerses="versesBottom" OnVerseSelected="ReturnedVerse" />
 			}
 		}
 	}
