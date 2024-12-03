@@ -493,15 +493,15 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerse>> GetVerseListAsync(long begId, long endId)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerse>> GetVerseListBetweenIdsAsync(long begId, long endId)
         {
-            return GetVerseListAsync(begId, endId, System.Threading.CancellationToken.None);
+            return GetVerseListBetweenIdsAsync(begId, endId, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerse>> GetVerseListAsync(long begId, long endId, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerse>> GetVerseListBetweenIdsAsync(long begId, long endId, System.Threading.CancellationToken cancellationToken)
         {
             if (begId == null)
                 throw new System.ArgumentNullException("begId");
@@ -520,8 +520,8 @@ namespace MyHebrewBible.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/VerseList/{begId}/{endId}"
-                    urlBuilder_.Append("api/VerseList/");
+                    // Operation Path: "api/VerseListBetweenIds/{begId}/{endId}"
+                    urlBuilder_.Append("api/VerseListBetweenIds/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(begId, System.Globalization.CultureInfo.InvariantCulture)));
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(endId, System.Globalization.CultureInfo.InvariantCulture)));

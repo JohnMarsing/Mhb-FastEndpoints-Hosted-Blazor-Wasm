@@ -1,4 +1,4 @@
-﻿@page "/VerseList"
+﻿@page "/verselist/{bookid:int}/{chapter:int}/{begverse:int}/{endverse:int}"
 
 @using MyHebrewBible.Client.Components.BibleLookup
 @using MyHebrewBible.Client.Components.BibleLookup.Toolbar;
@@ -8,44 +8,62 @@
 
 @inject ILogger<Index>? Logger
 @inject IToastService? Toast
+@inject NavigationManager NavigationManager
 
 <PageTitle>@PageTitle</PageTitle>
 
-<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
-	<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
-									 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
-									 MediaQuery="GlobalEnums.MediaQuery.Xs" />
-</div>
-<div class="@GlobalEnums.MediaQuery.Sm.DivClass">
-	<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
-									 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
-									 MediaQuery="GlobalEnums.MediaQuery.Sm" />
-</div>
-<div class="@GlobalEnums.MediaQuery.Md.DivClass">
-	<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
-									 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
-									 MediaQuery="GlobalEnums.MediaQuery.Md" />
-</div>
-<div class="@GlobalEnums.MediaQuery.Lg.DivClass">
-	<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
-									 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
-									 MediaQuery="GlobalEnums.MediaQuery.Lg" />
-</div>
-<div class="@GlobalEnums.MediaQuery.Xl.DivClass">
-	<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
-									 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
-									 MediaQuery="GlobalEnums.MediaQuery.Xl" />
-</div>
+@if (CurrentVM is not null)
+{
+	<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+		<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
+										 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
+										 MediaQuery="GlobalEnums.MediaQuery.Xs" />
+	</div>
+	<div class="@GlobalEnums.MediaQuery.Sm.DivClass">
+		<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
+										 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
+										 MediaQuery="GlobalEnums.MediaQuery.Sm" />
+	</div>
+	<div class="@GlobalEnums.MediaQuery.Md.DivClass">
+		<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
+										 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
+										 MediaQuery="GlobalEnums.MediaQuery.Md" />
+	</div>
+	<div class="@GlobalEnums.MediaQuery.Lg.DivClass">
+		<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
+										 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
+										 MediaQuery="GlobalEnums.MediaQuery.Lg" />
+	</div>
+	<div class="@GlobalEnums.MediaQuery.Xl.DivClass">
+		<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
+										 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
+										 MediaQuery="GlobalEnums.MediaQuery.Xl" />
+	</div>
+}
+else
+{
+	<p> <b>Features\VerseList\Index.razor</b> <code>CurrentVM is not null</code></p>
+}
 
 @if (CurrentVM is not null)
 {
-	<div class="mt-5">
-		<br />
-		<Sections VM="CurrentVM" CalledBy="EnumCalledBy.VerseList" />
-	</div>
+	<LoadingProgress>
+		<div class="mt-5">
+			<br />
+			<Sections VM="CurrentVM" CalledBy="EnumCalledBy.VerseList" />
+		</div>
+	</LoadingProgress>
+}
+else
+{
+	<p> <b>Features\VerseList\Index.razor</b> <code>CurrentVM is not null</code></p>
 }
 
 @code {
+	[Parameter, EditorRequired] public int BookId { get; set; }
+	[Parameter, EditorRequired] public int Chapter { get; set; }
+	[Parameter, EditorRequired] public int BegVerse { get; set; }
+	[Parameter, EditorRequired] public int EndVerse { get; set; }
 
 	public Header? CurrentHeader { get; set; }
 	public BookChapterVerse? CurrentVM { get; set; }
@@ -54,33 +72,55 @@
 
 	protected string PageTitle => GlobalEnums.BibleBookFormat.BCV(CurrentVM, useAbrv: false);
 
-	protected override void OnInitialized()
+	protected override void OnParametersSet()
 	{
-		Logger!.LogInformation("{Method}", nameof(OnInitialized));
+		//Logger!.LogInformation("{Method}, Route BCVbVe: {BookId}/{Chapter}/{BegVerse}/{EndVerse}"
+		//	, nameof(OnParametersSet), BookId, Chapter, BegVerse, EndVerse);
 		try
 		{
 			/*
 			Header header = state!.GetHeader();
 			CurrentHeader = new BookAndChapter(BibleBook.FromValue(_state.BibleBookId), _state.Chapter);
 			*/
-			DetailRecord bcv = CascadingAppState!.AppState!.VerseListState!.GetBCV();
-			BookAndChapter bookAndChapter = new BookAndChapter(GlobalEnums.BibleBook.FromValue(bcv.BibleBookId), bcv.Chapter);
-			CurrentVM = new BookChapterVerse(bookAndChapter, bcv.BegVerse);
-			//PageTitle = GlobalEnums.BibleBookFormat.BCV(CurrentVM); 
+			if (BookId == 0 && Chapter == 0) //  && BegVerse == 0 && EndVerse == 0 the first two should be sufficient
+			{
+				ReNavigateBackToThisPage();
+			}
+			else
+			{
+				CurrentVM = new BookChapterVerse(new BookAndChapter(GlobalEnums.BibleBook.FromValue(BookId), Chapter), BegVerse);
+			}
 
 		}
 		catch (Exception ex)
 		{
-			Logger!.LogError(ex, "VerseList!{Class}!{Method}", nameof(Index), nameof(OnInitialized));
-			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnInitialized)}");
+			Logger!.LogError(ex, "VerseList!{Class}!{Method}", nameof(Index), nameof(OnParametersSet));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnParametersSet)}");
 		}
 	}
 
-	private async Task ReturnedBookChapterVerse(BookChapterVerse vm)  //async Task
+	private void ReNavigateBackToThisPage()
 	{
-		CurrentVM = vm!;
-		//state!.UpdateHeader(new VerseListState(CurrentBookAndChapter.BibleBook!.Value, CurrentBookAndChapter.Chapter));
-		await CascadingAppState!.AppState!.VerseListState!.UpdateBCV(new DetailRecord(vm.BookAndChapter.BibleBook, vm.BookAndChapter.Chapter, vm.Verse, vm.Verse, "Just Got Updated"));
+		// Last member FYI , string? NotesMD
+		DetailRecord? bcv = CascadingAppState!.AppState!.VerseListState!.GetBCV();
+		if (bcv is null)
+		{
+			Logger!.LogInformation("{Method}, bcv is null???", nameof(OnParametersSet));
+			Toast!.ShowWarning($"bcv is null, DetailRecord not found");
+		}
+		else
+		{
+			GlobalEnums.BibleBook bibleBook = GlobalEnums.BibleBook.FromValue(bcv.BibleBookId);
+			NavigationManager!.NavigateTo(Components.Helper.GetNavigateToUrlVerseList(bibleBook, bcv.Chapter, bcv.BegVerse, bcv.EndVerse));
+		}
 	}
 
+
+	private async Task ReturnedBookChapterVerse(BookChapterVerse vm)
+	{
+		CurrentVM = vm!;
+		await CascadingAppState!.AppState!.VerseListState!.UpdateBCV(
+			new DetailRecord(vm.BookAndChapter.BibleBook, vm.BookAndChapter.Chapter, vm.Verse, vm.Verse, "Just Got Updated"));
+	}
+	// Ignore Spelling: bcv
 }

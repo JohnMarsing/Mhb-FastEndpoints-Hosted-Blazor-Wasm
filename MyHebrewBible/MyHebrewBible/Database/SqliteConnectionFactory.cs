@@ -19,3 +19,4 @@ public class SqliteConnectionFactory : IDbConnectionFactory
 		return connection;
 	}
 }
+// Ignore Spelling: Sqlite

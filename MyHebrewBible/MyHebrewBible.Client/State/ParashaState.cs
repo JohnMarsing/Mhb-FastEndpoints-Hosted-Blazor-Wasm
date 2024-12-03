@@ -21,7 +21,7 @@ public class ParashaState
 	#endregion
 
 	private const string Key = "parasha-show-section-permutation";
-	private bool _isInitialized;
+	private bool _isInitialized = false; //private bool _isInitialized;  warning CS0649: Field 'ParashaState._isInitialized' is never assigned to, and will always have its default value false
 	private void NotifyStateHasChanged() => OnChange?.Invoke();
 	public event Action? OnChange;
 
@@ -49,6 +49,7 @@ public class ParashaState
 					await Update(defaultPermutation);
 				}
 			}
+			//_isInitialized = true;
 		}
 	}
 

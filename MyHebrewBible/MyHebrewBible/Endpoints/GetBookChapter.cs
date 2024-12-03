@@ -1,4 +1,6 @@
-﻿namespace MyHebrewBible.Endpoints;
+﻿using MyHebrewBible.Client.Enums;
+
+namespace MyHebrewBible.Endpoints;
 
 public class BookChapterRequest
 {
@@ -11,15 +13,15 @@ public class GetBookChapter : Endpoint<BookChapterRequest, IEnumerable<BibleVers
 {
 	public override void Configure()
 	{
-		Get("/bookchapter/{bookid:long}/{chapter:long}");
+		Get(Api.BookChapter.EndPoint);
 		AllowAnonymous();
 	}
 
-	private readonly Repository _db;
+	private readonly Query _db;
 	private readonly ILogger<GetBookChapter> _logger;
-	public GetBookChapter(Repository repository, ILogger<GetBookChapter> logger)
+	public GetBookChapter(Query query, ILogger<GetBookChapter> logger)
 	{
-		_db = repository;
+		_db = query;
 		_logger = logger;
 	}
 

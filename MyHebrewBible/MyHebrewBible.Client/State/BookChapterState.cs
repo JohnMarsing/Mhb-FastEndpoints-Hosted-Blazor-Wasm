@@ -18,7 +18,7 @@ public class BookChapterState
 	}
 	#endregion
 
-	private const string Key = "biblebookidandchapter";
+	private const string Key = "biblebookidandchapter"; // Ignore Spelling: biblebookidandchapter
 	private bool _isInitialized;
 	private void NotifyStateHasChanged() => OnChange?.Invoke();
 	public event Action? OnChange;

@@ -84,17 +84,16 @@ else
 
 	private void PopulateButtonRows(int verseCount)
 	{
-		Logger!.LogInformation("{Class}!{Method}; verseCount: {VerseCount}, buttonsPerRow: {buttonsPerRow}"
-		, nameof(VerseModal), nameof(PopulateButtonRows), verseCount, buttonsPerRow);
-
+		//Logger!.LogInformation("{Class}!{Method}; verseCount: {VerseCount}, buttonsPerRow: {buttonsPerRow}"
+		//, nameof(VerseModal), nameof(PopulateButtonRows), verseCount, buttonsPerRow);
 		try
 		{
 			if (buttonsPerRow >= verseCount)
 			{
 				ButtonRows.Add(new ButtonRange(1, verseCount));
 
-				Logger!.LogInformation("{Class}!{Method}; Add only 1 row, ButtonRows: {ButtonRows}"
-					, nameof(VerseModal), nameof(PopulateButtonRows), ButtonRows);
+				//Logger!.LogInformation("{Class}!{Method}; Add only 1 row, ButtonRows: {ButtonRows}"
+				//	, nameof(VerseModal), nameof(PopulateButtonRows), ButtonRows);
 			}
 			else
 			{
@@ -104,8 +103,8 @@ else
 				int s = 1;
 				int e = buttonsPerRow;
 
-				Logger!.LogInformation("{Class}!{Method}; wholeRowCount: {wholeRowCount}, lastRowButtonCount: {lastRowButtonCount}"
-					, nameof(VerseModal), nameof(PopulateButtonRows), wholeRowCount, lastRowButtonCount);
+				//Logger!.LogInformation("{Class}!{Method}; wholeRowCount: {wholeRowCount}, lastRowButtonCount: {lastRowButtonCount}"
+				//	, nameof(VerseModal), nameof(PopulateButtonRows), wholeRowCount, lastRowButtonCount);
 
 				for (int r = 1; r <= wholeRowCount; r++)
 				{

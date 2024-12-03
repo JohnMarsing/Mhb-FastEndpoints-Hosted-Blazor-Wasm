@@ -73,38 +73,6 @@ ORDER BY BegId
 		return mitzvot;
 	}
 
-	public async Task<IEnumerable<BibleVerse?>> GetVerseList(long begId, long endId)
-	{
-		using var connection = await _connectionFactory.CreateConnectionAsync();
-		Parms = new DynamicParameters(new { BegId = begId, EndId = endId });
-
-		var versList = await connection.QueryAsync<BibleVerse>(@"
-
-SELECT ID, BCV, Verse, KJV, VerseOffset, DescH, DescD
-FROM Scripture
-WHERE ID BETWEEN @BegId AND @EndId
-ORDER BY ID
-", Parms);
-		return versList;
-	}
-
-	public async Task<IEnumerable<BibleVerse?>> GetVerseListByBCV(long bookId, long chapter, long begVerse, long endVerse)
-	{
-		using var connection = await _connectionFactory.CreateConnectionAsync();
-		Parms = new DynamicParameters(new { BookId = bookId, Chapter = chapter, BegVerse = begVerse, EndVerse = endVerse });
-
-		//DECLARE  @BookId int=1,  @Chapter int=12,  @BegVerse int=2,  @EndVerse int=3
-		//ToDo: I don't really need DescH and DescD
-		var versList = await connection.QueryAsync<BibleVerse>(@"
-SELECT ID, BCV, Verse, KJV, VerseOffset, DescH, DescD
-FROM Scripture
-WHERE BookId=@BookId AND Chapter=@Chapter AND Verse BETWEEN @BegVerse AND @EndVerse
-ORDER BY ID
-", Parms);
-
-		return versList;
-	}
-
 	#region AlephTavHebrewVerse
 	private const string alephTavHebrewVerseSelect = @"
 SELECT 

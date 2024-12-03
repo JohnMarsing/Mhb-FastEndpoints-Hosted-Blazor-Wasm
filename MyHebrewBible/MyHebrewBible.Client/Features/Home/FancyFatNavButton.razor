@@ -4,16 +4,18 @@
 
 @inject NavigationManager NavigationManager
 
-<button @onclick="@(() => ButtonClicked(Nav!.Value))" title="@Nav!.Title @Nav!.HomeTitleSuffix"
+<button @onclick="ButtonClicked" title="@Nav!.Title @Nav!.HomeTitleSuffix"
 				class="list-group-item @ButtonCollor mt-1 @Nav!.DisabledHtml">
 	<div class="d-flex w-100 justify-content-between">
 		<i class="@Nav!.Icon fa-fw @IconSize" aria-hidden="true"></i>
-		<span class="@FontSize @Nav!.DisabledColor">@Nav!.Title</span>
+		<span class="@FontSize @Nav!.TextColor">@Nav!.Title</span>
 		<span class="float-end text-info">
 			<span class="hebrew">@Nav!.HomeFloatRightHebrew</span>
 		</span>
 	</div>
 </button>
+
+
 
 @code {
 	[Parameter, EditorRequired] public Nav? Nav { get; set; }
@@ -25,36 +27,24 @@
 	protected string IconSize => $"{(MediaQuery == MediaQuery.Sm ? " fa-2x" : " fa-3x")}";
 	protected string FontSize => $"{(MediaQuery == MediaQuery.Sm ? " fs-5" : " fs-4")}";
 	protected string ButtonCollor => $"{(IsFeatured ? " list-group-item-danger" : " list-group-item-warning")}";
-	
 
-	private void ButtonClicked(int id)
+	protected string? Route = string.Empty;
+
+	protected override void OnParametersSet()
 	{
-
-		if (Nav.FromValue(id) == Nav.BookChapter)
+		if (Api.TryFromValue(Nav!.Value, out var api))
 		{
-			// ToDo: this is a hack but it works. thinking I need to move much of this code to `Client.Enums.Nav`
-			BibleBookIdAndChapter? rec = CascadingAppState!.AppState!.BookChapterState!.Get();
-			if (rec is not null)
-			{
-				string slug = $"{Enums.BibleBook.FromValue(rec.BibleBookId).Abrv}-{rec.Chapter}";
-				NavigationManager!.NavigateTo($"{Nav.FromValue(id).Name}/{rec.BibleBookId}/{rec.Chapter}/{slug}");
-			}
-			else
-			{
-				NavigationManager!.NavigateTo($"{Nav.FromValue(id).Name}/1/1/gen-1-1"); // Default to Gen 1:1
-			}
+			Route = api.Route;
 		}
 		else
 		{
-			if (Nav.FromValue(id) == Nav.Parasha)
-			{
-				NavigationManager!.NavigateTo(ParashaEnums.Constants.GetUrl() ?? "");
-			}
-			else
-			{
-				NavigationManager!.NavigateTo(Nav.FromValue(id) + "/");
-			}
+			Route = Nav.Name;
 		}
-
 	}
+
+	private void ButtonClicked() 
+	{
+		NavigationManager!.NavigateTo(Route!);
+	}
+
 }
