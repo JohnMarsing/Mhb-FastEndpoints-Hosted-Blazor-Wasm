@@ -47,6 +47,7 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int ParashaList = 22;
 		internal const int HealthCheckBitwise = 23;
 		internal const int HebrewRevelation = 24;
+		internal const int Empty = 99;
 	}
 	#endregion
 
@@ -75,6 +76,7 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav ParashaList = new ParashaListSE();
 	public static readonly Nav HealthCheckBitwise = new HealthCheckBitwiseSE();
 	public static readonly Nav HebrewRevelation = new HebrewRevelationSE();
+	public static readonly Nav Empty = new EmptySE();
 	#endregion
 
 	private Nav(string name, int value) : base(name, value)  // Constructor
@@ -97,15 +99,14 @@ public abstract class Nav : SmartEnum<Nav>
 		get
 		{
 			return $"{(Disabled ? " disabled" : "")}";
-			//return $"{(Disabled ? "" : "")}";
 		}
 	}
 
-	public string DisabledColor
+	public string TextColor
 	{
 		get
 		{
-			return $"{(Disabled ? " text-black-50" : "")}";
+			return $"{(Disabled ? " text-black-50" : "text-primary")}";
 		}
 	}
 
@@ -457,11 +458,26 @@ public abstract class Nav : SmartEnum<Nav>
 		public override bool Disabled => false;
 	}
 
+	private sealed class EmptySE : Nav
+	{
+		public EmptySE() : base($"{nameof(Id.Empty)}", Id.Empty) { }
+		public override string Index => "Empty";
+		public override string Title => "Hebrew Revelation";
+		public override string Icon => "fas fa-eye";
+		public override int Sort => Id.Profile;
+		public override string HomeTitleSuffix => " ";
+		public override string HomeFloatRightHebrew => "";
+		public override PageListType PageListType => PageListType.SitemapPage;
+		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
+	}
+
 
 	#endregion
 
 
 	#region IsLayout
+	// Never used, but looks useful 
 	public bool IsLayoutShownXs
 	{
 		get { return this.PageListType == PageListType.LayoutXs ? true : false; }

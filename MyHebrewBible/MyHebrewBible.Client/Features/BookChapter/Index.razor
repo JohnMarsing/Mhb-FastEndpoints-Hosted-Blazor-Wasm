@@ -7,34 +7,35 @@
 
 @inject ILogger<Index>? Logger
 @inject NavigationManager NavigationManager
+@inject IToastService? Toast
 
 <PageTitle>@PageTitle</PageTitle>
 
-	<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
-		<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-											 OnBookAndChapterSelected="ReturnedBookAndChapter"
-											 MediaQuery="GlobalEnums.MediaQuery.Xs" />
-	</div>
-	<div class="@GlobalEnums.MediaQuery.Sm.DivClass">
-		<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-											 OnBookAndChapterSelected="ReturnedBookAndChapter"
-											 MediaQuery="GlobalEnums.MediaQuery.Sm" />
-	</div>
-	<div class="@GlobalEnums.MediaQuery.Md.DivClass">
-		<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-											 OnBookAndChapterSelected="ReturnedBookAndChapter"
-											 MediaQuery="GlobalEnums.MediaQuery.Md" />
-	</div>
-	<div class="@GlobalEnums.MediaQuery.Lg.DivClass">
-		<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-											 OnBookAndChapterSelected="ReturnedBookAndChapter"
-											 MediaQuery="GlobalEnums.MediaQuery.Lg" />
-	</div>
-	<div class="@GlobalEnums.MediaQuery.Xl.DivClass">
-		<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-											 OnBookAndChapterSelected="ReturnedBookAndChapter"
-											 MediaQuery="GlobalEnums.MediaQuery.Xl" />
-	</div>
+<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
+										 OnBookAndChapterSelected="ReturnedBookAndChapter"
+										 MediaQuery="GlobalEnums.MediaQuery.Xs" />
+</div>
+<div class="@GlobalEnums.MediaQuery.Sm.DivClass">
+	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
+										 OnBookAndChapterSelected="ReturnedBookAndChapter"
+										 MediaQuery="GlobalEnums.MediaQuery.Sm" />
+</div>
+<div class="@GlobalEnums.MediaQuery.Md.DivClass">
+	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
+										 OnBookAndChapterSelected="ReturnedBookAndChapter"
+										 MediaQuery="GlobalEnums.MediaQuery.Md" />
+</div>
+<div class="@GlobalEnums.MediaQuery.Lg.DivClass">
+	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
+										 OnBookAndChapterSelected="ReturnedBookAndChapter"
+										 MediaQuery="GlobalEnums.MediaQuery.Lg" />
+</div>
+<div class="@GlobalEnums.MediaQuery.Xl.DivClass">
+	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
+										 OnBookAndChapterSelected="ReturnedBookAndChapter"
+										 MediaQuery="GlobalEnums.MediaQuery.Xl" />
+</div>
 
 <LoadingProgress>
 	<div class="mt-5">
@@ -55,10 +56,36 @@
 
 	protected string PageTitle = string.Empty;
 
-	protected override void OnInitialized()
+	protected override void OnParametersSet()
 	{
-		Logger!.LogInformation("{Method}, Route: {BookId}/{Chapter}", nameof(OnInitialized), BookId, Chapter);
-		CurrentBookAndChapter = GetBookAndChapterViaRoutes(BookId, Chapter);
+		// Logger!.LogInformation("{Method}, Route: {BookId}/{Chapter}", nameof(OnParametersSet), BookId, Chapter);
+
+		if (BookId == 0 && Chapter == 0)
+		{
+			ReNavigateBackToThisPage();
+		}
+		else
+		{
+			CurrentBookAndChapter = GetBookAndChapterViaRoutes(BookId, Chapter);
+		}
+	}
+
+	private void ReNavigateBackToThisPage()
+	{
+		BibleBookIdAndChapter? rec;
+		rec = CascadingAppState!.AppState!.BookChapterState!.Get();
+		if (rec is null)
+		{
+			Logger!.LogWarning("{Method}, rec is null???", nameof(ReNavigateBackToThisPage));
+			Toast!.ShowWarning($"rec is null, BibleBookIdAndChapter not found");
+		}
+		else
+		{
+			Enums.BibleBook bibleBook = Enums.BibleBook.FromValue(rec.BibleBookId);
+			// Logger!.LogInformation("{Method}, BibleBook/Chapter: {BibleBook}/{Chapter}"
+			// 	, nameof(ReNavigateBackToThisPage), bibleBook.Value, rec.Chapter);
+			NavigationManager!.NavigateTo(Components.Helper.GetNavigateToUrl(bibleBook, rec.Chapter));
+		}
 	}
 
 	private BookAndChapter GetBookAndChapterViaRoutes(int bookId, int chapter)
@@ -74,7 +101,7 @@
 	{
 		BibleBookIdAndChapter rec = new BibleBookIdAndChapter(bookAndChapter.BibleBook!.Value, bookAndChapter.Chapter);
 		string slug = $"{Enums.BibleBook.FromValue(rec.BibleBookId).Abrv}-{rec.Chapter}";
-		Logger!.LogInformation("{Method}, Route: {BookId}/{Chapter}", nameof(ReturnedBookAndChapter), rec.BibleBookId, rec.Chapter);
+		//Logger!.LogInformation("{Method}, Route: {BookId}/{Chapter}", nameof(ReturnedBookAndChapter), rec.BibleBookId, rec.Chapter);
 		NavigationManager!.NavigateTo($"BookChapter/{rec.BibleBookId}/{rec.Chapter}/{slug}");
 
 		await CascadingAppState!.AppState!.BookChapterState!.Update(rec);

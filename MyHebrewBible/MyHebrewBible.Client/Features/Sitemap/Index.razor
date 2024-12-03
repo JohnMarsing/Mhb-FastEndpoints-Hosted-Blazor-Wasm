@@ -4,6 +4,8 @@
 @using MyHebrewBible.Client.Enums
 @using Page = MyHebrewBible.Client.Enums.Nav
 
+@inject NavigationManager NavigationManager
+
 <PageHeader PageEnum="Page.Sitemap" />
 
 <div class="h5">
@@ -11,19 +13,35 @@
 	<ul class="fa-ul">
 		@foreach (var item in Nav.List.ToList()
 			.Where(w => w.IsPartOfList(PageListType.SitemapPage))
-			.OrderBy(o => o.Sort))
+			.OrderBy(o => o.Name))
 		{
 			<li class="py-1">
-
 				<span class="fa-li"><i class="@item.Icon"></i></span>
-				<a href="@item.Index">
+				<a @onclick="@(e => ButtonClicked(item))" 
+					title="@item.Title @item.HomeTitleSuffix" class="@item.TextColor text-decoration-underline">
 					@item.Title
 				</a>
-
+				@if (item.Disabled)
+				{
+					<text>&nbsp;</text><span class="text-black-50"><i class="fas fa-ban"></i></span>
+				}
 			</li>
 		}
 	</ul>
 
 </div>
 
+@code {
+	private void ButtonClicked(Nav nav)
+	{
+		if (Api.TryFromValue(nav.Value, out var api))
+		{
+			NavigationManager!.NavigateTo(api.Route);
+		}
+		else
+		{
+			NavigationManager!.NavigateTo(nav.Name);
+		}
+	}
+}
 

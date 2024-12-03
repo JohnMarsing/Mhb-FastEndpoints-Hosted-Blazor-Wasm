@@ -46,7 +46,7 @@ else
 
 	protected Enums.Filter CurrentFilter { get; set; } = Enums.Filter.All;
 
-	private ArticleList? SelectedArticle;
+	protected ArticleList? SelectedArticle { get; set; }
 
 	private ICollection<ArticleList>? collection = null;
 	protected long ArticleRowCount = 0;

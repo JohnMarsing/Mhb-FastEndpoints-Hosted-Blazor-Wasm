@@ -37,7 +37,7 @@
 			if (VerseParagraphRange!.BegId > VerseParagraphRange.EndId) 
 				throw new System.ApplicationException($"BegId [{VerseParagraphRange!.BegId}] >= EndId [{VerseParagraphRange!.EndId}]");
 			if (VerseParagraphRange!.EndId - VerseParagraphRange!.BegId > 300) throw new System.ApplicationException("Verse range can not exceed 300"); // ToDo: extract this
-			verses = await Api!.GetVerseListAsync(VerseParagraphRange.BegId, VerseParagraphRange.EndId);
+			verses = await Api!.GetVerseListBetweenIdsAsync(VerseParagraphRange.BegId, VerseParagraphRange.EndId);
 		}
 		catch (Exception ex)
 		{

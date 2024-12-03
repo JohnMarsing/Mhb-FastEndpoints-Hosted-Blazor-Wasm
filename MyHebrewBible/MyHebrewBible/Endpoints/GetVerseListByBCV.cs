@@ -1,4 +1,6 @@
-﻿namespace MyHebrewBible.Endpoints;
+﻿using MyHebrewBible.Client.Enums;
+
+namespace MyHebrewBible.Endpoints;
 
 public class GetVerseListByBCVRequest
 {
@@ -12,19 +14,32 @@ public class GetVerseListByBCV : Endpoint<GetVerseListByBCVRequest, IEnumerable<
 {
 	public override void Configure()
 	{
-		Get("/verselist/{bookid:long}/{chapter:long}/{begverse:long}/{endverse:long}");
+		Get(Api.VerseList.EndPoint);
 		AllowAnonymous();
 	}
 
-	private readonly Repository _db;
-	public GetVerseListByBCV(Repository repository)
+	private readonly Query _db;
+	private readonly ILogger<GetVerseListByBCV> _logger;
+	public GetVerseListByBCV(Query query, ILogger<GetVerseListByBCV> logger)
 	{
-		_db = repository;
+		_db = query;
+		_logger = logger;
 	}
 
 	public override async Task HandleAsync(GetVerseListByBCVRequest request, CancellationToken ct)
 	{
-		IEnumerable<BibleVerse?> verses = await _db.GetVerseListByBCV(request.BookID, request.Chapter, request.BegVerse, request.EndVerse);
-		await SendAsync(verses.ToList()!);
+		_logger.LogDebug("{Method} Get B/C: {BookID}/{Chapter} Verse {BegVerse}:{EndVerse}"
+			, nameof(GetVerseListByBCVRequest), request.BookID, request.Chapter, request.BegVerse, request.EndVerse);
+		try
+		{
+			IEnumerable<BibleVerse?> verses = await _db.GetVerseListByBCV(request.BookID, request.Chapter, request.BegVerse, request.EndVerse);
+			_logger.LogDebug($"Retrieved {verses.Count()} verses from the database.");
+			await SendAsync(verses.ToList()!);
+		}
+		catch (Exception ex)
+		{
+			_logger!.LogError(ex, "{Method}", nameof(GetVerseListByBCVRequest));
+			throw;
+		}
 	}
 }
