@@ -15,6 +15,7 @@ public class WordPart
 	public int? FinalEnum { get; set; }
 
 	// ToDo: should this be only on the client?
+	// Yeah, it probable should
 	public string StrongsH
 	{
 		get

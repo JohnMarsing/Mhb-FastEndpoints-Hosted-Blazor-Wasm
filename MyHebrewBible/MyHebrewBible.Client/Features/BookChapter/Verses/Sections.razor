@@ -22,18 +22,10 @@ else
 			<p><b>versesTop:</b> is null | why would this ever happen?</p>
 		}
 
-		<WordSegmentsCard ScriptureId="FocusScriptureId"
+ 		<SectionDetailCard ScriptureId="FocusScriptureId"
 											VerseNumber="VerseNumber"
-											SelectedWordCount="WordCount"
 											BookAndChapter="BookAndChapter"
-											OnStrongsSelected="ReturnedStrongs" />
-
-		@if (Strongs != 0)
-		{
-			<HebrewTable ScriptureId="FocusScriptureId"
-									 Strongs="Strongs"
-									 OnHebrewSelected="ReturnedHebrew" />
-		}
+											OnStrongsSelected="ReturnedStrongs" /> 
 
 		@if (versesBottom is not null)
 		{
@@ -57,9 +49,6 @@ else
 	protected long VerseNumber; // = 0;
 	protected long TopRC = 0;
 	protected long BottomRC = 0;
-	protected long Strongs = 0;
-	protected string? Hebrew;  // ToDo: Not fully implemented
-	protected long WordCount = 0;
 
 	public List<BibleVerse>? versesTop;
 	public List<BibleVerse>? versesBottom;
@@ -82,8 +71,6 @@ else
 	{
 		FocusScriptureId = scriptureIdAndVerseNumber.ScriptureID;
 		VerseNumber = scriptureIdAndVerseNumber.VerseNumber;
-		WordCount = 0;
-		Strongs = 0;
 		PopulateTopAndBottom(VerseNumber);
 	}
 
@@ -114,15 +101,7 @@ else
 			FocusScriptureId = 0;
 			PopulateTopAndBottom(VerseRowCount);
 		}
-		Strongs = strongsAndWordCount.Strongs;
-		WordCount = strongsAndWordCount.WordCount;
 	}
 
-	// ToDo: Not fully implemented
-	// hebrew will be added to local storage
-	private void ReturnedHebrew(string hebrew)
-	{
-		Hebrew = hebrew;
-	}
 
 }

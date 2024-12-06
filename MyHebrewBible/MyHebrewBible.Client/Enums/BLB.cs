@@ -54,6 +54,7 @@ public abstract class BLB : SmartEnum<BLB>
 
 	#region Extra Fields
 	public abstract string Title { get; }
+	public abstract string Suffix { get; }
 	#endregion
 
 	#region Private Instantiation
@@ -62,20 +63,24 @@ public abstract class BLB : SmartEnum<BLB>
 	{
 		public KJV_SE() : base($"{nameof(Id.KJV)}", Id.KJV) { }
 		public override string Title => "King James Version";
+		public override string Suffix => "t_bibles_2001";
 	}
 
 	private sealed class NKJV_SE : BLB
 	{
 		public NKJV_SE() : base($"{nameof(Id.NKJV)}", Id.NKJV) { }
 		public override string Title => "New King James Version";
+		public override string Suffix => "t_bibles_2001";
 	}
 
 	private sealed class WLC_SE : BLB
 	{
 		// https://www.blueletterbible.org/NKJV/Gen/1/1/t_bibles_2001
 		// https://www.blueletterbible.org/wlc/gen/1/1/s_1001
+		// https://www.blueletterbible.org/WLC/Gen/1/3/t_conc_1003
 		public WLC_SE() : base($"{nameof(Id.WLC)}", Id.WLC) { }
 		public override string Title => "Westminster Leningrad Codex"; // (WLC)
+		public override string Suffix => "t_conc_1003";
 	}
 
 	/*
@@ -119,7 +124,7 @@ public abstract class BLB : SmartEnum<BLB>
 			s += " href='https://www.blueletterbible.org/";     // start href with a '
 			s += $"{this.Name}/";
 			s += $"{BibleBookFormat.BLB_HrefSuffix(bookAndChapter, verseNumber)}";
-			s += $"t_bibles_2001";
+			s += $"/{this.Suffix}";
 			s += "'";                                           // end href with a '
 			s += $" title='{this.Name} BLB' target='_blank'";
 			s += ">";                                           // End anchor attribute
