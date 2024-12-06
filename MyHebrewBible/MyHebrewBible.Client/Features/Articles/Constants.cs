@@ -7,6 +7,12 @@ public static class Blobs
 	public const string ImagesUrl = BaseUrl + "images/";
 }
 
+public static class Helper
+{
+	public static string GetAnchor(int id, string description)
+	{
+		return $"<a href='/Article/{id}'>{description}</a> <i class='fas fa-pencil-alt'></i>";
+	}
 
-//href="@Model.DetailsVM.BaseLink@Model.DetailsVM.Article.WordFileName">
-//public string BaseLink {	get { return Env.ArticleUrl; } }
+}
+

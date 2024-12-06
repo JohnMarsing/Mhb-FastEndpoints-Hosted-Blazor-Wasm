@@ -43,7 +43,7 @@ public abstract class ShowSection : SmartEnum<ShowSection>
 		public override Permutation Permutation => Permutation.Torah;
 
 		public override string Title => "Torah Verses";
-		public override string ButtonColor => Anchors.BtnColors.Primary;
+		public override string ButtonColor => BtnColors.Primary;
 		public override string HeaderColor => TextColors.Primary;
 	}
 
@@ -54,7 +54,7 @@ public abstract class ShowSection : SmartEnum<ShowSection>
 		public override Permutation Permutation => Permutation.Haftorah;
 
 		public override string Title => "Haftora Verses";
-		public override string ButtonColor => Anchors.BtnColors.Warning;
+		public override string ButtonColor => BtnColors.Warning;
 		public override string HeaderColor => TextColors.Warning;
 	}
 
@@ -65,7 +65,7 @@ public abstract class ShowSection : SmartEnum<ShowSection>
 		public override Permutation Permutation => Permutation.Brit;
 
 		public override string Title => "Brit Verses";
-		public override string ButtonColor => Anchors.BtnColors.Danger;
+		public override string ButtonColor => BtnColors.Danger;
 		public override string HeaderColor => TextColors.Danger;
 	}
 

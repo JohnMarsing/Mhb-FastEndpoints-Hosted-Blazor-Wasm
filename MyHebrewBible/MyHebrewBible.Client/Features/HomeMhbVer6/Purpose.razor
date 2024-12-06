@@ -1,0 +1,101 @@
+﻿@page "/HomeMhbVer6/Purpose"
+
+@using MyHebrewBible.Client.CommonVerses
+
+<PageHeader PageEnum="@GlobalEnums.Nav.HomeMhbVer6" PageTitle="@Enums.MenuItems.Purpose.Title" />
+
+<SubNavbar ActiveMenuItem="@Enums.MenuItems.Purpose" />
+
+<ul class="list-inline">
+  <li class="list-inline-item"><NavLink class="nav-link" href="@($"{Enums.MenuItems.Purpose.Page}#parashaid")">Parasha Centric</NavLink> </li>
+  <li class="list-inline-item"><NavLink class="nav-link" href="@($"{Enums.MenuItems.Purpose.Page}#hebrewid")">Hebrew Centric</NavLink> </li>
+  <li class="list-inline-item"><NavLink class="nav-link" href="@($"{Enums.MenuItems.Purpose.Page}#torahid")">Torah Centric</NavLink> </li>
+  <li class="list-inline-item"><NavLink class="nav-link" href="@($"{Enums.MenuItems.Purpose.Page}#toolsid")">Bible Tools</NavLink> </li>
+  <li class="list-inline-item"><NavLink class="nav-link" href="@($"{Enums.MenuItems.Purpose.Page}#endid")">End Notes</NavLink> </li>
+</ul>
+
+<h3 id="overview">Overview</h3>
+<p class='fs-5'>
+  My goal is to help people (including myself) to make their King James bible slowly become their Hebrew bible.
+  I want to 'trick' them into learning Hebrew words as they go about reading their bible.
+  The thought is that their custom bible will remember Hebrew words that they have learned in the past so when a portion of scripture 
+  <a href="http://en.wikipedia.org/wiki/Parsha" target="_blank">(parasha)</a> comes up to be studied these Hebrew words will be substituted.
+</p>
+
+<h3 id="parashaid">Parasha Centric</h3>
+<p class='fs-5'>
+  I’ve used bible software before like <a href="https://www.e-sword.net/" target="_blank">e-Sword</a> which is a “general purpose” bible program.
+  With 'My Hebrew Bible' <strong>(MHB)</strong>, I am interested in having the focus and detail be on a portion of the bible that would studied in a group format.
+  Having access to the rest of the bible of course would be a feature of MHB, but it’s a secondary one.
+</p>
+
+<h3 id="hebrewid">Hebrew Centric</h3>
+<p class='fs-5'>
+  MHB is designed to move people to a better understanding of Hebrew which is the source language of the <a href="https://en.wikipedia.org/wiki/Tanakh" target="_blank"> TaNaCh</a>.
+  I also believe that the <i>Brit Chadasha</i> (Renewed or "New" Covenant) was written from the mindset of a Hebrew thinking people,  
+  therefore understanding Hebrew greatly reduces the inherent problems associated with translations as it takes you to the source.
+  I also contend that Hebrew is the pure language spoken of in Zephaniah 3:9 (see @((MarkupString)@Articles.Helper.GetAnchor(222, "Zephaniah 3:8-9")) ).
+</p>
+<p class='fs-5'>With the design of MHB being both parasha centered and Hebrew centered, the intent is to have each MHB user create their own bible “translation” that grows over time moving the user from English to Hebrew.</p>
+
+<h3 id="torahid">Torah Law Form Centric</h3>
+ <a href="@Enums.MenuItems.AboutMyReligion">My Religion</a>
+<p class='fs-5'>
+  My passion is the law form of Torah ( <a href="@GlobalEnums.Nav.HomeMhbVer6.Index">@GlobalEnums.Nav.HomeMhbVer6.Title</a> ) and so MHB will have 
+  resources and commentary (at least initially) that relate to that subject matter.
+  To encourage exegesis, the Torah is King.  By this I mean that the Torah is given first in scripture and is paramount and all must flow from it, 
+  therefore MHB is to be Torah centered and displayed prominently.
+</p>
+
+<h3 id="toolsid">Bible Tools</h3>
+<p class='fs-5'>
+  I envision that <b>My Hebrew Bible</b> to be more than just a simple device to replace this English word with that Hebrew word.  I want to be able to use it as a foundational writing tool that I can have at my finger tips.  Below are some more thoughts.
+</p>
+<ul>
+  <li>Customizable</li>
+  <li>
+    Create a parasha specific to you or your congregation or choose from pre-existing parasha templates
+    <ul>
+      <li>Examples: one year or three year (triennial) etc.</li>
+    </ul>
+  </li>
+  <li>
+    Choose how you want the format of the Hebrew word to appear in your bible
+    <ul>
+      <li>Replace the English word with the Hebrew word</li>
+      <li>Replace the English word with the Hebrew transliterated word</li>
+      <li>Keep the English word and have the Hebrew word as a superscript</li>
+    </ul>
+  </li>
+  <li>Incorporate hyperlinks to word studies that you have created</li>
+  <li>Choose to run the program on your computer or set up a service that periodically gives you your weekly parasha</li>
+  <li>LXX tools to help connect from the Greek in the Brit Chadasha to the Hebrew in the TaNaCh.</li>
+  <li>Hebrew transliterated word search</li>
+  <li>
+    Commentary/word study search
+    <ul>
+      <li>Examples: <a href="http://edenics.homestead.com/" target="_blank">Edenics</a>  </li>
+    </ul>
+  </li>
+  <li>
+    Reports
+    <ul>
+      <li>Add custom report parts to your parasha.  For example in the parasha you may want to add lists which could include...</li>
+      <li>The 613 Mitzvot</li>
+      <li>Stand alone Aleph Tav's</li>
+      <li>Jots and Tittle</li>
+      <li>Choose extra reports like next week's parasha in <a href="https://www.pocketmod.com/" target="_blank">PocketMod</a> format so that you can read the following parasha at your convenience</li>
+    </ul>
+  </li>
+</ul>
+
+
+<h3 id="endid">End Notes</h3>
+<h4>Verses</h4>
+<Deu_17_18_19 />
+<br />
+<Exo_19_06 />
+
+@code {
+
+}

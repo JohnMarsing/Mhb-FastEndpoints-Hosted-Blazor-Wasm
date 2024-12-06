@@ -12,7 +12,6 @@ public enum WordEnum
 
 public class HebrewFormat
 {
-
 	public static string GetSpan(long wordEnumLong, string hebrew1, string hebrew2, string hebrew3)
 	{
 		WordEnum wordEnum = (WordEnum)wordEnumLong;

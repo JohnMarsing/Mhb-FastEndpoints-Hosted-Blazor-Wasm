@@ -61,6 +61,35 @@ public class Query
 		var versList = await connection.QueryAsync<BibleVerse>(Api.VerseListBetweenIds.Sql, Parms);
 		return versList;
 	}
+
+	public async Task<IEnumerable<WordPart?>> GetWordPartByScriptureId(long scriptureId)
+	{
+		using var connection = await _connectionFactory.CreateConnectionAsync();
+		Parms = new DynamicParameters(new { ScriptureID = scriptureId });
+		var versList = await connection.QueryAsync<WordPart>(Api.HebrewWords.Sql, Parms);
+		return versList;
+	}
+
+	public async Task<IEnumerable<AlephTavHebrewVerse?>> GetAlephTavHebrewVerses(long bookId, long chapter)
+	{
+		using var connection = await _connectionFactory.CreateConnectionAsync();
+		string sql;
+		if (chapter == 0)
+		{
+			Parms = new DynamicParameters(new { BookId = bookId });
+			sql = Api.AlephTavHebrewVerses.Sql + " WHERE s.BookID=@BookId " + Api.AlephTavHebrewVerses.SqlOrderBy;
+			var verseList = await connection.QueryAsync<AlephTavHebrewVerse>(sql, Parms);
+			return verseList;
+		}
+		else
+		{
+			Parms = new DynamicParameters(new { BookId = bookId, Chapter = chapter });
+			sql = Api.AlephTavHebrewVerses.Sql + " WHERE s.BookID=@BookId and s.Chapter=@Chapter " + Api.AlephTavHebrewVerses.SqlOrderBy;
+			var verseList = await connection.QueryAsync<AlephTavHebrewVerse>(sql, Parms);
+			return verseList;
+		}
+	}
+
 }
 
 // Ignore Spelling: strongs, Kjvs, Parms, atv, Mitzvot

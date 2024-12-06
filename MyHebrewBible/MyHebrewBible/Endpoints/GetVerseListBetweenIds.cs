@@ -1,13 +1,13 @@
 ﻿using MyHebrewBible.Client.Enums;
 namespace MyHebrewBible.Endpoints;
 
-public class GetVerseListBetweenIdsRequest
+public class VerseListBetweenIdsRequest
 {
 	public long BegId { get; set; }
 	public long EndId { get; set; }
 }
 
-public class GetVerseListBetweenIds : Endpoint<GetVerseListBetweenIdsRequest, IEnumerable<BibleVerse>>
+public class GetVerseListBetweenIds : Endpoint<VerseListBetweenIdsRequest, IEnumerable<BibleVerse>>
 {
 	public override void Configure()
 	{
@@ -23,10 +23,10 @@ public class GetVerseListBetweenIds : Endpoint<GetVerseListBetweenIdsRequest, IE
 		_logger = logger;
 	}
 
-	public override async Task HandleAsync(GetVerseListBetweenIdsRequest request, CancellationToken ct)
+	public override async Task HandleAsync(VerseListBetweenIdsRequest request, CancellationToken ct)
 	{
 		_logger.LogDebug("{Method} Get BegId/EndId: {BegId}/{EndId}"
-		, nameof(GetVerseListBetweenIdsRequest), request.BegId, request.EndId);
+		, nameof(HandleAsync), request.BegId, request.EndId);
 		try
 		{
 			IEnumerable<BibleVerse?> verses = await _db.GetVerseListBetweenIds(request.BegId, request.EndId);
@@ -35,7 +35,7 @@ public class GetVerseListBetweenIds : Endpoint<GetVerseListBetweenIdsRequest, IE
 		}
 		catch (Exception ex)
 		{
-			_logger!.LogError(ex, "{Method}", nameof(GetVerseListBetweenIdsRequest));
+			_logger!.LogError(ex, "{Method}", nameof(HandleAsync));
 			throw;
 		}
 	}

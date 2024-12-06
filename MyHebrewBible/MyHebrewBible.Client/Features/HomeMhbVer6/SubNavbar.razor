@@ -1,0 +1,75 @@
+﻿
+<nav id="subNavBar" class="navbar navbar-expand-sm navbar-toggleable-md border-bottom box-shadow p-0 mb-3 @NavBarColor">
+	<div class="container">
+
+		<a class="nav-link @GetActive(Enums.MenuItems.Home) @GetBackGroundHome(Enums.MenuItems.Home)" title="" href="@Enums.MenuItems.Home.Page">
+			<i class="@Enums.MenuItems.Home.Icon"></i>
+			
+			<span class="fw-bold @Enums.MenuItems.Home.TextColor">@Enums.MenuItems.Home.Title</span>
+		</a>
+
+		<button class="navbar-toggler" @onclick="ToggleSubNavBar" type="button"
+						data-bs-toggle="collapse" data-target=".navbar-collapse"
+						aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="@SubNavBarCssClass navbar-collapse d-sm-inline-flex flex-sm-row-reverse"
+				 @onclick="ToggleSubNavBar">
+
+			<ul class="navbar-nav flex-grow-1">
+				@foreach (var item in Enums.MenuItems.List
+						.Where(w => w.Value != Enums.MenuItems.Home.Value)
+						.OrderBy(o => o.Value))
+				{
+					<li class="nav-item @GetBackGround(item)">
+						<a class="nav-link @GetActive(item)" href="@item.Page">
+							<i class="@item.Icon"></i>
+							<span class="fw-bold @item.TextColor ">@item.Title</span>
+						</a>
+					</li>
+				}
+			</ul>
+
+		</div>
+
+	</div>
+</nav>
+
+
+@if (ActiveMenuItem is not null)
+{
+	<div class="d-print-none pb-2 mt-4 mb-2 border-bottom">
+		<h2 class="@ActiveMenuItem.TextColor text-center"><i class="@ActiveMenuItem.Icon"></i> @ActiveMenuItem.Title</h2>
+	</div>
+}
+
+@code {
+
+	[Parameter] public Enums.MenuItems? ActiveMenuItem { get; set; }
+
+	bool collapseNavMenu = true;
+	string? SubNavBarCssClass => collapseNavMenu ? "collapse" : null;
+	void ToggleSubNavBar()
+	{
+		collapseNavMenu = !collapseNavMenu;
+	}
+
+	string GetActive(Enums.MenuItems currentMenuItem)
+	{
+		return ActiveMenuItem == currentMenuItem ? " active" : "";
+	}
+
+	string GetBackGround(Enums.MenuItems currentMenuItem)
+	{
+		return ActiveMenuItem == currentMenuItem ? " bg-secondary p-0 text-dark bg-opacity-25 " : "";
+	}
+
+	string GetBackGroundHome(Enums.MenuItems currentMenuItem)
+	{
+		return ActiveMenuItem == currentMenuItem ? " bg-secondary p-1 text-dark bg-opacity-25 " : "";
+	}
+
+	protected string NavBarColor = " navbar-light bg-light ";
+}

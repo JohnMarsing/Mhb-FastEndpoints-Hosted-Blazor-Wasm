@@ -1,4 +1,5 @@
-﻿
+﻿@using MyHebrewBible.Client.CommonVerses
+
 <div class="card">
 	<div class="card-header">
 		Purpose
@@ -9,15 +10,18 @@
 				The relationship we have with the Creator is contractual (more precisely covenant).  Knowing the contract instructs us what the law is and therefore the relationship.
 			</p>
 		</div>
-		<p class="d-print-none"><a href="@Enums.Nav.HomeMhbVer6.Index" class="btn btn-info btn-sm">About &raquo;</a></p>
-		@* ToDo: . Anchors.HomeMhbVer6.PageAbout*@
+		<p class="d-print-none"><a href="@GlobalEnums.Nav.About.Index" class="btn btn-info btn-sm">About &raquo;</a></p>
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-sm-3">
 		<h3>Critical Thinking</h3>
-		<p>Through principles like <i>Sola Scriptura</i>, <em>My Hebrew Bible</em> is an attempt to view scriptures in a disciplined way based on what the scriptures say not based on hearsay</p>
+		<p>
+			Through principles like <i>Sola Scriptura</i>, <em>My Hebrew Bible</em> is an attempt to view scriptures in a disciplined way 
+			based on what the scriptures say not based on hearsay
+		</p>
+		<p class="d-print-none"><a href="@Enums.MenuItems.CriticalThinking.Page" class="btn btn-info btn-sm">Learn more &raquo;</a></p>
 		@*<p class="d-print-none"><a class="btn btn-default btn-sm" href="@Url.Action("Details", "Glossary", new { id = 159 })">Learn more &raquo;</a></p>*@
 
 		<h3>American Birthright</h3>
@@ -26,6 +30,7 @@
 			<small><cite title="Source Title">Declaration of Independence</cite></small>
 		</blockquote>
 		@*<p class="d-print-none"><a class="btn btn-default btn-sm" href="@Url.Action("Details", "Glossary", new { id = 109 })">Learn more &raquo;</a></p>*@
+		<!-- ToDo: Review Features\HomeMhbVer6\CriticalThinking.razor and possibly link to it here -->
 	</div>
 
 	<div class="col-sm-6">
@@ -39,9 +44,7 @@
 			<p>It is through law that you will have great clarity regarding your religion</p>
 			<small>Marsing's #1 Maxim <cite title="Source Title">MHB website</cite></small>
 		</blockquote>
-		<p class="d-print-none"><a href="@Enums.Nav.HomeMhbVer6.Index" class="btn btn-info btn-sm">Learn more &raquo;</a></p>
-
-		@*ToDo: href="@Anchors.HomeMhbVer6.PagePurpos*@
+		<p class="d-print-none"><a href="@Enums.MenuItems.MarsingsMaxim.Page" class="btn btn-info btn-sm">Learn more &raquo;</a></p>
 
 		<Sovereign />
 
@@ -51,21 +54,15 @@
 		<h3>Why the name?</h3>
 		<p>
 			<span class="fs-3 text-info">My</span> It is the intent to make your bible yours just like the items found under the <em>My Documents</em> folder on your computer are yours. <br />  If you accept that you are Israel and therefore a nation of priests and kings then the goal is to aid you in fulfilling
-			<a class="btn btn-default btn-xs" href="#Deu171819" data-toggle="modal"> Deu 17:18-19 <span class="fa fa-comment-o"></span></a>
+			<Deu_17_18_19 />
 			(at least at some level) because over time you are making the bible your bible.<br />
 			<span class="fs-3 text-info">Hebrew</span> Part of the focus is to get the English speaking user to know the source of the scripture, thereby relying less on translations and more on the original language.
 			Knowing the original language means you know more about original intent.<br />
-			<span class="fs-3 text-info">Bible</span> The most important thing one has is their relationship to the Creator and this relationship is a covenant.  The details of this covenant are found in the bible.<br />
+			<span class="fs-3 text-info">Bible</span> The most important thing one has is their relationship to the Creator and this relationship is a covenant.  
+			The details of this covenant are found in the bible.<br />
 		</p>
 
-		@*
-		ToDo:
-		- verify fs-3 works for mhb-h3
-		- data-toggle="modal
-		*@
-
-		<p class="d-print-none"><a href="@Enums.Nav.HomeMhbVer6.Index" class="btn btn-info btn-sm">Learn more &raquo;</a></p>
-		@*ToDo: href="@Anchors.HomeMhbVer6.PagePurpos*@
+		<p class="d-print-none"><a href="@Enums.MenuItems.Purpose.Page" class="btn btn-info btn-sm">Learn more &raquo;</a></p>
 	</div>
 </div>
 
@@ -94,7 +91,7 @@
 				No State shall enter into any Treaty, Alliance, or Confederation; grant Letters of Marque and Reprisal; coin Money; emit Bills of Credit; make any Thing but gold and silver Coin a Tender in Payment of Debts; pass any Bill of Attainder, ex post facto Law, or Law <b>impairing the Obligation of Contracts</b>, or grant any Title of Nobility.
 				<small>
 					<cite title="Source Title">
-						<a href="http://en.wikipedia.org/wiki/Contract_Clause">
+						<a href="http://en.wikipedia.org/wiki/Contract_Clause" target="_blank">
 							Article I, &sect; 10, clause 1 of the United States Constitution
 							<i class="fas fa-external-link-alt" aria-hidden="true">&nbsp;</i><i class="fab fa-wikipedia-w" aria-hidden="true"></i>
 						</a>
@@ -121,12 +118,12 @@
 					<br />
 					<cite title="Source Title">
 						UCC
-						<a href="http://www.law.cornell.edu/ucc/3/3-103">Accommodation party U.C.C. &sect; 3-103. DEFINITIONS, (a)(17)(b) </a>
+						<a href="http://www.law.cornell.edu/ucc/3/3-103" target="_blank">Accommodation party U.C.C. &sect; 3-103. DEFINITIONS, (a)(17)(b) </a>
 					</cite>
 					<br />
 					<cite title="Source Title">
 						UCC
-						<a href="http://www.law.cornell.edu/ucc/3/3-419 ">&sect; 3-419. INSTRUMENTS SIGNED FOR ACCOMMODATION.</a>
+						<a href="http://www.law.cornell.edu/ucc/3/3-419" target="_blank">&sect; 3-419. INSTRUMENTS SIGNED FOR ACCOMMODATION.</a>
 					</cite>
 				</small>
 			</blockquote>
@@ -135,31 +132,6 @@
 
 </div>
 
-@*
-		public static class HomeMhbVer6
-		{
-			public const string PageIndexFromRoot = "/HomeMhbVer6/Index";
-			public const string PageAbout = "./About";
-			public const string PageAboutMe = "./AboutMe";
-			public const string PagePurpose = "./Purpose";
-			public const string PageVersion = "./AboutVersion";
-			public const string PageTechnology = "./AboutTechnology";
-			public const string PageReligion = "./AboutMyReligion";
-		}
-*@
-
 @code {
-	[Parameter] public Enums.MediaQuery MediaQuery { get; set; } = Enums.MediaQuery.SmOrMdOrLgOrXl;
 
-	protected string? panelClass;
-	protected string? initialyMakePanelOpen;
-
-	protected string? TitleCSS;
-
-	protected override void OnInitialized()
-	{
-		base.OnInitialized();
-		panelClass = MediaQuery == Enums.MediaQuery.Xs ? "panel panel-info " : "";
-		initialyMakePanelOpen = MediaQuery == Enums.MediaQuery.Xs ? " " : " in"; // if this = " in" then it will be openned
-	}
 }

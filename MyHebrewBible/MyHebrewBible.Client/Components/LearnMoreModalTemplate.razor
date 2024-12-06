@@ -1,6 +1,6 @@
 ﻿@if (ModalIsNotShownToggle)
 {
-	<button type="button" class="btn @IconColor"
+	<button type="button" class="btn @BtnSize @IconColor"
 						@onclick="() => ShowModal()">
 			<i class="@Icon"></i> @* @ButtonText *@
 		</button>
@@ -32,6 +32,7 @@ else
 @code {
 	[Parameter, EditorRequired] public string? Icon { get; set; } // "fas fa-info"
 	[Parameter, EditorRequired] public string? IconColor { get; set; }  // "btn-info"
+	[Parameter] public string? BtnSize { get; set; }  // BtnSize.BtnSm
 	//[Parameter, EditorRequired] public string? ButtonText { get; set; }  // e.g. Genesis
 	[Parameter, EditorRequired] public RenderFragment? ChildHeaderContent { get; set; }
 	[Parameter, EditorRequired] public RenderFragment? ChildBodyContent { get; set; }

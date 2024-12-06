@@ -1,4 +1,5 @@
 ﻿using Ardalis.SmartEnum;
+using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums;
 
 namespace MyHebrewBible.Client.Enums;
 
@@ -47,7 +48,6 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int ParashaList = 22;
 		internal const int HealthCheckBitwise = 23;
 		internal const int HebrewRevelation = 24;
-		internal const int Empty = 99;
 	}
 	#endregion
 
@@ -76,7 +76,6 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav ParashaList = new ParashaListSE();
 	public static readonly Nav HealthCheckBitwise = new HealthCheckBitwiseSE();
 	public static readonly Nav HebrewRevelation = new HebrewRevelationSE();
-	public static readonly Nav Empty = new EmptySE();
 	#endregion
 
 	private Nav(string name, int value) : base(name, value)  // Constructor
@@ -131,7 +130,7 @@ public abstract class Nav : SmartEnum<Nav>
 	private sealed class BookChapterSE : Nav
 	{
 		public BookChapterSE() : base($"{nameof(Id.BookChapter)}", Id.BookChapter) { }
-		public override string Index => "/BookChapter";
+		public override string Index => "/BookChapter/0/0/default";   
 		public override string Title => "Book Chapter";
 		public override string Icon => "fa fa-book";
 		public override int Sort => Id.BookChapter;
@@ -145,7 +144,7 @@ public abstract class Nav : SmartEnum<Nav>
 	private sealed class ParashaSE : Nav
 	{
 		public ParashaSE() : base($"{nameof(Id.Parasha)}", Id.Parasha) { }
-		public override string Index => "/Parasha";
+		public override string Index => ParashaEnums.Constants.GetUrl()! ?? this.Name; 
 		public override string Title => "Parasha";
 		public override string Icon => "far fa-bookmark";
 		public override int Sort => Id.Parasha;
@@ -299,7 +298,7 @@ public abstract class Nav : SmartEnum<Nav>
 	private sealed class VerseListSE : Nav
 	{
 		public VerseListSE() : base($"{nameof(Id.VerseList)}", Id.VerseList) { }
-		public override string Index => "/VerseList";
+		public override string Index => "/VerseList/0/0/0/0";  
 		public override string Title => "Verse List";
 		public override string Icon => "fas fa-list";
 		public override int Sort => Id.VerseList;
@@ -450,20 +449,6 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string Index => "HebrewRevelation";
 		public override string Title => "Hebrew Revelation";
 		public override string Icon => "fas fa-eye";  
-		public override int Sort => Id.Profile;
-		public override string HomeTitleSuffix => " ";
-		public override string HomeFloatRightHebrew => "";
-		public override PageListType PageListType => PageListType.SitemapPage;
-		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
-		public override bool Disabled => false;
-	}
-
-	private sealed class EmptySE : Nav
-	{
-		public EmptySE() : base($"{nameof(Id.Empty)}", Id.Empty) { }
-		public override string Index => "Empty";
-		public override string Title => "Hebrew Revelation";
-		public override string Icon => "fas fa-eye";
 		public override int Sort => Id.Profile;
 		public override string HomeTitleSuffix => " ";
 		public override string HomeFloatRightHebrew => "";

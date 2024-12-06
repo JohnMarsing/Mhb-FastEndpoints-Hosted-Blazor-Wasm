@@ -80,8 +80,8 @@ public abstract class Verses : SmartEnum<Verses>
 	public abstract int BookId { get; }
 	public abstract string VerseName { get; }
 	public abstract string VerseNameAbrv { get; }
-	public abstract string VerseDescription { get; }
-	public abstract string Commentary { get; }
+	public abstract string VerseDescription { get; } 
+	public abstract string Commentary { get; }  
 	public abstract string ConcatenatedVerses { get; }
 	public abstract bool HasExtraInfo { get; }
 	#endregion
@@ -121,8 +121,8 @@ public abstract class Verses : SmartEnum<Verses>
 		public override int BookId => 1;
 		public override string VerseName => "Genesis 4:9-14";
 		public override string VerseNameAbrv => "Gen 4:9-14";
-		public override string VerseDescription => "Brother&quot;s Keeper";
-		public override string Commentary => "Are you your brother&quot;s keeper";
+		public override string VerseDescription => "Brother\'s Keeper";  
+		public override string Commentary => "Are you your brother\'s keeper";
 		public override string ConcatenatedVerses => "<sup>9</sup> And the LORD said unto Cain, Where is Abel thy brother? And he said, I know not: Am I my brother's keeper? <sup>10</sup> And he said, What hast thou done? the voice of thy brother's blood crieth unto me from the ground. <sup>11</sup> And now art thou cursed from the earth, which hath opened her mouth to receive thy brother's blood from thy hand; <sup>12</sup> When thou tillest the ground, it shall not henceforth yield unto thee her strength; a fugitive and a vagabond shalt thou be in the earth. <sup>13</sup> And Cain said unto the LORD, My punishment is greater than I can bear. <sup>14</sup> Behold, thou hast driven me out this day from the face of the earth; and from thy face shall I be hid; and I shall be a fugitive and a vagabond in the earth; and it shall come to pass, that every one that findeth me shall slay me.";
 		public override bool HasExtraInfo => false;
 	}
@@ -473,7 +473,7 @@ public abstract class Verses : SmartEnum<Verses>
 		public override string VerseName => "Isaiah 53:5-6";
 		public override string VerseNameAbrv => "Isa 53:5-6";
 		public override string VerseDescription => "The suffering servant";
-		public override string Commentary => "What can I say but Wow! You just have to read the whole chapter.  Also notice a very powerful Standalone <span class='text-danger'>Aleph Tav</span> in <sup>Isa 53:6</sup>.  There is all kinds of legal nuances going on in this chapter but I want to focus in on <sup>Isa 53:5</sup> where this servant&quot;s suffering results in <b>peace</b>.  Who is it that needs a covenant of Peace but <b>the Lost Sheep of the House of Israel</b> who was given a <b>Bill of Divorce</b>.";
+		public override string Commentary => "What can I say but Wow! You just have to read the whole chapter.  Also notice a very powerful Standalone <span class='text-danger'>Aleph Tav</span> in <sup>Isa 53:6</sup>.  There is all kinds of legal nuances going on in this chapter but I want to focus in on <sup>Isa 53:5</sup> where this servant\'s suffering results in <b>peace</b>.  Who is it that needs a covenant of Peace but <b>the Lost Sheep of the House of Israel</b> who was given a <b>Bill of Divorce</b>.";
 		public override string ConcatenatedVerses => "<sup>5</sup> But he was wounded for our transgressions, he was bruised for our iniquities: the chastisement of our peace was upon him; and with his stripes we are healed. <sup>6</sup> All we like sheep have gone astray; we have turned every one to his own way; and the LORD hath laid on him the iniquity of us all.";
 		public override bool HasExtraInfo => false;
 	}
@@ -707,7 +707,7 @@ public abstract class Verses : SmartEnum<Verses>
 		public override string VerseName => "Romans 1:1";
 		public override string VerseNameAbrv => "Rom 1:1";
 		public override string VerseDescription => "Legal Status of Paul: Bond Servant of Yeshua Messiah";
-		public override string Commentary => "Romans 1:1-6 is Paul&quot;s calling card from which he is declaring is status.  If one were to ask Paul &quot;<i>Quo Warranto</i>&quot; (by what authority), could he not claim Exodus 21:5-6?";
+		public override string Commentary => "Romans 1:1-6 is Paul\'s calling card from which he is declaring his status.  If one were to ask Paul \'<i>Quo Warranto</i>\' (by what authority), could he not claim Exodus 21:5-6?";
 		public override string ConcatenatedVerses => "<sup>1</sup> Paul, a servant of Jesus Christ, called to be an apostle, separated unto the gospel of God,";
 		public override bool HasExtraInfo => false;
 	}
@@ -720,7 +720,7 @@ public abstract class Verses : SmartEnum<Verses>
 		public override string VerseName => "1 Corinthians 7:20-24";
 		public override string VerseNameAbrv => "1Co 7:20-24";
 		public override string VerseDescription => "Freeman, Paid for a Price";
-		public override string Commentary => "Marsing&quot;s maxim: The perceived paradox to become free you have to become a bond servant; see <sup>1Co 6:20<sup>";
+		public override string Commentary => "Marsing\'s maxim: The perceived paradox to become free you have to become a bond servant; see <sup>1Co 6:20<sup>";
 		public override string ConcatenatedVerses => "<sup>20</sup> Let every man abide in the same calling wherein he was called. <sup>21</sup> Art thou called being a servant? care not for it: but if thou mayest be made free, use it rather. <sup>22</sup> For he that is called in the Lord, being a servant, is the Lord's freeman: likewise also he that is called, being free, is Christ's servant. <sup>23</sup> Ye are bought with a price; be not ye the servants of men. <sup>24</sup> Brethren, let every man, wherein he is called, therein abide with God.";
 		public override bool HasExtraInfo => true;
 	}
@@ -772,7 +772,7 @@ public abstract class Verses : SmartEnum<Verses>
 		public override string VerseName => "1 Timothy 1:4";
 		public override string VerseNameAbrv => "1Ti 1:4";
 		public override string VerseDescription => "Word study of edifying";
-		public override string Commentary => "This word is <i>oikonomia</i> (Strong&quot;s <sup>G3622</sup>) which is where we get the word <b>economy</b><br />For more, see Economy-of-God-G3622-oikonomia-G3623-oikonomos-dispensation-steward.doc and The-Economy-of-God.doc";
+		public override string Commentary => "This word is <i>oikonomia</i> (Strong\'s <sup>G3622</sup>) which is where we get the word <b>economy</b><br />For more, see Economy-of-God-G3622-oikonomia-G3623-oikonomos-dispensation-steward.doc and The-Economy-of-God.doc";
 		public override string ConcatenatedVerses => "<sup>4</sup> Neither give heed to fables and endless genealogies, which minister questions, rather than godly edifying which is in faith: so do.";
 		public override bool HasExtraInfo => false;
 	}

@@ -1,67 +1,32 @@
 ﻿@page "/HomeMhbVer6"
+@using MyHebrewBible.Client.CommonVerses
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.HomeMhbVer6" />
 
+<SubNavbar ActiveMenuItem="Enums.MenuItems.Home" />
+
 @using MyHebrewBible.Client.Enums
 
-<div class="@MediaQuery.SmOrMdOrLgOrXl.DivClass">
-	<div class="text-center">
-		<h1 class=""><span class="mhb-site-title text-info">My Hebrew Bible</span></h1>
-		<h4 class=""><span class="hebrew text-info">התנ ך שלי</span></h4>
-		<h3 class="text-default">A cool place to study scriptures</h3>
-		<h6 class="text-warning">*** This is information pulled from the previous version of My Hebrew Bible ***</h6>
-		@*ToDo: why would I need this hidden-xs *@
-	</div>
-
-	<div class="container">
-		<br />
-		<IndexContent MediaQuery="MediaQuery.SmOrMdOrLgOrXl" />
-	</div>
+<div class="text-center">
+	<h1 class=""><span class="mhb-site-title text-info">My Hebrew Bible</span></h1>
+	<h4 class=""><span class="hebrew text-info">התנ ך שלי</span></h4>
+	<h3 class="text-default">A cool place to study scriptures</h3>
+	<h6 class="text-warning">*** This is information pulled from the previous version of My Hebrew Bible ***</h6>
 </div>
 
-<div class="@MediaQuery.Xs.DivClass">
-	<div class="panel-group" id="accordion">
-		<div class="panel panel-info">
-			@*ToDo: convert to BS-5 panelClass*@
-			<div class="panel-heading">
-
-				<h4 class="panel-title">
-					<a class="accordion-toggle nounderline" data-toggle="collapse"
-						 data-parent="#accordion" href="#IntroductionXs">
-						Introduction
-					</a>
-				</h4>
-
-			</div>
-
-			@*ToDo: convert to BS-5 <div id="IntroductionXs" class="panel-collapse collapse @initialyMakePanelOpen">*@
-
-			<div id="IntroductionXs" class="panel-collapse collapse    ">
-				<div class="panel-body">
-					<IndexContent MediaQuery="MediaQuery.Xs" />
-				</div>
-			</div>
-		</div>
-	</div>
-	
+<div class="container">
+	<br />
+	<IndexContent />
 </div>
-
-<h1>
-	ToDo: Add VersesModalHtml.Deu_17_18_19
-</h1>
 
 
 @*
+
  namespace MyHebrewBible.Web.Pages.HomeMhbVer6
 	public static class PartialViews
 	{
-		public const string IndexContent = "_IndexContent";
-		public const string IndexContentXs = "_IndexIntroductionXs";
-		public const string IndexContentPurpose = "_IndexContentPurpose";
-		public const string IndexContentCriticalThinking = "_IndexContentCriticalThinking";
 		public const string IndexContentAmericanBirthright = "_IndexContentAmericanBirthright";
 		public const string IndexContentMarsingsMs = "_IndexContentMarsingsMs";
-		public const string Sovereign = "_Sovereign";
 		public const string IndexContentMoreOnLaw = "_IndexContentMoreOnLaw";
 		public const string IndexContentWhyTheName = "_IndexContentWhyTheName";
 	}

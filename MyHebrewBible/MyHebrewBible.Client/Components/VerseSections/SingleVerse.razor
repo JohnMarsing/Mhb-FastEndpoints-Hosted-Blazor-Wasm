@@ -28,6 +28,14 @@ else
 						<b>@item.Verse</b>
 					</sup>
 				</a>
+				@if (item.VerseOffset != "NULL")
+				{
+					<sup class="text-black-50">&nbsp;@item.VerseOffset&nbsp;</sup>
+				}
+				else
+				{
+					<text>&nbsp;</text>
+				}
 				@((MarkupString)@item.KJV!)
 			</p>
 		}
