@@ -1,32 +1,49 @@
 ﻿@page "/Articles"
-@page "/Article"
-
-@* ToDo Should this have route parameters? *@
+@page "/Article/{Id:int}"
 
 @using MyHebrewBible.Client.Features.Articles.Search
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.Article" BorderCSS="" />
 
-<LoadingProgress>
-	<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
-		<Typeahead OnArticleIdSelected="ReturnedArticleId" IsXs=true />
-	</div>
+@if (Id is not null)
+{
+	<LoadingProgress>
+		<Details ArticleId="Id2" />
+	</LoadingProgress>
+}
+else
+{
 
-	<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
-		<Typeahead OnArticleIdSelected="ReturnedArticleId" IsXs=false />
-	</div>
+	<LoadingProgress>
+		<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+			<Typeahead OnArticleIdSelected="ReturnedArticleId" IsXs=true />
+		</div>
 
-	@* <p>SelectedArticleId: @SelectedArticleId</p> *@
+		<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+			<Typeahead OnArticleIdSelected="ReturnedArticleId" IsXs=false />
+		</div>
 
-	@if (SelectedArticleId != 0)
-	{
-		<Details ArticleId="SelectedArticleId" />
-	}
-</LoadingProgress>
+		@* <p>SelectedArticleId: @SelectedArticleId</p> *@
 
+		@if (SelectedArticleId != 0)
+		{
+			<Details ArticleId="SelectedArticleId" />
+		}
+	</LoadingProgress>
+}
 @code {
+	[Parameter] public int? Id { get; set; }
 
+	public long Id2 = 0;
 	public long SelectedArticleId = 0;
+
+	protected override void OnParametersSet()
+	{
+		if (Id is not null)
+		{
+			Id2 = (long)Id;
+		}
+	}
 
 	private void ReturnedArticleId(long articleId)
 	{

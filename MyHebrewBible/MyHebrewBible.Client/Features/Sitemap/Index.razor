@@ -34,14 +34,7 @@
 @code {
 	private void ButtonClicked(Nav nav)
 	{
-		if (Api.TryFromValue(nav.Value, out var api))
-		{
-			NavigationManager!.NavigateTo(api.Route);
-		}
-		else
-		{
-			NavigationManager!.NavigateTo(nav.Name);
-		}
+		NavigationManager!.NavigateTo(nav.Index);
 	}
 }
 

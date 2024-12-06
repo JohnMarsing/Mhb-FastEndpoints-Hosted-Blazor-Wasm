@@ -1,8 +1,10 @@
-﻿@inject ApiClient Api
+﻿@using MyHebrewBible.Client.Helpers
+
+@inject ApiClient Api
 
 @if (kjvWords == null)
 {
-	<p><em>Loading...</em></p>
+	<p><em> KJV Words Loading...</em></p>
 }
 else
 {
@@ -52,12 +54,30 @@ else
 							<span class="bg-dark-subtle text-black-50 me-2 "> @item.Word</span>
 						}
 					}
-
 				</p>
 			</div>
 		}
 
+	</div>
+}
 
+
+@if (hebrewWords is not null)
+{
+	<div class="card  border-primary my-2">
+		<div class="card-body">
+			<h5 class="card-title ">
+				@* <span>@GlobalEnums.BLB.WLC.AnchorBCV(BookAndChapter!.BibleBook!.Value, (int)item.Chapter, (int)item.Verse)</span> *@
+			</h5>
+
+			<p class="hebrew">
+				@foreach (var item2 in hebrewWords)
+				{
+					@((MarkupString)HebrewFormat.GetSpan(item2.WordEnum, item2.Hebrew1, item2.Hebrew2, item2.Hebrew3))
+					@HebrewFormat.CheckMaqqef(item2.WordEnum, item2.Hebrew1, item2.Hebrew2, item2.Hebrew3)
+				}
+			</p>
+		</div>
 	</div>
 }
 
@@ -69,10 +89,12 @@ else
 	[Parameter] public EventCallback<StrongsAndWordCount?> OnStrongsSelected { get; set; }
 
 	private ICollection<WordPartKjv>? kjvWords = null;
+	private ICollection<WordPart>? hebrewWords = null;
 
 	protected override async Task OnParametersSetAsync()
 	{
 		kjvWords = await Api.GetWordPartKjvAsync(ScriptureId);
+		hebrewWords = await Api!.GetWordPartByScriptureIdAsync(ScriptureId);
 	}
 
 	private void ButtonClick(long strongs, long wordCount)

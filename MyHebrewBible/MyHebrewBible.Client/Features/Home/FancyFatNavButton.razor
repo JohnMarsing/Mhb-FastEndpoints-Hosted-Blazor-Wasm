@@ -15,8 +15,6 @@
 	</div>
 </button>
 
-
-
 @code {
 	[Parameter, EditorRequired] public Nav? Nav { get; set; }
 	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
@@ -28,23 +26,9 @@
 	protected string FontSize => $"{(MediaQuery == MediaQuery.Sm ? " fs-5" : " fs-4")}";
 	protected string ButtonCollor => $"{(IsFeatured ? " list-group-item-danger" : " list-group-item-warning")}";
 
-	protected string? Route = string.Empty;
-
-	protected override void OnParametersSet()
-	{
-		if (Api.TryFromValue(Nav!.Value, out var api))
-		{
-			Route = api.Route;
-		}
-		else
-		{
-			Route = Nav.Name;
-		}
-	}
-
 	private void ButtonClicked() 
 	{
-		NavigationManager!.NavigateTo(Route!);
+		NavigationManager!.NavigateTo(Nav!.Index);
 	}
 
 }

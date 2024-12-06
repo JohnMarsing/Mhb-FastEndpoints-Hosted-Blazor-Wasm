@@ -184,6 +184,28 @@ public abstract class BLB : SmartEnum<BLB>
 		}
 	}
 
+	public MarkupString AnchorBCV(CommonVerses.Enums.VerseRange verseRange)
+	{
+		BookChapterVerse? bcv = null;
+		BookAndChapter? bc = new BookAndChapter(BibleBook.FromValue(verseRange.BibleBook.Value), verseRange.Chapter);
+		if (bc is not null)
+		{
+			bcv = new BookChapterVerse(bc, verseRange.BegVerse);
+			if (bcv is not null)
+			{
+				return AnchorBCV(bcv);
+			}
+			else
+			{
+				return (MarkupString)"<a href='https://www.blueletterbible.org> <i class='fas fa-external-link-alt'></i></a>";
+			}
+		}
+		else
+		{
+			return (MarkupString)"<a href='https://www.blueletterbible.org> <i class='fas fa-external-link-alt'></i></a>";
+		}
+	}
+
 }
 
 // Ignore Spelling: KJV NKJV WLC Strongs

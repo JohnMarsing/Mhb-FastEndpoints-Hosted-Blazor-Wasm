@@ -28,7 +28,7 @@ public class GetBookChapter : Endpoint<BookChapterRequest, IEnumerable<BibleVers
 	public override async Task HandleAsync(BookChapterRequest request, CancellationToken ct)
 	{
 		_logger.LogDebug("{Method} Get B/C: {BookID}/{Chapter}"
-			, nameof(BookChapterRequest), request.BookID, request.Chapter);
+			, nameof(HandleAsync), request.BookID, request.Chapter);
 		try
 		{
 			IEnumerable<BibleVerse?> verses = await _db.GetBookChapter(request.BookID, request.Chapter);
@@ -37,7 +37,7 @@ public class GetBookChapter : Endpoint<BookChapterRequest, IEnumerable<BibleVers
 		}
 		catch (Exception ex)
 		{
-			_logger!.LogError(ex, "{Method}", nameof(BookChapterRequest));
+			_logger!.LogError(ex, "{Method}", nameof(HandleAsync));
 			throw;
 		}
 	}

@@ -2,7 +2,7 @@
 
 namespace MyHebrewBible.Endpoints;
 
-public class GetVerseListByBCVRequest
+public class VerseListByBCVRequest
 {
 	public long BookID { get; set; }
 	public long Chapter { get; set; }
@@ -10,7 +10,7 @@ public class GetVerseListByBCVRequest
 	public long EndVerse { get; set; }
 }
 
-public class GetVerseListByBCV : Endpoint<GetVerseListByBCVRequest, IEnumerable<BibleVerse>>
+public class GetVerseListByBCV : Endpoint<VerseListByBCVRequest, IEnumerable<BibleVerse>>
 {
 	public override void Configure()
 	{
@@ -26,10 +26,10 @@ public class GetVerseListByBCV : Endpoint<GetVerseListByBCVRequest, IEnumerable<
 		_logger = logger;
 	}
 
-	public override async Task HandleAsync(GetVerseListByBCVRequest request, CancellationToken ct)
+	public override async Task HandleAsync(VerseListByBCVRequest request, CancellationToken ct)
 	{
 		_logger.LogDebug("{Method} Get B/C: {BookID}/{Chapter} Verse {BegVerse}:{EndVerse}"
-			, nameof(GetVerseListByBCVRequest), request.BookID, request.Chapter, request.BegVerse, request.EndVerse);
+			, nameof(HandleAsync), request.BookID, request.Chapter, request.BegVerse, request.EndVerse);
 		try
 		{
 			IEnumerable<BibleVerse?> verses = await _db.GetVerseListByBCV(request.BookID, request.Chapter, request.BegVerse, request.EndVerse);
@@ -38,7 +38,7 @@ public class GetVerseListByBCV : Endpoint<GetVerseListByBCVRequest, IEnumerable<
 		}
 		catch (Exception ex)
 		{
-			_logger!.LogError(ex, "{Method}", nameof(GetVerseListByBCVRequest));
+			_logger!.LogError(ex, "{Method}", nameof(HandleAsync));
 			throw;
 		}
 	}

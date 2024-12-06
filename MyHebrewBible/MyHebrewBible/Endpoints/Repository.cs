@@ -6,6 +6,7 @@ namespace MyHebrewBible.Endpoints;
 
 public class Repository
 {
+	#region DI
 	private readonly ILogger<Repository> _logger;
 	private readonly IDbConnectionFactory _connectionFactory;
 	public DynamicParameters? Parms { get; set; }
@@ -15,6 +16,7 @@ public class Repository
 		_connectionFactory = connectionFactory;
 		_logger = logger;
 	}
+	#endregion
 
 	#region GetBookChapter
 	private const string SqlGetBookChapter = @"
@@ -35,27 +37,12 @@ public class Repository
 			return verseList;
 		}
 		catch (Exception ex)
-		{ 
+		{
 			_logger!.LogError(ex, "{Method} Sql:{Sql}", nameof(GetBookChapter), SqlGetBookChapter);
 			throw;
 		}
 	}
 	#endregion
-
-	public async Task<IEnumerable<WordPart?>> GetWordParts(long scriptureID)
-	{
-		using var connection = await _connectionFactory.CreateConnectionAsync();
-		Parms = new DynamicParameters(new { ScriptureID = scriptureID });
-
-		var wordParts = await connection.QueryAsync<WordPart>(@"
-SELECT ScriptureID, WordCount, SegmentCount, WordEnum, Hebrew1, Hebrew2, Hebrew3, KjvWord, Strongs, Transliteration, FinalEnum
-FROM WordPart 
-WHERE ScriptureID=@ScriptureID
-ORDER BY WordCount, SegmentCount
-", Parms);
-
-		return wordParts;
-	}
 
 	public async Task<IEnumerable<Mitzvah?>> GetMitzvot(long bookId)
 	{
@@ -71,42 +58,6 @@ ORDER BY BegId
 ", Parms);
 
 		return mitzvot;
-	}
-
-	#region AlephTavHebrewVerse
-	private const string alephTavHebrewVerseSelect = @"
-SELECT 
-	s.Id AS ScriptureID, s.BCV, s.Chapter, s.Verse, wp.WordCount, wp.WordEnum
-, wp.Hebrew1, wp.Hebrew2, wp.Hebrew3, wp.KjvWord, wp.Strongs, wp.Transliteration, wp.FinalEnum
-, atv.HasTwo
-FROM WordPart wp 
-	INNER JOIN AlephTavVerse atv 
-		ON wp.ScriptureID = atv.ScriptureID 
-	INNER JOIN Scripture s 
-		ON wp.ScriptureID = s.Id
-		";
-
-	private const string alephTavHebrewVerseOrderBy = "ORDER BY wp.ScriptureID, wp.WordCount";
-
-	public async Task<IEnumerable<AlephTavHebrewVerse?>> GetAlephTavHebrewVerses(long bookId, long chapter)
-	{
-		using var connection = await _connectionFactory.CreateConnectionAsync();
-		if (chapter == 0)
-		{
-			Parms = new DynamicParameters(new { BookId = bookId });
-			var verseList = await connection.QueryAsync<AlephTavHebrewVerse>(
-				$"{alephTavHebrewVerseSelect} WHERE s.BookID=@BookId {alephTavHebrewVerseOrderBy}", Parms);
-			return verseList;
-		}
-		else
-		{
-			Parms = new DynamicParameters(new { BookId = bookId, Chapter = chapter });
-			var verseList = await connection.QueryAsync<AlephTavHebrewVerse>(
-				$"{alephTavHebrewVerseSelect} WHERE s.BookID=@BookId and s.Chapter=@Chapter {alephTavHebrewVerseOrderBy}", Parms);
-			return verseList;
-		}
-		#endregion
-
 	}
 
 	public async Task<IEnumerable<WordPart?>> GetWordPartsByStrongs(long scriptureID, long strongs)

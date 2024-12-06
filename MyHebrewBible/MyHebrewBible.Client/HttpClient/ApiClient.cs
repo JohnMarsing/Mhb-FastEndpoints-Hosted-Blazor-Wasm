@@ -677,18 +677,18 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPart>> GetWordPartAsync(long scriptureid)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPart>> GetWordPartByScriptureIdAsync(long scriptureId)
         {
-            return GetWordPartAsync(scriptureid, System.Threading.CancellationToken.None);
+            return GetWordPartByScriptureIdAsync(scriptureId, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPart>> GetWordPartAsync(long scriptureid, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPart>> GetWordPartByScriptureIdAsync(long scriptureId, System.Threading.CancellationToken cancellationToken)
         {
-            if (scriptureid == null)
-                throw new System.ArgumentNullException("scriptureid");
+            if (scriptureId == null)
+                throw new System.ArgumentNullException("scriptureId");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -701,9 +701,9 @@ namespace MyHebrewBible.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/wordpart/{scriptureid}"
-                    urlBuilder_.Append("api/wordpart/");
-                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(scriptureid, System.Globalization.CultureInfo.InvariantCulture)));
+                    // Operation Path: "api/HebrewWords/{scriptureId}"
+                    urlBuilder_.Append("api/HebrewWords/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(scriptureId, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
