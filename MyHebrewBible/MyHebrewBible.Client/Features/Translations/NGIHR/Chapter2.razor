@@ -1,0 +1,45 @@
+﻿
+<div class="card mt-3 mb-2">
+	<div class="card-header">
+		<div class="d-flex justify-content-center">
+			<span class="fs-4 badge bg-warning-subtle text-black">Chapter 2</span>
+		</div>
+	</div>
+
+	<div class="card-body py-1">
+
+		<div class="d-flex justify-content-between">
+			<div class="">
+				The Second Gate
+				<span class=""><ToggleButton OnShowDetails="OnToggleChanged" /></span>
+				<i class="fas fa-question"></i>
+			</div>
+
+			<div class="@HebrewSize">
+				הַשַּׁעַר שֵׁנִי
+			</div>
+		</div>
+
+	</div>
+
+	@if (showDetails)
+	{
+		<div class="card-body py-1">
+			<p class="text-center mb-1">&mdash; JKM Note &mdash;</p>
+			<p class="card-title">
+				What is the <b>Second Gate</b>? Maybe that is just the way it is in the manuscript.
+			</p>
+		</div>
+	}
+
+</div>
+
+@code {
+	string HebrewSize = "hebrew"; // hebrew30
+
+	private bool showDetails = false;
+	private void OnToggleChanged(bool newState)
+	{
+		showDetails = !showDetails;
+	}
+}

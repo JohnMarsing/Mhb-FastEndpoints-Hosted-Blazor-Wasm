@@ -1,0 +1,81 @@
+﻿@using BLBEnum=MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Helpers
+
+<div class="card border-info my-2">
+
+	<div class="card-body py-1">
+		<div class="card-header">
+			<div class="d-flex justify-content-center">
+				<span class="fs-4 badge bg-warning-subtle text-black">Crown of Life</span>
+				<span class="float-end"><ToggleButton OnShowDetails="OnToggleChanged" /></span>
+			</div>
+		</div>
+	</div>
+
+	@if (showDetails)
+	{
+		<div class="card-body py-1">
+			<sup class='text-black-50'>33:31</sup>
+
+			<p class="card-text">
+				<!-- COMMENTS
+				<b>T-Bone</b>:
+				<b>AJ Bernard</b>:
+				-->
+				<!--
+					<p class="card-text"><b>SPEAKER</b>:CONTENT</p>
+				-->
+
+				<b>Nehemia</b>:
+				All right. To me, this is one of the three big pearls in this passage, one of the three golden nuggets.
+				<ul>
+					<li>
+						<sup class="text-black-50">[1]</sup> You’ve got Yehovah with the vowels in chapter 1 verse 8,
+					</li>
+					<li>
+						<sup class="text-black-50">[2]</sup> you’ve got the nails,
+					</li>
+					<li>
+						<sup class="text-black-50">[3]</sup> and you have this reference to Yehudi’im versus Yehudim.
+					</li>
+				</ul>
+				This is some cool stuff.
+				And again, I don’t know if this is a translation from some lost Greek or Latin version, or if it is just the original Hebrew, I have no idea.
+				But there’s something really fascinating about this text.
+				Let’s read on.
+			</p>
+
+			<p class="card-text">
+				<b>Nehemia</b>:
+				Verse 10,
+				“Al tira shehutzrach unot vehinei ha’avadon yiten mikem el beit hasohar lenasotchem.
+				Velachem tzara asar yamim. Heyeh ne’eman ad mavet venatati lecha ateret hachayim.”
+			</p>
+
+			<p class="card-text">
+				That’s pretty cool.	What’s <b>the crown of life</b>? It sounds like a good thing, whatever it is. [laughing]
+			</p>
+
+			<p class="card-text">
+				<b>AJ Bernard</b>: Yeah, it could be a reference to <b>a victor’s crown</b> from the Greek games.
+				<b>Nehemia</b>:So, we’re back to the victors, like in the earlier verse. <b>AJ Bernard</b>: Right. <b>Nehemia</b>:Okay, nice. Nice.
+			</p>
+
+			<!--
+				34:37 Smirna, Mir,
+			-->
+
+		</div>
+
+	} <!-- if ShowDetils -->
+
+</div><!-- card -->
+<!-- 33:55 Rev 2:10 -->
+@code {
+	//string HebrewSize = "hebrew"; // hebrew30  Rev210AvadonTreeOfLife
+	private bool showDetails = false;
+	private void OnToggleChanged(bool newState)
+	{
+		showDetails = !showDetails;
+	}
+}

@@ -1,0 +1,28 @@
+﻿
+<div class="card mt-3 mb-2">
+	<div class="d-flex justify-content-end">
+		<span class="text-danger"><b>7?</b></span> &nbsp;
+<span class="float-end"><ToggleButton OnShowDetails="OnToggleChanged" /></span>
+	</div>
+
+	@if (showDetails)
+	{
+		<div class="card-body py-1">
+			<p class="text-center mb-1">&mdash; JKM Note &mdash;</p>
+			<p class="card-title">
+				In the Hebrew text on the PDF, there's a <b>[3r]</b> just to the right of the verse number for 14.
+				Not sure what that is about. Maybe it's for <b>footnote 7</b> which states "The Shin-dot is missing in the manuscript.".
+				I say that because I don't see where <b>footnote 7</b> is referenced.
+			</p>
+		</div>
+	}
+
+</div>
+
+@code {
+	private bool showDetails = false;
+	private void OnToggleChanged(bool newState)
+	{
+		showDetails = !showDetails;
+	}
+}

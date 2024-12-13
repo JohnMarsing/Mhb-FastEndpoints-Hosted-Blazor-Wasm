@@ -1,0 +1,72 @@
+﻿@using BLBEnum=MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Helpers
+
+<div class="card border-info my-2">
+
+	<div class="card-body py-1">
+		<div class="card-header">
+			<div class="d-flex justify-content-center">
+				<span class="fs-4 badge bg-warning-subtle text-black">Avadon | Destruction | Diablo</span>
+				<span class="float-end"><ToggleButton OnShowDetails="OnToggleChanged" /></span>
+			</div>
+		</div>
+	</div>
+
+	@if (showDetails)
+	{
+		<div class="card-body py-1">
+			<sup class='text-black-50'>35:54</sup>
+
+			<p class="card-text">
+
+				<b>T-Bone</b>: It says, “And behold destruction, Abaddon, will give some of you to the prison.”
+				The word “Abaddon”, couldn’t that be construed as an adversary in that point?
+
+				<br />
+				<b>Nehemia</b>: Well, it’s not good. [laughing]; <b>AJ Bernard</b>: No, it’s not good.
+
+				<br />
+				<b>Nehemia</b>: Meaning, “avadon” is destruction. It certainly is not a pleasant experience, whatever it is.
+				And of course, in the Book of <b>Revelation in 9:11</b>, do you want to read it?
+			</p>
+
+			<!--
+			<p class="card-text">
+				<b>JKM</b>: See comments above
+			</p>
+			-->
+
+			<p class="card-text">
+
+				<b>Nehemia</b>: And I think that’s really interesting. This is one of the signs that at least this has Hebrew sources, and his name is “Avadon”, “Destruction” and in the Greek the “v” becomes a “b”, Abadon. There’s no “v” in Greek. So, Avadon, Destruction is mentioned again, but you wouldn’t know that from the Greek of Revelation 2:10, but in the Hebrew here it’s “Avadon is going to give you over to the prison.” 
+				So, just real quick, what do we have in the Greek there?
+
+				<br />
+				<b>AJ Bernard</b>: Diabolos. <b>Nehemia</b>: Wow!  <b>AJ Bernard</b>: Yeah.
+
+				<br />
+				<b>Nehemia</b>: So, there’s “Diabolos”, which is “the Devil”.
+				You don’t even need to speak Spanish to know Diabolos is the devil, meaning something like Satan or maybe it’s “a diabolos”, “a devil”.
+				Wow, so that’s interesting.
+				<br />
+				So, there’s another thing where you have to say, “Why on earth, if he’s translating this from Greek, 
+				why would he translate “Diabolos” as “Avadon?”
+				And you could make the argument, “Well, he read later in Revelation.” I wish we had Revelation 9 of this Hebrew text.
+
+				<b>AJ Bernard</b>: Yeah, no doubt.
+			</p>
+
+		</div>
+
+	} <!-- if ShowDetils -->
+
+</div><!-- card -->
+
+@code {
+	//string HebrewSize = "hebrew"; // hebrew30  Rev210AvadonTreeOfLife
+	private bool showDetails = false;
+	private void OnToggleChanged(bool newState)
+	{
+		showDetails = !showDetails;
+	}
+}

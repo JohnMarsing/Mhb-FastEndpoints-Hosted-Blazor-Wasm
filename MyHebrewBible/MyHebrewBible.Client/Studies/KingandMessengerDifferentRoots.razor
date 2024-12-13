@@ -1,10 +1,16 @@
 ﻿@using MyHebrewBible.Client.Helpers
 
-<div class="card border-info my-2">
 
-	<div class="card-body py-1">
-		<p class="card-title">@HtmlGeneration.TranscriptHeader("B", "King and Messenger", "11:13")</p>
+<div class="card border-info my-2">
+	<div class="card-header">
+		<div class="d-flex justify-content-center">
+			<span class="fs-4 badge bg-warning-subtle text-black">King and Messenger</span>
+			<span class="float-end"><ToggleButton OnShowDetails="OnToggleChanged" /></span>
+		</div>
 	</div>
+
+	@if (showDetails)
+	{
 	<div class="card-body py-1">
 
 		<p class="card-text">
@@ -44,8 +50,14 @@
 		</p>
 
 	</div>
+	}
+
 </div>
 
 @code {
-
+	private bool showDetails = false;
+	private void OnToggleChanged(bool newState)
+	{
+		showDetails = !showDetails;
+	}
 }

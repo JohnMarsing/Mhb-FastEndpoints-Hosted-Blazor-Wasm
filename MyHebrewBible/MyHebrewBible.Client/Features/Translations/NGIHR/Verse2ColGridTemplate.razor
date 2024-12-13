@@ -1,0 +1,73 @@
+﻿@using MyHebrewBible.Client.Helpers
+
+<div class="card border-primary p-2 my-1">
+
+	@if (AddGridHeader)
+	{
+		@HtmlGeneration.TableHeading2Cols()
+	}
+
+	<div class="row mb-2">
+
+		<div class="col-6 fs-5">
+			@HtmlGeneration.VerseNoCol(VerseNumber)
+			@Col1
+		</div>
+
+		<div class="col-6">
+			<div class="@HebrewSize">
+				<sup class='text-primary fw-bold'>@VerseHebrew</sup>
+				@Col2
+			</div>
+
+		</div>
+
+	</div>
+
+
+	@* background-color:aliceblue; *@
+	<div class="card border-info p-2 my-1">
+		<div style="padding:0px; text-align: center;margin-top: -10px;">KJV</div>
+		<div class="card-body py-1">
+			@RowKJV 
+		</div>
+	</div>
+
+	@if (@FootNote is not null)
+	{
+		<div class="card-body">
+			@FootNote
+		</div>
+	}
+
+	@if (@FootNote2 is not null)
+	{
+		<div class="card-body">
+			@FootNote2
+		</div>
+	}
+
+	@if (@FootNote3 is not null)
+	{
+		<div class="card-body">
+			@FootNote3
+		</div>
+	}
+
+
+</div>
+
+
+@code {
+	[Parameter, EditorRequired] public int VerseNumber { get; set; }
+	[Parameter, EditorRequired] public string? VerseHebrew { get; set; }
+	[Parameter, EditorRequired] public bool AddGridHeader { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? Col1 { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? Col2 { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? RowKJV { get; set; }
+	[Parameter] public RenderFragment? FootNote { get; set; }
+	[Parameter] public RenderFragment? FootNote2 { get; set; }
+	[Parameter] public RenderFragment? FootNote3 { get; set; }
+
+	string HebrewSize = "hebrew"; //  hebrew30
+}
