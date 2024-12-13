@@ -4,12 +4,20 @@
 <div class="card border-info my-2">
 
 	<div class="card-body py-1">
-		<p class="card-title">@HtmlGeneration.TranscriptHeader("F", "Genesis Rabbah and 10 Tribes", "27:56")</p>
-		<!-- Topics: FirstAndList, Aleph and the Tav, SynOfSatn -->
+		<div class="card-header">
+			<div class="d-flex justify-content-center">
+				<span class="fs-4 badge bg-warning-subtle text-black">Genesis Rabbah and 10 Tribes</span>
+				<span class="float-end"><ToggleButton OnShowDetails="OnToggleChanged" /></span>
+				<!-- Topics: FirstAndList, Aleph and the Tav, SynOfSatn -->
+			</div>
+		</div>
 	</div>
 
+	@if (showDetails)
+	{
 
 	<div class="card-body py-1">
+			<sup class='text-black-50'>27:56</sup>
 		<p class="card-text">
 			<b>T-Bone</b>: I would like if you’d explain <b>Genesis Rabbah</b> a little bit,
 			where it’s from, what it is, that sort of thing.
@@ -62,9 +70,17 @@
 
 		</p>
 
+		
 	</div>
-</div>
+
+	} <!-- if ShowDetils -->
+</div> <!-- card -->
 
 @code {
 	//string HebrewSize = "hebrew"; // hebrew30
+	private bool showDetails = false;
+	private void OnToggleChanged(bool newState)
+	{
+		showDetails = !showDetails;
+	}
 }

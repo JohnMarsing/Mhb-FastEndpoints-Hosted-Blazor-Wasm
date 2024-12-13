@@ -1,8 +1,15 @@
 ﻿@using MyHebrewBible.Client.Helpers
 
 <div class="card border-primary p-2 my-1">
+	<div class="card-header">
+		<div class="d-flex justify-content-center">
+			<span class="fs-4 badge bg-warning-subtle text-black">Title</span>
+			<span class="float-end"><ToggleButton OnShowDetails="OnToggleChanged" /></span>
+		</div>
+	</div>
 
-
+	@if (showDetails)
+	{
 	<div class="row mt-2">
 		<div class="col-6">
 			[1r] 1
@@ -11,7 +18,6 @@
 			[1r] א
 		</div>
 	</div>
-
 
 	<div class="row mb-2">
 		<div class="col-6 fs-5">
@@ -41,9 +47,16 @@
 			is missing or misspelled with a Tsere.
 		
 	</div>
+	} <!-- if ShowDetils -->
 
-</div>
+</div> <!-- card -->
 
 @code {
 	string HebrewSize = "hebrew"; // hebrew30
+	
+	private bool showDetails = false;
+	private void OnToggleChanged(bool newState)
+	{
+		showDetails = !showDetails;
+	}
 }

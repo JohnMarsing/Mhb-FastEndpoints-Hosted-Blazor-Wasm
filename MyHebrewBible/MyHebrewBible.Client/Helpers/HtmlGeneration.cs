@@ -65,6 +65,16 @@ public class HtmlGeneration
 		// text-decoration-underline
 	}
 
+	public static MarkupString TableHeading2Cols()
+	{
+		return new MarkupString($@"
+<div class='row mb-1 text-center'>
+	<div class='col-6 fw-bold '>NG Translation</div>
+	<div class='col-6 fw-bold'>Hebrew Revelation</div>
+</div>
+");
+	}
+
 
 	public static MarkupString FootnoteJKM(string footnote, string subject, string timestamp)
 	{

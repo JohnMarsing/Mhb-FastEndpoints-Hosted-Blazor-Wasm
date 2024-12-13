@@ -1,0 +1,40 @@
+﻿@using BLBEnum=MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Helpers
+
+<div class="card border-danger mt-3 mb-2 mx-3">
+
+	<div class="card-header">
+		<p class="text-center mb-1">&mdash; JKM Commentary &mdash;</p>
+		<div class="d-flex justify-content-center">
+			<span class="fs-4 badge bg-warning-subtle text-black">Avadon | Rev 9:11</span>
+			<span class="float-end"><ToggleButton OnShowDetails="OnToggleChanged" /></span>
+		</div>
+	</div>
+
+
+	@if (showDetails)
+	{
+		<div class="card-body py-1">
+			<p class="card-title">
+				Avadon is found here in the Hebrew translation but not in the Greek, but later in Revelation it is. See below.
+			</p>
+		</div>
+
+		<div class="card-body py-1">
+			@BLBEnum.BLB.KJV.AnchorBCV(Enums.BibleBook.Revelation.Value, 9, 11)
+			<p class="card-text bg-info-subtle mt-3 ps-4">
+				<i class="fas fa-quote-left"></i>
+				And they had a king over them, which is the angel of the bottomless pit,
+				whose name in the Hebrew tongue is Abaddon @Enums.BibleAnchors.StrongsG(3, "abaddōn"), but in the Greek tongue hath his name Apollyon @Enums.BibleAnchors.StrongsG(623, "apollyōn").
+			</p>
+		</div>
+
+	} <!-- if ShowDetils -->
+</div><!-- card -->
+@code {
+	private bool showDetails = false;
+	private void OnToggleChanged(bool newState)
+	{
+		showDetails = !showDetails;
+	}
+}

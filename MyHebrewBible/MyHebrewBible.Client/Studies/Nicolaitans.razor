@@ -4,79 +4,91 @@
 <div class="card border-info my-2">
 
 	<div class="card-body py-1">
-		<p class="card-title">@HtmlGeneration.TranscriptHeader("D", "Nicolaitans", "17:05")</p>
+		<div class="card-header">
+			<div class="d-flex justify-content-center">
+				<span class="fs-4 badge bg-warning-subtle text-black">Nicolaitans</span>
+				<span class="float-end"><ToggleButton OnShowDetails="OnToggleChanged" /></span>
+			</div>
+		</div>
 	</div>
 
-	<div class="card-body py-1">
+	@if (showDetails)
+	{
+		<div class="card-body py-1">
 
-		<p class="card-text">
-			<b>AJ Bernard:</b> The one thing I really wanted to hit on was the word “Nicolaitans” @Enums.BibleAnchors.StrongsG(3531, "nikolaitēs").
-			Nicolaitans, because it comes from the Greek, it’s a transliteration of the Greek.
-			I looked in the Hebrew text, and it had the transliteration there.
-			The Greek word - a couple of ideas of where it may come from:
-			One, a conjugation of “nicai’o” which means “to rule over” from the Greek god Nike, and the word that becomes “laity”
-		</p>
+			<sup class='text-black-50'>17:05</sup>
 
-		<p class="card-text">
-			<b>Nehemia</b>: Oh, so it’s to Nike over laity, to be victorious over the laity.
-		</p>
+			<p class="card-text">
+				<b>AJ Bernard:</b> The one thing I really wanted to hit on was the word “Nicolaitans” @Enums.BibleAnchors.StrongsG(3531, "nikolaitēs").
+				Nicolaitans, because it comes from the Greek, it’s a transliteration of the Greek.
+				I looked in the Hebrew text, and it had the transliteration there.
+				The Greek word - a couple of ideas of where it may come from:
+				One, a conjugation of “nicai’o” which means “to rule over” from the Greek god Nike, and the word that becomes “laity”
+			</p>
 
-		<p class="card-text">
-			<b>AJ Bernard</b>: Right. <b>Nehemia</b>: Oh, wow.
-		</p>
+			<p class="card-text">
+				<b>Nehemia</b>: Oh, so it’s to Nike over laity, to be victorious over the laity.
+			</p>
 
-		<p class="card-text">
-			<b>AJ Bernard</b>: Yeah, to rule over the people.
-			And I’ve heard people say that this talks about the idea of the clergy,
-			the professional clergy, lording their religion over the people.
-		</p>
+			<p class="card-text">
+				<b>AJ Bernard</b>: Right. <b>Nehemia</b>: Oh, wow.
+			</p>
 
-	</div>
+			<p class="card-text">
+				<b>AJ Bernard</b>: Yeah, to rule over the people.
+				And I’ve heard people say that this talks about the idea of the clergy,
+				the professional clergy, lording their religion over the people.
+			</p>
 
-	<div class="card-body py-2">
-		<p class="card-title">@HtmlGeneration.TranscriptHeader("", "Greek words borrowed by Hebrew", "18:18")</p>
-	</div>
-
-	<div class="card-body py-1">
-
-		<p class="card-text">
-			<b>Nehemia:</b>
-			...but yeah. It is interesting that you have a Greek word here in the Hebrew.
-			I should point out that in this period, when Hebrew was heavily influenced by both Greek and Aramaic,
-			for example, there are two key concepts in Rabbinical literature from this period, one will be probably
-			very well-known to many members of the audience, it’s the word “gematria.”
-			Gematria is simply the Greek word for “mathematics”, but it appears all over Hebrew literature,
-			both Hebrew and Aramaic literature of Jewish sources.
-
-			Gematria is where you take words and you turn them into numbers, and then find other words that have the same number.
-			And that is actually a Greek concept, that they would take Alpha, Beta and Gamma and turn them into numbers.
-			It actually came from the Greek schools of Alexandria.
-
-			And then the other word you have, which probably isn’t going to be too familiar to anybody but Hebrew scholars,
-			is the word “notarikon”, which is another Greek word that you find all over Rabbinical literature in Hebrew and in Aramaic.
-			And it’s another method of interpretation that comes out of the Greek schools of Alexandria.
-			Notarikon actually makes a lot more sense in Greek than it does in Hebrew, because it’s identifying compound words.
-			Hebrew doesn’t really have so many compound words, it’s quite rare. But in Greek, “Nicolaitans” is an example of a compound word. It’s the word “nicao”, victory and laity, right? So, compound words are much more natural in Greek.
-
-			<b>So, you do have Greek words in Hebrew of this period.</b>
-			You have Aramaic words. We just saw a Persian word that goes back to the time of King Solomon, right,
-			because he’s writing in Ecclesiastes, assuming he wrote Ecclesiastes.
-			<b>So, you do have foreign loaned words occasionally</b>.
-			They tend to be rare, depending on your period you might have more.
-			So yeah, you have all kinds of Greek words in Hebrew sources of this period.
-			You have “famalia” which is the word “family”, but it actually means an “entourage” or a “royal entourage”.
-			You have “palatin” which is a word that appears all over the Rabbinical writings in Hebrew of this period.
-			“Palatin” is the word “palatine” and it means “palace”. It’s actually the source of the word “palace”.
-
-			In other words, the original Hebrew, whether this is the original Hebrew or not I don’t know,
-			but <b>it’s very possible the original Hebrew did have the word “Nicolaitim” or something like it, Nicolaitans</b>. It’s very possible.
-		</p>
+		</div>
 
 		<div class="card-body py-2">
-			<p class="card-title">@HtmlGeneration.TranscriptHeader("", "Victorious and Conquerors", "19:30")</p>
+			<div class='fs-4'>Greek words borrowed by Hebrew</div>
 		</div>
 
 		<div class="card-body py-1">
+			<sup class='text-black-50'>18:18</sup>
+			<p class="card-text">
+				<b>Nehemia:</b>
+				...but yeah. It is interesting that you have a Greek word here in the Hebrew.
+				I should point out that in this period, when Hebrew was heavily influenced by both Greek and Aramaic,
+				for example, there are two key concepts in Rabbinical literature from this period, one will be probably
+				very well-known to many members of the audience, it’s the word “gematria.”
+				Gematria is simply the Greek word for “mathematics”, but it appears all over Hebrew literature,
+				both Hebrew and Aramaic literature of Jewish sources.
+
+				Gematria is where you take words and you turn them into numbers, and then find other words that have the same number.
+				And that is actually a Greek concept, that they would take Alpha, Beta and Gamma and turn them into numbers.
+				It actually came from the Greek schools of Alexandria.
+
+				And then the other word you have, which probably isn’t going to be too familiar to anybody but Hebrew scholars,
+				is the word “notarikon”, which is another Greek word that you find all over Rabbinical literature in Hebrew and in Aramaic.
+				And it’s another method of interpretation that comes out of the Greek schools of Alexandria.
+				Notarikon actually makes a lot more sense in Greek than it does in Hebrew, because it’s identifying compound words.
+				Hebrew doesn’t really have so many compound words, it’s quite rare. But in Greek, “Nicolaitans” is an example of a compound word. It’s the word “nicao”, victory and laity, right? So, compound words are much more natural in Greek.
+
+				<b>So, you do have Greek words in Hebrew of this period.</b>
+				You have Aramaic words. We just saw a Persian word that goes back to the time of King Solomon, right,
+				because he’s writing in Ecclesiastes, assuming he wrote Ecclesiastes.
+				<b>So, you do have foreign loaned words occasionally</b>.
+				They tend to be rare, depending on your period you might have more.
+				So yeah, you have all kinds of Greek words in Hebrew sources of this period.
+				You have “famalia” which is the word “family”, but it actually means an “entourage” or a “royal entourage”.
+				You have “palatin” which is a word that appears all over the Rabbinical writings in Hebrew of this period.
+				“Palatin” is the word “palatine” and it means “palace”. It’s actually the source of the word “palace”.
+
+				In other words, the original Hebrew, whether this is the original Hebrew or not I don’t know,
+				but <b>it’s very possible the original Hebrew did have the word “Nicolaitim” or something like it, Nicolaitans</b>. It’s very possible.
+			</p>
+		</div> <!-- Greek words borrowed by Hebrew -->
+
+		<div class="card-body py-2">
+			<div class='fs-4'>Victorious and Conquerors</div>
+		</div>
+
+		<div class="card-body py-1">
+			<sup class='text-black-50'>19:30</sup>
+			
 			<p class="card-text">
 				<b>T-Bone</b>: I’ve seen some people connect the <b>Nicolaitans</b> back to the same meaning as <b>“Balaam”</b>.
 			</p>
@@ -188,11 +200,16 @@
 				he’s going to get to eat of the tree of life. Here I’m speculating, I don’t know.
 				I don’t have that text, right? We have a copy of a copy of a copy, possibly a translation.
 			</p>
-		</div>
+		</div> <!-- Victorious and Conquerors -->
 
-	</div>
-</div>
+	} <!-- if ShowDetils -->
 
+</div><!-- card -->
 @code {
 
+	private bool showDetails = false;
+	private void OnToggleChanged(bool newState)
+	{
+		showDetails = !showDetails;
+	}
 }

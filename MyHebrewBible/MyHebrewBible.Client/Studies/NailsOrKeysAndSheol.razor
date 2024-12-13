@@ -4,14 +4,16 @@
 <div class="card border-info my-2">
 
 	<div class="card-body py-1">
-		<p class="card-title">@HtmlGeneration.TranscriptHeader("A", "Nails or Keys and Sheol", "1:25")</p>
+		<div class="card-header">
+			<div class="d-flex justify-content-center">
+				<span class="fs-4 badge bg-warning-subtle text-black">Nails or Keys and Sheol</span>
+				<span class="float-end"><ToggleButton OnShowDetails="OnToggleChanged" /></span>
+			</div>
+		</div>
 	</div>
 
-	@*
-	<div class="card-body py-1">
-	<b>T-Bone</b>: I’m really interested in the divine orchard portion.
-	</div>
-	*@
+	@if (showDetails)
+	{
 	<div class="card-body py-1">
 
 		<p class="card-text">
@@ -105,7 +107,7 @@
 	</div>
 
 	<!--
-			H3489 KJC:
+		H3489 KJC:
 		Exo 27:19; 27:19; 27:19; 35:18; 38:20; 38:20; 38:21; 38:31; 39:40; 39:40
 		Num 3:37; 3:37; 4:32; 4:32
 		Deu: 23:14; 23:14; 23:14
@@ -241,10 +243,18 @@
 			</li>
 		</ul>
 	</div>
+	
+	} <!-- if ShowDetils -->
 
-</div>
+</div>  <!-- card -->
 
 
 @code {
 	string HebrewSize = "hebrew"; // hebrew30
+
+	private bool showDetails = false;
+	private void OnToggleChanged(bool newState)
+	{
+		showDetails = !showDetails;
+	}
 }

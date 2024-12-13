@@ -1,19 +1,33 @@
 ﻿
 <div class="card border-primary p-2 my-1">
-
-<div class="card-body">
-		<h4 class="text-center">A Hebrew Manuscript of the Book of Revelation</h4>
-		<h4 class="text-center">British Library, MS Sloane 273</h4>
-		<h4 class="text-center mt-5">Transcribed and Translated by Nehemia Gordon</h4>
-		<h4 class="text-center">
-			www.NehemiasWall.com
-			&nbsp;<a href="https://www.nehemiaswall.com/" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-		</h4>
-		<h4 class="text-center">© 2017 by Nehemia Gordon</h4>
+	<div class="card-header">
+		<div class="d-flex justify-content-center">
+ 		<span class="fs-4 badge bg-warning-subtle text-black">Preface</span>
+		<span class="float-end"><ToggleButton OnShowDetails="OnToggleChanged" /></span>
+		</div>
 	</div>
+
+	@if (showDetails)
+	{
+		<div class="card-body">
+			<h4 class="text-center">A Hebrew Manuscript of the Book of Revelation</h4>
+			<h4 class="text-center">British Library, MS Sloane 273</h4>
+			<h4 class="text-center mt-5">Transcribed and Translated by Nehemia Gordon</h4>
+			<h4 class="text-center">
+				www.NehemiasWall.com
+				&nbsp;<a href="https://www.nehemiaswall.com/" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+			</h4>
+			<h4 class="text-center">© 2017 by Nehemia Gordon</h4>
+		</div>
+	}
 
 </div>
 
-@code {
 
+@code {
+	private bool showDetails = false;
+	private void OnToggleChanged(bool newState)
+	{
+		showDetails = !showDetails;
+	}
 }

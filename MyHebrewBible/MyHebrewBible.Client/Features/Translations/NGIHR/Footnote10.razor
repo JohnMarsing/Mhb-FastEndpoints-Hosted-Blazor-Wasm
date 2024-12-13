@@ -1,0 +1,31 @@
+﻿@using MyHebrewBible.Client.Helpers
+
+<div class="card mt-3 mb-2">
+	<div class="d-flex justify-content-end">
+		<span class="text-danger"><b>10</b></span> &nbsp;
+		<span class="float-end"><ToggleButton OnShowDetails="OnToggleChanged" /></span>
+	</div>
+
+	@if (showDetails)
+	{
+		<div class="card-body py-1">
+			<p class="text-center mb-1">&mdash; JKM Note &mdash;</p>
+			<p class="card-title">
+				@HtmlGeneration.FootnoteNG(10) The Shin-dot is missing in the manuscript
+			</p>
+			<p class="card-title">
+				Also, in the Hebrew text on the PDF, there's a <b>[4r]</b> just after footnote @HtmlGeneration.FootnoteNG(10) and before verse number for 3.
+			</p>
+		</div>
+	}
+
+
+</div>
+
+@code {
+	private bool showDetails = false;
+	private void OnToggleChanged(bool newState)
+	{
+		showDetails = !showDetails;
+	}
+}

@@ -4,9 +4,16 @@
 <div class="card border-info my-2">
 
 	<div class="card-body py-1">
-		<p class="card-title">@HtmlGeneration.TranscriptHeader("C", "The divine orchard (pardes)", "14:30")</p>
+		<div class="card-header">
+			<div class="d-flex justify-content-center">
+				<span class="fs-4 badge bg-warning-subtle text-black">The divine orchard (pardes)</span>
+				<span class="float-end"><ToggleButton OnShowDetails="OnToggleChanged" /></span>
+			</div>
+		</div>
 	</div>
 
+	@if (showDetails)
+	{
 	<div class="card-body py-1">
 		<b>T-Bone</b>: I’m really interested in the divine orchard portion.
 	</div>
@@ -87,8 +94,17 @@
 			<li>See also @BLBEnum.BLB.KJV.AnchorBCV(Enums.BibleBook.Nehemiah.Value, 2, 8). FWIW, the next verse, @BLBEnum.BLB.KJV.AnchorBCV(Enums.BibleBook.Nehemiah.Value, 2, 9), has a Standalone Aleph Tav</li>
 		</ul>
 	</p>
-</div>
+
+	} <!-- if ShowDetils -->
+
+</div> <!-- card -->
 
 @code {
 	string HebrewSize = "hebrew"; // hebrew30
+	
+	private bool showDetails = false;
+	private void OnToggleChanged(bool newState)
+	{
+		showDetails = !showDetails;
+	}
 }

@@ -1,0 +1,26 @@
+﻿
+<div class="card mt-3 mb-2">
+	<div class="d-flex justify-content-end">
+		<span class="text-danger"><b>7b</b></span> &nbsp;
+		<span class="float-end"><ToggleButton OnShowDetails="OnToggleChanged" /></span>
+	</div>
+
+	@if (showDetails)
+	{
+		<div class="card-body py-1">
+			<p class="text-center mb-1">&mdash; JKM Note &mdash;</p>
+			<p class="card-title">
+				In the Hebrew text on the PDF, there is no verse number
+			</p>
+		</div>
+	}
+
+</div>
+
+@code {
+	private bool showDetails = false;
+	private void OnToggleChanged(bool newState)
+	{
+		showDetails = !showDetails;
+	}
+}

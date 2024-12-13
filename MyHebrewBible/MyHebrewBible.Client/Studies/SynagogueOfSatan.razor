@@ -4,10 +4,19 @@
 <div class="card border-info my-2">
 
 	<div class="card-body py-1">
-		<p class="card-title">@HtmlGeneration.TranscriptHeader("F", "Knesset haSatan | Synagogue of Satan", "30:25")</p>
+		<div class="card-header">
+			<div class="d-flex justify-content-center">
+				<span class="fs-4 badge bg-warning-subtle text-black">Knesset haSatan | Synagogue of Satan</span>
+				<span class="float-end"><ToggleButton OnShowDetails="OnToggleChanged" /></span>
+			</div>
+		</div>
 	</div>
 
+	@if (showDetails)
+	{
+
 	<div class="card-body py-1">
+			<sup class='text-black-50'>30:25</sup>
 		<p class="card-text">
 			<b>T-Bone</b>: and I’d kind of like a deep understanding of what a synagogue is. Is it a system, is it a congregation? That sort of thing.
 		</p>
@@ -72,8 +81,17 @@
 		</p>
 
 	</div>
-</div>
+
+	} <!-- if ShowDetils -->
+
+</div><!-- card -->
 
 @code {
 	//string HebrewSize = "hebrew"; // hebrew30
+	private bool showDetails = false;
+	private void OnToggleChanged(bool newState)
+	{
+		showDetails = !showDetails;
+	}
+
 }
