@@ -1,6 +1,8 @@
 ﻿@inject ApiClient Api 
 @inject ILogger<Sections>? Logger
 
+@using AlephTavEnums = MyHebrewBible.Client.Features.AlephTav.Enums
+
 @if (verses == null)
 {
 	<p><em>Loading verses...</em></p>
@@ -9,13 +11,13 @@ else
 {
 	if (FocusScriptureId == 0)
 	{
-		<Paragraph BibleVerses="versesTop" OnVerseSelected="ReturnedVerse"  />
+		<Paragraph SatVerseList="SatVerseList" BibleVerses="versesTop" OnVerseSelected="ReturnedVerse" />
 	}
 	else
 	{
 		@if (versesTop is not null)
 		{
-			<Paragraph BibleVerses="versesTop" OnVerseSelected="ReturnedVerse" />
+			<Paragraph SatVerseList="SatVerseList" BibleVerses="versesTop" OnVerseSelected="ReturnedVerse" />
 		}
 		else
 		{
@@ -29,7 +31,7 @@ else
 
 		@if (versesBottom is not null)
 		{
-			<Paragraph BibleVerses="versesBottom" OnVerseSelected="ReturnedVerse" />
+			<Paragraph SatVerseList="SatVerseList" BibleVerses="versesBottom" OnVerseSelected="ReturnedVerse" />
 		}
 		else
 		{
@@ -53,6 +55,8 @@ else
 	public List<BibleVerse>? versesTop;
 	public List<BibleVerse>? versesBottom;
 
+	private List<AlephTavEnums.ChapterVerse>? SatVerseList = null;
+
 	private ICollection<BibleVerse>? verses = null;
 
 	protected override async Task OnParametersSetAsync()
@@ -63,6 +67,7 @@ else
 			verses = await Api!.GetBookChapterAsync((long)BookAndChapter!.BibleBook, (long)BookAndChapter.Chapter);
 			VerseRowCount = verses.Count;
 			PopulateTopAndBottom(VerseRowCount);
+			SatVerseList = MyHebrewBible.Client.Components.Helper.GetSatVerseList(BookAndChapter.BibleBook, BookAndChapter.Chapter);
 		}
 	}
 

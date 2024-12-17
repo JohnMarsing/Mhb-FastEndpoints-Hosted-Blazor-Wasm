@@ -13,9 +13,9 @@
 	<div class="collapse navbar-collapse justify-content-center">
 
 		<div class="px-1">
-			<BookModal CurrentAlephTavSummary="CurrentAlephTavSummary"
+			<BookModal CurrentBookChaptersVerses="CurrentBookChaptersVerses"
 								 ShowIntroToggle="ShowIntroToggle"
-								 OnAlephTavSummarySelected="ReturnedAlephTavSummary" />
+								 OnBookChaptersVersesSelected="ReturnedBookChaptersVerses" />
 		</div>
 
 	</div>
@@ -39,22 +39,22 @@
 </nav>
 
 @code {
-	[Parameter, EditorRequired] public Enums.AlephTavSummary? CurrentAlephTavSummary { get; set; }
+	[Parameter, EditorRequired] public Enums.BookChaptersVerses? CurrentBookChaptersVerses { get; set; }
 	[Parameter, EditorRequired] public bool ShowIntroToggle { get; set; }
 
-	[Parameter] public EventCallback<Enums.AlephTavSummary> OnAlephTavSummarySelected { get; set; }
+	[Parameter] public EventCallback<Enums.BookChaptersVerses> OnBookChaptersVersesSelected { get; set; }
 	[Parameter] public EventCallback<bool> OnShowIntroSelected { get; set; }
 
 	private void ToggleClick()
 	{
 		//Toast!.ShowInfo($"{nameof(ChapterList)}!{nameof(ButtonClick)}; chapter{chapter}");
-		CurrentAlephTavSummary = null;
+		CurrentBookChaptersVerses = null;
 		OnShowIntroSelected.InvokeAsync(!ShowIntroToggle);
 	}
 
-	private void ReturnedAlephTavSummary(Enums.AlephTavSummary alephTavSummary)
+	private void ReturnedBookChaptersVerses(Enums.BookChaptersVerses bookChaptersVerses)
 	{
-		OnAlephTavSummarySelected.InvokeAsync(alephTavSummary);
+		OnBookChaptersVersesSelected.InvokeAsync(bookChaptersVerses);
 	}
 
 }

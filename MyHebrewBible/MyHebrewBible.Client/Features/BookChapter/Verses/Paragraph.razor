@@ -1,4 +1,7 @@
-﻿@if (BibleVerses != null)
+﻿@using AlephTavEnums = MyHebrewBible.Client.Features.AlephTav.Enums;
+@using MyHebrewBible.Client.Helpers
+
+@if (BibleVerses != null)
 {
 	@* <h6 class="mt-4 mb-1">Top</h6> *@
 
@@ -28,16 +31,43 @@
 				<text>&nbsp;</text>
 			}
 			@((MarkupString)@item.KJV!)
+			@GetSAT(item.Verse)
 		</p>
 	}
 }
 
 @code {
+	[Parameter, EditorRequired] public List<AlephTavEnums.ChapterVerse>? SatVerseList { get; set; }
 	[Parameter, EditorRequired] public List<BibleVerse>? BibleVerses { get; set; }
 	[Parameter] public EventCallback<ScriptureIdAndVerseNumber> OnVerseSelected { get; set; }
+
+	
 
 	private void ButtonClick(long scriptureId, long verse)
 	{
 		OnVerseSelected.InvokeAsync(new ScriptureIdAndVerseNumber(scriptureId, verse));
 	}
+
+	protected MarkupString GetSAT(long verse)
+	{
+		if (SatVerseList is not null && SatVerseList.Any())
+		{
+			int cnt = 0;
+			cnt = SatVerseList.Where(w => w.Verse == verse).Count();
+			if (cnt > 0)
+			{
+				return new MarkupString("<span class=''><sup class='fw-bolder text-danger hebrew16'>את</sup></span>");
+			}
+			else
+			{
+				return new MarkupString("");
+			}
+		}
+		else
+		{
+			return new MarkupString("");
+		}
+	}
+
+
 }

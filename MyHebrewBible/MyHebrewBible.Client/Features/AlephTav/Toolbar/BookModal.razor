@@ -24,8 +24,8 @@ else
 				<div class="modal-body @modalBodyColor">
 
 					<BlazoredTypeahead SearchMethod="SearchBibleBooks"
-														 TValue="Enums.AlephTavSummary"
-														 TItem="Enums.AlephTavSummary"
+														 TValue="Enums.BookChaptersVerses"
+														 TItem="Enums.BookChaptersVerses"
 														 Value="SelectedBook"
 														 ValueChanged="SelectedResultChanged"
 														 ValueExpression="@(() => SelectedBook)"
@@ -54,11 +54,11 @@ else
 }
 
 @code {
-	[Parameter, EditorRequired] public Enums.AlephTavSummary? CurrentAlephTavSummary { get; set; }
+	[Parameter, EditorRequired] public Enums.BookChaptersVerses? CurrentBookChaptersVerses { get; set; }
 	[Parameter, EditorRequired] public bool ShowIntroToggle { get; set; }
-	[Parameter] public EventCallback<Enums.AlephTavSummary> OnAlephTavSummarySelected { get; set; }
+	[Parameter] public EventCallback<Enums.BookChaptersVerses> OnBookChaptersVersesSelected { get; set; }
 
-	protected Enums.AlephTavSummary? SelectedBook { get; set; }
+	protected Enums.BookChaptersVerses? SelectedBook { get; set; }
 
 	//string Title = "Select Book";
 	string? Title;
@@ -75,25 +75,25 @@ else
 
 	protected override void OnParametersSet()
 	{
-		SelectedBook = CurrentAlephTavSummary;
+		SelectedBook = CurrentBookChaptersVerses;
 		if (!ShowIntroToggle) { Title = "Select Book"; }
 	}
 
-	private async Task<IEnumerable<Enums.AlephTavSummary>> SearchBibleBooks(string searchText)
+	private async Task<IEnumerable<Enums.BookChaptersVerses>> SearchBibleBooks(string searchText)
 	{
-		return await Task.FromResult(Enums.AlephTavSummary.List
+		return await Task.FromResult(Enums.BookChaptersVerses.List
 			.Where(x => x.BibleBook.Title.ToLower().Contains(searchText.ToLower()))
 			.OrderBy(o => o.Value));
 	}
 
-	private void SelectedResultChanged(Enums.AlephTavSummary? bibleBook)
+	private void SelectedResultChanged(Enums.BookChaptersVerses? bibleBook)
 	{
 		if (bibleBook is not null)
 		{
 			Title = bibleBook.BibleBook.Title;
 			CloseModal();
 			SelectedBook = bibleBook;
-			OnAlephTavSummarySelected.InvokeAsync(bibleBook);
+			OnBookChaptersVersesSelected.InvokeAsync(bibleBook);
 		}
 	}
 

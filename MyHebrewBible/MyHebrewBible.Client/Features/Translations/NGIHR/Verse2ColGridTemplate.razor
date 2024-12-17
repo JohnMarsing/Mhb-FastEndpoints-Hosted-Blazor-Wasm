@@ -40,21 +40,6 @@
 		</div>
 	}
 
-	@if (@FootNote2 is not null)
-	{
-		<div class="card-body">
-			@FootNote2
-		</div>
-	}
-
-	@if (@FootNote3 is not null)
-	{
-		<div class="card-body">
-			@FootNote3
-		</div>
-	}
-
-
 </div>
 
 
@@ -66,8 +51,6 @@
 	[Parameter, EditorRequired] public RenderFragment? Col2 { get; set; }
 	[Parameter, EditorRequired] public RenderFragment? RowKJV { get; set; }
 	[Parameter] public RenderFragment? FootNote { get; set; }
-	[Parameter] public RenderFragment? FootNote2 { get; set; }
-	[Parameter] public RenderFragment? FootNote3 { get; set; }
 
 	string HebrewSize = "hebrew"; //  hebrew30
 }

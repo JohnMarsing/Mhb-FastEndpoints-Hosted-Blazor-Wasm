@@ -9,23 +9,23 @@
 
 <PageTitle>@Page.AlephTavs.Title</PageTitle>
 
-<NavbarAlephTavList CurrentAlephTavSummary="CurrentAlephTavSummary"
+<NavbarAlephTavList CurrentBookChaptersVerses="CurrentBookChaptersVerses"
 										ShowIntroToggle="ShowIntro"
-										OnAlephTavSummarySelected="ReturnedAlephTavSummary"
+										OnBookChaptersVersesSelected="ReturnedBookChaptersVerses"
 										OnShowIntroSelected="ReturnedShowIntro" />
 
-@if (@CurrentAlephTavSummary is not null)
+@if (CurrentBookChaptersVerses is not null)
 {
 	<div class="mt-5">
 		<br />
 
-		<ChapterList AlephTavSummary="CurrentAlephTavSummary"
+		<ChapterList BookChaptersVerses="CurrentBookChaptersVerses"
 								 OnChapterSelected="ReturnedChapter" />
 
-		@if (@VM is not null)
+		@if (@BookAndChapterAT is not null)
 		{
 			<LoadingProgress>
-				<VerseList VM="VM" />
+				<Sections BookAndChapterAT="BookAndChapterAT" />
 			</LoadingProgress>
 		}
 	</div>
@@ -46,20 +46,21 @@ else
 
 @code {
 
-	public Enums.AlephTavSummary? CurrentAlephTavSummary { get; set; }
+	public Enums.BookChaptersVerses? CurrentBookChaptersVerses { get; set; }
 
-	private void ReturnedAlephTavSummary(Enums.AlephTavSummary alephTavSummary)
+	private void ReturnedBookChaptersVerses(
+		Enums.BookChaptersVerses bookChaptersVerses)
 	{
-		//Toast!.ShowWarning($"AlephTavSummary Selected {alephTavSummary.BibleBook.Title}");
+		//Toast!.ShowWarning($"BookChaptersVerses Selected {bookChaptersVerses.BibleBook.Title}");
 		ShowIntro = true;
-		CurrentAlephTavSummary = alephTavSummary!;
+		CurrentBookChaptersVerses = bookChaptersVerses!;
 	}
 
-	protected VerseListVM? VM;
+	protected BookAndChapterAT? BookAndChapterAT;
 	private void ReturnedChapter(int chapter)
 	{
 		//Toast!.ShowSuccess($"{nameof(Index)}!{nameof(ReturnedChapter)}; chapter: {chapter}");
-		VM = new VerseListVM(CurrentAlephTavSummary!, chapter);
+		BookAndChapterAT = new BookAndChapterAT(CurrentBookChaptersVerses!, chapter);
 	}
 
 
@@ -67,7 +68,7 @@ else
 	private void ReturnedShowIntro(bool toggle)
 	{
 		ShowIntro = toggle;
-		CurrentAlephTavSummary = null;
+		CurrentBookChaptersVerses = null;
 	}
 
 }

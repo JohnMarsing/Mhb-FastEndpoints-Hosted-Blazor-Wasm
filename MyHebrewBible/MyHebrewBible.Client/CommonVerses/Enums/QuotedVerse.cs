@@ -16,7 +16,8 @@ public abstract class QuotedVerse : SmartEnum<QuotedVerse>
 		internal const int Joh_20_31 = 5;
 		internal const int Rev_12_17 = 6;
 		internal const int Exo_19_06 = 7;
-
+		internal const int Mat_22_15_22 = 8;
+		
 
 	}
 	#endregion
@@ -29,6 +30,7 @@ public abstract class QuotedVerse : SmartEnum<QuotedVerse>
 	public static readonly QuotedVerse Joh_20_31 = new Joh_20_31SE();
 	public static readonly QuotedVerse Rev_12_17 = new Rev_12_17SE();
 	public static readonly QuotedVerse Exo_19_06 = new Exo_19_06SE();
+	public static readonly QuotedVerse Mat_22_15_22 = new Mat_22_15_22SE();
 
 
 	#endregion
@@ -94,6 +96,13 @@ public abstract class QuotedVerse : SmartEnum<QuotedVerse>
 		public override VerseRange VerseRange => new(BibleBookEnum.Exodus, "19:6", 19, 6, 6);
 	}
 
+	private sealed class Mat_22_15_22SE : QuotedVerse
+	{
+		public Mat_22_15_22SE() : base($"{nameof(Id.Mat_22_15_22)}", Id.Mat_22_15_22) { }
+		public override VerseRange VerseRange => new(BibleBookEnum.Matthew, "22:15-22", 22, 15, 22);
+	}
+
+	//
 
 	#endregion
 }

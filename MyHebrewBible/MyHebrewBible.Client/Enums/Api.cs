@@ -15,6 +15,7 @@ public abstract class Api : SmartEnum<Api>
 		internal const int VerseListBetweenIds = 5;
 		internal const int HebrewWords = 6;
 		internal const int AlephTavHebrewVerses = 7;
+		internal const int AlephTavKjvVerses = 8;
 	}
 	#endregion
 
@@ -26,6 +27,7 @@ public abstract class Api : SmartEnum<Api>
 	public static readonly Api VerseListBetweenIds = new VerseListBetweenIdsSE();
 	public static readonly Api HebrewWords = new HebrewWordsSE();
 	public static readonly Api AlephTavHebrewVerses = new AlephTavHebrewVersesSE();
+	public static readonly Api AlephTavKjvVerses = new AlephTavKjvVersesSE();
 	#endregion
 
 	private Api(string name, int value) : base(name, value) { } // Constructor
@@ -121,6 +123,21 @@ FROM WordPart wp
 		ON wp.ScriptureID = s.Id";
 		public override string SqlOrderBy => " ORDER BY wp.ScriptureID, wp.WordCount";
 		//DECLARE  @ScriptureID int=1
+	}
+
+	private sealed class AlephTavKjvVersesSE : Api
+	{
+		public AlephTavKjvVersesSE() : base($"{nameof(Id.AlephTavKjvVerses)}", Id.AlephTavKjvVerses) { }
+		public override string EndPoint => "/alephtavkjvverse/{bookid:long}/{chapter:long}";
+		public override string Sql => @"
+SELECT  s.ID, s.BCV, s.Verse, s.VerseOffset, s.KJV, s.DescH, s.DescD  
+FROM Scripture s
+	INNER JOIN AlephTavVerse atv ON s.Id=atv.ScriptureID
+WHERE s.BookID=@BookId and s.Chapter=@Chapter
+ORDER BY s.ID
+";
+		public override string SqlOrderBy => "";
+		//DECLARE  @BookId int=1,  @Chapter int=17
 	}
 
 	#endregion

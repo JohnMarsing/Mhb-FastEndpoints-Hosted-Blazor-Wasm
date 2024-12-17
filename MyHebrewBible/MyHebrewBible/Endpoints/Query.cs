@@ -90,6 +90,16 @@ public class Query
 		}
 	}
 
+
+	public async Task<IEnumerable<BibleVerse?>> GetAlephTavKjvVerses(long bookID, long chapter)
+	{
+		//_logger.LogDebug("{Method} Get B/C: {bookID}/{chapter}", nameof(GetAlephTavKjvVerses), bookID, chapter);
+			using var connection = await _connectionFactory.CreateConnectionAsync();
+			Parms = new DynamicParameters(new { BookId = bookID, Chapter = chapter });
+			var verseList = await connection.QueryAsync<BibleVerse>(Api.AlephTavKjvVerses.Sql, Parms);
+			return verseList;
+	}
+
 }
 
 // Ignore Spelling: strongs, Kjvs, Parms, atv, Mitzvot

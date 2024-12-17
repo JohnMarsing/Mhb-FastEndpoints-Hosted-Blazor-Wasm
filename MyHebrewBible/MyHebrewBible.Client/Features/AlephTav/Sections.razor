@@ -1,0 +1,203 @@
+﻿@* @using MyHebrewBible.Client.Helpers *@
+@using MyHebrewBible.Client.Enums
+@using SectionStatusEnum=MyHebrewBible.Client.Features.AlephTav.Enums.SectionStatus
+
+@inject ILogger<Sections>? Logger
+@inject IToastService? Toast
+@inject ApiClient Api
+
+@* 
+<div class="row">
+	<div class="col-12">
+		<p class="text-black-50 float-end"><small>status: @status</small></p>
+	</div>
+</div> 
+*@
+
+<h3 class="text-center mt-4">
+	<span class="badge bg-warning-subtle  text-black">Standalone Aleph Tav Verses</span>
+</h3>
+
+
+@switch (status)
+{
+	case SectionStatusEnum.Loading:
+		<p>Loading page...</p>
+		break;
+
+	case SectionStatusEnum.Hebrew_Table_Not_Shown:
+		@foreach (var item in SummaryVerseList!)
+		{
+			<SectionDetailCardWrapper>
+				<Header SummaryVM="item" BookAndChapterAT="BookAndChapterAT" />
+				<Paragraph BibleVerse="kjvVerses!.Where(w => w.ID == item.ScriptureId).SingleOrDefault()" OnVerseSelected="ReturnedVerse" />
+				<ParagraphHebrew DetailWordList="DetailWordList?.Where(w => w.BCV == item.BCV).ToList()" />
+			</SectionDetailCardWrapper>
+		}
+		break;
+
+
+	case SectionStatusEnum.Hebrew_Table_Shown_Has_Top:
+
+		@foreach (var itemTop in versesTop!)
+		{
+			<SectionDetailCardWrapper>
+				@* <Header SummaryVM="itemTop" BookAndChapterAT="BookAndChapterAT" /> *@
+				<Paragraph BibleVerse="itemTop" OnVerseSelected="ReturnedVerse" />
+				<ParagraphHebrew DetailWordList="DetailWordList?.Where(w => w.BCV == itemTop.BCV).ToList()" />
+			</SectionDetailCardWrapper>
+		}
+
+		<SectionDetailHebrewTable ScriptureId="FocusScriptureId"
+															VerseNumber="VerseNumber"
+															BookAndChapterAT="BookAndChapterAT"
+															OnStrongsSelected="ReturnedStrongs" />
+
+		break;
+
+
+	case SectionStatusEnum.Hebrew_Table_Shown_Has_Bottom:
+		<SectionDetailHebrewTable ScriptureId="FocusScriptureId"
+															VerseNumber="VerseNumber"
+															BookAndChapterAT="BookAndChapterAT"
+															OnStrongsSelected="ReturnedStrongs" />
+
+		@foreach (var itemBottom in versesBottom!)
+		{
+			<SectionDetailCardWrapper>
+				@* <Header SummaryVM="itemTop" BookAndChapterAT="BookAndChapterAT" /> *@
+				<Paragraph BibleVerse="itemBottom" OnVerseSelected="ReturnedVerse" />
+				<ParagraphHebrew DetailWordList="DetailWordList?.Where(w => w.BCV == itemBottom.BCV).ToList()" />
+			</SectionDetailCardWrapper>
+		}
+
+		break;
+
+
+	case SectionStatusEnum.Hebrew_Table_Shown_Has_Top_And_Bottom:
+
+		@foreach (var itemTop in versesTop!)
+		{
+			<SectionDetailCardWrapper>
+				@* <Header SummaryVM="itemTop" BookAndChapterAT="BookAndChapterAT" /> *@
+				<Paragraph BibleVerse="itemTop" OnVerseSelected="ReturnedVerse" />
+				<ParagraphHebrew DetailWordList="DetailWordList?.Where(w => w.BCV == itemTop.BCV).ToList()" />
+			</SectionDetailCardWrapper>
+		}
+
+		<SectionDetailHebrewTable ScriptureId="FocusScriptureId"
+															VerseNumber="VerseNumber"
+															BookAndChapterAT="BookAndChapterAT"
+															OnStrongsSelected="ReturnedStrongs" />
+
+		@foreach (var itemBottom in versesBottom!)
+		{
+			<SectionDetailCardWrapper>
+				@* <Header SummaryVM="itemTop" BookAndChapterAT="BookAndChapterAT" /> *@
+				<Paragraph BibleVerse="itemBottom" OnVerseSelected="ReturnedVerse" />
+				<ParagraphHebrew DetailWordList="DetailWordList?.Where(w => w.BCV == itemBottom.BCV).ToList()" />
+			</SectionDetailCardWrapper>
+		}
+
+		break;
+
+
+	default:
+		break;
+		<h1>HOW IS POSSIBLE???</h1>
+}
+
+
+
+@code {
+	[Parameter, EditorRequired] public BookAndChapterAT? BookAndChapterAT { get; set; }
+
+	private ICollection<AlephTavHebrewVerse>? DetailWordList = null;
+	private ICollection<BibleVerse>? kjvVerses = null;
+
+	private List<SummaryVM>? SummaryVerseList;
+
+	protected SectionStatusEnum status = SectionStatusEnum.Loading;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		try
+		{
+			kjvVerses = await Api!.GetAlephTavKjvVersesAsync(
+				(long)BookAndChapterAT!.BookChaptersVerses.BibleBook!.Value, (long)BookAndChapterAT.Chapter);
+
+			DetailWordList = await Api!.GetAlephTavHebrewVersesAsync(
+				BookAndChapterAT!.BookChaptersVerses.BibleBook!.Value, BookAndChapterAT!.Chapter);
+
+			SummaryVerseList = DetailWordList
+				.GroupBy(d => new { d.BCV, d.ScriptureID, d.Chapter, d.Verse, d.HasTwo })
+				.Select(g => new SummaryVM(
+						g.Key.ScriptureID,
+						g.Key.BCV,
+						g.Key.Chapter,
+						g.Key.Verse,
+						g.Key.HasTwo,
+						g.Count()
+				))
+				.ToList();
+			status = SectionStatusEnum.Hebrew_Table_Not_Shown;
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(OnParametersSetAsync));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Sections)}!{nameof(OnParametersSetAsync)}");
+		}
+	}
+
+	protected long FocusScriptureId;
+	protected long VerseNumber;
+	private void ReturnedVerse(ScriptureIdAndVerseNumber scriptureIdAndVerseNumber)
+	{
+		FocusScriptureId = scriptureIdAndVerseNumber.ScriptureID;
+
+		VerseNumber = scriptureIdAndVerseNumber.VerseNumber;
+		PopulateTopAndBottom(VerseNumber);
+	}
+
+	private void ReturnedStrongs(StrongsAndWordCount strongsAndWordCount)
+	{
+		if (strongsAndWordCount.Strongs == 0)
+		{
+			FocusScriptureId = 0;
+			PopulateTopAndBottom(SummaryVerseList!.Count());
+		}
+	}
+
+	public List<BibleVerse>? versesTop;
+	public List<BibleVerse>? versesBottom;
+	private void PopulateTopAndBottom(long verseSplit)
+	{
+		if (FocusScriptureId == 0)
+		{
+			versesTop = kjvVerses!.Where(w => w.Verse <= verseSplit).OrderBy(o => o.Verse).ToList();
+			status = SectionStatusEnum.Hebrew_Table_Not_Shown;
+		}
+		else
+		{
+			versesTop = kjvVerses!.Where(w => w.Verse < verseSplit).OrderBy(o => o.Verse).ToList();
+			versesBottom = kjvVerses!.Where(w => w.Verse > verseSplit).OrderBy(o => o.Verse).ToList();
+
+			if (versesTop.Any() && versesBottom.Any())
+			{
+				status = SectionStatusEnum.Hebrew_Table_Shown_Has_Top_And_Bottom;
+			}
+			else
+			{
+				if (versesTop.Any())
+				{
+					status = SectionStatusEnum.Hebrew_Table_Shown_Has_Top;
+				}
+				else
+				{
+					status = SectionStatusEnum.Hebrew_Table_Shown_Has_Bottom;
+				}
+			}
+		}
+	}
+}
+

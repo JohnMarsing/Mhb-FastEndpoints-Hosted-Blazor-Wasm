@@ -1,4 +1,6 @@
 ﻿using MyHebrewBible.Client.Enums;
+using MyHebrewBible.Client.Helpers;
+using AlephTavEnums = MyHebrewBible.Client.Features.AlephTav.Enums;
 
 namespace MyHebrewBible.Client.Components;
 
@@ -11,7 +13,7 @@ public static class Helper
 		return BibleBook!.LastVerses[chapter - 1];
 	}
 
-	public static string GetNavigateToUrl(BibleBook? bibleBook, int chapter) 
+	public static string GetNavigateToUrl(BibleBook? bibleBook, int chapter)
 	{
 		return $"BookChapter/{bibleBook!.Value}/{chapter}/{bibleBook!.Abrv}-{chapter}";
 	}
@@ -19,6 +21,27 @@ public static class Helper
 	public static string GetNavigateToUrlVerseList(BibleBook? bibleBook, int chapter, int begVerse, int endVerse)
 	{
 		return $"VerseList/{bibleBook!.Value}/{chapter}/{begVerse}/{endVerse}";
+	}
+
+	public static List<AlephTavEnums.ChapterVerse>? GetSatVerseList(BibleBook? bibleBook, int chapter) // Sat=Standalone Aleph Tav 
+	{
+		if (bibleBook <= VerseFacts.LastBookInOT)
+		{
+			AlephTavEnums.BookChaptersVerses? bibleBookWithSATs;
+			if (AlephTavEnums.BookChaptersVerses.TryFromValue(bibleBook!.Value, out bibleBookWithSATs))
+			{
+				return bibleBookWithSATs.Verses!.Where(w => w.Chapter == chapter).ToList();
+			}
+			else
+			{
+			return null;
+			}
+		}
+		else
+		{
+			return null;
+		}
+
 	}
 
 }

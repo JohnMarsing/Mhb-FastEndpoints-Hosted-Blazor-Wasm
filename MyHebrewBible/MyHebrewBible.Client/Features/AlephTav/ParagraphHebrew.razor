@@ -1,0 +1,21 @@
+﻿@using MyHebrewBible.Client.Helpers
+
+@if (DetailWordList == null)
+{
+	<p><em>DetailWordList Loading...</em></p>
+}
+else
+{
+	<p class="hebrew">
+		@foreach (var DetailWordList in DetailWordList)
+		{
+			@((MarkupString)HebrewFormat.GetSpan(DetailWordList.WordEnum, DetailWordList.Hebrew1, DetailWordList.Hebrew2, DetailWordList.Hebrew3))
+			@HebrewFormat.CheckMaqqef(DetailWordList.WordEnum, DetailWordList.Hebrew1, DetailWordList.Hebrew2, DetailWordList.Hebrew3)
+		}
+	</p>
+}
+
+
+@code {
+	[Parameter, EditorRequired] public List<AlephTavHebrewVerse>? DetailWordList { get; set; }
+}
