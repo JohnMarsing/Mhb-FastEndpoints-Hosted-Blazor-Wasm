@@ -90,6 +90,35 @@ public abstract class BookChaptersVerses : SmartEnum<BookChaptersVerses>
 	public abstract BibleBook BibleBook { get; }
 	public abstract List<int> Chapters { get; }
 	public abstract List<ChapterVerse>? Verses { get; }
+
+
+	//Properties
+	public string Abbreviation
+	{
+		get
+		{
+			return $"{BibleBook.FromValue(this.BibleBook).Abrv}";
+		}
+	}
+
+	public string Title 
+	{
+		get
+		{
+			return $"{BibleBook.FromValue(this.BibleBook).Title}";  
+		}
+	}
+
+	public int BibleBookValue
+	{
+		get
+		{
+			return BibleBook.FromValue(this.BibleBook).Value;
+		}
+	}
+
+
+
 	#endregion
 
 	#region Private Instantiation

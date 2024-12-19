@@ -6,7 +6,7 @@
 }
 else
 {
-	<p class="hebrew">
+	<p class="hebrew mb-0">
 		@foreach (var DetailWordList in DetailWordList)
 		{
 			@((MarkupString)HebrewFormat.GetSpan(DetailWordList.WordEnum, DetailWordList.Hebrew1, DetailWordList.Hebrew2, DetailWordList.Hebrew3))
@@ -14,7 +14,6 @@ else
 		}
 	</p>
 }
-
 
 @code {
 	[Parameter, EditorRequired] public List<AlephTavHebrewVerse>? DetailWordList { get; set; }
