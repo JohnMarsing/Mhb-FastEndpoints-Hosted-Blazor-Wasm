@@ -6,38 +6,31 @@
 	<div class="d-flex justify-content-between">
 
 		<div class="px-1">
-			<small>
-				<sup>
-					&copy; @DateTime.Now.Year - <span class="text-danger"><b>AEAIJ</b></span>, a
-					<a href="http://en.wikipedia.org/wiki/Religious_corporation" target="_blank">Religious Corporation Sole</a>
-					<br />
-					the things that are <span class="text-danger"><b><i>Caesar's</i></b></span>
-				</sup>
-			</small>
-
+			<p style="@fontSize">
+				<span class="text-danger"><b>AEAIJ</b></span>, a
+				<a href="http://en.wikipedia.org/wiki/Religious_corporation" target="_blank">Religious Corporation Sole</a> &copy; @DateTime.Now.Year
+				<br />
+				&nbsp; &#x21B3; the things that are <span class="text-danger"><b><i>Caesar's</i></b></span>
+			</p>
 		</div>
-		
+
 		<div class="p-2 ">
-			@* <button class="btn btn-outline-info btn-xs"><i class="fas fa-info"></i></button> *@
 			<FooterAboutItructions />
 		</div>
-		
-	<div class="px-1">
-			<small>
-				<sup>
-					MyHebrewBible is the creation and intellectual property of <span style="color:purple"><b>John Marsing</b></span>
-					<br />
-					the things that are <span style="color:purple"><b><i>Elohim's</i></b></span>
-				</sup>
-			</small>
-		</div>
 
+
+		<div class="px-1 font">
+			<p style="@fontSize">
+				<span style="color:purple"><b>John Marsing</b></span>, creator of <b>MyHebrewBible</b>
+				<br />
+				&nbsp; &#x21B3; the things that are <span style="color:purple"><b><i>Elohim's</i></b></span>
+			</p>
+		</div>
+	
 	</div>
 
 </div>
 
 @code {
-	//  text-wrap" style='width: 20rem;'
-	//The things which are Caesar
-	//the things that are God's
+	string fontSize = "font-size:11px;";
 }

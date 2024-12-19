@@ -1,0 +1,71 @@
+﻿@inject ApiClient Api
+@inject IToastService? Toast
+@inject ILogger<ParagraphKjvWordPart>? Logger
+
+<LoadingComponent IsLoading="kjvWords==null" TurnSpinnerOff="TurnSpinnerOff">
+
+	<p class="fs-5">
+
+		@foreach (var item in kjvWords!)
+		{
+			if (item.Strongs is not null)
+			{
+				if (item.WordCount != WordCount | WordCount == 0)
+				{
+					<span class="bg-info-subtle text-decoration-underline me-2"
+								@onclick="@(e => ButtonWordClick((long)item.Strongs, item.WordCount))">
+						@item.Word
+					</span>
+				}
+				else
+				{
+					<span class="bg-info-subtle me-2"> @item.Word</span>
+				}
+			}
+			else
+			{
+				<span class="bg-dark-subtle text-black-50 me-2 "> @item.Word</span>
+			}
+		}
+	</p>
+
+</LoadingComponent>
+
+@code {
+
+	[Parameter, EditorRequired] public long ScriptureId { get; set; }
+	[Parameter] public EventCallback<StrongsAndWordCount?> OnStrongsSelected { get; set; }
+
+	protected bool TurnSpinnerOff = false;
+
+	private ICollection<WordPartKjv>? kjvWords = null;
+	protected override async Task OnParametersSetAsync()
+	{
+		try
+		{
+			kjvWords = await Api.GetWordPartKjvAsync(ScriptureId);
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(OnParametersSetAsync));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(ParagraphKjvWordPart)}!{nameof(OnParametersSetAsync)}");
+		}
+		finally
+		{
+			TurnSpinnerOff = true;
+		}
+	}
+
+	protected long Strongs = 0;
+	protected long WordCount = 0;
+	private void ButtonWordClick(long strongs, long wordCount)
+	{
+		//Toast!.ShowInfo($"Strongs/WordCount: {strongs}/{wordCount}");
+		Strongs = strongs;
+		WordCount = wordCount;
+		OnStrongsSelected.InvokeAsync(new StrongsAndWordCount(strongs, wordCount));
+	}
+
+	// Ignore Spelling: Strongs 
+}
+

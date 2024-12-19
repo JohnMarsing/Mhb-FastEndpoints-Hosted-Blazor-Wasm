@@ -1,0 +1,121 @@
+﻿@using MyHebrewBible.Client.Enums
+
+@inject ILogger<Sections>? Logger
+@inject IToastService? Toast
+@inject ApiClient Api
+
+<h3 class="text-center mt-4">
+	<span class="badge bg-warning-subtle  text-black">Standalone Aleph Tav Verses | @SubTitle</span>
+</h3>
+
+<LoadingComponent IsLoading="isLoading" TurnSpinnerOff="TurnSpinnerOff">
+	@foreach (var item in SummaryVerseList!)
+	{
+		if (FocusScriptureId != 0 && item.ScriptureId == FocusScriptureId)
+		{
+			@*
+	Note: this is similar pattern to code in Paragraph.razor (BookChapter\Verses\)
+	`if (item.DescD != "NULL")` then inject DescD before displaying the paragraph of verses
+	*@
+
+			<div class="card border-primary mt-2 mb-4">
+				<div class="card-header">
+					<HeaderKjvWordPart SummaryVM="item"
+														 BibleBookValue="BibleBookValue"
+														 OnClose="ReturnedCloseEvent" />
+				</div>
+				<div class="card-body">
+					<ParagraphKjvWordPart ScriptureId="FocusScriptureId" OnStrongsSelected="ReturnedStrongs" />
+				</div>
+				<HebrewTable ScriptureId="FocusScriptureId"
+										 StrongsAndWordCount="CurrentStrongsAndWordCount"
+										 OnStrongsSelected="ReturnedStrongs" />
+			</div>
+		}
+		else
+		{
+			<div class="card border-primary mt-2 mb-1">
+				<div class="card-header">
+					<HeaderKjv SummaryVM="item"
+										 BibleBookValue="BibleBookValue"
+										 OnVerseSelected="ReturnedVerse" />
+				</div>
+				<div class="card-body">
+					<ParagraphKjv BibleVerse="kjvVerses!.Where(w => w.ID == item.ScriptureId).SingleOrDefault()" />
+					<ParagraphHebrew DetailWordList="DetailWordList?.Where(w => w.BCV == item.BCV).ToList()" />
+				</div>
+			</div>
+		}
+	}
+</LoadingComponent>
+
+@code {
+	[Parameter, EditorRequired] public BookAndChapterAT? BookAndChapterAT { get; set; }
+
+	private ICollection<AlephTavHebrewVerse>? DetailWordList = null;
+	private ICollection<BibleVerse>? kjvVerses = null;
+
+	private List<SummaryVM>? SummaryVerseList;
+
+	bool isLoading = true;
+	protected bool TurnSpinnerOff = false;
+
+	private string SubTitle => $"{BookAndChapterAT!.BookChaptersVerses.Title} {BookAndChapterAT!.Chapter}";
+	private int BibleBookValue => BookAndChapterAT!.BookChaptersVerses.BibleBookValue;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		try
+		{
+			kjvVerses = await Api!.GetAlephTavKjvVersesAsync(
+				(long)BookAndChapterAT!.BookChaptersVerses.BibleBook!.Value, (long)BookAndChapterAT.Chapter);
+
+			DetailWordList = await Api!.GetAlephTavHebrewVersesAsync(
+				BookAndChapterAT!.BookChaptersVerses.BibleBook!.Value, BookAndChapterAT!.Chapter);
+
+			SummaryVerseList = DetailWordList
+				.GroupBy(d => new { d.BCV, d.ScriptureID, d.Chapter, d.Verse, d.HasTwo })
+				.Select(g => new SummaryVM(
+						g.Key.ScriptureID,
+						g.Key.BCV,
+						g.Key.Chapter,
+						g.Key.Verse,
+						g.Key.HasTwo,
+						g.Count()
+				))
+				.ToList();
+
+
+			isLoading = false;
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(OnParametersSetAsync));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Sections)}!{nameof(OnParametersSetAsync)}");
+		}
+		finally
+		{
+			TurnSpinnerOff = true;
+		}
+	}
+
+	protected long FocusScriptureId;
+	protected long VerseNumber;
+	private void ReturnedVerse(ScriptureIdAndVerseNumber scriptureIdAndVerseNumber)
+	{
+		FocusScriptureId = scriptureIdAndVerseNumber.ScriptureID;
+		VerseNumber = scriptureIdAndVerseNumber.VerseNumber;
+	}
+
+	private void ReturnedCloseEvent()
+	{
+		FocusScriptureId = 0;
+	}
+
+	StrongsAndWordCount? CurrentStrongsAndWordCount = new StrongsAndWordCount(0, 0);
+	private void ReturnedStrongs(StrongsAndWordCount strongsAndWordCount)
+	{
+		CurrentStrongsAndWordCount = strongsAndWordCount;
+	}
+}
+

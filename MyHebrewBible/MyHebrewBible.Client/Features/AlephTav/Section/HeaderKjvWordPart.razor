@@ -1,0 +1,41 @@
+﻿@using BLBEnum=MyHebrewBible.Client.Enums.BLB
+
+@* @inject IToastService? Toast *@
+
+<div class="d-flex justify-content-between">
+
+	<div class="px-1">
+		<button @onclick="ButtonClick"
+						type="button" class="mt-1 btn btn-outline-primary btn-sm" title="@SummaryVM">
+			<i class="fas fa-chevron-up"></i>
+		</button>
+	</div>
+
+	<div class="px-1">
+		<h5 class="card-title">
+			@BLBEnum.WLC.AnchorBCV(BibleBookValue, (int)SummaryVM!.Chapter, (int)SummaryVM!.Verse) <sup>WLC</sup>
+			@if (SummaryVM!.HasTwo == 1)
+			{
+				<text>&nbsp;</text>
+				<span class="text-danger">את</span> <span class="text-danger">את</span>
+			}
+		</h5>
+	</div>
+
+	<div class="pe-1">
+		&nbsp;
+	</div>
+
+</div>
+
+@code {
+	[Parameter, EditorRequired] public SummaryVM? SummaryVM { get; set; }
+	[Parameter, EditorRequired] public int BibleBookValue { get; set; }
+	[Parameter] public EventCallback OnClose { get; set; }
+
+	private void ButtonClick()
+	{
+		// Toast!.ShowInfo($"HeaderKjvWordPart|OnClose {SummaryVM}");
+		OnClose.InvokeAsync();
+	}
+}
