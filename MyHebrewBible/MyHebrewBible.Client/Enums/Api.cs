@@ -133,10 +133,8 @@ FROM WordPart wp
 SELECT  s.ID, s.BCV, s.Verse, s.VerseOffset, s.KJV, s.DescH, s.DescD  
 FROM Scripture s
 	INNER JOIN AlephTavVerse atv ON s.Id=atv.ScriptureID
-WHERE s.BookID=@BookId and s.Chapter=@Chapter
-ORDER BY s.ID
 ";
-		public override string SqlOrderBy => "";
+		public override string SqlOrderBy => " ORDER BY s.ID";
 		//DECLARE  @BookId int=1,  @Chapter int=17
 	}
 
