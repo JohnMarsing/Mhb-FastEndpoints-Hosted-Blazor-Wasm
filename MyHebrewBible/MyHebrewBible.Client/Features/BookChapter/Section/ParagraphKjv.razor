@@ -1,0 +1,26 @@
+﻿@using AlephTavEnums = MyHebrewBible.Client.Features.AlephTav.Enums;
+@using MyHebrewBible.Client.Helpers
+
+@if (BibleVerse != null)
+{
+ <p class="fs-5">
+		<sup class="text-primary"><b>@BibleVerse.Verse</b></sup>
+
+		@if (BibleVerse.VerseOffset != "NULL")
+		{
+			<sup class="text-black-50">&nbsp;@BibleVerse.VerseOffset&nbsp;</sup>
+		}
+		else
+		{
+			<text>&nbsp;</text>
+		}
+		@((MarkupString)@BibleVerse.KJV!)
+		@ParagraphEnd
+	</p>
+}
+
+
+@code {
+	[Parameter, EditorRequired] public BibleVerse? BibleVerse { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? ParagraphEnd { get; set; } /* DrillDownButton GetSAT */
+}

@@ -5,7 +5,7 @@
 @inject ApiClient Api
 
 <h3 class="text-center mt-4">
-	<span class="badge bg-warning-subtle  text-black">Standalone Aleph Tav Verses | @SubTitle</span>
+	<span class="badge bg-warning-subtle  text-black">Standalone Aleph Tav Verses <br /> @SubTitle</span>
 </h3>
 
 <LoadingComponent IsLoading="isLoading" TurnSpinnerOff="TurnSpinnerOff">
@@ -60,7 +60,7 @@
 	bool isLoading = true;
 	protected bool TurnSpinnerOff = false;
 
-	private string SubTitle => $"{BookAndChapterAT!.BookChaptersVerses.Title} {BookAndChapterAT!.Chapter}";
+	private string SubTitle => $"{BookAndChapterAT!.BookChaptersVerses.Title} {(BookAndChapterAT!.Chapter == 0 ? "[all chapters]" : BookAndChapterAT!.Chapter)}";
 	private int BibleBookValue => BookAndChapterAT!.BookChaptersVerses.BibleBookValue;
 
 	protected override async Task OnParametersSetAsync()
