@@ -7,9 +7,15 @@
 <LoadingComponent IsLoading="verses==null" TurnSpinnerOff="TurnSpinnerOff">
 	@foreach (var item in verses!)
 	{
-		@if (item.DescH != "NULL") { <p class="text-danger text-center fs-4 mt-1 mb-2">@item.DescH</p>	}
-		
-		@if (item.DescD != "NULL") {<p class="text-secondary fs-6 text-end mb-0"><em>@item.DescD</em></p> }
+		@if (item.DescH != "NULL")
+		{
+			<p class="text-danger text-center fs-4 mt-1 mb-2">@item.DescH</p>
+		}
+
+		@if (item.DescD != "NULL")
+		{
+			<p class="text-secondary fs-6 text-end mb-0"><em>@item.DescD</em></p>
+		}
 
 		if (FocusScriptureId == 0)
 		{
@@ -18,6 +24,9 @@
 					<AppendixSAT VerseNumber="item.Verse" SatVerseList="SatVerseList" />
 					<AppendixDrillDownButton ScriptureId="item.ID" VerseNumber="item.Verse"
 																	 OnVerseSelected="ReturnedVerse" />
+					<sup>
+						<BibleAnchor BookAndChapter="BookAndChapter" IconOnly="true" ScriptureId="item.ID" Verse="item.Verse" />
+					</sup>
 				</ParagraphEnd>
 			</ParagraphKjv>
 		}
@@ -27,15 +36,15 @@
 			{
 				<div class="card border-primary mt-2 mb-4">
 					<div class="card-header">
-						<HeaderKjvWordPart BibleVerse="item" BookAndChapter="BookAndChapter" 
+						<HeaderKjvWordPart BibleVerse="item" BookAndChapter="BookAndChapter"
 															 VerseNumber="item.Verse"
 															 OnClose="ReturnedCloseEvent" />
 					</div>
 					<div class="card-body">
-						<ParagraphKjvWordPart ScriptureId="FocusScriptureId" 
+						<ParagraphKjvWordPart ScriptureId="FocusScriptureId"
 																	OnStrongsSelected="ReturnedStrongs" />
 					</div>
-					<HebrewTable ScriptureId="FocusScriptureId" 
+					<HebrewTable ScriptureId="FocusScriptureId"
 											 StrongsAndWordCount="CurrentStrongsAndWordCount"
 											 OnStrongsSelected="ReturnedStrongs" />
 				</div>
@@ -47,6 +56,9 @@
 						<AppendixSAT VerseNumber="item.Verse" SatVerseList="SatVerseList" />
 						<AppendixDrillDownButton ScriptureId="item.ID" VerseNumber="item.Verse"
 																		 OnVerseSelected="ReturnedVerse" />
+						<sup>
+							<BibleAnchor BookAndChapter="BookAndChapter" IconOnly="true" ScriptureId="item.ID" Verse="item.Verse" />
+						</sup>
 					</ParagraphEnd>
 				</ParagraphKjv>
 			}

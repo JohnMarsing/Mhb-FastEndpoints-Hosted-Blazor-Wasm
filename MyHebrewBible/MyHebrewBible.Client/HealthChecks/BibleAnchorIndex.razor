@@ -1,0 +1,71 @@
+﻿@page "/bibleanchor"
+
+@using BLBEnum=MyHebrewBible.Client.Enums.BLB
+
+<div class="card card-border-info my-2">
+	<div class="card-header">
+		<h1 class="text-center">Test bed of <code>BibleAnchor</code></h1>
+	</div>
+
+	<div class="card-body">
+		<ul class="list-inline">
+
+			<li class="list-inline-item">
+				<sup>
+					<BibleAnchor BookChapterVerse="bcv" />
+				</sup>
+			</li>
+
+			<li class="list-inline-item">
+				<BibleAnchor BookAndChapter="bookAndChapter"
+										 Chapter="Chapter"
+										 Verse="Verse" />
+			</li>
+
+			<li class="list-inline-item">
+				<BibleAnchor BLB="BLBEnum.NKJV" id="613"
+										 BibleBookValue="BibleBookValue" Chapter="Chapter" />
+			</li>
+
+			<li class="list-inline-item">
+				<BibleAnchor BLB="BLBEnum.WLC"
+										 BibleBookValue="BibleBookValue" Chapter="Chapter" />
+			</li>
+
+			<li class="list-inline-item">
+				<BibleAnchor BibleBookValue="BibleBookValue"
+										 Chapter="Chapter"
+										 Verse="Verse" />
+			</li>
+
+			<li class="list-inline-item">
+				<BibleAnchor BookAndChapter="bookAndChapter"
+										 Chapter="Chapter"
+										 Verse="Verse"
+										 IconOnly="true"
+										 ScriptureId="9999" />
+			</li>
+
+		</ul>
+
+	</div>
+</div>
+
+
+
+
+@code {
+	GlobalEnums.BibleBook bibleBook = Enums.BibleBook.Genesis;
+
+	BookAndChapter? bookAndChapter;
+	BookChapterVerse? bcv;
+	int BibleBookValue = 1; // Gen
+	int Chapter = 1;
+	int Verse = 2;
+
+	protected override void OnInitialized()
+	{
+		bookAndChapter = new BookAndChapter(bibleBook, Chapter);
+		bcv = new BookChapterVerse(bookAndChapter, Verse);
+	}
+}
