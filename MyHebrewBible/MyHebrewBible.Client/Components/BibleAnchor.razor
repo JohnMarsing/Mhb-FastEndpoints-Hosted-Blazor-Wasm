@@ -1,0 +1,155 @@
+﻿@using BLBEnum=MyHebrewBible.Client.Enums.BLB
+@using MyHebrewBible.Client.Enums
+@using System.Text
+@using BLBConstants = MyHebrewBible.Client.Enums.Constants
+@using MyHebrewBible.Client.Helpers
+
+
+@Final()
+
+@code {
+	//[Inject] public ILogger<BibleAnchor>? Logger { get; set; }
+
+	[Parameter] public BLBEnum? BLB { get; set; } = BLBEnum.KJV;
+
+	[Parameter] public BookAndChapter? BookAndChapter { get; set; }     // BibleBook? BibleBook, int Chapter
+	[Parameter] public BookChapterVerse? BookChapterVerse { get; set; } // BookAndChapter BookAndChapter, int Verse
+
+	[Parameter] public bool IconOnly { get; set; } = false;
+
+	[Parameter] public int BibleBookValue { get; set; } = 0;
+	[Parameter] public long Chapter { get; set; } = 0;
+	[Parameter] public long Verse { get; set; } = 1;
+
+	[Parameter] public long ScriptureId { get; set; } = 0;
+
+	[Parameter] public string? Text { get; set; } = string.Empty;
+	[Parameter] public string? Id { get; set; } = string.Empty;
+
+	const string Icon = " <i class='fas fa-external-link-alt'></i>";
+	const char SQ = '\'';  // "'"  @$"'"
+	string Abbrv = string.Empty;
+	string? Target = "_blank";
+	string? Href;
+	string? Title;
+
+	protected override void OnParametersSet()
+	{
+		CurrentBCV = SetBCV();
+		Href = GetHref();
+		Text = GetText();
+		Title = GetTitle();
+	}
+
+	private string GetText()
+	{
+		if (CurrentBCV is not null)
+		{
+			StringBuilder sb = new();
+			sb.Append(CurrentBCV!.BookAndChapter.BibleBook!.Abrv)
+			.Append(' ').Append(CurrentBCV!.BookAndChapter.Chapter)
+			.Append(':').Append(CurrentBCV!.Verse);
+			return sb.ToString();
+		}
+		else
+		{
+			return "???";
+		}
+	}
+
+	private string GetTitle()
+	{
+		StringBuilder sb = new();
+		sb.Append(BLB!.Name).Append(" BLB")
+		.Append(' ').Append(Text)
+		.AppendIfElse(ScriptureId == 0, string.Empty, " [" + ScriptureId.ToString() + ']');
+		return sb.ToString();
+	}
+
+	BookChapterVerse? CurrentBCV = null;
+	private BookChapterVerse? SetBCV()
+	{
+		if (BookAndChapter is null)
+		{
+			if (BookChapterVerse is null)
+			{
+				if (BibleBookValue == 0)
+				{
+					return CurrentBCV;
+				}
+				else
+				{
+					if (Chapter == 0)
+					{
+						return CurrentBCV;
+					}
+					else
+					{
+						if (BibleBook.TryFromValue(BibleBookValue, out BibleBook? bibleBook))
+						{
+							return new BookChapterVerse(new BookAndChapter(bibleBook, (int)Chapter), (int)Verse);
+						}
+						else
+						{
+							return CurrentBCV;
+						}
+					}
+				}
+			}
+			else // BookChapterVerse is not null
+			{
+				return BookChapterVerse;
+			}
+		}
+		else // BookAndChapter is not null
+		{
+			return new BookChapterVerse(BookAndChapter, (int)Verse);
+		}
+
+	}
+
+	private string GetHref()
+	{
+		if (CurrentBCV is null)
+		{
+			return BLBConstants.BaseUrl;
+		}
+		else
+		{
+			StringBuilder sb = new();
+			sb.Append(BLBConstants.BaseUrl)
+				.Append('/').Append(BLB!.Name)
+				.Append('/').Append(CurrentBCV!.BookAndChapter.BibleBook!.Abrv)
+				.Append('/').Append(CurrentBCV.BookAndChapter.Chapter)
+				.Append('/').Append(Verse);
+			//.Append('/').Append(BLB!.Suffix);
+			return sb.ToString();
+		}
+	}
+
+	private MarkupString Final()
+	{
+		StringBuilder sb = new();
+		sb.Append("<a href='").Append(Href).Append(SQ)
+			.Append(" title='").Append(Title).Append(SQ)
+			.Append(" id='").Append(Id).Append(SQ)
+			.Append(" target='").Append(Target).Append(SQ)
+			.Append('>');
+
+		if (IconOnly)
+		{
+			sb.Append(Icon).Append("</a>");
+		}
+		else
+		{
+			sb.Append(Text).Append("</a>").Append(Icon);
+		}
+
+		//Logger!.LogWarning("{Method}, sb: {sb}", nameof(Final), sb.ToString());
+
+		return (MarkupString)sb.ToString();
+
+	}
+
+	// Ignore Spelling: BCV, Abrv, BLB
+}

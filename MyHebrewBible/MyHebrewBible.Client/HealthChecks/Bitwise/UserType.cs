@@ -1,5 +1,6 @@
 namespace MyHebrewBible.Client.HealthChecks.Bitwise;
 
+// ToDo: Not Used
 [Flags]
 public enum UserType
 {

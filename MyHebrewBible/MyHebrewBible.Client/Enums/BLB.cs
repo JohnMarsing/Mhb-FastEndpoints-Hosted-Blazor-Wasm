@@ -4,6 +4,11 @@ using MyHebrewBible.Client.Components;
 
 namespace MyHebrewBible.Client.Enums;
 
+public static class Constants
+{
+	public const string BaseUrl = "https://www.blueletterbible.org";
+}
+
 public abstract class BLB : SmartEnum<BLB>
 {
 

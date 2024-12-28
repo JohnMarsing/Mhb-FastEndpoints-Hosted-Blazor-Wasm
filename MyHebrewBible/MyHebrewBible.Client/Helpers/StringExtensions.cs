@@ -11,13 +11,15 @@ public static class StringExtensions
 
 	//ToDo: NOTE BEING USED
 	// See D:\TFS\OsisXmlToSql\BuildLetter\Helper\StringExtensions.cs
-	public static StringBuilder AppendIf(this StringBuilder builder, bool condition, string value)
+	public static StringBuilder AppendIf(
+		this StringBuilder builder, bool condition, string value)
 	{
 		if (condition) builder.Append(value);
 		return builder;
 	}
 
-	public static StringBuilder AppendIfElse(this StringBuilder builder, bool condition, string ifValue, string elseValue)
+	public static StringBuilder AppendIfElse(
+		this StringBuilder builder, bool condition, string ifValue, string elseValue)
 	{
 		if (condition)
 		{
