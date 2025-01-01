@@ -9,7 +9,12 @@
 	{
 		@if (item.DescH != "NULL")
 		{
-			<p class="text-danger text-center fs-4 mt-1 mb-2">@item.DescH</p>
+			@* ToDo: Still having problems syncing the navbar, title etc. with the actual chapter being shown; maybe only during slow internet connection  *@
+			<p class="text-black-50 text-center " style="font-size:11px; margin-top: -1rem !important; margin-bottom: -.05rem !important;">@item.BCV</p>
+
+			<p class="text-danger text-center fs-4 mt-1 mb-2">
+				@item.DescH
+			</p>
 		}
 
 		@if (item.DescD != "NULL")

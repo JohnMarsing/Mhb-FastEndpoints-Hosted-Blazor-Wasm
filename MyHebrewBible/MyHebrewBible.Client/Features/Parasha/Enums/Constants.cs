@@ -3,11 +3,13 @@ using MyHebrewBible.Client.Enums;
 
 namespace MyHebrewBible.Client.Features.Parasha.Enums;
 
+
 public static class ParashaFacts
 {
-	public const int FirstParashaId = 1; 
-	public const int LastParashaId = 157;
+	public const int FirstParashaId = 1;
+	public const int LastParashaId = 155;
 }
+
 
 public static class Constants
 {
@@ -57,7 +59,7 @@ public static class Constants
 	}
 
 	//public static DateTime TriennialSeedDate = DateTime.Parse("2021-10-02"); // 2021-09-25 Last date from previous triennial
-	public static DateTime TriennialSeedDate = DateTime.Parse("2024-10-05");  //2024-10-26
+	public static DateTime TriennialSeedDate = DateTime.Parse("2024-10-26");  
 
 	// Not used
 	public static DateTime GetUsersUTC()

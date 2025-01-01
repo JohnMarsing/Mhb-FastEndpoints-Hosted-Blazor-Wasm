@@ -93,18 +93,19 @@ internal class Program
 		using (var connection = new SqlConnection(connectionString))
 		{
 			await connection.OpenAsync();  // connection.Open();
-			var sql = "SELECT Value, ClassCodeGen, TorahVerseCodeGen, HaftorahVerseCodeGen, BritVerseCodeGen FROM ParashaEnumTorah";
+			var sql = "SELECT Value, RegionIdCodeGen, RegionInstanceCodeGen, ClassCodeGen, TorahVerseCodeGen, HaftorahVerseCodeGen, BritVerseCodeGen FROM ParashaEnumTorah";
 			var result = connection.Query<ParashaEnumTorah>(sql);
 
 			using (var writer = new StreamWriter(stats.FileName!)) //folder + "TriennialSmartEnum.txt"
 			{
 				await writer.WriteLineAsync("");
+
 				await writer.WriteLineAsync("#region Private Instantiation");
 
 				foreach (var item in result)
 				{
 					stats.RowsRead++;
-					await Task.Delay(50);
+					//await Task.Delay(50);
 					await writer.WriteLineAsync($"{item.ClassCodeGen}");
 					await writer.WriteLineAsync($"{item.TorahVerseCodeGen}");
 					await writer.WriteLineAsync($"{item.HaftorahVerseCodeGen}");
@@ -124,6 +125,8 @@ internal class Program
 public class ParashaEnumTorah
 {
 	public int Value { get; set; }
+	public string? RegionIdCodeGen { get; set; }
+	public string? RegionInstanceCodeGen { get; set; }
 	public string? ClassCodeGen { get; set; }
 	public string? TorahVerseCodeGen { get; set; }
 	public string? HaftorahVerseCodeGen { get; set; }
@@ -134,5 +137,6 @@ public class Stats
 {
 	public int RowsRead { get; set; } = 0;
 	public int RowsWritten { get; set; } = 0;
-	public string? FileName { get; set; } = "C:\\Source\\repos\\FastEndpoints\\Mhb-FastEndpoints-Hosted-Blazor-Wasm-Backup\\034-CodeGen-Triennial-SmartEnum-class\\" + "TriennialSmartEnum.txt";
+	//public string? FileName { get; set; } = "C:\\Source\\repos\\FastEndpoints\\Mhb-FastEndpoints-Hosted-Blazor-Wasm-Backup\\034-CodeGen-Triennial-SmartEnum-class\\" + "TriennialSmartEnum.txt";
+	public string? FileName { get; set; } = "C:\\Source\\repos\\FastEndpoints\\Mhb-FastEndpoints-Hosted-Blazor-Wasm-Backup\\054-rebuild-TriennialSmartEnum\\Database-Changes-CodeGen\\" + "TriennialSmartEnum.txt";
 }
