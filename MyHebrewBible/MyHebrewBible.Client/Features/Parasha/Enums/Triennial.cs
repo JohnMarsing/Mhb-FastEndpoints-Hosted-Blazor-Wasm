@@ -9,13 +9,12 @@ namespace MyHebrewBible.Client.Features.Parasha.Enums;
 
 public abstract class Triennial : SmartEnum<Triennial>
 {
-
 	#region Id's
 	private static class Id
 	{
 		internal const int Gen_01 = 1; // 1.1 | Gen 1:1-2:3
 		internal const int Gen_02 = 2; // 1.2 | Gen 2:4-3-24
-		internal const int Gen_04 = 3; // 1.3 | Gen 4:1-26
+		internal const int Gen_04 = 3; // 1.3 | Gen 4
 		internal const int Gen_05 = 4; // 1.4 | Gen 5:1-6:8
 		internal const int Gen_06 = 5; // 2.1 | Gen 6:9-7:24
 		internal const int Gen_08a = 6; // 2.2 | Gen 8:1-14
@@ -167,188 +166,170 @@ public abstract class Triennial : SmartEnum<Triennial>
 		internal const int Deu_31 = 152; // 64.1 | Deu 31:14-30
 		internal const int Deu_32 = 153; // 66.1 | Deu 32
 		internal const int Deu_33 = 154; // 67.1 | Deu 33
-		internal const int Deu_34 = 155; // 68.1 | Deu 34		
-		/*
-		internal const int AppendTrumpets = 158;
-				internal const int AppendYomKippur = 159;
-				internal const int AppendSukkot = 160;
-		*/
+		internal const int Deu_34 = 155; // 68.1 | Deu 34
 	}
 	#endregion
 
-	#region  Declared Public Instances
+	#region Declared Public Instances
+	public static readonly Triennial Gen_01 = new Gen_01SE(); // 1
+	public static readonly Triennial Gen_02 = new Gen_02SE(); // 2
+	public static readonly Triennial Gen_04 = new Gen_04SE(); // 3
+	public static readonly Triennial Gen_05 = new Gen_05SE(); // 4
+	public static readonly Triennial Gen_06 = new Gen_06SE(); // 5
+	public static readonly Triennial Gen_08a = new Gen_08aSE(); // 6
+	public static readonly Triennial Gen_08b = new Gen_08bSE(); // 7
+	public static readonly Triennial Gen_09 = new Gen_09SE(); // 8
+	public static readonly Triennial Gen_11 = new Gen_11SE(); // 9
+	public static readonly Triennial Gen_12 = new Gen_12SE(); // 10
+	public static readonly Triennial Gen_14 = new Gen_14SE(); // 11
+	public static readonly Triennial Gen_15 = new Gen_15SE(); // 12
+	public static readonly Triennial Gen_16 = new Gen_16SE(); // 13
+	public static readonly Triennial Gen_17 = new Gen_17SE(); // 14
+	public static readonly Triennial Gen_18 = new Gen_18SE(); // 15
+	public static readonly Triennial Gen_19 = new Gen_19SE(); // 16
+	public static readonly Triennial Gen_20 = new Gen_20SE(); // 17
+	public static readonly Triennial Gen_21 = new Gen_21SE(); // 18
+	public static readonly Triennial Gen_22 = new Gen_22SE(); // 19
+	public static readonly Triennial Gen_23 = new Gen_23SE(); // 20
+	public static readonly Triennial Gen_24a = new Gen_24aSE(); // 21
+	public static readonly Triennial Gen_24b = new Gen_24bSE(); // 22
+	public static readonly Triennial Gen_25a = new Gen_25aSE(); // 23
+	public static readonly Triennial Gen_25b = new Gen_25bSE(); // 24
+	public static readonly Triennial Gen_26 = new Gen_26SE(); // 25
+	public static readonly Triennial Gen_27a = new Gen_27aSE(); // 26
+	public static readonly Triennial Gen_27b = new Gen_27bSE(); // 27
+	public static readonly Triennial Gen_28 = new Gen_28SE(); // 28
+	public static readonly Triennial Gen_29 = new Gen_29SE(); // 29
+	public static readonly Triennial Gen_30 = new Gen_30SE(); // 30
+	public static readonly Triennial Gen_31 = new Gen_31SE(); // 31
+	public static readonly Triennial Gen_32 = new Gen_32SE(); // 32
+	public static readonly Triennial Gen_33 = new Gen_33SE(); // 33
+	public static readonly Triennial Gen_35 = new Gen_35SE(); // 34
+	public static readonly Triennial Gen_37 = new Gen_37SE(); // 35
+	public static readonly Triennial Gen_38 = new Gen_38SE(); // 36
+	public static readonly Triennial Gen_39 = new Gen_39SE(); // 37
+	public static readonly Triennial Gen_40 = new Gen_40SE(); // 38
+	public static readonly Triennial Gen_41a = new Gen_41aSE(); // 39
+	public static readonly Triennial Gen_41b = new Gen_41bSE(); // 40
+	public static readonly Triennial Gen_42 = new Gen_42SE(); // 41
+	public static readonly Triennial Gen_43 = new Gen_43SE(); // 42
+	public static readonly Triennial Gen_44 = new Gen_44SE(); // 43
+	public static readonly Triennial Gen_46 = new Gen_46SE(); // 44
+	public static readonly Triennial Gen_48 = new Gen_48SE(); // 45
+	public static readonly Triennial Gen_49 = new Gen_49SE(); // 46
+	public static readonly Triennial Exo_01 = new Exo_01SE(); // 47
+	public static readonly Triennial Exo_03 = new Exo_03SE(); // 48
+	public static readonly Triennial Exo_04 = new Exo_04SE(); // 49
+	public static readonly Triennial Exo_06 = new Exo_06SE(); // 50
+	public static readonly Triennial Exo_07 = new Exo_07SE(); // 51
+	public static readonly Triennial Exo_08 = new Exo_08SE(); // 52
+	public static readonly Triennial Exo_10 = new Exo_10SE(); // 53
+	public static readonly Triennial Exo_11 = new Exo_11SE(); // 54
+	public static readonly Triennial Exo_12 = new Exo_12SE(); // 55
+	public static readonly Triennial Exo_13a = new Exo_13aSE(); // 56
+	public static readonly Triennial Exo_13b = new Exo_13bSE(); // 57
+	public static readonly Triennial Exo_15 = new Exo_15SE(); // 58
+	public static readonly Triennial Exo_16 = new Exo_16SE(); // 59
+	public static readonly Triennial Exo_18 = new Exo_18SE(); // 60
+	public static readonly Triennial Exo_19 = new Exo_19SE(); // 61
+	public static readonly Triennial Exo_21 = new Exo_21SE(); // 62
+	public static readonly Triennial Exo_22 = new Exo_22SE(); // 63
+	public static readonly Triennial Exo_24 = new Exo_24SE(); // 64
+	public static readonly Triennial Exo_25 = new Exo_25SE(); // 65
+	public static readonly Triennial Exo_27a = new Exo_27aSE(); // 66
+	public static readonly Triennial Exo_27b = new Exo_27bSE(); // 67
+	public static readonly Triennial Exo_29 = new Exo_29SE(); // 68
+	public static readonly Triennial Exo_30a = new Exo_30aSE(); // 69
+	public static readonly Triennial Exo_30b = new Exo_30bSE(); // 70
+	public static readonly Triennial Exo_31 = new Exo_31SE(); // 71
+	public static readonly Triennial Exo_32 = new Exo_32SE(); // 72
+	public static readonly Triennial Exo_34 = new Exo_34SE(); // 73
+	public static readonly Triennial Exo_37 = new Exo_37SE(); // 74
+	public static readonly Triennial Exo_38 = new Exo_38SE(); // 75
+	public static readonly Triennial Exo_39 = new Exo_39SE(); // 76
+	public static readonly Triennial Lev_01 = new Lev_01SE(); // 77
+	public static readonly Triennial Lev_03 = new Lev_03SE(); // 78
+	public static readonly Triennial Lev_04 = new Lev_04SE(); // 79
+	public static readonly Triennial Lev_05 = new Lev_05SE(); // 80
+	public static readonly Triennial Lev_06 = new Lev_06SE(); // 81
+	public static readonly Triennial Lev_07 = new Lev_07SE(); // 82
+	public static readonly Triennial Lev_08 = new Lev_08SE(); // 83
+	public static readonly Triennial Lev_09 = new Lev_09SE(); // 84
+	public static readonly Triennial Lev_12 = new Lev_12SE(); // 85
+	public static readonly Triennial Lev_13 = new Lev_13SE(); // 86
+	public static readonly Triennial Lev_14 = new Lev_14SE(); // 87
+	public static readonly Triennial Lev_15 = new Lev_15SE(); // 88
+	public static readonly Triennial Lev_16 = new Lev_16SE(); // 89
+	public static readonly Triennial Lev_17 = new Lev_17SE(); // 90
+	public static readonly Triennial Lev_18 = new Lev_18SE(); // 91
+	public static readonly Triennial Lev_19 = new Lev_19SE(); // 92
+	public static readonly Triennial Lev_21 = new Lev_21SE(); // 93
+	public static readonly Triennial Lev_22 = new Lev_22SE(); // 94
+	public static readonly Triennial Lev_24 = new Lev_24SE(); // 95
+	public static readonly Triennial Lev_25a = new Lev_25aSE(); // 96
+	public static readonly Triennial Lev_25b = new Lev_25bSE(); // 97
+	public static readonly Triennial Lev_26 = new Lev_26SE(); // 98
+	public static readonly Triennial Num_01 = new Num_01SE(); // 99
+	public static readonly Triennial Num_02 = new Num_02SE(); // 100
+	public static readonly Triennial Num_03 = new Num_03SE(); // 101
+	public static readonly Triennial Num_04 = new Num_04SE(); // 102
+	public static readonly Triennial Num_05 = new Num_05SE(); // 103
+	public static readonly Triennial Num_06a = new Num_06aSE(); // 104
+	public static readonly Triennial Num_06b = new Num_06bSE(); // 105
+	public static readonly Triennial Num_08 = new Num_08SE(); // 106
+	public static readonly Triennial Num_10 = new Num_10SE(); // 107
+	public static readonly Triennial Num_11 = new Num_11SE(); // 108
+	public static readonly Triennial Num_12 = new Num_12SE(); // 109
+	public static readonly Triennial Num_13 = new Num_13SE(); // 110
+	public static readonly Triennial Num_14 = new Num_14SE(); // 111
+	public static readonly Triennial Num_15 = new Num_15SE(); // 112
+	public static readonly Triennial Num_16 = new Num_16SE(); // 113
+	public static readonly Triennial Num_17 = new Num_17SE(); // 114
+	public static readonly Triennial Num_19 = new Num_19SE(); // 115
+	public static readonly Triennial Num_20 = new Num_20SE(); // 116
+	public static readonly Triennial Num_22 = new Num_22SE(); // 117
+	public static readonly Triennial Num_23 = new Num_23SE(); // 118
+	public static readonly Triennial Num_25 = new Num_25SE(); // 119
+	public static readonly Triennial Num_26 = new Num_26SE(); // 120
+	public static readonly Triennial Num_28 = new Num_28SE(); // 121
+	public static readonly Triennial Num_30 = new Num_30SE(); // 122
+	public static readonly Triennial Num_32 = new Num_32SE(); // 123
+	public static readonly Triennial Num_33 = new Num_33SE(); // 124
+	public static readonly Triennial Num_34 = new Num_34SE(); // 125
+	public static readonly Triennial Num_35 = new Num_35SE(); // 126
+	public static readonly Triennial Deu_01 = new Deu_01SE(); // 127
+	public static readonly Triennial Deu_02 = new Deu_02SE(); // 128
+	public static readonly Triennial Deu_03 = new Deu_03SE(); // 129
+	public static readonly Triennial Deu_04 = new Deu_04SE(); // 130
+	public static readonly Triennial Deu_05 = new Deu_05SE(); // 131
+	public static readonly Triennial Deu_06 = new Deu_06SE(); // 132
+	public static readonly Triennial Deu_08 = new Deu_08SE(); // 133
+	public static readonly Triennial Deu_09 = new Deu_09SE(); // 134
+	public static readonly Triennial Deu_10 = new Deu_10SE(); // 135
+	public static readonly Triennial Deu_11 = new Deu_11SE(); // 136
+	public static readonly Triennial Deu_12 = new Deu_12SE(); // 137
+	public static readonly Triennial Deu_15 = new Deu_15SE(); // 138
+	public static readonly Triennial Deu_16 = new Deu_16SE(); // 139
+	public static readonly Triennial Deu_17 = new Deu_17SE(); // 140
+	public static readonly Triennial Deu_18 = new Deu_18SE(); // 141
+	public static readonly Triennial Deu_20 = new Deu_20SE(); // 142
+	public static readonly Triennial Deu_21 = new Deu_21SE(); // 143
+	public static readonly Triennial Deu_22 = new Deu_22SE(); // 144
+	public static readonly Triennial Deu_23a = new Deu_23aSE(); // 145
+	public static readonly Triennial Deu_23b = new Deu_23bSE(); // 146
+	public static readonly Triennial Deu_24 = new Deu_24SE(); // 147
+	public static readonly Triennial Deu_26 = new Deu_26SE(); // 148
+	public static readonly Triennial Deu_28 = new Deu_28SE(); // 149
+	public static readonly Triennial Deu_29 = new Deu_29SE(); // 150
+	public static readonly Triennial Deu_30 = new Deu_30SE(); // 151
+	public static readonly Triennial Deu_31 = new Deu_31SE(); // 152
+	public static readonly Triennial Deu_32 = new Deu_32SE(); // 153
+	public static readonly Triennial Deu_33 = new Deu_33SE(); // 154
+	public static readonly Triennial Deu_34 = new Deu_34SE(); // 155
 
-	/**/
-	//public static readonly Triennial Gen_01a = new Gen_01aSE();
-	//public static readonly Triennial Gen_01b = new Gen_01bSE();
-
-  public static readonly Triennial Gen_01 = new Gen_01SE(); // 1
-
-
-	public static readonly Triennial Gen_02 = new Gen_02SE();
-	//public static readonly Triennial Gen_03a = new Gen_03aSE();
-	//public static readonly Triennial Gen_03b = new Gen_03bSE();
-	public static readonly Triennial Gen_04 = new Gen_04SE();
-
-	public static readonly Triennial Gen_05 = new Gen_05SE();
-	public static readonly Triennial Gen_06 = new Gen_06SE();
-	public static readonly Triennial Gen_08a = new Gen_08aSE();
-	public static readonly Triennial Gen_08b = new Gen_08bSE();
-	public static readonly Triennial Gen_09 = new Gen_09SE();
-	public static readonly Triennial Gen_11 = new Gen_11SE();
-	public static readonly Triennial Gen_12 = new Gen_12SE();
-	public static readonly Triennial Gen_14 = new Gen_14SE();
-	public static readonly Triennial Gen_15 = new Gen_15SE();
-	public static readonly Triennial Gen_16 = new Gen_16SE();
-	public static readonly Triennial Gen_17 = new Gen_17SE();
-	public static readonly Triennial Gen_18 = new Gen_18SE();
-	public static readonly Triennial Gen_19 = new Gen_19SE();
-	public static readonly Triennial Gen_20 = new Gen_20SE();
-	public static readonly Triennial Gen_21 = new Gen_21SE();
-	public static readonly Triennial Gen_22 = new Gen_22SE();
-	public static readonly Triennial Gen_23 = new Gen_23SE();
-	public static readonly Triennial Gen_24a = new Gen_24aSE();
-	public static readonly Triennial Gen_24b = new Gen_24bSE();
-	public static readonly Triennial Gen_25a = new Gen_25aSE();
-	public static readonly Triennial Gen_25b = new Gen_25bSE();
-	public static readonly Triennial Gen_26 = new Gen_26SE();
-	public static readonly Triennial Gen_27a = new Gen_27aSE();
-	public static readonly Triennial Gen_27b = new Gen_27bSE();
-	public static readonly Triennial Gen_28 = new Gen_28SE();
-	public static readonly Triennial Gen_29 = new Gen_29SE();
-	public static readonly Triennial Gen_30 = new Gen_30SE();
-	public static readonly Triennial Gen_31 = new Gen_31SE();
-	public static readonly Triennial Gen_32 = new Gen_32SE();
-	public static readonly Triennial Gen_33 = new Gen_33SE();
-	public static readonly Triennial Gen_35 = new Gen_35SE();
-	public static readonly Triennial Gen_37 = new Gen_37SE();
-	public static readonly Triennial Gen_38 = new Gen_38SE();
-	public static readonly Triennial Gen_39 = new Gen_39SE();
-	public static readonly Triennial Gen_40 = new Gen_40SE();
-	public static readonly Triennial Gen_41a = new Gen_41aSE();
-	public static readonly Triennial Gen_41b = new Gen_41bSE();
-	public static readonly Triennial Gen_42 = new Gen_42SE();
-	public static readonly Triennial Gen_43 = new Gen_43SE();
-	public static readonly Triennial Gen_44 = new Gen_44SE();
-	public static readonly Triennial Gen_46 = new Gen_46SE();
-	public static readonly Triennial Gen_48 = new Gen_48SE();
-	public static readonly Triennial Gen_49 = new Gen_49SE();
-	public static readonly Triennial Exo_01 = new Exo_01SE();
-	public static readonly Triennial Exo_03 = new Exo_03SE();
-	public static readonly Triennial Exo_04 = new Exo_04SE();
-	public static readonly Triennial Exo_06 = new Exo_06SE();
-	public static readonly Triennial Exo_07 = new Exo_07SE();
-	public static readonly Triennial Exo_08 = new Exo_08SE();
-	public static readonly Triennial Exo_10 = new Exo_10SE();
-	public static readonly Triennial Exo_11 = new Exo_11SE();
-	public static readonly Triennial Exo_12 = new Exo_12SE();
-	public static readonly Triennial Exo_13a = new Exo_13aSE();
-	public static readonly Triennial Exo_13b = new Exo_13bSE();
-	public static readonly Triennial Exo_15 = new Exo_15SE();
-	public static readonly Triennial Exo_16 = new Exo_16SE();
-	public static readonly Triennial Exo_18 = new Exo_18SE();
-	public static readonly Triennial Exo_19 = new Exo_19SE();
-	public static readonly Triennial Exo_21 = new Exo_21SE();
-	public static readonly Triennial Exo_22 = new Exo_22SE();
-	public static readonly Triennial Exo_24 = new Exo_24SE();
-	public static readonly Triennial Exo_25 = new Exo_25SE();
-	public static readonly Triennial Exo_27a = new Exo_27aSE();
-	public static readonly Triennial Exo_27b = new Exo_27bSE();
-	public static readonly Triennial Exo_29 = new Exo_29SE();
-	public static readonly Triennial Exo_30a = new Exo_30aSE();
-	public static readonly Triennial Exo_30b = new Exo_30bSE();
-	public static readonly Triennial Exo_31 = new Exo_31SE();
-	public static readonly Triennial Exo_32 = new Exo_32SE();
-	public static readonly Triennial Exo_34 = new Exo_34SE();
-	public static readonly Triennial Exo_37 = new Exo_37SE();
-	public static readonly Triennial Exo_38 = new Exo_38SE();
-	public static readonly Triennial Exo_39 = new Exo_39SE();
-	public static readonly Triennial Lev_01 = new Lev_01SE();
-	public static readonly Triennial Lev_03 = new Lev_03SE();
-	public static readonly Triennial Lev_04 = new Lev_04SE();
-	public static readonly Triennial Lev_05 = new Lev_05SE();
-	public static readonly Triennial Lev_06 = new Lev_06SE();
-	public static readonly Triennial Lev_07 = new Lev_07SE();
-	public static readonly Triennial Lev_08 = new Lev_08SE();
-	public static readonly Triennial Lev_09 = new Lev_09SE();
-	public static readonly Triennial Lev_12 = new Lev_12SE();
-	public static readonly Triennial Lev_13 = new Lev_13SE();
-	public static readonly Triennial Lev_14 = new Lev_14SE();
-	public static readonly Triennial Lev_15 = new Lev_15SE();
-	public static readonly Triennial Lev_16 = new Lev_16SE();
-	public static readonly Triennial Lev_17 = new Lev_17SE();
-	public static readonly Triennial Lev_18 = new Lev_18SE();
-	public static readonly Triennial Lev_19 = new Lev_19SE();
-	public static readonly Triennial Lev_21 = new Lev_21SE();
-	public static readonly Triennial Lev_22 = new Lev_22SE();
-	public static readonly Triennial Lev_24 = new Lev_24SE();
-	public static readonly Triennial Lev_25a = new Lev_25aSE();
-	public static readonly Triennial Lev_25b = new Lev_25bSE();
-	public static readonly Triennial Lev_26 = new Lev_26SE();
-	public static readonly Triennial Num_01 = new Num_01SE();
-	public static readonly Triennial Num_02 = new Num_02SE();
-	public static readonly Triennial Num_03 = new Num_03SE();
-	public static readonly Triennial Num_04 = new Num_04SE();
-	public static readonly Triennial Num_05 = new Num_05SE();
-	public static readonly Triennial Num_06a = new Num_06aSE();
-	public static readonly Triennial Num_06b = new Num_06bSE();
-	public static readonly Triennial Num_08 = new Num_08SE();
-	public static readonly Triennial Num_10 = new Num_10SE();
-	public static readonly Triennial Num_11 = new Num_11SE();
-	public static readonly Triennial Num_12 = new Num_12SE();
-	public static readonly Triennial Num_13 = new Num_13SE();
-	public static readonly Triennial Num_14 = new Num_14SE();
-	public static readonly Triennial Num_15 = new Num_15SE();
-	public static readonly Triennial Num_16 = new Num_16SE();
-	public static readonly Triennial Num_17 = new Num_17SE();
-	public static readonly Triennial Num_19 = new Num_19SE();
-	public static readonly Triennial Num_20 = new Num_20SE();
-	public static readonly Triennial Num_22 = new Num_22SE();
-	public static readonly Triennial Num_23 = new Num_23SE();
-	public static readonly Triennial Num_25 = new Num_25SE();
-	public static readonly Triennial Num_26 = new Num_26SE();
-	public static readonly Triennial Num_28 = new Num_28SE();
-	public static readonly Triennial Num_30 = new Num_30SE();
-	public static readonly Triennial Num_32 = new Num_32SE();
-	public static readonly Triennial Num_33 = new Num_33SE();
-	public static readonly Triennial Num_34 = new Num_34SE();
-	public static readonly Triennial Num_35 = new Num_35SE();
-	public static readonly Triennial Deu_01 = new Deu_01SE();
-	public static readonly Triennial Deu_02 = new Deu_02SE();
-	public static readonly Triennial Deu_03 = new Deu_03SE();
-	public static readonly Triennial Deu_04 = new Deu_04SE();
-	public static readonly Triennial Deu_05 = new Deu_05SE();
-	public static readonly Triennial Deu_06 = new Deu_06SE();
-	public static readonly Triennial Deu_08 = new Deu_08SE();
-	public static readonly Triennial Deu_09 = new Deu_09SE();
-	public static readonly Triennial Deu_10 = new Deu_10SE();
-	public static readonly Triennial Deu_11 = new Deu_11SE();
-	public static readonly Triennial Deu_12 = new Deu_12SE();
-	public static readonly Triennial Deu_15 = new Deu_15SE();
-	public static readonly Triennial Deu_16 = new Deu_16SE();
-	public static readonly Triennial Deu_17 = new Deu_17SE();
-	public static readonly Triennial Deu_18 = new Deu_18SE();
-	public static readonly Triennial Deu_20 = new Deu_20SE();
-	public static readonly Triennial Deu_21 = new Deu_21SE();
-	public static readonly Triennial Deu_22 = new Deu_22SE();
-	public static readonly Triennial Deu_23a = new Deu_23aSE();
-	public static readonly Triennial Deu_23b = new Deu_23bSE();
-	public static readonly Triennial Deu_24 = new Deu_24SE();
-	public static readonly Triennial Deu_26 = new Deu_26SE();
-	public static readonly Triennial Deu_28 = new Deu_28SE();
-	public static readonly Triennial Deu_29 = new Deu_29SE();
-	public static readonly Triennial Deu_30 = new Deu_30SE();
-	public static readonly Triennial Deu_31 = new Deu_31SE();
-	public static readonly Triennial Deu_32 = new Deu_32SE();
-	public static readonly Triennial Deu_33 = new Deu_33SE();
-	public static readonly Triennial Deu_34 = new Deu_34SE();
-
-	/*
-	public static readonly Triennial AppendTrumpets = new AppendTrumpetsSE();
-	public static readonly Triennial AppendYomKippur = new AppendYomKippurSE();
-	public static readonly Triennial AppendSukkot = new AppendSukkotSE();
-	*/
 	#endregion
+
+
 
 	private Triennial(string name, int value) : base(name, value) { } // Constructor
 
@@ -403,7 +384,7 @@ public abstract class Triennial : SmartEnum<Triennial>
 	}
 
 
-	public string Url 
+	public string Url
 	{
 		get
 		{
@@ -492,9 +473,8 @@ public abstract class Triennial : SmartEnum<Triennial>
 
 	#endregion
 
-
 	#region Private Instantiation
-	
+
 	private sealed class Gen_01SE : Triennial
 	{
 		public Gen_01SE() : base($"{nameof(Id.Gen_01)}", Id.Gen_01) { }
@@ -505,14 +485,12 @@ public abstract class Triennial : SmartEnum<Triennial>
 		public override string Meaning => "In the beginning";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "1:1-2:3", 1, 34);
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Job, "38:11-40:2", 13805, 138867),    new VerseRange(BibleBook.Isaiah, "42:5-7", 18486, 18488),   new VerseRange(BibleBook.Isaiah, "45:17-19", 18579, 18581),
+new VerseRange(BibleBook.Job, "38:11-40:2", 13805, 13867),   new VerseRange(BibleBook.Isaiah, "42:5-7", 18486, 18488),   new VerseRange(BibleBook.Isaiah, "45:17-19", 18579, 18581),
 		];
-
 
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "1:1-5", 26046, 26050),   new VerseRange(BibleBook.Colossians, "1:1-23", 29467, 29489),   new VerseRange(BibleBook.Revelation, "22:6-21", 31087, 31102),
 		];
-
 
 	}
 
@@ -529,11 +507,9 @@ new VerseRange(BibleBook.John, "1:1-5", 26046, 26050),   new VerseRange(BibleBoo
 new VerseRange(BibleBook.Ezekiel, "28:11-26", 21169, 21184),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "1:6-28", 26051, 26073),    new VerseRange(BibleBook.Romans, "5:12-21", 28060, 28069),    new VerseRange(BibleBook.Hebrews, "11:1-7", 30174, 30180),
 		];
-
 
 	}
 
@@ -550,11 +526,9 @@ new VerseRange(BibleBook.John, "1:6-28", 26051, 26073),    new VerseRange(BibleB
 new VerseRange(BibleBook.Isaiah, "42:7-8", 18488, 18489),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Luke, "2:39-41", 25013, 25015),   new VerseRange(BibleBook.Romans, "3:1-24", 27993, 28016),
 		];
-
 
 	}
 
@@ -571,11 +545,9 @@ new VerseRange(BibleBook.Luke, "2:39-41", 25013, 25015),   new VerseRange(BibleB
 new VerseRange(BibleBook.Isaiah, "30:8-15", 18226, 18233),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "1:11-23", 26056, 26068),
 		];
-
 
 	}
 
@@ -592,11 +564,9 @@ new VerseRange(BibleBook.John, "1:11-23", 26056, 26068),
 new VerseRange(BibleBook.Isaiah, "54:5-8", 18729, 18732),    new VerseRange(BibleBook.Ezekiel, "14:14", 20746, 20746),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "24:4-14", 23962, 23972),    new VerseRange(BibleBook.John, "1:24-34", 26069, 26079),
 		];
-
 
 	}
 
@@ -613,11 +583,9 @@ new VerseRange(BibleBook.Matthew, "24:4-14", 23962, 23972),    new VerseRange(Bi
 new VerseRange(BibleBook.Habakkuk, "3:1-5", 22770, 22774),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Acts, "1:1-14", 26925, 26938),    new VerseRange(BibleBook.FirstPeter, "3:20", 30445, 30445),   new VerseRange(BibleBook.Revelation, "1:9-20", 30707, 30718),
 		];
-
 
 	}
 
@@ -634,11 +602,9 @@ new VerseRange(BibleBook.Acts, "1:1-14", 26925, 26938),    new VerseRange(BibleB
 new VerseRange(BibleBook.Isaiah, "42:9-21", 18490, 18502),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "24:4-14", 23962, 23972),    new VerseRange(BibleBook.SecondTimothy, "2:8-19", 29836, 29847),
 		];
-
 
 	}
 
@@ -655,11 +621,9 @@ new VerseRange(BibleBook.Matthew, "24:4-14", 23962, 23972),    new VerseRange(Bi
 new VerseRange(BibleBook.Isaiah, "49:9-13", 18646, 18650),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Acts, "17:26-28", 27550, 27552),    new VerseRange(BibleBook.Revelation, "5", 30781, 30794),
 		];
-
 
 	}
 
@@ -676,11 +640,9 @@ new VerseRange(BibleBook.Acts, "17:26-28", 27550, 27552),    new VerseRange(Bibl
 new VerseRange(BibleBook.Isaiah, "28:10-16", 18175, 18181),    new VerseRange(BibleBook.Zephaniah, "3:9", 22830, 22830),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.FirstCorinthians, "14:20-33", 28699, 28712),
 		];
-
 
 	}
 
@@ -697,11 +659,9 @@ new VerseRange(BibleBook.FirstCorinthians, "14:20-33", 28699, 28712),
 new VerseRange(BibleBook.Joshua, "24:3-18", 6480, 6495),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Galatians, "2:20", 29102, 29102),   new VerseRange(BibleBook.SecondTimothy, "2:11", 29839, 29839),    new VerseRange(BibleBook.Hebrews, "11:1-10", 30174, 30183),
 		];
-
 
 	}
 
@@ -718,11 +678,9 @@ new VerseRange(BibleBook.Galatians, "2:20", 29102, 29102),   new VerseRange(Bibl
 new VerseRange(BibleBook.FirstKings, "10:9", 9089, 9089),    new VerseRange(BibleBook.Isaiah, "41:2-14", 18454, 18466),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Hebrews, "7:1-19", 30066, 30084),
 		];
-
 
 	}
 
@@ -739,11 +697,9 @@ new VerseRange(BibleBook.Hebrews, "7:1-19", 30066, 30084),
 new VerseRange(BibleBook.Isaiah, "1:1-27", 17656, 17682),    new VerseRange(BibleBook.Zephaniah, "3:9-19", 22830, 22840),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Romans, "4:1-9", 28024, 28032),
 		];
-
 
 	}
 
@@ -760,11 +716,9 @@ new VerseRange(BibleBook.Romans, "4:1-9", 28024, 28032),
 new VerseRange(BibleBook.Isaiah, "54:1", 18725, 18725),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Galatians, "4:21-31", 29153, 29163),
 		];
-
 
 	}
 
@@ -781,11 +735,9 @@ new VerseRange(BibleBook.Galatians, "4:21-31", 29153, 29163),
 new VerseRange(BibleBook.Isaiah, "63:10-19", 18877, 18886),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Romans, "4:10-25", 28033, 28048),
 		];
-
 
 	}
 
@@ -802,11 +754,9 @@ new VerseRange(BibleBook.Romans, "4:10-25", 28033, 28048),
 new VerseRange(BibleBook.SecondKings, "4:1", 9605, 9605),    new VerseRange(BibleBook.Isaiah, "33:17-24", 18297, 18304),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Luke, "8:40-56", 25286, 25302),   new VerseRange(BibleBook.Hebrews, "11:8-18", 30181, 30191),
 		];
-
 
 	}
 
@@ -823,11 +773,9 @@ new VerseRange(BibleBook.Luke, "8:40-56", 25286, 25302),   new VerseRange(BibleB
 new VerseRange(BibleBook.Isaiah, "17:14-18:7", 17998, 18005),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Luke, "17:20-37", 25672, 25689),
 		];
-
 
 	}
 
@@ -844,11 +792,9 @@ new VerseRange(BibleBook.Luke, "17:20-37", 25672, 25689),
 new VerseRange(BibleBook.Isaiah, "61:9-10", 18853, 18854),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "8:1-13", 23347, 23359),   new VerseRange(BibleBook.FirstCorinthians, "7:1-2", 28489, 28490),    new VerseRange(BibleBook.Galatians, "3:15-29", 29118, 29132),
 		];
-
 
 	}
 
@@ -865,11 +811,9 @@ new VerseRange(BibleBook.Matthew, "8:1-13", 23347, 23359),   new VerseRange(Bibl
 new VerseRange(BibleBook.FirstSamuel, "2:21-28", 7262, 7269),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "1:18-25", 23163, 23170),    new VerseRange(BibleBook.Hebrews, "11:11", 30184, 30184),
 		];
-
 
 	}
 
@@ -886,11 +830,9 @@ new VerseRange(BibleBook.Matthew, "1:18-25", 23163, 23170),    new VerseRange(Bi
 new VerseRange(BibleBook.Isaiah, "33:7-22", 18287, 18302),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "27:27-66", 24157, 24196),   new VerseRange(BibleBook.John, "19:16-17", 26842, 26843),
 		];
-
 
 	}
 
@@ -907,11 +849,9 @@ new VerseRange(BibleBook.Matthew, "27:27-66", 24157, 24196),   new VerseRange(Bi
 new VerseRange(BibleBook.FirstKings, "1:1-31", 8719, 8749),    new VerseRange(BibleBook.Isaiah, "1:1-27", 17656, 17682),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "19:41", 26867, 26867),   new VerseRange(BibleBook.Acts, "7:1-18", 27118, 27135),   new VerseRange(BibleBook.FirstCorinthians, "15:50-57", 28769, 28776),
 		];
-
 
 	}
 
@@ -928,11 +868,9 @@ new VerseRange(BibleBook.John, "19:41", 26867, 26867),   new VerseRange(BibleBoo
 new VerseRange(BibleBook.Judges, "19:20-21", 7045, 7046),    new VerseRange(BibleBook.Isaiah, "40:1-2", 18422, 18423),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "4:7-15", 26164, 26172),    new VerseRange(BibleBook.Ephesians, "5:15-33", 29320, 29338),
 		];
-
 
 	}
 
@@ -949,11 +887,9 @@ new VerseRange(BibleBook.John, "4:7-15", 26164, 26172),    new VerseRange(BibleB
 new VerseRange(BibleBook.Isaiah, "49:14-51:3", 18651, 18677),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.James, "4:13-17", 30351, 30355),
 		];
-
 
 	}
 
@@ -970,11 +906,9 @@ new VerseRange(BibleBook.James, "4:13-17", 30351, 30355),
 new VerseRange(BibleBook.SecondSamuel, "5:17-6:1", 8150, 8159),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Romans, "7", 28093, 28117),
 		];
-
 
 	}
 
@@ -991,11 +925,9 @@ new VerseRange(BibleBook.Romans, "7", 28093, 28117),
 new VerseRange(BibleBook.FirstSamuel, "20:18", 7749, 7749),    new VerseRange(BibleBook.FirstSamuel, "20:42", 7773, 7773),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Romans, "9:9-14", 28165, 28170),    new VerseRange(BibleBook.Hebrews, "12:14-29", 30227, 30242),
 		];
-
 
 	}
 
@@ -1012,11 +944,9 @@ new VerseRange(BibleBook.Romans, "9:9-14", 28165, 28170),    new VerseRange(Bibl
 new VerseRange(BibleBook.Isaiah, "51:12-52:12", 18686, 18709),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Luke, "16:1-15", 25622, 25636),   new VerseRange(BibleBook.Romans, "9:1-8", 28157, 28164),
 		];
-
 
 	}
 
@@ -1033,11 +963,9 @@ new VerseRange(BibleBook.Luke, "16:1-15", 25622, 25636),   new VerseRange(BibleB
 new VerseRange(BibleBook.Isaiah, "46:3-6", 18590, 18593),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Hebrews, "2:14-18", 29992, 29996),    new VerseRange(BibleBook.Hebrews, "11:20", 30193, 30193),
 		];
-
 
 	}
 
@@ -1054,11 +982,9 @@ new VerseRange(BibleBook.Hebrews, "2:14-18", 29992, 29996),    new VerseRange(Bi
 new VerseRange(BibleBook.Micah, "1:11", 22591, 22591),   new VerseRange(BibleBook.Micah, "5", 22635, 22649),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Romans, "10:20-11:36", 28209, 28246),
 		];
-
 
 	}
 
@@ -1075,11 +1001,9 @@ new VerseRange(BibleBook.Romans, "10:20-11:36", 28209, 28246),
 new VerseRange(BibleBook.Isaiah, "60", 18823, 18844),    new VerseRange(BibleBook.Hosea, "12:13", 22266, 22266),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "9:18-19", 23398, 23399),    new VerseRange(BibleBook.Luke, "2:1-31", 24975, 25005),   new VerseRange(BibleBook.Ephesians, "6:5-9", 29343, 29347),
 		];
-
 
 	}
 
@@ -1096,11 +1020,9 @@ new VerseRange(BibleBook.Matthew, "9:18-19", 23398, 23399),    new VerseRange(Bi
 new VerseRange(BibleBook.Isaiah, "60:15", 18837, 18837),   new VerseRange(BibleBook.Isaiah, "61:10-63:9", 18854, 18876),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Romans, "11:25-36", 28235, 28246),    new VerseRange(BibleBook.Revelation, "19", 31019, 31039),
 		];
-
 
 	}
 
@@ -1117,11 +1039,9 @@ new VerseRange(BibleBook.Romans, "11:25-36", 28235, 28246),    new VerseRange(Bi
 new VerseRange(BibleBook.FirstSamuel, "1:11", 7224, 7224),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "2:13", 23183, 23183),   new VerseRange(BibleBook.Acts, "13:16-41", 27379, 27404),   new VerseRange(BibleBook.Revelation, "20:4-15", 31043, 31054),
 		];
-
 
 	}
 
@@ -1138,11 +1058,9 @@ new VerseRange(BibleBook.Matthew, "2:13", 23183, 23183),   new VerseRange(BibleB
 new VerseRange(BibleBook.Jeremiah, "30:10-16", 19678, 19684),    new VerseRange(BibleBook.Micah, "6:3-7:20", 22652, 22685),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "1:24-28", 26069, 26073),   new VerseRange(BibleBook.James, "4:1-12", 30339, 30350),
 		];
-
 
 	}
 
@@ -1159,11 +1077,9 @@ new VerseRange(BibleBook.John, "1:24-28", 26069, 26073),   new VerseRange(BibleB
 new VerseRange(BibleBook.Obadiah, "1:1", 22512, 22512),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.James, "1:1-12", 30268, 30279),
 		];
-
 
 	}
 
@@ -1180,11 +1096,9 @@ new VerseRange(BibleBook.James, "1:1-12", 30268, 30279),
 new VerseRange(BibleBook.Nahum, "1:12-2:5", 22697, 22705),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Revelation, "22:8-21", 31089, 31102),
 		];
-
 
 	}
 
@@ -1201,11 +1115,9 @@ new VerseRange(BibleBook.Revelation, "22:8-21", 31089, 31102),
 new VerseRange(BibleBook.Isaiah, "43:1-7", 18507, 18513),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "5:1-12", 23236, 23247),
 		];
-
 
 	}
 
@@ -1222,11 +1134,9 @@ new VerseRange(BibleBook.Matthew, "5:1-12", 23236, 23247),
 new VerseRange(BibleBook.Jeremiah, "38:8", 19904, 19904),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "19:1-20:10", 26827, 26878),
 		];
-
 
 	}
 
@@ -1243,11 +1153,9 @@ new VerseRange(BibleBook.John, "19:1-20:10", 26827, 26878),
 new VerseRange(BibleBook.Isaiah, "37:31-37", 18384, 18390),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Romans, "9:22-29", 28178, 28185),
 		];
-
 
 	}
 
@@ -1264,11 +1172,9 @@ new VerseRange(BibleBook.Romans, "9:22-29", 28178, 28185),
 new VerseRange(BibleBook.Isaiah, "52:3-9", 18700, 18706),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Acts, "7:9-37", 27126, 27154),
 		];
-
 
 	}
 
@@ -1285,11 +1191,9 @@ new VerseRange(BibleBook.Acts, "7:9-37", 27126, 27154),
 new VerseRange(BibleBook.Amos, "1:3-15", 22368, 22380),    new VerseRange(BibleBook.Amos, "2:6", 22386, 22386),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.SecondCorinthians, "9:6-15", 28963, 28972),
 		];
-
 
 	}
 
@@ -1306,11 +1210,9 @@ new VerseRange(BibleBook.SecondCorinthians, "9:6-15", 28963, 28972),
 new VerseRange(BibleBook.FirstKings, "3:15-4:1", 8832, 8846),    new VerseRange(BibleBook.Isaiah, "29:8", 18202, 18202),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "2", 23171, 23193),
 		];
-
 
 	}
 
@@ -1327,11 +1229,9 @@ new VerseRange(BibleBook.Matthew, "2", 23171, 23193),
 new VerseRange(BibleBook.Isaiah, "11:2-9", 17887, 17894),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Acts, "7:1-19", 27118, 27136),
 		];
-
 
 	}
 
@@ -1348,11 +1248,9 @@ new VerseRange(BibleBook.Acts, "7:1-19", 27118, 27136),
 new VerseRange(BibleBook.Isaiah, "50:10-52:11", 18673, 18708),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Luke, "1:68-79", 24962, 24973),
 		];
-
 
 	}
 
@@ -1369,11 +1267,9 @@ new VerseRange(BibleBook.Luke, "1:68-79", 24962, 24973),
 new VerseRange(BibleBook.Jeremiah, "42:12-17", 19988, 19993),    new VerseRange(BibleBook.Jeremiah, "43:12-13", 20010, 20011),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Luke, "19:37-48", 25769, 25780),
 		];
-
 
 	}
 
@@ -1390,11 +1286,9 @@ new VerseRange(BibleBook.Luke, "19:37-48", 25769, 25780),
 new VerseRange(BibleBook.Joshua, "14:6", 6194, 6194),    new VerseRange(BibleBook.Ezekiel, "37:10", 21408, 21408),   new VerseRange(BibleBook.Ezekiel, "37:15-18", 21413, 21416),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Acts, "2:23", 26973, 26973),    new VerseRange(BibleBook.Acts, "2:36", 26986, 26986),   new VerseRange(BibleBook.Revelation, "12:1-6", 30893, 30898),
 		];
-
 
 	}
 
@@ -1411,11 +1305,9 @@ new VerseRange(BibleBook.Acts, "2:23", 26973, 26973),    new VerseRange(BibleBoo
 new VerseRange(BibleBook.FirstKings, "2:1-4", 8772, 8775),   new VerseRange(BibleBook.SecondKings, "13:14", 9886, 9886),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Revelation, "21:1-10", 31055, 31064),   new VerseRange(BibleBook.Revelation, "22:1-10", 31082, 31091),
 		];
-
 
 	}
 
@@ -1432,11 +1324,9 @@ new VerseRange(BibleBook.Revelation, "21:1-10", 31055, 31064),   new VerseRange(
 new VerseRange(BibleBook.Isaiah, "43:2", 18508, 18508),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "19:39-20:9", 26865, 26877),
 		];
-
 
 	}
 
@@ -1453,11 +1343,9 @@ new VerseRange(BibleBook.John, "19:39-20:9", 26865, 26877),
 new VerseRange(BibleBook.Micah, "2:12", 22608, 22608),   new VerseRange(BibleBook.Zechariah, "14:1", 23070, 23070),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "21:12-19", 26911, 26918),
 		];
-
 
 	}
 
@@ -1474,11 +1362,9 @@ new VerseRange(BibleBook.John, "21:12-19", 26911, 26918),
 new VerseRange(BibleBook.Isaiah, "27:6", 18158, 18158),    new VerseRange(BibleBook.Isaiah, "52:1-6", 18698, 18703),   new VerseRange(BibleBook.Isaiah, "65:19-23", 18917, 18921),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Acts, "7:17-29", 27134, 27146),   new VerseRange(BibleBook.SecondCorinthians, "6:1-10", 28900, 28909),
 		];
-
 
 	}
 
@@ -1495,11 +1381,9 @@ new VerseRange(BibleBook.Acts, "7:17-29", 27134, 27146),   new VerseRange(BibleB
 new VerseRange(BibleBook.SecondKings, "20:8", 10107, 10107),   new VerseRange(BibleBook.Isaiah, "40:11", 18432, 18432),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "12:26", 23516, 23516),    new VerseRange(BibleBook.Luke, "20:37", 25817, 25817),    new VerseRange(BibleBook.Acts, "7:30", 27147, 27147),
 		];
-
 
 	}
 
@@ -1516,11 +1400,9 @@ new VerseRange(BibleBook.Matthew, "12:26", 23516, 23516),    new VerseRange(Bibl
 new VerseRange(BibleBook.Isaiah, "55:12", 18753, 18753),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "8:26-59", 26408, 26441),
 		];
-
 
 	}
 
@@ -1537,11 +1419,9 @@ new VerseRange(BibleBook.John, "8:26-59", 26408, 26441),
 new VerseRange(BibleBook.Isaiah, "42:8", 18489, 18489),    new VerseRange(BibleBook.Ezekiel, "28:25-29:21", 21183, 21205),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.ThirdJohn, "1:1-7", 30660, 30666),
 		];
-
 
 	}
 
@@ -1558,11 +1438,9 @@ new VerseRange(BibleBook.ThirdJohn, "1:1-7", 30660, 30666),
 new VerseRange(BibleBook.FirstKings, "22:1-38", 9482, 9519),   new VerseRange(BibleBook.Joel, "3:1-7", 22345, 22351),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Revelation, "16:1-17", 30956, 30972),
 		];
-
 
 	}
 
@@ -1579,11 +1457,9 @@ new VerseRange(BibleBook.Revelation, "16:1-17", 30956, 30972),
 new VerseRange(BibleBook.Isaiah, "34:1-11", 18305, 18315),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Luke, "11:20", 25426, 25426),   new VerseRange(BibleBook.John, "11:47-53", 26571, 26577),   new VerseRange(BibleBook.Revelation, "8:1-9:6", 30829, 30847),
 		];
-
 
 	}
 
@@ -1600,11 +1476,9 @@ new VerseRange(BibleBook.Luke, "11:20", 25426, 25426),   new VerseRange(BibleBoo
 new VerseRange(BibleBook.FirstSamuel, "6:6", 7338, 7338),    new VerseRange(BibleBook.Isaiah, "19:1", 18006, 18006),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "24:29-44", 23987, 24002),   new VerseRange(BibleBook.Matthew, "25:31", 24040, 24040),   new VerseRange(BibleBook.Matthew, "26:30", 24085, 24085),
 		];
-
 
 	}
 
@@ -1621,11 +1495,9 @@ new VerseRange(BibleBook.Matthew, "24:29-44", 23987, 24002),   new VerseRange(Bi
 new VerseRange(BibleBook.Jeremiah, "46:13-28", 20059, 20074),    new VerseRange(BibleBook.Micah, "7:15", 22680, 22680),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "3:13-25", 26134, 26146),
 		];
-
 
 	}
 
@@ -1642,11 +1514,9 @@ new VerseRange(BibleBook.John, "3:13-25", 26134, 26146),
 new VerseRange(BibleBook.Isaiah, "21:9-12", 18045, 18048),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "6:4-15", 26262, 26273),    new VerseRange(BibleBook.John, "21:1", 26900, 26900),   new VerseRange(BibleBook.Revelation, "18", 30995, 31018),
 		];
-
 
 	}
 
@@ -1663,11 +1533,9 @@ new VerseRange(BibleBook.John, "6:4-15", 26262, 26273),    new VerseRange(BibleB
 new VerseRange(BibleBook.Isaiah, "46:3-7", 18590, 18594),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Hebrews, "8:6-9:1", 30099, 30107),    new VerseRange(BibleBook.Hebrews, "9:13-15", 30119, 30121),
 		];
-
 
 	}
 
@@ -1684,11 +1552,9 @@ new VerseRange(BibleBook.Hebrews, "8:6-9:1", 30099, 30107),    new VerseRange(Bi
 new VerseRange(BibleBook.Joshua, "24:1-4", 6478, 6481),    new VerseRange(BibleBook.Judges, "4:4-5:31", 6604, 6655),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "16:25", 26752, 26752),   new VerseRange(BibleBook.Philippians, "4:4-23", 29447, 29466),
 		];
-
 
 	}
 
@@ -1705,11 +1571,9 @@ new VerseRange(BibleBook.John, "16:25", 26752, 26752),   new VerseRange(BibleBoo
 new VerseRange(BibleBook.Psalms, "106:7-8", 15659, 15660),   new VerseRange(BibleBook.Isaiah, "49:8-14", 18645, 18651),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Philippians, "4:4-23", 29447, 29466),
 		];
-
 
 	}
 
@@ -1726,11 +1590,9 @@ new VerseRange(BibleBook.Philippians, "4:4-23", 29447, 29466),
 new VerseRange(BibleBook.Isaiah, "58:13", 18800, 18800),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "6:35-59", 26293, 26317),
 		];
-
 
 	}
 
@@ -1747,11 +1609,9 @@ new VerseRange(BibleBook.John, "6:35-59", 26293, 26317),
 new VerseRange(BibleBook.Isaiah, "6", 17771, 17783),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "6:1-35", 26259, 26293),    new VerseRange(BibleBook.John, "6:60-71", 26318, 26329),
 		];
-
 
 	}
 
@@ -1768,11 +1628,9 @@ new VerseRange(BibleBook.John, "6:1-35", 26259, 26293),    new VerseRange(BibleB
 new VerseRange(BibleBook.Isaiah, "61:6-10", 18850, 18854),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Hebrews, "12:18", 30231, 30231),    new VerseRange(BibleBook.Hebrews, "12:29", 30242, 30242),
 		];
-
 
 	}
 
@@ -1789,11 +1647,9 @@ new VerseRange(BibleBook.Hebrews, "12:18", 30231, 30231),    new VerseRange(Bibl
 new VerseRange(BibleBook.Isaiah, "56:1", 18755, 18755),    new VerseRange(BibleBook.Jeremiah, "34", 19803, 19824),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "7:1-5", 23318, 23322),
 		];
-
 
 	}
 
@@ -1810,11 +1666,9 @@ new VerseRange(BibleBook.Matthew, "7:1-5", 23318, 23322),
 new VerseRange(BibleBook.Isaiah, "48:10", 18625, 18625),   new VerseRange(BibleBook.Isaiah, "49", 18638, 18663),   new VerseRange(BibleBook.Isaiah, "49:3", 18640, 18640),   new VerseRange(BibleBook.Isaiah, "60:17-61:11", 18839, 18855),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "5", 23236, 23283),
 		];
-
 
 	}
 
@@ -1831,11 +1685,9 @@ new VerseRange(BibleBook.Matthew, "5", 23236, 23283),
 new VerseRange(BibleBook.FirstKings, "6:11-13", 8908, 8910),   new VerseRange(BibleBook.Isaiah, "60:17-61:9", 18839, 18853),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "26:26-30", 24081, 24085),
 		];
-
 
 	}
 
@@ -1852,11 +1704,9 @@ new VerseRange(BibleBook.Matthew, "26:26-30", 24081, 24085),
 new VerseRange(BibleBook.Isaiah, "66", 18924, 18947),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "7:25-32", 26354, 26361),   new VerseRange(BibleBook.Hebrews, "9", 30107, 30134),
 		];
-
 
 	}
 
@@ -1873,11 +1723,9 @@ new VerseRange(BibleBook.John, "7:25-32", 26354, 26361),   new VerseRange(BibleB
 new VerseRange(BibleBook.Ezekiel, "16:10-19", 20773, 20782),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "23:1-28", 23920, 23947),
 		];
-
 
 	}
 
@@ -1894,11 +1742,9 @@ new VerseRange(BibleBook.Matthew, "23:1-28", 23920, 23947),
 new VerseRange(BibleBook.Ezekiel, "3:10-27", 20513, 20530),    new VerseRange(BibleBook.Ezekiel, "43:10-12", 21583, 21585),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Hebrews, "3", 29997, 30015),
 		];
-
 
 	}
 
@@ -1915,11 +1761,9 @@ new VerseRange(BibleBook.Hebrews, "3", 29997, 30015),
 new VerseRange(BibleBook.Isaiah, "61:6", 18850, 18850),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.FirstPeter, "2", 30401, 30425),
 		];
-
 
 	}
 
@@ -1936,11 +1780,9 @@ new VerseRange(BibleBook.FirstPeter, "2", 30401, 30425),
 new VerseRange(BibleBook.Malachi, "1:11-2:7", 23101, 23111),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Luke, "1:1-25", 24895, 24919),
 		];
-
 
 	}
 
@@ -1957,11 +1799,9 @@ new VerseRange(BibleBook.Luke, "1:1-25", 24895, 24919),
 new VerseRange(BibleBook.FirstKings, "18:1-39", 9343, 9381),   new VerseRange(BibleBook.SecondKings, "12:5", 9856, 9856),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Romans, "5:10-11", 28058, 28059),
 		];
-
 
 	}
 
@@ -1978,11 +1818,9 @@ new VerseRange(BibleBook.Romans, "5:10-11", 28058, 28059),
 new VerseRange(BibleBook.Isaiah, "43:7-21", 18513, 18527),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.SecondTimothy, "1", 29811, 29828),
 		];
-
 
 	}
 
@@ -1999,11 +1837,9 @@ new VerseRange(BibleBook.SecondTimothy, "1", 29811, 29828),
 new VerseRange(BibleBook.SecondSamuel, "22:10-51", 8613, 8654),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Romans, "9", 28157, 28189),
 		];
-
 
 	}
 
@@ -2020,11 +1856,9 @@ new VerseRange(BibleBook.Romans, "9", 28157, 28189),
 new VerseRange(BibleBook.FirstKings, "18:27-39", 9369, 9381),    new VerseRange(BibleBook.Jeremiah, "31:31-40", 19723, 19732),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.SecondCorinthians, "3", 28843, 28860),
 		];
-
 
 	}
 
@@ -2041,11 +1875,9 @@ new VerseRange(BibleBook.SecondCorinthians, "3", 28843, 28860),
 new VerseRange(BibleBook.FirstKings, "7:13-27", 8948, 8962),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Hebrews, "9", 30107, 30134),    new VerseRange(BibleBook.FirstJohn, "1", 30542, 30551),
 		];
-
 
 	}
 
@@ -2062,11 +1894,9 @@ new VerseRange(BibleBook.Hebrews, "9", 30107, 30134),    new VerseRange(BibleBoo
 new VerseRange(BibleBook.FirstKings, "8:8-22", 8994, 9008),    new VerseRange(BibleBook.Jeremiah, "30:18-24", 19686, 19692),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.SecondCorinthians, "4:1-5:19", 28861, 28897),
 		];
-
 
 	}
 
@@ -2083,11 +1913,9 @@ new VerseRange(BibleBook.SecondCorinthians, "4:1-5:19", 28861, 28897),
 new VerseRange(BibleBook.FirstKings, "7:13", 8948, 8948),    new VerseRange(BibleBook.Isaiah, "33:20-34:8", 18300, 18312),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Hebrews, "8:1-5", 30094, 30098),    new VerseRange(BibleBook.Revelation, "15", 30948, 30955),
 		];
-
 
 	}
 
@@ -2104,11 +1932,9 @@ new VerseRange(BibleBook.Hebrews, "8:1-5", 30094, 30098),    new VerseRange(Bibl
 new VerseRange(BibleBook.Isaiah, "43:21-44:23", 18527, 18557),   new VerseRange(BibleBook.Jeremiah, "31:15-20", 19707, 19712),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.FirstCorinthians, "3", 28412, 28434),
 		];
-
 
 	}
 
@@ -2125,11 +1951,9 @@ new VerseRange(BibleBook.FirstCorinthians, "3", 28412, 28434),
 new VerseRange(BibleBook.Ezekiel, "20:33-44", 20929, 20940),   new VerseRange(BibleBook.Ezekiel, "44:10-14", 21610, 21614),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Revelation, "8", 30829, 30841),
 		];
-
 
 	}
 
@@ -2146,11 +1970,9 @@ new VerseRange(BibleBook.Revelation, "8", 30829, 30841),
 new VerseRange(BibleBook.Ezekiel, "18:4-17", 20854, 20867),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Romans, "8:1-13", 28118, 28130),    new VerseRange(BibleBook.Hebrews, "10:1-18", 30135, 30152),
 		];
-
 
 	}
 
@@ -2167,11 +1989,9 @@ new VerseRange(BibleBook.Romans, "8:1-13", 28118, 28130),    new VerseRange(Bibl
 new VerseRange(BibleBook.FirstSamuel, "15:1-34", 7562, 7595),    new VerseRange(BibleBook.Zechariah, "5 - 7", 22938, 22977),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Revelation, "5 & 6", 30781, 30811),
 		];
-
 
 	}
 
@@ -2188,11 +2008,9 @@ new VerseRange(BibleBook.Revelation, "5 & 6", 30781, 30811),
 new VerseRange(BibleBook.Jeremiah, "7:12-34", 19132, 19154),   new VerseRange(BibleBook.Ezekiel, "36:16-36", 21376, 21396),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Mark, "12:28-34", 24702, 24708),
 		];
-
 
 	}
 
@@ -2209,11 +2027,9 @@ new VerseRange(BibleBook.Mark, "12:28-34", 24702, 24708),
 new VerseRange(BibleBook.Malachi, "3:6-9", 23127, 23130),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "23", 23920, 23958),   new VerseRange(BibleBook.John, "6:63-66", 26321, 26324),
 		];
-
 
 	}
 
@@ -2230,11 +2046,9 @@ new VerseRange(BibleBook.Matthew, "23", 23920, 23958),   new VerseRange(BibleBoo
 new VerseRange(BibleBook.Ezekiel, "43:27", 21600, 21600),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "24:29-44", 23987, 24002),   new VerseRange(BibleBook.Matthew, "25:31", 24040, 24040),   new VerseRange(BibleBook.Matthew, "26:30", 24085, 24085),
 		];
-
 
 	}
 
@@ -2251,11 +2065,9 @@ new VerseRange(BibleBook.Matthew, "24:29-44", 23987, 24002),   new VerseRange(Bi
 new VerseRange(BibleBook.SecondSamuel, "6:1-7", 8159, 8165),   new VerseRange(BibleBook.FirstKings, "8:54-61", 9040, 9047),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Mark, "7:1-23", 24465, 24487),
 		];
-
 
 	}
 
@@ -2272,11 +2084,9 @@ new VerseRange(BibleBook.Mark, "7:1-23", 24465, 24487),
 new VerseRange(BibleBook.SecondKings, "4:42-5:19", 9646, 9667),    new VerseRange(BibleBook.Isaiah, "66:7", 18930, 18930),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "1:18-24", 23163, 23169),    new VerseRange(BibleBook.John, "7:37-44", 26366, 26373),
 		];
-
 
 	}
 
@@ -2294,7 +2104,6 @@ new VerseRange(BibleBook.Matthew, "1:18-24", 23163, 23169),    new VerseRange(Bi
 new VerseRange(BibleBook.Hebrews, "2:11-18", 29979, 29996),
 		];
 
-
 	}
 
 	private sealed class Lev_14SE : Triennial
@@ -2310,11 +2119,9 @@ new VerseRange(BibleBook.Hebrews, "2:11-18", 29979, 29996),
 new VerseRange(BibleBook.SecondKings, "7:1-16", 9709, 9724),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "8:1-4", 23347, 23350),    new VerseRange(BibleBook.Luke, "5:12-14", 25120, 25122),    new VerseRange(BibleBook.Ephesians, "4", 29274, 29305),
 		];
-
 
 	}
 
@@ -2331,11 +2138,9 @@ new VerseRange(BibleBook.Matthew, "8:1-4", 23347, 23350),    new VerseRange(Bibl
 new VerseRange(BibleBook.Ezekiel, "43:18-27", 21591, 21600),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Philippians, "3", 29423, 29443),
 		];
-
 
 	}
 
@@ -2352,11 +2157,9 @@ new VerseRange(BibleBook.Philippians, "3", 29423, 29443),
 new VerseRange(BibleBook.Ezekiel, "44:1-15", 21601, 21615),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Jude, "1:6-21", 30679, 30694),
 		];
-
 
 	}
 
@@ -2373,11 +2176,9 @@ new VerseRange(BibleBook.Jude, "1:6-21", 30679, 30694),
 new VerseRange(BibleBook.Ezekiel, "22:1-19", 20978, 20996),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.FirstJohn, "5", 30626, 30646),
 		];
-
 
 	}
 
@@ -2394,11 +2195,9 @@ new VerseRange(BibleBook.FirstJohn, "5", 30626, 30646),
 new VerseRange(BibleBook.Ezekiel, "22:20-31", 20997, 21008),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.FirstCorinthians, "5:1-6:10", 28456, 28488),
 		];
-
 
 	}
 
@@ -2415,11 +2214,9 @@ new VerseRange(BibleBook.FirstCorinthians, "5:1-6:10", 28456, 28488),
 new VerseRange(BibleBook.Isaiah, "4", 17735, 17740),   new VerseRange(BibleBook.Amos, "9", 22497, 22511),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "18", 23729, 23763),
 		];
-
 
 	}
 
@@ -2436,11 +2233,9 @@ new VerseRange(BibleBook.Matthew, "18", 23729, 23763),
 new VerseRange(BibleBook.Ezekiel, "44", 21601, 21631),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.FirstCorinthians, "7:17", 28505, 28505),
 		];
-
 
 	}
 
@@ -2457,11 +2252,9 @@ new VerseRange(BibleBook.FirstCorinthians, "7:17", 28505, 28505),
 new VerseRange(BibleBook.Isaiah, "56", 18755, 18766),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.FirstCorinthians, "15:20-23", 28739, 28742),
 		];
-
 
 	}
 
@@ -2478,11 +2271,9 @@ new VerseRange(BibleBook.FirstCorinthians, "15:20-23", 28739, 28742),
 new VerseRange(BibleBook.Hosea, "14", 22284, 22292),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "7", 26330, 26382),
 		];
-
 
 	}
 
@@ -2499,11 +2290,9 @@ new VerseRange(BibleBook.John, "7", 26330, 26382),
 new VerseRange(BibleBook.Jeremiah, "32:6-27", 19738, 19759),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "10:1-33", 26483, 26515),
 		];
-
 
 	}
 
@@ -2520,11 +2309,9 @@ new VerseRange(BibleBook.John, "10:1-33", 26483, 26515),
 new VerseRange(BibleBook.Ezekiel, "12:17-28", 20698, 20709),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Galatians, "4:1-5:1", 29133, 29164),
 		];
-
 
 	}
 
@@ -2541,11 +2328,9 @@ new VerseRange(BibleBook.Galatians, "4:1-5:1", 29133, 29164),
 new VerseRange(BibleBook.Jeremiah, "16:16-17:4", 19353, 19362),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "15", 26701, 26727),
 		];
-
 
 	}
 
@@ -2562,11 +2347,9 @@ new VerseRange(BibleBook.John, "15", 26701, 26727),
 new VerseRange(BibleBook.Ezekiel, "47:13-23", 21693, 21703),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Revelation, "7", 30812, 30828),
 		];
-
 
 	}
 
@@ -2583,11 +2366,9 @@ new VerseRange(BibleBook.Revelation, "7", 30812, 30828),
 new VerseRange(BibleBook.Isaiah, "8:18-22", 17826, 17830),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Luke, "15:1-7", 25590, 25596),
 		];
-
 
 	}
 
@@ -2604,11 +2385,9 @@ new VerseRange(BibleBook.Luke, "15:1-7", 25590, 25596),
 new VerseRange(BibleBook.Isaiah, "43:8-13", 18514, 18519),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Acts, "5:1-16", 27061, 27076),    new VerseRange(BibleBook.Hebrews, "12", 30214, 30242),
 		];
-
 
 	}
 
@@ -2625,11 +2404,9 @@ new VerseRange(BibleBook.Acts, "5:1-16", 27061, 27076),    new VerseRange(BibleB
 new VerseRange(BibleBook.Judges, "13:2-25", 6887, 6910),   new VerseRange(BibleBook.FirstSamuel, "6:10-16", 7342, 7348),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.FirstCorinthians, "12:12-18", 28647, 28653),
 		];
-
 
 	}
 
@@ -2646,11 +2423,9 @@ new VerseRange(BibleBook.FirstCorinthians, "12:12-18", 28647, 28653),
 new VerseRange(BibleBook.Hosea, "4:14-15", 22148, 22149),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.SecondPeter, "2", 30502, 30523),
 		];
-
 
 	}
 
@@ -2667,11 +2442,9 @@ new VerseRange(BibleBook.SecondPeter, "2", 30502, 30523),
 new VerseRange(BibleBook.FirstSamuel, "1:7-11", 7220, 7224),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Luke, "1:8-17", 24902, 24911),
 		];
-
 
 	}
 
@@ -2688,11 +2461,9 @@ new VerseRange(BibleBook.Luke, "1:8-17", 24902, 24911),
 new VerseRange(BibleBook.Jeremiah, "31:21-34", 19713, 19726),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "13:1-30", 26632, 26661),
 		];
-
 
 	}
 
@@ -2709,11 +2480,9 @@ new VerseRange(BibleBook.John, "13:1-30", 26632, 26661),
 new VerseRange(BibleBook.Zechariah, "4", 22924, 22937),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Revelation, "11", 30874, 30892),
 		];
-
 
 	}
 
@@ -2730,11 +2499,9 @@ new VerseRange(BibleBook.Revelation, "11", 30874, 30892),
 new VerseRange(BibleBook.FirstSamuel, "27:7-12", 7938, 7943),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.FirstCorinthians, "14:1-9", 28680, 28688),
 		];
-
 
 	}
 
@@ -2752,7 +2519,6 @@ new VerseRange(BibleBook.FirstCorinthians, "14:1-9", 28680, 28688),
 new VerseRange(BibleBook.Acts, "12:3-12", 27341, 27350),   new VerseRange(BibleBook.FirstCorinthians, "10", 28569, 28601),
 		];
 
-
 	}
 
 	private sealed class Num_12SE : Triennial
@@ -2769,7 +2535,6 @@ new VerseRange(BibleBook.Acts, "12:3-12", 27341, 27350),   new VerseRange(BibleB
 new VerseRange(BibleBook.Romans, "11:22-13:4", 28232, 28271),    new VerseRange(BibleBook.Isaiah, "59:1-21", 18802, 18822),
 		];
 
-
 	}
 
 	private sealed class Num_13SE : Triennial
@@ -2785,11 +2550,9 @@ new VerseRange(BibleBook.Romans, "11:22-13:4", 28232, 28271),    new VerseRange(
 new VerseRange(BibleBook.Joshua, "2:1-11", 5871, 5881),    new VerseRange(BibleBook.Joshua, "18:1-2", 6295, 6296),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Hebrews, "11:24-31", 30197, 30204),
 		];
-
 
 	}
 
@@ -2806,11 +2569,9 @@ new VerseRange(BibleBook.Hebrews, "11:24-31", 30197, 30204),
 new VerseRange(BibleBook.SecondChronicles, "36:5-23", 11999, 12017),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Philippians, "3", 29423, 29443),
 		];
-
 
 	}
 
@@ -2827,11 +2588,9 @@ new VerseRange(BibleBook.Philippians, "3", 29423, 29443),
 new VerseRange(BibleBook.Jeremiah, "17:19-27", 19377, 19385),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.FirstJohn, "2 and 3", 30552, 30604),
 		];
-
 
 	}
 
@@ -2848,11 +2607,9 @@ new VerseRange(BibleBook.FirstJohn, "2 and 3", 30552, 30604),
 new VerseRange(BibleBook.FirstSamuel, "11:14-12:22", 7460, 7483),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.SecondTimothy, "2:8-21", 29836, 29849),   new VerseRange(BibleBook.Jude, "1", 30674, 30698),
 		];
-
 
 	}
 
@@ -2869,11 +2626,9 @@ new VerseRange(BibleBook.SecondTimothy, "2:8-21", 29836, 29849),   new VerseRang
 new VerseRange(BibleBook.Ezekiel, "44:15-28", 21615, 21628),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Hebrews, "5:1-6", 30032, 30037),
 		];
-
 
 	}
 
@@ -2890,11 +2645,9 @@ new VerseRange(BibleBook.Hebrews, "5:1-6", 30032, 30037),
 new VerseRange(BibleBook.Judges, "11:1-33", 6831, 6863),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "20:1-31", 26869, 26899),
 		];
-
 
 	}
 
@@ -2911,11 +2664,9 @@ new VerseRange(BibleBook.John, "20:1-31", 26869, 26899),
 new VerseRange(BibleBook.Ezekiel, "44:29-31", 21629, 21631),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "20:1-31", 26122, 26152),
 		];
-
 
 	}
 
@@ -2932,11 +2683,9 @@ new VerseRange(BibleBook.John, "20:1-31", 26122, 26152),
 new VerseRange(BibleBook.Micah, "5:6-6:8", 22640, 22657),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.FirstPeter, "5:5-7", 30471, 30473),
 		];
-
 
 	}
 
@@ -2953,11 +2702,9 @@ new VerseRange(BibleBook.FirstPeter, "5:5-7", 30471, 30473),
 new VerseRange(BibleBook.Joshua, "17:1-18", 6277, 6294),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.James, "3:1-4:17", 30321, 30355),
 		];
-
 
 	}
 
@@ -2974,11 +2721,9 @@ new VerseRange(BibleBook.James, "3:1-4:17", 30321, 30355),
 new VerseRange(BibleBook.FirstKings, "18:46-19:21", 9388, 9409),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "23:1-12", 23920, 23931),    new VerseRange(BibleBook.Ephesians, "4:1-16", 29274, 29289),
 		];
-
 
 	}
 
@@ -2995,11 +2740,9 @@ new VerseRange(BibleBook.Matthew, "23:1-12", 23920, 23931),    new VerseRange(Bi
 new VerseRange(BibleBook.Malachi, "2:1-9", 23105, 23113),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Ephesians, "1:3-23", 29210, 29230),
 		];
-
 
 	}
 
@@ -3016,11 +2759,9 @@ new VerseRange(BibleBook.Ephesians, "1:3-23", 29210, 29230),
 new VerseRange(BibleBook.Ezekiel, "45:13-25", 21644, 21656),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Hebrews, "10:1-39", 30135, 30173),
 		];
-
 
 	}
 
@@ -3037,11 +2778,9 @@ new VerseRange(BibleBook.Hebrews, "10:1-39", 30135, 30173),
 new VerseRange(BibleBook.Jeremiah, "1:1-2:3", 18948, 18969),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "5:33-37", 23268, 23272),
 		];
-
 
 	}
 
@@ -3058,11 +2797,9 @@ new VerseRange(BibleBook.Matthew, "5:33-37", 23268, 23272),
 new VerseRange(BibleBook.Jeremiah, "2", 18967, 19003),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.James, "2:1-26", 30295, 30320),
 		];
-
 
 	}
 
@@ -3079,11 +2816,9 @@ new VerseRange(BibleBook.James, "2:1-26", 30295, 30320),
 new VerseRange(BibleBook.Jeremiah, "3", 19004, 19028),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Acts, "6", 27103, 27117),   new VerseRange(BibleBook.James, "4:1-12", 30339, 30350),
 		];
-
 
 	}
 
@@ -3100,11 +2835,9 @@ new VerseRange(BibleBook.Acts, "6", 27103, 27117),   new VerseRange(BibleBook.Ja
 new VerseRange(BibleBook.Jeremiah, "4", 19029, 19059),   new VerseRange(BibleBook.Ezekiel, "45:1-8", 21632, 21639),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Ephesians, "2:1-22", 29231, 29252),
 		];
-
 
 	}
 
@@ -3121,11 +2854,9 @@ new VerseRange(BibleBook.Ephesians, "2:1-22", 29231, 29252),
 new VerseRange(BibleBook.Jeremiah, "5", 19060, 19090),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "4:1-45", 26158, 26202),
 		];
-
 
 	}
 
@@ -3142,11 +2873,9 @@ new VerseRange(BibleBook.John, "4:1-45", 26158, 26202),
 new VerseRange(BibleBook.Isaiah, "1:1-27", 17656, 17682),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.FirstTimothy, "3:1-7", 29733, 29739),   new VerseRange(BibleBook.Hebrews, "3", 29997, 30015),
 		];
-
 
 	}
 
@@ -3164,7 +2893,6 @@ new VerseRange(BibleBook.FirstTimothy, "3:1-7", 29733, 29739),   new VerseRange(
 new VerseRange(BibleBook.Romans, "9", 28157, 28189),
 		];
 
-
 	}
 
 	private sealed class Deu_03SE : Triennial
@@ -3180,11 +2908,9 @@ new VerseRange(BibleBook.Romans, "9", 28157, 28189),
 new VerseRange(BibleBook.Isaiah, "40:1-11", 18422, 18432),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Mark, "12:28-34", 24702, 24708),    new VerseRange(BibleBook.Romans, "2:1-3:31", 27964, 28023),
 		];
-
 
 	}
 
@@ -3201,11 +2927,9 @@ new VerseRange(BibleBook.Mark, "12:28-34", 24702, 24708),    new VerseRange(Bibl
 new VerseRange(BibleBook.Isaiah, "40:12-14", 18433, 18435),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Luke, "3:1", 25027, 25027),
 		];
-
 
 	}
 
@@ -3222,11 +2946,9 @@ new VerseRange(BibleBook.Luke, "3:1", 25027, 25027),
 new VerseRange(BibleBook.Isaiah, "40:15-26", 18436, 18447),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Romans, "10:1", 28190, 28190),
 		];
-
 
 	}
 
@@ -3244,7 +2966,6 @@ new VerseRange(BibleBook.Romans, "10:1", 28190, 28190),
 new VerseRange(BibleBook.Matthew, "4:1", 23211, 23211),
 		];
 
-
 	}
 
 	private sealed class Deu_08SE : Triennial
@@ -3260,11 +2981,9 @@ new VerseRange(BibleBook.Matthew, "4:1", 23211, 23211),
 new VerseRange(BibleBook.Isaiah, "49:14-51:3", 18651, 18677),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Luke, "4:11", 25075, 25075),    new VerseRange(BibleBook.Romans, "8:31-39", 28148, 28156),
 		];
-
 
 	}
 
@@ -3282,7 +3001,6 @@ new VerseRange(BibleBook.Luke, "4:11", 25075, 25075),    new VerseRange(BibleBoo
 new VerseRange(BibleBook.Ephesians, "2:11", 29241, 29241),
 		];
 
-
 	}
 
 	private sealed class Deu_10SE : Triennial
@@ -3299,7 +3017,6 @@ new VerseRange(BibleBook.Ephesians, "2:11", 29241, 29241),
 new VerseRange(BibleBook.Colossians, "3:1", 29519, 29519),
 		];
 
-
 	}
 
 	private sealed class Deu_11SE : Triennial
@@ -3315,11 +3032,9 @@ new VerseRange(BibleBook.Colossians, "3:1", 29519, 29519),
 new VerseRange(BibleBook.Isaiah, "54:11-55:5", 18735, 18746),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Luke, "6:20", 25167, 25167),    new VerseRange(BibleBook.FirstJohn, "4:1-6", 30605, 30610),
 		];
-
 
 	}
 
@@ -3337,7 +3052,6 @@ new VerseRange(BibleBook.Luke, "6:20", 25167, 25167),    new VerseRange(BibleBoo
 new VerseRange(BibleBook.Matthew, "7:15", 23332, 23332),
 		];
 
-
 	}
 
 	private sealed class Deu_15SE : Triennial
@@ -3354,7 +3068,6 @@ new VerseRange(BibleBook.Matthew, "7:15", 23332, 23332),
 new VerseRange(BibleBook.Luke, "4:14", 25078, 25078),
 		];
 
-
 	}
 
 	private sealed class Deu_16SE : Triennial
@@ -3370,11 +3083,9 @@ new VerseRange(BibleBook.Luke, "4:14", 25078, 25078),
 new VerseRange(BibleBook.Isaiah, "51:12-52:12", 18686, 18709),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "5:1", 26212, 26212),   new VerseRange(BibleBook.FirstCorinthians, "5:9-13", 28464, 28468),
 		];
-
 
 	}
 
@@ -3391,11 +3102,9 @@ new VerseRange(BibleBook.John, "5:1", 26212, 26212),   new VerseRange(BibleBook.
 new VerseRange(BibleBook.FirstSamuel, "8:1-7", 7371, 7377),    new VerseRange(BibleBook.Jeremiah, "31:31-34", 19723, 19726),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Jeremiah, "19:11-22", 19723, 19726),    new VerseRange(BibleBook.Acts, "13:13-44", 27376, 27407),
 		];
-
 
 	}
 
@@ -3412,11 +3121,9 @@ new VerseRange(BibleBook.Jeremiah, "19:11-22", 19723, 19726),    new VerseRange(
 new VerseRange(BibleBook.Jeremiah, "29:8-30:9", 19644, 19677),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Galatians, "5:1-6:10", 29164, 29199),
 		];
-
 
 	}
 
@@ -3433,11 +3140,9 @@ new VerseRange(BibleBook.Galatians, "5:1-6:10", 29164, 29199),
 new VerseRange(BibleBook.Joshua, "24:1-15", 6478, 6492),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "10:11-31", 26493, 26513),
 		];
-
 
 	}
 
@@ -3454,11 +3159,9 @@ new VerseRange(BibleBook.John, "10:11-31", 26493, 26513),
 new VerseRange(BibleBook.Isaiah, "54:1-10", 18725, 18734),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Luke, "20:27-38", 25807, 25818),    new VerseRange(BibleBook.Galatians, "3:1-5:26", 29104, 29189),
 		];
-
 
 	}
 
@@ -3475,11 +3178,9 @@ new VerseRange(BibleBook.Luke, "20:27-38", 25807, 25818),    new VerseRange(Bibl
 new VerseRange(BibleBook.Micah, "5:1-6", 22635, 22640),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "22:1-14", 23874, 23887),
 		];
-
 
 	}
 
@@ -3496,11 +3197,9 @@ new VerseRange(BibleBook.Matthew, "22:1-14", 23874, 23887),
 new VerseRange(BibleBook.Isaiah, "1:16-26", 17671, 17681),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "8:1-14", 23347, 23360),
 		];
-
 
 	}
 
@@ -3517,11 +3216,9 @@ new VerseRange(BibleBook.Matthew, "8:1-14", 23347, 23360),
 new VerseRange(BibleBook.Isaiah, "19:1-25", 18006, 18030),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "5:30-37", 23265, 23272),
 		];
-
 
 	}
 
@@ -3538,11 +3235,9 @@ new VerseRange(BibleBook.Matthew, "5:30-37", 23265, 23272),
 new VerseRange(BibleBook.Hosea, "10:12-15", 22238, 22241),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Luke, "12:13-48", 25473, 25508),
 		];
-
 
 	}
 
@@ -3559,11 +3254,9 @@ new VerseRange(BibleBook.Luke, "12:13-48", 25473, 25508),
 new VerseRange(BibleBook.Isaiah, "60", 18823, 18844),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Romans, "11:1-15", 28211, 28225),   new VerseRange(BibleBook.Revelation, "21:9-22:7", 31063, 31088),
 		];
-
 
 	}
 
@@ -3580,11 +3273,9 @@ new VerseRange(BibleBook.Romans, "11:1-15", 28211, 28225),   new VerseRange(Bibl
 new VerseRange(BibleBook.Isaiah, "55:1-5", 18742, 18746),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "14:1-31", 26670, 26700),
 		];
-
 
 	}
 
@@ -3601,11 +3292,9 @@ new VerseRange(BibleBook.John, "14:1-31", 26670, 26700),
 new VerseRange(BibleBook.Isaiah, "55:6-58:8", 18747, 18795),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Romans, "10:1-13", 28190, 28202),
 		];
-
 
 	}
 
@@ -3619,14 +3308,12 @@ new VerseRange(BibleBook.Romans, "10:1-13", 28190, 28202),
 		public override string Meaning => "This Commandment";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "30:11-31:13", 5720, 5742);
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "12:15-17", 19267, 18746),
+new VerseRange(BibleBook.Jeremiah, "12:15-17", 19265, 19267),
 		];
-
 
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "11:7-30", 23467, 23490),
 		];
-
 
 	}
 
@@ -3643,11 +3330,9 @@ new VerseRange(BibleBook.Matthew, "11:7-30", 23467, 23490),
 new VerseRange(BibleBook.Hosea, "14:2-9", 22285, 22292),   new VerseRange(BibleBook.Joel, "2:15-27", 22327, 22339),    new VerseRange(BibleBook.Micah, "7:18-20", 22683, 22685),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "12:35-14:26", 26616, 26695),   new VerseRange(BibleBook.Hebrews, "13:5-8", 30247, 30250),
 		];
-
 
 	}
 
@@ -3664,11 +3349,9 @@ new VerseRange(BibleBook.John, "12:35-14:26", 26616, 26695),   new VerseRange(Bi
 new VerseRange(BibleBook.Ezekiel, "17:22-24", 20848, 20850),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.John, "17:1-26", 26761, 26786),
 		];
-
 
 	}
 
@@ -3685,11 +3368,9 @@ new VerseRange(BibleBook.John, "17:1-26", 26761, 26786),
 new VerseRange(BibleBook.Ezekiel, "37:15-20", 21413, 21418),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "19:25-20:16", 23788, 23809),    new VerseRange(BibleBook.Jude, "1:8-9", 30681, 30682),
 		];
-
 
 	}
 
@@ -3706,20 +3387,12 @@ new VerseRange(BibleBook.Matthew, "19:25-20:16", 23788, 23809),    new VerseRang
 new VerseRange(BibleBook.Joshua, "1", 5853, 5870),
 		];
 
-
 		public override List<VerseRange> BritVerses => [
 new VerseRange(BibleBook.Matthew, "4:5-11", 23215, 23221),
 		];
 
-
 	}
-
 
 	#endregion
 
-
 }
-//	protected List<Data.CalendarQuery>? DataMonth { get; set; } = new List<Data.CalendarQuery>();
-
-
-
