@@ -484,13 +484,16 @@ public abstract class Triennial : SmartEnum<Triennial>
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-01.htm";
 		public override string Meaning => "In the beginning";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "1:1-2:3", 1, 34);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Job, "38:11-40:2", 13805, 13867),   new VerseRange(BibleBook.Isaiah, "42:5-7", 18486, 18488),   new VerseRange(BibleBook.Isaiah, "45:17-19", 18579, 18581),
-		];
+		new VerseRange(BibleBook.Job, "38:11-40:2", 13805, 13867),
+new VerseRange(BibleBook.Isaiah, "42:5-7", 18486, 18488),
+new VerseRange(BibleBook.Isaiah, "45:17-19", 18579, 18581),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "1:1-5", 26046, 26050),   new VerseRange(BibleBook.Colossians, "1:1-23", 29467, 29489),   new VerseRange(BibleBook.Revelation, "22:6-21", 31087, 31102),
-		];
+		new VerseRange(BibleBook.John, "1:1-5", 26046, 26050),
+new VerseRange(BibleBook.Colossians, "1:1-23", 29467, 29489),
+new VerseRange(BibleBook.Revelation, "22:6-21", 31087, 31102),];
 
 	}
 
@@ -503,13 +506,14 @@ new VerseRange(BibleBook.John, "1:1-5", 26046, 26050),   new VerseRange(BibleBoo
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-02.htm";
 		public override string Meaning => "These are the Generations";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "2:4-3-24", 35, 80);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "28:11-26", 21169, 21184),
-		];
+		new VerseRange(BibleBook.Ezekiel, "28:11-26", 21169, 21184),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "1:6-28", 26051, 26073),    new VerseRange(BibleBook.Romans, "5:12-21", 28060, 28069),    new VerseRange(BibleBook.Hebrews, "11:1-7", 30174, 30180),
-		];
+		new VerseRange(BibleBook.John, "1:6-28", 26051, 26073),
+new VerseRange(BibleBook.Romans, "5:12-21", 28060, 28069),
+new VerseRange(BibleBook.Hebrews, "11:1-7", 30174, 30180),];
 
 	}
 
@@ -522,13 +526,13 @@ new VerseRange(BibleBook.John, "1:6-28", 26051, 26073),    new VerseRange(BibleB
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-03.htm";
 		public override string Meaning => "Adam knew Eve";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "4", 81, 106);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "42:7-8", 18488, 18489),
-		];
+		new VerseRange(BibleBook.Isaiah, "42:7-8", 18488, 18489),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Luke, "2:39-41", 25013, 25015),   new VerseRange(BibleBook.Romans, "3:1-24", 27993, 28016),
-		];
+		new VerseRange(BibleBook.Luke, "2:39-41", 25013, 25015),
+new VerseRange(BibleBook.Romans, "3:1-24", 27993, 28016),];
 
 	}
 
@@ -541,13 +545,12 @@ new VerseRange(BibleBook.Luke, "2:39-41", 25013, 25015),   new VerseRange(BibleB
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-04.htm";
 		public override string Meaning => "Generations of Adam";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "5:1-6:8", 107, 146);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "30:8-15", 18226, 18233),
-		];
+		new VerseRange(BibleBook.Isaiah, "30:8-15", 18226, 18233),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "1:11-23", 26056, 26068),
-		];
+		new VerseRange(BibleBook.John, "1:11-23", 26056, 26068),];
 
 	}
 
@@ -560,13 +563,14 @@ new VerseRange(BibleBook.John, "1:11-23", 26056, 26068),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-05.htm";
 		public override string Meaning => "Rest";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "6:9-7:24", 147, 184);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "54:5-8", 18729, 18732),    new VerseRange(BibleBook.Ezekiel, "14:14", 20746, 20746),
-		];
+		new VerseRange(BibleBook.Isaiah, "54:5-8", 18729, 18732),
+new VerseRange(BibleBook.Ezekiel, "14:14", 20746, 20746),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "24:4-14", 23962, 23972),    new VerseRange(BibleBook.John, "1:24-34", 26069, 26079),
-		];
+		new VerseRange(BibleBook.Matthew, "24:4-14", 23962, 23972),
+new VerseRange(BibleBook.John, "1:24-34", 26069, 26079),];
 
 	}
 
@@ -579,13 +583,14 @@ new VerseRange(BibleBook.Matthew, "24:4-14", 23962, 23972),    new VerseRange(Bi
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-06.htm";
 		public override string Meaning => "And He remebered";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "8:1-14", 185, 198);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Habakkuk, "3:1-5", 22770, 22774),
-		];
+		new VerseRange(BibleBook.Habakkuk, "3:1-5", 22770, 22774),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Acts, "1:1-14", 26925, 26938),    new VerseRange(BibleBook.FirstPeter, "3:20", 30445, 30445),   new VerseRange(BibleBook.Revelation, "1:9-20", 30707, 30718),
-		];
+		new VerseRange(BibleBook.Acts, "1:1-14", 26925, 26938),
+new VerseRange(BibleBook.FirstPeter, "3:20", 30445, 30445),
+new VerseRange(BibleBook.Revelation, "1:9-20", 30707, 30718),];
 
 	}
 
@@ -598,13 +603,13 @@ new VerseRange(BibleBook.Acts, "1:1-14", 26925, 26938),    new VerseRange(BibleB
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-07.htm";
 		public override string Meaning => "Come out from the ark";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "8:15-9:17", 199, 223);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "42:9-21", 18490, 18502),
-		];
+		new VerseRange(BibleBook.Isaiah, "42:9-21", 18490, 18502),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "24:4-14", 23962, 23972),    new VerseRange(BibleBook.SecondTimothy, "2:8-19", 29836, 29847),
-		];
+		new VerseRange(BibleBook.Matthew, "24:4-14", 23962, 23972),
+new VerseRange(BibleBook.SecondTimothy, "2:8-19", 29836, 29847),];
 
 	}
 
@@ -617,13 +622,13 @@ new VerseRange(BibleBook.Matthew, "24:4-14", 23962, 23972),    new VerseRange(Bi
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-09.htm";
 		public override string Meaning => "Sons of Noah";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "9:18-10:32", 224, 267);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "49:9-13", 18646, 18650),
-		];
+		new VerseRange(BibleBook.Isaiah, "49:9-13", 18646, 18650),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Acts, "17:26-28", 27550, 27552),    new VerseRange(BibleBook.Revelation, "5", 30781, 30794),
-		];
+		new VerseRange(BibleBook.Acts, "17:26-28", 27550, 27552),
+new VerseRange(BibleBook.Revelation, "5", 30781, 30794),];
 
 	}
 
@@ -636,13 +641,13 @@ new VerseRange(BibleBook.Acts, "17:26-28", 27550, 27552),    new VerseRange(Bibl
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-10.htm";
 		public override string Meaning => "And he had all the land";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "11", 268, 299);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "28:10-16", 18175, 18181),    new VerseRange(BibleBook.Zephaniah, "3:9", 22830, 22830),
-		];
+		new VerseRange(BibleBook.Isaiah, "28:10-16", 18175, 18181),
+new VerseRange(BibleBook.Zephaniah, "3:9", 22830, 22830),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.FirstCorinthians, "14:20-33", 28699, 28712),
-		];
+		new VerseRange(BibleBook.FirstCorinthians, "14:20-33", 28699, 28712),];
 
 	}
 
@@ -655,13 +660,14 @@ new VerseRange(BibleBook.FirstCorinthians, "14:20-33", 28699, 28712),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-11.htm";
 		public override string Meaning => "Get yourself out";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "12 & 13", 300, 337);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Joshua, "24:3-18", 6480, 6495),
-		];
+		new VerseRange(BibleBook.Joshua, "24:3-18", 6480, 6495),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Galatians, "2:20", 29102, 29102),   new VerseRange(BibleBook.SecondTimothy, "2:11", 29839, 29839),    new VerseRange(BibleBook.Hebrews, "11:1-10", 30174, 30183),
-		];
+		new VerseRange(BibleBook.Galatians, "2:20", 29102, 29102),
+new VerseRange(BibleBook.SecondTimothy, "2:11", 29839, 29839),
+new VerseRange(BibleBook.Hebrews, "11:1-10", 30174, 30183),];
 
 	}
 
@@ -674,13 +680,13 @@ new VerseRange(BibleBook.Galatians, "2:20", 29102, 29102),   new VerseRange(Bibl
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-12.htm";
 		public override string Meaning => "Days of Amraphel";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "14", 338, 361);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstKings, "10:9", 9089, 9089),    new VerseRange(BibleBook.Isaiah, "41:2-14", 18454, 18466),
-		];
+		new VerseRange(BibleBook.FirstKings, "10:9", 9089, 9089),
+new VerseRange(BibleBook.Isaiah, "41:2-14", 18454, 18466),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Hebrews, "7:1-19", 30066, 30084),
-		];
+		new VerseRange(BibleBook.Hebrews, "7:1-19", 30066, 30084),];
 
 	}
 
@@ -693,13 +699,13 @@ new VerseRange(BibleBook.Hebrews, "7:1-19", 30066, 30084),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-13.htm";
 		public override string Meaning => "In a vision";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "15", 362, 382);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "1:1-27", 17656, 17682),    new VerseRange(BibleBook.Zephaniah, "3:9-19", 22830, 22840),
-		];
+		new VerseRange(BibleBook.Isaiah, "1:1-27", 17656, 17682),
+new VerseRange(BibleBook.Zephaniah, "3:9-19", 22830, 22840),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Romans, "4:1-9", 28024, 28032),
-		];
+		new VerseRange(BibleBook.Romans, "4:1-9", 28024, 28032),];
 
 	}
 
@@ -712,13 +718,12 @@ new VerseRange(BibleBook.Romans, "4:1-9", 28024, 28032),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-14.htm";
 		public override string Meaning => "Sarai wife of Avram";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "16", 383, 398);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "54:1", 18725, 18725),
-		];
+		new VerseRange(BibleBook.Isaiah, "54:1", 18725, 18725),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Galatians, "4:21-31", 29153, 29163),
-		];
+		new VerseRange(BibleBook.Galatians, "4:21-31", 29153, 29163),];
 
 	}
 
@@ -731,13 +736,12 @@ new VerseRange(BibleBook.Galatians, "4:21-31", 29153, 29163),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-15.htm";
 		public override string Meaning => "When Avram";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "17", 399, 425);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "63:10-19", 18877, 18886),
-		];
+		new VerseRange(BibleBook.Isaiah, "63:10-19", 18877, 18886),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Romans, "4:10-25", 28033, 28048),
-		];
+		new VerseRange(BibleBook.Romans, "4:10-25", 28033, 28048),];
 
 	}
 
@@ -750,13 +754,14 @@ new VerseRange(BibleBook.Romans, "4:10-25", 28033, 28048),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-16.htm";
 		public override string Meaning => "And He appeared";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "18", 426, 458);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.SecondKings, "4:1", 9605, 9605),    new VerseRange(BibleBook.Isaiah, "33:17-24", 18297, 18304),
-		];
+		new VerseRange(BibleBook.SecondKings, "4:1", 9605, 9605),
+new VerseRange(BibleBook.Isaiah, "33:17-24", 18297, 18304),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Luke, "8:40-56", 25286, 25302),   new VerseRange(BibleBook.Hebrews, "11:8-18", 30181, 30191),
-		];
+		new VerseRange(BibleBook.Luke, "8:40-56", 25286, 25302),
+new VerseRange(BibleBook.Hebrews, "11:8-18", 30181, 30191),];
 
 	}
 
@@ -769,13 +774,12 @@ new VerseRange(BibleBook.Luke, "8:40-56", 25286, 25302),   new VerseRange(BibleB
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-17.htm";
 		public override string Meaning => "And came the two";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "19", 459, 496);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "17:14-18:7", 17998, 18005),
-		];
+		new VerseRange(BibleBook.Isaiah, "17:14-18:7", 17998, 18005),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Luke, "17:20-37", 25672, 25689),
-		];
+		new VerseRange(BibleBook.Luke, "17:20-37", 25672, 25689),];
 
 	}
 
@@ -788,13 +792,14 @@ new VerseRange(BibleBook.Luke, "17:20-37", 25672, 25689),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-18.htm";
 		public override string Meaning => "And journeyed from ..";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "20", 497, 514);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "61:9-10", 18853, 18854),
-		];
+		new VerseRange(BibleBook.Isaiah, "61:9-10", 18853, 18854),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "8:1-13", 23347, 23359),   new VerseRange(BibleBook.FirstCorinthians, "7:1-2", 28489, 28490),    new VerseRange(BibleBook.Galatians, "3:15-29", 29118, 29132),
-		];
+		new VerseRange(BibleBook.Matthew, "8:1-13", 23347, 23359),
+new VerseRange(BibleBook.FirstCorinthians, "7:1-2", 28489, 28490),
+new VerseRange(BibleBook.Galatians, "3:15-29", 29118, 29132),];
 
 	}
 
@@ -807,13 +812,13 @@ new VerseRange(BibleBook.Matthew, "8:1-13", 23347, 23359),   new VerseRange(Bibl
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-19.htm";
 		public override string Meaning => "And YHVH visited";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "21", 515, 548);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstSamuel, "2:21-28", 7262, 7269),
-		];
+		new VerseRange(BibleBook.FirstSamuel, "2:21-28", 7262, 7269),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "1:18-25", 23163, 23170),    new VerseRange(BibleBook.Hebrews, "11:11", 30184, 30184),
-		];
+		new VerseRange(BibleBook.Matthew, "1:18-25", 23163, 23170),
+new VerseRange(BibleBook.Hebrews, "11:11", 30184, 30184),];
 
 	}
 
@@ -826,13 +831,13 @@ new VerseRange(BibleBook.Matthew, "1:18-25", 23163, 23170),    new VerseRange(Bi
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-20.htm";
 		public override string Meaning => "And Elohim tested";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "22", 549, 572);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "33:7-22", 18287, 18302),
-		];
+		new VerseRange(BibleBook.Isaiah, "33:7-22", 18287, 18302),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "27:27-66", 24157, 24196),   new VerseRange(BibleBook.John, "19:16-17", 26842, 26843),
-		];
+		new VerseRange(BibleBook.Matthew, "27:27-66", 24157, 24196),
+new VerseRange(BibleBook.John, "19:16-17", 26842, 26843),];
 
 	}
 
@@ -845,13 +850,15 @@ new VerseRange(BibleBook.Matthew, "27:27-66", 24157, 24196),   new VerseRange(Bi
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-21.htm";
 		public override string Meaning => "Life of Sarah";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "23", 573, 592);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstKings, "1:1-31", 8719, 8749),    new VerseRange(BibleBook.Isaiah, "1:1-27", 17656, 17682),
-		];
+		new VerseRange(BibleBook.FirstKings, "1:1-31", 8719, 8749),
+new VerseRange(BibleBook.Isaiah, "1:1-27", 17656, 17682),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "19:41", 26867, 26867),   new VerseRange(BibleBook.Acts, "7:1-18", 27118, 27135),   new VerseRange(BibleBook.FirstCorinthians, "15:50-57", 28769, 28776),
-		];
+		new VerseRange(BibleBook.John, "19:41", 26867, 26867),
+new VerseRange(BibleBook.Acts, "7:1-18", 27118, 27135),
+new VerseRange(BibleBook.FirstCorinthians, "15:50-57", 28769, 28776),];
 
 	}
 
@@ -864,13 +871,14 @@ new VerseRange(BibleBook.John, "19:41", 26867, 26867),   new VerseRange(BibleBoo
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-22.htm";
 		public override string Meaning => "And Abraham was old";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "24:1-41", 593, 633);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Judges, "19:20-21", 7045, 7046),    new VerseRange(BibleBook.Isaiah, "40:1-2", 18422, 18423),
-		];
+		new VerseRange(BibleBook.Judges, "19:20-21", 7045, 7046),
+new VerseRange(BibleBook.Isaiah, "40:1-2", 18422, 18423),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "4:7-15", 26164, 26172),    new VerseRange(BibleBook.Ephesians, "5:15-33", 29320, 29338),
-		];
+		new VerseRange(BibleBook.John, "4:7-15", 26164, 26172),
+new VerseRange(BibleBook.Ephesians, "5:15-33", 29320, 29338),];
 
 	}
 
@@ -883,13 +891,12 @@ new VerseRange(BibleBook.John, "4:7-15", 26164, 26172),    new VerseRange(BibleB
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-23.htm";
 		public override string Meaning => "I came today";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "24:42-67", 634, 659);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "49:14-51:3", 18651, 18677),
-		];
+		new VerseRange(BibleBook.Isaiah, "49:14-51:3", 18651, 18677),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.James, "4:13-17", 30351, 30355),
-		];
+		new VerseRange(BibleBook.James, "4:13-17", 30351, 30355),];
 
 	}
 
@@ -902,13 +909,12 @@ new VerseRange(BibleBook.James, "4:13-17", 30351, 30355),
 		public override string AhavtaURL => "";
 		public override string Meaning => "And added Avraham";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "25:1-18", 660, 677);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.SecondSamuel, "5:17-6:1", 8150, 8159),
-		];
+		new VerseRange(BibleBook.SecondSamuel, "5:17-6:1", 8150, 8159),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Romans, "7", 28093, 28117),
-		];
+		new VerseRange(BibleBook.Romans, "7", 28093, 28117),];
 
 	}
 
@@ -921,13 +927,14 @@ new VerseRange(BibleBook.Romans, "7", 28093, 28117),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-24.htm";
 		public override string Meaning => "Generations";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "25:19-26:11", 678, 704);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstSamuel, "20:18", 7749, 7749),    new VerseRange(BibleBook.FirstSamuel, "20:42", 7773, 7773),
-		];
+		new VerseRange(BibleBook.FirstSamuel, "20:18", 7749, 7749),
+new VerseRange(BibleBook.FirstSamuel, "20:42", 7773, 7773),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Romans, "9:9-14", 28165, 28170),    new VerseRange(BibleBook.Hebrews, "12:14-29", 30227, 30242),
-		];
+		new VerseRange(BibleBook.Romans, "9:9-14", 28165, 28170),
+new VerseRange(BibleBook.Hebrews, "12:14-29", 30227, 30242),];
 
 	}
 
@@ -940,13 +947,13 @@ new VerseRange(BibleBook.Romans, "9:9-14", 28165, 28170),    new VerseRange(Bibl
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-25.htm";
 		public override string Meaning => "And Isaac sowed";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "26:12-35", 705, 728);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "51:12-52:12", 18686, 18709),
-		];
+		new VerseRange(BibleBook.Isaiah, "51:12-52:12", 18686, 18709),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Luke, "16:1-15", 25622, 25636),   new VerseRange(BibleBook.Romans, "9:1-8", 28157, 28164),
-		];
+		new VerseRange(BibleBook.Luke, "16:1-15", 25622, 25636),
+new VerseRange(BibleBook.Romans, "9:1-8", 28157, 28164),];
 
 	}
 
@@ -959,13 +966,13 @@ new VerseRange(BibleBook.Luke, "16:1-15", 25622, 25636),   new VerseRange(BibleB
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-26.htm";
 		public override string Meaning => "And it was when old";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "27:1-29", 729, 757);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "46:3-6", 18590, 18593),
-		];
+		new VerseRange(BibleBook.Isaiah, "46:3-6", 18590, 18593),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Hebrews, "2:14-18", 29992, 29996),    new VerseRange(BibleBook.Hebrews, "11:20", 30193, 30193),
-		];
+		new VerseRange(BibleBook.Hebrews, "2:14-18", 29992, 29996),
+new VerseRange(BibleBook.Hebrews, "11:20", 30193, 30193),];
 
 	}
 
@@ -978,13 +985,13 @@ new VerseRange(BibleBook.Hebrews, "2:14-18", 29992, 29996),    new VerseRange(Bi
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-27.htm";
 		public override string Meaning => "And may give you";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "27:30-28:9", 758, 783);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Micah, "1:11", 22591, 22591),   new VerseRange(BibleBook.Micah, "5", 22635, 22649),
-		];
+		new VerseRange(BibleBook.Micah, "1:11", 22591, 22591),
+new VerseRange(BibleBook.Micah, "5", 22635, 22649),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Romans, "10:20-11:36", 28209, 28246),
-		];
+		new VerseRange(BibleBook.Romans, "10:20-11:36", 28209, 28246),];
 
 	}
 
@@ -997,13 +1004,15 @@ new VerseRange(BibleBook.Romans, "10:20-11:36", 28209, 28246),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-28.htm";
 		public override string Meaning => "And He went out";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "28:10-29:30", 784, 826);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "60", 18823, 18844),    new VerseRange(BibleBook.Hosea, "12:13", 22266, 22266),
-		];
+		new VerseRange(BibleBook.Isaiah, "60", 18823, 18844),
+new VerseRange(BibleBook.Hosea, "12:13", 22266, 22266),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "9:18-19", 23398, 23399),    new VerseRange(BibleBook.Luke, "2:1-31", 24975, 25005),   new VerseRange(BibleBook.Ephesians, "6:5-9", 29343, 29347),
-		];
+		new VerseRange(BibleBook.Matthew, "9:18-19", 23398, 23399),
+new VerseRange(BibleBook.Luke, "2:1-31", 24975, 25005),
+new VerseRange(BibleBook.Ephesians, "6:5-9", 29343, 29347),];
 
 	}
 
@@ -1016,13 +1025,14 @@ new VerseRange(BibleBook.Matthew, "9:18-19", 23398, 23399),    new VerseRange(Bi
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-29.htm";
 		public override string Meaning => "YHVH Saw";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "29:31-30:21", 827, 852);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "60:15", 18837, 18837),   new VerseRange(BibleBook.Isaiah, "61:10-63:9", 18854, 18876),
-		];
+		new VerseRange(BibleBook.Isaiah, "60:15", 18837, 18837),
+new VerseRange(BibleBook.Isaiah, "61:10-63:9", 18854, 18876),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Romans, "11:25-36", 28235, 28246),    new VerseRange(BibleBook.Revelation, "19", 31019, 31039),
-		];
+		new VerseRange(BibleBook.Romans, "11:25-36", 28235, 28246),
+new VerseRange(BibleBook.Revelation, "19", 31019, 31039),];
 
 	}
 
@@ -1035,13 +1045,14 @@ new VerseRange(BibleBook.Romans, "11:25-36", 28235, 28246),    new VerseRange(Bi
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-30.htm";
 		public override string Meaning => "Elohim Remebered";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "30:22-31:2", 853, 876);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstSamuel, "1:11", 7224, 7224),
-		];
+		new VerseRange(BibleBook.FirstSamuel, "1:11", 7224, 7224),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "2:13", 23183, 23183),   new VerseRange(BibleBook.Acts, "13:16-41", 27379, 27404),   new VerseRange(BibleBook.Revelation, "20:4-15", 31043, 31054),
-		];
+		new VerseRange(BibleBook.Matthew, "2:13", 23183, 23183),
+new VerseRange(BibleBook.Acts, "13:16-41", 27379, 27404),
+new VerseRange(BibleBook.Revelation, "20:4-15", 31043, 31054),];
 
 	}
 
@@ -1054,13 +1065,14 @@ new VerseRange(BibleBook.Matthew, "2:13", 23183, 23183),   new VerseRange(BibleB
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-31.htm";
 		public override string Meaning => "Return to the Land";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "31:3-32:3", 877, 932);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "30:10-16", 19678, 19684),    new VerseRange(BibleBook.Micah, "6:3-7:20", 22652, 22685),
-		];
+		new VerseRange(BibleBook.Jeremiah, "30:10-16", 19678, 19684),
+new VerseRange(BibleBook.Micah, "6:3-7:20", 22652, 22685),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "1:24-28", 26069, 26073),   new VerseRange(BibleBook.James, "4:1-12", 30339, 30350),
-		];
+		new VerseRange(BibleBook.John, "1:24-28", 26069, 26073),
+new VerseRange(BibleBook.James, "4:1-12", 30339, 30350),];
 
 	}
 
@@ -1073,13 +1085,12 @@ new VerseRange(BibleBook.John, "1:24-28", 26069, 26073),   new VerseRange(BibleB
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-32.htm";
 		public override string Meaning => "And He sent";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "32:4-33:17", 933, 978);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Obadiah, "1:1", 22512, 22512),
-		];
+		new VerseRange(BibleBook.Obadiah, "1:1", 22512, 22512),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.James, "1:1-12", 30268, 30279),
-		];
+		new VerseRange(BibleBook.James, "1:1-12", 30268, 30279),];
 
 	}
 
@@ -1092,13 +1103,12 @@ new VerseRange(BibleBook.James, "1:1-12", 30268, 30279),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-33.htm";
 		public override string Meaning => "Then He Arrived";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "33:18-35:8", 979, 1020);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Nahum, "1:12-2:5", 22697, 22705),
-		];
+		new VerseRange(BibleBook.Nahum, "1:12-2:5", 22697, 22705),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Revelation, "22:8-21", 31089, 31102),
-		];
+		new VerseRange(BibleBook.Revelation, "22:8-21", 31089, 31102),];
 
 	}
 
@@ -1111,13 +1121,12 @@ new VerseRange(BibleBook.Revelation, "22:8-21", 31089, 31102),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-34.htm";
 		public override string Meaning => "Then Elohim appeared";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "35:9-36:43", 1021, 1084);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "43:1-7", 18507, 18513),
-		];
+		new VerseRange(BibleBook.Isaiah, "43:1-7", 18507, 18513),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "5:1-12", 23236, 23247),
-		];
+		new VerseRange(BibleBook.Matthew, "5:1-12", 23236, 23247),];
 
 	}
 
@@ -1130,13 +1139,12 @@ new VerseRange(BibleBook.Matthew, "5:1-12", 23236, 23247),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-35.htm";
 		public override string Meaning => "And He dwelt";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "37", 1085, 1120);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "38:8", 19904, 19904),
-		];
+		new VerseRange(BibleBook.Jeremiah, "38:8", 19904, 19904),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "19:1-20:10", 26827, 26878),
-		];
+		new VerseRange(BibleBook.John, "19:1-20:10", 26827, 26878),];
 
 	}
 
@@ -1149,13 +1157,12 @@ new VerseRange(BibleBook.John, "19:1-20:10", 26827, 26878),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-36.htm";
 		public override string Meaning => "Judah Departed";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "38", 1121, 1150);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "37:31-37", 18384, 18390),
-		];
+		new VerseRange(BibleBook.Isaiah, "37:31-37", 18384, 18390),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Romans, "9:22-29", 28178, 28185),
-		];
+		new VerseRange(BibleBook.Romans, "9:22-29", 28178, 28185),];
 
 	}
 
@@ -1168,13 +1175,12 @@ new VerseRange(BibleBook.Romans, "9:22-29", 28178, 28185),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-37.htm";
 		public override string Meaning => "Now Joseph";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "39", 1151, 1173);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "52:3-9", 18700, 18706),
-		];
+		new VerseRange(BibleBook.Isaiah, "52:3-9", 18700, 18706),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Acts, "7:9-37", 27126, 27154),
-		];
+		new VerseRange(BibleBook.Acts, "7:9-37", 27126, 27154),];
 
 	}
 
@@ -1187,13 +1193,13 @@ new VerseRange(BibleBook.Acts, "7:9-37", 27126, 27154),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-38.htm";
 		public override string Meaning => "They offended";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "40", 1174, 1196);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Amos, "1:3-15", 22368, 22380),    new VerseRange(BibleBook.Amos, "2:6", 22386, 22386),
-		];
+		new VerseRange(BibleBook.Amos, "1:3-15", 22368, 22380),
+new VerseRange(BibleBook.Amos, "2:6", 22386, 22386),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.SecondCorinthians, "9:6-15", 28963, 28972),
-		];
+		new VerseRange(BibleBook.SecondCorinthians, "9:6-15", 28963, 28972),];
 
 	}
 
@@ -1206,13 +1212,13 @@ new VerseRange(BibleBook.SecondCorinthians, "9:6-15", 28963, 28972),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-39.htm";
 		public override string Meaning => "At the end of";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "41:1-37", 1197, 1233);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstKings, "3:15-4:1", 8832, 8846),    new VerseRange(BibleBook.Isaiah, "29:8", 18202, 18202),
-		];
+		new VerseRange(BibleBook.FirstKings, "3:15-4:1", 8832, 8846),
+new VerseRange(BibleBook.Isaiah, "29:8", 18202, 18202),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "2", 23171, 23193),
-		];
+		new VerseRange(BibleBook.Matthew, "2", 23171, 23193),];
 
 	}
 
@@ -1225,13 +1231,12 @@ new VerseRange(BibleBook.Matthew, "2", 23171, 23193),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-40.htm";
 		public override string Meaning => "Can We Find?";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "41:38-42:17", 1234, 1270);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "11:2-9", 17887, 17894),
-		];
+		new VerseRange(BibleBook.Isaiah, "11:2-9", 17887, 17894),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Acts, "7:1-19", 27118, 27136),
-		];
+		new VerseRange(BibleBook.Acts, "7:1-19", 27118, 27136),];
 
 	}
 
@@ -1244,13 +1249,12 @@ new VerseRange(BibleBook.Acts, "7:1-19", 27118, 27136),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-41.htm";
 		public override string Meaning => "He Said to Them";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "42:18-43:23", 1271, 1314);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "50:10-52:11", 18673, 18708),
-		];
+		new VerseRange(BibleBook.Isaiah, "50:10-52:11", 18673, 18708),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Luke, "1:68-79", 24962, 24973),
-		];
+		new VerseRange(BibleBook.Luke, "1:68-79", 24962, 24973),];
 
 	}
 
@@ -1263,13 +1267,13 @@ new VerseRange(BibleBook.Luke, "1:68-79", 24962, 24973),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-42.htm";
 		public override string Meaning => "Then the Man Brought";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "43:24-44:17", 1315, 1342);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "42:12-17", 19988, 19993),    new VerseRange(BibleBook.Jeremiah, "43:12-13", 20010, 20011),
-		];
+		new VerseRange(BibleBook.Jeremiah, "42:12-17", 19988, 19993),
+new VerseRange(BibleBook.Jeremiah, "43:12-13", 20010, 20011),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Luke, "19:37-48", 25769, 25780),
-		];
+		new VerseRange(BibleBook.Luke, "19:37-48", 25769, 25780),];
 
 	}
 
@@ -1282,13 +1286,16 @@ new VerseRange(BibleBook.Luke, "19:37-48", 25769, 25780),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-43.htm";
 		public override string Meaning => "And He drew near";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "44:18-46:27", 1343, 1414);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Joshua, "14:6", 6194, 6194),    new VerseRange(BibleBook.Ezekiel, "37:10", 21408, 21408),   new VerseRange(BibleBook.Ezekiel, "37:15-18", 21413, 21416),
-		];
+		new VerseRange(BibleBook.Joshua, "14:6", 6194, 6194),
+new VerseRange(BibleBook.Ezekiel, "37:10", 21408, 21408),
+new VerseRange(BibleBook.Ezekiel, "37:15-18", 21413, 21416),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Acts, "2:23", 26973, 26973),    new VerseRange(BibleBook.Acts, "2:36", 26986, 26986),   new VerseRange(BibleBook.Revelation, "12:1-6", 30893, 30898),
-		];
+		new VerseRange(BibleBook.Acts, "2:23", 26973, 26973),
+new VerseRange(BibleBook.Acts, "2:36", 26986, 26986),
+new VerseRange(BibleBook.Revelation, "12:1-6", 30893, 30898),];
 
 	}
 
@@ -1301,13 +1308,14 @@ new VerseRange(BibleBook.Acts, "2:23", 26973, 26973),    new VerseRange(BibleBoo
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-44a.htm";
 		public override string Meaning => "He Sent Judah";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "46:28-47:31", 1415, 1452);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstKings, "2:1-4", 8772, 8775),   new VerseRange(BibleBook.SecondKings, "13:14", 9886, 9886),
-		];
+		new VerseRange(BibleBook.FirstKings, "2:1-4", 8772, 8775),
+new VerseRange(BibleBook.SecondKings, "13:14", 9886, 9886),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Revelation, "21:1-10", 31055, 31064),   new VerseRange(BibleBook.Revelation, "22:1-10", 31082, 31091),
-		];
+		new VerseRange(BibleBook.Revelation, "21:1-10", 31055, 31064),
+new VerseRange(BibleBook.Revelation, "22:1-10", 31082, 31091),];
 
 	}
 
@@ -1320,13 +1328,12 @@ new VerseRange(BibleBook.Revelation, "21:1-10", 31055, 31064),   new VerseRange(
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-44b.htm";
 		public override string Meaning => "And He lived";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "48:1-49:27", 1453, 1501);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "43:2", 18508, 18508),
-		];
+		new VerseRange(BibleBook.Isaiah, "43:2", 18508, 18508),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "19:39-20:9", 26865, 26877),
-		];
+		new VerseRange(BibleBook.John, "19:39-20:9", 26865, 26877),];
 
 	}
 
@@ -1339,13 +1346,13 @@ new VerseRange(BibleBook.John, "19:39-20:9", 26865, 26877),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-45.htm";
 		public override string Meaning => "The Tribes of Israel";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "49:28-50:26", 1502, 1533);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Micah, "2:12", 22608, 22608),   new VerseRange(BibleBook.Zechariah, "14:1", 23070, 23070),
-		];
+		new VerseRange(BibleBook.Micah, "2:12", 22608, 22608),
+new VerseRange(BibleBook.Zechariah, "14:1", 23070, 23070),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "21:12-19", 26911, 26918),
-		];
+		new VerseRange(BibleBook.John, "21:12-19", 26911, 26918),];
 
 	}
 
@@ -1358,13 +1365,15 @@ new VerseRange(BibleBook.John, "21:12-19", 26911, 26918),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-46.htm";
 		public override string Meaning => "Names";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "1 & 2", 1534, 1580);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "27:6", 18158, 18158),    new VerseRange(BibleBook.Isaiah, "52:1-6", 18698, 18703),   new VerseRange(BibleBook.Isaiah, "65:19-23", 18917, 18921),
-		];
+		new VerseRange(BibleBook.Isaiah, "27:6", 18158, 18158),
+new VerseRange(BibleBook.Isaiah, "52:1-6", 18698, 18703),
+new VerseRange(BibleBook.Isaiah, "65:19-23", 18917, 18921),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Acts, "7:17-29", 27134, 27146),   new VerseRange(BibleBook.SecondCorinthians, "6:1-10", 28900, 28909),
-		];
+		new VerseRange(BibleBook.Acts, "7:17-29", 27134, 27146),
+new VerseRange(BibleBook.SecondCorinthians, "6:1-10", 28900, 28909),];
 
 	}
 
@@ -1377,13 +1386,15 @@ new VerseRange(BibleBook.Acts, "7:17-29", 27134, 27146),   new VerseRange(BibleB
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-47.htm";
 		public override string Meaning => "Now Moses";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "3:1-4:13", 1581, 1615);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.SecondKings, "20:8", 10107, 10107),   new VerseRange(BibleBook.Isaiah, "40:11", 18432, 18432),
-		];
+		new VerseRange(BibleBook.SecondKings, "20:8", 10107, 10107),
+new VerseRange(BibleBook.Isaiah, "40:11", 18432, 18432),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "12:26", 23516, 23516),    new VerseRange(BibleBook.Luke, "20:37", 25817, 25817),    new VerseRange(BibleBook.Acts, "7:30", 27147, 27147),
-		];
+		new VerseRange(BibleBook.Matthew, "12:26", 23516, 23516),
+new VerseRange(BibleBook.Luke, "20:37", 25817, 25817),
+new VerseRange(BibleBook.Acts, "7:30", 27147, 27147),];
 
 	}
 
@@ -1396,13 +1407,12 @@ new VerseRange(BibleBook.Matthew, "12:26", 23516, 23516),    new VerseRange(Bibl
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-48.htm";
 		public override string Meaning => "Then Moses Departed";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "4:14-6:1", 1616, 1657);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "55:12", 18753, 18753),
-		];
+		new VerseRange(BibleBook.Isaiah, "55:12", 18753, 18753),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "8:26-59", 26408, 26441),
-		];
+		new VerseRange(BibleBook.John, "8:26-59", 26408, 26441),];
 
 	}
 
@@ -1415,13 +1425,13 @@ new VerseRange(BibleBook.John, "8:26-59", 26408, 26441),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-49.htm";
 		public override string Meaning => "And I appeared";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "6:2-7:7", 1658, 1693);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "42:8", 18489, 18489),    new VerseRange(BibleBook.Ezekiel, "28:25-29:21", 21183, 21205),
-		];
+		new VerseRange(BibleBook.Isaiah, "42:8", 18489, 18489),
+new VerseRange(BibleBook.Ezekiel, "28:25-29:21", 21183, 21205),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.ThirdJohn, "1:1-7", 30660, 30666),
-		];
+		new VerseRange(BibleBook.ThirdJohn, "1:1-7", 30660, 30666),];
 
 	}
 
@@ -1434,13 +1444,13 @@ new VerseRange(BibleBook.ThirdJohn, "1:1-7", 30660, 30666),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-1/Y1-50.htm";
 		public override string Meaning => "When He Speaks";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "7:8-8:15", 1694, 1726);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstKings, "22:1-38", 9482, 9519),   new VerseRange(BibleBook.Joel, "3:1-7", 22345, 22351),
-		];
+		new VerseRange(BibleBook.FirstKings, "22:1-38", 9482, 9519),
+new VerseRange(BibleBook.Joel, "3:1-7", 22345, 22351),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Revelation, "16:1-17", 30956, 30972),
-		];
+		new VerseRange(BibleBook.Revelation, "16:1-17", 30956, 30972),];
 
 	}
 
@@ -1453,13 +1463,14 @@ new VerseRange(BibleBook.Revelation, "16:1-17", 30956, 30972),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-01.htm";
 		public override string Meaning => "Rise Up Early in the Morning";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "8:16-9:35", 1727, 1778);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "34:1-11", 18305, 18315),
-		];
+		new VerseRange(BibleBook.Isaiah, "34:1-11", 18305, 18315),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Luke, "11:20", 25426, 25426),   new VerseRange(BibleBook.John, "11:47-53", 26571, 26577),   new VerseRange(BibleBook.Revelation, "8:1-9:6", 30829, 30847),
-		];
+		new VerseRange(BibleBook.Luke, "11:20", 25426, 25426),
+new VerseRange(BibleBook.John, "11:47-53", 26571, 26577),
+new VerseRange(BibleBook.Revelation, "8:1-9:6", 30829, 30847),];
 
 	}
 
@@ -1472,13 +1483,15 @@ new VerseRange(BibleBook.Luke, "11:20", 25426, 25426),   new VerseRange(BibleBoo
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-02.htm";
 		public override string Meaning => "Enter/Go";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "10", 1779, 1807);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstSamuel, "6:6", 7338, 7338),    new VerseRange(BibleBook.Isaiah, "19:1", 18006, 18006),
-		];
+		new VerseRange(BibleBook.FirstSamuel, "6:6", 7338, 7338),
+new VerseRange(BibleBook.Isaiah, "19:1", 18006, 18006),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "24:29-44", 23987, 24002),   new VerseRange(BibleBook.Matthew, "25:31", 24040, 24040),   new VerseRange(BibleBook.Matthew, "26:30", 24085, 24085),
-		];
+		new VerseRange(BibleBook.Matthew, "24:29-44", 23987, 24002),
+new VerseRange(BibleBook.Matthew, "25:31", 24040, 24040),
+new VerseRange(BibleBook.Matthew, "26:30", 24085, 24085),];
 
 	}
 
@@ -1491,13 +1504,13 @@ new VerseRange(BibleBook.Matthew, "24:29-44", 23987, 24002),   new VerseRange(Bi
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-03.htm";
 		public override string Meaning => "One More Plague";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "11:1-12:28", 1808, 1845);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "46:13-28", 20059, 20074),    new VerseRange(BibleBook.Micah, "7:15", 22680, 22680),
-		];
+		new VerseRange(BibleBook.Jeremiah, "46:13-28", 20059, 20074),
+new VerseRange(BibleBook.Micah, "7:15", 22680, 22680),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "3:13-25", 26134, 26146),
-		];
+		new VerseRange(BibleBook.John, "3:13-25", 26134, 26146),];
 
 	}
 
@@ -1510,13 +1523,14 @@ new VerseRange(BibleBook.John, "3:13-25", 26134, 26146),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-04.htm";
 		public override string Meaning => "It was at midnight";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "12:29-51", 1846, 1868);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "21:9-12", 18045, 18048),
-		];
+		new VerseRange(BibleBook.Isaiah, "21:9-12", 18045, 18048),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "6:4-15", 26262, 26273),    new VerseRange(BibleBook.John, "21:1", 26900, 26900),   new VerseRange(BibleBook.Revelation, "18", 30995, 31018),
-		];
+		new VerseRange(BibleBook.John, "6:4-15", 26262, 26273),
+new VerseRange(BibleBook.John, "21:1", 26900, 26900),
+new VerseRange(BibleBook.Revelation, "18", 30995, 31018),];
 
 	}
 
@@ -1529,13 +1543,13 @@ new VerseRange(BibleBook.John, "6:4-15", 26262, 26273),    new VerseRange(BibleB
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-05.htm";
 		public override string Meaning => "Sanctify";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "13:1-20", 1869, 1888);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "46:3-7", 18590, 18594),
-		];
+		new VerseRange(BibleBook.Isaiah, "46:3-7", 18590, 18594),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Hebrews, "8:6-9:1", 30099, 30107),    new VerseRange(BibleBook.Hebrews, "9:13-15", 30119, 30121),
-		];
+		new VerseRange(BibleBook.Hebrews, "8:6-9:1", 30099, 30107),
+new VerseRange(BibleBook.Hebrews, "9:13-15", 30119, 30121),];
 
 	}
 
@@ -1548,13 +1562,14 @@ new VerseRange(BibleBook.Hebrews, "8:6-9:1", 30099, 30107),    new VerseRange(Bi
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-06.htm";
 		public override string Meaning => "When He let go";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "13:21-15:21", 1889, 1942);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Joshua, "24:1-4", 6478, 6481),    new VerseRange(BibleBook.Judges, "4:4-5:31", 6604, 6655),
-		];
+		new VerseRange(BibleBook.Joshua, "24:1-4", 6478, 6481),
+new VerseRange(BibleBook.Judges, "4:4-5:31", 6604, 6655),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "16:25", 26752, 26752),   new VerseRange(BibleBook.Philippians, "4:4-23", 29447, 29466),
-		];
+		new VerseRange(BibleBook.John, "16:25", 26752, 26752),
+new VerseRange(BibleBook.Philippians, "4:4-23", 29447, 29466),];
 
 	}
 
@@ -1567,13 +1582,13 @@ new VerseRange(BibleBook.John, "16:25", 26752, 26752),   new VerseRange(BibleBoo
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-07.htm";
 		public override string Meaning => "Moses Caused Them to Journey";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "15:22-16:24", 1943, 1972);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Psalms, "106:7-8", 15659, 15660),   new VerseRange(BibleBook.Isaiah, "49:8-14", 18645, 18651),
-		];
+		new VerseRange(BibleBook.Psalms, "106:7-8", 15659, 15660),
+new VerseRange(BibleBook.Isaiah, "49:8-14", 18645, 18651),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Philippians, "4:4-23", 29447, 29466),
-		];
+		new VerseRange(BibleBook.Philippians, "4:4-23", 29447, 29466),];
 
 	}
 
@@ -1586,13 +1601,12 @@ new VerseRange(BibleBook.Philippians, "4:4-23", 29447, 29466),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-08.htm";
 		public override string Meaning => "Today is Sabbath";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "16:25-17:16", 1973, 2000);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "58:13", 18800, 18800),
-		];
+		new VerseRange(BibleBook.Isaiah, "58:13", 18800, 18800),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "6:35-59", 26293, 26317),
-		];
+		new VerseRange(BibleBook.John, "6:35-59", 26293, 26317),];
 
 	}
 
@@ -1605,13 +1619,13 @@ new VerseRange(BibleBook.John, "6:35-59", 26293, 26317),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-09.htm";
 		public override string Meaning => "Priest/Jethro";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "18:1-19:6", 2001, 2033);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "6", 17771, 17783),
-		];
+		new VerseRange(BibleBook.Isaiah, "6", 17771, 17783),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "6:1-35", 26259, 26293),    new VerseRange(BibleBook.John, "6:60-71", 26318, 26329),
-		];
+		new VerseRange(BibleBook.John, "6:1-35", 26259, 26293),
+new VerseRange(BibleBook.John, "6:60-71", 26318, 26329),];
 
 	}
 
@@ -1624,13 +1638,13 @@ new VerseRange(BibleBook.John, "6:1-35", 26259, 26293),    new VerseRange(BibleB
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-10.htm";
 		public override string Meaning => "You Shall Speak";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "19:7-20:26", 2034, 2078);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "61:6-10", 18850, 18854),
-		];
+		new VerseRange(BibleBook.Isaiah, "61:6-10", 18850, 18854),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Hebrews, "12:18", 30231, 30231),    new VerseRange(BibleBook.Hebrews, "12:29", 30242, 30242),
-		];
+		new VerseRange(BibleBook.Hebrews, "12:18", 30231, 30231),
+new VerseRange(BibleBook.Hebrews, "12:29", 30242, 30242),];
 
 	}
 
@@ -1643,13 +1657,13 @@ new VerseRange(BibleBook.Hebrews, "12:18", 30231, 30231),    new VerseRange(Bibl
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-11.htm";
 		public override string Meaning => "Judgements";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "21:1-22:24", 2079, 2138);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "56:1", 18755, 18755),    new VerseRange(BibleBook.Jeremiah, "34", 19803, 19824),
-		];
+		new VerseRange(BibleBook.Isaiah, "56:1", 18755, 18755),
+new VerseRange(BibleBook.Jeremiah, "34", 19803, 19824),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "7:1-5", 23318, 23322),
-		];
+		new VerseRange(BibleBook.Matthew, "7:1-5", 23318, 23322),];
 
 	}
 
@@ -1662,13 +1676,15 @@ new VerseRange(BibleBook.Matthew, "7:1-5", 23318, 23322),
 		public override string AhavtaURL => "";
 		public override string Meaning => "When You Lend";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "22:25-23:33", 2139, 2178);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "48:10", 18625, 18625),   new VerseRange(BibleBook.Isaiah, "49", 18638, 18663),   new VerseRange(BibleBook.Isaiah, "49:3", 18640, 18640),   new VerseRange(BibleBook.Isaiah, "60:17-61:11", 18839, 18855),
-		];
+		new VerseRange(BibleBook.Isaiah, "48:10", 18625, 18625),
+new VerseRange(BibleBook.Isaiah, "49", 18638, 18663),
+new VerseRange(BibleBook.Isaiah, "49:3", 18640, 18640),
+new VerseRange(BibleBook.Isaiah, "60:17-61:11", 18839, 18855),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "5", 23236, 23283),
-		];
+		new VerseRange(BibleBook.Matthew, "5", 23236, 23283),];
 
 	}
 
@@ -1681,13 +1697,13 @@ new VerseRange(BibleBook.Matthew, "5", 23236, 23283),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-12.htm";
 		public override string Meaning => "?";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "24", 2179, 2196);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstKings, "6:11-13", 8908, 8910),   new VerseRange(BibleBook.Isaiah, "60:17-61:9", 18839, 18853),
-		];
+		new VerseRange(BibleBook.FirstKings, "6:11-13", 8908, 8910),
+new VerseRange(BibleBook.Isaiah, "60:17-61:9", 18839, 18853),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "26:26-30", 24081, 24085),
-		];
+		new VerseRange(BibleBook.Matthew, "26:26-30", 24081, 24085),];
 
 	}
 
@@ -1700,13 +1716,13 @@ new VerseRange(BibleBook.Matthew, "26:26-30", 24081, 24085),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-13.htm";
 		public override string Meaning => "Offering";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "25:1-26:30", 2197, 2273);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "66", 18924, 18947),
-		];
+		new VerseRange(BibleBook.Isaiah, "66", 18924, 18947),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "7:25-32", 26354, 26361),   new VerseRange(BibleBook.Hebrews, "9", 30107, 30134),
-		];
+		new VerseRange(BibleBook.John, "7:25-32", 26354, 26361),
+new VerseRange(BibleBook.Hebrews, "9", 30107, 30134),];
 
 	}
 
@@ -1719,13 +1735,12 @@ new VerseRange(BibleBook.John, "7:25-32", 26354, 26361),   new VerseRange(BibleB
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-13.htm";
 		public override string Meaning => "You Shall Make a Partition";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "26:31-27:19", 2274, 2292);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "16:10-19", 20773, 20782),
-		];
+		new VerseRange(BibleBook.Ezekiel, "16:10-19", 20773, 20782),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "23:1-28", 23920, 23947),
-		];
+		new VerseRange(BibleBook.Matthew, "23:1-28", 23920, 23947),];
 
 	}
 
@@ -1738,13 +1753,13 @@ new VerseRange(BibleBook.Matthew, "23:1-28", 23920, 23947),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-15.htm";
 		public override string Meaning => "You shall command";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "27:20-28:43", 2293, 2337);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "3:10-27", 20513, 20530),    new VerseRange(BibleBook.Ezekiel, "43:10-12", 21583, 21585),
-		];
+		new VerseRange(BibleBook.Ezekiel, "3:10-27", 20513, 20530),
+new VerseRange(BibleBook.Ezekiel, "43:10-12", 21583, 21585),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Hebrews, "3", 29997, 30015),
-		];
+		new VerseRange(BibleBook.Hebrews, "3", 29997, 30015),];
 
 	}
 
@@ -1757,13 +1772,12 @@ new VerseRange(BibleBook.Hebrews, "3", 29997, 30015),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-16.htm";
 		public override string Meaning => "This is the Word";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "29", 2338, 2383);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "61:6", 18850, 18850),
-		];
+		new VerseRange(BibleBook.Isaiah, "61:6", 18850, 18850),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.FirstPeter, "2", 30401, 30425),
-		];
+		new VerseRange(BibleBook.FirstPeter, "2", 30401, 30425),];
 
 	}
 
@@ -1776,13 +1790,12 @@ new VerseRange(BibleBook.FirstPeter, "2", 30401, 30425),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-17.htm";
 		public override string Meaning => "You Shall Make an Altar";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "30:1-10", 2384, 2393);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Malachi, "1:11-2:7", 23101, 23111),
-		];
+		new VerseRange(BibleBook.Malachi, "1:11-2:7", 23101, 23111),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Luke, "1:1-25", 24895, 24919),
-		];
+		new VerseRange(BibleBook.Luke, "1:1-25", 24895, 24919),];
 
 	}
 
@@ -1795,13 +1808,13 @@ new VerseRange(BibleBook.Luke, "1:1-25", 24895, 24919),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-18.htm";
 		public override string Meaning => "When you elevate";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "30:11-38", 2394, 2421);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstKings, "18:1-39", 9343, 9381),   new VerseRange(BibleBook.SecondKings, "12:5", 9856, 9856),
-		];
+		new VerseRange(BibleBook.FirstKings, "18:1-39", 9343, 9381),
+new VerseRange(BibleBook.SecondKings, "12:5", 9856, 9856),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Romans, "5:10-11", 28058, 28059),
-		];
+		new VerseRange(BibleBook.Romans, "5:10-11", 28058, 28059),];
 
 	}
 
@@ -1814,13 +1827,12 @@ new VerseRange(BibleBook.Romans, "5:10-11", 28058, 28059),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-19.htm";
 		public override string Meaning => "See, I Have Called";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "31:1-32:13", 2422, 2452);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "43:7-21", 18513, 18527),
-		];
+		new VerseRange(BibleBook.Isaiah, "43:7-21", 18513, 18527),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.SecondTimothy, "1", 29811, 29828),
-		];
+		new VerseRange(BibleBook.SecondTimothy, "1", 29811, 29828),];
 
 	}
 
@@ -1833,13 +1845,12 @@ new VerseRange(BibleBook.SecondTimothy, "1", 29811, 29828),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-20.htm";
 		public override string Meaning => "Moses Turned and Went Down";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "32:14-34:26", 2453, 2523);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.SecondSamuel, "22:10-51", 8613, 8654),
-		];
+		new VerseRange(BibleBook.SecondSamuel, "22:10-51", 8613, 8654),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Romans, "9", 28157, 28189),
-		];
+		new VerseRange(BibleBook.Romans, "9", 28157, 28189),];
 
 	}
 
@@ -1852,13 +1863,13 @@ new VerseRange(BibleBook.Romans, "9", 28157, 28189),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-21.htm";
 		public override string Meaning => "And He assembled";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "34:27-36:38", 2524, 2605);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstKings, "18:27-39", 9369, 9381),    new VerseRange(BibleBook.Jeremiah, "31:31-40", 19723, 19732),
-		];
+		new VerseRange(BibleBook.FirstKings, "18:27-39", 9369, 9381),
+new VerseRange(BibleBook.Jeremiah, "31:31-40", 19723, 19732),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.SecondCorinthians, "3", 28843, 28860),
-		];
+		new VerseRange(BibleBook.SecondCorinthians, "3", 28843, 28860),];
 
 	}
 
@@ -1871,13 +1882,13 @@ new VerseRange(BibleBook.SecondCorinthians, "3", 28843, 28860),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-22.htm";
 		public override string Meaning => "Betzalel Made";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "37:1-38:20", 2606, 2654);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstKings, "7:13-27", 8948, 8962),
-		];
+		new VerseRange(BibleBook.FirstKings, "7:13-27", 8948, 8962),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Hebrews, "9", 30107, 30134),    new VerseRange(BibleBook.FirstJohn, "1", 30542, 30551),
-		];
+		new VerseRange(BibleBook.Hebrews, "9", 30107, 30134),
+new VerseRange(BibleBook.FirstJohn, "1", 30542, 30551),];
 
 	}
 
@@ -1890,13 +1901,13 @@ new VerseRange(BibleBook.Hebrews, "9", 30107, 30134),    new VerseRange(BibleBoo
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-23.htm";
 		public override string Meaning => "Accounts of";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "38:21-31", 2655, 2665);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstKings, "8:8-22", 8994, 9008),    new VerseRange(BibleBook.Jeremiah, "30:18-24", 19686, 19692),
-		];
+		new VerseRange(BibleBook.FirstKings, "8:8-22", 8994, 9008),
+new VerseRange(BibleBook.Jeremiah, "30:18-24", 19686, 19692),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.SecondCorinthians, "4:1-5:19", 28861, 28897),
-		];
+		new VerseRange(BibleBook.SecondCorinthians, "4:1-5:19", 28861, 28897),];
 
 	}
 
@@ -1909,13 +1920,14 @@ new VerseRange(BibleBook.SecondCorinthians, "4:1-5:19", 28861, 28897),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-25.htm";
 		public override string Meaning => "From the Blue";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "39:1-40:38", 2666, 2746);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstKings, "7:13", 8948, 8948),    new VerseRange(BibleBook.Isaiah, "33:20-34:8", 18300, 18312),
-		];
+		new VerseRange(BibleBook.FirstKings, "7:13", 8948, 8948),
+new VerseRange(BibleBook.Isaiah, "33:20-34:8", 18300, 18312),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Hebrews, "8:1-5", 30094, 30098),    new VerseRange(BibleBook.Revelation, "15", 30948, 30955),
-		];
+		new VerseRange(BibleBook.Hebrews, "8:1-5", 30094, 30098),
+new VerseRange(BibleBook.Revelation, "15", 30948, 30955),];
 
 	}
 
@@ -1928,13 +1940,13 @@ new VerseRange(BibleBook.Hebrews, "8:1-5", 30094, 30098),    new VerseRange(Bibl
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-26.htm";
 		public override string Meaning => "And He called";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "1 & 2", 2747, 2779);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "43:21-44:23", 18527, 18557),   new VerseRange(BibleBook.Jeremiah, "31:15-20", 19707, 19712),
-		];
+		new VerseRange(BibleBook.Isaiah, "43:21-44:23", 18527, 18557),
+new VerseRange(BibleBook.Jeremiah, "31:15-20", 19707, 19712),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.FirstCorinthians, "3", 28412, 28434),
-		];
+		new VerseRange(BibleBook.FirstCorinthians, "3", 28412, 28434),];
 
 	}
 
@@ -1947,13 +1959,13 @@ new VerseRange(BibleBook.FirstCorinthians, "3", 28412, 28434),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-27.htm";
 		public override string Meaning => "If a Feast Peace-Offering";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "3", 2780, 2796);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "20:33-44", 20929, 20940),   new VerseRange(BibleBook.Ezekiel, "44:10-14", 21610, 21614),
-		];
+		new VerseRange(BibleBook.Ezekiel, "20:33-44", 20929, 20940),
+new VerseRange(BibleBook.Ezekiel, "44:10-14", 21610, 21614),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Revelation, "8", 30829, 30841),
-		];
+		new VerseRange(BibleBook.Revelation, "8", 30829, 30841),];
 
 	}
 
@@ -1966,13 +1978,13 @@ new VerseRange(BibleBook.Revelation, "8", 30829, 30841),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-28.htm";
 		public override string Meaning => "When a Soul Sins Unintentionally";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "4", 2797, 2831);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "18:4-17", 20854, 20867),
-		];
+		new VerseRange(BibleBook.Ezekiel, "18:4-17", 20854, 20867),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Romans, "8:1-13", 28118, 28130),    new VerseRange(BibleBook.Hebrews, "10:1-18", 30135, 30152),
-		];
+		new VerseRange(BibleBook.Romans, "8:1-13", 28118, 28130),
+new VerseRange(BibleBook.Hebrews, "10:1-18", 30135, 30152),];
 
 	}
 
@@ -1985,13 +1997,13 @@ new VerseRange(BibleBook.Romans, "8:1-13", 28118, 28130),    new VerseRange(Bibl
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-29.htm";
 		public override string Meaning => "Then If a Soul Sins";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "5:1-6:7", 2832, 2857);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstSamuel, "15:1-34", 7562, 7595),    new VerseRange(BibleBook.Zechariah, "5 - 7", 22938, 22977),
-		];
+		new VerseRange(BibleBook.FirstSamuel, "15:1-34", 7562, 7595),
+new VerseRange(BibleBook.Zechariah, "5 - 7", 22938, 22977),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Revelation, "5 & 6", 30781, 30811),
-		];
+		new VerseRange(BibleBook.Revelation, "5 & 6", 30781, 30811),];
 
 	}
 
@@ -2004,13 +2016,13 @@ new VerseRange(BibleBook.Revelation, "5 & 6", 30781, 30811),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-30.htm";
 		public override string Meaning => "Command";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "6:8-30", 2858, 2880);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "7:12-34", 19132, 19154),   new VerseRange(BibleBook.Ezekiel, "36:16-36", 21376, 21396),
-		];
+		new VerseRange(BibleBook.Jeremiah, "7:12-34", 19132, 19154),
+new VerseRange(BibleBook.Ezekiel, "36:16-36", 21376, 21396),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Mark, "12:28-34", 24702, 24708),
-		];
+		new VerseRange(BibleBook.Mark, "12:28-34", 24702, 24708),];
 
 	}
 
@@ -2023,13 +2035,13 @@ new VerseRange(BibleBook.Mark, "12:28-34", 24702, 24708),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-31.htm";
 		public override string Meaning => "This is the Offering of Aaron";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "7", 2881, 2918);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Malachi, "3:6-9", 23127, 23130),
-		];
+		new VerseRange(BibleBook.Malachi, "3:6-9", 23127, 23130),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "23", 23920, 23958),   new VerseRange(BibleBook.John, "6:63-66", 26321, 26324),
-		];
+		new VerseRange(BibleBook.Matthew, "23", 23920, 23958),
+new VerseRange(BibleBook.John, "6:63-66", 26321, 26324),];
 
 	}
 
@@ -2042,13 +2054,14 @@ new VerseRange(BibleBook.Matthew, "23", 23920, 23958),   new VerseRange(BibleBoo
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-32.htm";
 		public override string Meaning => "Take Aaron";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "8", 2919, 2954);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "43:27", 21600, 21600),
-		];
+		new VerseRange(BibleBook.Ezekiel, "43:27", 21600, 21600),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "24:29-44", 23987, 24002),   new VerseRange(BibleBook.Matthew, "25:31", 24040, 24040),   new VerseRange(BibleBook.Matthew, "26:30", 24085, 24085),
-		];
+		new VerseRange(BibleBook.Matthew, "24:29-44", 23987, 24002),
+new VerseRange(BibleBook.Matthew, "25:31", 24040, 24040),
+new VerseRange(BibleBook.Matthew, "26:30", 24085, 24085),];
 
 	}
 
@@ -2061,13 +2074,13 @@ new VerseRange(BibleBook.Matthew, "24:29-44", 23987, 24002),   new VerseRange(Bi
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-33.htm";
 		public override string Meaning => "Eighth";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "9 - 11", 2955, 3045);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.SecondSamuel, "6:1-7", 8159, 8165),   new VerseRange(BibleBook.FirstKings, "8:54-61", 9040, 9047),
-		];
+		new VerseRange(BibleBook.SecondSamuel, "6:1-7", 8159, 8165),
+new VerseRange(BibleBook.FirstKings, "8:54-61", 9040, 9047),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Mark, "7:1-23", 24465, 24487),
-		];
+		new VerseRange(BibleBook.Mark, "7:1-23", 24465, 24487),];
 
 	}
 
@@ -2080,13 +2093,14 @@ new VerseRange(BibleBook.Mark, "7:1-23", 24465, 24487),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-34.htm";
 		public override string Meaning => "She bears seed";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "12:1-13:28", 3046, 3081);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.SecondKings, "4:42-5:19", 9646, 9667),    new VerseRange(BibleBook.Isaiah, "66:7", 18930, 18930),
-		];
+		new VerseRange(BibleBook.SecondKings, "4:42-5:19", 9646, 9667),
+new VerseRange(BibleBook.Isaiah, "66:7", 18930, 18930),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "1:18-24", 23163, 23169),    new VerseRange(BibleBook.John, "7:37-44", 26366, 26373),
-		];
+		new VerseRange(BibleBook.Matthew, "1:18-24", 23163, 23169),
+new VerseRange(BibleBook.John, "7:37-44", 26366, 26373),];
 
 	}
 
@@ -2099,10 +2113,10 @@ new VerseRange(BibleBook.Matthew, "1:18-24", 23163, 23169),    new VerseRange(Bi
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-35.htm";
 		public override string Meaning => "In the Scalp or In the Beard";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "13:29-59", 3082, 3112);
+
 		public override List<VerseRange>? HaftorahVerses => null;
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Hebrews, "2:11-18", 29979, 29996),
-		];
+		new VerseRange(BibleBook.Hebrews, "2:11-18", 29979, 29996),];
 
 	}
 
@@ -2115,13 +2129,14 @@ new VerseRange(BibleBook.Hebrews, "2:11-18", 29979, 29996),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-36.htm";
 		public override string Meaning => "Infected One";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "14", 3113, 3169);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.SecondKings, "7:1-16", 9709, 9724),
-		];
+		new VerseRange(BibleBook.SecondKings, "7:1-16", 9709, 9724),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "8:1-4", 23347, 23350),    new VerseRange(BibleBook.Luke, "5:12-14", 25120, 25122),    new VerseRange(BibleBook.Ephesians, "4", 29274, 29305),
-		];
+		new VerseRange(BibleBook.Matthew, "8:1-4", 23347, 23350),
+new VerseRange(BibleBook.Luke, "5:12-14", 25120, 25122),
+new VerseRange(BibleBook.Ephesians, "4", 29274, 29305),];
 
 	}
 
@@ -2134,13 +2149,12 @@ new VerseRange(BibleBook.Matthew, "8:1-4", 23347, 23350),    new VerseRange(Bibl
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-37.htm";
 		public override string Meaning => "When Any Man";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "15", 3170, 3202);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "43:18-27", 21591, 21600),
-		];
+		new VerseRange(BibleBook.Ezekiel, "43:18-27", 21591, 21600),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Philippians, "3", 29423, 29443),
-		];
+		new VerseRange(BibleBook.Philippians, "3", 29423, 29443),];
 
 	}
 
@@ -2153,13 +2167,12 @@ new VerseRange(BibleBook.Philippians, "3", 29423, 29443),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-38.htm";
 		public override string Meaning => "After the death";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "16", 3203, 3236);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "44:1-15", 21601, 21615),
-		];
+		new VerseRange(BibleBook.Ezekiel, "44:1-15", 21601, 21615),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Jude, "1:6-21", 30679, 30694),
-		];
+		new VerseRange(BibleBook.Jude, "1:6-21", 30679, 30694),];
 
 	}
 
@@ -2172,13 +2185,12 @@ new VerseRange(BibleBook.Jude, "1:6-21", 30679, 30694),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-39.htm";
 		public override string Meaning => "Who Slaughters";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "17", 3237, 3252);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "22:1-19", 20978, 20996),
-		];
+		new VerseRange(BibleBook.Ezekiel, "22:1-19", 20978, 20996),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.FirstJohn, "5", 30626, 30646),
-		];
+		new VerseRange(BibleBook.FirstJohn, "5", 30626, 30646),];
 
 	}
 
@@ -2191,13 +2203,12 @@ new VerseRange(BibleBook.FirstJohn, "5", 30626, 30646),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-40.htm";
 		public override string Meaning => "The Practice in the Land";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "18", 3253, 3282);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "22:20-31", 20997, 21008),
-		];
+		new VerseRange(BibleBook.Ezekiel, "22:20-31", 20997, 21008),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.FirstCorinthians, "5:1-6:10", 28456, 28488),
-		];
+		new VerseRange(BibleBook.FirstCorinthians, "5:1-6:10", 28456, 28488),];
 
 	}
 
@@ -2210,13 +2221,13 @@ new VerseRange(BibleBook.FirstCorinthians, "5:1-6:10", 28456, 28488),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-41.htm";
 		public override string Meaning => "Set apart Ones";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "19 & 20", 3283, 3346);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "4", 17735, 17740),   new VerseRange(BibleBook.Amos, "9", 22497, 22511),
-		];
+		new VerseRange(BibleBook.Isaiah, "4", 17735, 17740),
+new VerseRange(BibleBook.Amos, "9", 22497, 22511),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "18", 23729, 23763),
-		];
+		new VerseRange(BibleBook.Matthew, "18", 23729, 23763),];
 
 	}
 
@@ -2229,13 +2240,12 @@ new VerseRange(BibleBook.Matthew, "18", 23729, 23763),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-42.htm";
 		public override string Meaning => "Say";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "21", 3347, 3370);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "44", 21601, 21631),
-		];
+		new VerseRange(BibleBook.Ezekiel, "44", 21601, 21631),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.FirstCorinthians, "7:17", 28505, 28505),
-		];
+		new VerseRange(BibleBook.FirstCorinthians, "7:17", 28505, 28505),];
 
 	}
 
@@ -2248,13 +2258,12 @@ new VerseRange(BibleBook.FirstCorinthians, "7:17", 28505, 28505),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-43.htm";
 		public override string Meaning => "Tell Aaron";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "22 & 23", 3371, 3447);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "56", 18755, 18766),
-		];
+		new VerseRange(BibleBook.Isaiah, "56", 18755, 18766),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.FirstCorinthians, "15:20-23", 28739, 28742),
-		];
+		new VerseRange(BibleBook.FirstCorinthians, "15:20-23", 28739, 28742),];
 
 	}
 
@@ -2267,13 +2276,12 @@ new VerseRange(BibleBook.FirstCorinthians, "15:20-23", 28739, 28742),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-44.htm";
 		public override string Meaning => "Oil of Pressed Olives";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "24", 3448, 3470);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Hosea, "14", 22284, 22292),
-		];
+		new VerseRange(BibleBook.Hosea, "14", 22284, 22292),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "7", 26330, 26382),
-		];
+		new VerseRange(BibleBook.John, "7", 26330, 26382),];
 
 	}
 
@@ -2286,13 +2294,12 @@ new VerseRange(BibleBook.John, "7", 26330, 26382),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-45.htm";
 		public override string Meaning => "On the mount";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "25:1-38", 3471, 3508);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "32:6-27", 19738, 19759),
-		];
+		new VerseRange(BibleBook.Jeremiah, "32:6-27", 19738, 19759),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "10:1-33", 26483, 26515),
-		];
+		new VerseRange(BibleBook.John, "10:1-33", 26483, 26515),];
 
 	}
 
@@ -2305,13 +2312,12 @@ new VerseRange(BibleBook.John, "10:1-33", 26483, 26515),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-46.htm";
 		public override string Meaning => "If Impoverished";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "25:39-26:2", 3509, 3527);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "12:17-28", 20698, 20709),
-		];
+		new VerseRange(BibleBook.Ezekiel, "12:17-28", 20698, 20709),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Galatians, "4:1-5:1", 29133, 29164),
-		];
+		new VerseRange(BibleBook.Galatians, "4:1-5:1", 29133, 29164),];
 
 	}
 
@@ -2324,13 +2330,12 @@ new VerseRange(BibleBook.Galatians, "4:1-5:1", 29133, 29164),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-47.htm";
 		public override string Meaning => "In My statutes";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Leviticus, "26:3-27:34", 3528, 3605);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "16:16-17:4", 19353, 19362),
-		];
+		new VerseRange(BibleBook.Jeremiah, "16:16-17:4", 19353, 19362),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "15", 26701, 26727),
-		];
+		new VerseRange(BibleBook.John, "15", 26701, 26727),];
 
 	}
 
@@ -2343,13 +2348,12 @@ new VerseRange(BibleBook.John, "15", 26701, 26727),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-48.htm";
 		public override string Meaning => "In the wilderness";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "1:1-2:13", 3606, 3672);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "47:13-23", 21693, 21703),
-		];
+		new VerseRange(BibleBook.Ezekiel, "47:13-23", 21693, 21703),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Revelation, "7", 30812, 30828),
-		];
+		new VerseRange(BibleBook.Revelation, "7", 30812, 30828),];
 
 	}
 
@@ -2362,13 +2366,12 @@ new VerseRange(BibleBook.Revelation, "7", 30812, 30828),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-49.htm";
 		public override string Meaning => "Each Man by His Own Banner";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "2:14-3:13", 3673, 3706);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "8:18-22", 17826, 17830),
-		];
+		new VerseRange(BibleBook.Isaiah, "8:18-22", 17826, 17830),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Luke, "15:1-7", 25590, 25596),
-		];
+		new VerseRange(BibleBook.Luke, "15:1-7", 25590, 25596),];
 
 	}
 
@@ -2381,13 +2384,13 @@ new VerseRange(BibleBook.Luke, "15:1-7", 25590, 25596),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-51.htm";
 		public override string Meaning => "These are the Generations";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "3:14-4:20", 3707, 3764);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "43:8-13", 18514, 18519),
-		];
+		new VerseRange(BibleBook.Isaiah, "43:8-13", 18514, 18519),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Acts, "5:1-16", 27061, 27076),    new VerseRange(BibleBook.Hebrews, "12", 30214, 30242),
-		];
+		new VerseRange(BibleBook.Acts, "5:1-16", 27061, 27076),
+new VerseRange(BibleBook.Hebrews, "12", 30214, 30242),];
 
 	}
 
@@ -2400,13 +2403,13 @@ new VerseRange(BibleBook.Acts, "5:1-16", 27061, 27076),    new VerseRange(BibleB
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-2/Y2-53.htm";
 		public override string Meaning => "Elevate";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "4:21-5:10", 3765, 3803);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Judges, "13:2-25", 6887, 6910),   new VerseRange(BibleBook.FirstSamuel, "6:10-16", 7342, 7348),
-		];
+		new VerseRange(BibleBook.Judges, "13:2-25", 6887, 6910),
+new VerseRange(BibleBook.FirstSamuel, "6:10-16", 7342, 7348),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.FirstCorinthians, "12:12-18", 28647, 28653),
-		];
+		new VerseRange(BibleBook.FirstCorinthians, "12:12-18", 28647, 28653),];
 
 	}
 
@@ -2419,13 +2422,12 @@ new VerseRange(BibleBook.FirstCorinthians, "12:12-18", 28647, 28653),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-01.htm";
 		public override string Meaning => "If She Goes Astray";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "5:11-31", 3804, 3824);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Hosea, "4:14-15", 22148, 22149),
-		];
+		new VerseRange(BibleBook.Hosea, "4:14-15", 22148, 22149),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.SecondPeter, "2", 30502, 30523),
-		];
+		new VerseRange(BibleBook.SecondPeter, "2", 30502, 30523),];
 
 	}
 
@@ -2438,13 +2440,12 @@ new VerseRange(BibleBook.SecondPeter, "2", 30502, 30523),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-02.htm";
 		public override string Meaning => "If . . . Make a Special Vow";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "6:1-21", 3825, 3845);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstSamuel, "1:7-11", 7220, 7224),
-		];
+		new VerseRange(BibleBook.FirstSamuel, "1:7-11", 7220, 7224),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Luke, "1:8-17", 24902, 24911),
-		];
+		new VerseRange(BibleBook.Luke, "1:8-17", 24902, 24911),];
 
 	}
 
@@ -2457,13 +2458,12 @@ new VerseRange(BibleBook.Luke, "1:8-17", 24902, 24911),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-03.htm";
 		public override string Meaning => "Thus Shall You Bless";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "6:22-7:89", 3846, 3940);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "31:21-34", 19713, 19726),
-		];
+		new VerseRange(BibleBook.Jeremiah, "31:21-34", 19713, 19726),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "13:1-30", 26632, 26661),
-		];
+		new VerseRange(BibleBook.John, "13:1-30", 26632, 26661),];
 
 	}
 
@@ -2476,13 +2476,12 @@ new VerseRange(BibleBook.John, "13:1-30", 26632, 26661),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-04.htm";
 		public override string Meaning => "In your going up";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "8-9", 3941, 3989);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Zechariah, "4", 22924, 22937),
-		];
+		new VerseRange(BibleBook.Zechariah, "4", 22924, 22937),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Revelation, "11", 30874, 30892),
-		];
+		new VerseRange(BibleBook.Revelation, "11", 30874, 30892),];
 
 	}
 
@@ -2495,13 +2494,12 @@ new VerseRange(BibleBook.Revelation, "11", 30874, 30892),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-05.htm";
 		public override string Meaning => "Whether days or a month";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "10", 3990, 4025);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstSamuel, "27:7-12", 7938, 7943),
-		];
+		new VerseRange(BibleBook.FirstSamuel, "27:7-12", 7938, 7943),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.FirstCorinthians, "14:1-9", 28680, 28688),
-		];
+		new VerseRange(BibleBook.FirstCorinthians, "14:1-9", 28680, 28688),];
 
 	}
 
@@ -2514,10 +2512,11 @@ new VerseRange(BibleBook.FirstCorinthians, "14:1-9", 28680, 28688),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-06.htm";
 		public override string Meaning => "The People Sought Complaints";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "11", 4026, 4060);
+
 		public override List<VerseRange>? HaftorahVerses => null;
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Acts, "12:3-12", 27341, 27350),   new VerseRange(BibleBook.FirstCorinthians, "10", 28569, 28601),
-		];
+		new VerseRange(BibleBook.Acts, "12:3-12", 27341, 27350),
+new VerseRange(BibleBook.FirstCorinthians, "10", 28569, 28601),];
 
 	}
 
@@ -2530,10 +2529,11 @@ new VerseRange(BibleBook.Acts, "12:3-12", 27341, 27350),   new VerseRange(BibleB
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-07.htm";
 		public override string Meaning => "Miriam and Aaron spoke";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "12", 4061, 4076);
+
 		public override List<VerseRange>? HaftorahVerses => null;
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Romans, "11:22-13:4", 28232, 28271),    new VerseRange(BibleBook.Isaiah, "59:1-21", 18802, 18822),
-		];
+		new VerseRange(BibleBook.Romans, "11:22-13:4", 28232, 28271),
+new VerseRange(BibleBook.Isaiah, "59:1-21", 18802, 18822),];
 
 	}
 
@@ -2546,13 +2546,13 @@ new VerseRange(BibleBook.Romans, "11:22-13:4", 28232, 28271),    new VerseRange(
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-08.htm";
 		public override string Meaning => "Send for yourself";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "13", 4077, 4109);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Joshua, "2:1-11", 5871, 5881),    new VerseRange(BibleBook.Joshua, "18:1-2", 6295, 6296),
-		];
+		new VerseRange(BibleBook.Joshua, "2:1-11", 5871, 5881),
+new VerseRange(BibleBook.Joshua, "18:1-2", 6295, 6296),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Hebrews, "11:24-31", 30197, 30204),
-		];
+		new VerseRange(BibleBook.Hebrews, "11:24-31", 30197, 30204),];
 
 	}
 
@@ -2565,13 +2565,12 @@ new VerseRange(BibleBook.Hebrews, "11:24-31", 30197, 30204),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-09.htm";
 		public override string Meaning => "The People Wept";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "14", 4110, 4154);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.SecondChronicles, "36:5-23", 11999, 12017),
-		];
+		new VerseRange(BibleBook.SecondChronicles, "36:5-23", 11999, 12017),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Philippians, "3", 29423, 29443),
-		];
+		new VerseRange(BibleBook.Philippians, "3", 29423, 29443),];
 
 	}
 
@@ -2584,13 +2583,12 @@ new VerseRange(BibleBook.Philippians, "3", 29423, 29443),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-10.htm";
 		public override string Meaning => "When You Come into the Land";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "15", 4155, 4195);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "17:19-27", 19377, 19385),
-		];
+		new VerseRange(BibleBook.Jeremiah, "17:19-27", 19377, 19385),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.FirstJohn, "2 and 3", 30552, 30604),
-		];
+		new VerseRange(BibleBook.FirstJohn, "2 and 3", 30552, 30604),];
 
 	}
 
@@ -2603,13 +2601,13 @@ new VerseRange(BibleBook.FirstJohn, "2 and 3", 30552, 30604),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-11.htm";
 		public override string Meaning => "Korah";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "16", 4196, 4245);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstSamuel, "11:14-12:22", 7460, 7483),
-		];
+		new VerseRange(BibleBook.FirstSamuel, "11:14-12:22", 7460, 7483),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.SecondTimothy, "2:8-21", 29836, 29849),   new VerseRange(BibleBook.Jude, "1", 30674, 30698),
-		];
+		new VerseRange(BibleBook.SecondTimothy, "2:8-21", 29836, 29849),
+new VerseRange(BibleBook.Jude, "1", 30674, 30698),];
 
 	}
 
@@ -2622,13 +2620,12 @@ new VerseRange(BibleBook.SecondTimothy, "2:8-21", 29836, 29849),   new VerseRang
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-12.htm";
 		public override string Meaning => "Take from Them a Staff";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "17 & 18", 4246, 4290);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "44:15-28", 21615, 21628),
-		];
+		new VerseRange(BibleBook.Ezekiel, "44:15-28", 21615, 21628),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Hebrews, "5:1-6", 30032, 30037),
-		];
+		new VerseRange(BibleBook.Hebrews, "5:1-6", 30032, 30037),];
 
 	}
 
@@ -2641,13 +2638,12 @@ new VerseRange(BibleBook.Hebrews, "5:1-6", 30032, 30037),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-13.htm";
 		public override string Meaning => "Ordinance of";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "19:1-20:13", 4291, 4325);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Judges, "11:1-33", 6831, 6863),
-		];
+		new VerseRange(BibleBook.Judges, "11:1-33", 6831, 6863),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "20:1-31", 26869, 26899),
-		];
+		new VerseRange(BibleBook.John, "20:1-31", 26869, 26899),];
 
 	}
 
@@ -2660,13 +2656,12 @@ new VerseRange(BibleBook.John, "20:1-31", 26869, 26899),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-14.htm";
 		public override string Meaning => "Messengers from Kadesh";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "20:14-22:1", 4326, 4377);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "44:29-31", 21629, 21631),
-		];
+		new VerseRange(BibleBook.Ezekiel, "44:29-31", 21629, 21631),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "20:1-31", 26122, 26152),
-		];
+		new VerseRange(BibleBook.John, "20:1-31", 26122, 26152),];
 
 	}
 
@@ -2679,13 +2674,12 @@ new VerseRange(BibleBook.John, "20:1-31", 26122, 26152),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-15.htm";
 		public override string Meaning => "Destoyer";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "22:2-23:1", 4378, 4418);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Micah, "5:6-6:8", 22640, 22657),
-		];
+		new VerseRange(BibleBook.Micah, "5:6-6:8", 22640, 22657),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.FirstPeter, "5:5-7", 30471, 30473),
-		];
+		new VerseRange(BibleBook.FirstPeter, "5:5-7", 30471, 30473),];
 
 	}
 
@@ -2698,13 +2692,12 @@ new VerseRange(BibleBook.FirstPeter, "5:5-7", 30471, 30473),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-16.htm";
 		public override string Meaning => "Balak Did";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "23:2-25:9", 4419, 4481);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Joshua, "17:1-18", 6277, 6294),
-		];
+		new VerseRange(BibleBook.Joshua, "17:1-18", 6277, 6294),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.James, "3:1-4:17", 30321, 30355),
-		];
+		new VerseRange(BibleBook.James, "3:1-4:17", 30321, 30355),];
 
 	}
 
@@ -2717,13 +2710,13 @@ new VerseRange(BibleBook.James, "3:1-4:17", 30321, 30355),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-17.htm";
 		public override string Meaning => "Dark Skin";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "25:10-26:51", 4482, 4541);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstKings, "18:46-19:21", 9388, 9409),
-		];
+		new VerseRange(BibleBook.FirstKings, "18:46-19:21", 9388, 9409),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "23:1-12", 23920, 23931),    new VerseRange(BibleBook.Ephesians, "4:1-16", 29274, 29289),
-		];
+		new VerseRange(BibleBook.Matthew, "23:1-12", 23920, 23931),
+new VerseRange(BibleBook.Ephesians, "4:1-16", 29274, 29289),];
 
 	}
 
@@ -2736,13 +2729,12 @@ new VerseRange(BibleBook.Matthew, "23:1-12", 23920, 23931),    new VerseRange(Bi
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-18.htm";
 		public override string Meaning => "To These";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "26:52-27:23", 4542, 4578);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Malachi, "2:1-9", 23105, 23113),
-		];
+		new VerseRange(BibleBook.Malachi, "2:1-9", 23105, 23113),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Ephesians, "1:3-23", 29210, 29230),
-		];
+		new VerseRange(BibleBook.Ephesians, "1:3-23", 29210, 29230),];
 
 	}
 
@@ -2755,13 +2747,12 @@ new VerseRange(BibleBook.Ephesians, "1:3-23", 29210, 29230),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-19.htm";
 		public override string Meaning => "My Offerings";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "28 & 29", 4579, 4649);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "45:13-25", 21644, 21656),
-		];
+		new VerseRange(BibleBook.Ezekiel, "45:13-25", 21644, 21656),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Hebrews, "10:1-39", 30135, 30173),
-		];
+		new VerseRange(BibleBook.Hebrews, "10:1-39", 30135, 30173),];
 
 	}
 
@@ -2774,13 +2765,12 @@ new VerseRange(BibleBook.Hebrews, "10:1-39", 30135, 30173),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-20.htm";
 		public override string Meaning => "Tribes";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "30 & 31", 4650, 4719);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "1:1-2:3", 18948, 18969),
-		];
+		new VerseRange(BibleBook.Jeremiah, "1:1-2:3", 18948, 18969),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "5:33-37", 23268, 23272),
-		];
+		new VerseRange(BibleBook.Matthew, "5:33-37", 23268, 23272),];
 
 	}
 
@@ -2793,13 +2783,12 @@ new VerseRange(BibleBook.Matthew, "5:33-37", 23268, 23272),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-21.htm";
 		public override string Meaning => "Much Cattle";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "32", 4720, 4761);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "2", 18967, 19003),
-		];
+		new VerseRange(BibleBook.Jeremiah, "2", 18967, 19003),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.James, "2:1-26", 30295, 30320),
-		];
+		new VerseRange(BibleBook.James, "2:1-26", 30295, 30320),];
 
 	}
 
@@ -2812,13 +2801,13 @@ new VerseRange(BibleBook.James, "2:1-26", 30295, 30320),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-22.htm";
 		public override string Meaning => "Stages";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "33", 4762, 4817);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "3", 19004, 19028),
-		];
+		new VerseRange(BibleBook.Jeremiah, "3", 19004, 19028),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Acts, "6", 27103, 27117),   new VerseRange(BibleBook.James, "4:1-12", 30339, 30350),
-		];
+		new VerseRange(BibleBook.Acts, "6", 27103, 27117),
+new VerseRange(BibleBook.James, "4:1-12", 30339, 30350),];
 
 	}
 
@@ -2831,13 +2820,13 @@ new VerseRange(BibleBook.Acts, "6", 27103, 27117),   new VerseRange(BibleBook.Ja
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-23.htm";
 		public override string Meaning => "This is the Land";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "34:1-35:8", 4818, 4854);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "4", 19029, 19059),   new VerseRange(BibleBook.Ezekiel, "45:1-8", 21632, 21639),
-		];
+		new VerseRange(BibleBook.Jeremiah, "4", 19029, 19059),
+new VerseRange(BibleBook.Ezekiel, "45:1-8", 21632, 21639),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Ephesians, "2:1-22", 29231, 29252),
-		];
+		new VerseRange(BibleBook.Ephesians, "2:1-22", 29231, 29252),];
 
 	}
 
@@ -2850,13 +2839,12 @@ new VerseRange(BibleBook.Ephesians, "2:1-22", 29231, 29252),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-24.htm";
 		public override string Meaning => "When You Cross the Jordan";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Numbers, "35:9-36:13", 4855, 4893);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "5", 19060, 19090),
-		];
+		new VerseRange(BibleBook.Jeremiah, "5", 19060, 19090),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "4:1-45", 26158, 26202),
-		];
+		new VerseRange(BibleBook.John, "4:1-45", 26158, 26202),];
 
 	}
 
@@ -2869,13 +2857,13 @@ new VerseRange(BibleBook.John, "4:1-45", 26158, 26202),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-25.htm";
 		public override string Meaning => "Words";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "1", 4894, 4939);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "1:1-27", 17656, 17682),
-		];
+		new VerseRange(BibleBook.Isaiah, "1:1-27", 17656, 17682),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.FirstTimothy, "3:1-7", 29733, 29739),   new VerseRange(BibleBook.Hebrews, "3", 29997, 30015),
-		];
+		new VerseRange(BibleBook.FirstTimothy, "3:1-7", 29733, 29739),
+new VerseRange(BibleBook.Hebrews, "3", 29997, 30015),];
 
 	}
 
@@ -2888,10 +2876,10 @@ new VerseRange(BibleBook.FirstTimothy, "3:1-7", 29733, 29739),   new VerseRange(
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-26.htm";
 		public override string Meaning => "We Turned";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "2:1-3:22", 4940, 4998);
+
 		public override List<VerseRange>? HaftorahVerses => null;
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Romans, "9", 28157, 28189),
-		];
+		new VerseRange(BibleBook.Romans, "9", 28157, 28189),];
 
 	}
 
@@ -2904,13 +2892,13 @@ new VerseRange(BibleBook.Romans, "9", 28157, 28189),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-27.htm";
 		public override string Meaning => "And I pleaded";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "3:23-29", 4999, 5005);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "40:1-11", 18422, 18432),
-		];
+		new VerseRange(BibleBook.Isaiah, "40:1-11", 18422, 18432),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Mark, "12:28-34", 24702, 24708),    new VerseRange(BibleBook.Romans, "2:1-3:31", 27964, 28023),
-		];
+		new VerseRange(BibleBook.Mark, "12:28-34", 24702, 24708),
+new VerseRange(BibleBook.Romans, "2:1-3:31", 27964, 28023),];
 
 	}
 
@@ -2923,13 +2911,12 @@ new VerseRange(BibleBook.Mark, "12:28-34", 24702, 24708),    new VerseRange(Bibl
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-28.htm";
 		public override string Meaning => "Israel, Listen";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "4", 5006, 5054);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "40:12-14", 18433, 18435),
-		];
+		new VerseRange(BibleBook.Isaiah, "40:12-14", 18433, 18435),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Luke, "3:1", 25027, 25027),
-		];
+		new VerseRange(BibleBook.Luke, "3:1", 25027, 25027),];
 
 	}
 
@@ -2942,13 +2929,12 @@ new VerseRange(BibleBook.Luke, "3:1", 25027, 25027),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-29.htm";
 		public override string Meaning => "Moses Summoned";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "5:1-6:3", 5055, 5090);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "40:15-26", 18436, 18447),
-		];
+		new VerseRange(BibleBook.Isaiah, "40:15-26", 18436, 18447),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Romans, "10:1", 28190, 28190),
-		];
+		new VerseRange(BibleBook.Romans, "10:1", 28190, 28190),];
 
 	}
 
@@ -2961,10 +2947,10 @@ new VerseRange(BibleBook.Romans, "10:1", 28190, 28190),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-30.htm";
 		public override string Meaning => "This is the Commandment";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "6:4-7:26", 5091, 5138);
+
 		public override List<VerseRange>? HaftorahVerses => null;
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "4:1", 23211, 23211),
-		];
+		new VerseRange(BibleBook.Matthew, "4:1", 23211, 23211),];
 
 	}
 
@@ -2977,13 +2963,13 @@ new VerseRange(BibleBook.Matthew, "4:1", 23211, 23211),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-31.htm";
 		public override string Meaning => "On the heel of (because)";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "8", 5139, 5158);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "49:14-51:3", 18651, 18677),
-		];
+		new VerseRange(BibleBook.Isaiah, "49:14-51:3", 18651, 18677),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Luke, "4:11", 25075, 25075),    new VerseRange(BibleBook.Romans, "8:31-39", 28148, 28156),
-		];
+		new VerseRange(BibleBook.Luke, "4:11", 25075, 25075),
+new VerseRange(BibleBook.Romans, "8:31-39", 28148, 28156),];
 
 	}
 
@@ -2996,10 +2982,10 @@ new VerseRange(BibleBook.Luke, "4:11", 25075, 25075),    new VerseRange(BibleBoo
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-32.htm";
 		public override string Meaning => "You are Crossing Over Today";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "9", 5159, 5187);
+
 		public override List<VerseRange>? HaftorahVerses => null;
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Ephesians, "2:11", 29241, 29241),
-		];
+		new VerseRange(BibleBook.Ephesians, "2:11", 29241, 29241),];
 
 	}
 
@@ -3012,10 +2998,10 @@ new VerseRange(BibleBook.Ephesians, "2:11", 29241, 29241),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-33.htm";
 		public override string Meaning => "Carve for Yourself";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "10:1-11:25", 5188, 5234);
+
 		public override List<VerseRange>? HaftorahVerses => null;
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Colossians, "3:1", 29519, 29519),
-		];
+		new VerseRange(BibleBook.Colossians, "3:1", 29519, 29519),];
 
 	}
 
@@ -3028,13 +3014,13 @@ new VerseRange(BibleBook.Colossians, "3:1", 29519, 29519),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-34.htm";
 		public override string Meaning => "See!";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "11:26-12:19", 5235, 5260);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "54:11-55:5", 18735, 18746),
-		];
+		new VerseRange(BibleBook.Isaiah, "54:11-55:5", 18735, 18746),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Luke, "6:20", 25167, 25167),    new VerseRange(BibleBook.FirstJohn, "4:1-6", 30605, 30610),
-		];
+		new VerseRange(BibleBook.Luke, "6:20", 25167, 25167),
+new VerseRange(BibleBook.FirstJohn, "4:1-6", 30605, 30610),];
 
 	}
 
@@ -3047,10 +3033,10 @@ new VerseRange(BibleBook.Luke, "6:20", 25167, 25167),    new VerseRange(BibleBoo
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-35.htm";
 		public override string Meaning => "When He Enlarges";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "12:20-15:6", 5261, 5326);
+
 		public override List<VerseRange>? HaftorahVerses => null;
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "7:15", 23332, 23332),
-		];
+		new VerseRange(BibleBook.Matthew, "7:15", 23332, 23332),];
 
 	}
 
@@ -3063,10 +3049,10 @@ new VerseRange(BibleBook.Matthew, "7:15", 23332, 23332),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-36.htm";
 		public override string Meaning => "A Poor Man";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "15:7-16:17", 5327, 5360);
+
 		public override List<VerseRange>? HaftorahVerses => null;
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Luke, "4:14", 25078, 25078),
-		];
+		new VerseRange(BibleBook.Luke, "4:14", 25078, 25078),];
 
 	}
 
@@ -3079,13 +3065,13 @@ new VerseRange(BibleBook.Luke, "4:14", 25078, 25078),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-37.htm";
 		public override string Meaning => "Judges";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "16:18-17:13", 5361, 5378);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "51:12-52:12", 18686, 18709),
-		];
+		new VerseRange(BibleBook.Isaiah, "51:12-52:12", 18686, 18709),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "5:1", 26212, 26212),   new VerseRange(BibleBook.FirstCorinthians, "5:9-13", 28464, 28468),
-		];
+		new VerseRange(BibleBook.John, "5:1", 26212, 26212),
+new VerseRange(BibleBook.FirstCorinthians, "5:9-13", 28464, 28468),];
 
 	}
 
@@ -3098,13 +3084,14 @@ new VerseRange(BibleBook.John, "5:1", 26212, 26212),   new VerseRange(BibleBook.
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-38.htm";
 		public override string Meaning => "When You Enter";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "17:14-18:13", 5379, 5398);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.FirstSamuel, "8:1-7", 7371, 7377),    new VerseRange(BibleBook.Jeremiah, "31:31-34", 19723, 19726),
-		];
+		new VerseRange(BibleBook.FirstSamuel, "8:1-7", 7371, 7377),
+new VerseRange(BibleBook.Jeremiah, "31:31-34", 19723, 19726),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Jeremiah, "19:11-22", 19723, 19726),    new VerseRange(BibleBook.Acts, "13:13-44", 27376, 27407),
-		];
+		new VerseRange(BibleBook.John, "19:11-22", 19723, 19726),
+new VerseRange(BibleBook.Acts, "13:13-44", 27376, 27407),];
 
 	}
 
@@ -3117,13 +3104,12 @@ new VerseRange(BibleBook.Jeremiah, "19:11-22", 19723, 19726),    new VerseRange(
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-39.htm";
 		public override string Meaning => "A Prophet from Your Midst";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "18:14-20:9", 5399, 5437);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "29:8-30:9", 19644, 19677),
-		];
+		new VerseRange(BibleBook.Jeremiah, "29:8-30:9", 19644, 19677),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Galatians, "5:1-6:10", 29164, 29199),
-		];
+		new VerseRange(BibleBook.Galatians, "5:1-6:10", 29164, 29199),];
 
 	}
 
@@ -3136,13 +3122,12 @@ new VerseRange(BibleBook.Galatians, "5:1-6:10", 29164, 29199),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-40.htm";
 		public override string Meaning => "When You Approach a City";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "20:10-21:9", 5438, 5457);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Joshua, "24:1-15", 6478, 6492),
-		];
+		new VerseRange(BibleBook.Joshua, "24:1-15", 6478, 6492),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "10:11-31", 26493, 26513),
-		];
+		new VerseRange(BibleBook.John, "10:11-31", 26493, 26513),];
 
 	}
 
@@ -3155,13 +3140,13 @@ new VerseRange(BibleBook.John, "10:11-31", 26493, 26513),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-41.htm";
 		public override string Meaning => "When you go out";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "21:10-22:5", 5458, 5476);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "54:1-10", 18725, 18734),
-		];
+		new VerseRange(BibleBook.Isaiah, "54:1-10", 18725, 18734),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Luke, "20:27-38", 25807, 25818),    new VerseRange(BibleBook.Galatians, "3:1-5:26", 29104, 29189),
-		];
+		new VerseRange(BibleBook.Luke, "20:27-38", 25807, 25818),
+new VerseRange(BibleBook.Galatians, "3:1-5:26", 29104, 29189),];
 
 	}
 
@@ -3174,13 +3159,12 @@ new VerseRange(BibleBook.Luke, "20:27-38", 25807, 25818),    new VerseRange(Bibl
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-42.htm";
 		public override string Meaning => "A Bird|s Nest";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "22:6-23:8", 5477, 5509);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Micah, "5:1-6", 22635, 22640),
-		];
+		new VerseRange(BibleBook.Micah, "5:1-6", 22635, 22640),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "22:1-14", 23874, 23887),
-		];
+		new VerseRange(BibleBook.Matthew, "22:1-14", 23874, 23887),];
 
 	}
 
@@ -3193,13 +3177,12 @@ new VerseRange(BibleBook.Matthew, "22:1-14", 23874, 23887),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-43.htm";
 		public override string Meaning => "When a Camp";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "23:9-20", 5510, 5521);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "1:16-26", 17671, 17681),
-		];
+		new VerseRange(BibleBook.Isaiah, "1:16-26", 17671, 17681),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "8:1-14", 23347, 23360),
-		];
+		new VerseRange(BibleBook.Matthew, "8:1-14", 23347, 23360),];
 
 	}
 
@@ -3212,13 +3195,12 @@ new VerseRange(BibleBook.Matthew, "8:1-14", 23347, 23360),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-44.htm";
 		public override string Meaning => "When You Make a Vow";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "23:21-24:18", 5522, 5544);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "19:1-25", 18006, 18030),
-		];
+		new VerseRange(BibleBook.Isaiah, "19:1-25", 18006, 18030),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "5:30-37", 23265, 23272),
-		];
+		new VerseRange(BibleBook.Matthew, "5:30-37", 23265, 23272),];
 
 	}
 
@@ -3231,13 +3213,12 @@ new VerseRange(BibleBook.Matthew, "5:30-37", 23265, 23272),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-45.htm";
 		public override string Meaning => "When You Reap";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "24:19-25:19", 5545, 5567);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Hosea, "10:12-15", 22238, 22241),
-		];
+		new VerseRange(BibleBook.Hosea, "10:12-15", 22238, 22241),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Luke, "12:13-48", 25473, 25508),
-		];
+		new VerseRange(BibleBook.Luke, "12:13-48", 25473, 25508),];
 
 	}
 
@@ -3250,13 +3231,13 @@ new VerseRange(BibleBook.Luke, "12:13-48", 25473, 25508),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-46.htm";
 		public override string Meaning => "When you enter in";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "26 & 27", 5568, 5612);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "60", 18823, 18844),
-		];
+		new VerseRange(BibleBook.Isaiah, "60", 18823, 18844),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Romans, "11:1-15", 28211, 28225),   new VerseRange(BibleBook.Revelation, "21:9-22:7", 31063, 31088),
-		];
+		new VerseRange(BibleBook.Romans, "11:1-15", 28211, 28225),
+new VerseRange(BibleBook.Revelation, "21:9-22:7", 31063, 31088),];
 
 	}
 
@@ -3269,13 +3250,12 @@ new VerseRange(BibleBook.Romans, "11:1-15", 28211, 28225),   new VerseRange(Bibl
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-47.htm";
 		public override string Meaning => "If You Hearken";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "28:1-29:9", 5613, 5689);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "55:1-5", 18742, 18746),
-		];
+		new VerseRange(BibleBook.Isaiah, "55:1-5", 18742, 18746),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "14:1-31", 26670, 26700),
-		];
+		new VerseRange(BibleBook.John, "14:1-31", 26670, 26700),];
 
 	}
 
@@ -3288,13 +3268,12 @@ new VerseRange(BibleBook.John, "14:1-31", 26670, 26700),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-48.htm";
 		public override string Meaning => "You are standing";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "29:10-30:10", 5690, 5719);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Isaiah, "55:6-58:8", 18747, 18795),
-		];
+		new VerseRange(BibleBook.Isaiah, "55:6-58:8", 18747, 18795),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Romans, "10:1-13", 28190, 28202),
-		];
+		new VerseRange(BibleBook.Romans, "10:1-13", 28190, 28202),];
 
 	}
 
@@ -3307,13 +3286,12 @@ new VerseRange(BibleBook.Romans, "10:1-13", 28190, 28202),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-49.htm";
 		public override string Meaning => "This Commandment";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "30:11-31:13", 5720, 5742);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Jeremiah, "12:15-17", 19265, 19267),
-		];
+		new VerseRange(BibleBook.Jeremiah, "12:15-17", 19265, 19267),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "11:7-30", 23467, 23490),
-		];
+		new VerseRange(BibleBook.Matthew, "11:7-30", 23467, 23490),];
 
 	}
 
@@ -3326,13 +3304,15 @@ new VerseRange(BibleBook.Matthew, "11:7-30", 23467, 23490),
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-50.htm";
 		public override string Meaning => "And he went";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "31:14-30", 5743, 5759);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Hosea, "14:2-9", 22285, 22292),   new VerseRange(BibleBook.Joel, "2:15-27", 22327, 22339),    new VerseRange(BibleBook.Micah, "7:18-20", 22683, 22685),
-		];
+		new VerseRange(BibleBook.Hosea, "14:2-9", 22285, 22292),
+new VerseRange(BibleBook.Joel, "2:15-27", 22327, 22339),
+new VerseRange(BibleBook.Micah, "7:18-20", 22683, 22685),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "12:35-14:26", 26616, 26695),   new VerseRange(BibleBook.Hebrews, "13:5-8", 30247, 30250),
-		];
+		new VerseRange(BibleBook.John, "12:35-14:26", 26616, 26695),
+new VerseRange(BibleBook.Hebrews, "13:5-8", 30247, 30250),];
 
 	}
 
@@ -3345,13 +3325,12 @@ new VerseRange(BibleBook.John, "12:35-14:26", 26616, 26695),   new VerseRange(Bi
 		public override string AhavtaURL => "http://www.ahavta.org/Commentary Y-3/Y3-51.htm";
 		public override string Meaning => "Give ear";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "32", 5760, 5811);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "17:22-24", 20848, 20850),
-		];
+		new VerseRange(BibleBook.Ezekiel, "17:22-24", 20848, 20850),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.John, "17:1-26", 26761, 26786),
-		];
+		new VerseRange(BibleBook.John, "17:1-26", 26761, 26786),];
 
 	}
 
@@ -3364,13 +3343,13 @@ new VerseRange(BibleBook.John, "17:1-26", 26761, 26786),
 		public override string AhavtaURL => "";
 		public override string Meaning => "This is the blessing";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "33", 5812, 5840);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Ezekiel, "37:15-20", 21413, 21418),
-		];
+		new VerseRange(BibleBook.Ezekiel, "37:15-20", 21413, 21418),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "19:25-20:16", 23788, 23809),    new VerseRange(BibleBook.Jude, "1:8-9", 30681, 30682),
-		];
+		new VerseRange(BibleBook.Matthew, "19:25-20:16", 23788, 23809),
+new VerseRange(BibleBook.Jude, "1:8-9", 30681, 30682),];
 
 	}
 
@@ -3383,13 +3362,12 @@ new VerseRange(BibleBook.Matthew, "19:25-20:16", 23788, 23809),    new VerseRang
 		public override string AhavtaURL => "";
 		public override string Meaning => "Moses Ascended";
 		public override VerseRange TorahVerse => new VerseRange(BibleBook.Deuteronomy, "34", 5841, 5852);
+
 		public override List<VerseRange> HaftorahVerses => [
-new VerseRange(BibleBook.Joshua, "1", 5853, 5870),
-		];
+		new VerseRange(BibleBook.Joshua, "1", 5853, 5870),];
 
 		public override List<VerseRange> BritVerses => [
-new VerseRange(BibleBook.Matthew, "4:5-11", 23215, 23221),
-		];
+		new VerseRange(BibleBook.Matthew, "4:5-11", 23215, 23221),];
 
 	}
 

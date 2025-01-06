@@ -94,16 +94,15 @@ internal class Program
 		using (var connection = new SqlConnection(connectionString))
 		{
 			await connection.OpenAsync();  // connection.Open();
-			var sql = "SELECT Value, RegionIdCodeGen, RegionInstanceCodeGen, SealedClassTop, TorahVerseCodeGen, HaftorahVerseCodeGen, BritVerseCodeGen FROM TriennialCS";
-			var result = connection.Query<ParashaEnumTorah>(sql);
 
+			const string  SQL = @"
+			SELECT Value, RegionIdCodeGen, RegionInstanceCodeGen, SealedClassTop,
+			TorahVerseCodeGen, HaftorahVerseCodeGen, BritVerseCodeGen 
+			FROM TriennialCS";
+
+			var result = connection.Query<ParashaEnumTorah>(SQL);
 
 			UTF8Encoding encodingWithBOM = new UTF8Encoding(true); // with a BOM (Byte Order Mark) i.e. saving "With signature"
-
-			/*
-			using (StreamWriter writer = new StreamWriter(fileName, false, encodingWithBOM))
-            
-			 */
 
 			using (var writer1 = new StreamWriter(Constants.Folder + Constants.TriennialCS_02_RegionId, false, encodingWithBOM))
 			{
@@ -176,7 +175,9 @@ internal class Program
 
 		}
 	}
+
 }
+
 
 
 public class ParashaEnumTorah
