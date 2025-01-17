@@ -1,6 +1,4 @@
-﻿@using AlephTavEnums = MyHebrewBible.Client.Features.AlephTav.Enums;
-@using MyHebrewBible.Client.Helpers
-
+﻿
 @if (BibleVerse != null)
 {
  <p class="fs-5">
@@ -21,7 +19,6 @@
 
 
 @code {
-	
 	[Parameter, EditorRequired] public BibleVerse? BibleVerse { get; set; }
 	[Parameter, EditorRequired] public RenderFragment? ParagraphEnd { get; set; } /* DrillDownButton GetSAT */
 }

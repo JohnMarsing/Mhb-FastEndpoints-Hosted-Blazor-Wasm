@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using MyHebrewBible.Database;
 using MyHebrewBible.Client.Enums;
+using MyHebrewBible.Client.Features.Parasha.Enums;
 //using ArticleEnums = MyHebrewBible.Client.Features.Articles.Search.Enums;
 
 namespace MyHebrewBible.Endpoints;
@@ -54,6 +55,26 @@ public class Query
 		}
 	}
 
+
+	/*
+	### Note: `SqlOrderBy` is only needed if you need,  e.g., a custom `WHERE` clause
+
+	```csharp
+	string sql = $"{Api.Parasha.Sql} {Api.Parasha.SqlOrderBy}";
+	_logger.LogDebug("{Method} triennialId: {triennialId}; sql: {sql}"
+		, nameof(GetParasha), triennialId, sql);
+	var versList = await connection.QueryAsync<Parasha>($"{Api.Parasha.Sql} {Api.Parasha.SqlOrderBy}", Parms);
+	```
+ */
+
+	public async Task<IEnumerable<Parasha?>> GetParasha(long triennialId)
+	{
+		using var connection = await _connectionFactory.CreateConnectionAsync();
+		Parms = new DynamicParameters(new { TriennialId = triennialId });
+		var versList = await connection.QueryAsync<Parasha>(Api.Parasha.Sql, Parms);
+		return versList;
+	}
+
 	public async Task<IEnumerable<BibleVerse?>> GetVerseListBetweenIds(long begId, long endId)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
@@ -61,6 +82,7 @@ public class Query
 		var versList = await connection.QueryAsync<BibleVerse>(Api.VerseListBetweenIds.Sql, Parms);
 		return versList;
 	}
+
 
 	public async Task<IEnumerable<WordPart?>> GetWordPartByScriptureId(long scriptureId)
 	{
@@ -98,7 +120,7 @@ public class Query
 		string sql;
 		if (chapter == 0)
 		{
-			Parms = new DynamicParameters(new { BookId = bookID});
+			Parms = new DynamicParameters(new { BookId = bookID });
 			sql = $"{Api.AlephTavKjvVerses.Sql} WHERE s.BookID=@BookId {Api.AlephTavKjvVerses.SqlOrderBy}";
 			var verseList = await connection.QueryAsync<BibleVerse>(sql, Parms);
 			return verseList;
@@ -111,6 +133,23 @@ public class Query
 			return verseList;
 
 		}
+	}
+
+
+	public async Task<IEnumerable<AlephTavWordPartContext?>> GetAlephTavWordPartContext(long bookId, long chapter)
+	{
+		using var connection = await _connectionFactory.CreateConnectionAsync();
+		Parms = new DynamicParameters(new { BookId = bookId, Chapter = chapter });
+		var verseList = await connection.QueryAsync<AlephTavWordPartContext>(Api.AlephTavWordPartContext.Sql, Parms);
+		return verseList;
+	}
+
+	public async Task<IEnumerable<AlephTavWordPartContext?>> GetAlephTavTriennialWordPartContext(long triennialId)
+	{
+		using var connection = await _connectionFactory.CreateConnectionAsync();
+		Parms = new DynamicParameters(new { TriennialId = triennialId});
+		var verseList = await connection.QueryAsync<AlephTavWordPartContext>(Api.AlephTavTriennialWordPartContext.Sql, Parms);
+		return verseList;
 	}
 
 }

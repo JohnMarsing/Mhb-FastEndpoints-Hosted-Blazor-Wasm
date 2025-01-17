@@ -1,0 +1,101 @@
+﻿@using AlephTavEnums = MyHebrewBible.Client.Features.AlephTav.Enums
+
+@foreach (var item in ParashaVerses!.OrderBy(o => o.ID))
+{
+	@if (item.DescH != "NULL")
+	{
+		<p class="text-danger text-center fs-4 mt-1 mb-2">@item.DescH</p>
+	}
+
+	@if (item.DescD != "NULL")
+	{
+		<p class="text-secondary fs-6 text-end mb-0"><em>@item.DescD</em></p>
+	}
+
+	if (FocusScriptureId == 0)
+	{
+		<ParagraphKjv Parasha="item">
+			<ParagraphEnd>
+				@* <AppendixSAT VerseNumber="item.Verse" SatVerseList="SatVerseList" /> *@
+				<AppendixDrillDownButton ScriptureId="item.ID" VerseNumber="item.Verse"
+																 OnVerseSelected="ReturnedVerse" />
+				<sup>
+					<BibleAnchor BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)" IconOnly="true" ScriptureId="item.ID" Verse="item.Verse" />
+				</sup>
+			</ParagraphEnd>
+		</ParagraphKjv>
+		if (SurroundingWords is not null)
+		{
+			<ParagraphSAT SurroundingWords="SurroundingWords!.Where(w => w.Verse == item.Verse).ToList()" />
+		}
+	}
+	else
+	{
+		if (item.ID == FocusScriptureId)
+		{
+			<div class="card border-primary mt-2 mb-4">
+				<div class="card-header">
+					<HeaderKjvWordPart Parasha="item" BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
+														 VerseNumber="item.Verse"
+														 OnClose="ReturnedCloseEvent" />
+				</div>
+				<div class="card-body">
+					<ParagraphKjvWordPart ScriptureId="FocusScriptureId"
+																OnStrongsSelected="ReturnedStrongs" />
+				</div>
+				<HebrewTable ScriptureId="FocusScriptureId"
+										 StrongsAndWordCount="CurrentStrongsAndWordCount"
+										 OnStrongsSelected="ReturnedStrongs" />
+			</div>
+		}
+		else
+		{
+			<ParagraphKjv Parasha="item">
+				<ParagraphEnd>
+					@* <AppendixSAT VerseNumber="item.Verse" SatVerseList="SatVerseList" /> *@
+					<AppendixDrillDownButton ScriptureId="item.ID" VerseNumber="item.Verse"
+																	 OnVerseSelected="ReturnedVerse" />
+					<sup>
+						<BibleAnchor BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)" IconOnly="true" ScriptureId="item.ID" Verse="item.Verse" />
+					</sup>
+				</ParagraphEnd>
+			</ParagraphKjv>
+		}
+	}
+}
+
+
+@code {
+	[Parameter, EditorRequired] public List<Parasha>? ParashaVerses { get; set; }
+	[Parameter] public List<AlephTavWordPartContext>? SurroundingWords { get; set; }
+
+	protected long FocusScriptureId;
+	protected long VerseNumber;
+
+	protected BookAndChapter GetBookAndChapter(long bookId, long chapter)
+	{
+		return new BookAndChapter(MyHebrewBible.Client.Enums.BibleBook.FromValue(LongToInt(bookId)), LongToInt(chapter));
+	}
+
+	private int LongToInt(long l)
+	{
+		return (l <= int.MaxValue && l >= int.MinValue) ? (int)l : 1;
+	}
+
+	private void ReturnedVerse(ScriptureIdAndVerseNumber scriptureIdAndVerseNumber)
+	{
+		FocusScriptureId = scriptureIdAndVerseNumber.ScriptureID;
+		VerseNumber = scriptureIdAndVerseNumber.VerseNumber;
+	}
+
+	StrongsAndWordCount? CurrentStrongsAndWordCount = new StrongsAndWordCount(0, 0);
+	private void ReturnedStrongs(StrongsAndWordCount strongsAndWordCount)
+	{
+		CurrentStrongsAndWordCount = strongsAndWordCount;
+	}
+
+	private void ReturnedCloseEvent()
+	{
+		FocusScriptureId = 0;
+	}
+}

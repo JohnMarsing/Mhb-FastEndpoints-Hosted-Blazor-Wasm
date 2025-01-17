@@ -1,0 +1,26 @@
+﻿@using AlephTavEnums = MyHebrewBible.Client.Features.AlephTav.Enums
+@using MyHebrewBible.Client.Helpers
+
+@if (SurroundingWords is not null && SurroundingWords.Any())
+{
+	<div class="card-body bg-light">
+		<p dir="rtl">
+			@foreach (var item in SurroundingWords!)
+			{
+				@*  *@
+				<sup>@item.WordCount <b>@item.KjvWord</b></sup>
+				<span class="hebrew">
+					@((MarkupString)HebrewFormat.GetSpan(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3))
+					@HebrewFormat.CheckMaqqef(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3)
+				</span>
+				@* <sub>@item.BCV</sub> *@
+				<text>&nbsp;&nbsp;&nbsp;</text>
+			}
+		</p>
+
+	</div>
+}
+
+@code {
+	[Parameter, EditorRequired] public List<AlephTavWordPartContext>? SurroundingWords { get; set; }
+}

@@ -1,0 +1,30 @@
+﻿@using AlephTavEnums = MyHebrewBible.Client.Features.AlephTav.Enums
+
+@GetSAT()
+
+@code {
+	[Parameter, EditorRequired] public List<AlephTavEnums.ChapterVerse>? SatVerseList { get; set; }
+	[Parameter, EditorRequired] public long VerseNumber { get; set; }
+
+	protected MarkupString GetSAT() //long verse
+	{
+		if (SatVerseList is not null && SatVerseList.Any())
+		{
+			int cnt = 0;
+			cnt = SatVerseList.Where(w => w.Verse == VerseNumber).Count();
+			if (cnt > 0)
+			{
+				return new MarkupString("<span class=''><sup class='fw-bolder text-danger hebrew16'>את</sup></span>");
+			}
+			else
+			{
+				return new MarkupString("");
+			}
+		}
+		else
+		{
+			return new MarkupString("");
+		}
+	}
+
+}

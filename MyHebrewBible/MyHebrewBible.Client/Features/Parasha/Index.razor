@@ -1,6 +1,5 @@
 ﻿@page "/Parasha/{Id:int}/{Slug}"
 @using MyHebrewBible.Client.Enums
-
 @using MyHebrewBible.Client.Features.Parasha.Enums
 @using MyHebrewBible.Client.Features.Parasha.Toolbar
 
@@ -9,78 +8,40 @@
 
 <PageTitle>@Nav.Parasha.Title @PageTitleDetail</PageTitle>
 
-<Buttons CurrentReading="CurrentReading" OnTriennialSelected="ReturnedTriennial" />
+<LoadingProgress>
 
-@if (CurrentReading is not null)
-{
-	<br />
-	<div class="card border-primary mb-3 mt-5">
-		@*
-	<div class="card-header">
-	<h2>Current Parasha</h2>
-	</div>
-	*@
-		<div class="@GlobalEnums.MediaQuery.XsOrSm.DivClass">
-			<Header CurrentReading="CurrentReading" MediaQuery="@GlobalEnums.MediaQuery.XsOrSm" />
-		</div>
+	<Buttons CurrentReading="CurrentReading" OnTriennialSelected="ReturnedTriennial" />
 
-		<div class="@GlobalEnums.MediaQuery.MdOrLgOrXl.DivClass">
-			<Header CurrentReading="CurrentReading" MediaQuery="@GlobalEnums.MediaQuery.MdOrLgOrXl" />
-		</div>
-
-	</div>
-
-	@foreach (var item in ShowSection.List.OrderBy(o => o.Value))
+	@if (CurrentReading is not null)
 	{
-		<div class="card bg-light mb-3">
-			<div class="card-header">
-				<div class="d-flex justify-content-between">
-					<div>
-						<h3 class="@item!.HeaderColor"><b>@item!.Title</b></h3>
-					</div>
-
-					<div>
-						<ShowSectionButtons ShowSection="item"
-																CurrentPermutations="CurrentPermutations"
-																OnShowSectionSelected="ReturnedPermutation" />
-
-					</div>
-				</div>
-
-				<LoadingProgress>
-
-					@if (CurrentPermutations.HasFlag(Permutation.Torah) && item == ShowSection.Torah)
-					{
-						<TorahVerses CurrentReading="CurrentReading" />
-					}
-
-					@if (CurrentPermutations.HasFlag(Permutation.Haftorah) && item == ShowSection.Haftorah)
-					{
-						<HaftorahVerses CurrentReading="CurrentReading" />
-					}
-
-					@if (CurrentPermutations.HasFlag(Permutation.Brit) && item == ShowSection.Brit)
-					{
-						<BritVerses CurrentReading="CurrentReading" />
-					}
-
-				</LoadingProgress>
-
+		<br />  @* ToDo: Fix this CSS HACK *@
+		<div class="card border-primary mb-3 mt-5">
+			<div class="@GlobalEnums.MediaQuery.XsOrSm.DivClass">
+				<Header CurrentReading="CurrentReading" MediaQuery="@GlobalEnums.MediaQuery.XsOrSm" />
 			</div>
+			<div class="@GlobalEnums.MediaQuery.MdOrLgOrXl.DivClass">
+				<Header CurrentReading="CurrentReading" MediaQuery="@GlobalEnums.MediaQuery.MdOrLgOrXl" />
+			</div>
+		</div>
+
+		<TorahHaftorahBrit CurrentReading="CurrentReading" CurrentPermutations="CurrentPermutations" />
+	}
+	else
+	{
+		<br />  @* ToDo: Fix this CSS HACK *@
+		<div class="card border-danger mb-3 mt-5">
+			<div class="card-body text-center fs-1">No Parasha Found <br /> (◡︵◡)</div>
 		</div>
 	}
 
-}
-else
-{
-	<p>CurrentReading IS null!</p>
-}
+</LoadingProgress>
 
 @code {
 	[Parameter, EditorRequired] public int Id { get; set; }
 	[Parameter] public string? Slug { get; set; } // not used
 
 	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+
 	protected Permutation CurrentPermutations;
 
 	public Triennial? CurrentReading { get; set; }
@@ -90,25 +51,41 @@ else
 	protected override void OnInitialized()
 	{
 		Logger!.LogInformation("{Method}, Id: {Id}", nameof(OnInitialized), Id);
-		CurrentReading = GetCurrentReadingViaRoutes(Id);
+		try
+		{
+			CurrentReading = GetCurrentReadingViaRoutes(Id);
 
-		if (CurrentReading is not null) { PageTitleDetail = CurrentReading.TorahAbrv; }
-
-		CurrentPermutations = GetCurrentPermutation();
+			if (CurrentReading is not null)
+			{
+				PageTitleDetail = CurrentReading.TorahAbrv;
+			}
+			else
+			{
+				Toast!.ShowWarning($"Parasha Id {Id} not found; inside: {nameof(Index)}!{nameof(OnInitialized)}");
+			}
+			CurrentPermutations = GetCurrentPermutation();
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(OnInitialized));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnInitialized)}");
+		}
 	}
 
 	private Triennial? GetCurrentReadingViaRoutes(int id)
 	{
 		Triennial? _reading = Triennial.List.Where(w => w.Value == id).SingleOrDefault();
-
+		// _reading = null; Test for when the id is not found
 		if (_reading is null)
 		{
 			Logger!.LogWarning("{id}; _reading is null", id);
-			Toast!.ShowWarning($"Current reading is not found; id: {id}");
+			//Toast!.ShowWarning($"Current reading is not found; id: {id}");
 			return null;
 		}
 		else
 		{
+			Logger!.LogInformation("{Method}, _reading: {_reading}"
+			, nameof(GetCurrentReadingViaRoutes), _reading);
 			return _reading;
 		}
 	}
@@ -120,12 +97,6 @@ else
 		return (Permutation)_permutation;
 	}
 
-	private async Task ReturnedPermutation(Permutation permutation)
-	{
-		CurrentPermutations = permutation;
-		//Logger!.LogInformation("{Method} CurrentPermutations: {CurrentPermutations}", nameof(ReturnedPermutation), CurrentPermutations);
-		await CascadingAppState!.AppState!.ParashaState!.Update(CurrentPermutations);
-	}
 
 	private void ReturnedTriennial(Triennial triennial)
 	{

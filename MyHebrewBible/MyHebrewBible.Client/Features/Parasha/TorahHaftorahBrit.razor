@@ -1,0 +1,144 @@
+﻿@using MyHebrewBible.Client.Features.Parasha.Enums
+@using AlephTavEnums = MyHebrewBible.Client.Features.AlephTav.Enums
+@using MyHebrewBible.Client.Features.Parasha.Section
+
+@inject ApiClient Api
+@inject ILogger<TorahHaftorahBrit>? Logger
+@inject IToastService? Toast
+
+<LoadingComponent IsLoading="verses==null" TurnSpinnerOff="TurnSpinnerOff">
+
+	@*
+	ToDo: Embed `DetailVersesTable` inside `SummaryVersesTable` and add a detail toggle button to for each of the sections
+		<SummaryVersesTable SummaryVerseList="SummaryVerseList" />
+			<DetailVersesTable DetailVerseList="verses!.Where(w => w.SectionId == ShowSection.Brit.Value).OrderBy(o => o.ID).ToList()" />	
+	*@
+
+	<div class="card bg-light mb-3">
+
+		@foreach (var showSection in ShowSection.List.OrderBy(o => o.Value))
+		{
+			<div class="card-header">
+				<div class="d-flex justify-content-between">
+
+					<div>
+						<h3 class="@showSection!.HeaderColor"><b>@showSection!.Title</b></h3>
+					</div>
+					<div>
+						<ShowSectionButtons ShowSection="showSection"
+																CurrentPermutations="CurrentPermutations"
+																OnShowSectionSelected="ReturnedPermutation" />
+					</div>
+				</div>
+			</div>
+
+			@if (CurrentPermutations.HasFlag(Permutation.Torah) && showSection == ShowSection.Torah)
+			{
+				<div class="card-body">
+					<h5>@CurrentReading!.BCV</h5>
+					<Sections ParashaVerses="GetParashaTorahVerses(ShowSection.Torah.Value)"
+										SurroundingWords="GetSurroundingWords(isTorah: true)" />
+				</div>
+			}
+
+			@if (CurrentPermutations.HasFlag(Permutation.Haftorah) && showSection == ShowSection.Haftorah)
+			{
+				@foreach (var haftorah in SummaryVerseList!.Where(w => w.SectionId == ShowSection.Haftorah.Value).OrderBy(o => o.RowCnt))
+				{
+					<div class="card-body">
+						<h5>@haftorah.VerseRange</h5>
+						<Sections ParashaVerses="GetParashaHaftorahOrBritVerses(ShowSection.Haftorah.Value, haftorah.RowCnt)"
+							SurroundingWords="GetSurroundingWords(isTorah: false)"/>
+					</div>
+				}
+			}
+
+			@if (CurrentPermutations.HasFlag(Permutation.Brit) && showSection == ShowSection.Brit)
+			{
+				@foreach (var brit in SummaryVerseList!.Where(w => w.SectionId == ShowSection.Brit.Value).OrderBy(o => o.RowCnt))
+				{
+
+					<div class="card-body">
+						<h5>@brit.VerseRange</h5>
+						<Sections ParashaVerses="GetParashaHaftorahOrBritVerses(ShowSection.Brit.Value, brit.RowCnt)" />
+					</div>
+				}
+			}
+
+		}
+
+	</div>
+
+</LoadingComponent>
+
+@code {
+	[Parameter, EditorRequired] public Triennial? CurrentReading { get; set; }
+	[Parameter, EditorRequired] public Permutation CurrentPermutations { get; set; }
+
+	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+
+	protected bool TurnSpinnerOff = false;
+	private ICollection<Parasha>? verses = null;
+	private List<SummaryVM>? SummaryVerseList;
+	private ICollection<AlephTavWordPartContext>? SurroundingWords = null;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		try
+		{
+			// ToDo: combine `Api!.GetParashaAsync` and `Api!.GetAlephTavTriennialWordPartContextAsync` into one call
+			verses = await Api!.GetParashaAsync((long)CurrentReading!.Value);
+			SurroundingWords = await Api!.GetAlephTavTriennialWordPartContextAsync((long)CurrentReading!.Value);
+
+			SummaryVerseList = verses
+			.GroupBy(d => new { d.SectionId, d.RowCnt, d.VerseRange })
+			.Select(g => new SummaryVM(
+					g.Key.SectionId,
+					g.Key.RowCnt,
+					g.Key.VerseRange,
+					g.Count()
+			))
+			.ToList();
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(OnParametersSetAsync));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(TorahHaftorahBrit)}!{nameof(OnParametersSetAsync)}");
+		}
+		finally
+		{
+			TurnSpinnerOff = true;
+		}
+
+	}
+
+	private async Task ReturnedPermutation(Permutation permutation)
+	{
+		CurrentPermutations = permutation;
+		//Logger!.LogInformation("{Method} CurrentPermutations: {CurrentPermutations}", nameof(ReturnedPermutation), CurrentPermutations);
+		await CascadingAppState!.AppState!.ParashaState!.Update(CurrentPermutations);
+	}
+
+	protected List<Parasha> GetParashaTorahVerses(int showSection)
+	{
+		return verses!.Where(w => w.SectionId == showSection).OrderBy(o => o.ID).ToList();
+	}
+
+	protected List<Parasha> GetParashaHaftorahOrBritVerses(int showSection, long rowCnt)  // ShowSection showSection
+	{
+		return verses!.Where(w => w.SectionId == showSection).Where(w => w.RowCnt == rowCnt).OrderBy(o => o.ID).ToList();
+	}
+
+	protected List<AlephTavWordPartContext> GetSurroundingWords(bool isTorah)  // ShowSection showSection
+	{
+		if (isTorah)
+		{
+			return SurroundingWords!.Where(w => w.BookID <= MyHebrewBible.Client.Enums.BibleBook.Deuteronomy.Value).ToList();
+		}
+		else
+		{
+			return SurroundingWords!.Where(w => w.BookID > MyHebrewBible.Client.Enums.BibleBook.Deuteronomy.Value).ToList();
+		}
+	}
+
+}

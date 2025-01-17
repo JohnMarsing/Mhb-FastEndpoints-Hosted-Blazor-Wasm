@@ -13,8 +13,18 @@ public enum Permutation : int
 	//, Comments = 8
 }
 
+// ToDo: maybe rename this SectionGroupShowButton
 public abstract class ShowSection : SmartEnum<ShowSection>
 {
+
+	#region Id's
+	private static class Id
+	{
+		internal const int Torah = 1;
+		internal const int Haftorah = 2;
+		internal const int Brit = 3;
+	}
+	#endregion
 
 	#region  Declared Public Instances
 	public static readonly ShowSection Torah = new TorahSE();
@@ -32,41 +42,50 @@ public abstract class ShowSection : SmartEnum<ShowSection>
 	public abstract string HeaderColor { get; }
 
 	public abstract string ButtonLabel { get; }
+
+	//ToDo: consider renaming this ShowPermutation or VisibilityPermutation 
 	public abstract Permutation Permutation { get; }
+
+	public abstract bool HasManySections  { get; }
 	#endregion
 
 	#region Private Instantiation
 	private sealed class TorahSE : ShowSection
 	{
-		public TorahSE() : base($"{nameof(Permutation.Torah)}", (int)Permutation.Torah) { }
+		public TorahSE() : base($"{nameof(Id.Torah)}", (int)Id.Torah) { }
 		public override string ButtonLabel => "Torah";
 		public override Permutation Permutation => Permutation.Torah;
 
 		public override string Title => "Torah Verses";
 		public override string ButtonColor => BtnColors.Primary;
 		public override string HeaderColor => TextColors.Primary;
+		public override bool HasManySections => false;
+
+
 	}
 
 	private sealed class HaftorahSE : ShowSection
 	{
-		public HaftorahSE() : base($"{nameof(Permutation.Haftorah)}", (int)Permutation.Haftorah) { }
+		public HaftorahSE() : base($"{nameof(Id.Haftorah)}", (int)Id.Haftorah) { }
 		public override string ButtonLabel => "Haftorah";
 		public override Permutation Permutation => Permutation.Haftorah;
 
-		public override string Title => "Haftora Verses";
+		public override string Title => "Haftorah Verses";
 		public override string ButtonColor => BtnColors.Warning;
 		public override string HeaderColor => TextColors.Warning;
+		public override bool HasManySections => true;
 	}
 
 	private sealed class BritSE : ShowSection
 	{
-		public BritSE() : base($"{nameof(Permutation.Brit)}", (int)Permutation.Brit) { }
+		public BritSE() : base($"{nameof(Id.Brit)}", (int)Id.Brit) { }
 		public override string ButtonLabel => "Brit";
 		public override Permutation Permutation => Permutation.Brit;
 
 		public override string Title => "Brit Verses";
 		public override string ButtonColor => BtnColors.Danger;
-		public override string HeaderColor => TextColors.Danger;
+		public override string HeaderColor => TextColors.Danger; 
+		public override bool HasManySections => true;
 	}
 
 	#endregion

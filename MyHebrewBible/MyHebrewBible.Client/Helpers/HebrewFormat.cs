@@ -1,5 +1,7 @@
 ﻿namespace MyHebrewBible.Client.Helpers;
 
+// ToDo: Add similar logic for FinalEnum
+
 public enum WordEnum
 {
 	SimpleSingle = 1,

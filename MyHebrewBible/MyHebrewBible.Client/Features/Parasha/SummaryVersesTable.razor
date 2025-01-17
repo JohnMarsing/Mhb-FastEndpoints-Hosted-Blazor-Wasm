@@ -1,0 +1,20 @@
+﻿
+
+<TableTemplate Items="SummaryVerseList">
+	<TableHeader>
+		<th class="text-info">Section</th>
+		<th class="text-primary">Detail</th>
+		<th class="text-danger">Verse Range</th>
+		<th class="text-warning">Verse Count</th>
+	</TableHeader>
+	<RowTemplate>
+		<td>@context.SectionId</td>
+		<td>@context.RowCnt</td>
+		<td>@context.VerseRange</td>
+		<td>@context.VerseCount</td>
+	</RowTemplate>
+</TableTemplate>
+
+@code {
+	[Parameter, EditorRequired] public List<SummaryVM>? SummaryVerseList { get; set; }
+}
