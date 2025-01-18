@@ -1,4 +1,4 @@
-﻿// Ignore Spelling: Abrv Deu Tri YomKippur Yom Kippur Teruah
+﻿// Ignore Spelling: Abrv Deu Tri YomKippur Yom Kippur Teruah BCV
 
 using Ardalis.SmartEnum;
 using MyHebrewBible.Client.Enums;
@@ -407,6 +407,14 @@ public abstract class Triennial : SmartEnum<Triennial>
 		get
 		{
 			return $" {this.TriNum}, {BibleBook.FromValue(this.TorahVerse.BibleBook).Abrv} {this.TorahVerse.ChapterVerse}, {this.Date.ToString(DateFormat.YYYY_MM_DD)}";
+		}
+	}
+
+	public string BCV 
+	{
+		get
+		{
+			return $"{BibleBook.FromValue(this.TorahVerse.BibleBook).Title} {this.TorahVerse.ChapterVerse}";
 		}
 	}
 

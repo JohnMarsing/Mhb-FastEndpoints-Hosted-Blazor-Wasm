@@ -1,46 +1,55 @@
 ﻿@inject ApiClient Api
+@inject ILogger<MitzvotTable>? Logger
+@inject IToastService? Toast
 
 <h3>Mitzvot Table</h3>
 
- @if (mitzvot == null)
-{
-	<p><em>Loading...</em></p>
-}
-else
-{
-	<table class="table">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>Verse</th>
-				<th>Scripture ID</th>
-				<th>Description</th>
-				<th>Detail</th>
-				
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var item in mitzvot)
-			{
-				<tr>
-					<td>@item.Verse</td>
-					<td>@item.Verse</td>
-					<td>@item.BegId - @item.BegId</td>
-					<td><i>@item.Descr</i></td>
-					<td>@item.Detail</td>
-				
-				</tr>
-			}
-		</tbody>
-	</table>
-}  
-@code {
-	[Parameter, EditorRequired] public long torahFilter { get; set; }
+<LoadingComponent IsLoading="mitzvot==null" TurnSpinnerOff="TurnSpinnerOff">
 
+	<TableTemplate Items="mitzvot!.ToList()">
+		<TableHeader>
+			<th class="text-info">#</th>
+			<th class="text-info">Verse</th>
+			<th class="text-info">Scripture ID</th>
+			<th class="text-info">Description</th>
+			<th class="text-info">Detail</th>
+		</TableHeader>
+		<RowTemplate>
+			<td>@context.Id</td>
+			<td>@context.Verse</td>
+			<td>@context.BegId - @context.EndId</td>
+			<td><i>@context.Descr</i></td>
+			<td>@context.Detail</td>
+		</RowTemplate>
+	</TableTemplate>
+</LoadingComponent>
+
+@code {
+	[Parameter, EditorRequired] public Enums.TorahBookFilter? TorahBookFilter { get; set; }
+
+	protected bool TurnSpinnerOff = false;
 	private ICollection<Mitzvah>? mitzvot = null;
 
-	protected override async Task OnInitializedAsync()
+	protected override async Task OnParametersSetAsync()
 	{
-		mitzvot = await Api.GetMitzvotAsync(torahFilter, 2);
+		try
+		{
+			mitzvot = await Api.GetMitzvotAsync(TorahBookFilter!.Value);
+			if (mitzvot is null || !mitzvot.Any())
+			{
+				Toast!.ShowWarning($"{TorahBookFilter} not found (◡︵◡)");
+			}
+		}
+		catch (Exception ex)
+		{
+			//Logger!.LogError(ex, "{Method}", nameof(OnParametersSetAsync));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(MitzvotTable)}!{nameof(OnParametersSetAsync)}");
+		}
+		finally
+		{
+			TurnSpinnerOff = true;
+		}
 	}
+	// Ignore Spelling: Mitzvot
 }
+

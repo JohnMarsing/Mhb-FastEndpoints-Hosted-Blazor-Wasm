@@ -2,8 +2,18 @@
 
 namespace MyHebrewBible.Client.Enums;
 
-public  class BibleAnchors
+public class BibleAnchors
 {
+	public static MarkupString StrongsH_td(long strongs)
+	{
+		return (MarkupString)(LexiconAnchor("H", LongToInt(strongs), "", false));
+	}
+
+	// ToDo: duplicate code
+	private static int LongToInt(long l)
+	{
+		return (l <= int.MaxValue && l >= int.MinValue) ? (int)l : 1;
+	}
 
 	public static MarkupString StrongsH(int strongs, string transliteration, bool superscript = true)
 	{
@@ -20,7 +30,7 @@ public  class BibleAnchors
 	{
 		const string a1 = "<a href='https://www.blueletterbible.org/lexicon/";
 		string result;
-		result = $"{a1}{HorG}{strongs}/kjv/{(HorG == "H" ? "wlc/" : "tr/")}/0-1/' target='_blank'>{HorG}{strongs}</a> <i class='fas fa-external-link-alt'></i>";
+		result = $"{a1}{HorG}{strongs}/kjv/{(HorG == "H" ? "wlc/" : "tr/")}0-1/' target='_blank'>{HorG}{strongs}</a> <i class='fas fa-external-link-alt'></i>";
 
 		if (!String.IsNullOrEmpty(translit))
 		{

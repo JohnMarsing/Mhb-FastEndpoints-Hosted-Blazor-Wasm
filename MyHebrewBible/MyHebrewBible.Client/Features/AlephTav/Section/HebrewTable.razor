@@ -26,8 +26,8 @@
 				{
 					<tr class="@(item.Strongs != 0 && item.Strongs == StrongsAndWordCount!.Strongs ? "table-success" : "")">
 						<td class="">@item.KjvWord</td>
-						<td class="">@((MarkupString)@item.StrongsH) </td>
-						<td class="hebrew16">
+						<td class="">@GlobalEnums.BibleAnchors.StrongsH_td(item.Strongs)</td>
+						<td class="hebrew">
 							@((MarkupString)HebrewFormat.GetSpan(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3))
 							@HebrewFormat.CheckMaqqef(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3)
 						</td>
@@ -58,7 +58,7 @@
 
 	protected bool TurnSpinnerOff = false;
 
-	private ICollection<WordPart>? hebrewWords = null;
+	private ICollection<WordPartByScriptureId>? hebrewWords = null;
 	protected override async Task OnParametersSetAsync()
 	{
 

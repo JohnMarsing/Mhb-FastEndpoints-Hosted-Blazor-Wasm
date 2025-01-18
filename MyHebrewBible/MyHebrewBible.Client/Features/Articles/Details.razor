@@ -84,7 +84,7 @@ else
 
 	protected override async Task OnParametersSetAsync()
 	{
-		Logger!.LogInformation("{Method}; ArticleId: {ArticleId}", nameof(OnParametersSetAsync), ArticleId);
+		//Logger!.LogInformation("{Method}; ArticleId: {ArticleId}", nameof(OnParametersSetAsync), ArticleId);
 		try
 		{
 			article = await Api!.GetArticleAsync(ArticleId);

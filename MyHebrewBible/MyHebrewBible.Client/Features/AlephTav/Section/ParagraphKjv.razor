@@ -1,28 +1,28 @@
-﻿@if (BibleVerse == null)
+﻿@if (BibleVerseAT == null)
 {
-	<p><em>BibleVerse is Loading...</em></p>
+	<p><em>BibleVerseAT is Loading...</em></p>
 }
 else
 {
 	<p class="fs-5">
 
 		<sup class="py-0 px-1">
-			<b>@BibleVerse.Verse</b>
+			<b>@BibleVerseAT.Verse</b>
 		</sup>
 
-		@if (BibleVerse.VerseOffset != "NULL")
+		@if (BibleVerseAT.VerseOffset != "NULL")
 		{
-			<sup class="text-black-50">&nbsp;@BibleVerse.VerseOffset&nbsp;</sup>
+			<sup class="text-black-50">&nbsp;@BibleVerseAT.VerseOffset&nbsp;</sup>
 		}
 		else
 		{
 			<text>&nbsp;</text>
 		}
-		@((MarkupString)@BibleVerse.KJV!)
+		@((MarkupString)BibleVerseAT.KJV!)
 	</p>
 
 }
 
 @code {
-	[Parameter, EditorRequired] public BibleVerse? BibleVerse { get; set; }
+	[Parameter, EditorRequired] public BibleVerseAT? BibleVerseAT { get; set; }
 }

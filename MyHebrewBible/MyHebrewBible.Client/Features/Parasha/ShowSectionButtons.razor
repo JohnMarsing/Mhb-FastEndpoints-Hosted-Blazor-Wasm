@@ -2,22 +2,24 @@
 
 @* @inject ILogger<ShowSectionButtons>? Logger *@
 
+
+@* If Verbose labeling, use `Hide @ShowSection.ButtonLabel` and `Show @ShowSection.ButtonLabel` *@
+
 @if (CurrentPermutations.HasFlag(ShowSection!.Permutation))
 {
 	<button @onclick="@(() => OnButtonSubtractClicked(ShowSection))"
 					class="btn @ShowSection.ButtonColor btn-lg">
-		Hide @ShowSection.ButtonLabel <i class="fas fa-chevron-up"></i>
+		Hide <i class="fas fa-chevron-up"></i>
 	</button>
 }
 else
 {
 	<button @onclick="@(() => OnButtonAddClicked(ShowSection))"
 					class="btn @ShowSection.ButtonColor btn-lg">
-		Show @ShowSection.ButtonLabel <i class="fas fa-chevron-down"></i>
+		Show  <i class="fas fa-chevron-down"></i>
 		@* @ButtonTextPrefix @ButtonText	<i class="fas @ChevronIcon"></i> *@
 	</button>
 }
-
 
 @* 
 ToDo: This could be combined into one button
@@ -25,7 +27,6 @@ ToDo: This could be combined into one button
 	@ButtonTextPrefix @ButtonText	<i class="fas @ChevronIcon"></i> 
 </button>
 *@
-
 
 @code {
 	[Parameter, EditorRequired] public ShowSection? ShowSection { get; set; }

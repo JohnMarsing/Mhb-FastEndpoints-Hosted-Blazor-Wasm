@@ -1,0 +1,23 @@
+﻿@if (BibleVerseBCV != null)
+{
+	<p class="fs-5">
+		<sup class="text-primary"><b>@BibleVerseBCV.Verse</b></sup>
+
+		@if (BibleVerseBCV.VerseOffset != "NULL")
+		{
+			<sup class="text-black-50">&nbsp;@BibleVerseBCV.VerseOffset&nbsp;</sup>
+		}
+		else
+		{
+			<text>&nbsp;</text>
+		}
+		@((MarkupString)@BibleVerseBCV.KJV!)
+		@ParagraphEnd
+	</p>
+}
+
+
+@code {
+	[Parameter, EditorRequired] public BibleVerseBCV? BibleVerseBCV { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? ParagraphEnd { get; set; } 
+}

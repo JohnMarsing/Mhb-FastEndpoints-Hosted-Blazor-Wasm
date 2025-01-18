@@ -1,0 +1,21 @@
+﻿<h3>DetailVersesTable</h3>
+
+<TableTemplate Items="DetailVerseList">
+	<TableHeader>
+		<th class="text-info">Sec.</th>
+		<th class="text-info">BCV</th>
+		<th class="text-info">B.C.V.</th>
+		<th class="text-info">KJV</th>
+	</TableHeader>
+	<RowTemplate>
+		<td>@context.SectionId</td>
+		<td>@context.BCV</td>
+		<td>@context.BookID-@context.Chapter-@context.Verse</td>
+		<td>@context.KJV</td>
+	</RowTemplate>
+</TableTemplate>
+
+@code {
+	[Parameter, EditorRequired] public List<Parasha>? DetailVerseList { get; set; }
+	
+}

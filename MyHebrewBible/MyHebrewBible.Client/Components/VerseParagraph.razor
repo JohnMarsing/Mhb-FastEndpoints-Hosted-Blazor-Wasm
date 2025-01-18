@@ -33,7 +33,7 @@
 	[Parameter, EditorRequired] public VerseParagraphRange? VerseParagraphRange { get; set; }
 	[Parameter] public EventCallback<VerseSelected> OnVerseSelected { get; set; }
 
-	private ICollection<BibleVerse>? verses = null;
+	private ICollection<BibleVerseId>? verses = null;
 	protected bool TurnSpinnerOff = false;
 
 	protected override async Task OnParametersSetAsync()

@@ -6,7 +6,7 @@
 
 	<div class="px-1">
 		<button @onclick="ButtonClick"
-						type="button" class="mt-1 btn btn-outline-primary btn-sm" title="@BibleVerse!.BCV">
+						type="button" class="mt-1 btn btn-outline-primary btn-sm" title="@BibleVerseBC!.BCV">
 			<i class="fas fa-chevron-up"></i>
 		</button>
 	</div>
@@ -25,14 +25,14 @@
 </div>
 
 @code {
-	[Parameter, EditorRequired] public BibleVerse? BibleVerse { get; set; }
+	[Parameter, EditorRequired] public BibleVerseBC? BibleVerseBC { get; set; }
 	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
 	[Parameter, EditorRequired] public long VerseNumber { get; set; }
 	[Parameter] public EventCallback OnClose { get; set; }
 
 	private void ButtonClick()
 	{
-		// Toast!.ShowInfo($"HeaderKjvWordPart|OnClose {BibleVerse}");
+		// Toast!.ShowInfo($"HeaderKjvWordPart|OnClose {BibleVerseBC}");
 		OnClose.InvokeAsync();
 	}
 }

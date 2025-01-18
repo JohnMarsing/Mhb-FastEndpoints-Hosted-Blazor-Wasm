@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <Folder Include="Features\Translations\NGIHR\Enums\" />
+    <Folder Include="Features\VerseList\Enums\" />
   </ItemGroup>
 
 </Project>

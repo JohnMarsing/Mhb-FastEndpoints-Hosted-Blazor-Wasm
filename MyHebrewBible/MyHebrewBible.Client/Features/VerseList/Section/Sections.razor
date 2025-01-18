@@ -1,0 +1,131 @@
+﻿@inject ApiClient Api
+@inject ILogger<Sections>? Logger
+@inject IToastService? Toast
+
+
+<LoadingComponent IsLoading="verses==null" TurnSpinnerOff="TurnSpinnerOff">
+
+	@foreach (var item in verses!)
+	{
+		@if (item.DescH != "NULL")
+		{
+			@* ToDo: Still having problems syncing the navbar, title etc. with the actual chapter being shown; maybe only during slow internet connection  *@
+			<p class="text-black-50 text-center " style="font-size:11px; margin-top: -1rem !important; margin-bottom: -.05rem !important;">@item.BCV</p>
+
+			<p class="text-danger text-center fs-4 mt-1 mb-2">
+				@item.DescH
+			</p>
+		}
+
+		@if (item.DescD != "NULL")
+		{
+			<p class="text-secondary fs-6 text-end mb-0"><em>@item.DescD</em></p>
+		}
+
+		if (FocusScriptureId == 0)
+		{
+			<ParagraphKjv BibleVerseBCV="item">
+				<ParagraphEnd>
+					<AppendixDrillDownButton ScriptureId="item.ID" VerseNumber="item.Verse"
+																	 OnVerseSelected="ReturnedVerse" />
+					<sup>
+						<BibleAnchor BookChapterVerse="BookChapterVerse" IconOnly="true" ScriptureId="item.ID" Verse="item.Verse" />
+					</sup>
+				</ParagraphEnd>
+			</ParagraphKjv>
+			@* <ParagraphSAT SurroundingWords="SurroundingWords!.Where(w => w.Verse == item.Verse).ToList()" /> *@
+		}
+		else
+		{
+			if (item.ID == FocusScriptureId)
+			{
+				<div class="card border-primary mt-2 mb-4">
+					<div class="card-header">
+						<HeaderKjvWordPart BibleVerseBCV="item" BookChapterVerse="BookChapterVerse"
+															 VerseNumber="item.Verse"
+															 OnClose="ReturnedCloseEvent" />
+					</div>
+					<div class="card-body">
+						<ParagraphKjvWordPart ScriptureId="FocusScriptureId"
+																	OnStrongsSelected="ReturnedStrongs" />
+					</div>
+					<HebrewTable ScriptureId="FocusScriptureId"
+											 StrongsAndWordCount="CurrentStrongsAndWordCount"
+											 OnStrongsSelected="ReturnedStrongs" />
+				</div>
+			}
+			else
+			{
+				<ParagraphKjv BibleVerseBCV="item">
+					<ParagraphEnd>
+						<AppendixDrillDownButton ScriptureId="item.ID" VerseNumber="item.Verse"
+																		 OnVerseSelected="ReturnedVerse" />
+						<sup>
+							<BibleAnchor BookChapterVerse="BookChapterVerse" IconOnly="true" ScriptureId="item.ID" Verse="item.Verse" />
+						</sup>
+					</ParagraphEnd>
+				</ParagraphKjv>
+			}
+		}
+	}
+</LoadingComponent>
+
+
+@code {
+	[Parameter, EditorRequired] public BookChapterVerse? BookChapterVerse { get; set; }
+
+	protected long FocusScriptureId;
+	protected long VerseNumber;
+	protected bool TurnSpinnerOff = false;
+
+	private ICollection<BibleVerseBCV>? verses = null;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		Logger!.LogInformation("{Method}", nameof(OnParametersSetAsync));
+		FocusScriptureId = 0;
+
+		if (BookChapterVerse is null || BookChapterVerse!.BookAndChapter.BibleBook is null)
+		{
+			Toast!.ShowWarning($"Parameter BookChapterVerse is null");
+		}
+		else
+		{
+			try
+			{
+				await Task.Delay(5);
+				verses = await Api!.GetVerseListByBCVAsync((long)BookChapterVerse.BookAndChapter.BibleBook, 
+																										(long)BookChapterVerse.BookAndChapter.Chapter, 
+																										(long)BookChapterVerse.Verse, 
+																										(long)BookChapterVerse.Verse);
+			}
+			catch (Exception ex)
+			{
+				Logger!.LogError(ex, "{Method}", nameof(OnParametersSetAsync));
+				Toast!.ShowError($"{Global.ToastShowError} {nameof(Sections)}!{nameof(OnParametersSetAsync)}");
+			}
+			finally
+			{
+				TurnSpinnerOff = true;
+			}
+		}
+
+	}
+
+	private void ReturnedVerse(ScriptureIdAndVerseNumber scriptureIdAndVerseNumber)
+	{
+		FocusScriptureId = scriptureIdAndVerseNumber.ScriptureID;
+		VerseNumber = scriptureIdAndVerseNumber.VerseNumber;
+	}
+
+	StrongsAndWordCount? CurrentStrongsAndWordCount = new StrongsAndWordCount(0, 0);
+	private void ReturnedStrongs(StrongsAndWordCount strongsAndWordCount)
+	{
+		CurrentStrongsAndWordCount = strongsAndWordCount;
+	}
+
+	private void ReturnedCloseEvent()
+	{
+		FocusScriptureId = 0;
+	}
+}

@@ -28,31 +28,18 @@
 	</LearnMoreToggleTemplate>
 </div>
 
-<Filter CurrentFilter="CurrentFilter" OnFilterSelected="@HandleFilterSelected" />
+<Filter CurrentFilter="CurrentFilter" OnFilterSelected="@ReturnedFilter" />
 
 <LoadingProgress>
-	<MitzvotTable torahFilter="2" />
+	<MitzvotTable TorahBookFilter="CurrentFilter" />
 </LoadingProgress>
-
-
 
 @code {
 	public Enums.TorahBookFilter CurrentFilter { get; set; } = Enums.TorahBookFilter.Genesis;
 
-	protected override async Task OnInitializedAsync()
+	private void ReturnedFilter(Enums.TorahBookFilter selectedFilter)
 	{
-		await Task.Delay(5);
-		Logger!.LogInformation("Lists!MitzvahPage!{Class}!{Method}; {CurrentFilter} "
-		, nameof(Index), nameof(OnInitializedAsync), CurrentFilter);  //Page.Title
-
-		//await PopulateMitzvot(CurrentFilter);  // <MitzvotTable is populating itself, so why do I need this?
-	}
-
-	private async Task HandleFilterSelected(Enums.TorahBookFilter selectedFilter)
-	{
-		await Task.Delay(5);
 		CurrentFilter = selectedFilter;
-		//await PopulateMitzvot(selectedFilter); // <MitzvotTable is populating itself, so why do I need this?
 	}
 
 }

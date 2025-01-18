@@ -5,6 +5,7 @@
 @using AlephTavEnums = MyHebrewBible.Client.Features.AlephTav.Enums
 
 <LoadingComponent IsLoading="verses==null" TurnSpinnerOff="TurnSpinnerOff">
+
 	@foreach (var item in verses!)
 	{
 		@if (item.DescH != "NULL")
@@ -24,9 +25,9 @@
 
 		if (FocusScriptureId == 0)
 		{
-			<ParagraphKjv BibleVerse="item">
+			<ParagraphKjv BibleVerseBC="item">
 				<ParagraphEnd>
-					<AppendixSAT VerseNumber="item.Verse" SatVerseList="SatVerseList" />
+					 @* <AppendixSAT VerseNumber="item.Verse" SatVerseList="SatVerseList" />  *@
 					<AppendixDrillDownButton ScriptureId="item.ID" VerseNumber="item.Verse"
 																	 OnVerseSelected="ReturnedVerse" />
 					<sup>
@@ -34,6 +35,7 @@
 					</sup>
 				</ParagraphEnd>
 			</ParagraphKjv>
+			<ParagraphSAT SurroundingWords="SurroundingWords!.Where(w => w.Verse == item.Verse).ToList()" />
 		}
 		else
 		{
@@ -41,7 +43,7 @@
 			{
 				<div class="card border-primary mt-2 mb-4">
 					<div class="card-header">
-						<HeaderKjvWordPart BibleVerse="item" BookAndChapter="BookAndChapter"
+						<HeaderKjvWordPart BibleVerseBC="item" BookAndChapter="BookAndChapter"
 															 VerseNumber="item.Verse"
 															 OnClose="ReturnedCloseEvent" />
 					</div>
@@ -56,9 +58,9 @@
 			}
 			else
 			{
-				<ParagraphKjv BibleVerse="item">
+				<ParagraphKjv BibleVerseBC="item">
 					<ParagraphEnd>
-						<AppendixSAT VerseNumber="item.Verse" SatVerseList="SatVerseList" />
+						@* <AppendixSAT VerseNumber="item.Verse" SatVerseList="SatVerseList" /> *@
 						<AppendixDrillDownButton ScriptureId="item.ID" VerseNumber="item.Verse"
 																		 OnVerseSelected="ReturnedVerse" />
 						<sup>
@@ -78,9 +80,10 @@
 	protected long VerseNumber;
 
 	private List<AlephTavEnums.ChapterVerse>? SatVerseList = null;
+	private ICollection<AlephTavBookChapterWordPartContext>? SurroundingWords = null;
 
 	protected bool TurnSpinnerOff = false;
-	private ICollection<BibleVerse>? verses = null;
+	private ICollection<BibleVerseBC>? verses = null;
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -91,6 +94,12 @@
 			{
 				verses = await Api!.GetBookChapterAsync((long)BookAndChapter!.BibleBook, (long)BookAndChapter.Chapter);
 				SatVerseList = MyHebrewBible.Client.Components.Helper.GetSatVerseList(BookAndChapter.BibleBook, BookAndChapter.Chapter);
+				if (SatVerseList is not null)
+				{
+					//Toast!.ShowInfo($"Call GetAlephTavWordPartContextAsync; | B/C {BookAndChapter!.BibleBook}/{BookAndChapter.Chapter}");
+					SurroundingWords = await Api!.GetAlephTavBookChapterWordPartContextAsync((long)BookAndChapter!.BibleBook, (long)BookAndChapter.Chapter);
+					//Toast!.ShowInfo($" SurroundingWords.Count() {SurroundingWords.Count()}");
+				}
 			}
 		}
 		catch (Exception ex)

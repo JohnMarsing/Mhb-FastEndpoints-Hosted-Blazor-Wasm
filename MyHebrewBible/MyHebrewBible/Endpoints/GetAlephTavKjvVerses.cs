@@ -8,8 +8,8 @@ public class AlephTavKjvVersesRequest
 	public long Chapter { get; set; }
 }
 
-
-public class GetAlephTavKjvVerses(Query query, ILogger<GetAlephTavKjvVerses> logger) : Endpoint<AlephTavKjvVersesRequest, IEnumerable<BibleVerse>>
+// Using Primary Constructors
+public class GetAlephTavKjvVerses(Query query, ILogger<GetAlephTavKjvVerses> logger) : Endpoint<AlephTavKjvVersesRequest, IEnumerable<BibleVerseAT>>
 {
 	public override void Configure()
 	{
@@ -28,7 +28,7 @@ public class GetAlephTavKjvVerses(Query query, ILogger<GetAlephTavKjvVerses> log
 		, nameof(HandleAsync), request.BookID, request.Chapter);
 		try
 		{
-			IEnumerable<BibleVerse?> verses = await _db.GetAlephTavKjvVerses(request.BookID, request.Chapter);
+			IEnumerable<BibleVerseAT?> verses = await _db.GetAlephTavKjvVerses(request.BookID, request.Chapter);
 			_logger.LogDebug($"Retrieved {verses.Count()} verses from the database.");
 			await SendAsync(verses.ToList()!, cancellation: ct);
 		}
@@ -40,4 +40,15 @@ public class GetAlephTavKjvVerses(Query query, ILogger<GetAlephTavKjvVerses> log
 	}
 }
 
-// Ignore Spelling: alephtavhebrewverse: bookid, 
+public class BibleVerseAT
+{
+	public long ID { get; set; }
+	public string? BCV { get; set; }
+	public long Verse { get; set; }
+	public string? VerseOffset { get; set; }
+	public string? KJV { get; set; }
+	public string? DescH { get; set; }
+	public string? DescD { get; set; }
+}
+
+// Ignore Spelling: alephtavhebrewverse: bookid, BCV

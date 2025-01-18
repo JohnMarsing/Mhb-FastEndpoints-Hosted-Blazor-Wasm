@@ -1,5 +1,6 @@
-﻿namespace MyHebrewBible.Endpoints;
+﻿using MyHebrewBible.Client.Enums;
 
+namespace MyHebrewBible.Endpoints;
 
 public class WordPartByStrongsRequest
 {
@@ -7,28 +8,54 @@ public class WordPartByStrongsRequest
 	public long Strongs { get; set; }
 }
 
-
-public class GetWordPartByStrongs : Endpoint<WordPartByStrongsRequest, IEnumerable<WordPart>>
+public class GetWordPartByStrongs : Endpoint<WordPartByStrongsRequest, IEnumerable<WordPartByStrongs>>
 {
 	public override void Configure()
 	{
-		Get("/wordpart/{scriptureid:long}/{strongs:long}");
+		Get(Api.WordPartByStrongs.EndPoint);
 		AllowAnonymous();
 	}
 
-	private readonly Repository _db;
-	public GetWordPartByStrongs(Repository repository)
+	#region DI
+	private readonly Query _db;
+	private readonly ILogger<GetWordPartByStrongs> _logger;
+	public GetWordPartByStrongs(Query query, ILogger<GetWordPartByStrongs> logger)
 	{
-		_db = repository;
+		_db = query;
+		_logger = logger;
 	}
+	#endregion
 
 	public override async Task HandleAsync(WordPartByStrongsRequest request, CancellationToken ct)
 	{
-		IEnumerable<WordPart?> verses = await _db.GetWordPartsByStrongs(request.ScriptureId, request.Strongs);
-		await SendAsync(verses.ToList()!);
+		_logger.LogDebug("{Method} ScriptureId: {ScriptureId}; Strongs: {Strongs}"
+			, nameof(HandleAsync), request.ScriptureId, request.Strongs);
+		try
+		{
+			IEnumerable<WordPartByStrongs?> verses = await _db.GetWordPartsByStrongs(request.ScriptureId, request.Strongs);
+			await SendAsync(verses.ToList()!);
+		}
+		catch (Exception ex)
+		{
+			_logger!.LogError(ex, "{Method}", nameof(HandleAsync));
+		}
 	}
 
 }
 
+public class WordPartByStrongs
+{
+	public long ScriptureID { get; set; }
+	public long WordCount { get; set; }
+	public long SegmentCount { get; set; }
+	public long WordEnum { get; set; }
+	public string? Hebrew1 { get; set; }
+	public string? Hebrew2 { get; set; }
+	public string? Hebrew3 { get; set; }
+	public string? KjvWord { get; set; }
+	public long Strongs { get; set; }
+	public string? Transliteration { get; set; }
+	public int? FinalEnum { get; set; }
+}
 
 // Ignore Spelling: strongs, 
