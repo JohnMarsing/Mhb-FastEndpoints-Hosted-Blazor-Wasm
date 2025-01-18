@@ -6,14 +6,18 @@
 
 	<div class="px-1">
 		<button @onclick="ButtonClick"
-						type="button" class="mt-1 btn btn-outline-primary btn-sm" title="@BibleVerseBC!.BCV">
+						type="button" class="mt-1 btn btn-outline-primary btn-sm" title="@BibleVerseBCV!.BCV">
 			<i class="fas fa-chevron-up"></i>
 		</button>
 	</div>
 
 	<div class="px-1">
 		<h5 class="card-title">
-			<BibleAnchor BLB="BLBEnum.WLC" BookAndChapter="BookAndChapter" Verse="VerseNumber" />
+			@* 
+			ToDo: Test this
+				<BibleAnchor BLB="BLBEnum.WLC" BookAndChapter="BookAndChapter" Verse="VerseNumber" /> 
+			*@
+			<BibleAnchor BLB="BLBEnum.WLC" BookChapterVerse="BookChapterVerse" />
 		</h5>
 	</div>
 
@@ -25,8 +29,8 @@
 </div>
 
 @code {
-	[Parameter, EditorRequired] public BibleVerseBC? BibleVerseBC { get; set; }
-	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
+	[Parameter, EditorRequired] public BibleVerseBCV? BibleVerseBCV { get; set; }
+	[Parameter, EditorRequired] public BookChapterVerse? BookChapterVerse { get; set; }
 	[Parameter, EditorRequired] public long VerseNumber { get; set; }
 	[Parameter] public EventCallback OnClose { get; set; }
 

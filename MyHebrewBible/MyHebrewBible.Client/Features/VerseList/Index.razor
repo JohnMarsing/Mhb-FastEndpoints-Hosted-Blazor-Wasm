@@ -2,9 +2,8 @@
 
 @using MyHebrewBible.Client.Components.BibleLookup
 @using MyHebrewBible.Client.Components.BibleLookup.Toolbar;
-@using MyHebrewBible.Client.Components.VerseSections
-@using EnumCalledBy = MyHebrewBible.Client.Components.VerseSections.Enums.CalledBy
 @using MyHebrewBible.Client.State.VerseList
+@using MyHebrewBible.Client.Features.VerseList.Section
 
 @inject ILogger<Index>? Logger
 @inject IToastService? Toast
@@ -12,52 +11,49 @@
 
 <PageTitle>@PageTitle</PageTitle>
 
-@if (CurrentVM is not null)
+@if (CurrentBookChapterVerse is not null)
 {
 	<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
-		<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
+		<NavbarVerseList CurrentBookChapterVerse="CurrentBookChapterVerse"
 										 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
 										 MediaQuery="GlobalEnums.MediaQuery.Xs" />
 	</div>
 	<div class="@GlobalEnums.MediaQuery.Sm.DivClass">
-		<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
+		<NavbarVerseList CurrentBookChapterVerse="CurrentBookChapterVerse"
 										 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
 										 MediaQuery="GlobalEnums.MediaQuery.Sm" />
 	</div>
 	<div class="@GlobalEnums.MediaQuery.Md.DivClass">
-		<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
+		<NavbarVerseList CurrentBookChapterVerse="CurrentBookChapterVerse"
 										 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
 										 MediaQuery="GlobalEnums.MediaQuery.Md" />
 	</div>
 	<div class="@GlobalEnums.MediaQuery.Lg.DivClass">
-		<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
+		<NavbarVerseList CurrentBookChapterVerse="CurrentBookChapterVerse"
 										 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
 										 MediaQuery="GlobalEnums.MediaQuery.Lg" />
 	</div>
 	<div class="@GlobalEnums.MediaQuery.Xl.DivClass">
-		<NavbarVerseList CurrentBookChapterVerse="CurrentVM"
+		<NavbarVerseList CurrentBookChapterVerse="CurrentBookChapterVerse"
 										 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
 										 MediaQuery="GlobalEnums.MediaQuery.Xl" />
 	</div>
 }
 else
 {
-	<p> <b>Features\VerseList\Index.razor</b> <code>CurrentVM is not null</code></p>
+	<p> <b>Features\VerseList\Index.razor</b> <code>CurrentBookChapterVerse is not null</code></p>
 }
 
-@if (CurrentVM is not null)
+@if (CurrentBookChapterVerse is not null)
 {
-	<LoadingProgress>
-		<div class="mt-5">
-			<br />
-			<Sections VM="CurrentVM" CalledBy="EnumCalledBy.VerseList" />
-		</div>
-	</LoadingProgress>
+<LoadingProgress>
+	<div class="mt-5">
+		<br />
+		<Sections BookChapterVerse="CurrentBookChapterVerse" />
+	</div>
+</LoadingProgress>
 }
-else
-{
-	<p> <b>Features\VerseList\Index.razor</b> <code>CurrentVM is not null</code></p>
-}
+
 
 @code {
 	[Parameter, EditorRequired] public int BookId { get; set; }
@@ -66,11 +62,11 @@ else
 	[Parameter, EditorRequired] public int EndVerse { get; set; }
 
 	public Header? CurrentHeader { get; set; }
-	public BookChapterVerse? CurrentVM { get; set; }
+	public BookChapterVerse? CurrentBookChapterVerse { get; set; }
 
 	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
 
-	protected string PageTitle => GlobalEnums.BibleBookFormat.BCV(CurrentVM, useAbrv: false);
+	protected string PageTitle => GlobalEnums.BibleBookFormat.BCV(CurrentBookChapterVerse, useAbrv: false);
 
 	protected override void OnParametersSet()
 	{
@@ -88,7 +84,7 @@ else
 			}
 			else
 			{
-				CurrentVM = new BookChapterVerse(new BookAndChapter(GlobalEnums.BibleBook.FromValue(BookId), Chapter), BegVerse);
+				CurrentBookChapterVerse = new BookChapterVerse(new BookAndChapter(GlobalEnums.BibleBook.FromValue(BookId), Chapter), BegVerse);
 			}
 
 		}
@@ -118,7 +114,7 @@ else
 
 	private async Task ReturnedBookChapterVerse(BookChapterVerse vm)
 	{
-		CurrentVM = vm!;
+		CurrentBookChapterVerse = vm!;
 		await CascadingAppState!.AppState!.VerseListState!.UpdateBCV(
 			new DetailRecord(vm.BookAndChapter.BibleBook, vm.BookAndChapter.Chapter, vm.Verse, vm.Verse, "Just Got Updated"));
 	}

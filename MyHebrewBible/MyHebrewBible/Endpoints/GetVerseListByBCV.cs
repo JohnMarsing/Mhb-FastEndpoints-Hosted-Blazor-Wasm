@@ -10,7 +10,7 @@ public class VerseListByBCVRequest
 	public long EndVerse { get; set; }
 }
 
-public class GetVerseListByBCV : Endpoint<VerseListByBCVRequest, IEnumerable<BibleVerse>>
+public class GetVerseListByBCV : Endpoint<VerseListByBCVRequest, IEnumerable<BibleVerseBCV>>
 {
 	public override void Configure()
 	{
@@ -18,6 +18,7 @@ public class GetVerseListByBCV : Endpoint<VerseListByBCVRequest, IEnumerable<Bib
 		AllowAnonymous();
 	}
 
+	#region DI 
 	private readonly Query _db;
 	private readonly ILogger<GetVerseListByBCV> _logger;
 	public GetVerseListByBCV(Query query, ILogger<GetVerseListByBCV> logger)
@@ -25,6 +26,7 @@ public class GetVerseListByBCV : Endpoint<VerseListByBCVRequest, IEnumerable<Bib
 		_db = query;
 		_logger = logger;
 	}
+	#endregion
 
 	public override async Task HandleAsync(VerseListByBCVRequest request, CancellationToken ct)
 	{
@@ -32,7 +34,7 @@ public class GetVerseListByBCV : Endpoint<VerseListByBCVRequest, IEnumerable<Bib
 			, nameof(HandleAsync), request.BookID, request.Chapter, request.BegVerse, request.EndVerse);
 		try
 		{
-			IEnumerable<BibleVerse?> verses = await _db.GetVerseListByBCV(request.BookID, request.Chapter, request.BegVerse, request.EndVerse);
+			IEnumerable<BibleVerseBCV?> verses = await _db.GetVerseListByBCV(request.BookID, request.Chapter, request.BegVerse, request.EndVerse);
 			_logger.LogDebug($"Retrieved {verses.Count()} verses from the database.");
 			await SendAsync(verses.ToList()!);
 		}
@@ -43,3 +45,16 @@ public class GetVerseListByBCV : Endpoint<VerseListByBCVRequest, IEnumerable<Bib
 		}
 	}
 }
+
+public class BibleVerseBCV
+{
+	public long ID { get; set; }
+	public string? BCV { get; set; }
+	public long Verse { get; set; }
+	public string? VerseOffset { get; set; }
+	public string? KJV { get; set; }
+	public string? DescH { get; set; }
+	public string? DescD { get; set; }
+}
+
+// Ignore Spelling: BCV

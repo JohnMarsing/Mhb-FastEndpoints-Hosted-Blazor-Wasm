@@ -80,7 +80,7 @@
 	protected bool TurnSpinnerOff = false;
 	private ICollection<Parasha>? verses = null;
 	private List<SummaryVM>? SummaryVerseList;
-	private ICollection<AlephTavWordPartContext>? SurroundingWords = null;
+	private ICollection<AlephTavTriennialWordPartContext>? SurroundingWords = null;
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -129,7 +129,7 @@
 		return verses!.Where(w => w.SectionId == showSection).Where(w => w.RowCnt == rowCnt).OrderBy(o => o.ID).ToList();
 	}
 
-	protected List<AlephTavWordPartContext> GetSurroundingWords(bool isTorah)  // ShowSection showSection
+	protected List<AlephTavTriennialWordPartContext> GetSurroundingWords(bool isTorah)  // ShowSection showSection
 	{
 		if (isTorah)
 		{

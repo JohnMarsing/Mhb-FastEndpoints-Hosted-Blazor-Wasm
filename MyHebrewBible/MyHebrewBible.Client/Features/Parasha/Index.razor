@@ -50,7 +50,7 @@
 
 	protected override void OnInitialized()
 	{
-		Logger!.LogInformation("{Method}, Id: {Id}", nameof(OnInitialized), Id);
+		//Logger!.LogInformation("{Method}, Id: {Id}", nameof(OnInitialized), Id);
 		try
 		{
 			CurrentReading = GetCurrentReadingViaRoutes(Id);
@@ -78,14 +78,13 @@
 		// _reading = null; Test for when the id is not found
 		if (_reading is null)
 		{
-			Logger!.LogWarning("{id}; _reading is null", id);
+			//Logger!.LogWarning("{id}; _reading is null", id);
 			//Toast!.ShowWarning($"Current reading is not found; id: {id}");
 			return null;
 		}
 		else
 		{
-			Logger!.LogInformation("{Method}, _reading: {_reading}"
-			, nameof(GetCurrentReadingViaRoutes), _reading);
+			//Logger!.LogInformation("{Method}, _reading: {_reading}", nameof(GetCurrentReadingViaRoutes), _reading);
 			return _reading;
 		}
 	}

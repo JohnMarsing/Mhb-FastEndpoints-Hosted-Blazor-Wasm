@@ -22,7 +22,7 @@ public class HebrewFormat
 		{
 			WordEnum.SimpleSingle => hebrew1,
 			WordEnum.NrlPrefix => $"<span class='nrl'>{hebrew1}</span>{hebrew2}",
-			WordEnum.NrlSuffix => $"{hebrew1}<span class='nrl'>{hebrew2}</span>",  
+			WordEnum.NrlSuffix => $"{hebrew1}<span class='nrl'>{hebrew2}</span>",
 			WordEnum.NrlPrefixAndSuffix => $"<span class='nrl'>{hebrew1}</span>{hebrew2}<span class='nrl'>{hebrew3}</span>",
 			WordEnum.Sat => $"<span class='at-red'>{hebrew1}</span>",
 			_ => $"<span class='at-red'>{hebrew1}</span> <span class='last-seg-type-paseq'>׀</span>"  // WordEnum.SatAndPaseq
@@ -30,7 +30,7 @@ public class HebrewFormat
 	}
 
 	private const string Maqqef = "־";  // A Maqqef is a Hebrew hyphen
-	
+
 	// If the last part of the word is a Maqqef, don't add a space to the end of the word
 
 	public static string CheckMaqqef(long wordEnumLong, string hebrew1, string hebrew2, string hebrew3)
@@ -48,8 +48,8 @@ public class HebrewFormat
 		};
 	}
 
-	
+
 
 }
 
-// Ignore Spelling: Maqqef
+// Ignore Spelling: Maqqef, Strongs

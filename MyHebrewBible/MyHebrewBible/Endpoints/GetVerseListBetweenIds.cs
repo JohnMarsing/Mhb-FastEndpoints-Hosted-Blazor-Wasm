@@ -7,7 +7,7 @@ public class VerseListBetweenIdsRequest
 	public long EndId { get; set; }
 }
 
-public class GetVerseListBetweenIds : Endpoint<VerseListBetweenIdsRequest, IEnumerable<BibleVerse>>
+public class GetVerseListBetweenIds : Endpoint<VerseListBetweenIdsRequest, IEnumerable<BibleVerseId>>
 {
 	public override void Configure()
 	{
@@ -15,6 +15,7 @@ public class GetVerseListBetweenIds : Endpoint<VerseListBetweenIdsRequest, IEnum
 		AllowAnonymous();
 	}
 
+	#region DI
 	private readonly Query _db;
 	private readonly ILogger<GetVerseListBetweenIds> _logger;
 	public GetVerseListBetweenIds(Query query, ILogger<GetVerseListBetweenIds> logger)
@@ -22,6 +23,7 @@ public class GetVerseListBetweenIds : Endpoint<VerseListBetweenIdsRequest, IEnum
 		_db = query;
 		_logger = logger;
 	}
+	#endregion
 
 	public override async Task HandleAsync(VerseListBetweenIdsRequest request, CancellationToken ct)
 	{
@@ -29,7 +31,7 @@ public class GetVerseListBetweenIds : Endpoint<VerseListBetweenIdsRequest, IEnum
 		, nameof(HandleAsync), request.BegId, request.EndId);
 		try
 		{
-			IEnumerable<BibleVerse?> verses = await _db.GetVerseListBetweenIds(request.BegId, request.EndId);
+			IEnumerable<BibleVerseId?> verses = await _db.GetVerseListBetweenIds(request.BegId, request.EndId);
 			_logger.LogDebug($"Retrieved {verses.Count()} verses from the database.");
 			await SendAsync(verses.ToList()!);
 		}
@@ -41,3 +43,14 @@ public class GetVerseListBetweenIds : Endpoint<VerseListBetweenIdsRequest, IEnum
 	}
 }
 
+public class BibleVerseId
+{
+	public long ID { get; set; }
+	public string? BCV { get; set; }
+	public long Verse { get; set; }
+	public string? VerseOffset { get; set; }
+	public string? KJV { get; set; }
+	public string? DescH { get; set; }
+	public string? DescD { get; set; }
+}
+// Ignore Spelling: BCV

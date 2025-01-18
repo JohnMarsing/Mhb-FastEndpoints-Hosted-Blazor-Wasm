@@ -53,18 +53,18 @@ else
 
 	protected override async Task OnParametersSetAsync()
 	{
-		Logger!.LogInformation("{Method} CurrentFilter: {CurrentFilter}", nameof(OnParametersSetAsync), CurrentFilter);
+		//Logger!.LogInformation("{Method} CurrentFilter: {CurrentFilter}", nameof(OnParametersSetAsync), CurrentFilter);
 		await PopulateCollection(CurrentFilter);
 	}
 
 	protected async Task PopulateCollection(Enums.Filter filter)
 	{
 		long longValue = (long)filter.Value;
-		Logger!.LogInformation("{Method} filter: {FilterName}, longValue:{longValue}"
-		, nameof(PopulateCollection), filter.Name, longValue);
+		// Logger!.LogInformation("{Method} filter: {FilterName}, longValue:{longValue}"
+		// 	, nameof(PopulateCollection), filter.Name, longValue);
 		try
 		{
-			collection = await Api!.GetArticleListAsync(longValue);  // filter.Value
+			collection = await Api!.GetArticleListAsync(longValue); 
 			ArticleRowCount = collection.Count;
 		}
 		catch (Exception ex)

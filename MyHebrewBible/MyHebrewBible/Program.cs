@@ -59,7 +59,6 @@ try
 			new SqliteConnectionFactory(connectionString: builder.Configuration.GetConnectionString("Database")!));
 
 	builder.Services.AddTransient<Query>();
-	builder.Services.AddTransient<Repository>();
 	builder.Services.AddBlazoredLocalStorage();
 	//builder.Services.AddScoped<IBookChapterState, BookChapterState>();
 	builder.Services.AddScoped<AppState>();

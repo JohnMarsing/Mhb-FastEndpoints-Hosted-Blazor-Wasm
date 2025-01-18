@@ -2,32 +2,33 @@
 
 namespace MyHebrewBible.Endpoints;
 
-public class AlephTavTriennialWordPartContextRequest
+public class AlephTavBookChapterWordPartContextRequest
 {
-	public long TriennialId { get; set; }
+	public long BookID { get; set; }
+	public long Chapter { get; set; }
 }
 
-public class GetAlephTavTriennialWordPartContext(Query query, ILogger<GetAlephTavTriennialWordPartContext> logger) : Endpoint<AlephTavTriennialWordPartContextRequest, IEnumerable<AlephTavTriennialWordPartContext>>
+public class GetAlephTavBookChapterWordPartContext(Query query, ILogger<GetAlephTavBookChapterWordPartContext> logger) : 
+Endpoint<AlephTavBookChapterWordPartContextRequest, IEnumerable<AlephTavBookChapterWordPartContext>>
 {
 	public override void Configure()
 	{
-		//Get(Api.AlephTavWordPartContext.EndPoint);
-		Get(Api.AlephTavTriennialWordPartContext.EndPoint);
+		Get(Api.AlephTavBookChapterWordPartContext.EndPoint);
 		AllowAnonymous();
 	}
 
 	#region DI Using Primary Constructors
 	private readonly Query _db = query;
-	private readonly ILogger<GetAlephTavTriennialWordPartContext> _logger = logger;
+	private readonly ILogger<GetAlephTavBookChapterWordPartContext> _logger = logger;
 	#endregion
 
-	public override async Task HandleAsync(AlephTavTriennialWordPartContextRequest request, CancellationToken ct)
+	public override async Task HandleAsync(AlephTavBookChapterWordPartContextRequest request, CancellationToken ct)
 	{
-		_logger.LogDebug("{Method} Get TriennialId: {TriennialId}"
-		, nameof(HandleAsync), request.TriennialId);
+		_logger.LogDebug("{Method} Get B/C: {BookID}/{Chapter}"
+		, nameof(HandleAsync), request.BookID, request.Chapter);
 		try
 		{
-			IEnumerable<AlephTavTriennialWordPartContext?> verses = await _db.GetAlephTavTriennialWordPartContext(request.TriennialId);
+			IEnumerable<AlephTavBookChapterWordPartContext?> verses = await _db.GetAlephTavWordPartContext(request.BookID, request.Chapter);
 			_logger.LogDebug($"Retrieved {verses.Count()} verses from the database.");
 			await SendAsync(verses.ToList()!, cancellation: ct);
 		}
@@ -39,7 +40,7 @@ public class GetAlephTavTriennialWordPartContext(Query query, ILogger<GetAlephTa
 	}
 }
 
-public class AlephTavTriennialWordPartContext
+public class AlephTavBookChapterWordPartContext 
 {
 	public int Id { get; set; }                   // AlephTavVerseWordPart!Id int
 	public int ScriptureID { get; set; }          // WordPart!ScriptureID int
@@ -58,6 +59,7 @@ public class AlephTavTriennialWordPartContext
 	public string? Transliteration { get; set; }
 	public int? FinalEnum { get; set; }           // WordPart!FinalEnum int
 	public long HasTwo { get; set; }              // AlephTavVerse!HasTwo bigint
+
 }
 
-// Ignore Spelling: alephtavhebrewverse: bookid, Strongs, bigint, BCV
+// Ignore Spelling: alephtavhebrewverse: bookid, BCV, bigint, Strongs

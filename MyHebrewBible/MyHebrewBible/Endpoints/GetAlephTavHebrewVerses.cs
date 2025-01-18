@@ -39,4 +39,22 @@ public class GetAlephTavHebrewVerses(Query query, ILogger<GetAlephTavHebrewVerse
 	}
 }
 
-// Ignore Spelling: alephtavhebrewverse: bookid, 
+public class AlephTavHebrewVerse
+{
+	public long ScriptureID { get; set; }
+	public string? BCV { get; set; }
+	public long Chapter { get; set; }
+	public long Verse { get; set; }
+	public long WordCount { get; set; }
+	public long WordEnum { get; set; }
+	public string? Hebrew1 { get; set; }
+	public string? Hebrew2 { get; set; }
+	public string? Hebrew3 { get; set; }
+	public string? KjvWord { get; set; }
+	public long Strongs { get; set; }
+	public string? Transliteration { get; set; }
+	public int? FinalEnum { get; set; }
+	public long HasTwo { get; set; }
+}
+
+// Ignore Spelling: BCV, strongs, Paseq, css,  alephtavhebrewverse: bookid, 

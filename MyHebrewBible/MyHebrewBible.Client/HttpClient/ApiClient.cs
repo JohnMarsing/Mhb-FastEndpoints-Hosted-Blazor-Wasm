@@ -67,6 +67,93 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTavBookChapterWordPartContext>> GetAlephTavBookChapterWordPartContextAsync(long bookid, long chapter)
+        {
+            return GetAlephTavBookChapterWordPartContextAsync(bookid, chapter, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTavBookChapterWordPartContext>> GetAlephTavBookChapterWordPartContextAsync(long bookid, long chapter, System.Threading.CancellationToken cancellationToken)
+        {
+            if (bookid == null)
+                throw new System.ArgumentNullException("bookid");
+
+            if (chapter == null)
+                throw new System.ArgumentNullException("chapter");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/alephtavbookchapterwordpartcontext/{bookid}/{chapter}"
+                    urlBuilder_.Append("api/alephtavbookchapterwordpartcontext/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(bookid, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(chapter, System.Globalization.CultureInfo.InvariantCulture)));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<AlephTavBookChapterWordPartContext>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTavHebrewVerse>> GetAlephTavHebrewVersesAsync(long bookid, long chapter)
         {
             return GetAlephTavHebrewVersesAsync(bookid, chapter, System.Threading.CancellationToken.None);
@@ -154,7 +241,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerse>> GetAlephTavKjvVersesAsync(long bookid, long chapter)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseAT>> GetAlephTavKjvVersesAsync(long bookid, long chapter)
         {
             return GetAlephTavKjvVersesAsync(bookid, chapter, System.Threading.CancellationToken.None);
         }
@@ -162,7 +249,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerse>> GetAlephTavKjvVersesAsync(long bookid, long chapter, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseAT>> GetAlephTavKjvVersesAsync(long bookid, long chapter, System.Threading.CancellationToken cancellationToken)
         {
             if (bookid == null)
                 throw new System.ArgumentNullException("bookid");
@@ -212,7 +299,7 @@ namespace MyHebrewBible.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<BibleVerse>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<BibleVerseAT>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -241,7 +328,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTavWordPartContext>> GetAlephTavTriennialWordPartContextAsync(long triennialid)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTavTriennialWordPartContext>> GetAlephTavTriennialWordPartContextAsync(long triennialid)
         {
             return GetAlephTavTriennialWordPartContextAsync(triennialid, System.Threading.CancellationToken.None);
         }
@@ -249,7 +336,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTavWordPartContext>> GetAlephTavTriennialWordPartContextAsync(long triennialid, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTavTriennialWordPartContext>> GetAlephTavTriennialWordPartContextAsync(long triennialid, System.Threading.CancellationToken cancellationToken)
         {
             if (triennialid == null)
                 throw new System.ArgumentNullException("triennialid");
@@ -294,94 +381,7 @@ namespace MyHebrewBible.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<AlephTavWordPartContext>>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            return objectResponse_.Object;
-                        }
-                        else
-                        {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
-                        }
-                    }
-                    finally
-                    {
-                        if (disposeResponse_)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-                if (disposeClient_)
-                    client_.Dispose();
-            }
-        }
-
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTavWordPartContext>> GetAlephTavWordPartContextAsync(long bookid, long chapter)
-        {
-            return GetAlephTavWordPartContextAsync(bookid, chapter, System.Threading.CancellationToken.None);
-        }
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTavWordPartContext>> GetAlephTavWordPartContextAsync(long bookid, long chapter, System.Threading.CancellationToken cancellationToken)
-        {
-            if (bookid == null)
-                throw new System.ArgumentNullException("bookid");
-
-            if (chapter == null)
-                throw new System.ArgumentNullException("chapter");
-
-            var client_ = _httpClient;
-            var disposeClient_ = false;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-
-                    var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/alephtavwordpartcontext/{bookid}/{chapter}"
-                    urlBuilder_.Append("api/alephtavwordpartcontext/");
-                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(bookid, System.Globalization.CultureInfo.InvariantCulture)));
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(chapter, System.Globalization.CultureInfo.InvariantCulture)));
-
-                    PrepareRequest(client_, request_, urlBuilder_);
-
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-
-                    PrepareRequest(client_, request_, url_);
-
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    var disposeResponse_ = true;
-                    try
-                    {
-                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
-                        foreach (var item_ in response_.Headers)
-                            headers_[item_.Key] = item_.Value;
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-
-                        ProcessResponse(client_, response_);
-
-                        var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<AlephTavWordPartContext>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<AlephTavTriennialWordPartContext>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -516,8 +516,8 @@ namespace MyHebrewBible.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/articlelist/{filter}"
-                    urlBuilder_.Append("api/articlelist/");
+                    // Operation Path: "api/ArticleList/{filter}"
+                    urlBuilder_.Append("api/ArticleList/");
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -574,7 +574,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerse>> GetBookChapterAsync(long bookid, long chapter)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseBC>> GetBookChapterAsync(long bookid, long chapter)
         {
             return GetBookChapterAsync(bookid, chapter, System.Threading.CancellationToken.None);
         }
@@ -582,7 +582,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerse>> GetBookChapterAsync(long bookid, long chapter, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseBC>> GetBookChapterAsync(long bookid, long chapter, System.Threading.CancellationToken cancellationToken)
         {
             if (bookid == null)
                 throw new System.ArgumentNullException("bookid");
@@ -632,7 +632,7 @@ namespace MyHebrewBible.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<BibleVerse>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<BibleVerseBC>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -661,19 +661,16 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Mitzvah>> GetMitzvotAsync(long torahBookfilter, long filter)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Mitzvah>> GetMitzvotAsync(long filter)
         {
-            return GetMitzvotAsync(torahBookfilter, filter, System.Threading.CancellationToken.None);
+            return GetMitzvotAsync(filter, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Mitzvah>> GetMitzvotAsync(long torahBookfilter, long filter, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Mitzvah>> GetMitzvotAsync(long filter, System.Threading.CancellationToken cancellationToken)
         {
-            if (torahBookfilter == null)
-                throw new System.ArgumentNullException("torahBookfilter");
-
             if (filter == null)
                 throw new System.ArgumentNullException("filter");
 
@@ -688,12 +685,9 @@ namespace MyHebrewBible.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/mitzvot/book/{torahBookfilter}"
+                    // Operation Path: "api/mitzvot/book/{filter}"
                     urlBuilder_.Append("api/mitzvot/book/");
-                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(torahBookfilter, System.Globalization.CultureInfo.InvariantCulture)));
-                    urlBuilder_.Append('?');
-                    urlBuilder_.Append(System.Uri.EscapeDataString("Filter")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
-                    urlBuilder_.Length--;
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -831,7 +825,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerse>> GetVerseListBetweenIdsAsync(long begId, long endId)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseId>> GetVerseListBetweenIdsAsync(long begId, long endId)
         {
             return GetVerseListBetweenIdsAsync(begId, endId, System.Threading.CancellationToken.None);
         }
@@ -839,7 +833,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerse>> GetVerseListBetweenIdsAsync(long begId, long endId, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseId>> GetVerseListBetweenIdsAsync(long begId, long endId, System.Threading.CancellationToken cancellationToken)
         {
             if (begId == null)
                 throw new System.ArgumentNullException("begId");
@@ -889,7 +883,7 @@ namespace MyHebrewBible.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<BibleVerse>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<BibleVerseId>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -918,7 +912,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerse>> GetVerseListByBCVAsync(long bookid, long chapter, long begverse, long endverse)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseBCV>> GetVerseListByBCVAsync(long bookid, long chapter, long begverse, long endverse)
         {
             return GetVerseListByBCVAsync(bookid, chapter, begverse, endverse, System.Threading.CancellationToken.None);
         }
@@ -926,7 +920,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerse>> GetVerseListByBCVAsync(long bookid, long chapter, long begverse, long endverse, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseBCV>> GetVerseListByBCVAsync(long bookid, long chapter, long begverse, long endverse, System.Threading.CancellationToken cancellationToken)
         {
             if (bookid == null)
                 throw new System.ArgumentNullException("bookid");
@@ -986,7 +980,7 @@ namespace MyHebrewBible.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<BibleVerse>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<BibleVerseBCV>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1015,7 +1009,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPart>> GetWordPartByScriptureIdAsync(long scriptureId)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPartByScriptureId>> GetWordPartByScriptureIdAsync(long scriptureId)
         {
             return GetWordPartByScriptureIdAsync(scriptureId, System.Threading.CancellationToken.None);
         }
@@ -1023,7 +1017,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPart>> GetWordPartByScriptureIdAsync(long scriptureId, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPartByScriptureId>> GetWordPartByScriptureIdAsync(long scriptureId, System.Threading.CancellationToken cancellationToken)
         {
             if (scriptureId == null)
                 throw new System.ArgumentNullException("scriptureId");
@@ -1068,7 +1062,7 @@ namespace MyHebrewBible.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<WordPart>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<WordPartByScriptureId>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1097,7 +1091,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPart>> GetWordPartByStrongsAsync(long scriptureid, long strongs)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPartByStrongs>> GetWordPartByStrongsAsync(long scriptureid, long strongs)
         {
             return GetWordPartByStrongsAsync(scriptureid, strongs, System.Threading.CancellationToken.None);
         }
@@ -1105,7 +1099,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPart>> GetWordPartByStrongsAsync(long scriptureid, long strongs, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPartByStrongs>> GetWordPartByStrongsAsync(long scriptureid, long strongs, System.Threading.CancellationToken cancellationToken)
         {
             if (scriptureid == null)
                 throw new System.ArgumentNullException("scriptureid");
@@ -1155,7 +1149,7 @@ namespace MyHebrewBible.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<WordPart>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<WordPartByStrongs>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1374,6 +1368,63 @@ namespace MyHebrewBible.Client
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AlephTavBookChapterWordPartContext
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("Id")]
+        public int Id { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("ScriptureID")]
+        public int ScriptureID { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("BCV")]
+        public string BCV { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("BookID")]
+        public long BookID { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Chapter")]
+        public long Chapter { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Verse")]
+        public long Verse { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("WordCount")]
+        public int WordCount { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("SegmentCount")]
+        public int SegmentCount { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("WordEnum")]
+        public int WordEnum { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Hebrew1")]
+        public string Hebrew1 { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Hebrew2")]
+        public string Hebrew2 { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Hebrew3")]
+        public string Hebrew3 { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("KjvWord")]
+        public string KjvWord { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Strongs")]
+        public int Strongs { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Transliteration")]
+        public string Transliteration { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("FinalEnum")]
+        public int? FinalEnum { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("HasTwo")]
+        public long HasTwo { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AlephTavHebrewVerse
     {
 
@@ -1419,13 +1470,10 @@ namespace MyHebrewBible.Client
         [System.Text.Json.Serialization.JsonPropertyName("HasTwo")]
         public long HasTwo { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("StrongsH")]
-        public string StrongsH { get; set; }
-
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class BibleVerse
+    public partial class BibleVerseAT
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("ID")]
@@ -1452,7 +1500,7 @@ namespace MyHebrewBible.Client
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class AlephTavWordPartContext
+    public partial class AlephTavTriennialWordPartContext
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
@@ -1599,6 +1647,33 @@ namespace MyHebrewBible.Client
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class BibleVerseBC
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("ID")]
+        public long ID { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("BCV")]
+        public string BCV { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Verse")]
+        public long Verse { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("VerseOffset")]
+        public string VerseOffset { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("KJV")]
+        public string KJV { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("DescH")]
+        public string DescH { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("DescD")]
+        public string DescD { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class Mitzvah
     {
 
@@ -1671,7 +1746,61 @@ namespace MyHebrewBible.Client
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class WordPart
+    public partial class BibleVerseId
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("ID")]
+        public long ID { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("BCV")]
+        public string BCV { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Verse")]
+        public long Verse { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("VerseOffset")]
+        public string VerseOffset { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("KJV")]
+        public string KJV { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("DescH")]
+        public string DescH { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("DescD")]
+        public string DescD { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class BibleVerseBCV
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("ID")]
+        public long ID { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("BCV")]
+        public string BCV { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Verse")]
+        public long Verse { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("VerseOffset")]
+        public string VerseOffset { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("KJV")]
+        public string KJV { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("DescH")]
+        public string DescH { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("DescD")]
+        public string DescD { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class WordPartByScriptureId
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("ScriptureID")]
@@ -1707,11 +1836,44 @@ namespace MyHebrewBible.Client
         [System.Text.Json.Serialization.JsonPropertyName("FinalEnum")]
         public int? FinalEnum { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("StrongsH")]
-        public string StrongsH { get; set; }
+    }
 
-        [System.Text.Json.Serialization.JsonPropertyName("Hebrew")]
-        public string Hebrew { get; set; }
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class WordPartByStrongs
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("ScriptureID")]
+        public long ScriptureID { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("WordCount")]
+        public long WordCount { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("SegmentCount")]
+        public long SegmentCount { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("WordEnum")]
+        public long WordEnum { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Hebrew1")]
+        public string Hebrew1 { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Hebrew2")]
+        public string Hebrew2 { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Hebrew3")]
+        public string Hebrew3 { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("KjvWord")]
+        public string KjvWord { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Strongs")]
+        public long Strongs { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Transliteration")]
+        public string Transliteration { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("FinalEnum")]
+        public int? FinalEnum { get; set; }
 
     }
 

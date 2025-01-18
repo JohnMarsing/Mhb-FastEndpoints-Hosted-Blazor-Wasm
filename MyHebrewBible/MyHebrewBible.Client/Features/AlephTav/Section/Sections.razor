@@ -41,7 +41,7 @@
 										 OnVerseSelected="ReturnedVerse" />
 				</div>
 				<div class="card-body">
-					<ParagraphKjv BibleVerse="kjvVerses!.Where(w => w.ID == item.ScriptureId).SingleOrDefault()" />
+					<ParagraphKjv BibleVerseAT="kjvVerses!.Where(w => w.ID == item.ScriptureId).SingleOrDefault()" />
 					<ParagraphHebrew DetailWordList="DetailWordList?.Where(w => w.BCV == item.BCV).ToList()" />
 				</div>
 			</div>
@@ -53,7 +53,7 @@
 	[Parameter, EditorRequired] public BookAndChapterAT? BookAndChapterAT { get; set; }
 
 	private ICollection<AlephTavHebrewVerse>? DetailWordList = null;
-	private ICollection<BibleVerse>? kjvVerses = null;
+	private ICollection<BibleVerseAT>? kjvVerses = null;
 
 	private List<SummaryVM>? SummaryVerseList;
 
