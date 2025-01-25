@@ -41,25 +41,24 @@
 }
 else
 {
-	<p> <b>Features\VerseList\Index.razor</b> <code>CurrentBookChapterVerse is not null</code></p>
+	<p> <b>Features\VerseList\Index.razor</b> <code>CurrentBookChapterVerse IS null</code></p>
 }
 
 @if (CurrentBookChapterVerse is not null)
 {
-<LoadingProgress>
-	<div class="mt-5">
-		<br />
-		<Sections BookChapterVerse="CurrentBookChapterVerse" />
-	</div>
-</LoadingProgress>
+	<LoadingProgress>
+		<div class="mt-5">
+			<br />
+			<Sections BookChapterVerse="CurrentBookChapterVerse" />
+		</div>
+	</LoadingProgress>
 }
-
 
 @code {
 	[Parameter, EditorRequired] public int BookId { get; set; }
 	[Parameter, EditorRequired] public int Chapter { get; set; }
 	[Parameter, EditorRequired] public int BegVerse { get; set; }
-	[Parameter, EditorRequired] public int EndVerse { get; set; }
+	[Parameter, EditorRequired] public int EndVerse { get; set; } // currently not referenced
 
 	public Header? CurrentHeader { get; set; }
 	public BookChapterVerse? CurrentBookChapterVerse { get; set; }
@@ -68,25 +67,38 @@ else
 
 	protected string PageTitle => GlobalEnums.BibleBookFormat.BCV(CurrentBookChapterVerse, useAbrv: false);
 
-	protected override void OnParametersSet()
+	//protected override void OnParametersSet()
+	protected override async Task OnParametersSetAsync()
 	{
 		//Logger!.LogInformation("{Method}, Route BCVbVe: {BookId}/{Chapter}/{BegVerse}/{EndVerse}"
 		//	, nameof(OnParametersSet), BookId, Chapter, BegVerse, EndVerse);
 		try
 		{
-			/*
-			Header header = state!.GetHeader();
-			CurrentHeader = new BookAndChapter(BibleBook.FromValue(_state.BibleBookId), _state.Chapter);
-			*/
 			if (BookId == 0 && Chapter == 0) //  && BegVerse == 0 && EndVerse == 0 the first two should be sufficient
 			{
+				//Toast!.ShowSuccess("OnParametersSetAsync | B&C=0");
 				ReNavigateBackToThisPage();
 			}
 			else
 			{
-				CurrentBookChapterVerse = new BookChapterVerse(new BookAndChapter(GlobalEnums.BibleBook.FromValue(BookId), Chapter), BegVerse);
-			}
+				ValidationTuple vt = ValidateRouteParameters();
+				if (vt.IsValid)
+				{
+					CurrentBookChapterVerse = vt.BCV;
+					//Toast!.ShowSuccess("OnParametersSetAsync");
+					await CascadingAppState!.AppState!.VerseListState!.UpdateBCV(
+						new DetailRecord(vt.BCV!.BookAndChapter.BibleBook, vt.BCV.BookAndChapter.Chapter
+							, vt.BCV.Verse, vt.BCV.Verse, "Updated inside OnParametersSetAsync"));
 
+					ReNavigateBackToThisPage();
+				}
+				else
+				{
+					Toast!.ShowWarning(vt.ErrorMessage);
+					ReNavigateBackToThisPage();
+				}
+					
+			}
 		}
 		catch (Exception ex)
 		{
@@ -94,6 +106,37 @@ else
 			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnParametersSet)}");
 		}
 	}
+
+	private ValidationTuple ValidateRouteParameters()
+	{
+		GlobalEnums.BibleBook? bibleBook;
+		if (GlobalEnums.BibleBook.TryFromValue(BookId, out bibleBook))
+		{
+			if (Chapter >= 1 && Chapter <= bibleBook!.LastChapter)
+			{
+				if ((BegVerse >= 1 && BegVerse <= bibleBook.LastVerses[Chapter - 1]) &&
+						(EndVerse >= 1 && EndVerse <= bibleBook.LastVerses[Chapter - 1]) &&
+						(BegVerse <= EndVerse) )
+				{
+					return new ValidationTuple(true, "", new BookChapterVerse(new BookAndChapter(bibleBook, Chapter), BegVerse));
+				}
+				else
+				{
+					return new ValidationTuple(false, $"Beginning verse {BegVerse} and/or ending verse: {EndVerse} is in valid", new BookChapterVerse(new BookAndChapter(GlobalEnums.BibleBook.Genesis, 1), 1));
+				}
+
+			}
+			else
+			{
+				return new ValidationTuple(false, $"Chapter: {Chapter} is in valid", new BookChapterVerse(new BookAndChapter(GlobalEnums.BibleBook.Genesis, 1), 1));
+			}
+		}
+		else
+		{
+			return new ValidationTuple(false, $"BookId: {BookId} is in valid", new BookChapterVerse(new BookAndChapter(GlobalEnums.BibleBook.Genesis, 1), 1));
+		}
+	}
+
 
 	private void ReNavigateBackToThisPage()
 	{
@@ -111,12 +154,19 @@ else
 		}
 	}
 
-
-	private async Task ReturnedBookChapterVerse(BookChapterVerse vm)
+	//private async Task ReturnedBookChapterVerse(BookChapterVerse bookChapterVerse)
+	private void ReturnedBookChapterVerse(BookChapterVerse bookChapterVerse)
 	{
-		CurrentBookChapterVerse = vm!;
-		await CascadingAppState!.AppState!.VerseListState!.UpdateBCV(
-			new DetailRecord(vm.BookAndChapter.BibleBook, vm.BookAndChapter.Chapter, vm.Verse, vm.Verse, "Just Got Updated"));
+		NavigationManager!.NavigateTo($"verselist/{bookChapterVerse.BookAndChapter.BibleBook!.Value}/{bookChapterVerse.BookAndChapter.Chapter}/{bookChapterVerse.Verse}/{bookChapterVerse.Verse}");
+
+		Toast!.ShowInfo("ReturnedBookChapterVerse");
+		// await CascadingAppState!.AppState!.VerseListState!.UpdateBCV(
+		// 	new DetailRecord(bookChapterVerse.BookAndChapter.BibleBook, bookChapterVerse.BookAndChapter.Chapter, 
+		// 		bookChapterVerse.Verse, bookChapterVerse.Verse, "Updated inside ReturnedBookChapterVerse"));
+
+		CurrentBookChapterVerse = bookChapterVerse;
 	}
-	// Ignore Spelling: bcv
+	// Ignore Spelling: bcv, verselist, bookid, begverse, endverse
+
+
 }

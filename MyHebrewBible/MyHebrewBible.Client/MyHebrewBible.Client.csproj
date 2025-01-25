@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\VerseList\Enums\**" />
+    <Content Remove="Features\VerseList\Enums\**" />
+    <EmbeddedResource Remove="Features\VerseList\Enums\**" />
+    <None Remove="Features\VerseList\Enums\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Ardalis.SmartEnum" Version="8.0.0" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
     <PackageReference Include="Blazored.Toast" Version="4.2.1" />
@@ -26,7 +33,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Translations\NGIHR\Enums\" />
-    <Folder Include="Features\VerseList\Enums\" />
   </ItemGroup>
 
 </Project>

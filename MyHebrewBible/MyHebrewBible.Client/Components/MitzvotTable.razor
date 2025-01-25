@@ -42,7 +42,7 @@
 		}
 		catch (Exception ex)
 		{
-			//Logger!.LogError(ex, "{Method}", nameof(OnParametersSetAsync));
+			Logger!.LogError(ex, "{Method}", nameof(OnParametersSetAsync));
 			Toast!.ShowError($"{Global.ToastShowError} {nameof(MitzvotTable)}!{nameof(OnParametersSetAsync)}");
 		}
 		finally

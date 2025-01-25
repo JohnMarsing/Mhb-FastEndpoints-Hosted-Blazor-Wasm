@@ -1,4 +1,6 @@
-﻿@using AlephTavEnums = MyHebrewBible.Client.Features.AlephTav.Enums
+﻿@inject ILogger<Sections>? Logger
+
+@using AlephTavEnums = MyHebrewBible.Client.Features.AlephTav.Enums
 
 @foreach (var item in ParashaVerses!.OrderBy(o => o.ID))
 {
@@ -24,10 +26,7 @@
 				</sup>
 			</ParagraphEnd>
 		</ParagraphKjv>
-		if (SurroundingWords is not null)
-		{
-			<ParagraphSAT SurroundingWords="SurroundingWords!.Where(w => w.Verse == item.Verse).ToList()" />
-		}
+		<ParagraphSAT SurroundingWords="SurroundingWords?.Where(w => w.Verse == item.Verse).ToList()" />
 	}
 	else
 	{
@@ -66,6 +65,9 @@
 
 
 @code {
+
+
+
 	[Parameter, EditorRequired] public List<Parasha>? ParashaVerses { get; set; }
 	[Parameter] public List<AlephTavTriennialWordPartContext>? SurroundingWords { get; set; }
 

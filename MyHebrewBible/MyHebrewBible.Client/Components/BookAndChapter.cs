@@ -1,5 +1,4 @@
 ﻿using MyHebrewBible.Client.Enums;
-using MyHebrewBible.Client.Helpers;
 using AlephTavEnums = MyHebrewBible.Client.Features.AlephTav.Enums;
 
 namespace MyHebrewBible.Client.Components;
@@ -25,7 +24,9 @@ public static class Helper
 
 	public static List<AlephTavEnums.ChapterVerse>? GetSatVerseList(BibleBook? bibleBook, int chapter) // Sat=Standalone Aleph Tav 
 	{
-		if (bibleBook <= VerseFacts.LastBookInOT)
+		if (bibleBook is null) { return null;		}
+
+		if (bibleBook.IsHebrewBible)
 		{
 			AlephTavEnums.BookChaptersVerses? bibleBookWithSATs;
 			if (AlephTavEnums.BookChaptersVerses.TryFromValue(bibleBook!.Value, out bibleBookWithSATs))
