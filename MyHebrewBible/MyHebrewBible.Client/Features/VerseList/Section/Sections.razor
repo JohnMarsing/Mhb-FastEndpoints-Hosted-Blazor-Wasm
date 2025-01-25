@@ -33,7 +33,7 @@
 					</sup>
 				</ParagraphEnd>
 			</ParagraphKjv>
-			@* <ParagraphSAT SurroundingWords="SurroundingWords!.Where(w => w.Verse == item.Verse).ToList()" /> *@
+			@* <ParagraphSAT SurroundingWords="SurroundingWords?.Where(w => w.Verse == item.Verse).ToList()" /> *@
 		}
 		else
 		{
@@ -82,7 +82,7 @@
 
 	protected override async Task OnParametersSetAsync()
 	{
-		Logger!.LogInformation("{Method}", nameof(OnParametersSetAsync));
+		Logger!.LogInformation("{Method}, BCV: {BookChapterVerse}", nameof(OnParametersSetAsync), BookChapterVerse);
 		FocusScriptureId = 0;
 
 		if (BookChapterVerse is null || BookChapterVerse!.BookAndChapter.BibleBook is null)
@@ -93,11 +93,15 @@
 		{
 			try
 			{
-				await Task.Delay(5);
+				//await Task.Delay(5);
 				verses = await Api!.GetVerseListByBCVAsync((long)BookChapterVerse.BookAndChapter.BibleBook, 
 																										(long)BookChapterVerse.BookAndChapter.Chapter, 
 																										(long)BookChapterVerse.Verse, 
 																										(long)BookChapterVerse.Verse);
+				// if (verses is null || !verses.Any())
+				// {
+				// 	Toast!.ShowWarning($"No verses found; BCV: {BookChapterVerse}");
+				// }
 			}
 			catch (Exception ex)
 			{

@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using MyHebrewBible.Database;
 using MyHebrewBible.Client.Enums;
-using MyHebrewBible.Client.Features.Parasha.Enums;
 using ArticleEnums = MyHebrewBible.Client.Features.Articles.Search.Enums;
 
 namespace MyHebrewBible.Endpoints;
@@ -104,6 +103,7 @@ public class Query
 	#endregion
 
 	#region BibleVerse
+
 	public async Task<IEnumerable<BibleVerseBC?>> GetBookChapter(long bookID, long chapter)
 	{
 		try
@@ -118,6 +118,58 @@ public class Query
 		catch (Exception ex)
 		{
 			_logger!.LogError(ex, "{Method} Sql:{Sql}", nameof(GetBookChapter), Api.BookChapter.Sql);
+			throw;
+		}
+	}
+
+	
+	public async Task<IEnumerable<BibleVerseWithAT?>> GetBookChapterWithAT(long bookID, long chapter)
+	{
+		try
+		{
+			_logger.LogDebug("{Method} Get B/C: {bookID}/{chapter}", nameof(GetBookChapterWithAT), bookID, chapter);
+
+			using (var connection = await _connectionFactory.CreateConnectionAsync())
+			{
+				Parms = new DynamicParameters(new { BookId = bookID, Chapter = chapter });
+
+				// first call the detail record set because it's more likely than not it will be empty.
+				// if it is empty, then we can skip the second call.
+				var wordPart = await connection.QueryAsync<WordPart>(Api.BookChapterWithAT.SqlDetail, Parms);
+
+				if (wordPart is not null && wordPart.Any())
+				{
+					var sciptureList = await connection.QueryAsync<BibleVerseWithAT>(Api.BookChapterWithAT.Sql, Parms);
+
+					// join the two lists by using a LINQ query expression
+					var query =
+							from s in sciptureList
+							join wp in wordPart
+							on s.ID equals wp.ScriptureID into wpGroup
+							select new BibleVerseWithAT
+							{
+								ID = s.ID,
+								BCV = s.BCV,
+								Verse = s.Verse,
+								VerseOffset = s.VerseOffset,
+								KJV = s.KJV,
+								DescH = s.DescH,
+								DescD = s.DescD,
+								WordPartList = wpGroup.ToList()
+							};
+					return query;
+				}
+				else
+				{
+					// the detail record set is empty, so we can skip the second call
+					var sciptureList = await connection.QueryAsync<BibleVerseWithAT>(Api.BookChapterWithAT.Sql, Parms);
+					return sciptureList;
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+			_logger!.LogError(ex, "{Method} Sql:{Sql}", nameof(GetBookChapterWithAT), Api.BookChapterWithAT.Sql);
 			throw;
 		}
 	}

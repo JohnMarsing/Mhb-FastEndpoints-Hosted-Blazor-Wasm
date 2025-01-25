@@ -182,7 +182,11 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 	public abstract BibleBookPrevNext NavigationPrevious(int Chapter);
 	public abstract BibleBookPrevNext NavigationNext(int Chapter);
 
+	//Properties
+	public bool IsHebrewBible => this.Value <= BookChapterFacts.LastBookInOT ? true : false;
+
 	public string Dump => $" {Value}-{Abrv}-{Name}-{BookGroupEnum}";
+
 	#endregion
 
 
