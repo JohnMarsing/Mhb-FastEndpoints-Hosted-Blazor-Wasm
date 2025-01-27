@@ -67,7 +67,6 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTavBookChapterWordPartContext>> GetAlephTavBookChapterWordPartContextAsync(long bookid, long chapter)
         {
             return GetAlephTavBookChapterWordPartContextAsync(bookid, chapter, System.Threading.CancellationToken.None);
         }
