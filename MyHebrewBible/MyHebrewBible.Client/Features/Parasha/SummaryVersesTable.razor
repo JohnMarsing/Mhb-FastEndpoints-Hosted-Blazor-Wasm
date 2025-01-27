@@ -8,7 +8,13 @@
 		<th class="text-warning">Verse Count</th>
 	</TableHeader>
 	<RowTemplate>
-		<td>@context.SectionId</td>
+		<td>
+			@context.SectionId
+@* 			<button type="button" class="btn btn-xs btn-outline-primary" title="@item.Value | @item.TriNum"
+							@onclick="@(e => ButtonClick(item.Url))">
+				<i class="fas fa-chevron-down"></i>
+			</button> *@
+		</td>
 		<td>@context.RowCnt</td>
 		<td>@context.VerseRange</td>
 		<td>@context.VerseCount</td>

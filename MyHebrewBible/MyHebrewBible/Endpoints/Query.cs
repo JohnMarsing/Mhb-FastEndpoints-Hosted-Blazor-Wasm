@@ -18,7 +18,6 @@ public class Query
 	}
 	#endregion
 
-
 	#region AlephTav
 	public async Task<IEnumerable<AlephTavHebrewVerse?>> GetAlephTavHebrewVerses(long bookId, long chapter)
 	{
@@ -62,24 +61,7 @@ public class Query
 
 		}
 	}
-
-	public async Task<IEnumerable<AlephTavBookChapterWordPartContext?>> GetAlephTavWordPartContext(long bookId, long chapter)
-	{
-		using var connection = await _connectionFactory.CreateConnectionAsync();
-		Parms = new DynamicParameters(new { BookId = bookId, Chapter = chapter });
-		var verseList = await connection.QueryAsync<AlephTavBookChapterWordPartContext>(Api.AlephTavBookChapterWordPartContext.Sql, Parms);
-		return verseList;
-	}
-
-	public async Task<IEnumerable<AlephTavTriennialWordPartContext?>> GetAlephTavTriennialWordPartContext(long triennialId)
-	{
-		using var connection = await _connectionFactory.CreateConnectionAsync();
-		Parms = new DynamicParameters(new { TriennialId = triennialId });
-		var verseList = await connection.QueryAsync<AlephTavTriennialWordPartContext>(Api.AlephTavTriennialWordPartContext.Sql, Parms);
-		return verseList;
-	}
 	#endregion
-
 
 	#region Articles
 	public async Task<Article?> GetArticle(long id)
@@ -103,39 +85,18 @@ public class Query
 	#endregion
 
 	#region BibleVerse
-
-	public async Task<IEnumerable<BibleVerseBC?>> GetBookChapter(long bookID, long chapter)
-	{
-		try
-		{
-			_logger.LogDebug("{ Method} Get B/C: {bookID}/{chapter}"
-				, nameof(GetBookChapter), bookID, chapter);
-			using var connection = await _connectionFactory.CreateConnectionAsync();
-			Parms = new DynamicParameters(new { BookId = bookID, Chapter = chapter });
-			var verseList = await connection.QueryAsync<BibleVerseBC>(Api.BookChapter.Sql, Parms);
-			return verseList;
-		}
-		catch (Exception ex)
-		{
-			_logger!.LogError(ex, "{Method} Sql:{Sql}", nameof(GetBookChapter), Api.BookChapter.Sql);
-			throw;
-		}
-	}
-
-	
 	public async Task<IEnumerable<BibleVerseWithAT?>> GetBookChapterWithAT(long bookID, long chapter)
 	{
+		_logger.LogDebug("{Method} Get B/C: {bookID}/{chapter}", nameof(GetBookChapterWithAT), bookID, chapter);
 		try
 		{
-			_logger.LogDebug("{Method} Get B/C: {bookID}/{chapter}", nameof(GetBookChapterWithAT), bookID, chapter);
-
 			using (var connection = await _connectionFactory.CreateConnectionAsync())
 			{
 				Parms = new DynamicParameters(new { BookId = bookID, Chapter = chapter });
 
 				// first call the detail record set because it's more likely than not it will be empty.
 				// if it is empty, then we can skip the second call.
-				var wordPart = await connection.QueryAsync<WordPart>(Api.BookChapterWithAT.SqlDetail, Parms);
+				var wordPart = await connection.QueryAsync<CommonDtos.WordPart>(Api.BookChapterWithAT.SqlDetail, Parms);
 
 				if (wordPart is not null && wordPart.Any())
 				{
@@ -173,7 +134,7 @@ public class Query
 			throw;
 		}
 	}
-
+	#endregion
 
 	public async Task<IEnumerable<Mitzvah?>> GetMitzvot(long bookId)
 	{
@@ -196,12 +157,12 @@ public class Query
 		}
 		catch (Exception ex)
 		{
-			_logger!.LogError(ex, "{Method} Sql:{Sql}", nameof(GetVerseListByBCV), Api.BookChapter.Sql);
+			_logger!.LogError(ex, "{Method} Sql:{Sql}", nameof(GetVerseListByBCV), Api.VerseList.Sql);
 			throw;
 		}
 	}
 
-	#endregion
+
 
 	/*
 	### Note: `SqlOrderBy` is only needed if you need,  e.g., a custom `WHERE` clause
@@ -214,12 +175,56 @@ public class Query
 	```
  */
 
-	public async Task<IEnumerable<Parasha?>> GetParasha(long triennialId)
+	public async Task<IEnumerable<ParashaWithAT?>> GetParashaWithAT(long triennialId)
 	{
-		using var connection = await _connectionFactory.CreateConnectionAsync();
-		Parms = new DynamicParameters(new { TriennialId = triennialId });
-		var versList = await connection.QueryAsync<Parasha>(Api.Parasha.Sql, Parms);
-		return versList;
+		_logger.LogDebug("{Method} Get ParashaId : {triennialId}", nameof(GetParashaWithAT), triennialId);
+		try
+		{
+			using (var connection = await _connectionFactory.CreateConnectionAsync())
+			{
+				Parms = new DynamicParameters(new { TriennialId = triennialId });
+				var wordPart = await connection.QueryAsync<CommonDtos.WordPart>(Api.ParashaWithAT.SqlDetail, Parms);
+				if (wordPart is not null && wordPart.Any())
+				{
+					var sciptureList = await connection.QueryAsync<ParashaWithAT>(Api.ParashaWithAT.Sql, Parms);
+
+					// join the two lists by using a LINQ query expression
+					var query =
+							from s in sciptureList
+							join wp in wordPart
+							on s.ID equals wp.ScriptureID into wpGroup
+							select new ParashaWithAT
+							{
+								ID = s.ID,
+								SectionId = s.SectionId,
+								RowCnt = s.RowCnt,
+								VerseRange = s.VerseRange,
+								BCV = s.BCV,
+								BookID = s.BookID,
+								Chapter = s.Chapter,
+								Verse = s.Verse,
+								VerseOffset = s.VerseOffset,
+								KJV = s.KJV,
+								DescH = s.DescH,
+								DescD = s.DescD,
+								WordPartList = wpGroup.ToList()
+							};
+					return query;
+				}
+				else
+				{
+					// the detail record set is empty, so we can skip the second call
+					var sciptureList = await connection.QueryAsync<ParashaWithAT>(Api.ParashaWithAT.Sql, Parms);
+					return sciptureList;
+				}
+			}
+		}
+
+		catch (Exception ex)
+		{
+			_logger!.LogError(ex, "{Method} Sql:{Sql}", nameof(GetBookChapterWithAT), Api.BookChapterWithAT.Sql);
+			throw;
+		}
 	}
 
 	public async Task<IEnumerable<BibleVerseId?>> GetVerseListBetweenIds(long begId, long endId)

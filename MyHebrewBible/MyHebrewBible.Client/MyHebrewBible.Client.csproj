@@ -35,4 +35,11 @@
     <Folder Include="Features\Translations\NGIHR\Enums\" />
   </ItemGroup>
 
+	<!--
+	<ItemGroup>
+		<None Include="..\MyHebrewBible\wwwroot\app.css" Link="wwwroot\app.css" />
+		<None Include="..\MyHebrewBible\wwwroot\lib\bootstrap\css\bootstrap.min.css" Link="wwwroot\bootstrap\bootstrap.min.css"/>
+	</ItemGroup>
+	-->
+	
 </Project>

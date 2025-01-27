@@ -45,36 +45,16 @@ public class GetBookChapterWithAT : Endpoint<BookChapterWithATRequest, IEnumerab
 	}
 }
 
-public class BibleVerseWithAT
+public record BibleVerseWithAT
 {
-	public long ID { get; set; }
-	public string? BCV { get; set; }
-	public long Verse { get; set; }
-	public string? VerseOffset { get; set; }
-	public string? KJV { get; set; }
-	public string? DescH { get; set; }
-	public string? DescD { get; set; }
-	public List<WordPart>? WordPartList { get; set; }
-}
-
-public record WordPart
-{
-	public int Id { get; init; }                   // AlephTavVerseWordPart!Id int
+	public long ID { get; init; }
 	public string? BCV { get; init; }
-	public long BookID { get; init; }              // Scripture!BookID is bigint
-	public long Chapter { get; init; }             // Scripture!Chapter is bigint
-	public long Verse { get; init; }               // Scripture!Verse is bigint
-	public int ScriptureID { get; init; }          // WordPart!ScriptureID int
-	public int WordCount { get; init; }
-	public int SegmentCount { get; init; }
-	public int WordEnum { get; init; }             // WordPart!WordEnum int
-	public string? Hebrew1 { get; init; }
-	public string? Hebrew2 { get; init; }
-	public string? Hebrew3 { get; init; }
-	public string? KjvWord { get; init; }
-	public int Strongs { get; init; }              // WordPart!Strongs int
-	public string? Transliteration { get; init; }
-	public int? FinalEnum { get; init; }           // WordPart!FinalEnum int
+	public long Verse { get; init; }
+	public string? VerseOffset { get; init; }
+	public string? KJV { get; init; }
+	public string? DescH { get; init; }
+	public string? DescD { get; init; }
+	public List<CommonDtos.WordPart>? WordPartList { get; init; }
 }
 
-// Ignore Spelling: BCV, Strongs
+// Ignore Spelling: BCV

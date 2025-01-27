@@ -2,7 +2,6 @@
 @inject ILogger<Sections>? Logger
 @inject IToastService? Toast
 
-
 <LoadingComponent IsLoading="verses==null" TurnSpinnerOff="TurnSpinnerOff">
 
 	@foreach (var item in verses!)
@@ -26,8 +25,12 @@
 		{
 			<ParagraphKjv BibleVerseBCV="item">
 				<ParagraphEnd>
-					<AppendixDrillDownButton ScriptureId="item.ID" VerseNumber="item.Verse"
-																	 OnVerseSelected="ReturnedVerse" />
+
+					@if (BookChapterVerse!.BookAndChapter.BibleBook!.IsHebrewBible)
+					{
+						<AppendixDrillDownButton ScriptureId="item.ID" VerseNumber="item.Verse"
+																		 OnVerseSelected="ReturnedVerse" />
+					}
 					<sup>
 						<BibleAnchor BookChapterVerse="BookChapterVerse" IconOnly="true" ScriptureId="item.ID" Verse="item.Verse" />
 					</sup>
@@ -82,7 +85,7 @@
 
 	protected override async Task OnParametersSetAsync()
 	{
-		Logger!.LogInformation("{Method}, BCV: {BookChapterVerse}", nameof(OnParametersSetAsync), BookChapterVerse);
+		//Logger!.LogInformation("{Method}, BCV: {BookChapterVerse}", nameof(OnParametersSetAsync), BookChapterVerse);
 		FocusScriptureId = 0;
 
 		if (BookChapterVerse is null || BookChapterVerse!.BookAndChapter.BibleBook is null)
@@ -98,10 +101,6 @@
 																										(long)BookChapterVerse.BookAndChapter.Chapter, 
 																										(long)BookChapterVerse.Verse, 
 																										(long)BookChapterVerse.Verse);
-				// if (verses is null || !verses.Any())
-				// {
-				// 	Toast!.ShowWarning($"No verses found; BCV: {BookChapterVerse}");
-				// }
 			}
 			catch (Exception ex)
 			{

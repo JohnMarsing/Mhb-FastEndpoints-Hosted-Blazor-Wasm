@@ -1,5 +1,4 @@
 ﻿@using MyHebrewBible.Client.Features.Parasha.Enums
-@using AlephTavEnums = MyHebrewBible.Client.Features.AlephTav.Enums
 @using MyHebrewBible.Client.Features.Parasha.Section
 
 @inject ApiClient Api
@@ -36,8 +35,7 @@
 			{
 				<div class="card-body">
 					<h5>@CurrentReading!.BCV</h5>
-					<Sections ParashaVerses="GetParashaTorahVerses(ShowSection.Torah.Value)"
-										SurroundingWords="GetSurroundingWords(isTorah: true)" />
+					<Sections ParashaVerses="GetParashaTorahVerses(ShowSection.Torah.Value)" ShowSection="showSection" />
 				</div>
 			}
 
@@ -47,8 +45,7 @@
 				{
 					<div class="card-body">
 						<h5>@haftorah.VerseRange</h5>
-						<Sections ParashaVerses="GetParashaHaftorahOrBritVerses(ShowSection.Haftorah.Value, haftorah.RowCnt)"
-							SurroundingWords="GetSurroundingWords(isTorah: false)"/>
+						<Sections ParashaVerses="GetParashaHaftorahOrBritVerses(ShowSection.Haftorah.Value, haftorah.RowCnt)" ShowSection="showSection" />
 					</div>
 				}
 			}
@@ -57,10 +54,9 @@
 			{
 				@foreach (var brit in SummaryVerseList!.Where(w => w.SectionId == ShowSection.Brit.Value).OrderBy(o => o.RowCnt))
 				{
-
 					<div class="card-body">
 						<h5>@brit.VerseRange</h5>
-						<Sections ParashaVerses="GetParashaHaftorahOrBritVerses(ShowSection.Brit.Value, brit.RowCnt)" />
+						<Sections ParashaVerses="GetParashaHaftorahOrBritVerses(ShowSection.Brit.Value, brit.RowCnt)" ShowSection="showSection" />
 					</div>
 				}
 			}
@@ -78,18 +74,15 @@
 	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
 
 	protected bool TurnSpinnerOff = false;
-	private ICollection<Parasha>? verses = null;
-	private List<SummaryVM>? SummaryVerseList;
-	private ICollection<AlephTavTriennialWordPartContext>? SurroundingWords = null;
-
+	private ICollection<ParashaWithAT>? verses = null;  
+	
+	private List<SummaryVM>? SummaryVerseList;  
+	
 	protected override async Task OnParametersSetAsync()
 	{
 		try
 		{
-			// ToDo: combine `Api!.GetParashaAsync` and `Api!.GetAlephTavTriennialWordPartContextAsync` into one call
-			verses = await Api!.GetParashaAsync((long)CurrentReading!.Value);
-			SurroundingWords = await Api!.GetAlephTavTriennialWordPartContextAsync((long)CurrentReading!.Value);
-
+			verses = await Api!.GetParashaWithATAsync((long)CurrentReading!.Value);
 			SummaryVerseList = verses
 			.GroupBy(d => new { d.SectionId, d.RowCnt, d.VerseRange })
 			.Select(g => new SummaryVM(
@@ -119,26 +112,14 @@
 		await CascadingAppState!.AppState!.ParashaState!.Update(CurrentPermutations);
 	}
 
-	protected List<Parasha> GetParashaTorahVerses(int showSection)
+	protected List<ParashaWithAT> GetParashaTorahVerses(int showSection)
 	{
 		return verses!.Where(w => w.SectionId == showSection).OrderBy(o => o.ID).ToList();
 	}
 
-	protected List<Parasha> GetParashaHaftorahOrBritVerses(int showSection, long rowCnt)  // ShowSection showSection
+	protected List<ParashaWithAT> GetParashaHaftorahOrBritVerses(int showSection, long rowCnt)  // ShowSection showSection
 	{
 		return verses!.Where(w => w.SectionId == showSection).Where(w => w.RowCnt == rowCnt).OrderBy(o => o.ID).ToList();
-	}
-
-	protected List<AlephTavTriennialWordPartContext> GetSurroundingWords(bool isTorah)  // ShowSection showSection
-	{
-		if (isTorah)
-		{
-			return SurroundingWords!.Where(w => w.BookID <= MyHebrewBible.Client.Enums.BibleBook.Deuteronomy.Value).ToList();
-		}
-		else
-		{
-			return SurroundingWords!.Where(w => w.BookID > MyHebrewBible.Client.Enums.BibleBook.Deuteronomy.Value).ToList();
-		}
 	}
 
 }
