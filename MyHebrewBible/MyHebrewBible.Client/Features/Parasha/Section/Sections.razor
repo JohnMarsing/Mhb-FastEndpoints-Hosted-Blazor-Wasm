@@ -1,6 +1,6 @@
-﻿@inject ILogger<Sections>? Logger
+﻿@using MyHebrewBible.Client.Features.Parasha.Enums
 
-@using AlephTavEnums = MyHebrewBible.Client.Features.AlephTav.Enums
+@inject ILogger<Sections>? Logger
 
 @foreach (var item in ParashaVerses!.OrderBy(o => o.ID))
 {
@@ -19,14 +19,21 @@
 		<ParagraphKjv Parasha="item">
 			<ParagraphEnd>
 				@* <AppendixSAT VerseNumber="item.Verse" SatVerseList="SatVerseList" /> *@
-				<AppendixDrillDownButton ScriptureId="item.ID" VerseNumber="item.Verse"
-																 OnVerseSelected="ReturnedVerse" />
+				@if (ShowSection != ShowSection.Brit)
+				{
+					<AppendixDrillDownButton ScriptureId="item.ID" VerseNumber="item.Verse"
+																	 OnVerseSelected="ReturnedVerse" />
+				}
 				<sup>
 					<BibleAnchor BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)" IconOnly="true" ScriptureId="item.ID" Verse="item.Verse" />
 				</sup>
 			</ParagraphEnd>
 		</ParagraphKjv>
-		<ParagraphSAT SurroundingWords="SurroundingWords?.Where(w => w.Verse == item.Verse).ToList()" />
+		@if (item.WordPartList.Count() > 0)
+		{
+			<ParagraphSAT SurroundingWords="item.WordPartList.ToList()" />
+		}
+
 	}
 	else
 	{
@@ -52,8 +59,11 @@
 			<ParagraphKjv Parasha="item">
 				<ParagraphEnd>
 					@* <AppendixSAT VerseNumber="item.Verse" SatVerseList="SatVerseList" /> *@
-					<AppendixDrillDownButton ScriptureId="item.ID" VerseNumber="item.Verse"
-																	 OnVerseSelected="ReturnedVerse" />
+					@if (ShowSection != ShowSection.Brit)
+					{
+						<AppendixDrillDownButton ScriptureId="item.ID" VerseNumber="item.Verse"
+																		 OnVerseSelected="ReturnedVerse" />
+					}
 					<sup>
 						<BibleAnchor BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)" IconOnly="true" ScriptureId="item.ID" Verse="item.Verse" />
 					</sup>
@@ -63,19 +73,17 @@
 	}
 }
 
-
 @code {
 
-
-
-	[Parameter, EditorRequired] public List<Parasha>? ParashaVerses { get; set; }
-	[Parameter] public List<AlephTavTriennialWordPartContext>? SurroundingWords { get; set; }
+	[Parameter, EditorRequired] public List<ParashaWithAT>? ParashaVerses { get; set; }
+	[Parameter, EditorRequired] public ShowSection? ShowSection { get; set; }
 
 	protected long FocusScriptureId;
 	protected long VerseNumber;
 
 	protected BookAndChapter GetBookAndChapter(long bookId, long chapter)
 	{
+		//Logger!.LogInformation("{Method}, B/C: {bookId}/{chapter}", nameof(GetBookAndChapter), bookId, chapter);
 		return new BookAndChapter(MyHebrewBible.Client.Enums.BibleBook.FromValue(LongToInt(bookId)), LongToInt(chapter));
 	}
 

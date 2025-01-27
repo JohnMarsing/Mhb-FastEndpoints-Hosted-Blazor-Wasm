@@ -1,24 +1,24 @@
 ﻿
-@if (BibleVerseBC != null)
+@if (BibleVerseWithAT != null)
 {
  <p class="fs-5">
-		<sup class="text-primary"><b>@BibleVerseBC.Verse</b></sup>
+		<sup class="text-primary"><b>@BibleVerseWithAT.Verse</b></sup>
 		
-		@if (BibleVerseBC.VerseOffset != "NULL")
+		@if (BibleVerseWithAT.VerseOffset != "NULL")
 		{
-			<sup class="text-black-50">&nbsp;@BibleVerseBC.VerseOffset&nbsp;</sup>
+			<sup class="text-black-50">&nbsp;@BibleVerseWithAT.VerseOffset&nbsp;</sup>
 		}
 		else
 		{
 			<text>&nbsp;</text>
 		}
-		@((MarkupString)@BibleVerseBC.KJV!)
+		@((MarkupString)@BibleVerseWithAT.KJV!)
 		@ParagraphEnd
 	</p>
 }
 
 
 @code {
-	[Parameter, EditorRequired] public BibleVerseBC? BibleVerseBC { get; set; }
+	[Parameter, EditorRequired] public BibleVerseWithAT? BibleVerseWithAT { get; set; }
 	[Parameter, EditorRequired] public RenderFragment? ParagraphEnd { get; set; } /* DrillDownButton GetSAT */
 }

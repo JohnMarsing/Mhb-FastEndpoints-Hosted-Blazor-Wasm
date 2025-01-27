@@ -6,7 +6,7 @@
 
 	<div class="px-1">
 		<button @onclick="ButtonClick"
-						type="button" class="mt-1 btn btn-outline-primary btn-sm" title="@BibleVerseBC!.BCV">
+						type="button" class="mt-1 btn btn-outline-primary btn-sm" title="@BibleVerseWithAT!.BCV">
 			<i class="fas fa-chevron-up"></i>
 		</button>
 	</div>
@@ -25,7 +25,7 @@
 </div>
 
 @code {
-	[Parameter, EditorRequired] public BibleVerseBC? BibleVerseBC { get; set; }
+	[Parameter, EditorRequired] public BibleVerseWithAT? BibleVerseWithAT { get; set; }
 	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
 	[Parameter, EditorRequired] public long VerseNumber { get; set; }
 	[Parameter] public EventCallback OnClose { get; set; }

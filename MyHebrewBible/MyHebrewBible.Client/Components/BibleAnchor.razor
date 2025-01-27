@@ -26,7 +26,7 @@
 	[Parameter] public string? Text { get; set; } = string.Empty;
 	[Parameter] public string? Id { get; set; } = string.Empty;
 
-	const string Icon = " <i class='fas fa-external-link-alt'></i>";
+	const string Icon = "<i class='fas fa-external-link-alt'></i>";
 	const char SQ = '\'';  // "'"  @$"'"
 	string Abbrv = string.Empty;
 	string? Target = "_blank";
@@ -130,7 +130,7 @@
 	private MarkupString Final()
 	{
 		StringBuilder sb = new();
-		sb.Append("<a href='").Append(Href).Append(SQ)
+		sb.Append(" <a href='").Append(Href).Append(SQ)
 			.Append(" title='").Append(Title).Append(SQ)
 			.Append(" id='").Append(Id).Append(SQ)
 			.Append(" target='").Append(Target).Append(SQ)

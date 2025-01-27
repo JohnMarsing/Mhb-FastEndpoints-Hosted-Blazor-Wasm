@@ -2,10 +2,7 @@
 @inject ILogger<Sections>? Logger
 @inject IToastService? Toast
 
-@using AlephTavEnums = MyHebrewBible.Client.Features.AlephTav.Enums
-
 <LoadingComponent IsLoading="verses==null" TurnSpinnerOff="TurnSpinnerOff">
-
 	@foreach (var item in verses!)
 	{
 		@if (item.DescH != "NULL")
@@ -25,28 +22,23 @@
 
 		if (FocusScriptureId == 0)
 		{
-			<ParagraphKjv BibleVerseBC="item">
+			<ParagraphKjv BibleVerseWithAT="item">
 				<ParagraphEnd>
 					@*<AppendixSAT VerseNumber="item.Verse" SatVerseList="SatVerseList" />*@
 					@if (BookAndChapter!.BibleBook!.IsHebrewBible)
 					{
 						<AppendixDrillDownButton ScriptureId="item.ID" VerseNumber="item.Verse"
 																		 OnVerseSelected="ReturnedVerse" />
-
 					}
 					<sup>
 						<BibleAnchor BookAndChapter="BookAndChapter" IconOnly="true" ScriptureId="item.ID" Verse="item.Verse" />
 					</sup>
 				</ParagraphEnd>
 			</ParagraphKjv>
-			<ParagraphSAT SurroundingWords="SurroundingWords?.Where(w => w.Verse == item.Verse).ToList()" />
-
-					@* ToDo: && item.VerseHasSAT 
-			@if (BookAndChapter!.BibleBook!.IsHebrewBible && verses is not null)
+	    @if (item.WordPartList.Count() >0)
 			{
-
+				<ParagraphSAT SurroundingWords="item.WordPartList.ToList()" />
 			}
-			*@
 		}
 		else
 		{
@@ -54,7 +46,7 @@
 			{
 				<div class="card border-primary mt-2 mb-4">
 					<div class="card-header">
-						<HeaderKjvWordPart BibleVerseBC="item" BookAndChapter="BookAndChapter"
+						<HeaderKjvWordPart BibleVerseWithAT="item" BookAndChapter="BookAndChapter"
 															 VerseNumber="item.Verse"
 															 OnClose="ReturnedCloseEvent" />
 					</div>
@@ -69,7 +61,7 @@
 			}
 			else
 			{
-				<ParagraphKjv BibleVerseBC="item">
+				<ParagraphKjv BibleVerseWithAT="item">
 					<ParagraphEnd>
 						@* <AppendixSAT VerseNumber="item.Verse" SatVerseList="SatVerseList" /> *@
 						<AppendixDrillDownButton ScriptureId="item.ID" VerseNumber="item.Verse"
@@ -89,12 +81,9 @@
 
 	protected long FocusScriptureId;
 	protected long VerseNumber;
-
-	private List<AlephTavEnums.ChapterVerse>? SatVerseList = null;
-	private ICollection<AlephTavBookChapterWordPartContext>? SurroundingWords = null;
-
 	protected bool TurnSpinnerOff = false;
-	private ICollection<BibleVerseBC>? verses = null;
+
+	private ICollection<BibleVerseWithAT>? verses = null;
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -104,15 +93,7 @@
 			FocusScriptureId = 0;
 			if (BookAndChapter is not null && BookAndChapter!.BibleBook is not null)
 			{
-				verses = await Api!.GetBookChapterAsync((long)BookAndChapter!.BibleBook, (long)BookAndChapter.Chapter);
-				//Logger!.LogInformation("{Method}, verses.Count: {Count}", nameof(OnParametersSetAsync), verses.Count());
-				SatVerseList = MyHebrewBible.Client.Components.Helper.GetSatVerseList(BookAndChapter.BibleBook, BookAndChapter.Chapter);
-				if (SatVerseList is not null)
-				{
-					//Toast!.ShowInfo($"Call GetAlephTavWordPartContextAsync; | B/C {BookAndChapter!.BibleBook}/{BookAndChapter.Chapter}");
-					SurroundingWords = await Api!.GetAlephTavBookChapterWordPartContextAsync((long)BookAndChapter!.BibleBook, (long)BookAndChapter.Chapter);
-					//Toast!.ShowInfo($" SurroundingWords.Count() {SurroundingWords.Count()}");
-				}
+				verses = await Api!.GetBookChapterWithATAsync((long)BookAndChapter!.BibleBook, (long)BookAndChapter.Chapter);
 			}
 		}
 		catch (Exception ex)
@@ -124,10 +105,7 @@
 		{
 			TurnSpinnerOff = true;
 		}
-
 	}
-
-
 
 	private void ReturnedVerse(ScriptureIdAndVerseNumber scriptureIdAndVerseNumber)
 	{
@@ -145,5 +123,4 @@
 	{
 		FocusScriptureId = 0;
 	}
-
 }

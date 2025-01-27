@@ -23,7 +23,7 @@
 </div>
 
 @code {
-	[Parameter, EditorRequired] public Parasha? Parasha { get; set; }
+	[Parameter, EditorRequired] public ParashaWithAT? Parasha { get; set; }
 	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
 	[Parameter, EditorRequired] public long VerseNumber { get; set; }
 	[Parameter] public EventCallback OnClose { get; set; }

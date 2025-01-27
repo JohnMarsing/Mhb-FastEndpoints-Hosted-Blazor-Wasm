@@ -4,6 +4,19 @@
 @using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
 @using MyHebrewBible.Client.Features.Parasha
 
+
+<div class="card mb-3 border-success">
+	<div class="card-header">
+		<h4 class="card-title text-center">Test some API Calls</h4>
+	</div>
+		<div class="card-body">
+		<a class="btn btn-primary btn-xs" href="/api/Parasha/14">API Parasha 14 (Gen 17)</a>
+		<a class="btn btn-primary btn-xs" href="/api/Parasha/15">API Parasha 15 (Gen 18)</a>
+		<a class="btn btn-primary btn-xs" href="/Parasha/15">Parasha 15</a>
+	</div>
+	<p class="card-footer text-center">FOOTER</p>
+</div>
+
 <div class="card mb-3 border-warning">
 	<div class="card-header">
 		<h4 class="card-title text-center"><code>HaftorahVerses is null</code></h4>
@@ -46,7 +59,6 @@
 	</div>
 </div>
 
-
 <div class="card mb-3 border-warning">
 	<div class="card-header">
 		<h4 class="card-title text-center"><code>HaftorahVerses is not null</code></h4>
@@ -78,8 +90,6 @@
 	@* <p class="card-footer text-center"><code><small>BibleBook.List.Count</small></code>: @BibleBook.List.Count</p> *@
 </div>
 
-
-
 <div class="card mb-3 border-warning">
 	<div class="card-header">
 		<h4 class="card-title text-center"><code>BritVerses is not null</code></h4>
@@ -108,7 +118,6 @@
 		</TableTemplate>
 	</div>
 </div>
-
 
 
 @code {

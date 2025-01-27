@@ -1,6 +1,4 @@
 ﻿using Ardalis.SmartEnum;
-using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums;
-using ArticleEnums = MyHebrewBible.Client.Features.Articles.Search.Enums;
 
 namespace MyHebrewBible.Client.Enums;
 
@@ -11,38 +9,32 @@ public abstract class Api : SmartEnum<Api>
 	{
 		internal const int AlephTavHebrewVerses = 1;
 		internal const int AlephTavKjvVerses = 2;
-		internal const int AlephTavBookChapterWordPartContext = 3;
-		internal const int AlephTavTriennialWordPartContext = 4;
-		internal const int Article = 5;
-		internal const int ArticleList = 6;
-		internal const int BookChapter = 7;
-		internal const int Mitzvah = 8;
-		internal const int Parasha = 9;
-		internal const int VerseList = 10;
-		internal const int VerseListBetweenIds = 11;
-		internal const int WordPartKjv = 12;
-		internal const int WordPartByScriptureId = 13;
-		internal const int WordPartByStrongs = 14;
-		internal const int BookChapterWithAT = 15;
+		internal const int Article = 3;
+		internal const int ArticleList = 4;
+		internal const int BookChapterWithAT = 5;
+		internal const int Mitzvah = 6;
+		internal const int ParashaWithAT = 7;
+		internal const int VerseList = 8;
+		internal const int VerseListBetweenIds = 0;
+		internal const int WordPartKjv = 10;
+		internal const int WordPartByScriptureId = 11;
+		internal const int WordPartByStrongs = 12;
 	}
 	#endregion
 
 	#region  Declared Public Instances
 	public static readonly Api AlephTavHebrewVerses = new AlephTavHebrewVersesSE();
 	public static readonly Api AlephTavKjvVerses = new AlephTavKjvVersesSE();
-	public static readonly Api AlephTavBookChapterWordPartContext = new AlephTavBookChapterWordPartContextSE();
-	public static readonly Api AlephTavTriennialWordPartContext = new AlephTavTriennialWordPartContextSE();
 	public static readonly Api Article = new ArticleSE();
 	public static readonly Api ArticleList = new ArticleListSE();
-	public static readonly Api BookChapter = new BookChapterSE();
+	public static readonly Api BookChapterWithAT = new BookChapterWithATSE();
 	public static readonly Api Mitzvah = new MitzvahSE();
-	public static readonly Api Parasha = new ParashaSE();
+	public static readonly Api ParashaWithAT = new ParashaWithATSE();
 	public static readonly Api VerseList = new VerseListSE();
 	public static readonly Api VerseListBetweenIds = new VerseListBetweenIdsSE();
 	public static readonly Api WordPartKjv = new WordPartKjvSE();
 	public static readonly Api WordPartByScriptureId = new WordPartByScriptureIdSE();
 	public static readonly Api WordPartByStrongs = new WordPartByStrongsSE();
-	public static readonly Api BookChapterWithAT = new BookChapterWithATSE();
 	#endregion
 
 	private Api(string name, int value) : base(name, value) { } // Constructor
@@ -89,39 +81,6 @@ FROM Scripture s
 		//DECLARE  @BookId int=1,  @Chapter int=17
 	}
 
-	private sealed class AlephTavBookChapterWordPartContextSE : Api
-	{
-		public AlephTavBookChapterWordPartContextSE() : base($"{nameof(Id.AlephTavBookChapterWordPartContext)}", Id.AlephTavBookChapterWordPartContext) { }
-		public override string EndPoint => "/alephtavbookchapterwordpartcontext/{bookid:long}/{chapter:long}";
-		public override string Sql => @"
-SELECT Id, BCV, BookID, Chapter, Verse
-, ScriptureID, WordCount, SegmentCount, WordEnum
-, Hebrew1, Hebrew2, Hebrew3
-, KjvWord, Strongs, Transliteration, FinalEnum
-FROM vwAlephTavVerseWordPart
-WHERE BookID=@BookId and Chapter=@Chapter
-ORDER BY Id
-";
-		public override string SqlOrderBy => "";
-		public override string SqlDetail => "";
-	}
-
-	private sealed class AlephTavTriennialWordPartContextSE : Api
-	{
-		public AlephTavTriennialWordPartContextSE() : base($"{nameof(Id.AlephTavTriennialWordPartContext)}", Id.AlephTavTriennialWordPartContext) { }
-		public override string EndPoint => "/alephtavtriennialwordpartcontext/{triennialid:long}";
-		public override string Sql => @"
-SELECT Id, BCV, BookID, Chapter, Verse
-, ScriptureID, WordCount, SegmentCount, WordEnum
-, Hebrew1, Hebrew2, Hebrew3
-, KjvWord, Strongs, Transliteration, FinalEnum --, TriennialId
-FROM vwAlephTavTriennialWordPart
-WHERE TriennialId=@TriennialId
-ORDER BY Id
-";
-		public override string SqlOrderBy => "";
-		public override string SqlDetail => "";
-	}
 
 	private sealed class ArticleSE : Api
 	{
@@ -153,17 +112,28 @@ WHERE a.Id=@Id
 		*/
 	}
 
-	private sealed class BookChapterSE : Api
+	private sealed class BookChapterWithATSE : Api
 	{
-		public BookChapterSE() : base($"{nameof(Id.BookChapter)}", Id.BookChapter) { }
-		public override string EndPoint => "/bookchapter/{bookid:long}/{chapter:long}";
+		public BookChapterWithATSE() : base($"{nameof(Id.BookChapterWithAT)}", Id.BookChapterWithAT) { }
+		public override string EndPoint => "/bookchapterwithat/{bookid:long}/{chapter:long}";
 		public override string Sql => @"
-		SELECT ID, BCV, Verse, VerseOffset, KJV, DescH, DescD  
-		FROM Scripture
-		WHERE BookID=@BookId and Chapter=@Chapter
-		ORDER BY ID";
+SELECT ID, BCV, Verse, VerseOffset, KJV, DescH, DescD  
+FROM Scripture
+WHERE BookID=@BookId and Chapter=@Chapter
+ORDER BY ID
+		";
+
+		public override string SqlDetail => @"
+SELECT Id, BCV, BookID, Chapter, Verse
+, ScriptureID, WordCount, SegmentCount, WordEnum
+, Hebrew1, Hebrew2, Hebrew3
+, KjvWord, Strongs, Transliteration, FinalEnum
+--, HasTwo
+FROM vwAlephTavVerseWordPart
+--WHERE BookID=@BookId and Chapter=@Chapter
+ORDER BY Id	
+		";
 		public override string SqlOrderBy => "";
-		public override string SqlDetail => "";
 	}
 
 
@@ -182,20 +152,30 @@ ORDER BY BegId
 		public override string SqlDetail => "";
 	}
 
-	private sealed class ParashaSE : Api
+	private sealed class ParashaWithATSE : Api
 	{
-		public ParashaSE() : base($"{nameof(Id.Parasha)}", Id.Parasha) { }
+		public ParashaWithATSE() : base($"{nameof(Id.ParashaWithAT)}", Id.ParashaWithAT) { }
 		public override string EndPoint => "/Parasha/{id:long}";
 		public override string Sql => @"
 SELECT s.ID, t.SectionId, t.RowCnt, t.VerseRange
-, s.BCV, s.BookID, s.Chapter, s.Verse, s.KJV, s.VerseOffset, s.DescH, s.DescD
+, s.BCV, s.BookID, s.Chapter, s.Verse, s.VerseOffset, s.KJV, s.DescH, s.DescD
 FROM  Scripture s
 CROSS JOIN Triennial t 
 wHERE t.Id = @TriennialId AND s.ID BETWEEN ScriptureID_Beg AND ScriptureID_End
 ORDER BY s.ID
 ";
 		public override string SqlOrderBy => "";
-		public override string SqlDetail => "";
+
+		public override string SqlDetail => @"
+SELECT Id, BCV, BookID, Chapter, Verse
+, ScriptureID, WordCount, SegmentCount, WordEnum
+, Hebrew1, Hebrew2, Hebrew3
+, KjvWord, Strongs, Transliteration, FinalEnum
+--, HasTwo
+FROM vwAlephTavTriennialWordPart
+--WHERE TriennialId=@TriennialId
+ORDER BY Id	
+		";
 	}
 
 	private sealed class VerseListSE : Api
@@ -267,32 +247,6 @@ ORDER BY WordCount, SegmentCount
 		public override string SqlOrderBy => "";
 		public override string SqlDetail => "";
 	}
-
-	private sealed class BookChapterWithATSE : Api
-	{
-		public BookChapterWithATSE() : base($"{nameof(Id.BookChapterWithAT)}", Id.BookChapterWithAT) { }
-		public override string EndPoint => "/bookchapterwithat/{bookid:long}/{chapter:long}";
-		public override string Sql => @"
-SELECT ID, BCV, Verse, VerseOffset, KJV, DescH, DescD  
-FROM Scripture
-WHERE BookID=@BookId and Chapter=@Chapter
-ORDER BY ID
-		";
-
-		public override string SqlDetail => @"
-SELECT Id, BCV, BookID, Chapter, Verse
-, ScriptureID, WordCount, SegmentCount, WordEnum
-, Hebrew1, Hebrew2, Hebrew3
-, KjvWord, Strongs, Transliteration, FinalEnum
---, HasTwo
-FROM vwAlephTavVerseWordPart
---WHERE BookID=@BookId and Chapter=@Chapter
-WHERE BookID=39 and Chapter=4
-ORDER BY Id	
-		";
-		public override string SqlOrderBy => "";
-	}
-
 
 	#endregion //SE
 
