@@ -9,7 +9,7 @@ public class BookChapterWithATRequest
 	public long Chapter { get; set; }
 }
 
-public class GetBookChapterWithAT : Endpoint<BookChapterWithATRequest, IEnumerable<BibleVerseWithAT>>
+public class GetBookChapterWithAT : Endpoint<BookChapterWithATRequest, IEnumerable<BookChapterWithAT>>
 {
 	public override void Configure()
 	{
@@ -33,7 +33,7 @@ public class GetBookChapterWithAT : Endpoint<BookChapterWithATRequest, IEnumerab
 			, nameof(HandleAsync), request.BookID, request.Chapter);
 		try
 		{
-			IEnumerable<BibleVerseWithAT?> verses = await _db.GetBookChapterWithAT(request.BookID, request.Chapter);
+			IEnumerable<BookChapterWithAT?> verses = await _db.GetBookChapterWithAT(request.BookID, request.Chapter);
 			_logger.LogDebug($"Retrieved {verses.Count()} verses from the database.");
 			await SendAsync(verses.ToList()!);
 		}
@@ -45,7 +45,7 @@ public class GetBookChapterWithAT : Endpoint<BookChapterWithATRequest, IEnumerab
 	}
 }
 
-public record BibleVerseWithAT
+public record BookChapterWithAT
 {
 	public long ID { get; init; }
 	public string? BCV { get; init; }
