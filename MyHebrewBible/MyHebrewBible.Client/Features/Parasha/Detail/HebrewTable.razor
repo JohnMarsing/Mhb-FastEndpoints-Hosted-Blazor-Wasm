@@ -9,6 +9,7 @@
 	<div class="mx-1">
 		<table class="@HeaderCSS">
 			<thead class="@TheadCSS">
+				@* <tr>@TableHeader</tr> *@
 				<tr>
 					<th class="">KJV</th>
 					<th class="">Strong&apos;s</th>
@@ -22,7 +23,7 @@
 			<tbody>
 				@foreach (var item in hebrewWords!)
 				{
-					<tr class="@(item.Strongs != 0 && item.Strongs == StrongsAndWordCount!.Strongs ? "table-success" : "")">
+					<tr class="@(item.Strongs != 0 && item.Strongs == WordSelected!.Strongs ? "table-success" : "")">
 						<td class="">@item.KjvWord</td>
 						<td class="">@GlobalEnums.BibleAnchors.StrongsH_td(item.Strongs)</td>
 						<td class="hebrew">
@@ -39,7 +40,6 @@
 					</tr>
 				}
 			</tbody>
-			@* 				<tfoot>	<tr class="@TableFooterColor">@TableFooter</tr>	</tfoot> *@
 		</table>
 	</div>
 
@@ -48,15 +48,13 @@
 @code {
 
 	[Parameter, EditorRequired] public long ScriptureId { get; set; }
-	[Parameter, EditorRequired] public StrongsAndWordCount? StrongsAndWordCount { get; set; }
-	[Parameter] public EventCallback<StrongsAndWordCount?> OnStrongsSelected { get; set; }
+	[Parameter, EditorRequired] public WordSelected? WordSelected { get; set; }
 
 	protected bool TurnSpinnerOff = false;
 
 	private ICollection<WordPartByScriptureId>? hebrewWords = null;
 	protected override async Task OnParametersSetAsync()
 	{
-
 		try
 		{
 			hebrewWords = await Api!.GetWordPartByScriptureIdAsync(ScriptureId);
@@ -71,7 +69,6 @@
 		{
 			TurnSpinnerOff = true;
 		}
-
 	}
 
 	private void ButtonAddClick(string hebrew)
@@ -82,5 +79,4 @@
 
 	protected string HeaderCSS { get; set; } = "table table-condensed table-sm";
 	public string TheadCSS { get; set; } = "table-light";
-
 }

@@ -1,11 +1,10 @@
 ﻿@inject ApiClient Api
 @inject IToastService? Toast
-@inject ILogger<ParagraphKjvWordPart>? Logger
+@inject ILogger<ParagraphWithWordButtons>? Logger
 
 <LoadingComponent IsLoading="kjvWords==null" TurnSpinnerOff="TurnSpinnerOff">
 
 	<p class="fs-5">
-
 		@foreach (var item in kjvWords!)
 		{
 			if (item.Strongs is not null)
@@ -34,7 +33,7 @@
 @code {
 
 	[Parameter, EditorRequired] public long ScriptureId { get; set; }
-	[Parameter] public EventCallback<StrongsAndWordCount?> OnStrongsSelected { get; set; }
+	[Parameter] public EventCallback<WordSelected?> OnWordSelected { get; set; }
 
 	protected bool TurnSpinnerOff = false;
 
@@ -49,7 +48,7 @@
 		catch (Exception ex)
 		{
 			Logger!.LogError(ex, "{Method}", nameof(OnParametersSetAsync));
-			Toast!.ShowError($"{Global.ToastShowError} {nameof(ParagraphKjvWordPart)}!{nameof(OnParametersSetAsync)}");
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(ParagraphWithWordButtons)}!{nameof(OnParametersSetAsync)}");
 		}
 		finally
 		{
@@ -57,14 +56,12 @@
 		}
 	}
 
-	protected long Strongs = 0;
 	protected long WordCount = 0;
 	private void ButtonWordClick(long strongs, long wordCount)
 	{
 		//Toast!.ShowInfo($"Strongs/WordCount: {strongs}/{wordCount}");
-		Strongs = strongs;
 		WordCount = wordCount;
-		OnStrongsSelected.InvokeAsync(new StrongsAndWordCount(strongs, wordCount));
+		OnWordSelected.InvokeAsync(new WordSelected(strongs, wordCount));
 	}
 
 	// Ignore Spelling: Strongs

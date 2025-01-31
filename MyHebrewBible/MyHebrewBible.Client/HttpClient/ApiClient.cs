@@ -405,7 +405,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseWithAT>> GetBookChapterWithATAsync(long bookid, long chapter)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BookChapterWithAT>> GetBookChapterWithATAsync(long bookid, long chapter)
         {
             return GetBookChapterWithATAsync(bookid, chapter, System.Threading.CancellationToken.None);
         }
@@ -413,7 +413,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseWithAT>> GetBookChapterWithATAsync(long bookid, long chapter, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BookChapterWithAT>> GetBookChapterWithATAsync(long bookid, long chapter, System.Threading.CancellationToken cancellationToken)
         {
             if (bookid == null)
                 throw new System.ArgumentNullException("bookid");
@@ -463,7 +463,7 @@ namespace MyHebrewBible.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<BibleVerseWithAT>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<BookChapterWithAT>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1364,7 +1364,7 @@ namespace MyHebrewBible.Client
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class BibleVerseWithAT
+    public partial class BookChapterWithAT
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("ID")]

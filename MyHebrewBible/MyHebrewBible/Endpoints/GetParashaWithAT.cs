@@ -45,18 +45,18 @@ public class GetParashaWithAT : Endpoint<ParashaWithATRequest, IEnumerable<Paras
 
 public record ParashaWithAT
 {
-	public long ID { get; set; }            // s.ID, 
-	public long SectionId { get; set; }     // t.SectionId, 
-	public long RowCnt { get; set; }        // t.RowCnt, 
-	public string? VerseRange { get; set; } // t.VerseRange,
-	public string? BCV { get; set; }        // s.BCV, 
-	public long BookID { get; set; }        // s.BookID, 
-	public long Chapter { get; set; }       // s.Chapter, 
-	public long Verse { get; set; }         // s.Verse, 
-	public string? VerseOffset { get; set; } //s.VerseOffset
-	public string? KJV { get; set; }        // s.KJV, 
-	public string? DescH { get; set; }      // s.DescH, 
-	public string? DescD { get; set; }      // s.DescD
+	public long ID { get; init; }            // s.ID, 
+	public long SectionId { get; init; }     // t.SectionId, 
+	public long RowCnt { get; init; }        // t.RowCnt, 
+	public string? VerseRange { get; init; } // t.VerseRange,
+	public string? BCV { get; init; }        // s.BCV, 
+	public long BookID { get; init; }        // s.BookID, 
+	public long Chapter { get; init; }       // s.Chapter, 
+	public long Verse { get; init; }         // s.Verse, 
+	public string? VerseOffset { get; init; } //s.VerseOffset
+	public string? KJV { get; init; }        // s.KJV, 
+	public string? DescH { get; init; }      // s.DescH, 
+	public string? DescD { get; init; }      // s.DescD
 	public List<CommonDtos.WordPart>? WordPartList { get; init; }
 }
 // Ignore Spelling: Cnt, BCV

@@ -119,24 +119,24 @@ public abstract class BLB : SmartEnum<BLB>
 
 	#endregion
 
-	// Deprecated Used by Features\BookChapter\Verses\WordSegmentsCard.razor
-	public MarkupString AnchorBCV(BookAndChapter? bookAndChapter, int verseNumber)
+
+
+	//ToDo: do a range of verses https://www.blueletterbible.org/kjv/ecc/2/5-6/s_661005
+	public MarkupString AnchorBCV(int book, int chapter, int verse)
 	{
-		if (bookAndChapter is not null && bookAndChapter.BibleBook is not null)
+		BookChapterVerse? bcv = null;
+		BookAndChapter? bc = new BookAndChapter(BibleBook.FromValue(book), chapter);
+		if (bc is not null)
 		{
-			string
-			s = "<a";                                           // Start anchor attribute
-			s += " href='https://www.blueletterbible.org/";     // start href with a '
-			s += $"{this.Name}/";
-			s += $"{BibleBookFormat.BLB_HrefSuffix(bookAndChapter, verseNumber)}";
-			s += $"/{this.Suffix}";
-			s += "'";                                           // end href with a '
-			s += $" title='{this.Name} BLB' target='_blank'";
-			s += ">";                                           // End anchor attribute
-			s += $"{BibleBookFormat.BCV(bookAndChapter!, verseNumber)}";
-			s += "</a>";
-			s += " <i class='fas fa-external-link-alt'></i>";
-			return (MarkupString)s;
+			bcv = new BookChapterVerse(bc, verse);
+			if (bcv is not null)
+			{
+				return BuildMarkup(bcv);
+			}
+			else
+			{
+				return (MarkupString)"<a href='https://www.blueletterbible.org> <i class='fas fa-external-link-alt'></i></a>";
+			}
 		}
 		else
 		{
@@ -144,8 +144,29 @@ public abstract class BLB : SmartEnum<BLB>
 		}
 	}
 
-	// used by Components\VerseSections\WordSegmentsCard.razor
-	public MarkupString AnchorBCV(BookChapterVerse? bookChapterVerse)
+	public MarkupString AnchorBCV(CommonVerses.Enums.VerseRange verseRange)
+	{
+		BookChapterVerse? bcv = null;
+		BookAndChapter? bc = new BookAndChapter(BibleBook.FromValue(verseRange.BibleBook.Value), verseRange.Chapter);
+		if (bc is not null)
+		{
+			bcv = new BookChapterVerse(bc, verseRange.BegVerse);
+			if (bcv is not null)
+			{
+				return BuildMarkup(bcv);
+			}
+			else
+			{
+				return (MarkupString)"<a href='https://www.blueletterbible.org> <i class='fas fa-external-link-alt'></i></a>";
+			}
+		}
+		else
+		{
+			return (MarkupString)"<a href='https://www.blueletterbible.org> <i class='fas fa-external-link-alt'></i></a>";
+		}
+	}
+	
+	private MarkupString BuildMarkup(BookChapterVerse? bookChapterVerse)
 	{
 		if (bookChapterVerse is not null && bookChapterVerse.BookAndChapter.BibleBook is not null)
 		{
@@ -170,62 +191,6 @@ public abstract class BLB : SmartEnum<BLB>
 			return (MarkupString)"<a href='https://www.blueletterbible.org> <i class='fas fa-external-link-alt'></i></a>";
 		}
 	}
-
-	//ToDo: do a range of verses https://www.blueletterbible.org/kjv/ecc/2/5-6/s_661005
-	public MarkupString AnchorBCV(int book, int chapter, int verse)
-	{
-		BookChapterVerse? bcv = null;
-		BookAndChapter? bc = new BookAndChapter(BibleBook.FromValue(book), chapter);
-		if (bc is not null)
-		{
-			bcv = new BookChapterVerse(bc, verse);
-			if (bcv is not null)
-			{
-				return AnchorBCV(bcv);
-			}
-			else
-			{
-				return (MarkupString)"<a href='https://www.blueletterbible.org> <i class='fas fa-external-link-alt'></i></a>";
-			}
-		}
-		else
-		{
-			return (MarkupString)"<a href='https://www.blueletterbible.org> <i class='fas fa-external-link-alt'></i></a>";
-		}
-	}
-
-	public MarkupString AnchorBCV(CommonVerses.Enums.VerseRange verseRange)
-	{
-		BookChapterVerse? bcv = null;
-		BookAndChapter? bc = new BookAndChapter(BibleBook.FromValue(verseRange.BibleBook.Value), verseRange.Chapter);
-		if (bc is not null)
-		{
-			bcv = new BookChapterVerse(bc, verseRange.BegVerse);
-			if (bcv is not null)
-			{
-				return AnchorBCV(bcv);
-			}
-			else
-			{
-				return (MarkupString)"<a href='https://www.blueletterbible.org> <i class='fas fa-external-link-alt'></i></a>";
-			}
-		}
-		else
-		{
-			return (MarkupString)"<a href='https://www.blueletterbible.org> <i class='fas fa-external-link-alt'></i></a>";
-		}
-	}
-
 }
 
-// Ignore Spelling: KJV NKJV WLC Strongs
-
-/*
-s += $"{bookChapterVerse.BookAndChapter.BibleBook.Abrv} {bookChapterVerse.BookAndChapter.Chapter} {bookChapterVerse.Verse}";
-
-public static class Constants
-{
-	public const string HREF = "https://www.blueletterbible.org";
-}
-
-*/
+// Ignore Spelling: BLB, KJV, NKJV, WLC, Strongs

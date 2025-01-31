@@ -1,0 +1,90 @@
+﻿@using MyHebrewBible.Client.Features.BookChapter.Summary;
+@using MyHebrewBible.Client.Features.BookChapter.Detail;
+
+@inject ApiClient Api
+@inject ILogger<Sections>? Logger
+@inject IToastService? Toast
+
+<LoadingComponent IsLoading="verses==null" TurnSpinnerOff="TurnSpinnerOff">
+	@foreach (var item in verses!)
+	{
+		<TitleSubtitle Title="@item.DescH" Subtitle="@item.DescD" BCV="@item.BCV" />
+
+		if (FocusScriptureId == 0)
+		{
+			<Paragraph BookAndChapter="BookAndChapter"
+								 Verse="item"
+								 OnVerseSelectedPassThrough="ReturnedVerse" />
+
+			@if (item.WordPartList.Count() > 0)
+			{
+				<SatAndSurroundingWords SurroundingWords="item.WordPartList.ToList()" />
+			}
+		}
+		else
+		{
+			if (item.ID == FocusScriptureId)
+			{
+				<Card BookAndChapter="BookAndChapter"
+							Verse="item"
+							ScriptureId="FocusScriptureId"
+							WordSelected="CurrentWordSelected"
+							OnClose="ReturnedCloseEvent"
+							OnWordSelected="ReturnedWord" />
+			}
+			else
+			{
+				<Paragraph BookAndChapter="BookAndChapter"
+									 Verse="item"
+									 OnVerseSelectedPassThrough="ReturnedVerse" />
+			}
+		}
+	}
+</LoadingComponent>
+
+@code {
+	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
+
+	protected long FocusScriptureId;
+	protected bool TurnSpinnerOff = false;
+
+	private ICollection<BookChapterWithAT>? verses = null;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		try
+		{
+			//Logger!.LogInformation("{Method}, BookAndChapter: {BookAndChapter}", nameof(OnParametersSetAsync), BookAndChapter);
+			FocusScriptureId = 0;
+			if (BookAndChapter is not null && BookAndChapter!.BibleBook is not null)
+			{
+				verses = await Api!.GetBookChapterWithATAsync((long)BookAndChapter!.BibleBook, (long)BookAndChapter.Chapter);
+			}
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(OnParametersSetAsync));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Sections)}!{nameof(OnParametersSetAsync)}");
+		}
+		finally
+		{
+			TurnSpinnerOff = true;
+		}
+	}
+
+	private void ReturnedVerse(long scriptureId)
+	{
+		FocusScriptureId = scriptureId;
+	}
+
+	WordSelected? CurrentWordSelected = new WordSelected(0, 0);
+	private void ReturnedWord(WordSelected wordSelected)
+	{
+		CurrentWordSelected = wordSelected;
+	}
+
+	private void ReturnedCloseEvent()
+	{
+		FocusScriptureId = 0;
+	}
+}

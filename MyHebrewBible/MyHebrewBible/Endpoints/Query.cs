@@ -85,7 +85,7 @@ public class Query
 	#endregion
 
 	#region BibleVerse
-	public async Task<IEnumerable<BibleVerseWithAT?>> GetBookChapterWithAT(long bookID, long chapter)
+	public async Task<IEnumerable<BookChapterWithAT?>> GetBookChapterWithAT(long bookID, long chapter)
 	{
 		_logger.LogDebug("{Method} Get B/C: {bookID}/{chapter}", nameof(GetBookChapterWithAT), bookID, chapter);
 		try
@@ -100,14 +100,14 @@ public class Query
 
 				if (wordPart is not null && wordPart.Any())
 				{
-					var sciptureList = await connection.QueryAsync<BibleVerseWithAT>(Api.BookChapterWithAT.Sql, Parms);
+					var sciptureList = await connection.QueryAsync<BookChapterWithAT>(Api.BookChapterWithAT.Sql, Parms);
 
 					// join the two lists by using a LINQ query expression
 					var query =
 							from s in sciptureList
 							join wp in wordPart
 							on s.ID equals wp.ScriptureID into wpGroup
-							select new BibleVerseWithAT
+							select new BookChapterWithAT
 							{
 								ID = s.ID,
 								BCV = s.BCV,
@@ -123,7 +123,7 @@ public class Query
 				else
 				{
 					// the detail record set is empty, so we can skip the second call
-					var sciptureList = await connection.QueryAsync<BibleVerseWithAT>(Api.BookChapterWithAT.Sql, Parms);
+					var sciptureList = await connection.QueryAsync<BookChapterWithAT>(Api.BookChapterWithAT.Sql, Parms);
 					return sciptureList;
 				}
 			}

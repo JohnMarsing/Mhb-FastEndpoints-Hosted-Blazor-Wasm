@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\AlephTav\Section\" />
     <Folder Include="Features\Translations\NGIHR\Enums\" />
   </ItemGroup>
 
