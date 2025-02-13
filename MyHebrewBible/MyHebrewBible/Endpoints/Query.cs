@@ -197,7 +197,8 @@ public class Query
 							{
 								ID = s.ID,
 								SectionId = s.SectionId,
-								RowCnt = s.RowCnt,
+								GroupCount = s.GroupCount,
+								ScriptureID_Beg = s.ScriptureID_Beg,
 								VerseRange = s.VerseRange,
 								BCV = s.BCV,
 								BookID = s.BookID,

@@ -1,0 +1,87 @@
+﻿@using MyHebrewBible.Client.Components.Report
+@using ReportEnums =MyHebrewBible.Client.Components.Report.Enums
+
+@inject ApiClient Api
+@inject ILogger<ReportWrapper>? Logger
+@inject IToastService? Toast
+
+
+<LoadingComponent IsLoading="verses==null" TurnSpinnerOff="TurnSpinnerOff">
+	<Sections Verses="GetBookChapterVerses()"
+						CalledBy="ReportEnums.CalledBy.BookChapter" />
+</LoadingComponent>
+
+@code {
+	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
+	protected long FocusScriptureId;
+
+	protected bool TurnSpinnerOff = false;
+
+	private ICollection<BookChapterWithAT>? verses = null;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		try
+		{
+			//Logger!.LogInformation("{Method}, BookAndChapter: {BookAndChapter}", nameof(OnParametersSetAsync), BookAndChapter);
+			FocusScriptureId = 0;
+			if (BookAndChapter is not null && BookAndChapter!.BibleBook is not null)
+			{
+				verses = await Api!.GetBookChapterWithATAsync((long)BookAndChapter!.BibleBook, (long)BookAndChapter.Chapter);
+			}
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(OnParametersSetAsync));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(ReportWrapper)}!{nameof(OnParametersSetAsync)}");
+		}
+		finally
+		{
+			TurnSpinnerOff = true;
+		}
+	}
+
+	protected List<ReportModel> GetBookChapterVerses()
+	{
+		return verses!
+				.OrderBy(o => o.ID)
+				.Select(bc => MapToReportModel(bc))
+				.ToList();
+	}
+
+	private ReportModel MapToReportModel(BookChapterWithAT bc)
+	{
+		return new ReportModel
+			{
+				ID = bc.ID,
+				BCV = bc.BCV,
+				Verse = bc.Verse,
+				VerseOffset = bc.VerseOffset,
+				KJV = bc.KJV,
+				DescH = bc.DescH,
+				DescD = bc.DescD,
+				BookID = BookAndChapter!.BibleBook!.Value,
+				Chapter = BookAndChapter.Chapter,
+				WordPartList = bc.WordPartList?.Select(wp => new Components.Report.WordPart
+				{
+					Id = wp.Id,
+					BCV = wp.BCV,
+					BookID = wp.BookID,
+					Chapter = wp.Chapter,
+					Verse = wp.Verse,
+					ScriptureID = wp.ScriptureID,
+					WordCount = wp.WordCount,
+					SegmentCount = wp.SegmentCount,
+					WordEnum = wp.WordEnum,
+					Hebrew1 = wp.Hebrew1,
+					Hebrew2 = wp.Hebrew2,
+					Hebrew3 = wp.Hebrew3,
+					KjvWord = wp.KjvWord,
+					Strongs = wp.Strongs,
+					Transliteration = wp.Transliteration,
+					FinalEnum = wp.FinalEnum
+				}).ToList()
+			};
+	}
+
+}

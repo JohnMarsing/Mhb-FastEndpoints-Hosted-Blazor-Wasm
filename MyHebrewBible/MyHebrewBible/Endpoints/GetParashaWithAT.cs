@@ -47,7 +47,8 @@ public record ParashaWithAT
 {
 	public long ID { get; init; }            // s.ID, 
 	public long SectionId { get; init; }     // t.SectionId, 
-	public long RowCnt { get; init; }        // t.RowCnt, 
+	public long GroupCount { get; init; }    // t.GroupCount, 
+	public long ScriptureID_Beg { get; init; } // t.ScriptureID_Beg, 
 	public string? VerseRange { get; init; } // t.VerseRange,
 	public string? BCV { get; init; }        // s.BCV, 
 	public long BookID { get; init; }        // s.BookID, 

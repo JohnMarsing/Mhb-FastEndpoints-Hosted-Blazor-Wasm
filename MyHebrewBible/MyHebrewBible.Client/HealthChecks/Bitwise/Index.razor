@@ -10,21 +10,35 @@
 
 <div class="card border-success mb-2">
 	
-	 <div class="card-header text-center">Current Permutation[s]: @CurrentPermutations</div> 
+ <div class="card-header text-center">Current Permutation[s]: @CurrentPermutations</div> 
 
 	<div class="card-body">
 		<div class="d-flex justify-content-center mt-2">
-			 <ShowSectionButtons CurrentPermutations="CurrentPermutations"	OnShowSectionSelected="ReturnedPermutation" />  
+			 <ShowSectionButtons CurrentVisibilityState="CurrentPermutations"	OnShowSectionSelected="ReturnedPermutation" />  
 		</div>
 	</div>
 </div>
 
+<div class="card border-info my-2">
+<ul>
+	<li>
+		For a more condensed version of this, see <code>ShowHideToggleButton.razor</code>
+		<ul>
+			<li>
+				(<code>\Features\Parasha\Sections\</code>)
+			</li>
+		</ul>
+	</li>
+	<li>
+		Note, this code leverages <code>CascadingAppState</code> for <code>ParashaState</code>
+	</li>
+</ul>
+</div>
+
 
 @code {
-
 	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }  
 	protected Permutation CurrentPermutations;
-
 
 	protected override void OnInitialized()
 	{

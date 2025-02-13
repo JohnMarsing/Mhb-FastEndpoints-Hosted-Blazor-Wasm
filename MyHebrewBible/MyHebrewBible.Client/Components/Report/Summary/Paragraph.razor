@@ -1,0 +1,46 @@
+﻿@if (Verse != null)
+{
+	<p class="fs-5">
+		<sup class="text-primary"><b>@Verse.Verse</b></sup>
+
+		@if (Verse.VerseOffset != "NULL")
+		{
+			<sup class="text-black-50">&nbsp;@Verse.VerseOffset&nbsp;</sup>
+		}
+		else
+		{
+			<text>&nbsp;</text>
+		}
+		@((MarkupString)@Verse.KJV!)
+
+		@if (BookAndChapter!.BibleBook!.IsHebrewBible)
+		{
+			<DrillDownButton ScriptureId="Verse!.ID"
+											 OnVerseSelected="ReturnedVersePassThrough" />
+		}
+		<sup>
+			<BibleAnchor BookAndChapter="BookAndChapter"
+									 IconOnly="true"
+									 ScriptureId="Verse!.ID"
+									 Verse="Verse.Verse" />
+		</sup>
+	</p>
+}
+
+@code {
+
+	/*
+	[Parameter, EditorRequired] public ParashaWithAT? Verse { get; set; }
+	[Parameter, EditorRequired] public BookChapterWithAT? Verse { get; set; }
+		*/
+	[Parameter, EditorRequired] public ReportModel? Verse { get; set; }
+
+	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
+	[Parameter] public EventCallback<long> OnVerseSelectedPassThrough { get; set; }
+
+	private void ReturnedVersePassThrough(long scriptureId)
+	{
+		OnVerseSelectedPassThrough.InvokeAsync(scriptureId);
+	}
+
+}

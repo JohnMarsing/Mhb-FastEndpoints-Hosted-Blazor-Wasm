@@ -1,0 +1,17 @@
+﻿
+&nbsp;<button @onclick="@(e => ButtonClick(ScriptureId))"
+				type="button" class="btn btn-outline-primary btn-xs" title="@ScriptureId">
+	<i class="fas fa-chevron-down"></i>
+</button>
+
+
+@code {
+	[Parameter, EditorRequired] public long ScriptureId { get; set; }
+	[Parameter] public EventCallback<long> OnVerseSelected { get; set; }
+
+	private void ButtonClick(long scriptureId)
+	{
+		//Toast!.ShowWarning($"DrillDown|ButtonClick {scriptureId}!{verse}");
+		OnVerseSelected.InvokeAsync(scriptureId);
+	}
+}

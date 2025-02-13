@@ -24,7 +24,7 @@
 			</div>
 		</div>
 
-		<TorahHaftorahBrit CurrentReading="CurrentReading" CurrentPermutations="CurrentPermutations" />
+		<ReportWrapper CurrentReading="CurrentReading" CurrentVisibilityState="CurrentVisibilityState" />
 	}
 	else
 	{
@@ -42,8 +42,7 @@
 
 	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
 
-	protected Permutation CurrentPermutations;
-
+	protected Permutation CurrentVisibilityState;
 	public Triennial? CurrentReading { get; set; }
 
 	private string? PageTitleDetail = string.Empty;
@@ -63,7 +62,7 @@
 			{
 				Toast!.ShowWarning($"Parasha Id {Id} not found; inside: {nameof(Index)}!{nameof(OnInitialized)}");
 			}
-			CurrentPermutations = GetCurrentPermutation();
+			CurrentVisibilityState = GetCurrentVisibilityState();
 		}
 		catch (Exception ex)
 		{
@@ -89,7 +88,7 @@
 		}
 	}
 
-	private Permutation GetCurrentPermutation()
+	private Permutation GetCurrentVisibilityState()
 	{
 		int _permutation = CascadingAppState!.AppState!.ParashaState!.Get();
 		//Logger!.LogInformation("{Method}, _permutation: {_permutation}", nameof(GetCurrentPermutation), _permutation);

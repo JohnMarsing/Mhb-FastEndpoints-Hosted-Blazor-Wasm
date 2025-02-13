@@ -39,7 +39,7 @@ public static class BtnColors
 	public const string Link = "btn-link";
 	//public const string Tertiary = "btn-tertiary"; 
 }
-/*
+
 public static class BtnOutlineColors
 {
 	public const string Primary = "btn-outline-primary";
@@ -52,5 +52,5 @@ public static class BtnOutlineColors
 	public const string Dark = "btn-outline-dark";
 	public const string Link = "btn-outline-link";
 }
-*/
+
 

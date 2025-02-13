@@ -157,10 +157,10 @@ ORDER BY BegId
 		public ParashaWithATSE() : base($"{nameof(Id.ParashaWithAT)}", Id.ParashaWithAT) { }
 		public override string EndPoint => "/Parasha/{id:long}";
 		public override string Sql => @"
-SELECT s.ID, t.SectionId, t.RowCnt, t.VerseRange
+SELECT s.ID, t.SectionId, t.GroupCount, t.ScriptureID_Beg, t.VerseRange
 , s.BCV, s.BookID, s.Chapter, s.Verse, s.VerseOffset, s.KJV, s.DescH, s.DescD
 FROM  Scripture s
-CROSS JOIN Triennial t 
+CROSS JOIN vwParashaTableOfContents t 
 wHERE t.Id = @TriennialId AND s.ID BETWEEN ScriptureID_Beg AND ScriptureID_End
 ORDER BY s.ID
 ";

@@ -2,7 +2,7 @@
 
 @foreach (var item in ShowSection.List.OrderBy(o => o.Value))
 {
-	if (CurrentPermutations.HasFlag(item.Permutation))
+	if (CurrentVisibilityState.HasFlag(item.VisibilityState))
 	{
 		<button @onclick="@(() => OnButtonSubtractClicked(item))"
 						class="btn btn-outline-warning btn-sm me-1">
@@ -17,14 +17,14 @@
 		</button>
 	}
 }
-@code {
 
-	[Parameter, EditorRequired] public Permutation CurrentPermutations { get; set; }
+@code {
+	[Parameter, EditorRequired] public Permutation CurrentVisibilityState { get; set; }
 	[Parameter] public EventCallback<Permutation> OnShowSectionSelected { get; set; }
 
 	private void OnButtonAddClicked(ShowSection showSection)
-		=> OnShowSectionSelected.InvokeAsync(CurrentPermutations | showSection.VisibilityState);
+		=> OnShowSectionSelected.InvokeAsync(CurrentVisibilityState | showSection.VisibilityState);
 
 	private void OnButtonSubtractClicked(ShowSection showSection) 
-		=> OnShowSectionSelected.InvokeAsync(CurrentPermutations &= ~showSection.VisibilityState);
+		=> OnShowSectionSelected.InvokeAsync(CurrentVisibilityState &= ~showSection.VisibilityState);
 }
