@@ -49,7 +49,7 @@
 
 			@if (CurrentVisibilityState.HasFlag(Permutation.Haftorah) && showSection == ShowSection.Haftorah)
 			{
-				@foreach (var haftorah in TableOfContentList!
+				@foreach (var haftorah in VM!.TableOfContentList!
 					.Where(w => w.SectionId == ShowSection.Haftorah.Value)
 					.OrderBy(o => o.GroupCount))
 				{
@@ -64,7 +64,7 @@
 
 			@if (CurrentVisibilityState.HasFlag(Permutation.Brit) && showSection == ShowSection.Brit)
 			{
-				@foreach (var brit in TableOfContentList!.Where(w => w.SectionId == ShowSection.Brit.Value).OrderBy(o => o.GroupCount))
+				@foreach (var brit in VM!.TableOfContentList!.Where(w => w.SectionId == ShowSection.Brit.Value).OrderBy(o => o.GroupCount))
 				{
 					<div class="card-body">
 						<h5 class="text-center">@brit.VerseRange</h5>
