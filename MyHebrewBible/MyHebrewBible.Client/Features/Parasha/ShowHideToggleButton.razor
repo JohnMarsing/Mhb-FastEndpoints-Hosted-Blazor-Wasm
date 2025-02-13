@@ -1,0 +1,38 @@
+﻿@using MyHebrewBible.Client.Features.Parasha.Enums
+
+<button @onclick="ButtonClicked" title=""
+				class="btn @ShowSection!.ButtonColor btn-lg">
+	@ButtonText	<i class="fas @ChevronIcon"></i>
+</button>
+
+@code {
+	[Parameter, EditorRequired] public ShowSection? ShowSection { get; set; }
+	[Parameter, EditorRequired] public Permutation CurrentVisibilityState { get; set; }
+	[Parameter] public EventCallback<Permutation> OnToggleSelected { get; set; }
+
+	private bool ToggleIsVisible;
+	private string? ChevronIcon;
+	private string? ButtonText; 
+
+	protected override void OnParametersSet() 
+	{ 
+		ToggleIsVisible = CurrentVisibilityState.HasFlag(ShowSection!.VisibilityState) ? true : false;
+		ChevronIcon = ToggleIsVisible ? " fa-chevron-up" : " fa-chevron-down";
+		ButtonText = ToggleIsVisible ? "Hide" : "Show";
+	}
+
+	private void ButtonClicked()
+	{
+		if (ToggleIsVisible)
+		{
+			CurrentVisibilityState = CurrentVisibilityState & ~ShowSection!.VisibilityState;
+		}
+		else
+		{
+			CurrentVisibilityState = CurrentVisibilityState | ShowSection!.VisibilityState;
+		}
+
+		ToggleIsVisible = (!ToggleIsVisible);
+		OnToggleSelected.InvokeAsync(CurrentVisibilityState);
+	}
+}

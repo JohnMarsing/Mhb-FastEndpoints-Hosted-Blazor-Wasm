@@ -14,6 +14,7 @@ public enum WordEnum
 
 public class HebrewFormat
 {
+	// ToDo: Compare dupe code to Components\Report\Enums\Helper.cs
 	public static string GetSpan(long wordEnumLong, string hebrew1, string hebrew2, string hebrew3)
 	{
 		WordEnum wordEnum = (WordEnum)wordEnumLong;

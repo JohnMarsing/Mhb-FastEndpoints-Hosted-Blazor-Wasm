@@ -1,0 +1,22 @@
+﻿@using ReportEnums = MyHebrewBible.Client.Components.Report.Enums
+@using ReportModel = MyHebrewBible.Client.Components.Report
+
+<div class="card-body bg-light">
+	<p dir="rtl">
+		@foreach (var item in SurroundingWords!)
+		{
+			<sup><span class="text-muted fst-italic">@item.WordCount</span> <b>@item.KjvWord</b></sup>
+			<span class="hebrew">
+				@((MarkupString)ReportEnums.Helper.GetSpan(item.WordEnum, item.Hebrew1!, item.Hebrew2!, item.Hebrew3!))
+				@ReportEnums.Helper.CheckMaqqef(item.WordEnum, item.Hebrew1!, item.Hebrew2!, item.Hebrew3!)
+			</span>
+			@* <sub>@item.BCV</sub> *@
+			<text>&nbsp;&nbsp;&nbsp;</text>
+		}
+	</p>
+</div>
+
+@code {
+	//[Parameter, EditorRequired] public List<WordPart>? SurroundingWords { get; set; }
+	[Parameter, EditorRequired] public List<ReportModel.WordPart>? SurroundingWords { get; set; }
+}

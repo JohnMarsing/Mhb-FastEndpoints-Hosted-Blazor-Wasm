@@ -4,19 +4,17 @@ using MyHebrewBible.Client.Helpers;
 namespace MyHebrewBible.Client.Features.Parasha.Enums;
 
 [Flags]
-public enum Permutation : int
-{
-	//None = 0,
-	Torah = 1,
-	Haftorah = 2,
-	Brit = 4
-	//, Comments = 8
-}
+public enum Permutation : int {Torah = 1,	Haftorah = 2,	Brit = 4}
 
-// ToDo: maybe rename this SectionGroupShowButton
+/*
+# Business rule
+1. Torah has 1 and only 1 groups of verses 
+2. Haftorah and Brit have a 0, 1 or m groups of verses
+3. The presentation order of the Section groups is Torah, Haftorah, Brit
+*/
+
 public abstract class ShowSection : SmartEnum<ShowSection>
 {
-
 	#region Id's
 	private static class Id
 	{
@@ -40,13 +38,12 @@ public abstract class ShowSection : SmartEnum<ShowSection>
 	public abstract string Title { get; }
 	public abstract string ButtonColor { get; }
 	public abstract string HeaderColor { get; }
-
 	public abstract string ButtonLabel { get; }
+	public abstract Permutation VisibilityState { get; }
+	public abstract string LineItemButtonColor { get; }
 
-	//ToDo: consider renaming this ShowPermutation or VisibilityPermutation 
-	public abstract Permutation Permutation { get; }
-
-	public abstract bool HasManySections  { get; }
+	//Properties
+	public string CardHeader => $"<h3 class='{HeaderColor}'<b>{Title}</b></h3>";
 	#endregion
 
 	#region Private Instantiation
@@ -54,39 +51,35 @@ public abstract class ShowSection : SmartEnum<ShowSection>
 	{
 		public TorahSE() : base($"{nameof(Id.Torah)}", (int)Id.Torah) { }
 		public override string ButtonLabel => "Torah";
-		public override Permutation Permutation => Permutation.Torah;
-
+		public override Permutation VisibilityState => Permutation.Torah;
 		public override string Title => "Torah Verses";
-		public override string ButtonColor => BtnColors.Primary;
-		public override string HeaderColor => TextColors.Primary;
-		public override bool HasManySections => false;
 
-
+		public override string ButtonColor => BtnColors.Success;
+		public override string HeaderColor => TextColors.Success;
+		public override string LineItemButtonColor => BtnOutlineColors.Success;
 	}
 
 	private sealed class HaftorahSE : ShowSection
 	{
 		public HaftorahSE() : base($"{nameof(Id.Haftorah)}", (int)Id.Haftorah) { }
 		public override string ButtonLabel => "Haftorah";
-		public override Permutation Permutation => Permutation.Haftorah;
-
+		public override Permutation VisibilityState => Permutation.Haftorah;
 		public override string Title => "Haftorah Verses";
 		public override string ButtonColor => BtnColors.Warning;
 		public override string HeaderColor => TextColors.Warning;
-		public override bool HasManySections => true;
+		public override string LineItemButtonColor => BtnOutlineColors.Warning;
 	}
-
+	
 	private sealed class BritSE : ShowSection
 	{
 		public BritSE() : base($"{nameof(Id.Brit)}", (int)Id.Brit) { }
 		public override string ButtonLabel => "Brit";
-		public override Permutation Permutation => Permutation.Brit;
-
+		public override Permutation VisibilityState => Permutation.Brit;
 		public override string Title => "Brit Verses";
 		public override string ButtonColor => BtnColors.Danger;
-		public override string HeaderColor => TextColors.Danger; 
-		public override bool HasManySections => true;
+		public override string HeaderColor => TextColors.Danger;
+		public override string LineItemButtonColor => BtnOutlineColors.Danger;
 	}
-
 	#endregion
 }
+// Ignore Spelling: Toc

@@ -1,0 +1,195 @@
+﻿@using MyHebrewBible.Client.Features.Parasha.Enums
+@using MyHebrewBible.Client.Features.Parasha.TableOfContents
+
+@using MyHebrewBible.Client.Components.Report
+@using ReportEnums = MyHebrewBible.Client.Components.Report.Enums
+
+@inject ApiClient Api
+@inject ILogger<ReportWrapper>? Logger
+@inject IToastService? Toast
+
+<LoadingComponent IsLoading="verses==null" TurnSpinnerOff="TurnSpinnerOff">
+
+	@if (VM is not null)
+	{
+		<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+			<ButtonGroups VM="VM"
+										MediaQuery="@GlobalEnums.MediaQuery.Xs"
+										OnScriptureIdSelected="ReturnedScriptureId" />
+		</div>
+		<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+			<ButtonGroups VM="VM"
+										MediaQuery="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl"
+										OnScriptureIdSelected="ReturnedScriptureId" />
+		</div>
+	}
+
+	<div class="card bg-light mb-3">
+		@foreach (var showSection in ShowSection.List.OrderBy(o => o.Value))
+		{
+			<div class="card-header">
+				<div class="d-flex justify-content-between">
+					<div>@((MarkupString)showSection.CardHeader)</div>
+					<div>
+						<ShowHideToggleButton ShowSection="showSection"
+																	CurrentVisibilityState="CurrentVisibilityState"
+																	OnToggleSelected="ReturnedNewVisibilityState" />
+					</div>
+				</div>
+			</div>
+
+			@if (CurrentVisibilityState.HasFlag(Permutation.Torah) && showSection == ShowSection.Torah)
+			{
+				<div class="card-body">
+					<h5 class="text-center">@CurrentReading!.BCV</h5>
+					<Sections Verses="GetParashaTorahVerses(ShowSection.Torah.Value)"
+										CalledBy="ReportEnums.CalledBy.Parasha" />
+				</div>
+			}
+
+			@if (CurrentVisibilityState.HasFlag(Permutation.Haftorah) && showSection == ShowSection.Haftorah)
+			{
+				@foreach (var haftorah in TableOfContentList!
+					.Where(w => w.SectionId == ShowSection.Haftorah.Value)
+					.OrderBy(o => o.GroupCount))
+				{
+					<div class="card-body">
+						@* @(haftorah.GroupCount > 1 ? <hr> : "")"  *@
+						<h5 class="text-center">@haftorah.VerseRange</h5>
+						<Sections Verses="GetParashaHaftorahOrBritVerses(ShowSection.Haftorah.Value, haftorah.GroupCount)"
+											CalledBy="ReportEnums.CalledBy.Parasha" />
+					</div>
+				}
+			}
+
+			@if (CurrentVisibilityState.HasFlag(Permutation.Brit) && showSection == ShowSection.Brit)
+			{
+				@foreach (var brit in TableOfContentList!.Where(w => w.SectionId == ShowSection.Brit.Value).OrderBy(o => o.GroupCount))
+				{
+					<div class="card-body">
+						<h5 class="text-center">@brit.VerseRange</h5>
+						<Sections Verses="GetParashaHaftorahOrBritVerses(ShowSection.Brit.Value, brit.GroupCount)"
+											CalledBy="ReportEnums.CalledBy.Parasha" />
+					</div>
+				}
+			}
+
+		}
+	</div>
+</LoadingComponent>
+
+@code {
+	[Parameter, EditorRequired] public Triennial? CurrentReading { get; set; }
+	[Parameter, EditorRequired] public Permutation CurrentVisibilityState { get; set; }
+
+	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+		
+	protected bool TurnSpinnerOff = false;
+	private ICollection<ParashaWithAT>? verses = null;
+
+	private TOC_VM? VM;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		try
+		{
+			verses = await Api!.GetParashaWithATAsync((long)CurrentReading!.Value);
+
+			List<TocRecord>? _tableOfContentList = verses
+			.GroupBy(d => new { d.SectionId, d.GroupCount, d.ScriptureID_Beg, d.VerseRange })
+			.Select(g => new TocRecord(
+					g.Key.SectionId,
+					g.Key.GroupCount,
+					g.Key.ScriptureID_Beg,
+					g.Key.VerseRange,
+					g.Count()
+			))
+			.ToList();
+
+			if (verses.Count > 0)
+			{
+				VM = new TOC_VM();
+				VM!.TableOfContentList = _tableOfContentList;
+			}
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(OnParametersSetAsync));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(ReportWrapper)}!{nameof(OnParametersSetAsync)}");
+		}
+		finally
+		{
+			TurnSpinnerOff = true;
+		}
+	}
+
+	private async Task ReturnedNewVisibilityState(Permutation permutation)
+	{
+		CurrentVisibilityState = permutation;
+		//Logger!.LogInformation("{Method} CurrentPermutations: {CurrentPermutations}", nameof(ReturnedPermutation), CurrentPermutations);
+		await CascadingAppState!.AppState!.ParashaState!.Update(CurrentVisibilityState);
+	}
+
+	protected List<ReportModel> GetParashaTorahVerses(int showSection)
+	{
+		return verses!
+				.Where(w => w.SectionId == showSection)
+				.OrderBy(o => o.ID)
+				.Select(parasha => MapToReportModel(parasha))
+				.ToList();
+	}
+
+	protected List<ReportModel> GetParashaHaftorahOrBritVerses(int showSection, long groupCount)
+	{
+		return verses!
+			.Where(w => w.SectionId == showSection)
+			.Where(w => w.GroupCount == groupCount)
+			.Select(parasha => MapToReportModel(parasha))
+			.OrderBy(o => o.ID).ToList();
+	}
+
+	private ReportModel MapToReportModel(ParashaWithAT parasha)
+	{
+		return new ReportModel
+			{
+				ID = parasha.ID,
+				BCV = parasha.BCV,
+				Verse = parasha.Verse,
+				VerseOffset = parasha.VerseOffset,
+				KJV = parasha.KJV,
+				DescH = parasha.DescH,
+				DescD = parasha.DescD,
+				BookID = parasha.BookID,
+				Chapter = parasha.Chapter,
+				WordPartList = parasha.WordPartList?.Select(wp => new Components.Report.WordPart
+				{
+					Id = wp.Id,
+					BCV = wp.BCV,
+					BookID = wp.BookID,
+					Chapter = wp.Chapter,
+					Verse = wp.Verse,
+					ScriptureID = wp.ScriptureID,
+					WordCount = wp.WordCount,
+					SegmentCount = wp.SegmentCount,
+					WordEnum = wp.WordEnum,
+					Hebrew1 = wp.Hebrew1,
+					Hebrew2 = wp.Hebrew2,
+					Hebrew3 = wp.Hebrew3,
+					KjvWord = wp.KjvWord,
+					Strongs = wp.Strongs,
+					Transliteration = wp.Transliteration,
+					FinalEnum = wp.FinalEnum
+				}).ToList()
+			};
+	}
+
+	private void ReturnedScriptureId(long scriptureId)
+	{
+		Toast!.ShowInfo($"Id: {scriptureId}");
+		//Toast!.ShowWarning($"{nameof(ReportWrapper)}!{nameof(ReturnedScriptureId)}; scriptureId: {scriptureId}; ToDo: NavToContent");
+		//BookAndChapterAT = new BookAndChapterAT(CurrentBookChaptersVerses!, chapter);
+		//@inject NavigationManager NavigationManager
+		//NavigationManager!.NavigateTo(Components.Helper.GetNavigateToUrl(bibleBook, rec.Chapter));
+	}
+
+}

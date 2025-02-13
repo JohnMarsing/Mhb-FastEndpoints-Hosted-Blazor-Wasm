@@ -1,0 +1,81 @@
+﻿@using MyHebrewBible.Client.Components.Report
+@using MyHebrewBible.Client.Components.Report.Detail
+@using MyHebrewBible.Client.Components.Report.Summary
+
+@inject ILogger<Sections>? Logger
+
+@foreach (var item in Verses!.OrderBy(o => o.ID))
+{
+	<TitleSubtitle Title="@item.DescH" Subtitle="@item.DescD" BCV="@GetBCV(item.BCV!)" />
+
+	if (FocusScriptureId == 0)
+	{
+		<Paragraph BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
+							 Verse="item"
+							 OnVerseSelectedPassThrough="ReturnedVerse" />
+
+		@if (item.WordPartList!.Count() > 0)
+		{
+			<SatAndSurroundingWords SurroundingWords="item.WordPartList!.ToList()" />
+		}
+	}
+	else
+	{
+		if (item.ID == FocusScriptureId)
+		{
+			<Card BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
+						Verse="item"
+						ScriptureId="FocusScriptureId"
+						WordSelected="CurrentWordSelected"
+						OnClose="ReturnedCloseEvent"
+						OnWordSelected="ReturnedWord" />
+		}
+		else
+		{
+			<Paragraph BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
+								 Verse="item"
+								 OnVerseSelectedPassThrough="ReturnedVerse" />
+		}
+	}
+}
+
+@code {
+	[Parameter, EditorRequired] public List<ReportModel>? Verses { get; set; }
+	[Parameter, EditorRequired] public Enums.CalledBy CalledBy { get; set; }
+
+	protected long FocusScriptureId;
+	//protected string BCV = Enums.CalledBy = Enums.CalledBy.BookChapter ? Verses.BCV : "";
+
+
+	protected string GetBCV(string bcv)
+	{
+		return CalledBy == Enums.CalledBy.BookChapter ? bcv : "";
+	}
+
+
+	protected BookAndChapter GetBookAndChapter(long bookId, long chapter)
+	{
+		return new BookAndChapter(MyHebrewBible.Client.Enums.BibleBook.FromValue(LongToInt(bookId)), LongToInt(chapter));
+	}
+
+	private int LongToInt(long l)
+	{
+		return (l <= int.MaxValue && l >= int.MinValue) ? (int)l : 1;
+	}
+
+	private void ReturnedVerse(long scriptureId)
+	{
+		FocusScriptureId = scriptureId;
+	}
+
+	WordSelected? CurrentWordSelected = new WordSelected(0, 0);
+	private void ReturnedWord(WordSelected wordSelected)
+	{
+		CurrentWordSelected = wordSelected;
+	}
+
+	private void ReturnedCloseEvent()
+	{
+		FocusScriptureId = 0;
+	}
+}

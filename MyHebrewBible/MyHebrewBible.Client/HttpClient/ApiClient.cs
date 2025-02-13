@@ -1487,8 +1487,11 @@ namespace MyHebrewBible.Client
         [System.Text.Json.Serialization.JsonPropertyName("SectionId")]
         public long SectionId { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("RowCnt")]
-        public long RowCnt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("GroupCount")]
+        public long GroupCount { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("ScriptureID_Beg")]
+        public long ScriptureID_Beg { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("VerseRange")]
         public string VerseRange { get; set; }
