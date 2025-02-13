@@ -23,8 +23,8 @@
 	[Parameter] public EventCallback<Permutation> OnShowSectionSelected { get; set; }
 
 	private void OnButtonAddClicked(ShowSection showSection)
-		=> OnShowSectionSelected.InvokeAsync(CurrentPermutations | showSection.Permutation);
+		=> OnShowSectionSelected.InvokeAsync(CurrentPermutations | showSection.VisibilityState);
 
 	private void OnButtonSubtractClicked(ShowSection showSection) 
-		=> OnShowSectionSelected.InvokeAsync(CurrentPermutations &= ~showSection.Permutation);
+		=> OnShowSectionSelected.InvokeAsync(CurrentPermutations &= ~showSection.VisibilityState);
 }
