@@ -36,7 +36,8 @@ public abstract class ShowSection : SmartEnum<ShowSection>
 
 	#region Extra Fields 
 	public abstract string Title { get; }
-	public abstract string ButtonColor { get; }
+	public abstract string ButtonColorTOC { get; }
+	public abstract string ButtonColorShowHide { get; }
 	public abstract string HeaderColor { get; }
 	public abstract string ButtonLabel { get; }
 	public abstract Permutation VisibilityState { get; }
@@ -53,8 +54,8 @@ public abstract class ShowSection : SmartEnum<ShowSection>
 		public override string ButtonLabel => "Torah";
 		public override Permutation VisibilityState => Permutation.Torah;
 		public override string Title => "Torah Verses";
-
-		public override string ButtonColor => BtnColors.Success;
+		public override string ButtonColorTOC => BtnColors.Link;
+		public override string ButtonColorShowHide => BtnColors.Success;
 		public override string HeaderColor => TextColors.Success;
 		public override string LineItemButtonColor => BtnOutlineColors.Success;
 	}
@@ -65,7 +66,8 @@ public abstract class ShowSection : SmartEnum<ShowSection>
 		public override string ButtonLabel => "Haftorah";
 		public override Permutation VisibilityState => Permutation.Haftorah;
 		public override string Title => "Haftorah Verses";
-		public override string ButtonColor => BtnColors.Warning;
+		public override string ButtonColorTOC => BtnColors.Link;
+		public override string ButtonColorShowHide => BtnColors.Warning;
 		public override string HeaderColor => TextColors.Warning;
 		public override string LineItemButtonColor => BtnOutlineColors.Warning;
 	}
@@ -76,7 +78,8 @@ public abstract class ShowSection : SmartEnum<ShowSection>
 		public override string ButtonLabel => "Brit";
 		public override Permutation VisibilityState => Permutation.Brit;
 		public override string Title => "Brit Verses";
-		public override string ButtonColor => BtnColors.Danger;
+		public override string ButtonColorTOC => BtnColors.Link;
+		public override string ButtonColorShowHide => BtnColors.Danger;
 		public override string HeaderColor => TextColors.Danger;
 		public override string LineItemButtonColor => BtnOutlineColors.Danger;
 	}
