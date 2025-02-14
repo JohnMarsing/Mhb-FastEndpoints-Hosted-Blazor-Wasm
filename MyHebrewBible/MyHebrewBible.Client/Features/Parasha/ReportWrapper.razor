@@ -7,6 +7,7 @@
 @inject ApiClient Api
 @inject ILogger<ReportWrapper>? Logger
 @inject IToastService? Toast
+@inject IJSRuntime? JSRuntime
 
 <LoadingComponent IsLoading="verses==null" TurnSpinnerOff="TurnSpinnerOff">
 
@@ -24,7 +25,7 @@
 		</div>
 	}
 
-	<div class="card bg-light mb-3">
+	<div class="card mb-3">
 		@foreach (var showSection in ShowSection.List.OrderBy(o => o.Value))
 		{
 			<div class="card-header">
@@ -43,6 +44,7 @@
 				<div class="card-body">
 					<h5 class="text-center">@CurrentReading!.BCV</h5>
 					<Sections Verses="GetParashaTorahVerses(ShowSection.Torah.Value)"
+										ScrollToScriptureId="ScrollToScriptureId"
 										CalledBy="ReportEnums.CalledBy.Parasha" />
 				</div>
 			}
@@ -57,6 +59,7 @@
 						@* @(haftorah.GroupCount > 1 ? <hr> : "")"  *@
 						<h5 class="text-center">@haftorah.VerseRange</h5>
 						<Sections Verses="GetParashaHaftorahOrBritVerses(ShowSection.Haftorah.Value, haftorah.GroupCount)"
+											ScrollToScriptureId="ScrollToScriptureId"
 											CalledBy="ReportEnums.CalledBy.Parasha" />
 					</div>
 				}
@@ -69,6 +72,7 @@
 					<div class="card-body">
 						<h5 class="text-center">@brit.VerseRange</h5>
 						<Sections Verses="GetParashaHaftorahOrBritVerses(ShowSection.Brit.Value, brit.GroupCount)"
+											ScrollToScriptureId="ScrollToScriptureId"
 											CalledBy="ReportEnums.CalledBy.Parasha" />
 					</div>
 				}
@@ -81,13 +85,13 @@
 @code {
 	[Parameter, EditorRequired] public Triennial? CurrentReading { get; set; }
 	[Parameter, EditorRequired] public Permutation CurrentVisibilityState { get; set; }
-
 	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
-		
+
 	protected bool TurnSpinnerOff = false;
 	private ICollection<ParashaWithAT>? verses = null;
 
 	private TOC_VM? VM;
+	private long ScrollToScriptureId = 0; 
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -183,13 +187,17 @@
 			};
 	}
 
-	private void ReturnedScriptureId(long scriptureId)
+
+	private async Task ReturnedScriptureId(ScriptureSelected scriptureSelected)
 	{
-		Toast!.ShowInfo($"Id: {scriptureId}");
-		//Toast!.ShowWarning($"{nameof(ReportWrapper)}!{nameof(ReturnedScriptureId)}; scriptureId: {scriptureId}; ToDo: NavToContent");
-		//BookAndChapterAT = new BookAndChapterAT(CurrentBookChaptersVerses!, chapter);
-		//@inject NavigationManager NavigationManager
-		//NavigationManager!.NavigateTo(Components.Helper.GetNavigateToUrl(bibleBook, rec.Chapter));
+		ScrollToScriptureId = scriptureSelected.ScriptureId;
+		//string msg = $"Id: {scriptureSelected.ScriptureId}; State before:{CurrentVisibilityState}";
+		CurrentVisibilityState = CurrentVisibilityState | scriptureSelected.ShowSection!.VisibilityState;
+		await CascadingAppState!.AppState!.ParashaState!.Update(CurrentVisibilityState);
+		//await Task.Delay(200);
+		//msg += $" | after:{CurrentVisibilityState}";
+		//Toast!.ShowInfo(msg);
+		await JSRuntime!.InvokeVoidAsync("scrollToElementById", scriptureSelected.ScriptureId.ToString());
 	}
 
 }

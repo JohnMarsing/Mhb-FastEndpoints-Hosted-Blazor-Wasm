@@ -1,7 +1,7 @@
 ﻿@if (Verse != null)
 {
-	<p class="fs-5">
-		<sup class="text-primary"><b>@Verse.Verse</b></sup>
+	<p id="@Verse.ID" class="fs-5 @textBG">
+		<sup class="text-primary" title="@Verse.ID"><b>@Verse.Verse</b></sup>
 
 		@if (Verse.VerseOffset != "NULL")
 		{
@@ -28,19 +28,16 @@
 }
 
 @code {
-
-	/*
-	[Parameter, EditorRequired] public ParashaWithAT? Verse { get; set; }
-	[Parameter, EditorRequired] public BookChapterWithAT? Verse { get; set; }
-		*/
 	[Parameter, EditorRequired] public ReportModel? Verse { get; set; }
-
 	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
 	[Parameter] public EventCallback<long> OnVerseSelectedPassThrough { get; set; }
+	[Parameter] public long ScrollToScriptureId { get; set; }
+
+	string textBG => ScrollToScriptureId == Verse!.ID ? " p-1 text-bg-info" : "";  //text-bg-info text-bg-light
 
 	private void ReturnedVersePassThrough(long scriptureId)
 	{
 		OnVerseSelectedPassThrough.InvokeAsync(scriptureId);
 	}
-
+	// Ignore Spelling: bg
 }

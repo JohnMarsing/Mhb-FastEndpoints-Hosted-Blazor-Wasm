@@ -12,6 +12,7 @@
 	{
 		<Paragraph BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
 							 Verse="item"
+							 ScrollToScriptureId="ScrollToScriptureId"
 							 OnVerseSelectedPassThrough="ReturnedVerse" />
 
 		@if (item.WordPartList!.Count() > 0)
@@ -34,6 +35,7 @@
 		{
 			<Paragraph BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
 								 Verse="item"
+								 ScrollToScriptureId="ScrollToScriptureId"
 								 OnVerseSelectedPassThrough="ReturnedVerse" />
 		}
 	}
@@ -42,7 +44,8 @@
 @code {
 	[Parameter, EditorRequired] public List<ReportModel>? Verses { get; set; }
 	[Parameter, EditorRequired] public Enums.CalledBy CalledBy { get; set; }
-
+	[Parameter] public long ScrollToScriptureId { get; set; }
+	
 	protected long FocusScriptureId;
 	//protected string BCV = Enums.CalledBy = Enums.CalledBy.BookChapter ? Verses.BCV : "";
 

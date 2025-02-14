@@ -5,9 +5,9 @@
 
 		@* Torah: it's always first and there is always only 1 *@
 		<div class="btn-group-sm" role="group">
-			<button @onclick="@(e => ButtonClick(VM!.GetTorahScriptureId()))"
-							type="button" class="btn @ParashaEnums.ShowSection.Torah.ButtonColor">
-				<span class="@textSize">@VM!.GetTorahVerseRange()</span>
+			<button @onclick="@(e => ButtonClick(VM!.GetTorahScriptureId(), ParashaEnums.ShowSection.Torah))"
+							type="button" class="btn @ParashaEnums.ShowSection.Torah.ButtonColorTOC">
+				<span class="@textSize @ParashaEnums.ShowSection.Torah.HeaderColor">@VM!.GetTorahVerseRange()</span>
 			</button>
 		</div>
 
@@ -17,8 +17,8 @@
 			@if (VM!.GetSectionCount(showSection) == 0)
 			{
 				<div class="btn-group-sm" role="group">
-					<button type="button" class="btn @showSection.ButtonColor">
-						<span class="@textSize"><strike>@showSection.Name</strike></span>
+					<button type="button" class="btn @showSection.HeaderColor">
+						<span class="@textSize @Helpers.TextColors.Secondary"><strike>@showSection.Name</strike></span>
 					</button>
 				</div>
 			}
@@ -30,9 +30,9 @@
 
 						@foreach (var item in VM.TableOfContentList!.Where(w => w.SectionId == showSection.Value))
 						{
-							<button @onclick="@(e => ButtonClick(item.ScriptureID_Beg))"
-											type="button" class="btn @showSection.ButtonColor">
-								<span class="@textSize">@item.VerseRange</span>
+							<button @onclick="@(e => ButtonClick(item.ScriptureID_Beg, showSection))"
+											type="button" class="btn @showSection.ButtonColorTOC">
+								<span class="@textSize @showSection.HeaderColor">@item.VerseRange</span>
 							</button>
 						}
 
@@ -46,9 +46,9 @@
 						<div class="btn-group-vertical btn-group-sm" role="group" aria-label="Vertical button group">
 							@foreach (var item in VM.TableOfContentList!.Where(w => w.SectionId == showSection.Value))
 							{
-								<button @onclick="@(e => ButtonClick(item.ScriptureID_Beg))"
-												type="button" class="btn @showSection.ButtonColor mb-1">
-									<span class="@textSize">@item.VerseRange</span>
+								<button @onclick="@(e => ButtonClick(item.ScriptureID_Beg, showSection))"
+												type="button" class="btn @showSection.ButtonColorTOC mb-1">
+									<span class="@textSize @showSection.HeaderColor">@item.VerseRange</span>
 								</button>
 							}
 						</div>
@@ -57,16 +57,16 @@
 					{
 						@* 3 or more, build dropdown list boxes  *@
 						<div class="btn-group-vertical btn-group-sm" role="group" aria-label="Vertical button group">
-							<button type="button" class="btn @showSection.ButtonColor dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+							<button type="button" class="btn @showSection.ButtonColorTOC dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 								<span class="@textSize">@showSection.Name</span>
 							</button>
 							<ul class="dropdown-menu">
 								@foreach (var item in VM.TableOfContentList!.Where(w => w.SectionId == showSection.Value))
 								{
 									<li class="btn-group-sm">
-										<button @onclick="@(e => ButtonClick(item.ScriptureID_Beg))"
+										<button @onclick="@(e => ButtonClick(item.ScriptureID_Beg, showSection))"
 														type="button" class="btn @showSection.LineItemButtonColor ms-1 mb-1">
-											<span class="@textSize">@item.VerseRange</span>
+											<span class="@textSize @showSection.HeaderColor">@item.VerseRange</span>
 										</button>
 									</li>
 								}
@@ -87,16 +87,14 @@
 @code {
 	[Parameter, EditorRequired] public TOC_VM? VM { get; set; }
 	[Parameter, EditorRequired] public GlobalEnums.MediaQuery? MediaQuery { get; set; }
-	[Parameter] public EventCallback<long> OnScriptureIdSelected { get; set; }
-
+	[Parameter] public EventCallback<ScriptureSelected> OnScriptureIdSelected { get; set; }
+	
 	// string buttonGroupSize => MediaQuery == GlobalEnums.MediaQuery.Xs ? "btn-group-sm" : "btn-group";
 	string textSize => MediaQuery == GlobalEnums.MediaQuery.Xs ? "fs-6" : "fs-5";  // "fs-4"
 
-	long currentScriptureId = -1;
-	private void ButtonClick(long id)
+	private void ButtonClick(long scriptureId, ParashaEnums.ShowSection showSection)
 	{
-		currentScriptureId = id;
-		OnScriptureIdSelected.InvokeAsync(id);
+		OnScriptureIdSelected.InvokeAsync(new ScriptureSelected(scriptureId, showSection));
 	}
 
 

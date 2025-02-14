@@ -1,7 +1,9 @@
 ﻿@using MyHebrewBible.Client.Features.Parasha.Enums
 
+@* @inject IToastService? Toast *@
+
 <button @onclick="ButtonClicked" title=""
-				class="btn @ShowSection!.ButtonColor btn-lg">
+				class="btn @ShowSection!.ButtonColorShowHide btn-lg">
 	@ButtonText	<i class="fas @ChevronIcon"></i>
 </button>
 
@@ -23,6 +25,7 @@
 
 	private void ButtonClicked()
 	{
+		//string msg = $"State before:{CurrentVisibilityState},";
 		if (ToggleIsVisible)
 		{
 			CurrentVisibilityState = CurrentVisibilityState & ~ShowSection!.VisibilityState;
@@ -31,7 +34,8 @@
 		{
 			CurrentVisibilityState = CurrentVisibilityState | ShowSection!.VisibilityState;
 		}
-
+		//msg = $"{msg} after:{CurrentVisibilityState}";
+		//Toast!.ShowInfo(msg);
 		ToggleIsVisible = (!ToggleIsVisible);
 		OnToggleSelected.InvokeAsync(CurrentVisibilityState);
 	}
