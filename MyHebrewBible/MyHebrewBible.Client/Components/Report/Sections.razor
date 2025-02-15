@@ -3,18 +3,21 @@
 @using MyHebrewBible.Client.Components.Report.Summary
 
 @inject ILogger<Sections>? Logger
+@inject IToastService? Toast
+@inject IJSRuntime JSRuntime
 
 @foreach (var item in Verses!.OrderBy(o => o.ID))
 {
 	<TitleSubtitle Title="@item.DescH" Subtitle="@item.DescD" BCV="@GetBCV(item.BCV!)" />
 
-	if (FocusScriptureId == 0)
+	if (DrilldownScriptureId == 0)
 	{
-		<Paragraph BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
-							 Verse="item"
-							 ScrollToScriptureId="ScrollToScriptureId"
-							 OnVerseSelectedPassThrough="ReturnedVerse" />
-
+		<div id="verse-@item.ID" tabindex="0" @onkeydown="HandleKeyDown">
+			<Paragraph BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
+								 Verse="item"
+								 ScrollToScriptureId="ScrollToScriptureId"
+								 OnVerseSelectedPassThrough="ReturnedVerse" />
+		</div>
 		@if (item.WordPartList!.Count() > 0)
 		{
 			<SatAndSurroundingWords SurroundingWords="item.WordPartList!.ToList()" />
@@ -22,14 +25,25 @@
 	}
 	else
 	{
-		if (item.ID == FocusScriptureId)
+		if (item.ID == DrilldownScriptureId)
 		{
-			<Card BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
-						Verse="item"
-						ScriptureId="FocusScriptureId"
-						WordSelected="CurrentWordSelected"
-						OnClose="ReturnedCloseEvent"
-						OnWordSelected="ReturnedWord" />
+			<div class="card border-primary mt-2 mb-4">
+				<div class="card-header">
+					<CardHeader BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
+											BCV="@item!.BCV"
+											VerseNumber="item!.Verse"
+											Filter="Filter"
+											OnFilter="ReturnedFilter"	
+											OnClose="ReturnedCloseEvent" />
+				</div>
+				<div class="card-body">
+					<ParagraphWithWordButtons ScriptureId="DrilldownScriptureId"
+																		OnWordSelected="ReturnedWord" />
+				</div>
+				<HebrewTable ScriptureId="DrilldownScriptureId"
+										 Filter="Filter"
+										 WordSelected="CurrentWordSelected" />
+			</div>
 		}
 		else
 		{
@@ -41,20 +55,41 @@
 	}
 }
 
+
 @code {
 	[Parameter, EditorRequired] public List<ReportModel>? Verses { get; set; }
 	[Parameter, EditorRequired] public Enums.CalledBy CalledBy { get; set; }
 	[Parameter] public long ScrollToScriptureId { get; set; }
-	
-	protected long FocusScriptureId;
-	//protected string BCV = Enums.CalledBy = Enums.CalledBy.BookChapter ? Verses.BCV : "";
 
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			try
+			{
+				if (Verses != null && Verses.Any())
+				{
+					ScrollToScriptureId = Verses.First().ID;
+					StateHasChanged();
+					await JSRuntime.InvokeVoidAsync(JS.SetFocusToElement, $"verse-{ScrollToScriptureId}");
+				}
+			}
+			catch (Exception ex)
+			{
+				string msg;
+				msg = $"Exception inside {nameof(OnAfterRenderAsync)}, JS {JS.SetFocusToElement}, {ex.ToString()}";
+				Toast!.ShowError($"{Global.ToastShowError} {nameof(Sections)}!{nameof(OnAfterRenderAsync)}");
+			}
+		}
+	}
+
+	protected long DrilldownScriptureId;
+	//protected string BCV = Enums.CalledBy = Enums.CalledBy.BookChapter ? Verses.BCV : "";
 
 	protected string GetBCV(string bcv)
 	{
 		return CalledBy == Enums.CalledBy.BookChapter ? bcv : "";
 	}
-
 
 	protected BookAndChapter GetBookAndChapter(long bookId, long chapter)
 	{
@@ -66,9 +101,51 @@
 		return (l <= int.MaxValue && l >= int.MinValue) ? (int)l : 1;
 	}
 
+	private void HandleKeyDown(KeyboardEventArgs e)
+	{
+		if (Verses == null || !Verses.Any())
+		{
+			Toast!.ShowWarning("Verses.Any");
+			return;
+		}
+
+		if (e.Key == "ArrowDown")
+		{
+			var currentIndex = Verses.FindIndex(v => v.ID == ScrollToScriptureId);
+			//Toast!.ShowSuccess($"currentIndex: {currentIndex}");
+			if (currentIndex < Verses.Count - 1)
+			{
+				ScrollToScriptureId = Verses[currentIndex + 1].ID;
+			}
+			else
+			{
+				Toast!.ShowSuccess($"Bottomed out; currentIndex: {currentIndex}");
+			}
+		}
+		else if (e.Key == "ArrowUp")
+		{
+			var currentIndex = Verses.FindIndex(v => v.ID == ScrollToScriptureId);
+			//Toast!.ShowInfo($"currentIndex: {currentIndex}");
+			if (currentIndex > 0)
+			{
+				ScrollToScriptureId = Verses[currentIndex - 1].ID;
+			}
+			else
+			{
+				Toast!.ShowInfo($"Topped out; currentIndex: {currentIndex}");
+			}
+		}
+	}
+
 	private void ReturnedVerse(long scriptureId)
 	{
-		FocusScriptureId = scriptureId;
+		DrilldownScriptureId = scriptureId;
+	}
+
+	protected bool Filter=false;
+	private void ReturnedFilter(bool filter)
+	{
+		Filter = filter;
 	}
 
 	WordSelected? CurrentWordSelected = new WordSelected(0, 0);
@@ -79,6 +156,6 @@
 
 	private void ReturnedCloseEvent()
 	{
-		FocusScriptureId = 0;
+		DrilldownScriptureId = 0;
 	}
 }

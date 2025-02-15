@@ -91,7 +91,7 @@
 	private ICollection<ParashaWithAT>? verses = null;
 
 	private TOC_VM? VM;
-	private long ScrollToScriptureId = 0; 
+	private long ScrollToScriptureId = 0;
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -190,14 +190,24 @@
 
 	private async Task ReturnedScriptureId(ScriptureSelected scriptureSelected)
 	{
-		ScrollToScriptureId = scriptureSelected.ScriptureId;
-		//string msg = $"Id: {scriptureSelected.ScriptureId}; State before:{CurrentVisibilityState}";
-		CurrentVisibilityState = CurrentVisibilityState | scriptureSelected.ShowSection!.VisibilityState;
-		await CascadingAppState!.AppState!.ParashaState!.Update(CurrentVisibilityState);
-		//await Task.Delay(200);
-		//msg += $" | after:{CurrentVisibilityState}";
-		//Toast!.ShowInfo(msg);
-		await JSRuntime!.InvokeVoidAsync("scrollToElementById", scriptureSelected.ScriptureId.ToString());
+		try
+		{
+			ScrollToScriptureId = scriptureSelected.ScriptureId;
+			//string msg = $"Id: {scriptureSelected.ScriptureId}; State before:{CurrentVisibilityState}";
+			CurrentVisibilityState = CurrentVisibilityState | scriptureSelected.ShowSection!.VisibilityState;
+			await CascadingAppState!.AppState!.ParashaState!.Update(CurrentVisibilityState);
+			//await Task.Delay(200);
+			//msg += $" | after:{CurrentVisibilityState}";
+			//Toast!.ShowInfo(msg);
+			await JSRuntime!.InvokeVoidAsync(JS.ScrollToElementById, scriptureSelected.ScriptureId.ToString());
+		}
+		catch (Exception ex)
+		{
+			//string err;
+			//err = $"Exception inside {nameof(ReturnedScriptureId)}, JS {JS.ScrollToElementById}";
+			Toast!.ShowWarning($"{nameof(ReportWrapper)}!{nameof(ReturnedScriptureId)};  JS:{JS.ScrollToElementById}, scriptureSelected:{scriptureSelected}");
+			Logger!.LogError(ex, "{Method} scriptureSelected: {scriptureSelected}", nameof(ReturnedScriptureId), scriptureSelected);
+		}
 	}
 
 }

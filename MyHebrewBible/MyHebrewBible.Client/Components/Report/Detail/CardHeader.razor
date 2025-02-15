@@ -19,7 +19,7 @@
 
 
 	<div class="pe-1">
-		&nbsp;
+		<FilterButton IsFiltered="Filter" OnFilter="OnFilterChanged" />
 	</div>
 
 </div>
@@ -28,6 +28,8 @@
 	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
 	[Parameter, EditorRequired] public string? BCV { get; set; }
 	[Parameter, EditorRequired] public long VerseNumber { get; set; }
+	[Parameter, EditorRequired] public bool Filter { get; set; }
+	[Parameter] public EventCallback<bool> OnFilter { get; set; }
 	[Parameter] public EventCallback OnClose { get; set; }
 
 	private void ButtonClick()
@@ -35,4 +37,10 @@
 		// Toast!.ShowInfo($"HeaderKjvWordPart|OnClose {BibleVerseBC}");
 		OnClose.InvokeAsync();
 	}
+
+	private void OnFilterChanged(bool newState)
+	{
+		OnFilter.InvokeAsync(newState);
+	}
+
 }

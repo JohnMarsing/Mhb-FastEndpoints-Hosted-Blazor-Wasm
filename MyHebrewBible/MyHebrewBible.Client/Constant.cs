@@ -53,6 +53,12 @@ public static class SocialMedia
 }
 
 
+public static class JS
+{
+	public static string ScrollToElementById = "scrollToElementById";
+	public static string SetFocusToElement = "setFocusToElement";
+}
+
 //public static class Utc
 //{
 //	public const int ArizonaUtcMinus7 = -7;
