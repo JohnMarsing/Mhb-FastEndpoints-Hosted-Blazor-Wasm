@@ -9,3 +9,9 @@ function scrollToElementById(elementId) {
   //  console.log(`Element with ID '${elementId}' was NOT found.`);
   //}
 }
+function setFocusToElement(elementId) {
+  var element = document.getElementById(elementId);
+  if (element) {
+    element.focus();
+  }
+}

@@ -33,7 +33,7 @@
 	[Parameter] public EventCallback<long> OnVerseSelectedPassThrough { get; set; }
 	[Parameter] public long ScrollToScriptureId { get; set; }
 
-	string textBG => ScrollToScriptureId == Verse!.ID ? " p-1 text-bg-info" : "";  //text-bg-info text-bg-light
+	string textBG => ScrollToScriptureId == Verse!.ID ? " p-1 bg-info-subtle" : ""; 
 
 	private void ReturnedVersePassThrough(long scriptureId)
 	{
