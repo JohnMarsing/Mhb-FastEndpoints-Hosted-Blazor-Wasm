@@ -112,6 +112,7 @@ WHERE a.Id=@Id
 		*/
 	}
 
+	// update vwAlephTavVerseWordPart
 	private sealed class BookChapterWithATSE : Api
 	{
 		public BookChapterWithATSE() : base($"{nameof(Id.BookChapterWithAT)}", Id.BookChapterWithAT) { }
