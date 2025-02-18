@@ -24,6 +24,10 @@
 										OnScriptureIdSelected="ReturnedScriptureId" />
 		</div>
 	}
+	else
+	{
+		<p class="fs-3 text-danger text-center">Table of Contents is null  (◡︵◡) </p>
+	}
 
 	<div class="card mb-3">
 		@foreach (var showSection in ShowSection.List.OrderBy(o => o.Value))
@@ -51,30 +55,44 @@
 
 			@if (CurrentVisibilityState.HasFlag(Permutation.Haftorah) && showSection == ShowSection.Haftorah)
 			{
-				@foreach (var haftorah in VM!.TableOfContentList!
-					.Where(w => w.SectionId == ShowSection.Haftorah.Value)
-					.OrderBy(o => o.GroupCount))
+				if (VM! is not null && VM!.TableOfContentList is not null)
 				{
-					<div class="card-body">
-						@* @(haftorah.GroupCount > 1 ? <hr> : "")"  *@
-						<h5 class="text-center">@haftorah.VerseRange</h5>
-						<Sections Verses="GetParashaHaftorahOrBritVerses(ShowSection.Haftorah.Value, haftorah.GroupCount)"
-											ScrollToScriptureId="ScrollToScriptureId"
-											CalledBy="ReportEnums.CalledBy.Parasha" />
-					</div>
+					@foreach (var haftorah in VM!.TableOfContentList!
+						.Where(w => w.SectionId == ShowSection.Haftorah.Value)
+						.OrderBy(o => o.GroupCount))
+					{
+						<div class="card-body">
+							@* @(haftorah.GroupCount > 1 ? <hr> : "")"  *@
+							<h5 class="text-center">@haftorah.VerseRange</h5>
+							<Sections Verses="GetParashaHaftorahOrBritVerses(ShowSection.Haftorah.Value, haftorah.GroupCount)"
+												ScrollToScriptureId="ScrollToScriptureId"
+												CalledBy="ReportEnums.CalledBy.Parasha" />
+						</div>
+					}
+				}
+				else
+				{
+					<p class="fs-3 text-danger text-center">Haftorah Verses is null  (◡︵◡) </p>
 				}
 			}
 
 			@if (CurrentVisibilityState.HasFlag(Permutation.Brit) && showSection == ShowSection.Brit)
 			{
-				@foreach (var brit in VM!.TableOfContentList!.Where(w => w.SectionId == ShowSection.Brit.Value).OrderBy(o => o.GroupCount))
+				if (VM! is not null && VM!.TableOfContentList is not null)
 				{
-					<div class="card-body">
-						<h5 class="text-center">@brit.VerseRange</h5>
-						<Sections Verses="GetParashaHaftorahOrBritVerses(ShowSection.Brit.Value, brit.GroupCount)"
-											ScrollToScriptureId="ScrollToScriptureId"
-											CalledBy="ReportEnums.CalledBy.Parasha" />
-					</div>
+					@foreach (var brit in VM!.TableOfContentList!.Where(w => w.SectionId == ShowSection.Brit.Value).OrderBy(o => o.GroupCount))
+					{
+						<div class="card-body">
+							<h5 class="text-center">@brit.VerseRange</h5>
+							<Sections Verses="GetParashaHaftorahOrBritVerses(ShowSection.Brit.Value, brit.GroupCount)"
+												ScrollToScriptureId="ScrollToScriptureId"
+												CalledBy="ReportEnums.CalledBy.Parasha" />
+						</div>
+					}
+				}
+				else
+				{
+					<p class="fs-3 text-danger text-center">Brit Verses is null  (◡︵◡) </p>
 				}
 			}
 
@@ -91,13 +109,13 @@
 	private ICollection<ParashaWithAT>? verses = null;
 
 	private TOC_VM? VM;
-	private long ScrollToScriptureId = 0;
+	private int ScrollToScriptureId = 0;
 
 	protected override async Task OnParametersSetAsync()
 	{
 		try
 		{
-			verses = await Api!.GetParashaWithATAsync((long)CurrentReading!.Value);
+			verses = await Api!.GetParashaWithATAsync(CurrentReading!.Value);
 
 			List<TocRecord>? _tableOfContentList = verses
 			.GroupBy(d => new { d.SectionId, d.GroupCount, d.ScriptureID_Beg, d.VerseRange })
@@ -143,7 +161,7 @@
 				.ToList();
 	}
 
-	protected List<ReportModel> GetParashaHaftorahOrBritVerses(int showSection, long groupCount)
+	protected List<ReportModel> GetParashaHaftorahOrBritVerses(int showSection, int groupCount)
 	{
 		return verses!
 			.Where(w => w.SectionId == showSection)

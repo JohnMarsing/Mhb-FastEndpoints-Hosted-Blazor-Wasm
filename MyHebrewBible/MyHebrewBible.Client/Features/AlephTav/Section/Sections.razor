@@ -68,7 +68,7 @@
 		try
 		{
 			kjvVerses = await Api!.GetAlephTavKjvVersesAsync(
-				(long)BookAndChapterAT!.BookChaptersVerses.BibleBook!.Value, (long)BookAndChapterAT.Chapter);
+				BookAndChapterAT!.BookChaptersVerses.BibleBook!.Value, BookAndChapterAT.Chapter);
 
 			DetailWordList = await Api!.GetAlephTavHebrewVersesAsync(
 				BookAndChapterAT!.BookChaptersVerses.BibleBook!.Value, BookAndChapterAT!.Chapter);
@@ -99,8 +99,8 @@
 		}
 	}
 
-	protected long FocusScriptureId;
-	protected long VerseNumber;
+	protected int FocusScriptureId;
+	protected int VerseNumber;
 	private void ReturnedVerse(ScriptureIdAndVerseNumber scriptureIdAndVerseNumber)
 	{
 		FocusScriptureId = scriptureIdAndVerseNumber.ScriptureID;

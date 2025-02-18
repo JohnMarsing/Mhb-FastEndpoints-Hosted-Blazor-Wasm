@@ -5,7 +5,7 @@ namespace MyHebrewBible.Endpoints;
 // Can't rename to Request because already used by GetArticle
 public class ArticleListRequest
 {
-	public long Filter { get; set; }
+	public int Filter { get; set; }
 }
 
 public class GetArticleList : Endpoint<ArticleListRequest, IEnumerable<ArticleList>>
@@ -45,7 +45,7 @@ public class GetArticleList : Endpoint<ArticleListRequest, IEnumerable<ArticleLi
 
 public class ArticleList
 {
-	public long Id { get; set; }
+	public int Id { get; set; }
 	public string? Title { get; set; }
 	public bool IsPlaceHolder { get; set; }
 	public bool IsFavorite { get; set; }

@@ -67,7 +67,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTavHebrewVerse>> GetAlephTavHebrewVersesAsync(long bookid, long chapter)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTavHebrewVerse>> GetAlephTavHebrewVersesAsync(int bookid, int chapter)
         {
             return GetAlephTavHebrewVersesAsync(bookid, chapter, System.Threading.CancellationToken.None);
         }
@@ -75,7 +75,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTavHebrewVerse>> GetAlephTavHebrewVersesAsync(long bookid, long chapter, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AlephTavHebrewVerse>> GetAlephTavHebrewVersesAsync(int bookid, int chapter, System.Threading.CancellationToken cancellationToken)
         {
             if (bookid == null)
                 throw new System.ArgumentNullException("bookid");
@@ -154,7 +154,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseAT>> GetAlephTavKjvVersesAsync(long bookid, long chapter)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseAT>> GetAlephTavKjvVersesAsync(int bookid, int chapter)
         {
             return GetAlephTavKjvVersesAsync(bookid, chapter, System.Threading.CancellationToken.None);
         }
@@ -162,7 +162,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseAT>> GetAlephTavKjvVersesAsync(long bookid, long chapter, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseAT>> GetAlephTavKjvVersesAsync(int bookid, int chapter, System.Threading.CancellationToken cancellationToken)
         {
             if (bookid == null)
                 throw new System.ArgumentNullException("bookid");
@@ -241,7 +241,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Article> GetArticleAsync(long id)
+        public virtual System.Threading.Tasks.Task<Article> GetArticleAsync(int id)
         {
             return GetArticleAsync(id, System.Threading.CancellationToken.None);
         }
@@ -249,7 +249,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Article> GetArticleAsync(long id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Article> GetArticleAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -323,7 +323,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ArticleList>> GetArticleListAsync(long filter)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ArticleList>> GetArticleListAsync(int filter)
         {
             return GetArticleListAsync(filter, System.Threading.CancellationToken.None);
         }
@@ -331,7 +331,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ArticleList>> GetArticleListAsync(long filter, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ArticleList>> GetArticleListAsync(int filter, System.Threading.CancellationToken cancellationToken)
         {
             if (filter == null)
                 throw new System.ArgumentNullException("filter");
@@ -405,7 +405,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BookChapterWithAT>> GetBookChapterWithATAsync(long bookid, long chapter)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BookChapterWithAT>> GetBookChapterWithATAsync(int bookid, int chapter)
         {
             return GetBookChapterWithATAsync(bookid, chapter, System.Threading.CancellationToken.None);
         }
@@ -413,7 +413,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BookChapterWithAT>> GetBookChapterWithATAsync(long bookid, long chapter, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BookChapterWithAT>> GetBookChapterWithATAsync(int bookid, int chapter, System.Threading.CancellationToken cancellationToken)
         {
             if (bookid == null)
                 throw new System.ArgumentNullException("bookid");
@@ -492,7 +492,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Mitzvah>> GetMitzvotAsync(long filter)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Mitzvah>> GetMitzvotAsync(int filter)
         {
             return GetMitzvotAsync(filter, System.Threading.CancellationToken.None);
         }
@@ -500,7 +500,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Mitzvah>> GetMitzvotAsync(long filter, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Mitzvah>> GetMitzvotAsync(int filter, System.Threading.CancellationToken cancellationToken)
         {
             if (filter == null)
                 throw new System.ArgumentNullException("filter");
@@ -574,7 +574,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ParashaWithAT>> GetParashaWithATAsync(long id)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ParashaWithAT>> GetParashaWithATAsync(int id)
         {
             return GetParashaWithATAsync(id, System.Threading.CancellationToken.None);
         }
@@ -582,7 +582,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ParashaWithAT>> GetParashaWithATAsync(long id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ParashaWithAT>> GetParashaWithATAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -656,7 +656,89 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseId>> GetVerseListBetweenIdsAsync(long begId, long endId)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TableRowCount>> GetTableRowCountsAsync(int id)
+        {
+            return GetTableRowCountsAsync(id, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TableRowCount>> GetTableRowCountsAsync(int id, System.Threading.CancellationToken cancellationToken)
+        {
+            if (id == null)
+                throw new System.ArgumentNullException("id");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/tablerowcount/{id}"
+                    urlBuilder_.Append("api/tablerowcount/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<TableRowCount>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseId>> GetVerseListBetweenIdsAsync(int begId, int endId)
         {
             return GetVerseListBetweenIdsAsync(begId, endId, System.Threading.CancellationToken.None);
         }
@@ -664,7 +746,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseId>> GetVerseListBetweenIdsAsync(long begId, long endId, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseId>> GetVerseListBetweenIdsAsync(int begId, int endId, System.Threading.CancellationToken cancellationToken)
         {
             if (begId == null)
                 throw new System.ArgumentNullException("begId");
@@ -743,7 +825,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseBCV>> GetVerseListByBCVAsync(long bookid, long chapter, long begverse, long endverse)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseBCV>> GetVerseListByBCVAsync(int bookid, int chapter, int begverse, int endverse)
         {
             return GetVerseListByBCVAsync(bookid, chapter, begverse, endverse, System.Threading.CancellationToken.None);
         }
@@ -751,7 +833,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseBCV>> GetVerseListByBCVAsync(long bookid, long chapter, long begverse, long endverse, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BibleVerseBCV>> GetVerseListByBCVAsync(int bookid, int chapter, int begverse, int endverse, System.Threading.CancellationToken cancellationToken)
         {
             if (bookid == null)
                 throw new System.ArgumentNullException("bookid");
@@ -840,7 +922,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPartByScriptureId>> GetWordPartByScriptureIdAsync(long scriptureId)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPartByScriptureId>> GetWordPartByScriptureIdAsync(int scriptureId)
         {
             return GetWordPartByScriptureIdAsync(scriptureId, System.Threading.CancellationToken.None);
         }
@@ -848,7 +930,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPartByScriptureId>> GetWordPartByScriptureIdAsync(long scriptureId, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPartByScriptureId>> GetWordPartByScriptureIdAsync(int scriptureId, System.Threading.CancellationToken cancellationToken)
         {
             if (scriptureId == null)
                 throw new System.ArgumentNullException("scriptureId");
@@ -922,7 +1004,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPartByStrongs>> GetWordPartByStrongsAsync(long scriptureid, long strongs)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPartByStrongs>> GetWordPartByStrongsAsync(int scriptureid, int strongs)
         {
             return GetWordPartByStrongsAsync(scriptureid, strongs, System.Threading.CancellationToken.None);
         }
@@ -930,7 +1012,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPartByStrongs>> GetWordPartByStrongsAsync(long scriptureid, long strongs, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPartByStrongs>> GetWordPartByStrongsAsync(int scriptureid, int strongs, System.Threading.CancellationToken cancellationToken)
         {
             if (scriptureid == null)
                 throw new System.ArgumentNullException("scriptureid");
@@ -1009,7 +1091,7 @@ namespace MyHebrewBible.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPartKjv>> GetWordPartKjvAsync(long scriptureid)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPartKjv>> GetWordPartKjvAsync(int scriptureid)
         {
             return GetWordPartKjvAsync(scriptureid, System.Threading.CancellationToken.None);
         }
@@ -1017,7 +1099,7 @@ namespace MyHebrewBible.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPartKjv>> GetWordPartKjvAsync(long scriptureid, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WordPartKjv>> GetWordPartKjvAsync(int scriptureid, System.Threading.CancellationToken cancellationToken)
         {
             if (scriptureid == null)
                 throw new System.ArgumentNullException("scriptureid");
@@ -1203,22 +1285,22 @@ namespace MyHebrewBible.Client
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("ScriptureID")]
-        public long ScriptureID { get; set; }
+        public int ScriptureID { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("BCV")]
         public string BCV { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Chapter")]
-        public long Chapter { get; set; }
+        public int Chapter { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Verse")]
-        public long Verse { get; set; }
+        public int Verse { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("WordCount")]
-        public long WordCount { get; set; }
+        public int WordCount { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("WordEnum")]
-        public long WordEnum { get; set; }
+        public int WordEnum { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Hebrew1")]
         public string Hebrew1 { get; set; }
@@ -1233,7 +1315,7 @@ namespace MyHebrewBible.Client
         public string KjvWord { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Strongs")]
-        public long Strongs { get; set; }
+        public int Strongs { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Transliteration")]
         public string Transliteration { get; set; }
@@ -1242,7 +1324,7 @@ namespace MyHebrewBible.Client
         public int? FinalEnum { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("HasTwo")]
-        public long HasTwo { get; set; }
+        public int HasTwo { get; set; }
 
     }
 
@@ -1251,13 +1333,13 @@ namespace MyHebrewBible.Client
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("ID")]
-        public long ID { get; set; }
+        public int ID { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("BCV")]
         public string BCV { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Verse")]
-        public long Verse { get; set; }
+        public int Verse { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("VerseOffset")]
         public string VerseOffset { get; set; }
@@ -1278,7 +1360,7 @@ namespace MyHebrewBible.Client
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("FileNameNoExt")]
         public string FileNameNoExt { get; set; }
@@ -1293,16 +1375,16 @@ namespace MyHebrewBible.Client
         public string DetailsMD { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("PrimaryScriptureId")]
-        public long PrimaryScriptureId { get; set; }
+        public int PrimaryScriptureId { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("CreateDate")]
         public System.DateTimeOffset CreateDate { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("DocBlobID")]
-        public long? DocBlobID { get; set; }
+        public int? DocBlobID { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("PdfBlobID")]
-        public long? PdfBlobID { get; set; }
+        public int? PdfBlobID { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("IsPlaceHolder")]
         public bool IsPlaceHolder { get; set; }
@@ -1311,7 +1393,7 @@ namespace MyHebrewBible.Client
         public bool IsFavorite { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("ExtraVerses")]
-        public long ExtraVerses { get; set; }
+        public int ExtraVerses { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("IsWordStudy")]
         public bool IsWordStudy { get; set; }
@@ -1323,13 +1405,13 @@ namespace MyHebrewBible.Client
         public string BCV { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("BookID")]
-        public long BookID { get; set; }
+        public int BookID { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Chapter")]
-        public long Chapter { get; set; }
+        public int Chapter { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Verse")]
-        public long Verse { get; set; }
+        public int Verse { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("IsFavoriteHtml")]
         public string IsFavoriteHtml { get; set; }
@@ -1344,7 +1426,7 @@ namespace MyHebrewBible.Client
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Title")]
         public string Title { get; set; }
@@ -1368,13 +1450,13 @@ namespace MyHebrewBible.Client
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("ID")]
-        public long ID { get; set; }
+        public int ID { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("BCV")]
         public string BCV { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Verse")]
-        public long Verse { get; set; }
+        public int Verse { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("VerseOffset")]
         public string VerseOffset { get; set; }
@@ -1404,13 +1486,13 @@ namespace MyHebrewBible.Client
         public string BCV { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("BookID")]
-        public long BookID { get; set; }
+        public int BookID { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Chapter")]
-        public long Chapter { get; set; }
+        public int Chapter { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Verse")]
-        public long Verse { get; set; }
+        public int Verse { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("ScriptureID")]
         public int ScriptureID { get; set; }
@@ -1452,16 +1534,16 @@ namespace MyHebrewBible.Client
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("Id")]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Detail")]
-        public long Detail { get; set; }
+        public int Detail { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("BegId")]
-        public long BegId { get; set; }
+        public int BegId { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("EndId")]
-        public long EndId { get; set; }
+        public int EndId { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Verse")]
         public string Verse { get; set; }
@@ -1470,7 +1552,7 @@ namespace MyHebrewBible.Client
         public string Descr { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("BookId")]
-        public long BookId { get; set; }
+        public int BookId { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("BookAbrv")]
         public string BookAbrv { get; set; }
@@ -1482,16 +1564,16 @@ namespace MyHebrewBible.Client
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("ID")]
-        public long ID { get; set; }
+        public int ID { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("SectionId")]
-        public long SectionId { get; set; }
+        public int SectionId { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("GroupCount")]
-        public long GroupCount { get; set; }
+        public int GroupCount { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("ScriptureID_Beg")]
-        public long ScriptureID_Beg { get; set; }
+        public int ScriptureID_Beg { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("VerseRange")]
         public string VerseRange { get; set; }
@@ -1500,13 +1582,13 @@ namespace MyHebrewBible.Client
         public string BCV { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("BookID")]
-        public long BookID { get; set; }
+        public int BookID { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Chapter")]
-        public long Chapter { get; set; }
+        public int Chapter { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Verse")]
-        public long Verse { get; set; }
+        public int Verse { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("VerseOffset")]
         public string VerseOffset { get; set; }
@@ -1526,17 +1608,29 @@ namespace MyHebrewBible.Client
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class TableRowCount
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("RowCnt")]
+        public int RowCnt { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Name")]
+        public string Name { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.8.0 (NJsonSchema v11.0.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class BibleVerseId
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("ID")]
-        public long ID { get; set; }
+        public int ID { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("BCV")]
         public string BCV { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Verse")]
-        public long Verse { get; set; }
+        public int Verse { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("VerseOffset")]
         public string VerseOffset { get; set; }
@@ -1557,13 +1651,13 @@ namespace MyHebrewBible.Client
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("ID")]
-        public long ID { get; set; }
+        public int ID { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("BCV")]
         public string BCV { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Verse")]
-        public long Verse { get; set; }
+        public int Verse { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("VerseOffset")]
         public string VerseOffset { get; set; }
@@ -1584,16 +1678,16 @@ namespace MyHebrewBible.Client
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("ScriptureID")]
-        public long ScriptureID { get; set; }
+        public int ScriptureID { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("WordCount")]
-        public long WordCount { get; set; }
+        public int WordCount { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("SegmentCount")]
-        public long SegmentCount { get; set; }
+        public int SegmentCount { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("WordEnum")]
-        public long WordEnum { get; set; }
+        public int WordEnum { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Hebrew1")]
         public string Hebrew1 { get; set; }
@@ -1608,7 +1702,7 @@ namespace MyHebrewBible.Client
         public string KjvWord { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Strongs")]
-        public long Strongs { get; set; }
+        public int Strongs { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Transliteration")]
         public string Transliteration { get; set; }
@@ -1623,16 +1717,16 @@ namespace MyHebrewBible.Client
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("ScriptureID")]
-        public long ScriptureID { get; set; }
+        public int ScriptureID { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("WordCount")]
-        public long WordCount { get; set; }
+        public int WordCount { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("SegmentCount")]
-        public long SegmentCount { get; set; }
+        public int SegmentCount { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("WordEnum")]
-        public long WordEnum { get; set; }
+        public int WordEnum { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Hebrew1")]
         public string Hebrew1 { get; set; }
@@ -1647,7 +1741,7 @@ namespace MyHebrewBible.Client
         public string KjvWord { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Strongs")]
-        public long Strongs { get; set; }
+        public int Strongs { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Transliteration")]
         public string Transliteration { get; set; }
@@ -1662,13 +1756,13 @@ namespace MyHebrewBible.Client
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("ScriptureID")]
-        public long ScriptureID { get; set; }
+        public int ScriptureID { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("WordCount")]
-        public long WordCount { get; set; }
+        public int WordCount { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Strongs")]
-        public long? Strongs { get; set; }
+        public int Strongs { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Word")]
         public string Word { get; set; }

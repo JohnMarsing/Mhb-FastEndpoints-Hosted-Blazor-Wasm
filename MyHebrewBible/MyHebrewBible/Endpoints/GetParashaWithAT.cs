@@ -4,7 +4,7 @@ namespace MyHebrewBible.Endpoints;
 
 public class ParashaWithATRequest
 {
-	public long Id { get; set; }
+	public int Id { get; set; }
 }
 
 public class GetParashaWithAT : Endpoint<ParashaWithATRequest, IEnumerable<ParashaWithAT>>
@@ -45,15 +45,15 @@ public class GetParashaWithAT : Endpoint<ParashaWithATRequest, IEnumerable<Paras
 
 public record ParashaWithAT
 {
-	public long ID { get; init; }            // s.ID, 
-	public long SectionId { get; init; }     // t.SectionId, 
-	public long GroupCount { get; init; }    // t.GroupCount, 
-	public long ScriptureID_Beg { get; init; } // t.ScriptureID_Beg, 
+	public int ID { get; init; }            // s.ID, 
+	public int SectionId { get; init; }     // t.SectionId, 
+	public int GroupCount { get; init; }    // t.GroupCount, 
+	public int ScriptureID_Beg { get; init; } // t.ScriptureID_Beg, 
 	public string? VerseRange { get; init; } // t.VerseRange,
 	public string? BCV { get; init; }        // s.BCV, 
-	public long BookID { get; init; }        // s.BookID, 
-	public long Chapter { get; init; }       // s.Chapter, 
-	public long Verse { get; init; }         // s.Verse, 
+	public int BookID { get; init; }        // s.BookID, 
+	public int Chapter { get; init; }       // s.Chapter, 
+	public int Verse { get; init; }         // s.Verse, 
 	public string? VerseOffset { get; init; } //s.VerseOffset
 	public string? KJV { get; init; }        // s.KJV, 
 	public string? DescH { get; init; }      // s.DescH, 

@@ -13,7 +13,7 @@
 
 @code {
 	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
-	protected long FocusScriptureId;
+	protected int FocusScriptureId;
 
 	protected bool TurnSpinnerOff = false;
 
@@ -27,7 +27,7 @@
 			FocusScriptureId = 0;
 			if (BookAndChapter is not null && BookAndChapter!.BibleBook is not null)
 			{
-				verses = await Api!.GetBookChapterWithATAsync((long)BookAndChapter!.BibleBook, (long)BookAndChapter.Chapter);
+				verses = await Api!.GetBookChapterWithATAsync(BookAndChapter!.BibleBook, BookAndChapter.Chapter);
 			}
 		}
 		catch (Exception ex)

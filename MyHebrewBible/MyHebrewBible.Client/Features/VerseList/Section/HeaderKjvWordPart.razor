@@ -31,7 +31,7 @@
 @code {
 	[Parameter, EditorRequired] public BibleVerseBCV? BibleVerseBCV { get; set; }
 	[Parameter, EditorRequired] public BookChapterVerse? BookChapterVerse { get; set; }
-	[Parameter, EditorRequired] public long VerseNumber { get; set; }
+	[Parameter, EditorRequired] public int VerseNumber { get; set; }
 	[Parameter] public EventCallback OnClose { get; set; }
 
 	private void ButtonClick()

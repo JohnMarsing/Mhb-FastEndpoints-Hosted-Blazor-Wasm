@@ -34,18 +34,18 @@ else
 @code {
 	[Parameter] public int? Id { get; set; }
 
-	public long Id2 = 0;
-	public long SelectedArticleId = 0;
+	public int Id2 = 0;
+	public int SelectedArticleId = 0;
 
 	protected override void OnParametersSet()
 	{
 		if (Id is not null)
 		{
-			Id2 = (long)Id;
+			Id2 = (int)Id; // (longZ)Id;
 		}
 	}
 
-	private void ReturnedArticleId(long articleId)
+	private void ReturnedArticleId(int articleId)
 	{
 		SelectedArticleId = articleId;
 	}

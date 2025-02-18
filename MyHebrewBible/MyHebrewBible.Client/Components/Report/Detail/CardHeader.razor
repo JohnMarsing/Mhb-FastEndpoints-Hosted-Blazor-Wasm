@@ -27,7 +27,7 @@
 @code {
 	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
 	[Parameter, EditorRequired] public string? BCV { get; set; }
-	[Parameter, EditorRequired] public long VerseNumber { get; set; }
+	[Parameter, EditorRequired] public int VerseNumber { get; set; }
 	[Parameter, EditorRequired] public bool Filter { get; set; }
 	[Parameter] public EventCallback<bool> OnFilter { get; set; }
 	[Parameter] public EventCallback OnClose { get; set; }

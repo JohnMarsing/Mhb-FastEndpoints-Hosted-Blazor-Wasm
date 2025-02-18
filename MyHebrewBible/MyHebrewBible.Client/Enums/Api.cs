@@ -19,6 +19,7 @@ public abstract class Api : SmartEnum<Api>
 		internal const int WordPartKjv = 10;
 		internal const int WordPartByScriptureId = 11;
 		internal const int WordPartByStrongs = 12;
+		internal const int TableRowCount = 13;
 	}
 	#endregion
 
@@ -35,6 +36,8 @@ public abstract class Api : SmartEnum<Api>
 	public static readonly Api WordPartKjv = new WordPartKjvSE();
 	public static readonly Api WordPartByScriptureId = new WordPartByScriptureIdSE();
 	public static readonly Api WordPartByStrongs = new WordPartByStrongsSE();
+	public static readonly Api TableRowCount = new TableRowCountSE();
+	//
 	#endregion
 
 	private Api(string name, int value) : base(name, value) { } // Constructor
@@ -51,7 +54,7 @@ public abstract class Api : SmartEnum<Api>
 	private sealed class AlephTavHebrewVersesSE : Api
 	{
 		public AlephTavHebrewVersesSE() : base($"{nameof(Id.AlephTavHebrewVerses)}", Id.AlephTavHebrewVerses) { }
-		public override string EndPoint => "/alephtavhebrewverse/{bookid:long}/{chapter:long}";
+		public override string EndPoint => "/alephtavhebrewverse/{bookid:int}/{chapter:int}";
 		public override string Sql => @"
 SELECT 
 	s.Id AS ScriptureID, s.BCV, s.Chapter, s.Verse, wp.WordCount, wp.WordEnum
@@ -70,7 +73,7 @@ FROM WordPart wp
 	private sealed class AlephTavKjvVersesSE : Api
 	{
 		public AlephTavKjvVersesSE() : base($"{nameof(Id.AlephTavKjvVerses)}", Id.AlephTavKjvVerses) { }
-		public override string EndPoint => "/alephtavkjvverse/{bookid:long}/{chapter:long}";
+		public override string EndPoint => "/alephtavkjvverse/{bookid:int}/{chapter:int}";
 		public override string Sql => @"
 SELECT  s.ID, s.BCV, s.Verse, s.VerseOffset, s.KJV, s.DescH, s.DescD  
 FROM Scripture s
@@ -85,7 +88,7 @@ FROM Scripture s
 	private sealed class ArticleSE : Api
 	{
 		public ArticleSE() : base($"{nameof(Id.Article)}", Id.Article) { }
-		public override string EndPoint => "/article/{id:long}";
+		public override string EndPoint => "/article/{id:int}";
 		public override string Sql => @"
 SELECT a.Id, FileNameNoExt, Title, Details, DetailsMD, PrimaryScriptureId, CreateDate
 , DocBlobID, PdfBlobID, IsPlaceHolder, IsFavorite, ExtraVerses, IsWordStudy, IsParasha
@@ -102,7 +105,7 @@ WHERE a.Id=@Id
 	private sealed class ArticleListSE : Api
 	{
 		public ArticleListSE() : base($"{nameof(Id.ArticleList)}", Id.ArticleList) { }
-		public override string EndPoint => "/ArticleList/{filter:long}";
+		public override string EndPoint => "/ArticleList/{filter:int}";
 		public override string Sql => @"SELECT Id, Title FROM Article ";
 		public override string SqlOrderBy => " ORDER BY Title";
 		public override string SqlDetail => "";
@@ -111,12 +114,11 @@ WHERE a.Id=@Id
 		public override string SqlWhere => ArticleEnums.Filter.WordStudy.Where;
 		*/
 	}
-
-	// update vwAlephTavVerseWordPart
+		
 	private sealed class BookChapterWithATSE : Api
 	{
 		public BookChapterWithATSE() : base($"{nameof(Id.BookChapterWithAT)}", Id.BookChapterWithAT) { }
-		public override string EndPoint => "/bookchapterwithat/{bookid:long}/{chapter:long}";
+		public override string EndPoint => "/bookchapterwithat/{bookid:int}/{chapter:int}";
 		public override string Sql => @"
 SELECT ID, BCV, Verse, VerseOffset, KJV, DescH, DescD  
 FROM Scripture
@@ -130,7 +132,7 @@ SELECT Id, BCV, BookID, Chapter, Verse
 , Hebrew1, Hebrew2, Hebrew3
 , KjvWord, Strongs, Transliteration, FinalEnum
 --, HasTwo
-FROM vwAlephTavVerseWordPart
+FROM vwAlephTavBookChapterWordPart
 --WHERE BookID=@BookId and Chapter=@Chapter
 ORDER BY Id	
 		";
@@ -141,7 +143,7 @@ ORDER BY Id
 	private sealed class MitzvahSE : Api
 	{
 		public MitzvahSE() : base($"{nameof(Id.Mitzvah)}", Id.Mitzvah) { }
-		public override string EndPoint => "/mitzvot/book/{filter:long}";
+		public override string EndPoint => "/mitzvot/book/{filter:int}";
 		public override string Sql => @"
 SELECT
 ID, Detail, BegId, EndID, Verse, Descr, BookID, BookAbrv
@@ -156,7 +158,7 @@ ORDER BY BegId
 	private sealed class ParashaWithATSE : Api
 	{
 		public ParashaWithATSE() : base($"{nameof(Id.ParashaWithAT)}", Id.ParashaWithAT) { }
-		public override string EndPoint => "/Parasha/{id:long}";
+		public override string EndPoint => "/Parasha/{id:int}";
 		public override string Sql => @"
 SELECT s.ID, t.SectionId, t.GroupCount, t.ScriptureID_Beg, t.VerseRange
 , s.BCV, s.BookID, s.Chapter, s.Verse, s.VerseOffset, s.KJV, s.DescH, s.DescD
@@ -182,7 +184,7 @@ ORDER BY Id
 	private sealed class VerseListSE : Api
 	{
 		public VerseListSE() : base($"{nameof(Id.VerseList)}", Id.VerseList) { }
-		public override string EndPoint => "/verselist/{bookid:long}/{chapter:long}/{begverse:long}/{endverse:long}";
+		public override string EndPoint => "/verselist/{bookid:int}/{chapter:int}/{begverse:int}/{endverse:int}";
 		public override string Sql => @"
 SELECT ID, BCV, Verse, KJV, VerseOffset, DescH, DescD
 FROM Scripture
@@ -196,7 +198,7 @@ ORDER BY ID";
 	private sealed class VerseListBetweenIdsSE : Api
 	{
 		public VerseListBetweenIdsSE() : base($"{nameof(Id.VerseListBetweenIds)}", Id.VerseListBetweenIds) { }
-		public override string EndPoint => "/VerseListBetweenIds/{begId:long}/{endId:long}";
+		public override string EndPoint => "/VerseListBetweenIds/{begId:int}/{endId:int}";
 		public override string Sql => @"
 SELECT ID, BCV, Verse, KJV, VerseOffset, DescH, DescD
 FROM Scripture
@@ -210,7 +212,7 @@ ORDER BY ID";
 	private sealed class WordPartByScriptureIdSE : Api
 	{
 		public WordPartByScriptureIdSE() : base($"{nameof(Id.WordPartByScriptureId)}", Id.WordPartByScriptureId) { }
-		public override string EndPoint => "/HebrewWords/{scriptureId:long}";
+		public override string EndPoint => "/HebrewWords/{scriptureId:int}";
 		public override string Sql => @"
 SELECT ScriptureID, WordCount, SegmentCount, WordEnum, Hebrew1, Hebrew2, Hebrew3, KjvWord, Strongs, Transliteration, FinalEnum
 FROM WordPart 
@@ -224,9 +226,9 @@ ORDER BY WordCount";
 	private sealed class WordPartKjvSE : Api
 	{
 		public WordPartKjvSE() : base($"{nameof(Id.WordPartKjv)}", Id.WordPartKjv) { }
-		public override string EndPoint => "/wordpartkjv/{scriptureid:long}";
+		public override string EndPoint => "/wordpartkjv/{scriptureid:int}";
 		public override string Sql => @"
-SELECT ScriptureID, WordCount, Strongs, Word
+SELECT ScriptureID, WordCount, ifnull(Strongs,0) AS Strongs, Word
 FROM WordPartKjv
 WHERE ScriptureID=@ScriptureID
 ORDER BY WordCount
@@ -238,7 +240,7 @@ ORDER BY WordCount
 	private sealed class WordPartByStrongsSE : Api
 	{
 		public WordPartByStrongsSE() : base($"{nameof(Id.WordPartByStrongs)}", Id.WordPartByStrongs) { }
-		public override string EndPoint => "/wordpart/{scriptureid:long}/{strongs:long}";
+		public override string EndPoint => "/wordpart/{scriptureid:int}/{strongs:int}";
 		public override string Sql => @"
 SELECT ScriptureID, WordCount, SegmentCount, WordEnum, Hebrew1, Hebrew2, Hebrew3, KjvWord, Strongs, Transliteration, FinalEnum
 FROM WordPart 
@@ -249,8 +251,20 @@ ORDER BY WordCount, SegmentCount
 		public override string SqlDetail => "";
 	}
 
+	private sealed class TableRowCountSE : Api
+	{
+		public TableRowCountSE() : base($"{nameof(Id.TableRowCount)}", Id.TableRowCount) { }
+		public override string EndPoint => "/tablerowcount/{id:int}";
+		public override string Sql => @"
+SELECT RowCnt, Name
+FROM vwTableRowCount  
+";
+		public override string SqlOrderBy => "";
+		public override string SqlDetail => "";
+	}
+
 	#endregion //SE
 
 }
 
-// Ignore Spelling: Descr, bookid, Mitzvah, mitzvot, wordpart, wordpartkjv, scriptureid, bookchapterwithat, verselist, begverse endverse Nav, triennialid, alephtavkjvverse, alephtavhebrewverse, alephtavbookchapterwordpartcontext, alephtavtriennialwordpartcontext, Strongs
+// Ignore Spelling: Descr, bookid, Mitzvah, mitzvot, wordpart, wordpartkjv, scriptureid, bookchapterwithat, verselist, begverse endverse Nav, triennialid, alephtavkjvverse, alephtavhebrewverse, alephtavbookchapterwordpartcontext, alephtavtriennialwordpartcontext, Strongs, ifnull

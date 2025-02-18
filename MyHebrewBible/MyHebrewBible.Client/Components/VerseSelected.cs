@@ -1,3 +1,3 @@
 ﻿namespace MyHebrewBible.Client.Components;
 
-public record VerseSelected(long ScriptureID, long VerseNumber);
+public record VerseSelected(int ScriptureID, int VerseNumber);

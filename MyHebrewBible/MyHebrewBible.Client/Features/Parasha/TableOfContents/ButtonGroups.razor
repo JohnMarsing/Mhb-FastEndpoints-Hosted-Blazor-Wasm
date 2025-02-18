@@ -92,7 +92,7 @@
 	// string buttonGroupSize => MediaQuery == GlobalEnums.MediaQuery.Xs ? "btn-group-sm" : "btn-group";
 	string textSize => MediaQuery == GlobalEnums.MediaQuery.Xs ? "fs-6" : "fs-5";  // "fs-4"
 
-	private void ButtonClick(long scriptureId, ParashaEnums.ShowSection showSection)
+	private void ButtonClick(int scriptureId, ParashaEnums.ShowSection showSection)
 	{
 		OnScriptureIdSelected.InvokeAsync(new ScriptureSelected(scriptureId, showSection));
 	}

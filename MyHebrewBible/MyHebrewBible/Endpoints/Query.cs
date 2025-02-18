@@ -19,7 +19,7 @@ public class Query
 	#endregion
 
 	#region AlephTav
-	public async Task<IEnumerable<AlephTavHebrewVerse?>> GetAlephTavHebrewVerses(long bookId, long chapter)
+	public async Task<IEnumerable<AlephTavHebrewVerse?>> GetAlephTavHebrewVerses(int bookId, int chapter)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
 		string sql;
@@ -40,7 +40,7 @@ public class Query
 	}
 
 
-	public async Task<IEnumerable<BibleVerseAT?>> GetAlephTavKjvVerses(long bookID, long chapter)
+	public async Task<IEnumerable<BibleVerseAT?>> GetAlephTavKjvVerses(int bookID, int chapter)
 	{
 		//_logger.LogDebug("{Method} Get B/C: {bookID}/{chapter}", nameof(GetAlephTavKjvVerses), bookID, chapter);
 		using var connection = await _connectionFactory.CreateConnectionAsync();
@@ -64,7 +64,7 @@ public class Query
 	#endregion
 
 	#region Articles
-	public async Task<Article?> GetArticle(long id)
+	public async Task<Article?> GetArticle(int id)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
 		Parms = new DynamicParameters(new { Id = id });
@@ -72,7 +72,7 @@ public class Query
 		return article;
 	}
 
-	public async Task<IEnumerable<ArticleList?>> GetArticleList(long filter)
+	public async Task<IEnumerable<ArticleList?>> GetArticleList(int filter)
 	{
 		ArticleEnums.Filter filterSmartEnum = ArticleEnums.Filter.FromValue((int)filter);
 		string where = filterSmartEnum.Where;
@@ -85,7 +85,7 @@ public class Query
 	#endregion
 
 	#region BibleVerse
-	public async Task<IEnumerable<BookChapterWithAT?>> GetBookChapterWithAT(long bookID, long chapter)
+	public async Task<IEnumerable<BookChapterWithAT?>> GetBookChapterWithAT(int bookID, int chapter)
 	{
 		_logger.LogDebug("{Method} Get B/C: {bookID}/{chapter}", nameof(GetBookChapterWithAT), bookID, chapter);
 		try
@@ -136,7 +136,7 @@ public class Query
 	}
 	#endregion
 
-	public async Task<IEnumerable<Mitzvah?>> GetMitzvot(long bookId)
+	public async Task<IEnumerable<Mitzvah?>> GetMitzvot(int bookId)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
 		Parms = new DynamicParameters(new { BookId = bookId });
@@ -144,7 +144,7 @@ public class Query
 		return mitzvot;
 	}
 
-	public async Task<IEnumerable<BibleVerseBCV?>> GetVerseListByBCV(long bookId, long chapter, long begVerse, long endVerse)
+	public async Task<IEnumerable<BibleVerseBCV?>> GetVerseListByBCV(int bookId, int chapter, int begVerse, int endVerse)
 	{
 		try
 		{
@@ -163,7 +163,6 @@ public class Query
 	}
 
 
-
 	/*
 	### Note: `SqlOrderBy` is only needed if you need,  e.g., a custom `WHERE` clause
 
@@ -175,7 +174,7 @@ public class Query
 	```
  */
 
-	public async Task<IEnumerable<ParashaWithAT?>> GetParashaWithAT(long triennialId)
+	public async Task<IEnumerable<ParashaWithAT?>> GetParashaWithAT(int triennialId)
 	{
 		_logger.LogDebug("{Method} Get ParashaId : {triennialId}", nameof(GetParashaWithAT), triennialId);
 		try
@@ -228,7 +227,14 @@ public class Query
 		}
 	}
 
-	public async Task<IEnumerable<BibleVerseId?>> GetVerseListBetweenIds(long begId, long endId)
+	public async Task<IEnumerable<TableRowCount?>> GetTableRowCount()
+	{
+		using var connection = await _connectionFactory.CreateConnectionAsync();
+		var tableRowCounts = await connection.QueryAsync<TableRowCount>(Api.TableRowCount.Sql);
+		return tableRowCounts;
+	}
+
+	public async Task<IEnumerable<BibleVerseId?>> GetVerseListBetweenIds(int begId, int endId)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
 		Parms = new DynamicParameters(new { BegId = begId, EndId = endId });
@@ -238,7 +244,7 @@ public class Query
 
 
 	#region WordPart
-	public async Task<IEnumerable<WordPartByScriptureId?>> GetWordPartByScriptureId(long scriptureId)
+	public async Task<IEnumerable<WordPartByScriptureId?>> GetWordPartByScriptureId(int scriptureId)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
 		Parms = new DynamicParameters(new { ScriptureID = scriptureId });
@@ -246,7 +252,7 @@ public class Query
 		return versList;
 	}
 
-	public async Task<IEnumerable<WordPartByStrongs?>> GetWordPartsByStrongs(long scriptureID, long strongs)
+	public async Task<IEnumerable<WordPartByStrongs?>> GetWordPartsByStrongs(int scriptureID, int strongs)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
 		Parms = new DynamicParameters(new { ScriptureID = scriptureID, Strongs = strongs });
@@ -254,7 +260,7 @@ public class Query
 		return wordParts;
 	}
 
-	public async Task<IEnumerable<WordPartKjv?>> GetWordPartKjv(long scriptureID)
+	public async Task<IEnumerable<WordPartKjv?>> GetWordPartKjv(int scriptureID)
 	{
 		using var connection = await _connectionFactory.CreateConnectionAsync();
 		Parms = new DynamicParameters(new { ScriptureID = scriptureID });

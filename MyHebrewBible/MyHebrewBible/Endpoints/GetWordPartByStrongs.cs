@@ -4,8 +4,8 @@ namespace MyHebrewBible.Endpoints;
 
 public class WordPartByStrongsRequest
 {
-	public long ScriptureId { get; set; }
-	public long Strongs { get; set; }
+	public int ScriptureId { get; set; }
+	public int Strongs { get; set; }
 }
 
 public class GetWordPartByStrongs : Endpoint<WordPartByStrongsRequest, IEnumerable<WordPartByStrongs>>
@@ -45,15 +45,15 @@ public class GetWordPartByStrongs : Endpoint<WordPartByStrongsRequest, IEnumerab
 
 public class WordPartByStrongs
 {
-	public long ScriptureID { get; set; }
-	public long WordCount { get; set; }
-	public long SegmentCount { get; set; }
-	public long WordEnum { get; set; }
+	public int ScriptureID { get; set; }
+	public int WordCount { get; set; }
+	public int SegmentCount { get; set; }
+	public int WordEnum { get; set; }
 	public string? Hebrew1 { get; set; }
 	public string? Hebrew2 { get; set; }
 	public string? Hebrew3 { get; set; }
 	public string? KjvWord { get; set; }
-	public long Strongs { get; set; }
+	public int Strongs { get; set; }
 	public string? Transliteration { get; set; }
 	public int? FinalEnum { get; set; }
 }

@@ -4,8 +4,8 @@
 
 public class AlephTavKjvVersesRequest
 {
-	public long BookID { get; set; }
-	public long Chapter { get; set; }
+	public int BookID { get; set; }
+	public int Chapter { get; set; }
 }
 
 // Using Primary Constructors
@@ -42,9 +42,9 @@ public class GetAlephTavKjvVerses(Query query, ILogger<GetAlephTavKjvVerses> log
 
 public class BibleVerseAT
 {
-	public long ID { get; set; }
+	public int ID { get; set; }
 	public string? BCV { get; set; }
-	public long Verse { get; set; }
+	public int Verse { get; set; }
 	public string? VerseOffset { get; set; }
 	public string? KJV { get; set; }
 	public string? DescH { get; set; }

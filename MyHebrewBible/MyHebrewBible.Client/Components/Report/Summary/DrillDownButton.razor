@@ -6,10 +6,10 @@
 
 
 @code {
-	[Parameter, EditorRequired] public long ScriptureId { get; set; }
-	[Parameter] public EventCallback<long> OnVerseSelected { get; set; }
+	[Parameter, EditorRequired] public int ScriptureId { get; set; }
+	[Parameter] public EventCallback<int> OnVerseSelected { get; set; }
 
-	private void ButtonClick(long scriptureId)
+	private void ButtonClick(int scriptureId)
 	{
 		//Toast!.ShowWarning($"DrillDown|ButtonClick {scriptureId}!{verse}");
 		OnVerseSelected.InvokeAsync(scriptureId);

@@ -1,0 +1,56 @@
+﻿@page "/HealthChecks/TableRowCount/{Id:int}"
+@page "/HealthChecks/TableRowCount"
+
+@using MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Components
+@using Page = MyHebrewBible.Client.Enums.Nav
+@using System.Globalization
+
+@inject ApiClient Api
+@inject ILogger<Index>? Logger
+@inject IToastService? Toast
+
+<PageHeader PageEnum="Page.TableRowCount" />
+
+<LoadingProgress>
+	<LoadingComponent IsLoading="tableRowCnts==null" TurnSpinnerOff="TurnSpinnerOff">
+		<TableTemplate Items="tableRowCnts!.OrderBy(o => o.Name).ToList()">
+			<TableHeader>
+				<th class="text-primary float-end">Count</th>
+				<th class="text-primary">Name</th>
+			</TableHeader>
+			<RowTemplate>
+				<td class="float-end">@context.RowCnt.ToString("N0")</td>
+				<td>@context.Name</td>
+			</RowTemplate>
+		</TableTemplate>
+	</LoadingComponent>
+</LoadingProgress>
+
+@code {
+	[Parameter] public int? Id { get; set; } // I don't need this
+
+	protected bool TurnSpinnerOff = false;
+	private ICollection<TableRowCount>? tableRowCnts = null;
+
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			tableRowCnts = await Api.GetTableRowCountsAsync(0);
+			if (tableRowCnts is null)
+			{
+				Toast!.ShowWarning($"TableRowCount not found (◡︵◡)");
+			}
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(OnInitializedAsync));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnInitializedAsync)}");
+		}
+		finally
+		{
+			TurnSpinnerOff = true;
+		}
+	}
+}

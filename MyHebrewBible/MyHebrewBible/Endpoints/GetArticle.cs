@@ -1,12 +1,12 @@
 ﻿using MyHebrewBible.Client.Enums;
 namespace MyHebrewBible.Endpoints;
 
-public class Request
+public class ArticleRequest
 {
-	public long Id { get; set; }
+	public int Id { get; set; }
 }
 
-public class GetArticle : Endpoint<Request, Article>
+public class GetArticle : Endpoint<ArticleRequest, Article>
 {
 	public override void Configure()
 	{
@@ -24,7 +24,7 @@ public class GetArticle : Endpoint<Request, Article>
 	}
 	#endregion
 
-	public override async Task HandleAsync(Request request, CancellationToken c)
+	public override async Task HandleAsync(ArticleRequest request, CancellationToken c)
 	{
 		_logger.LogDebug("{Method} Id: {Id}", nameof(HandleAsync), request.Id);
 		try
@@ -42,25 +42,25 @@ public class GetArticle : Endpoint<Request, Article>
 
 public class Article
 {
-	public long Id { get; set; }
+	public int Id { get; set; }
 	public string? FileNameNoExt { get; set; }
 	public string? Title { get; set; }
 	//public string? Uri { get; set; }
 	public string? Details { get; set; }
 	public string? DetailsMD { get; set; }
-	public long PrimaryScriptureId { get; set; }
+	public int PrimaryScriptureId { get; set; }
 	public DateTime CreateDate { get; set; }
-	public long? DocBlobID { get; set; }
-	public long? PdfBlobID { get; set; }
+	public int? DocBlobID { get; set; }
+	public int? PdfBlobID { get; set; }
 	public bool IsPlaceHolder { get; set; }
 	public bool IsFavorite { get; set; }
-	public long ExtraVerses { get; set; }
+	public int ExtraVerses { get; set; }
 	public bool IsWordStudy { get; set; }
 	public bool IsParasha { get; set; }
 	public string? BCV { get; set; }
-	public long BookID { get; set; }
-	public long Chapter { get; set; }
-	public long Verse { get; set; }
+	public int BookID { get; set; }
+	public int Chapter { get; set; }
+	public int Verse { get; set; }
 	
 	//public string? BookAbrv { get; set; }
 
