@@ -5,8 +5,8 @@ namespace MyHebrewBible.Endpoints;
 public class BookChapterWithATRequest
 {
 	//[BindFrom("amount")]
-	public long BookID { get; set; }
-	public long Chapter { get; set; }
+	public int BookID { get; set; }
+	public int Chapter { get; set; }
 }
 
 public class GetBookChapterWithAT : Endpoint<BookChapterWithATRequest, IEnumerable<BookChapterWithAT>>
@@ -47,9 +47,9 @@ public class GetBookChapterWithAT : Endpoint<BookChapterWithATRequest, IEnumerab
 
 public record BookChapterWithAT
 {
-	public long ID { get; init; }
+	public int ID { get; init; }
 	public string? BCV { get; init; }
-	public long Verse { get; init; }
+	public int Verse { get; init; }
 	public string? VerseOffset { get; init; }
 	public string? KJV { get; init; }
 	public string? DescH { get; init; }

@@ -4,10 +4,10 @@ namespace MyHebrewBible.Endpoints;
 
 public class VerseListByBCVRequest
 {
-	public long BookID { get; set; }
-	public long Chapter { get; set; }
-	public long BegVerse { get; set; }
-	public long EndVerse { get; set; }
+	public int BookID { get; set; }
+	public int Chapter { get; set; }
+	public int BegVerse { get; set; }
+	public int EndVerse { get; set; }
 }
 
 public class GetVerseListByBCV : Endpoint<VerseListByBCVRequest, IEnumerable<BibleVerseBCV>>
@@ -48,9 +48,9 @@ public class GetVerseListByBCV : Endpoint<VerseListByBCVRequest, IEnumerable<Bib
 
 public class BibleVerseBCV
 {
-	public long ID { get; set; }
+	public int ID { get; set; }
 	public string? BCV { get; set; }
-	public long Verse { get; set; }
+	public int Verse { get; set; }
 	public string? VerseOffset { get; set; }
 	public string? KJV { get; set; }
 	public string? DescH { get; set; }

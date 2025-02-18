@@ -77,8 +77,8 @@
 @code {
 	[Parameter, EditorRequired] public BookChapterVerse? BookChapterVerse { get; set; }
 
-	protected long FocusScriptureId;
-	protected long VerseNumber;
+	protected int FocusScriptureId;
+	protected int VerseNumber;
 	protected bool TurnSpinnerOff = false;
 
 	private ICollection<BibleVerseBCV>? verses = null;
@@ -97,10 +97,10 @@
 			try
 			{
 				//await Task.Delay(5);
-				verses = await Api!.GetVerseListByBCVAsync((long)BookChapterVerse.BookAndChapter.BibleBook, 
-																										(long)BookChapterVerse.BookAndChapter.Chapter, 
-																										(long)BookChapterVerse.Verse, 
-																										(long)BookChapterVerse.Verse);
+				verses = await Api!.GetVerseListByBCVAsync(BookChapterVerse.BookAndChapter.BibleBook, 
+																										BookChapterVerse.BookAndChapter.Chapter, 
+																										BookChapterVerse.Verse, 
+																										BookChapterVerse.Verse);
 			}
 			catch (Exception ex)
 			{

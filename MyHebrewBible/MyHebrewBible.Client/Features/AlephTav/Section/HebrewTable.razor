@@ -49,7 +49,7 @@
 
 @code {
 
-	[Parameter, EditorRequired] public long ScriptureId { get; set; }
+	[Parameter, EditorRequired] public int ScriptureId { get; set; }
 	[Parameter, EditorRequired] public StrongsAndWordCount? StrongsAndWordCount { get; set; }
 	[Parameter] public EventCallback<StrongsAndWordCount?> OnStrongsSelected { get; set; }
 

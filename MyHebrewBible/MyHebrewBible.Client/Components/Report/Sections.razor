@@ -6,60 +6,69 @@
 @inject IToastService? Toast
 @inject IJSRuntime JSRuntime
 
-@foreach (var item in Verses!.OrderBy(o => o.ID))
+@if (Verses! is not null && Verses.Count()!=0)
 {
-	<TitleSubtitle Title="@item.DescH" Subtitle="@item.DescD" BCV="@GetBCV(item.BCV!)" />
+	@foreach (var item in Verses!.OrderBy(o => o.ID))
+	{
+		<TitleSubtitle Title="@item.DescH" Subtitle="@item.DescD" BCV="@GetBCV(item.BCV!)" />
 
-	if (DrilldownScriptureId == 0)
-	{
-		<div id="verse-@item.ID" tabindex="0" @onkeydown="HandleKeyDown">
-			<Paragraph BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
-								 Verse="item"
-								 ScrollToScriptureId="ScrollToScriptureId"
-								 OnVerseSelectedPassThrough="ReturnedVerse" />
-		</div>
-		@if (item.WordPartList!.Count() > 0)
+		if (DrilldownScriptureId == 0)
 		{
-			<SatAndSurroundingWords SurroundingWords="item.WordPartList!.ToList()" />
-		}
-	}
-	else
-	{
-		if (item.ID == DrilldownScriptureId)
-		{
-			<div class="card border-primary mt-2 mb-4">
-				<div class="card-header">
-					<CardHeader BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
-											BCV="@item!.BCV"
-											VerseNumber="item!.Verse"
-											Filter="Filter"
-											OnFilter="ReturnedFilter"	
-											OnClose="ReturnedCloseEvent" />
-				</div>
-				<div class="card-body">
-					<ParagraphWithWordButtons ScriptureId="DrilldownScriptureId"
-																		OnWordSelected="ReturnedWord" />
-				</div>
-				<HebrewTable ScriptureId="DrilldownScriptureId"
-										 Filter="Filter"
-										 WordSelected="CurrentWordSelected" />
+			<div id="verse-@item.ID" tabindex="0" @onkeydown="HandleKeyDown">
+				<Paragraph BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
+									 Verse="item"
+									 ScrollToScriptureId="ScrollToScriptureId"
+									 OnVerseSelectedPassThrough="ReturnedVerse" />
 			</div>
+			@if (item.WordPartList!.Count() > 0)
+			{
+				<SatAndSurroundingWords SurroundingWords="item.WordPartList!.ToList()" />
+			}
 		}
 		else
 		{
-			<Paragraph BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
-								 Verse="item"
-								 ScrollToScriptureId="ScrollToScriptureId"
-								 OnVerseSelectedPassThrough="ReturnedVerse" />
+			if (item.ID == DrilldownScriptureId)
+			{
+				<div class="card border-primary mt-2 mb-4">
+					<div class="card-header">
+						<CardHeader BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
+												BCV="@item!.BCV"
+												VerseNumber="item!.Verse"
+												Filter="Filter"
+												OnFilter="ReturnedFilter"
+												OnClose="ReturnedCloseEvent" />
+					</div>
+					<div class="card-body">
+						<ParagraphWithWordButtons ScriptureId="DrilldownScriptureId"
+																			OnWordSelected="ReturnedWord" />
+					</div>
+					<HebrewTable ScriptureId="DrilldownScriptureId"
+											 Filter="Filter"
+											 WordSelected="CurrentWordSelected" />
+				</div>
+			}
+			else
+			{
+				<Paragraph BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
+									 Verse="item"
+									 ScrollToScriptureId="ScrollToScriptureId"
+									 OnVerseSelectedPassThrough="ReturnedVerse" />
+			}
 		}
 	}
 }
+else
+{
+	<p class="fs-3 text-danger text-center">Report Verses is null or empty  (◡︵◡)</p>
+}
+
+
 
 
 @code {
 	[Parameter, EditorRequired] public List<ReportModel>? Verses { get; set; }
 	[Parameter, EditorRequired] public Enums.CalledBy CalledBy { get; set; }
-	[Parameter] public long ScrollToScriptureId { get; set; }
+	[Parameter] public int ScrollToScriptureId { get; set; }
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
@@ -83,7 +92,7 @@
 		}
 	}
 
-	protected long DrilldownScriptureId;
+	protected int DrilldownScriptureId;
 	//protected string BCV = Enums.CalledBy = Enums.CalledBy.BookChapter ? Verses.BCV : "";
 
 	protected string GetBCV(string bcv)
@@ -91,15 +100,11 @@
 		return CalledBy == Enums.CalledBy.BookChapter ? bcv : "";
 	}
 
-	protected BookAndChapter GetBookAndChapter(long bookId, long chapter)
+	protected BookAndChapter GetBookAndChapter(int bookId, int chapter)
 	{
-		return new BookAndChapter(MyHebrewBible.Client.Enums.BibleBook.FromValue(LongToInt(bookId)), LongToInt(chapter));
+		return new BookAndChapter(MyHebrewBible.Client.Enums.BibleBook.FromValue(bookId), chapter);
 	}
 
-	private int LongToInt(long l)
-	{
-		return (l <= int.MaxValue && l >= int.MinValue) ? (int)l : 1;
-	}
 
 	private void HandleKeyDown(KeyboardEventArgs e)
 	{
@@ -137,12 +142,12 @@
 		}
 	}
 
-	private void ReturnedVerse(long scriptureId)
+	private void ReturnedVerse(int scriptureId)
 	{
 		DrilldownScriptureId = scriptureId;
 	}
 
-	protected bool Filter=false;
+	protected bool Filter = false;
 	private void ReturnedFilter(bool filter)
 	{
 		Filter = filter;

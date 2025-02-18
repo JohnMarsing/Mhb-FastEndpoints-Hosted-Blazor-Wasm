@@ -2,10 +2,9 @@
 
 namespace MyHebrewBible.Endpoints;
 
-// GetMitzvotAsync(long torahBookfilter, long filter)
 public class MitzvahRequest
 {
-	public long filter { get; set; }
+	public int filter { get; set; }
 }
 
 public class GetMitzvot : Endpoint<MitzvahRequest, IEnumerable<Mitzvah>>
@@ -46,13 +45,13 @@ public class GetMitzvot : Endpoint<MitzvahRequest, IEnumerable<Mitzvah>>
 
 public class Mitzvah
 {
-	public long Id { get; set; }
-	public long Detail { get; set; }
-	public long BegId { get; set; }
-	public long EndId { get; set; }
+	public int Id { get; set; }
+	public int Detail { get; set; }
+	public int BegId { get; set; }
+	public int EndId { get; set; }
 	public string? Verse { get; set; }
 	public string? Descr { get; set; }
-	public long BookId { get; set; }
+	public int BookId { get; set; }
 	public string? BookAbrv { get; set; }
 }
 

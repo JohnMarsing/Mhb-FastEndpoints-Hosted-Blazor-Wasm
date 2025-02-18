@@ -30,12 +30,12 @@
 @code {
 	[Parameter, EditorRequired] public ReportModel? Verse { get; set; }
 	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
-	[Parameter] public EventCallback<long> OnVerseSelectedPassThrough { get; set; }
-	[Parameter] public long ScrollToScriptureId { get; set; }
+	[Parameter] public EventCallback<int> OnVerseSelectedPassThrough { get; set; }
+	[Parameter] public int ScrollToScriptureId { get; set; }
 
 	string textBG => ScrollToScriptureId == Verse!.ID ? " p-1 bg-info-subtle" : ""; 
 
-	private void ReturnedVersePassThrough(long scriptureId)
+	private void ReturnedVersePassThrough(int scriptureId)
 	{
 		OnVerseSelectedPassThrough.InvokeAsync(scriptureId);
 	}

@@ -1,5 +1,5 @@
 ﻿namespace MyHebrewBible.Client.Features.AlephTav;
 
-public record StrongsAndWordCount(long Strongs, long WordCount);
+public record StrongsAndWordCount(int Strongs, int WordCount);
 
 // Ignore Spelling: Strongs

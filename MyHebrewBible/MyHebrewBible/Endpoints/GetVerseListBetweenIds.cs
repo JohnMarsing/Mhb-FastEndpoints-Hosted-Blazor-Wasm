@@ -3,8 +3,8 @@ namespace MyHebrewBible.Endpoints;
 
 public class VerseListBetweenIdsRequest
 {
-	public long BegId { get; set; }
-	public long EndId { get; set; }
+	public int BegId { get; set; }
+	public int EndId { get; set; }
 }
 
 public class GetVerseListBetweenIds : Endpoint<VerseListBetweenIdsRequest, IEnumerable<BibleVerseId>>
@@ -45,9 +45,9 @@ public class GetVerseListBetweenIds : Endpoint<VerseListBetweenIdsRequest, IEnum
 
 public class BibleVerseId
 {
-	public long ID { get; set; }
+	public int ID { get; set; }
 	public string? BCV { get; set; }
-	public long Verse { get; set; }
+	public int Verse { get; set; }
 	public string? VerseOffset { get; set; }
 	public string? KJV { get; set; }
 	public string? DescH { get; set; }

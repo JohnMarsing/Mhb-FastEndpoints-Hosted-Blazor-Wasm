@@ -89,8 +89,8 @@ internal class Program
 	{
 		string tableName = "";
 		int rowsCopied = 0;
-		string readConnectionString = $"Data Source={Constants.Folder}MhbSqliteBigInt.db;Version=3;";
-		string writeConnectionString = $"Data Source={Constants.Folder}MhbSqlite.db;Version=3;";
+		string readConnectionString = $"Data Source={Constants.ReadFolder}MhbSqliteBigInt.db;Version=3;";
+		string writeConnectionString = $"Data Source={Constants.WriteFolder}MhbSqlite.db;Version=3;";
 
 		using (var readConnection = new SQLiteConnection(readConnectionString))
 		using (var writeConnection = new SQLiteConnection(writeConnectionString))
@@ -102,7 +102,7 @@ internal class Program
 			{
 				try
 				{
-					await writeConnection.ExecuteAsync($"ATTACH DATABASE '{Constants.Folder}MhbSqliteBigInt.db' AS SourceDb");
+					await writeConnection.ExecuteAsync($"ATTACH DATABASE '{Constants.ReadFolder}MhbSqliteBigInt.db' AS SourceDb");
 
 					/*
 					tableName = "Scripture";	
@@ -136,7 +136,6 @@ internal class Program
 
 					stats.TableName = tableName;
 					stats.RowsCopied = rowsCopied;
-					*/
 
 					tableName = "AlephTavVerse";
 					rowsCopied = await writeConnection.ExecuteAsync(@$"
@@ -175,6 +174,16 @@ internal class Program
 					progress.Report(new ProgressInfo(.10));
 
 					tableName = "Mitzvot";
+					rowsCopied = await writeConnection.ExecuteAsync(@$"
+                        INSERT INTO {tableName}
+                        SELECT * FROM SourceDb.{tableName}
+                    ");
+					stats.TableName = tableName;
+					stats.RowsCopied = rowsCopied;
+					progress.Report(new ProgressInfo(.10));
+					*/
+
+					tableName = "Triennial";
 					rowsCopied = await writeConnection.ExecuteAsync(@$"
                         INSERT INTO {tableName}
                         SELECT * FROM SourceDb.{tableName}

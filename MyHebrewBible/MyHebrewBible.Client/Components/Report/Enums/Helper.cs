@@ -3,7 +3,7 @@
 public class Helper
 {
 	// ToDo: Compare dupe code to Helpers\HebrewFormat.cs
-	public static string GetSpan(long wordEnumLong, string hebrew1, string hebrew2, string hebrew3)
+	public static string GetSpan(int wordEnumLong, string hebrew1, string hebrew2, string hebrew3)
 	{
 		WordEnum wordEnum = (WordEnum)wordEnumLong;
 
@@ -22,7 +22,7 @@ public class Helper
 
 	// If the last part of the word is a Maqqef, don't add a space to the end of the word
 
-	public static string CheckMaqqef(long wordEnumLong, string hebrew1, string hebrew2, string hebrew3)
+	public static string CheckMaqqef(int wordEnumLong, string hebrew1, string hebrew2, string hebrew3)
 	{
 		WordEnum wordEnum = (WordEnum)wordEnumLong;
 

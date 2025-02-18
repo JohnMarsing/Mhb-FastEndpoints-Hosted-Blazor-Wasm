@@ -49,6 +49,7 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int HealthCheckBitwise = 23;
 		internal const int HebrewRevelation = 24;
 		internal const int HealthCheckParasha = 25;
+		internal const int TableRowCount = 26;
 	}
 	#endregion
 
@@ -78,7 +79,8 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav HealthCheckBitwise = new HealthCheckBitwiseSE();
 	public static readonly Nav HebrewRevelation = new HebrewRevelationSE();
 	public static readonly Nav HealthCheckParasha = new HealthCheckParashaSE();
-	
+	public static readonly Nav TableRowCount = new TableRowCountSE();
+
 	#endregion
 
 	private Nav(string name, int value) : base(name, value)  // Constructor
@@ -469,6 +471,20 @@ public abstract class Nav : SmartEnum<Nav>
 		public override int Sort => Id.Profile;
 		public override string HomeTitleSuffix => " Parashat H6567";
 		public override string HomeFloatRightHebrew => "פָּרָשַׁת";
+		public override PageListType PageListType => PageListType.SitemapPage;
+		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
+	}
+
+	private sealed class TableRowCountSE : Nav
+	{
+		public TableRowCountSE() : base($"{nameof(Id.TableRowCount)}", Id.TableRowCount) { }
+		public override string Index => "HealthChecks/TableRowCount";
+		public override string Title => "HealthChecks Table Row Count";
+		public override string Icon => "fas fa-wave-square";  // fa-stopwatch-20
+		public override int Sort => Id.Profile;
+		public override string HomeTitleSuffix => " ";
+		public override string HomeFloatRightHebrew => "";
 		public override PageListType PageListType => PageListType.SitemapPage;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 		public override bool Disabled => false;

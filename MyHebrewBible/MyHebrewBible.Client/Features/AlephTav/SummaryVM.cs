@@ -12,5 +12,5 @@
 - `[Parameter, EditorRequired] public SummaryVM? SummaryVM { get; set; }`
 
 */
-public record SummaryVM(long ScriptureId, string BCV, long Chapter, long Verse, long HasTwo, int RowCnt);
+public record SummaryVM(int ScriptureId, string BCV, int Chapter, int Verse, int HasTwo, int RowCnt);
 

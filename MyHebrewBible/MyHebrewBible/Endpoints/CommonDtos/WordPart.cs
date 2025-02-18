@@ -4,9 +4,9 @@ public record WordPart
 {
 	public int Id { get; init; }                   // AlephTavVerseWordPart!Id int
 	public string? BCV { get; init; }
-	public long BookID { get; init; }              // Scripture!BookID is bigint
-	public long Chapter { get; init; }             // Scripture!Chapter is bigint
-	public long Verse { get; init; }               // Scripture!Verse is bigint
+	public int BookID { get; init; }              // Scripture!BookID is bigint
+	public int Chapter { get; init; }             // Scripture!Chapter is bigint
+	public int Verse { get; init; }               // Scripture!Verse is bigint
 	public int ScriptureID { get; init; }          // WordPart!ScriptureID int
 	public int WordCount { get; init; }
 	public int SegmentCount { get; init; }

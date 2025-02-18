@@ -41,7 +41,7 @@ else
 </BlazoredTypeahead>
 
 @code {
-	[Parameter, EditorRequired] public EventCallback<long> OnArticleIdSelected { get; set; }
+	[Parameter, EditorRequired] public EventCallback<int> OnArticleIdSelected { get; set; }
 	[Parameter, EditorRequired] public bool IsXs { get; set; }
 
 	protected Enums.Filter CurrentFilter { get; set; } = Enums.Filter.All;
@@ -49,7 +49,7 @@ else
 	protected ArticleList? SelectedArticle { get; set; }
 
 	private ICollection<ArticleList>? collection = null;
-	protected long ArticleRowCount = 0;
+	protected int ArticleRowCount = 0;
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -59,12 +59,12 @@ else
 
 	protected async Task PopulateCollection(Enums.Filter filter)
 	{
-		long longValue = (long)filter.Value;
+		int intValue = filter.Value;
 		// Logger!.LogInformation("{Method} filter: {FilterName}, longValue:{longValue}"
 		// 	, nameof(PopulateCollection), filter.Name, longValue);
 		try
 		{
-			collection = await Api!.GetArticleListAsync(longValue); 
+			collection = await Api!.GetArticleListAsync(intValue); 
 			ArticleRowCount = collection.Count;
 		}
 		catch (Exception ex)

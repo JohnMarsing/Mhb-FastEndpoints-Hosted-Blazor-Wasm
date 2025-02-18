@@ -4,13 +4,13 @@ namespace MyHebrewBible.Client.Enums;
 
 public class BibleAnchors
 {
-	public static MarkupString StrongsH_td(long strongs)
+	public static MarkupString StrongsH_td(int strongs)
 	{
 		return (MarkupString)(LexiconAnchor("H", LongToInt(strongs), "", false));
 	}
 
 	// ToDo: duplicate code
-	private static int LongToInt(long l)
+	private static int LongToInt(int l)
 	{
 		return (l <= int.MaxValue && l >= int.MinValue) ? (int)l : 1;
 	}
