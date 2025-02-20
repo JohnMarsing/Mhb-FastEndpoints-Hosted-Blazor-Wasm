@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using MyHebrewBible.Client.State.BookChapter;
 
 namespace MyHebrewBible.Client.State;
 

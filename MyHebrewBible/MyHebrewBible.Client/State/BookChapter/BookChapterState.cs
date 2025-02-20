@@ -1,7 +1,7 @@
 ﻿using Blazored.LocalStorage;
 using MyHebrewBible.Client.Enums;
 
-namespace MyHebrewBible.Client.State;
+namespace MyHebrewBible.Client.State.BookChapter;
 
 public class BookChapterState
 {
@@ -10,7 +10,7 @@ public class BookChapterState
 	#region Constructor and DI
 	private readonly ILogger Logger;
 	private readonly ILocalStorageService? localStorage;
-	public BookChapterState(ILocalStorageService localStorage, ILogger<AppState> logger)  
+	public BookChapterState(ILocalStorageService localStorage, ILogger<AppState> logger)
 	{
 		this.localStorage = localStorage;
 		Logger = logger;
@@ -23,7 +23,7 @@ public class BookChapterState
 	private void NotifyStateHasChanged() => OnChange?.Invoke();
 	public event Action? OnChange;
 
-	private BibleBookIdAndChapter _defaultBibleBookIdAndChapter = new(BibleBook.Genesis.Value, 1);
+	private BibleBookIdAndChapter _defaultBibleBookIdAndChapter = new(BibleBook.Genesis.Value, 1, 1, "Gen-1-1-1");
 	private BibleBookIdAndChapter? _bibleBookIdAndChapter;
 
 	public async Task Initialize()
@@ -35,14 +35,14 @@ public class BookChapterState
 			{
 				await Update(_bibleBookIdAndChapter);
 			}
-			else 
+			else
 			{
 				_bibleBookIdAndChapter = _defaultBibleBookIdAndChapter;
 				await Update(_defaultBibleBookIdAndChapter);
 			}
 
 			_isInitialized = true;
-			
+
 		}
 	}
 
@@ -51,9 +51,9 @@ public class BookChapterState
 		return _bibleBookIdAndChapter!;
 	}
 
-	public async Task Update(BibleBookIdAndChapter bibleBookIdAndChapter)  
+	public async Task Update(BibleBookIdAndChapter bibleBookIdAndChapter)
 	{
-		await this.localStorage!.SetItemAsync(Key, bibleBookIdAndChapter);
+		await localStorage!.SetItemAsync(Key, bibleBookIdAndChapter);
 		_bibleBookIdAndChapter = bibleBookIdAndChapter;
 		NotifyStateHasChanged();
 	}

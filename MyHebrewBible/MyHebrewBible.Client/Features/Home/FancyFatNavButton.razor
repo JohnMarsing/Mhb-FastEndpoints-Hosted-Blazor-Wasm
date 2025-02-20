@@ -1,6 +1,4 @@
 ﻿@using MyHebrewBible.Client.Enums
-@using MyHebrewBible.Client.State
-@using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
 
 @inject NavigationManager NavigationManager
 
@@ -19,8 +17,6 @@
 	[Parameter, EditorRequired] public Nav? Nav { get; set; }
 	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
 	[Parameter] public bool IsFeatured { get; set; } = false;
-
-	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
 
 	protected string IconSize => $"{(MediaQuery == MediaQuery.Sm ? " fa-2x" : " fa-3x")}";
 	protected string FontSize => $"{(MediaQuery == MediaQuery.Sm ? " fs-5" : " fs-4")}";

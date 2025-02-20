@@ -1,6 +1,6 @@
-﻿@page "/bookchapter/{BookId:int}/{Chapter:int}/{Slug}"
+﻿@page "/bookchapter/{BookId:int}/{Chapter:int}/{Verse:int=1}/{Slug?}"
 
-@using MyHebrewBible.Client.State
+@using MyHebrewBible.Client.State.BookChapter
 @using MyHebrewBible.Client.Layout
 @using MyHebrewBible.Client.Components.BibleLookup.Toolbar;
 @using MyHebrewBible.Client.Features.BookChapter
@@ -13,28 +13,28 @@
 
 <div class="@GlobalEnums.MediaQuery.Xs.DivClass">
 	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-										 OnBookAndChapterSelected="ReturnedBookAndChapter"
-										 MediaQuery="GlobalEnums.MediaQuery.Xs" />
+	OnBookAndChapterSelected="ReturnedBookAndChapter"
+	MediaQuery="GlobalEnums.MediaQuery.Xs" />
 </div>
 <div class="@GlobalEnums.MediaQuery.Sm.DivClass">
 	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-										 OnBookAndChapterSelected="ReturnedBookAndChapter"
-										 MediaQuery="GlobalEnums.MediaQuery.Sm" />
+	OnBookAndChapterSelected="ReturnedBookAndChapter"
+	MediaQuery="GlobalEnums.MediaQuery.Sm" />
 </div>
 <div class="@GlobalEnums.MediaQuery.Md.DivClass">
 	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-										 OnBookAndChapterSelected="ReturnedBookAndChapter"
-										 MediaQuery="GlobalEnums.MediaQuery.Md" />
+	OnBookAndChapterSelected="ReturnedBookAndChapter"
+	MediaQuery="GlobalEnums.MediaQuery.Md" />
 </div>
 <div class="@GlobalEnums.MediaQuery.Lg.DivClass">
 	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-										 OnBookAndChapterSelected="ReturnedBookAndChapter"
-										 MediaQuery="GlobalEnums.MediaQuery.Lg" />
+	OnBookAndChapterSelected="ReturnedBookAndChapter"
+	MediaQuery="GlobalEnums.MediaQuery.Lg" />
 </div>
 <div class="@GlobalEnums.MediaQuery.Xl.DivClass">
 	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-										 OnBookAndChapterSelected="ReturnedBookAndChapter"
-										 MediaQuery="GlobalEnums.MediaQuery.Xl" />
+	OnBookAndChapterSelected="ReturnedBookAndChapter"
+	MediaQuery="GlobalEnums.MediaQuery.Xl" />
 </div>
 
 <LoadingProgress>
@@ -50,7 +50,8 @@
 
 	[Parameter, EditorRequired] public int BookId { get; set; }
 	[Parameter, EditorRequired] public int Chapter { get; set; }
-	[Parameter] public string? Slug { get; set; }
+	[Parameter] public int Verse { get; set; } = 1;
+	[Parameter] public string? Slug { get; set; } = "default-slug";
 
 	public BookAndChapter? CurrentBookAndChapter { get; set; }
 
@@ -58,7 +59,8 @@
 
 	protected override void OnParametersSet()
 	{
-		// Logger!.LogInformation("{Method}, Route: {BookId}/{Chapter}", nameof(OnParametersSet), BookId, Chapter);
+		Logger!.LogInformation("{Method}, Route: {BookId}/{Chapter}/{Verse}/{Slug}"
+			, nameof(OnParametersSet), BookId, Chapter, Verse, Slug);
 
 		if (BookId == 0 && Chapter == 0)
 		{
@@ -68,6 +70,7 @@
 		{
 			CurrentBookAndChapter = GetBookAndChapterViaRoutes(BookId, Chapter);
 		}
+
 	}
 
 	private void ReNavigateBackToThisPage()
@@ -82,11 +85,18 @@
 		else
 		{
 			Enums.BibleBook bibleBook = Enums.BibleBook.FromValue(rec.BibleBookId);
-			// Logger!.LogInformation("{Method}, BibleBook/Chapter: {BibleBook}/{Chapter}"
-			// 	, nameof(ReNavigateBackToThisPage), bibleBook.Value, rec.Chapter);
-			NavigationManager!.NavigateTo(Components.Helper.GetNavigateToUrl(bibleBook, rec.Chapter));
+			Logger!.LogInformation("{Method}, BibleBook/Chapter/Verse/Slug: {BibleBook}/{Chapter}/{Verse}/{Slug}"
+			 	, nameof(ReNavigateBackToThisPage), bibleBook.Value, rec.Chapter, rec.Verse, rec.Slug);
+			NavigationManager!.NavigateTo(GetNavigateToUrl(bibleBook, rec.Chapter, rec.Verse, rec.Slug));
 		}
 	}
+
+	private string GetNavigateToUrl(MyHebrewBible.Client.Enums.BibleBook? bibleBook, int chapter, int verse, string? slug)
+	{
+		// slug is not used
+		return $"BookChapter/{bibleBook!.Value}/{chapter}/{verse}/{bibleBook!.Abrv}-{chapter}-{verse}";
+	}
+
 
 	private BookAndChapter GetBookAndChapterViaRoutes(int bookId, int chapter)
 	{
@@ -99,16 +109,14 @@
 
 	private async Task ReturnedBookAndChapter(BookAndChapter bookAndChapter)
 	{
-		BibleBookIdAndChapter rec = new BibleBookIdAndChapter(bookAndChapter.BibleBook!.Value, bookAndChapter.Chapter);
-		string slug = $"{Enums.BibleBook.FromValue(rec.BibleBookId).Abrv}-{rec.Chapter}";
+		BibleBookIdAndChapter rec = new BibleBookIdAndChapter(bookAndChapter.BibleBook!.Value, bookAndChapter.Chapter, 1);
+		string slug = $"{Enums.BibleBook.FromValue(rec.BibleBookId).Abrv}-{rec.Chapter}-{rec.Slug}";
 		//Logger!.LogInformation("{Method}, Route: {BookId}/{Chapter}", nameof(ReturnedBookAndChapter), rec.BibleBookId, rec.Chapter);
-		NavigationManager!.NavigateTo($"BookChapter/{rec.BibleBookId}/{rec.Chapter}/{slug}");
+		NavigationManager!.NavigateTo($"BookChapter/{rec.BibleBookId}/{rec.Chapter}/{rec.Verse}/{slug}");
 
 		await CascadingAppState!.AppState!.BookChapterState!.Update(rec);
 		CurrentBookAndChapter = bookAndChapter!;
 		//Logger!.LogInformation("{Method}, CurrentBookAndChapter: {CurrentBookAndChapter}", nameof(ReturnedBookAndChapter), CurrentBookAndChapter);
 		PageTitle = GlobalEnums.BibleBookFormat.BC(bookAndChapter);
 	}
-
 }
-

@@ -10,12 +10,13 @@ public enum PageListType
 	SitemapPage = 1,
 	Footer = 2,
 	Layout = 4,
-	Reply = 8,
-	LayoutXs = 16,
-	LayoutSm = 32,
-	LayoutMd = 64,
-	LayoutLg = 128,
-	LayoutXl = 256,
+	HealthCheck = 8,
+	Reply = 16,
+	LayoutXs = 32,
+	LayoutSm = 64,
+	LayoutMd = 128,
+	LayoutLg = 256,
+	LayoutXl = 512,
 }
 
 public abstract class Nav : SmartEnum<Nav>
@@ -49,7 +50,15 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int HealthCheckBitwise = 23;
 		internal const int HebrewRevelation = 24;
 		internal const int HealthCheckParasha = 25;
-		internal const int TableRowCount = 26;
+		internal const int HealthCheckTableRowCount = 26;
+
+		/*
+		Un documented Health Checks
+		internal const int HealthCheckBitwiseSample = 25;
+		internal const int HealthCheckQuickGrid = 25;
+		internal const int HealthCheckToggle = 25;
+		*/
+
 	}
 	#endregion
 
@@ -79,7 +88,7 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav HealthCheckBitwise = new HealthCheckBitwiseSE();
 	public static readonly Nav HebrewRevelation = new HebrewRevelationSE();
 	public static readonly Nav HealthCheckParasha = new HealthCheckParashaSE();
-	public static readonly Nav TableRowCount = new TableRowCountSE();
+	public static readonly Nav HealthCheckTableRowCount = new HealthCheckTableRowCountSE();
 
 	#endregion
 
@@ -135,7 +144,7 @@ public abstract class Nav : SmartEnum<Nav>
 	private sealed class BookChapterSE : Nav
 	{
 		public BookChapterSE() : base($"{nameof(Id.BookChapter)}", Id.BookChapter) { }
-		public override string Index => "/BookChapter/0/0/default";   
+		public override string Index => "/BookChapter/0/0/0/default";   // BookId/Chapter/Verse/Slug
 		public override string Title => "Book Chapter";
 		public override string Icon => "fa fa-book";
 		public override int Sort => Id.BookChapter;
@@ -380,12 +389,12 @@ public abstract class Nav : SmartEnum<Nav>
 	{
 		public HealthCheckBibleBookSE() : base($"{nameof(Id.HealthCheckBibleBook)}", Id.HealthCheckBibleBook) { }
 		public override string Index => "HealthChecks/BibleBooks";
-		public override string Title => "HealthChecks BibleBook";
+		public override string Title => "BibleBook (HC)";
 		public override string Icon => "fas fa-brain";
-		public override int Sort => Id.Profile;
+		public override int Sort => Id.HealthCheckBibleBook;
 		public override string HomeTitleSuffix => " Yakah H3198";
 		public override string HomeFloatRightHebrew => "יָכַח";
-		public override PageListType PageListType => PageListType.SitemapPage;
+		public override PageListType PageListType => PageListType.SitemapPage | PageListType.HealthCheck;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 		public override bool Disabled => false;
 	}
@@ -395,12 +404,12 @@ public abstract class Nav : SmartEnum<Nav>
 	{
 		public HealthCheckThrowErrorSE() : base($"{nameof(Id.HealthCheckThrowError)}", Id.HealthCheckThrowError) { }
 		public override string Index => "HealthChecks/ThrowError";
-		public override string Title => "HealthChecks ThrowError";
+		public override string Title => "ThrowError (HC)";
 		public override string Icon => "fas fa-bomb";  //fas fa-wrench
-		public override int Sort => Id.Profile;
+		public override int Sort => Id.HealthCheckThrowError;
 		public override string HomeTitleSuffix => " ";
 		public override string HomeFloatRightHebrew => "";
-		public override PageListType PageListType => PageListType.SitemapPage;
+		public override PageListType PageListType => PageListType.SitemapPage | PageListType.HealthCheck;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 		public override bool Disabled => false;
 	}
@@ -409,12 +418,12 @@ public abstract class Nav : SmartEnum<Nav>
 	{
 		public HealthCheckVerseListSE() : base($"{nameof(Id.HealthCheckVerseList)}", Id.HealthCheckVerseList) { }
 		public override string Index => "HealthChecks/VerseList";
-		public override string Title => "HealthChecks Verse List";
+		public override string Title => "Verse List (HC)";
 		public override string Icon => "fas fa-wrench";
-		public override int Sort => Id.Profile;
+		public override int Sort => Id.HealthCheckVerseList;
 		public override string HomeTitleSuffix => " ";
 		public override string HomeFloatRightHebrew => "";
-		public override PageListType PageListType => PageListType.SitemapPage;
+		public override PageListType PageListType => PageListType.SitemapPage | PageListType.HealthCheck;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 		public override bool Disabled => false;
 	}
@@ -438,12 +447,12 @@ public abstract class Nav : SmartEnum<Nav>
 	{
 		public HealthCheckBitwiseSE() : base($"{nameof(Id.HealthCheckBitwise)}", Id.HealthCheckBitwise) { }
 		public override string Index => "HealthChecks/Bitwise";
-		public override string Title => "HealthChecks Bitwise";
+		public override string Title => "Bitwise (HC)";
 		public override string Icon => "fas fa-teeth";  // fab fa-perbyte
-		public override int Sort => Id.Profile;
+		public override int Sort => Id.HealthCheckBitwise;
 		public override string HomeTitleSuffix => " ";
 		public override string HomeFloatRightHebrew => "";
-		public override PageListType PageListType => PageListType.SitemapPage;
+		public override PageListType PageListType => PageListType.SitemapPage | PageListType.HealthCheck;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 		public override bool Disabled => false;
 	}
@@ -454,7 +463,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public override string Index => "HebrewRevelation";
 		public override string Title => "Hebrew Revelation";
 		public override string Icon => "fas fa-eye";  
-		public override int Sort => Id.Profile;
+		public override int Sort => Id.HebrewRevelation;
 		public override string HomeTitleSuffix => " ";
 		public override string HomeFloatRightHebrew => "";
 		public override PageListType PageListType => PageListType.SitemapPage;
@@ -466,26 +475,26 @@ public abstract class Nav : SmartEnum<Nav>
 	{
 		public HealthCheckParashaSE() : base($"{nameof(Id.HealthCheckParasha)}", Id.HealthCheckParasha) { }
 		public override string Index => "HealthChecks/Parasha";
-		public override string Title => "HealthChecks Parasha";
+		public override string Title => "Parasha (HC)";
 		public override string Icon => "fas fa-crow";
-		public override int Sort => Id.Profile;
+		public override int Sort => Id.HealthCheckParasha;
 		public override string HomeTitleSuffix => " Parashat H6567";
 		public override string HomeFloatRightHebrew => "פָּרָשַׁת";
-		public override PageListType PageListType => PageListType.SitemapPage;
+		public override PageListType PageListType => PageListType.SitemapPage | PageListType.HealthCheck;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 		public override bool Disabled => false;
 	}
 
-	private sealed class TableRowCountSE : Nav
+	private sealed class HealthCheckTableRowCountSE : Nav
 	{
-		public TableRowCountSE() : base($"{nameof(Id.TableRowCount)}", Id.TableRowCount) { }
+		public HealthCheckTableRowCountSE() : base($"{nameof(Id.HealthCheckTableRowCount)}", Id.HealthCheckTableRowCount) { }
 		public override string Index => "HealthChecks/TableRowCount";
-		public override string Title => "HealthChecks Table Row Count";
+		public override string Title => "Table Row Count (HC)";
 		public override string Icon => "fas fa-wave-square";  // fa-stopwatch-20
-		public override int Sort => Id.Profile;
+		public override int Sort => Id.HealthCheckTableRowCount;
 		public override string HomeTitleSuffix => " ";
 		public override string HomeFloatRightHebrew => "";
-		public override PageListType PageListType => PageListType.SitemapPage;
+		public override PageListType PageListType => PageListType.SitemapPage | PageListType.HealthCheck;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 		public override bool Disabled => false;
 	}

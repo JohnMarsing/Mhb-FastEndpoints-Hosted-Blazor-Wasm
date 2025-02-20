@@ -10,25 +10,56 @@
 
 <div class="h5">
 
-	<ul class="fa-ul">
-		@foreach (var item in Nav.List.ToList()
-			.Where(w => w.IsPartOfList(PageListType.SitemapPage))
-			.OrderBy(o => o.Name))
-		{
-			<li class="py-1">
-				<span class="fa-li"><i class="@item.Icon"></i></span>
-				<a @onclick="@(e => ButtonClicked(item))" 
-					title="@item.Title @item.HomeTitleSuffix" class="@item.TextColor text-decoration-underline">
-					@item.Title
-				</a>
-				@if (item.Disabled)
-				{
-					<text>&nbsp;</text><span class="text-black-50"><i class="fas fa-ban"></i></span>
-				}
+	<div class="d-flex justify-content-between">
+		<ul class="fa-ul">
+			<li class="fs-4">
+				<span class="badge rounded-pill bg-info text-dark">Regular</span>
 			</li>
-		}
-	</ul>
+			@foreach (var item in Nav.List.ToList()
+				.Where(w => w.IsPartOfList(PageListType.SitemapPage) && !w.IsPartOfList(PageListType.HealthCheck))
+				.OrderBy(o => o.Name))
+			{
+				<li class="py-1">
+					<span class="fa-li"><i class="@item.Icon"></i></span>
+					<a @onclick="@(e => ButtonClicked(item))"
+						 title="@item.Title @item.HomeTitleSuffix" class="@item.TextColor text-decoration-underline">
+						@item.Title
+					</a>
+					@if (item.Disabled)
+					{
+						<text>&nbsp;</text>
 
+						<span class="text-black-50"><i class="fas fa-ban"></i></span>
+					}
+				</li>
+			}
+		</ul>
+
+		<ul class="fa-ul">
+			<li class="fs-4">
+				<span class="badge rounded-pill bg-warning text-dark">Health Check</span>
+			</li>
+
+			@foreach (var item in Nav.List.ToList()
+				.Where(w => w.IsPartOfList(PageListType.SitemapPage) && w.IsPartOfList(PageListType.HealthCheck))
+				.OrderBy(o => o.Name))
+			{
+				<li class="py-1">
+					<span class="fa-li"><i class="@item.Icon"></i></span>
+					<a @onclick="@(e => ButtonClicked(item))"
+						 title="@item.Title @item.HomeTitleSuffix" class="@item.TextColor text-decoration-underline">
+						@item.Title
+					</a>
+					@if (item.Disabled)
+					{
+						<text>&nbsp;</text>
+
+						<span class="text-black-50"><i class="fas fa-ban"></i></span>
+					}
+				</li>
+			}
+		</ul>
+	</div>
 </div>
 
 @code {
@@ -37,4 +68,3 @@
 		NavigationManager!.NavigateTo(nav.Index);
 	}
 }
-
