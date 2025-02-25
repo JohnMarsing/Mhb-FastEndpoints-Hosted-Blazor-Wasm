@@ -1,9 +1,10 @@
-﻿@page "/bookchapter/{BookId:int}/{Chapter:int}/{Slug}"
+﻿@page "/bookchapter/{Abrv}/{Chapter:int}/{Verse:int=1}/{ScriptureId:int=0}/"
 
-@using MyHebrewBible.Client.State
+@using MyHebrewBible.Client.State.BookChapter
 @using MyHebrewBible.Client.Layout
 @using MyHebrewBible.Client.Components.BibleLookup.Toolbar;
 @using MyHebrewBible.Client.Features.BookChapter
+@using BookChapterConstants = MyHebrewBible.Client.Features.BookChapter.Constants
 
 @inject ILogger<Index>? Logger
 @inject NavigationManager NavigationManager
@@ -40,75 +41,102 @@
 <LoadingProgress>
 	<div class="mt-5">
 		<br />
-		<ReportWrapper BookAndChapter="CurrentBookAndChapter" />	
+		@if (CurrentAbrvChapterVerse is not null && CurrentBookAndChapter is not null)
+		{
+			<ReportWrapper AbrvChapterVerse="CurrentAbrvChapterVerse"
+										 BookAndChapter="CurrentBookAndChapter" />
+		}
 	</div>
 </LoadingProgress>
 
 @code {
-	[CascadingParameter] public ProcessError? ProcessError { get; set; }
+
+	// Route parameters
+	[Parameter, EditorRequired] public string Abrv { get; set; } = string.Empty;
+	[Parameter, EditorRequired] public int Chapter { get; set; }
+	[Parameter] public int Verse { get; set; } = 1;
+	[Parameter] public int ScriptureId { get; set; }
+
+	[CascadingParameter] public ProcessError? ProcessError { get; set; } // where is this used?
 	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
 
-	[Parameter, EditorRequired] public int BookId { get; set; }
-	[Parameter, EditorRequired] public int Chapter { get; set; }
-	[Parameter] public string? Slug { get; set; }
-
 	public BookAndChapter? CurrentBookAndChapter { get; set; }
+	public AbrvChapterVerse? CurrentAbrvChapterVerse { get; set; }
 
 	protected string PageTitle = string.Empty;
 
 	protected override void OnParametersSet()
 	{
-		// Logger!.LogInformation("{Method}, Route: {BookId}/{Chapter}", nameof(OnParametersSet), BookId, Chapter);
+		//Logger!.LogInformation("{Method}, Route: {Abrv}/{Chapter}/{Verse}/{ScriptureId}"
+		//	, nameof(OnParametersSet), Abrv, Chapter, Verse, ScriptureId);
 
-		if (BookId == 0 && Chapter == 0)
+		if (Abrv == Constants.DefaultAbrv)
 		{
+			//Logger!.LogInformation("{Method}, CallingMethod: {CallingMethod}", nameof(OnParametersSet), nameof(ReNavigateBackToThisPage));
 			ReNavigateBackToThisPage();
 		}
 		else
 		{
-			CurrentBookAndChapter = GetBookAndChapterViaRoutes(BookId, Chapter);
+			//Logger!.LogInformation("{Method}, CallingMethod: {CallingMethod}", nameof(OnParametersSet), nameof(GetAbrvChapterVerseViaRoutes));
+			var (abrvChapterVerse, bibleBook) = GetAbrvChapterVerseViaRoutes(Abrv, Chapter, Verse, ScriptureId);
+
+			// These two properties are set and is the parameters that are passed to ReportWrapper;
+			CurrentAbrvChapterVerse = abrvChapterVerse;
+			CurrentBookAndChapter = bibleBook;
 		}
 	}
 
+	/*
+	Book abrv and Chapter are unknown (like from Home!FancyFatNavButton therefore,
+	1. Get `AbrvChapterVerse rec` found in local storage (State)
+	2. Then navigate back to BC via `NavigationManager` passing in `AbrvChapterVerse rec`
+	*/
 	private void ReNavigateBackToThisPage()
 	{
-		BibleBookIdAndChapter? rec;
-		rec = CascadingAppState!.AppState!.BookChapterState!.Get();
+		AbrvChapterVerse? rec = CascadingAppState!.AppState!.BookChapterState!.Get();
 		if (rec is null)
 		{
-			Logger!.LogWarning("{Method}, rec is null???", nameof(ReNavigateBackToThisPage));
-			Toast!.ShowWarning($"rec is null, BibleBookIdAndChapter not found");
+			// Note: I don't know why this should ever happen
+			Logger!.LogWarning("{Method}, rec is null, how is this possible ???", nameof(ReNavigateBackToThisPage));
+			Toast!.ShowWarning($"rec is null, AbrvChapterVerse not found");
 		}
 		else
 		{
-			Enums.BibleBook bibleBook = Enums.BibleBook.FromValue(rec.BibleBookId);
-			// Logger!.LogInformation("{Method}, BibleBook/Chapter: {BibleBook}/{Chapter}"
-			// 	, nameof(ReNavigateBackToThisPage), bibleBook.Value, rec.Chapter);
-			NavigationManager!.NavigateTo(Components.Helper.GetNavigateToUrl(bibleBook, rec.Chapter));
+			//Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(ReNavigateBackToThisPage), rec);
+			NavigationManager!.NavigateTo($"{BookChapterConstants.BaseUrl}/{rec.Abrv}/{rec.Chapter}/{rec.Verse}/{rec.ScriptureId}");
 		}
 	}
 
-	private BookAndChapter GetBookAndChapterViaRoutes(int bookId, int chapter)
+	// tuple used by ReportWrapper.
+	private (AbrvChapterVerse, BookAndChapter) GetAbrvChapterVerseViaRoutes(string abrv, int chapter, int verse, int scriptureId)
 	{
-		BookAndChapter bc;
-		bc = new BookAndChapter(GlobalEnums.BibleBook.FromValue(bookId), chapter);
-
-		PageTitle = GlobalEnums.BibleBookFormat.BC(bc);
-		return bc;
+		//Logger!.LogInformation("{Method}, abrv/c/v/SID: {abrv}/{chapter}/{verse}/{scriptureId}"
+		//, nameof(GetAbrvChapterVerseViaRoutes), abrv, chapter, verse, scriptureId);
+		GlobalEnums.BibleBook? bibleBook;
+		if (GlobalEnums.BibleBook.TryFromName(abrv, out bibleBook))
+		{
+			AbrvChapterVerse acv = new AbrvChapterVerse(bibleBook!.Abrv, chapter, verse, scriptureId); //
+			return (acv, new BookAndChapter(bibleBook, chapter));
+		}
+		else
+		{
+			Logger!.LogWarning("{Method}, TryFromName failed, using default; Abrv: {abrv}", nameof(GetAbrvChapterVerseViaRoutes), abrv);
+			Toast!.ShowWarning($"CurrentAbrvChapterVerse is null using default");
+			return (AbrvChapterVerse.Default, new BookAndChapter(GlobalEnums.BibleBook.Genesis, chapter));
+		}
 	}
 
+	// Called by <NavbarBookChapter>
 	private async Task ReturnedBookAndChapter(BookAndChapter bookAndChapter)
 	{
-		BibleBookIdAndChapter rec = new BibleBookIdAndChapter(bookAndChapter.BibleBook!.Value, bookAndChapter.Chapter);
-		string slug = $"{Enums.BibleBook.FromValue(rec.BibleBookId).Abrv}-{rec.Chapter}";
-		//Logger!.LogInformation("{Method}, Route: {BookId}/{Chapter}", nameof(ReturnedBookAndChapter), rec.BibleBookId, rec.Chapter);
-		NavigationManager!.NavigateTo($"BookChapter/{rec.BibleBookId}/{rec.Chapter}/{slug}");
+		AbrvChapterVerse rec = new AbrvChapterVerse(bookAndChapter.BibleBook!.Abrv, bookAndChapter.Chapter, 1, 0);
+		//Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(ReturnedBookAndChapter), rec);
+		NavigationManager!.NavigateTo($"{BookChapterConstants.BaseUrl}/{rec.Abrv}/{rec.Chapter}/{rec.Verse}/{rec.ScriptureId}");
 
 		await CascadingAppState!.AppState!.BookChapterState!.Update(rec);
 		CurrentBookAndChapter = bookAndChapter!;
 		//Logger!.LogInformation("{Method}, CurrentBookAndChapter: {CurrentBookAndChapter}", nameof(ReturnedBookAndChapter), CurrentBookAndChapter);
 		PageTitle = GlobalEnums.BibleBookFormat.BC(bookAndChapter);
 	}
-
+	// Ignore Spelling: bc, rec
 }
-

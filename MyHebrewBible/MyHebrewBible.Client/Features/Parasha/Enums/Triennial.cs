@@ -389,7 +389,7 @@ public abstract class Triennial : SmartEnum<Triennial>
 		get
 		{
 			string slug = $"{BibleBook.FromValue(this.TorahVerse.BibleBook).Abrv}_{this.TorahVerse.ChapterVerse.Replace("-", "-to-").Replace(":", "-")}";
-			return ($"parasha/{this.Value}/{slug}");
+			return ($"{Constants.BaseUrl}/{this.Value}/{slug}");
 		}
 	}
 
