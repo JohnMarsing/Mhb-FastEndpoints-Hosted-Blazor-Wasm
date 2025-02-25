@@ -55,7 +55,30 @@ public static class SocialMedia
 
 public static class JS
 {
+	/*
+	 Called by 
+		- Parasha    !ReportWrapper!ReturnedScriptureId; called by <ButtonGroups>
+ */
 	public static string ScrollToElementById = "scrollToElementById";
+
+
+	/*
+	 Called by: Components|Report!Sections.razor!OnAfterRenderAsync
+
+```html
+	if (DrilldownScriptureId == 0)
+		<div id="verse-@item.ID" tabindex="0" @onkeydown="HandleKeyDown">
+			<Paragraph...>
+```
+
+```csharp
+  if (firstRender)
+		ScrollToScriptureId = Verses.First().ID;
+		StateHasChanged();
+		await JSRuntime.InvokeVoidAsync(JS.SetFocusToElement, $"verse-{ScrollToScriptureId}");
+```
+
+	 */
 	public static string SetFocusToElement = "setFocusToElement";
 }
 

@@ -1,22 +1,26 @@
 ﻿@using MyHebrewBible.Client.Components.Report
-@using ReportEnums =MyHebrewBible.Client.Components.Report.Enums
+@using ReportEnums = MyHebrewBible.Client.Components.Report.Enums
+@using BC=MyHebrewBible.Client.Features.BookChapter
 
 @inject ApiClient Api
 @inject ILogger<ReportWrapper>? Logger
 @inject IToastService? Toast
+@inject IJSRuntime? JSRuntime
 
-
-<LoadingComponent IsLoading="verses==null" TurnSpinnerOff="TurnSpinnerOff">
+<LoadingComponent IsLoading="verses==null && CurrentAbrvChapterVerse==null" TurnSpinnerOff="TurnSpinnerOff">
 	<Sections Verses="GetBookChapterVerses()"
+						AbrvChapterVerse="CurrentAbrvChapterVerse"
 						CalledBy="ReportEnums.CalledBy.BookChapter" />
 </LoadingComponent>
 
 @code {
+	[Parameter, EditorRequired] public AbrvChapterVerse? AbrvChapterVerse { get; set; }
 	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
-	protected int FocusScriptureId;
+	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+
+	protected BC.AbrvChapterVerse? CurrentAbrvChapterVerse;
 
 	protected bool TurnSpinnerOff = false;
-
 	private ICollection<BookChapterWithAT>? verses = null;
 
 	protected override async Task OnParametersSetAsync()
@@ -24,11 +28,22 @@
 		try
 		{
 			//Logger!.LogInformation("{Method}, BookAndChapter: {BookAndChapter}", nameof(OnParametersSetAsync), BookAndChapter);
-			FocusScriptureId = 0;
-			if (BookAndChapter is not null && BookAndChapter!.BibleBook is not null)
+			
+			verses = await Api!.GetBookChapterWithATAsync(BookAndChapter!.BibleBook, BookAndChapter.Chapter);
+
+			//Logger!.LogInformation("{Method}, ScriptureId: {ScriptureId}", nameof(OnParametersSetAsync), AbrvChapterVerse!.ScriptureId);
+			if (AbrvChapterVerse!.ScriptureId == 0)
 			{
-				verses = await Api!.GetBookChapterWithATAsync(BookAndChapter!.BibleBook, BookAndChapter.Chapter);
+				CurrentAbrvChapterVerse = AbrvChapterVerse! with { ScriptureId = verses.First().ID };
+				await CascadingAppState!.AppState!.BookChapterState!.Update(CurrentAbrvChapterVerse!);
 			}
+			else
+			{
+				CurrentAbrvChapterVerse = AbrvChapterVerse;
+			}
+			//Logger!.LogInformation("{Method}, set CurrentAbrvChapterVerse: {CurrentAbrvChapterVerse}"
+			//	, nameof(OnParametersSetAsync), CurrentAbrvChapterVerse);
+
 		}
 		catch (Exception ex)
 		{
@@ -83,5 +98,4 @@
 				}).ToList()
 			};
 	}
-
 }

@@ -13,33 +13,46 @@ public static class ParashaFacts
 
 public static class Constants
 {
+	public const string BaseUrl = "Parasha";
 
-	public static string PrevNextUrl(Triennial triennial) 
+	public static string PrevNextUrl(Triennial triennial)
 	{
 		return $"parasha/{triennial.Value}/{BibleBook.FromValue(triennial.TorahVerse.BibleBook).Abrv}_{triennial.TorahVerse.ChapterVerse.Replace("-", "-to-").Replace(":", "-")}";
 	}
 
 	public static string? GetUrl()
 	{
-		string? url = null; 
+		string? url = null;
 
-		Triennial? _reading =
-			Triennial.List
-			.Where(w => w.Date == Constants.GetNextShabbatDate())
-			.SingleOrDefault();
+		try
+		{
+			Triennial? _reading =
+					Triennial.List
+					.Where(w => w.Date == Constants.GetNextShabbatDate())
+					.SingleOrDefault();
 
-		if (_reading is not null)
-		{
-			url = _reading.Url;
-		}
-		else
-		{
-			Triennial? _defaultReading = Triennial.List.FirstOrDefault();
-			if (_defaultReading is not null)
+			if (_reading is not null)
 			{
-				url = _defaultReading.Url;
+				url = _reading.Url;
 			}
-			//else {//ToDo: Throw Exception?	}
+			else
+			{
+				Triennial? _defaultReading = Triennial.List.FirstOrDefault();
+				if (_defaultReading is not null)
+				{
+					url = _defaultReading.Url;
+				}
+				else
+				{
+					Console.WriteLine($"Warning: {nameof(Constants)}!{nameof(GetUrl)}; {nameof(_defaultReading)} is null");
+					throw new InvalidOperationException($"{nameof(Constants)}!{nameof(GetUrl)}; {nameof(_defaultReading)} is null");
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Exception: {nameof(Constants)}!{nameof(GetUrl)}; ex: {ex}");
+			throw;
 		}
 
 		return url;
@@ -59,7 +72,7 @@ public static class Constants
 	}
 
 	//public static DateTime TriennialSeedDate = DateTime.Parse("2021-10-02"); // 2021-09-25 Last date from previous triennial
-	public static DateTime TriennialSeedDate = DateTime.Parse("2024-10-26");  
+	public static DateTime TriennialSeedDate = DateTime.Parse("2024-10-26");
 
 	// Not used
 	public static DateTime GetUsersUTC()

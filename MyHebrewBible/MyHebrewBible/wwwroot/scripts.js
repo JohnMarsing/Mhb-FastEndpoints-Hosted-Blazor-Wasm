@@ -1,4 +1,5 @@
 ﻿// wwwroot/scripts.js
+// Called by: 
 function scrollToElementById(elementId) {
   var element = document.getElementById(elementId);
   if (element) {
@@ -9,6 +10,7 @@ function scrollToElementById(elementId) {
   //  console.log(`Element with ID '${elementId}' was NOT found.`);
   //}
 }
+// Called by:
 function setFocusToElement(elementId) {
   var element = document.getElementById(elementId);
   if (element) {

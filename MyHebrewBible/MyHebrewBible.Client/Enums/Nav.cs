@@ -1,5 +1,6 @@
 ﻿using Ardalis.SmartEnum;
-using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums;
+using BookChapterConstants = MyHebrewBible.Client.Features.BookChapter.Constants;
+using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums;  // Index => ParashaEnums.Constants.GetUrl()! ?? this.Name;
 
 namespace MyHebrewBible.Client.Enums;
 
@@ -144,7 +145,7 @@ public abstract class Nav : SmartEnum<Nav>
 	private sealed class BookChapterSE : Nav
 	{
 		public BookChapterSE() : base($"{nameof(Id.BookChapter)}", Id.BookChapter) { }
-		public override string Index => "/BookChapter/0/0/0/default";   // BookId/Chapter/Verse/Slug
+		public override string Index => $"/{BookChapterConstants.BaseUrl}/{BookChapterConstants.DefaultRouteParameter}";  
 		public override string Title => "Book Chapter";
 		public override string Icon => "fa fa-book";
 		public override int Sort => Id.BookChapter;
@@ -158,7 +159,8 @@ public abstract class Nav : SmartEnum<Nav>
 	private sealed class ParashaSE : Nav
 	{
 		public ParashaSE() : base($"{nameof(Id.Parasha)}", Id.Parasha) { }
-		public override string Index => ParashaEnums.Constants.GetUrl()! ?? this.Name; 
+		public override string Index => ParashaEnums.Constants.GetUrl()! ?? this.Name;
+		//public override string Index => ParashaEnums.Constants.GetUrl() ?? $"/{ParashaEnums.Constants.BaseUrl}";
 		public override string Title => "Parasha";
 		public override string Icon => "far fa-bookmark";
 		public override int Sort => Id.Parasha;

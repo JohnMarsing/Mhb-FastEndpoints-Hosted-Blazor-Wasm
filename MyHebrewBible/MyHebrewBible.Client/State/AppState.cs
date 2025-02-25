@@ -1,11 +1,14 @@
 ﻿using Blazored.LocalStorage;
+//using MyHebrewBible.Client.State.BookChapter;
+//using BookChapterState = MyHebrewBible.Client.State.BookChapter;
+//using BookChapterFeatures = MyHebrewBible.Client.Features.BookChapter;
 using MyHebrewBible.Client.State.BookChapter;
 
 namespace MyHebrewBible.Client.State;
 
 public class AppState 
 {
-	public BookChapterState? BookChapterState { get; }
+	public BookChapterState? BookChapterState { get; } 
 	public ParashaState? ParashaState { get; }
 	public VerseList.VerseListState? VerseListState { get; }
 
@@ -49,4 +52,4 @@ public class AppState
 	}
 }
 
-// Ignore Spelling: App
+// Ignore Spelling: App, Abrv

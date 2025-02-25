@@ -1,5 +1,5 @@
 ﻿using Blazored.LocalStorage;
-using MyHebrewBible.Client.Enums;
+using MyHebrewBible.Client.Features.BookChapter;
 
 namespace MyHebrewBible.Client.State.BookChapter;
 
@@ -10,35 +10,35 @@ public class BookChapterState
 	#region Constructor and DI
 	private readonly ILogger Logger;
 	private readonly ILocalStorageService? localStorage;
-	public BookChapterState(ILocalStorageService localStorage, ILogger<AppState> logger)
+	public BookChapterState(ILocalStorageService localStorage, ILogger<AppState> logger)  //BookChapterState
 	{
 		this.localStorage = localStorage;
 		Logger = logger;
-		//Logger!.LogInformation("{Class}!{MethodEvent}", nameof(ParashaState), "CTOR");
+		//Logger!.LogInformation("{MethodEvent}", "CTOR");
 	}
 	#endregion
 
-	private const string Key = "biblebookidandchapter"; // Ignore Spelling: biblebookidandchapter
+	private const string Key = "bc-abrv-chapter-verse-id";
 	private bool _isInitialized;
 	private void NotifyStateHasChanged() => OnChange?.Invoke();
 	public event Action? OnChange;
 
-	private BibleBookIdAndChapter _defaultBibleBookIdAndChapter = new(BibleBook.Genesis.Value, 1, 1, "Gen-1-1-1");
-	private BibleBookIdAndChapter? _bibleBookIdAndChapter;
+	private AbrvChapterVerse _DefaultAbrvChapterVerse = new("Gen", 1, 1, 0); //"Gen", 1, 1, 1);
+	private AbrvChapterVerse? _AbrvChapterVerse = new("Gen", 1, 1, 0);  //"Gen", 1, 1, 1);
 
 	public async Task Initialize()
 	{
 		if (!_isInitialized)
 		{
-			_bibleBookIdAndChapter = await localStorage!.GetItemAsync<BibleBookIdAndChapter>(Key);
-			if (_bibleBookIdAndChapter is not null)
+			_AbrvChapterVerse = await localStorage!.GetItemAsync<AbrvChapterVerse>(Key);
+			if (_AbrvChapterVerse is not null)
 			{
-				await Update(_bibleBookIdAndChapter);
+				await Update(_AbrvChapterVerse);
 			}
 			else
 			{
-				_bibleBookIdAndChapter = _defaultBibleBookIdAndChapter;
-				await Update(_defaultBibleBookIdAndChapter);
+				_AbrvChapterVerse = _DefaultAbrvChapterVerse;
+				await Update(_DefaultAbrvChapterVerse);
 			}
 
 			_isInitialized = true;
@@ -46,15 +46,17 @@ public class BookChapterState
 		}
 	}
 
-	public BibleBookIdAndChapter Get()
+	public AbrvChapterVerse Get()
 	{
-		return _bibleBookIdAndChapter!;
+		//Logger!.LogInformation("{Method}, _AbrvChapterVerse: {AbrvChapterVerse}", "Get", _AbrvChapterVerse);
+		return _AbrvChapterVerse!;
 	}
 
-	public async Task Update(BibleBookIdAndChapter bibleBookIdAndChapter)
+	public async Task Update(AbrvChapterVerse abrvChapterVerse)
 	{
-		await localStorage!.SetItemAsync(Key, bibleBookIdAndChapter);
-		_bibleBookIdAndChapter = bibleBookIdAndChapter;
+		//Logger!.LogInformation("{Method}, brvChapterVerse: {AbrvChapterVerse}", "Update", abrvChapterVerse);
+		await localStorage!.SetItemAsync(Key, abrvChapterVerse);
+		_AbrvChapterVerse = abrvChapterVerse;
 		NotifyStateHasChanged();
 	}
 
