@@ -40,7 +40,7 @@
 
 <LoadingProgress>
 	<div class="mt-5">
-		<br />
+		@* <br /> *@
 		@if (CurrentAbrvChapterVerse is not null && CurrentBookAndChapter is not null)
 		{
 			<ReportWrapper AbrvChapterVerse="CurrentAbrvChapterVerse"
@@ -60,70 +60,75 @@
 	[CascadingParameter] public ProcessError? ProcessError { get; set; } // where is this used?
 	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
 
-	public BookAndChapter? CurrentBookAndChapter { get; set; }
-	public AbrvChapterVerse? CurrentAbrvChapterVerse { get; set; }
+	public BookAndChapter? CurrentBookAndChapter { get; set; }     // parameter for ReportWrapper
+	public AbrvChapterVerse? CurrentAbrvChapterVerse { get; set; } // parameter for ReportWrapper
 
 	protected string PageTitle = string.Empty;
 
 	protected override void OnParametersSet()
 	{
-		//Logger!.LogInformation("{Method}, Route: {Abrv}/{Chapter}/{Verse}/{ScriptureId}"
-		//	, nameof(OnParametersSet), Abrv, Chapter, Verse, ScriptureId);
-
-		if (Abrv == Constants.DefaultAbrv)
+		//Logger!.LogInformation("{Method}, Route: {Abrv}/{Chapter}/{Verse}/{ScriptureId}", nameof(OnParametersSet), Abrv, Chapter, Verse, ScriptureId);
+		try
 		{
-			//Logger!.LogInformation("{Method}, CallingMethod: {CallingMethod}", nameof(OnParametersSet), nameof(ReNavigateBackToThisPage));
-			ReNavigateBackToThisPage();
+			if (Abrv == Constants.DefaultAbrv)
+			{
+				AbrvChapterVerse? rec = CascadingAppState!.AppState!.BookChapterState!.Get();
+				NavigationManager!.NavigateTo($"{BookChapterConstants.BaseUrl}/{rec.Abrv}/{rec.Chapter}/{rec.Verse}/{rec.ScriptureId}");
+			}
+			else
+			{
+				//Logger!.LogInformation("{Method}, CallingMethod: {CallingMethod}", nameof(OnParametersSet), nameof(GetAbrvChapterVerseViaRoutes));
+				var (abrvChapterVerse, bibleBook) = GetAbrvChapterVerseViaRoutes(Abrv, Chapter, Verse, ScriptureId);
+				if (abrvChapterVerse is not null && bibleBook is not null)
+				{
+					CurrentAbrvChapterVerse = abrvChapterVerse;
+					CurrentBookAndChapter = bibleBook;
+					//Logger!.LogInformation("{Method}, CurrentAbrvChapterVerse: {CurrentAbrvChapterVerse}", nameof(OnParametersSet), CurrentAbrvChapterVerse);
+				}
+				else
+				{
+					Toast!.ShowWarning($"abrvChapterVerse and/or bibleBook is null (◡︵◡)");
+				}
+			}
 		}
-		else
+		catch (Exception ex)
 		{
-			//Logger!.LogInformation("{Method}, CallingMethod: {CallingMethod}", nameof(OnParametersSet), nameof(GetAbrvChapterVerseViaRoutes));
-			var (abrvChapterVerse, bibleBook) = GetAbrvChapterVerseViaRoutes(Abrv, Chapter, Verse, ScriptureId);
-
-			// These two properties are set and is the parameters that are passed to ReportWrapper;
-			CurrentAbrvChapterVerse = abrvChapterVerse;
-			CurrentBookAndChapter = bibleBook;
-		}
-	}
-
-	/*
-	Book abrv and Chapter are unknown (like from Home!FancyFatNavButton therefore,
-	1. Get `AbrvChapterVerse rec` found in local storage (State)
-	2. Then navigate back to BC via `NavigationManager` passing in `AbrvChapterVerse rec`
-	*/
-	private void ReNavigateBackToThisPage()
-	{
-		AbrvChapterVerse? rec = CascadingAppState!.AppState!.BookChapterState!.Get();
-		if (rec is null)
-		{
-			// Note: I don't know why this should ever happen
-			Logger!.LogWarning("{Method}, rec is null, how is this possible ???", nameof(ReNavigateBackToThisPage));
-			Toast!.ShowWarning($"rec is null, AbrvChapterVerse not found");
-		}
-		else
-		{
-			//Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(ReNavigateBackToThisPage), rec);
-			NavigationManager!.NavigateTo($"{BookChapterConstants.BaseUrl}/{rec.Abrv}/{rec.Chapter}/{rec.Verse}/{rec.ScriptureId}");
+			Logger!.LogError(ex, "{Method}", nameof(OnParametersSet));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnParametersSet)}");
 		}
 	}
 
 	// tuple used by ReportWrapper.
-	private (AbrvChapterVerse, BookAndChapter) GetAbrvChapterVerseViaRoutes(string abrv, int chapter, int verse, int scriptureId)
+	private (AbrvChapterVerse?, BookAndChapter?) GetAbrvChapterVerseViaRoutes(string abrv, int chapter, int verse, int scriptureId)
 	{
 		//Logger!.LogInformation("{Method}, abrv/c/v/SID: {abrv}/{chapter}/{verse}/{scriptureId}"
 		//, nameof(GetAbrvChapterVerseViaRoutes), abrv, chapter, verse, scriptureId);
-		GlobalEnums.BibleBook? bibleBook;
-		if (GlobalEnums.BibleBook.TryFromName(abrv, out bibleBook))
+
+		var (errMsg, _value) = GlobalEnums.BibleBookDictionary.GetId(abrv);
+
+		if (String.IsNullOrEmpty(errMsg))
 		{
-			AbrvChapterVerse acv = new AbrvChapterVerse(bibleBook!.Abrv, chapter, verse, scriptureId); //
-			return (acv, new BookAndChapter(bibleBook, chapter));
+			GlobalEnums.BibleBook? bibleBook;
+			if (GlobalEnums.BibleBook.TryFromValue(_value, out bibleBook))
+			{
+				AbrvChapterVerse acv = new AbrvChapterVerse(bibleBook!.Abrv, chapter, verse, scriptureId); //
+				return (acv, new BookAndChapter(bibleBook, chapter));
+			}
 		}
 		else
 		{
-			Logger!.LogWarning("{Method}, TryFromName failed, using default; Abrv: {abrv}", nameof(GetAbrvChapterVerseViaRoutes), abrv);
-			Toast!.ShowWarning($"CurrentAbrvChapterVerse is null using default");
+			Logger!.LogWarning("{Method}, {errMsg}", nameof(GetAbrvChapterVerseViaRoutes), errMsg);
+			Toast!.ShowWarning(errMsg);
+			//ToDo: change the url in the browser to the default book
 			return (AbrvChapterVerse.Default, new BookAndChapter(GlobalEnums.BibleBook.Genesis, chapter));
 		}
+		return (null, null);
+	}
+
+	private async Task ReturnedAbrvChapterVerse(AbrvChapterVerse rec)
+	{
+		CurrentAbrvChapterVerse = rec;
+		await CascadingAppState!.AppState!.BookChapterState!.Update(rec);
 	}
 
 	// Called by <NavbarBookChapter>

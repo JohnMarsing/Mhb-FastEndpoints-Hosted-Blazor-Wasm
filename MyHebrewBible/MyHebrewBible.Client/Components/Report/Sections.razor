@@ -177,9 +177,11 @@ else
 		CurrentWordSelected = wordSelected;
 	}
 
-	private void ReturnedCloseEvent()
+	private async Task ReturnedCloseEvent()
 	{
 		DrilldownScriptureId = 0;
+		await Task.Delay(5); // Give the browser time to render the page...seems to work ¯\_(ツ)_/¯
+		await JSRuntime.InvokeVoidAsync(JS.SetFocusToElement, $"verse-{CurrentScrollToScriptureId}");
 	}
 
 	private enum ArrowKey

@@ -1,4 +1,6 @@
-﻿namespace MyHebrewBible.Client.Enums;
+﻿//using BibleBookEnum = MyHebrewBible.Client.Enums.BibleBook;
+
+namespace MyHebrewBible.Client.Enums;
 
 public static class BookChapterFacts
 {
@@ -12,9 +14,9 @@ public static class BookChapterFacts
 	public const int FirstBookInNT = 40;
 	public const int FirstGospel = 40;
 	public const int LastGospel = 44;
-
-	public const int FirstBookInOT = 1; // BookEnum.Genesis;
-	public const int LastBookInNT = 66; // BookEnum.Revelation
+	
+	public const int FirstBookInOT = 1; // BibleBookEnum.Genesis;
+	public const int LastBookInNT = 66; // BibleBookEnum.Revelation
 	
 	public const int LastChapterInNt = 22;
 	public const int LastChapterId = 1189;

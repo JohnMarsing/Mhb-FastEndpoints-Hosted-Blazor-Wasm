@@ -21,7 +21,9 @@
 @if (SelectedVerse != null)
 {
 	<div class="card mt-2">
-		<div class="card-header h3 px-2">@SelectedVerse!.VerseName</div>
+		<div class="card-header h3 px-2">
+			@SelectedVerse!.VerseName <a class="" href="/bookchapter/@SelectedVerse!.BCV"><i class="fas fa-chevron-circle-right"></i></a>
+		</div>
 
 		<div class="card-body">
 			<h6 class="card-title float-end fst-italic text-black-50">@((MarkupString)@SelectedVerse!.VerseDescription!)</h6>

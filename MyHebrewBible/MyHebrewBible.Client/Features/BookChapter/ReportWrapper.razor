@@ -28,21 +28,22 @@
 		try
 		{
 			//Logger!.LogInformation("{Method}, BookAndChapter: {BookAndChapter}", nameof(OnParametersSetAsync), BookAndChapter);
-			
+			//Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(OnParametersSetAsync), AbrvChapterVerse);
+
 			verses = await Api!.GetBookChapterWithATAsync(BookAndChapter!.BibleBook, BookAndChapter.Chapter);
 
 			//Logger!.LogInformation("{Method}, ScriptureId: {ScriptureId}", nameof(OnParametersSetAsync), AbrvChapterVerse!.ScriptureId);
 			if (AbrvChapterVerse!.ScriptureId == 0)
 			{
-				CurrentAbrvChapterVerse = AbrvChapterVerse! with { ScriptureId = verses.First().ID };
+				CurrentAbrvChapterVerse = AbrvChapterVerse! with { ScriptureId = verses.First().ID};
+				//Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(OnParametersSetAsync), AbrvChapterVerse);
 				await CascadingAppState!.AppState!.BookChapterState!.Update(CurrentAbrvChapterVerse!);
 			}
 			else
 			{
 				CurrentAbrvChapterVerse = AbrvChapterVerse;
 			}
-			//Logger!.LogInformation("{Method}, set CurrentAbrvChapterVerse: {CurrentAbrvChapterVerse}"
-			//	, nameof(OnParametersSetAsync), CurrentAbrvChapterVerse);
+			//Logger!.LogInformation("{Method}, set CurrentAbrvChapterVerse: {CurrentAbrvChapterVerse}", nameof(OnParametersSetAsync), CurrentAbrvChapterVerse);
 
 		}
 		catch (Exception ex)

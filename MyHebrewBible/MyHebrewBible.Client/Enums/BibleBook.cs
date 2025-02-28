@@ -16,83 +16,80 @@ public enum BookGroupEnum
 	GeneralEpistles = 8,
 	Apocalypse = 9,
 }
- 
-public enum BookEnum
-{
-	Gen = 1,
-	Exo = 2,
-	Lev = 3,
-	Num = 4,
-	Deu = 5,
-	Jos = 6,
-	Jdg = 7,
-	Rut = 8,
-	Sa1 = 9,
-	Sa2 = 10,
-	Ki1 = 11,
-	Ki2 = 12,
-	Ch1 = 13,
-	Ch2 = 14,
-	Ezr = 15,
-	Neh = 16,
-	Est = 17,
-	Job = 18,
-	Psa = 19,
-	Pro = 20,
-	Ecc = 21,
-	Son = 22,
-	Isa = 23,
-	Jer = 24,
-	Lam = 25,
-	Eze = 26,
-	Dan = 27,
-	Hos = 28,
-	Joe = 29,
-	Amo = 30,
-	Oba = 31,
-	Jon = 32,
-	Mic = 33,
-	Nah = 34,
-	Hab = 35,
-	Zep = 36,
-	Hag = 37,
-	Zec = 38,
-	Mal = 39,
-	Mat = 40,
-	Mar = 41,
-	Luk = 42,
-	Joh = 43,
-	Act = 44,
-	Rom = 45,
-	Co1 = 46,
-	Co2 = 47,
-	Gal = 48,
-	Eph = 49,
-	Php = 50,
-	Col = 51,
-	Th1 = 52,
-	Th2 = 53,
-	Ti1 = 54,
-	Ti2 = 55,
-	Tit = 56,
-	Phm = 57,
-	Heb = 58,
-	Jam = 59,
-	Pe1 = 60,
-	Pe2 = 61,
-	Jo1 = 62,
-	Jo2 = 63,
-	Jo3 = 64,
-	Jud = 65,
-	Rev = 66,
-}
 
 public abstract class BibleBook : SmartEnum<BibleBook>
 {
 	#region Id's
-	// Use BookEnum
+	private static class Id
+	{
+		internal const int Genesis = 1;
+		internal const int Exodus = 2;
+		internal const int Leviticus = 3;
+		internal const int Numbers = 4;
+		internal const int Deuteronomy = 5;
+		internal const int Joshua = 6;
+		internal const int Judges = 7;
+		internal const int Ruth = 8;
+		internal const int FirstSamuel = 9;
+		internal const int SecondSamuel = 10;
+		internal const int FirstKings = 11;
+		internal const int SecondKings = 12;
+		internal const int FirstChronicles = 13;
+		internal const int SecondChronicles = 14;
+		internal const int Ezra = 15;
+		internal const int Nehemiah = 16;
+		internal const int Esther = 17;
+		internal const int Job = 18;
+		internal const int Psalms = 19;
+		internal const int Proverbs = 20;
+		internal const int Ecclesiastes = 21;
+		internal const int SongofSolomon = 22;
+		internal const int Isaiah = 23;
+		internal const int Jeremiah = 24;
+		internal const int Lamentations = 25;
+		internal const int Ezekiel = 26;
+		internal const int Daniel = 27;
+		internal const int Hosea = 28;
+		internal const int Joel = 29;
+		internal const int Amos = 30;
+		internal const int Obadiah = 31;
+		internal const int Jonah = 32;
+		internal const int Micah = 33;
+		internal const int Nahum = 34;
+		internal const int Habakkuk = 35;
+		internal const int Zephaniah = 36;
+		internal const int Haggai = 37;
+		internal const int Zechariah = 38;
+		internal const int Malachi = 39;
+		internal const int Matthew = 40;
+		internal const int Mark = 41;
+		internal const int Luke = 42;
+		internal const int John = 43;
+		internal const int Acts = 44;
+		internal const int Romans = 45;
+		internal const int FirstCorinthians = 46;
+		internal const int SecondCorinthians = 47;
+		internal const int Galatians = 48;
+		internal const int Ephesians = 49;
+		internal const int Philippians = 50;
+		internal const int Colossians = 51;
+		internal const int FirstThessalonians = 52;
+		internal const int SecondThessalonians = 53;
+		internal const int FirstTimothy = 54;
+		internal const int SecondTimothy = 55;
+		internal const int Titus = 56;
+		internal const int Philemon = 57;
+		internal const int Hebrews = 58;
+		internal const int James = 59;
+		internal const int FirstPeter = 60;
+		internal const int SecondPeter = 61;
+		internal const int FirstJohn = 62;
+		internal const int SecondJohn = 63;
+		internal const int ThirdJohn = 64;
+		internal const int Jude = 65;
+		internal const int Revelation = 66;
+	}
 	#endregion
-
 
 	#region  Declared Public Instances
 	public static readonly BibleBook Genesis = new GenesisSE();
@@ -171,7 +168,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 	#region Extra Fields
 	public abstract string Title { get; }
 
-	// ToDo: Instead of setting it like `Abrv => "Gen"`, it should be `Abrv => nameof(BookEnum.Gen)`
+	// ToDo: Instead of setting it like `Abrv => "Gen"`, it should be `Abrv => nameof(Id.Gen)`
 	// ToDo: it would be nice to remove this all together, but used a lot
 	public abstract string Abrv { get; }  
 	
@@ -188,15 +185,12 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 	//Properties
 	public bool IsHebrewBible => this.Value <= BookChapterFacts.LastBookInOT ? true : false;
 
-	public string Dump => $" {Value}-{Abrv}-{Name}-{BookGroupEnum}";
-
 	#endregion
-
 
 	#region Private Instantiation
 	private sealed class GenesisSE : BibleBook
 	{
-		public GenesisSE() : base($"{nameof(BookEnum.Gen)}", (int)BookEnum.Gen) { }
+		public GenesisSE() : base($"{nameof(Id.Genesis)}", Id.Genesis) { }
 		public override string Title => "Genesis";
 		public override string Abrv => "Gen";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Torah;
@@ -219,7 +213,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class ExodusSE : BibleBook
 	{
-		public ExodusSE() : base($"{nameof(BookEnum.Exo)}", (int)BookEnum.Exo) { }
+		public ExodusSE() : base($"{nameof(Id.Exodus)}", Id.Exodus) { }
 		public override string Title => "Exodus";
 		public override string Abrv => "Exo";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Torah;
@@ -243,7 +237,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class LeviticusSE : BibleBook
 	{
-		public LeviticusSE() : base($"{nameof(BookEnum.Lev)}", (int)BookEnum.Lev) { }
+		public LeviticusSE() : base($"{nameof(Id.Leviticus)}", Id.Leviticus) { }
 		public override string Title => "Leviticus";
 		public override string Abrv => "Lev";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Torah;
@@ -266,7 +260,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class NumbersSE : BibleBook
 	{
-		public NumbersSE() : base($"{nameof(BookEnum.Num)}", (int)BookEnum.Num) { }
+		public NumbersSE() : base($"{nameof(Id.Numbers)}", Id.Numbers) { }
 		public override string Title => "Numbers";
 		public override string Abrv => "Num";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Torah;
@@ -289,7 +283,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class DeuteronomySE : BibleBook
 	{
-		public DeuteronomySE() : base($"{nameof(BookEnum.Deu)}", (int)BookEnum.Deu) { }
+		public DeuteronomySE() : base($"{nameof(Id.Deuteronomy)}", Id.Deuteronomy) { }
 		public override string Title => "Deuteronomy";
 		public override string Abrv => "Deu";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Torah;
@@ -312,7 +306,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class JoshuaSE : BibleBook
 	{
-		public JoshuaSE() : base($"{nameof(BookEnum.Jos)}", (int)BookEnum.Jos) { }
+		public JoshuaSE() : base($"{nameof(Id.Joshua)}", Id.Joshua) { }
 		public override string Title => "Joshua";
 		public override string Abrv => "Jos";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.History;
@@ -335,14 +329,14 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class JudgesSE : BibleBook
 	{
-		public JudgesSE() : base($"{nameof(BookEnum.Jdg)}", (int)BookEnum.Jdg) { }
+		public JudgesSE() : base($"{nameof(Id.Judges)}", Id.Judges) { }
 		public override string Title => "Judges";
 		public override string Abrv => "Jdg";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.History;
 		public override int LastChapter => 21;
 		public override string TransliterationInHebrew => "Shophtim";
 		public override string NameInHebrew => "שׁוֹפְטִים";
-		
+
 		public override List<int> LastVerses => [36, 23, 31, 24, 31, 40, 25, 35, 57, 18, 40, 15, 25, 20, 20, 31, 13, 31, 30, 48, 25,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
@@ -358,7 +352,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class RuthSE : BibleBook
 	{
-		public RuthSE() : base($"{nameof(BookEnum.Rut)}", (int)BookEnum.Rut) { }
+		public RuthSE() : base($"{nameof(Id.Ruth)}", Id.Ruth) { }
 		public override string Title => "Ruth";
 		public override string Abrv => "Rut";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.History;
@@ -382,7 +376,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class FirstSamuelSE : BibleBook
 	{
-		public FirstSamuelSE() : base($"{nameof(BookEnum.Sa1)}", (int)BookEnum.Sa1) { }
+		public FirstSamuelSE() : base($"{nameof(Id.FirstSamuel)}", Id.FirstSamuel) { }
 		public override string Title => "1 Samuel";
 		public override string Abrv => "1Sa";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.History;
@@ -405,7 +399,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class SecondSamuelSE : BibleBook
 	{
-		public SecondSamuelSE() : base($"{nameof(BookEnum.Sa2)}", (int)BookEnum.Sa2) { }
+		public SecondSamuelSE() : base($"{nameof(Id.SecondSamuel)}", Id.SecondSamuel) { }
 		public override string Title => "2 Samuel";
 		public override string Abrv => "2Sa";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.History;
@@ -428,7 +422,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class FirstKingsSE : BibleBook
 	{
-		public FirstKingsSE() : base($"{nameof(BookEnum.Ki1)}", (int)BookEnum.Ki1) { }
+		public FirstKingsSE() : base($"{nameof(Id.FirstKings)}", Id.FirstKings) { }
 		public override string Title => "1 Kings";
 		public override string Abrv => "1Ki";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.History;
@@ -451,7 +445,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class SecondKingsSE : BibleBook
 	{
-		public SecondKingsSE() : base($"{nameof(BookEnum.Ki2)}", (int)BookEnum.Ki2) { }
+		public SecondKingsSE() : base($"{nameof(Id.SecondKings)}", Id.SecondKings) { }
 		public override string Title => "2 Kings";
 		public override string Abrv => "2Ki";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.History;
@@ -474,7 +468,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class FirstChroniclesSE : BibleBook
 	{
-		public FirstChroniclesSE() : base($"{nameof(BookEnum.Ch1)}", (int)BookEnum.Ch1) { }
+		public FirstChroniclesSE() : base($"{nameof(Id.FirstChronicles)}", Id.FirstChronicles) { }
 		public override string Title => "1 Chronicles";
 		public override string Abrv => "1Ch";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.History;
@@ -497,7 +491,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class SecondChroniclesSE : BibleBook
 	{
-		public SecondChroniclesSE() : base($"{nameof(BookEnum.Ch2)}", (int)BookEnum.Ch2) { }
+		public SecondChroniclesSE() : base($"{nameof(Id.SecondChronicles)}", Id.SecondChronicles) { }
 		public override string Title => "2 Chronicles";
 		public override string Abrv => "2Ch";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.History;
@@ -520,7 +514,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class EzraSE : BibleBook
 	{
-		public EzraSE() : base($"{nameof(BookEnum.Ezr)}", (int)BookEnum.Ezr) { }
+		public EzraSE() : base($"{nameof(Id.Ezra)}", Id.Ezra) { }
 		public override string Title => "Ezra";
 		public override string Abrv => "Ezr";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.History;
@@ -543,7 +537,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class NehemiahSE : BibleBook
 	{
-		public NehemiahSE() : base($"{nameof(BookEnum.Neh)}", (int)BookEnum.Neh) { }
+		public NehemiahSE() : base($"{nameof(Id.Nehemiah)}", Id.Nehemiah) { }
 		public override string Title => "Nehemiah";
 		public override string Abrv => "Neh";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.History;
@@ -566,7 +560,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class EstherSE : BibleBook
 	{
-		public EstherSE() : base($"{nameof(BookEnum.Est)}", (int)BookEnum.Est) { }
+		public EstherSE() : base($"{nameof(Id.Esther)}", Id.Esther) { }
 		public override string Title => "Esther";
 		public override string Abrv => "Est";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.History;
@@ -589,7 +583,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class JobSE : BibleBook
 	{
-		public JobSE() : base($"{nameof(BookEnum.Job)}", (int)BookEnum.Job) { }
+		public JobSE() : base($"{nameof(Id.Job)}", Id.Job) { }
 		public override string Title => "Job";
 		public override string Abrv => "Job";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Poetry;
@@ -612,7 +606,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class PsalmsSE : BibleBook
 	{
-		public PsalmsSE() : base($"{nameof(BookEnum.Psa)}", (int)BookEnum.Psa) { }
+		public PsalmsSE() : base($"{nameof(Id.Psalms)}", Id.Psalms) { }
 		public override string Title => "Psalms";
 		public override string Abrv => "Psa";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Poetry;
@@ -635,7 +629,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class ProverbsSE : BibleBook
 	{
-		public ProverbsSE() : base($"{nameof(BookEnum.Pro)}", (int)BookEnum.Pro) { }
+		public ProverbsSE() : base($"{nameof(Id.Proverbs)}", Id.Proverbs) { }
 		public override string Title => "Proverbs";
 		public override string Abrv => "Pro";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Poetry;
@@ -658,7 +652,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class EcclesiastesSE : BibleBook
 	{
-		public EcclesiastesSE() : base($"{nameof(BookEnum.Ecc)}", (int)BookEnum.Ecc) { }
+		public EcclesiastesSE() : base($"{nameof(Id.Ecclesiastes)}", Id.Ecclesiastes) { }
 		public override string Title => "Ecclesiastes";
 		public override string Abrv => "Ecc";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Poetry;
@@ -681,9 +675,9 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class SongofSolomonSE : BibleBook
 	{
-		public SongofSolomonSE() : base($"{nameof(BookEnum.Son)}", (int)BookEnum.Son) { }
+		public SongofSolomonSE() : base($"{nameof(Id.SongofSolomon)}", Id.SongofSolomon) { }
 		public override string Title => "Song of Solomon";
-		public override string Abrv => "Song";
+		public override string Abrv => "Sng"; // "Son"
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Poetry;
 		public override int LastChapter => 8;
 		public override string TransliterationInHebrew => "Shir HaShirim";
@@ -704,7 +698,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class IsaiahSE : BibleBook
 	{
-		public IsaiahSE() : base($"{nameof(BookEnum.Isa)}", (int)BookEnum.Isa) { }
+		public IsaiahSE() : base($"{nameof(Id.Isaiah)}", Id.Isaiah) { }
 		public override string Title => "Isaiah";
 		public override string Abrv => "Isa";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MajorProphets;
@@ -727,7 +721,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class JeremiahSE : BibleBook
 	{
-		public JeremiahSE() : base($"{nameof(BookEnum.Jer)}", (int)BookEnum.Jer) { }
+		public JeremiahSE() : base($"{nameof(Id.Jeremiah)}", Id.Jeremiah) { }
 		public override string Title => "Jeremiah";
 		public override string Abrv => "Jer";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MajorProphets;
@@ -750,7 +744,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class LamentationsSE : BibleBook
 	{
-		public LamentationsSE() : base($"{nameof(BookEnum.Lam)}", (int)BookEnum.Lam) { }
+		public LamentationsSE() : base($"{nameof(Id.Lamentations)}", Id.Lamentations) { }
 		public override string Title => "Lamentations";
 		public override string Abrv => "Lam";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MajorProphets;
@@ -773,7 +767,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class EzekielSE : BibleBook
 	{
-		public EzekielSE() : base($"{nameof(BookEnum.Eze)}", (int)BookEnum.Eze) { }
+		public EzekielSE() : base($"{nameof(Id.Ezekiel)}", Id.Ezekiel) { }
 		public override string Title => "Ezekiel";
 		public override string Abrv => "Eze";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MajorProphets;
@@ -796,7 +790,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class DanielSE : BibleBook
 	{
-		public DanielSE() : base($"{nameof(BookEnum.Dan)}", (int)BookEnum.Dan) { }
+		public DanielSE() : base($"{nameof(Id.Daniel)}", Id.Daniel) { }
 		public override string Title => "Daniel";
 		public override string Abrv => "Dan";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MajorProphets;
@@ -819,7 +813,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class HoseaSE : BibleBook
 	{
-		public HoseaSE() : base($"{nameof(BookEnum.Hos)}", (int)BookEnum.Hos) { }
+		public HoseaSE() : base($"{nameof(Id.Hosea)}", Id.Hosea) { }
 		public override string Title => "Hosea";
 		public override string Abrv => "Hos";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MinorProphets;
@@ -842,7 +836,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class JoelSE : BibleBook
 	{
-		public JoelSE() : base($"{nameof(BookEnum.Joe)}", (int)BookEnum.Joe) { }
+		public JoelSE() : base($"{nameof(Id.Joel)}", Id.Joel) { }
 		public override string Title => "Joel";
 		public override string Abrv => "Joe";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MinorProphets;
@@ -865,7 +859,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class AmosSE : BibleBook
 	{
-		public AmosSE() : base($"{nameof(BookEnum.Amo)}", (int)BookEnum.Amo) { }
+		public AmosSE() : base($"{nameof(Id.Amos)}", Id.Amos) { }
 		public override string Title => "Amos";
 		public override string Abrv => "Amo";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MinorProphets;
@@ -888,7 +882,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class ObadiahSE : BibleBook
 	{
-		public ObadiahSE() : base($"{nameof(BookEnum.Oba)}", (int)BookEnum.Oba) { }
+		public ObadiahSE() : base($"{nameof(Id.Obadiah)}", Id.Obadiah) { }
 		public override string Title => "Obadiah";
 		public override string Abrv => "Oba";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MinorProphets;
@@ -911,7 +905,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class JonahSE : BibleBook
 	{
-		public JonahSE() : base($"{nameof(BookEnum.Jon)}", (int)BookEnum.Jon) { }
+		public JonahSE() : base($"{nameof(Id.Jonah)}", Id.Jonah) { }
 		public override string Title => "Jonah";
 		public override string Abrv => "Jon";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MinorProphets;
@@ -934,7 +928,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class MicahSE : BibleBook
 	{
-		public MicahSE() : base($"{nameof(BookEnum.Mic)}", (int)BookEnum.Mic) { }
+		public MicahSE() : base($"{nameof(Id.Micah)}", Id.Micah) { }
 		public override string Title => "Micah";
 		public override string Abrv => "Mic";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MinorProphets;
@@ -957,7 +951,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class NahumSE : BibleBook
 	{
-		public NahumSE() : base($"{nameof(BookEnum.Nah)}", (int)BookEnum.Nah) { }
+		public NahumSE() : base($"{nameof(Id.Nahum)}", Id.Nahum) { }
 		public override string Title => "Nahum";
 		public override string Abrv => "Nah";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MinorProphets;
@@ -980,7 +974,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class HabakkukSE : BibleBook
 	{
-		public HabakkukSE() : base($"{nameof(BookEnum.Hab)}", (int)BookEnum.Hab) { }
+		public HabakkukSE() : base($"{nameof(Id.Habakkuk)}", Id.Habakkuk) { }
 		public override string Title => "Habakkuk";
 		public override string Abrv => "Hab";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MinorProphets;
@@ -1003,7 +997,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class ZephaniahSE : BibleBook
 	{
-		public ZephaniahSE() : base($"{nameof(BookEnum.Zep)}", (int)BookEnum.Zep) { }
+		public ZephaniahSE() : base($"{nameof(Id.Zephaniah)}", Id.Zephaniah) { }
 		public override string Title => "Zephaniah";
 		public override string Abrv => "Zep";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MinorProphets;
@@ -1026,7 +1020,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class HaggaiSE : BibleBook
 	{
-		public HaggaiSE() : base($"{nameof(BookEnum.Hag)}", (int)BookEnum.Hag) { }
+		public HaggaiSE() : base($"{nameof(Id.Haggai)}", Id.Haggai) { }
 		public override string Title => "Haggai";
 		public override string Abrv => "Hag";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MinorProphets;
@@ -1049,7 +1043,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class ZechariahSE : BibleBook
 	{
-		public ZechariahSE() : base($"{nameof(BookEnum.Zec)}", (int)BookEnum.Zec) { }
+		public ZechariahSE() : base($"{nameof(Id.Zechariah)}", Id.Zechariah) { }
 		public override string Title => "Zechariah";
 		public override string Abrv => "Zec";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MinorProphets;
@@ -1072,7 +1066,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class MalachiSE : BibleBook
 	{
-		public MalachiSE() : base($"{nameof(BookEnum.Mal)}", (int)BookEnum.Mal) { }
+		public MalachiSE() : base($"{nameof(Id.Malachi)}", Id.Malachi) { }
 		public override string Title => "Malachi";
 		public override string Abrv => "Mal";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.MinorProphets;
@@ -1095,7 +1089,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class MatthewSE : BibleBook
 	{
-		public MatthewSE() : base($"{nameof(BookEnum.Mat)}", (int)BookEnum.Mat) { }
+		public MatthewSE() : base($"{nameof(Id.Matthew)}", Id.Matthew) { }
 		public override string Title => "Matthew";
 		public override string Abrv => "Mat";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Gospels;
@@ -1118,7 +1112,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class MarkSE : BibleBook
 	{
-		public MarkSE() : base($"{nameof(BookEnum.Mar)}", (int)BookEnum.Mar) { }
+		public MarkSE() : base($"{nameof(Id.Mark)}", Id.Mark) { }
 		public override string Title => "Mark";
 		public override string Abrv => "Mar";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Gospels;
@@ -1141,7 +1135,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class LukeSE : BibleBook
 	{
-		public LukeSE() : base($"{nameof(BookEnum.Luk)}", (int)BookEnum.Luk) { }
+		public LukeSE() : base($"{nameof(Id.Luke)}", Id.Luke) { }
 		public override string Title => "Luke";
 		public override string Abrv => "Luk";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Gospels;
@@ -1164,7 +1158,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class JohnSE : BibleBook
 	{
-		public JohnSE() : base($"{nameof(BookEnum.Joh)}", (int)BookEnum.Joh) { }
+		public JohnSE() : base($"{nameof(Id.John)}", Id.John) { }
 		public override string Title => "John";
 		public override string Abrv => "Joh";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Gospels;
@@ -1187,7 +1181,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class ActsSE : BibleBook
 	{
-		public ActsSE() : base($"{nameof(BookEnum.Act)}", (int)BookEnum.Act) { }
+		public ActsSE() : base($"{nameof(Id.Acts)}", Id.Acts) { }
 		public override string Title => "Acts";
 		public override string Abrv => "Act";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Gospels;
@@ -1210,7 +1204,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class RomansSE : BibleBook
 	{
-		public RomansSE() : base($"{nameof(BookEnum.Rom)}", (int)BookEnum.Rom) { }
+		public RomansSE() : base($"{nameof(Id.Romans)}", Id.Romans) { }
 		public override string Title => "Romans";
 		public override string Abrv => "Rom";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.PaulsEpistles;
@@ -1233,7 +1227,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class FirstCorinthiansSE : BibleBook
 	{
-		public FirstCorinthiansSE() : base($"{nameof(BookEnum.Co1)}", (int)BookEnum.Co1) { }
+		public FirstCorinthiansSE() : base($"{nameof(Id.FirstCorinthians)}", Id.FirstCorinthians) { }
 		public override string Title => "1 Corinthians";
 		public override string Abrv => "1Co";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.PaulsEpistles;
@@ -1256,7 +1250,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class SecondCorinthiansSE : BibleBook
 	{
-		public SecondCorinthiansSE() : base($"{nameof(BookEnum.Co2)}", (int)BookEnum.Co2) { }
+		public SecondCorinthiansSE() : base($"{nameof(Id.SecondCorinthians)}", Id.SecondCorinthians) { }
 		public override string Title => "2 Corinthians";
 		public override string Abrv => "2Co";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.PaulsEpistles;
@@ -1279,7 +1273,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class GalatiansSE : BibleBook
 	{
-		public GalatiansSE() : base($"{nameof(BookEnum.Gal)}", (int)BookEnum.Gal) { }
+		public GalatiansSE() : base($"{nameof(Id.Galatians)}", Id.Galatians) { }
 		public override string Title => "Galatians";
 		public override string Abrv => "Gal";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.PaulsEpistles;
@@ -1302,7 +1296,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class EphesiansSE : BibleBook
 	{
-		public EphesiansSE() : base($"{nameof(BookEnum.Eph)}", (int)BookEnum.Eph) { }
+		public EphesiansSE() : base($"{nameof(Id.Ephesians)}", Id.Ephesians) { }
 		public override string Title => "Ephesians";
 		public override string Abrv => "Eph";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.PaulsEpistles;
@@ -1325,7 +1319,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class PhilippiansSE : BibleBook
 	{
-		public PhilippiansSE() : base($"{nameof(BookEnum.Php)}", (int)BookEnum.Php) { }
+		public PhilippiansSE() : base($"{nameof(Id.Philippians)}", Id.Philippians) { }
 		public override string Title => "Philippians";
 		public override string Abrv => "Php";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.PaulsEpistles;
@@ -1348,7 +1342,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class ColossiansSE : BibleBook
 	{
-		public ColossiansSE() : base($"{nameof(BookEnum.Col)}", (int)BookEnum.Col) { }
+		public ColossiansSE() : base($"{nameof(Id.Colossians)}", Id.Colossians) { }
 		public override string Title => "Colossians";
 		public override string Abrv => "Col";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.PaulsEpistles;
@@ -1371,7 +1365,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class FirstThessaloniansSE : BibleBook
 	{
-		public FirstThessaloniansSE() : base($"{nameof(BookEnum.Th1)}", (int)BookEnum.Th1) { }
+		public FirstThessaloniansSE() : base($"{nameof(Id.FirstThessalonians)}", Id.FirstThessalonians) { }
 		public override string Title => "1 Thessalonians";
 		public override string Abrv => "1Th";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.PaulsEpistles;
@@ -1394,7 +1388,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class SecondThessaloniansSE : BibleBook
 	{
-		public SecondThessaloniansSE() : base($"{nameof(BookEnum.Th2)}", (int)BookEnum.Th2) { }
+		public SecondThessaloniansSE() : base($"{nameof(Id.SecondThessalonians)}", Id.SecondThessalonians) { }
 		public override string Title => "2 Thessalonians";
 		public override string Abrv => "2Th";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.PaulsEpistles;
@@ -1417,7 +1411,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class FirstTimothySE : BibleBook
 	{
-		public FirstTimothySE() : base($"{nameof(BookEnum.Ti1)}", (int)BookEnum.Ti1) { }
+		public FirstTimothySE() : base($"{nameof(Id.FirstTimothy)}", Id.FirstTimothy) { }
 		public override string Title => "1 Timothy";
 		public override string Abrv => "1Ti";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.PaulsEpistles;
@@ -1440,7 +1434,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class SecondTimothySE : BibleBook
 	{
-		public SecondTimothySE() : base($"{nameof(BookEnum.Ti2)}", (int)BookEnum.Ti2) { }
+		public SecondTimothySE() : base($"{nameof(Id.SecondTimothy)}", Id.SecondTimothy) { }
 		public override string Title => "2 Timothy";
 		public override string Abrv => "2Ti";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.PaulsEpistles;
@@ -1463,7 +1457,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class TitusSE : BibleBook
 	{
-		public TitusSE() : base($"{nameof(BookEnum.Tit)}", (int)BookEnum.Tit) { }
+		public TitusSE() : base($"{nameof(Id.Titus)}", Id.Titus) { }
 		public override string Title => "Titus";
 		public override string Abrv => "Tit";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.PaulsEpistles;
@@ -1486,7 +1480,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class PhilemonSE : BibleBook
 	{
-		public PhilemonSE() : base($"{nameof(BookEnum.Phm)}", (int)BookEnum.Phm) { }
+		public PhilemonSE() : base($"{nameof(Id.Philemon)}", Id.Philemon) { }
 		public override string Title => "Philemon";
 		public override string Abrv => "Phm";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.PaulsEpistles;
@@ -1509,7 +1503,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class HebrewsSE : BibleBook
 	{
-		public HebrewsSE() : base($"{nameof(BookEnum.Heb)}", (int)BookEnum.Heb) { }
+		public HebrewsSE() : base($"{nameof(Id.Hebrews)}", Id.Hebrews) { }
 		public override string Title => "Hebrews";
 		public override string Abrv => "Heb";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.GeneralEpistles;
@@ -1532,7 +1526,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class JamesSE : BibleBook
 	{
-		public JamesSE() : base($"{nameof(BookEnum.Jam)}", (int)BookEnum.Jam) { }
+		public JamesSE() : base($"{nameof(Id.James)}", Id.James) { }
 		public override string Title => "James";
 		public override string Abrv => "Jam";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.GeneralEpistles;
@@ -1555,7 +1549,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class FirstPeterSE : BibleBook
 	{
-		public FirstPeterSE() : base($"{nameof(BookEnum.Pe1)}", (int)BookEnum.Pe1) { }
+		public FirstPeterSE() : base($"{nameof(Id.FirstPeter)}", Id.FirstPeter) { }
 		public override string Title => "1 Peter";
 		public override string Abrv => "1Pe";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.GeneralEpistles;
@@ -1578,7 +1572,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class SecondPeterSE : BibleBook
 	{
-		public SecondPeterSE() : base($"{nameof(BookEnum.Pe2)}", (int)BookEnum.Pe2) { }
+		public SecondPeterSE() : base($"{nameof(Id.SecondPeter)}", Id.SecondPeter) { }
 		public override string Title => "2 Peter";
 		public override string Abrv => "2Pe";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.GeneralEpistles;
@@ -1601,7 +1595,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class FirstJohnSE : BibleBook
 	{
-		public FirstJohnSE() : base($"{nameof(BookEnum.Jo1)}", (int)BookEnum.Jo1) { }
+		public FirstJohnSE() : base($"{nameof(Id.FirstJohn)}", Id.FirstJohn) { }
 		public override string Title => "1 John";
 		public override string Abrv => "1Jo";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.GeneralEpistles;
@@ -1624,14 +1618,14 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class SecondJohnSE : BibleBook
 	{
-		public SecondJohnSE() : base($"{nameof(BookEnum.Jo2)}", (int)BookEnum.Jo2) { }
+		public SecondJohnSE() : base($"{nameof(Id.SecondJohn)}", Id.SecondJohn) { }
 		public override string Title => "2 John";
 		public override string Abrv => "2Jo";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.GeneralEpistles;
 		public override int LastChapter => 1;
 		public override string TransliterationInHebrew => "Yochanan Bet";
 		public override string NameInHebrew => "";
-		
+
 		public override List<int> LastVerses => [13,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
@@ -1647,7 +1641,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class ThirdJohnSE : BibleBook
 	{
-		public ThirdJohnSE() : base($"{nameof(BookEnum.Jo3)}", (int)BookEnum.Jo3) { }
+		public ThirdJohnSE() : base($"{nameof(Id.ThirdJohn)}", Id.ThirdJohn) { }
 		public override string Title => "3 John";
 		public override string Abrv => "3Jo";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.GeneralEpistles;
@@ -1670,7 +1664,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class JudeSE : BibleBook
 	{
-		public JudeSE() : base($"{nameof(BookEnum.Jud)}", (int)BookEnum.Jud) { }
+		public JudeSE() : base($"{nameof(Id.Jude)}", Id.Jude) { }
 		public override string Title => "Jude";
 		public override string Abrv => "Jud";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.GeneralEpistles;
@@ -1693,7 +1687,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	private sealed class RevelationSE : BibleBook
 	{
-		public RevelationSE() : base($"{nameof(BookEnum.Rev)}", (int)BookEnum.Rev) { }
+		public RevelationSE() : base($"{nameof(Id.Revelation)}", Id.Revelation) { }
 		public override string Title => "Revelation";
 		public override string Abrv => "Rev";
 		public override BookGroupEnum BookGroupEnum => BookGroupEnum.Apocalypse;
@@ -1716,9 +1710,12 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	#endregion
 
+
 	public static class NavigationIcon
 	{
 		public const string Previous = "fas fa-arrow-left";
 		public const string Next = "fas fa-arrow-right";
+		public const string Down = "fas fa-arrow-down";
+		public const string Up = "fas fa-arrow-up";
 	}
 }
