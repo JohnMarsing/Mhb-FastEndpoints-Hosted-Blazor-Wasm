@@ -1,0 +1,50 @@
+﻿
+<div class="@modalClass" style="display:@(modalOpen?"block":"none");">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header @HeaderBackGround">
+
+				@ChildHeaderContent
+
+				<button type="button" class="close" @onclick="CloseModal">
+					<span>&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body @BodyBackGround">
+				@ChildBodyContent
+			</div>
+		</div>
+	</div>
+</div>
+
+@code {
+	// [Parameter, EditorRequired] public string? Icon { get; set; } // "fas fa-info"
+	// [Parameter, EditorRequired] public string? IconColor { get; set; }  // "btn-info"
+	// [Parameter] public string? BtnSize { get; set; }  // BtnSize.BtnSm
+	[Parameter] public string? HeaderBackGround { get; set; } = "bg-warning";
+	[Parameter] public string? BodyBackGround { get; set; } = "bg-warning-subtle";
+	[Parameter, EditorRequired] public RenderFragment? ChildHeaderContent { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? ChildBodyContent { get; set; }
+
+	bool modalOpen = true; //bool modalOpen = false;
+	string modalClass = "modal show"; // "modal";
+	//bool ModalIsNotShownToggle = true;
+	
+	/*
+	void ShowModal()
+	{
+		modalOpen = true;
+		ModalIsNotShownToggle = false;
+		modalClass += " show";
+		StateHasChanged();
+	}
+	*/
+	
+	void CloseModal()
+	{
+		modalOpen = false;
+		//ModalIsNotShownToggle = true;
+		modalClass = "modal";
+	}
+}

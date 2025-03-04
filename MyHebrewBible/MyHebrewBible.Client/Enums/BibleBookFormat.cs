@@ -10,10 +10,17 @@ public static class BibleBookFormat
 		return $"{(useAbrv ? bc!.BibleBook!.Abrv : bc!.BibleBook!.Title)} {bc!.Chapter}";
 	}
 
+
 	public static string BCV(BookAndChapter? bc, int verse, bool useAbrv = true)
 	{
 		if (bc is null) return string.Empty;
 		return $"{(useAbrv ? bc!.BibleBook!.Abrv : bc!.BibleBook!.Title)} {bc!.Chapter}:{verse}"; // Genesis 1:2
+	}
+
+	public static string BCV(MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad.BookChapterVerse? bcv, bool useAbrv = true)  // Genesis 1 or Gen 1
+	{
+		if (bcv is null) return string.Empty;
+		return $"{(useAbrv ? bcv!.BibleBook!.Abrv : bcv!.BibleBook!.Title)} {bcv!.Chapter}";
 	}
 
 	public static string BCV(BookChapterVerse? bcv, bool useAbrv = true)

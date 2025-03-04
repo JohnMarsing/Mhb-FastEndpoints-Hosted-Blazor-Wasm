@@ -9,14 +9,14 @@
 
 <LoadingComponent IsLoading="verses==null && CurrentAbrvChapterVerse==null" TurnSpinnerOff="TurnSpinnerOff">
 	<Sections Verses="GetBookChapterVerses()"
-						AbrvChapterVerse="CurrentAbrvChapterVerse"
-						CalledBy="ReportEnums.CalledBy.BookChapter" />
+	AbrvChapterVerse="CurrentAbrvChapterVerse"
+	CalledBy="ReportEnums.CalledBy.BookChapter" />
 </LoadingComponent>
 
 @code {
 	[Parameter, EditorRequired] public AbrvChapterVerse? AbrvChapterVerse { get; set; }
 	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
-	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+	[CascadingParameter] public CascadingAppState? State { get; set; }
 
 	protected BC.AbrvChapterVerse? CurrentAbrvChapterVerse;
 
@@ -37,14 +37,13 @@
 			{
 				CurrentAbrvChapterVerse = AbrvChapterVerse! with { ScriptureId = verses.First().ID};
 				//Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(OnParametersSetAsync), AbrvChapterVerse);
-				await CascadingAppState!.AppState!.BookChapterState!.Update(CurrentAbrvChapterVerse!);
+				await State!.AppState!.BookChapterState!.UpdateACV(CurrentAbrvChapterVerse!);
 			}
 			else
 			{
 				CurrentAbrvChapterVerse = AbrvChapterVerse;
 			}
 			//Logger!.LogInformation("{Method}, set CurrentAbrvChapterVerse: {CurrentAbrvChapterVerse}", nameof(OnParametersSetAsync), CurrentAbrvChapterVerse);
-
 		}
 		catch (Exception ex)
 		{

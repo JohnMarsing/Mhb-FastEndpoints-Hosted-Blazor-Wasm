@@ -1,14 +1,15 @@
 ﻿using Blazored.LocalStorage;
+using MyHebrewBible.Client.Features.BookChapter;
+
 //using MyHebrewBible.Client.State.BookChapter;
 //using BookChapterState = MyHebrewBible.Client.State.BookChapter;
-//using BookChapterFeatures = MyHebrewBible.Client.Features.BookChapter;
-using MyHebrewBible.Client.State.BookChapter;
+
 
 namespace MyHebrewBible.Client.State;
 
 public class AppState 
 {
-	public BookChapterState? BookChapterState { get; } 
+	public Features.BookChapter.State? BookChapterState { get; } 
 	public ParashaState? ParashaState { get; }
 	public VerseList.VerseListState? VerseListState { get; }
 
@@ -20,7 +21,7 @@ public class AppState
 	{
 		Logger = logger;
 		this.localStorage = localStorage;
-		BookChapterState = new BookChapterState(localStorage, logger);
+		BookChapterState = new Features.BookChapter.State(localStorage, logger);
 		ParashaState = new ParashaState(localStorage, logger);
 		VerseListState = new VerseList.VerseListState(localStorage, logger);
 		//Logger!.LogInformation("ctor of {Project}!{Class}", nameof(MyHebrewBible.Client), nameof(AppState));

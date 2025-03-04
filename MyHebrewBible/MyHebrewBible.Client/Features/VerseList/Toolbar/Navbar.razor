@@ -1,7 +1,11 @@
 ﻿@using MyHebrewBible.Client.Layout
-@using MyHebrewBible.Client.Components.BibleLookup.Toolbar.Books
-@using MyHebrewBible.Client.Components.BibleLookup.Toolbar.Chapters
-@using MyHebrewBible.Client.Components.BibleLookup.Toolbar.Verses
+
+@* ToDo: Review what to do with Toolbar.Books and Toolbar.Chapters that come from  BookChapter but used here by VerseList*@
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar.Books
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar.Chapters 
+
+@using MyHebrewBible.Client.Features.VerseList.Toolbar.Verses
+
 
 <nav class="navbar navbar-expand bg-primary-subtle fixed-top">
 
@@ -47,7 +51,7 @@
 	[Parameter, EditorRequired] public GlobalEnums.MediaQuery? MediaQuery { get; set; }
 	[Parameter, EditorRequired] public EventCallback<BookChapterVerse> OnBookChapterVerseSelected { get; set; }
 
-	private void ReturnedBook(Enums.BibleBook bibleBook)
+	private void ReturnedBook(GlobalEnums.BibleBook bibleBook) //Enums.BibleBook bibleBook
 	{
 		BookAndChapter bookAndChapter = new BookAndChapter(bibleBook, 1);
 		BookChapterVerse bookChapterVerse = new BookChapterVerse(bookAndChapter, 1);

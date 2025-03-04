@@ -1,0 +1,118 @@
+﻿@using MyHebrewBible.Client.Layout
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar.PrevNext
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar.Books
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar.Chapters
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad
+@* @using NumberPad = MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad; *@
+
+@inject ILogger<Navbar>? Logger
+
+<nav class="navbar navbar-expand bg-primary-subtle fixed-top">
+	<div class="collapse navbar-collapse justify-content-start">
+		<div class="ps-1"><HomeButton /></div>
+	</div>
+
+	@if (CurrentBookAndChapter is null)
+	{
+		<text><span class="text-center fw-bold fst-italic">CurrentBookAndChapter is null</span></text>
+	}
+	else
+	{
+		<div class="collapse navbar-collapse justify-content-center">
+			<div class="">
+				<PreviousButton PreviousBookAndChapter="@CurrentBookAndChapter"
+												buttonToShow="ButtonsToShow.PreviousOnly"
+												IsXs="isXs"
+												OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+			</div>
+
+			@if (Toolbar is not null)
+			{
+				@if (Toolbar == Constants.ToolbarNumericPad)
+				{
+					<div class="px-1">
+						<Picker CurrentPickerVM="CurrentPickerVM" OnBCVSelected="OnBCVSelected" />
+					</div>
+				}
+				else
+				{
+					<div class="px-1">
+						<BookModal CurrentBookAndChapter="CurrentBookAndChapter"
+											 MediaQuery="MediaQuery"
+											 OnBookSelected="ReturnedBook" />
+					</div>
+
+					<div class="pe-1">
+						<ChapterModal CurrentBookAndChapter="CurrentBookAndChapter"
+													MediaQuery="MediaQuery"
+													OnChapterFilterSelected="OnBookAndChapterSelected" />
+					</div>
+				}
+			}
+			else
+			{
+				<p>Toolbar IS NULL | Navbar</p>
+			}
+			<div class="">
+				<NextButton NextBookAndChapter="@CurrentBookAndChapter"
+										buttonToShow="ButtonsToShow.NextOnly"
+										IsXs="isXs"
+										OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+			</div>
+
+		</div>
+	}
+
+	<div class="collapse navbar-collapse justify-content-end pe-1">
+		<ConfigureDropdown OnMenuItemSelected="@ReturnedMenuItem" />
+	</div>
+</nav>
+
+@code {
+	[Parameter, EditorRequired] public BookAndChapter? CurrentBookAndChapter { get; set; }
+	[Parameter, EditorRequired] public string? Toolbar { get; set; }
+	[Parameter, EditorRequired] public GlobalEnums.MediaQuery? MediaQuery { get; set; }
+
+	[Parameter, EditorRequired] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
+	[Parameter, EditorRequired] public EventCallback<Enums.MenuItem> OnMenuItemSelected { get; set; }
+
+	//[Parameter, EditorRequired] public NumberPad.BookChapterVerse? CurrentBCV { get; set; }
+	[Parameter, EditorRequired] 
+	public NumberPad.PickerVM? CurrentPickerVM { get; set; }
+	[Parameter, EditorRequired] 
+	public EventCallback<NumberPad.BookChapterVerse> OnBCVSelected { get; set; }
+
+	private string Chapter = "0";
+
+	private string TitleOrAbrv => MediaQuery == GlobalEnums.MediaQuery.Xs ? CurrentBookAndChapter!.BibleBook!.Abrv : CurrentBookAndChapter!.BibleBook!.Title;
+	private bool isXs => MediaQuery == GlobalEnums.MediaQuery.Xs ? true : false;
+
+	private void ReturnedBook(GlobalEnums.BibleBook bibleBook)  //Enums.BibleBook bibleBook
+	{
+		OnBookAndChapterSelected.InvokeAsync(new BookAndChapter(bibleBook, 1));
+	}
+
+	private void ReturnedBookAndChapter(BookAndChapter bookAndChapter)
+	{
+		Logger!.LogInformation("{Method}, BookAndChapter: {BookAndChapter}", nameof(Navbar), bookAndChapter);
+		OnBookAndChapterSelected.InvokeAsync(bookAndChapter);
+	}
+
+	private void ReturnedBCV(NumberPad.BookChapterVerse bcv)
+	{
+		OnBCVSelected.InvokeAsync(bcv);
+	}
+
+	private void ReturnedMenuItem(Enums.MenuItem item)
+	{
+		OnMenuItemSelected.InvokeAsync(item);
+	}
+
+	private void HandleGo()
+	{
+		Console.WriteLine($"Go pressed! Value: {Chapter}");
+		// Do whatever you want with EnteredNumber here
+	}
+
+// Ignore Spelling: Toolbar
+}

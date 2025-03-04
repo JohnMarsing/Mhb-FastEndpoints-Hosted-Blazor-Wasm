@@ -4,16 +4,72 @@
 
 <h3>Chapter / Verse Numeric Pad</h3>
 
+@* <div class="d-flex justify-content-center"></div> *@
 
-@* table-bordered border-primary *@
+<div class="d-flex flex-row mb-1">
+	<div class="d-flex justify-content-start">
+		<div class="px-1"><button type="button" class="btn btn-outline-info font-monospace" @onclick="@(e => NumberButtonClick(1))">1</button></div>
+		<div class="pe-1"><button type="button" class="btn btn-outline-info font-monospace" @onclick="@(e => NumberButtonClick(2))">2</button></div>
+		<div class="pe-1"><button type="button" class="btn btn-outline-info font-monospace" @onclick="@(e => NumberButtonClick(3))">3</button></div>
+	</div>
+</div>
 
+<div class="d-flex flex-row mb-1">
+	<div class="d-flex justify-content-start">
+		<div class="px-1"><button type="button" class="btn btn-outline-info font-monospace" @onclick="@(e => NumberButtonClick(4))">4</button></div>
+		<div class="pe-1"><button type="button" class="btn btn-outline-info font-monospace" @onclick="@(e => NumberButtonClick(5))">5</button></div>
+		<div class="pe-1"><button type="button" class="btn btn-outline-info font-monospace" @onclick="@(e => NumberButtonClick(6))">6</button></div>
+	</div>
+</div>
+
+<div class="d-flex flex-row mb-1">
+	<div class="d-flex justify-content-start">
+		<div class="px-1"><button type="button" class="btn btn-outline-info font-monospace" @onclick="@(e => NumberButtonClick(7))">7</button></div>
+		<div class="pe-1"><button type="button" class="btn btn-outline-info font-monospace" @onclick="@(e => NumberButtonClick(8))">8</button></div>
+		<div class="pe-1"><button type="button" class="btn btn-outline-info font-monospace" @onclick="@(e => NumberButtonClick(9))">9</button></div>
+	</div>
+</div>
+
+<div class="d-flex flex-row mb-1">
+	<div class="d-flex justify-content-start">
+		<div class=""><button type="button" class="btn btn-outline-danger font-monospace" @onclick="@(e => ClickAction("Clear"))"><i class="fas fa-backspace"></i></button></div>
+		<div class="pe-0"><button type="button" class="btn btn-outline-info font-monospace" @onclick="@(e => NumberButtonClick(0))">0</button></div>
+		<div class=""><button type="button" class="btn btn-outline-success font-monospace" @onclick="@(e => ClickAction("Go"))"><i class="fas fa-arrow-right"></i></button></div>
+	</div>
+</div>
+
+<p>@number</p>
+
+@code {
+
+	int number = 0;
+	void NumberButtonClick(int number)
+	{
+		Toast!.ShowInfo($"{number} | {nameof(NumericPad)}!{nameof(NumberButtonClick)}");
+	}
+	void ClickAction(string action)
+	{
+		Toast!.ShowInfo($"{action} | {nameof(NumericPad)}!{nameof(ClickAction)}");
+	}
+
+	// Gotten from Components\BibleLookup\Toolbar\Verses\VerseModal.razor
+	protected MarkupString ButtonNumber(int i)
+	{
+		return new MarkupString($"&nbsp;&nbsp;{i}");
+	}
+
+}
+
+
+
+@* 
 <table class="table table-sm table-warning mt-2">
   <tr>
     <td><button type="button" class="btn btn-outline-info font-monospace" @onclick="@(e => NumberButtonClick(1))">1</button></td>
     <td><button type="button" class="btn btn-outline-info font-monospace" @onclick="@(e => NumberButtonClick(2))">2</button></td>
     <td><button type="button" class="btn btn-outline-info font-monospace" @onclick="@(e => NumberButtonClick(3))">3</button></td>
   </tr>
-  
+
   <tr>
     <td><button type="button" class="btn btn-outline-info font-monospace" @onclick="@(e => NumberButtonClick(4))">4</button></td>
     <td><button type="button" class="btn btn-outline-info font-monospace" @onclick="@(e => NumberButtonClick(5))">5</button></td>
@@ -33,22 +89,4 @@
   </tr>
 
 </table>
-
-@code {
-
-  void NumberButtonClick(int number)
-  {
-    Toast!.ShowInfo($"{number} | {nameof(NumericPad)}!{nameof(NumberButtonClick)}");
-  }
-  void ClickAction(string action)
-  {
-    Toast!.ShowInfo($"{action} | {nameof(NumericPad)}!{nameof(ClickAction)}");
-  }
-
-  // Gotten from Components\BibleLookup\Toolbar\Verses\VerseModal.razor
-  protected MarkupString ButtonNumber(int i)
-  {
-    return new MarkupString($"&nbsp;&nbsp;{i}");
-  }
-
-}
+ *@
