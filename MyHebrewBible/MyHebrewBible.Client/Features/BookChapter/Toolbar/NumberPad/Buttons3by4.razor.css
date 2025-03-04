@@ -1,0 +1,53 @@
+﻿.numeric-pad {
+	width: 220px;
+	margin: 10px auto;
+}
+
+.display input {
+	width: 100%;
+	padding: 10px;
+	font-size: 1.2em;
+	text-align: right;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.keypad {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 5px;
+}
+
+.num-btn, .clear-btn, .go-btn {
+	/*padding: 15px;*/
+	padding: 155px;
+	/*font-size: 1.1em;*/
+	font-size: 1em;
+	border: none;
+	border-radius: 4px;
+	background-color: #f0f0f0;
+	cursor: pointer;
+}
+
+	.num-btn:hover, .clear-btn:hover, .go-btn:hover {
+		background-color: #ddd;
+	}
+
+.clear-btn {
+	background-color: #ff6666;
+	color: white;
+}
+
+	.clear-btn:hover {
+		background-color: #ff3333;
+	}
+
+.go-btn {
+	background-color: #66cc66;
+	color: white;
+}
+
+	.go-btn:hover {
+		background-color: #33aa33;
+	}

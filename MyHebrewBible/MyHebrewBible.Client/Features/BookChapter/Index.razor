@@ -1,10 +1,10 @@
 ﻿@page "/bookchapter/{Abrv}/{Chapter:int}/{Verse:int=1}/{ScriptureId:int=0}/"
 
-@using MyHebrewBible.Client.State.BookChapter
-@using MyHebrewBible.Client.Layout
-@using MyHebrewBible.Client.Components.BibleLookup.Toolbar;
 @using MyHebrewBible.Client.Features.BookChapter
+@using MyHebrewBible.Client.Layout
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar;
 @using BookChapterConstants = MyHebrewBible.Client.Features.BookChapter.Constants
+@using NumberPad = MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad;
 
 @inject ILogger<Index>? Logger
 @inject NavigationManager NavigationManager
@@ -12,35 +12,59 @@
 
 <PageTitle>@PageTitle</PageTitle>
 
-<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
-	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-										 OnBookAndChapterSelected="ReturnedBookAndChapter"
-										 MediaQuery="GlobalEnums.MediaQuery.Xs" />
-</div>
-<div class="@GlobalEnums.MediaQuery.Sm.DivClass">
-	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-										 OnBookAndChapterSelected="ReturnedBookAndChapter"
-										 MediaQuery="GlobalEnums.MediaQuery.Sm" />
-</div>
-<div class="@GlobalEnums.MediaQuery.Md.DivClass">
-	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-										 OnBookAndChapterSelected="ReturnedBookAndChapter"
-										 MediaQuery="GlobalEnums.MediaQuery.Md" />
-</div>
-<div class="@GlobalEnums.MediaQuery.Lg.DivClass">
-	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-										 OnBookAndChapterSelected="ReturnedBookAndChapter"
-										 MediaQuery="GlobalEnums.MediaQuery.Lg" />
-</div>
-<div class="@GlobalEnums.MediaQuery.Xl.DivClass">
-	<NavbarBookChapter CurrentBookAndChapter="CurrentBookAndChapter"
-										 OnBookAndChapterSelected="ReturnedBookAndChapter"
-										 MediaQuery="GlobalEnums.MediaQuery.Xl" />
-</div>
+@if (Toolbar is not null)
+{
+	<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+		<Navbar CurrentBookAndChapter="CurrentBookAndChapter"
+						Toolbar="@Toolbar"
+						OnBookAndChapterSelected="ReturnedBookAndChapter"
 
+						CurrentPickerVM="CurrentPickerVM" 
+						OnBCVSelected="ReturnedBCV"
+						
+						OnMenuItemSelected="ReturnedMenuItem"
+						MediaQuery="GlobalEnums.MediaQuery.Xs" />
+	</div>
+	<div class="@GlobalEnums.MediaQuery.Sm.DivClass">
+		<Navbar CurrentBookAndChapter="CurrentBookAndChapter"
+						Toolbar="@Toolbar"
+						OnBookAndChapterSelected="ReturnedBookAndChapter"
+						CurrentPickerVM="CurrentPickerVM" OnBCVSelected="ReturnedBCV"
+						OnMenuItemSelected="ReturnedMenuItem"
+						MediaQuery="GlobalEnums.MediaQuery.Sm" />
+	</div>
+	<div class="@GlobalEnums.MediaQuery.Md.DivClass">
+		<Navbar CurrentBookAndChapter="CurrentBookAndChapter"
+						Toolbar="@Toolbar"
+						OnBookAndChapterSelected="ReturnedBookAndChapter"
+						CurrentPickerVM="CurrentPickerVM" OnBCVSelected="ReturnedBCV"
+						OnMenuItemSelected="ReturnedMenuItem"
+						MediaQuery="GlobalEnums.MediaQuery.Md" />
+	</div>
+	<div class="@GlobalEnums.MediaQuery.Lg.DivClass">
+		<Navbar CurrentBookAndChapter="CurrentBookAndChapter"
+						Toolbar="@Toolbar"
+						OnBookAndChapterSelected="ReturnedBookAndChapter"
+						CurrentPickerVM="CurrentPickerVM" OnBCVSelected="ReturnedBCV"
+						OnMenuItemSelected="ReturnedMenuItem"
+						MediaQuery="GlobalEnums.MediaQuery.Lg" />
+	</div>
+	<div class="@GlobalEnums.MediaQuery.Xl.DivClass">
+		<Navbar CurrentBookAndChapter="CurrentBookAndChapter"
+						Toolbar="@Toolbar"
+						OnBookAndChapterSelected="ReturnedBookAndChapter"
+						CurrentPickerVM="CurrentPickerVM" OnBCVSelected="ReturnedBCV"
+						OnMenuItemSelected="ReturnedMenuItem"
+						MediaQuery="GlobalEnums.MediaQuery.Xl" />
+	</div>
+}
+else
+{
+	<p>Toolbar IS NULL | Index</p>
+}
 <LoadingProgress>
 	<div class="mt-5">
-		@* <br /> *@
+		<br />
 		@if (CurrentAbrvChapterVerse is not null && CurrentBookAndChapter is not null)
 		{
 			<ReportWrapper AbrvChapterVerse="CurrentAbrvChapterVerse"
@@ -49,8 +73,14 @@
 	</div>
 </LoadingProgress>
 
-@code {
 
+@if (ShowPageInstructionsModal)
+{
+	<PageInstructions />
+}
+
+
+@code {
 	// Route parameters
 	[Parameter, EditorRequired] public string Abrv { get; set; } = string.Empty;
 	[Parameter, EditorRequired] public int Chapter { get; set; }
@@ -58,21 +88,29 @@
 	[Parameter] public int ScriptureId { get; set; }
 
 	[CascadingParameter] public ProcessError? ProcessError { get; set; } // where is this used?
-	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+	[CascadingParameter] public CascadingAppState? State { get; set; }
 
 	public BookAndChapter? CurrentBookAndChapter { get; set; }     // parameter for ReportWrapper
 	public AbrvChapterVerse? CurrentAbrvChapterVerse { get; set; } // parameter for ReportWrapper
 
+	//public NumberPad.BookChapterVerse? CurrentBCV { get; set; }
+	public NumberPad.PickerVM? CurrentPickerVM { get; set; }
+
+	//protected string? Toolbar; //
+	protected string? Toolbar = BookChapterConstants.ToolbarNumericPad;
+
 	protected string PageTitle = string.Empty;
+
 
 	protected override void OnParametersSet()
 	{
 		//Logger!.LogInformation("{Method}, Route: {Abrv}/{Chapter}/{Verse}/{ScriptureId}", nameof(OnParametersSet), Abrv, Chapter, Verse, ScriptureId);
+		Toolbar = State!.AppState!.BookChapterState!.GetToolbar();
 		try
 		{
 			if (Abrv == Constants.DefaultAbrv)
 			{
-				AbrvChapterVerse? rec = CascadingAppState!.AppState!.BookChapterState!.Get();
+				AbrvChapterVerse? rec = State!.AppState!.BookChapterState!.GetACV();
 				NavigationManager!.NavigateTo($"{BookChapterConstants.BaseUrl}/{rec.Abrv}/{rec.Chapter}/{rec.Verse}/{rec.ScriptureId}");
 			}
 			else
@@ -83,6 +121,9 @@
 				{
 					CurrentAbrvChapterVerse = abrvChapterVerse;
 					CurrentBookAndChapter = bibleBook;
+					//CurrentBCV = new NumberPad.BookChapterVerse(bibleBook.BibleBook, Chapter, Verse);
+					CurrentPickerVM = new NumberPad.PickerVM(Enums.StepBCV.NeedBook, new NumberPad.BookChapterVerse(bibleBook.BibleBook, Chapter, Verse));
+
 					//Logger!.LogInformation("{Method}, CurrentAbrvChapterVerse: {CurrentAbrvChapterVerse}", nameof(OnParametersSet), CurrentAbrvChapterVerse);
 				}
 				else
@@ -128,20 +169,68 @@
 	private async Task ReturnedAbrvChapterVerse(AbrvChapterVerse rec)
 	{
 		CurrentAbrvChapterVerse = rec;
-		await CascadingAppState!.AppState!.BookChapterState!.Update(rec);
+		await State!.AppState!.BookChapterState!.UpdateACV(rec);
 	}
 
-	// Called by <NavbarBookChapter>
+	// Called by <Navbar>
 	private async Task ReturnedBookAndChapter(BookAndChapter bookAndChapter)
 	{
 		AbrvChapterVerse rec = new AbrvChapterVerse(bookAndChapter.BibleBook!.Abrv, bookAndChapter.Chapter, 1, 0);
 		//Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(ReturnedBookAndChapter), rec);
 		NavigationManager!.NavigateTo($"{BookChapterConstants.BaseUrl}/{rec.Abrv}/{rec.Chapter}/{rec.Verse}/{rec.ScriptureId}");
 
-		await CascadingAppState!.AppState!.BookChapterState!.Update(rec);
+		await State!.AppState!.BookChapterState!.UpdateACV(rec);
 		CurrentBookAndChapter = bookAndChapter!;
 		//Logger!.LogInformation("{Method}, CurrentBookAndChapter: {CurrentBookAndChapter}", nameof(ReturnedBookAndChapter), CurrentBookAndChapter);
 		PageTitle = GlobalEnums.BibleBookFormat.BC(bookAndChapter);
+	}
+
+	private async Task ReturnedBCV(NumberPad.BookChapterVerse bcv)
+	{
+		CurrentBookAndChapter = new BookAndChapter(bcv.BibleBook, bcv.Chapter); // ToDo: do I need to do this?
+		//CurrentBCV = bcv;
+
+		if (CurrentPickerVM!.Step == Enums.StepBCV.NeedChapter)
+		{
+			CurrentPickerVM = CurrentPickerVM with { Step = Enums.StepBCV.NeedChapter };
+		}
+		else
+		{
+			AbrvChapterVerse rec = new AbrvChapterVerse(bcv.BibleBook!.Abrv, bcv.Chapter, bcv.Verse, 0);
+			//Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(ReturnedBookAndChapter), rec);
+			NavigationManager!.NavigateTo($"{BookChapterConstants.BaseUrl}/{rec.Abrv}/{rec.Chapter}/{rec.Verse}/{rec.ScriptureId}");
+			await State!.AppState!.BookChapterState!.UpdateACV(rec);
+		}
+
+
+		//Logger!.LogInformation("{Method}, CurrentBookAndChapter: {CurrentBookAndChapter}", nameof(ReturnedBookAndChapter), CurrentBookAndChapter);
+		PageTitle = GlobalEnums.BibleBookFormat.BCV(bcv);
+	}
+
+
+
+	protected bool ShowPageInstructionsModal = false;
+	private async Task ReturnedMenuItem(Enums.MenuItem item)
+	{
+		if (item == Enums.MenuItem.Instructions)
+		{
+			ShowPageInstructionsModal = !ShowPageInstructionsModal;
+		}
+		else
+		{
+			if (item == Enums.MenuItem.Edit)
+			{
+				if (Toolbar == Constants.ToolbarNumericPad)
+				{
+					Toolbar = Constants.ToolbarDynamicButtons;
+				}
+				else
+				{
+					Toolbar = Constants.ToolbarNumericPad;
+				}
+				await State!.AppState!.BookChapterState!.UpdateToolbar(Toolbar);
+			}
+		}
 	}
 	// Ignore Spelling: bc, rec
 }

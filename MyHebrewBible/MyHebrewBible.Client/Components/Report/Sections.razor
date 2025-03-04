@@ -68,7 +68,7 @@ else
 	[Parameter, EditorRequired] public Enums.CalledBy CalledBy { get; set; }
 	[Parameter] public int ScrollToScriptureId { get; set; }								// Used by Parasha!ReportWrapper (not BC)
 	[Parameter] public BC.AbrvChapterVerse? AbrvChapterVerse { get; set; } // Used by BC!ReportWrapper (not Parasha)
-	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+	[CascadingParameter] public CascadingAppState? State { get; set; }
 
 	#region OnAfter-and-OnParameters
 	protected BC.AbrvChapterVerse? CurrentAbrvChapterVerse;
@@ -139,7 +139,7 @@ else
 			CurrentAbrvChapterVerse = CurrentAbrvChapterVerse!
 				with
 				{ Verse = verse, ScriptureId = CurrentScrollToScriptureId };
-			await CascadingAppState!.AppState!.BookChapterState!.Update(CurrentAbrvChapterVerse!);
+			await State!.AppState!.BookChapterState!.UpdateACV(CurrentAbrvChapterVerse!);
 		}
 		await JSRuntime.InvokeVoidAsync(JS.SetFocusToElement, $"verse-{CurrentScrollToScriptureId}");
 	}

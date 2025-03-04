@@ -1,4 +1,6 @@
-﻿namespace MyHebrewBible.Client.Features.BookChapter;
+﻿// Ignore Spelling: Toolbar
+
+namespace MyHebrewBible.Client.Features.BookChapter;
 
 /*
 Used by
@@ -12,4 +14,7 @@ public static class Constants
 	public const string DefaultAbrv = "default";
 	//                                              gen /c/v/SID
 	public const string DefaultRouteParameter = "default/0/0/0";  // default/0/0 The abrv is case sensitive Gen/1/1
+
+	public const string ToolbarNumericPad = "numeric-pad";
+	public const string ToolbarDynamicButtons = "dynamic-buttons";
 }

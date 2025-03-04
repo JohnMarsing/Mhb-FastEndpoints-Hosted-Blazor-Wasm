@@ -50,7 +50,7 @@ public abstract class ShowSection : SmartEnum<ShowSection>
 	#region Private Instantiation
 	private sealed class TorahSE : ShowSection
 	{
-		public TorahSE() : base($"{nameof(Id.Torah)}", (int)Id.Torah) { }
+		public TorahSE() : base($"{nameof(Id.Torah)}", Id.Torah) { }
 		public override string ButtonLabel => "Torah";
 		public override Permutation VisibilityState => Permutation.Torah;
 		public override string Title => "Torah Verses";
@@ -62,7 +62,7 @@ public abstract class ShowSection : SmartEnum<ShowSection>
 
 	private sealed class HaftorahSE : ShowSection
 	{
-		public HaftorahSE() : base($"{nameof(Id.Haftorah)}", (int)Id.Haftorah) { }
+		public HaftorahSE() : base($"{nameof(Id.Haftorah)}", Id.Haftorah) { }
 		public override string ButtonLabel => "Haftorah";
 		public override Permutation VisibilityState => Permutation.Haftorah;
 		public override string Title => "Haftorah Verses";
@@ -74,7 +74,7 @@ public abstract class ShowSection : SmartEnum<ShowSection>
 	
 	private sealed class BritSE : ShowSection
 	{
-		public BritSE() : base($"{nameof(Id.Brit)}", (int)Id.Brit) { }
+		public BritSE() : base($"{nameof(Id.Brit)}", Id.Brit) { }
 		public override string ButtonLabel => "Brit";
 		public override Permutation VisibilityState => Permutation.Brit;
 		public override string Title => "Brit Verses";

@@ -1,9 +1,11 @@
 ﻿@page "/verselist/{bookid:int}/{chapter:int}/{begverse:int}/{endverse:int}"
 
-@using MyHebrewBible.Client.Components.BibleLookup
-@using MyHebrewBible.Client.Components.BibleLookup.Toolbar;
+
 @using MyHebrewBible.Client.State.VerseList
 @using MyHebrewBible.Client.Features.VerseList.Section
+
+@* ToDo: Review what to do with this modal in VerseList is relying on the one in BookChapter *@
+@using MyHebrewBible.Client.Features.VerseList.Toolbar;
 
 @inject ILogger<Index>? Logger
 @inject IToastService? Toast
@@ -14,27 +16,27 @@
 @if (CurrentBookChapterVerse is not null)
 {
 	<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
-		<NavbarVerseList CurrentBookChapterVerse="CurrentBookChapterVerse"
+		<Navbar CurrentBookChapterVerse="CurrentBookChapterVerse"
 										 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
 										 MediaQuery="GlobalEnums.MediaQuery.Xs" />
 	</div>
 	<div class="@GlobalEnums.MediaQuery.Sm.DivClass">
-		<NavbarVerseList CurrentBookChapterVerse="CurrentBookChapterVerse"
+		<Navbar CurrentBookChapterVerse="CurrentBookChapterVerse"
 										 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
 										 MediaQuery="GlobalEnums.MediaQuery.Sm" />
 	</div>
 	<div class="@GlobalEnums.MediaQuery.Md.DivClass">
-		<NavbarVerseList CurrentBookChapterVerse="CurrentBookChapterVerse"
+		<Navbar CurrentBookChapterVerse="CurrentBookChapterVerse"
 										 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
 										 MediaQuery="GlobalEnums.MediaQuery.Md" />
 	</div>
 	<div class="@GlobalEnums.MediaQuery.Lg.DivClass">
-		<NavbarVerseList CurrentBookChapterVerse="CurrentBookChapterVerse"
+		<Navbar CurrentBookChapterVerse="CurrentBookChapterVerse"
 										 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
 										 MediaQuery="GlobalEnums.MediaQuery.Lg" />
 	</div>
 	<div class="@GlobalEnums.MediaQuery.Xl.DivClass">
-		<NavbarVerseList CurrentBookChapterVerse="CurrentBookChapterVerse"
+		<Navbar CurrentBookChapterVerse="CurrentBookChapterVerse"
 										 OnBookChapterVerseSelected="ReturnedBookChapterVerse"
 										 MediaQuery="GlobalEnums.MediaQuery.Xl" />
 	</div>
