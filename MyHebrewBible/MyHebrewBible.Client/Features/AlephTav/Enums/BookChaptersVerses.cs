@@ -1,12 +1,9 @@
 ﻿using Ardalis.SmartEnum;
 using MyHebrewBible.Client.Enums;
-
 namespace MyHebrewBible.Client.Features.AlephTav.Enums;
-
 
 public abstract class BookChaptersVerses : SmartEnum<BookChaptersVerses>
 {
-
 	#region Id's
 	private static class Id
 	{
@@ -91,39 +88,14 @@ public abstract class BookChaptersVerses : SmartEnum<BookChaptersVerses>
 	public abstract List<int> Chapters { get; }
 	public abstract List<ChapterVerse>? Verses { get; }
 
-
 	//Properties
-	public string Abbreviation
-	{
-		get
-		{
-			return $"{BibleBook.FromValue(this.BibleBook).Abrv}";
-		}
-	}
-
-	public string Title 
-	{
-		get
-		{
-			return $"{BibleBook.FromValue(this.BibleBook).Title}";  
-		}
-	}
-
-	public int BibleBookValue
-	{
-		get
-		{
-			return BibleBook.FromValue(this.BibleBook).Value;
-		}
-	}
-
-
-
+	public string Abbreviation => $"{BibleBook.FromValue(this.BibleBook).Abrv}";
+	public string Title => $"{BibleBook.FromValue(this.BibleBook).Title}";
+	public int BibleBookValue => BibleBook.FromValue(this.BibleBook).Value;
+	//public int BibleBookValue { get {	return BibleBook.FromValue(this.BibleBook).Value; } }	
 	#endregion
 
 	#region Private Instantiation
-
-
 	private sealed class GenesisSE : BookChaptersVerses
 	{
 		public GenesisSE() : base($"{nameof(Id.Genesis)}", Id.Genesis) { }

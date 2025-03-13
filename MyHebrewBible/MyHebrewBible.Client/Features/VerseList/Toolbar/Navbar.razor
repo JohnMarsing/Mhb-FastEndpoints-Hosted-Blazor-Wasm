@@ -1,8 +1,8 @@
 ﻿@using MyHebrewBible.Client.Layout
 
 @* ToDo: Review what to do with Toolbar.Books and Toolbar.Chapters that come from  BookChapter but used here by VerseList*@
-@using MyHebrewBible.Client.Features.BookChapter.Toolbar.Books
-@using MyHebrewBible.Client.Features.BookChapter.Toolbar.Chapters 
+@* @using MyHebrewBible.Client.Features.BookChapter.Toolbar.Books
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar.Chapters  *@
 
 @using MyHebrewBible.Client.Features.VerseList.Toolbar.Verses
 
@@ -20,6 +20,9 @@
 	<div class="collapse navbar-collapse justify-content-center">
 
 		<div class="px-1">
+			BCV Toolbar Not Working
+		</div>
+@* 	<div class="px-1">
 			<BookModal CurrentBookAndChapter="CurrentBookChapterVerse!.BookAndChapter"
 								 MediaQuery="MediaQuery"
 								 OnBookSelected="ReturnedBook" />
@@ -35,7 +38,7 @@
 			<VerseModal CurrentBookChapterVerse="CurrentBookChapterVerse!"
 									MediaQuery="MediaQuery"
 									OnVerseFilterSelected="ReturnedBookAndChapterAndVerse" />
-		</div>
+		</div> *@
 
 	</div>
 

@@ -1,0 +1,47 @@
+﻿@using LastVerseHelper = MyHebrewBible.Client.Enums.LastVerseHelper
+@using MyHebrewBible.Client.Features.BookChapter.Enums
+
+<p class="text-center">Selected Chapter: @SelectedChapter</p>
+<div class="card border-success text-black-50 text-center">
+	<div class="card-body p-1 m-1">
+		<h5 class="card-title">Select <b>Verse</b></h5>
+		<p>Last Verse: @LastVerse</p>
+		<div class="row">
+			<div class="col d-flex justify-content-center"><b><span style="font-size:11px;">Descr</span></b></div>
+			<div class="col d-flex justify-content-center"><b>100s</b></div>
+			<div class="col d-flex justify-content-center"><b>10s</b></div>
+			<div class="col d-flex justify-content-center"><b>1s</b></div>
+			<div class="col d-flex justify-content-center"><b>W</b></div>
+		</div>
+		<div class="row">
+			<div class="col d-flex justify-content-center"><b><span style="font-size:11px;">Book</span></b></div>
+			<div class="col d-flex justify-content-center">@LastVerseHelper.GetPlace(Place.Hundreds, LastVerse)</div>
+			<div class="col d-flex justify-content-center">@LastVerseHelper.GetPlace(Place.Tens, LastVerse)</div>
+			<div class="col d-flex justify-content-center">@LastVerseHelper.GetPlace(Place.Ones, LastVerse)</div>
+			<div class="col d-flex justify-content-center"> <span>@(LastVerseHelper.GetLastVerseIsWhole(LastVerse) ? "T" : "F")</span>  </div>
+		</div>
+
+@* 
+		<div class="row">
+			<div class="col d-flex justify-content-center"><b><span style="font-size:11px;">Active</span></b></div>
+			<div class="col d-flex justify-content-center">@ActiveHundreds</div>
+			<div class="col d-flex justify-content-center">@ActiveTens</div>
+			<div class="col d-flex justify-content-center">@ActiveOnes</div>
+			<div class="col d-flex justify-content-center">&nbsp;</div>
+		</div>
+ *@
+		<div class="row">
+			<div class="col d-flex justify-content-center"><b><span style="font-size:11px;">Selected</span></b></div>
+			<div class="col d-flex justify-content-center">@CurrentPlaceValue!.Hundreds</div>
+			<div class="col d-flex justify-content-center">@CurrentPlaceValue!.Tens</div>
+			<div class="col d-flex justify-content-center">@CurrentPlaceValue!.Ones</div>
+			<div class="col d-flex justify-content-center">&nbsp;</div>
+		</div>
+	</div>
+</div>
+
+@code {
+	[Parameter, EditorRequired] public int SelectedChapter { get; set; } //  @returnedBCV?.Chapter
+	[Parameter, EditorRequired] public PlaceValue? CurrentPlaceValue { get; set; }
+	[Parameter, EditorRequired] public int LastVerse { get; set; }
+}

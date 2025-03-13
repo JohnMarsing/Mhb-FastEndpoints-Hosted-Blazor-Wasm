@@ -24,8 +24,8 @@ public class State
 	private void NotifyStateHasChanged() => OnChange?.Invoke();
 	public event Action? OnChange;
 
-	private AbrvChapterVerse _DefaultAbrvChapterVerse = new("Gen", 1, 1, 0); //"Gen", 1, 1, 1);
-	private AbrvChapterVerse? _AbrvChapterVerse = new("Gen", 1, 1, 0);  //"Gen", 1, 1, 1);
+	private AbrvChapterVerse _DefaultAbrvChapterVerse = new("Gen", 1, 1, true, 0); //"Gen", 1, 1, 1);
+	private AbrvChapterVerse? _AbrvChapterVerse = new("Gen", 1, 1, true, 0);  //"Gen", 1, 1, 1);
 
 	//public const string ToolbarNumericPad = "numeric-pad";
 	//public const string ToolbarDynamicButtons = "dynamic-buttons";

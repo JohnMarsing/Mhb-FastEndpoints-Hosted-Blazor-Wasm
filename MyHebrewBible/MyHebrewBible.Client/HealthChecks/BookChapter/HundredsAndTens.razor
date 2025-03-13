@@ -1,0 +1,39 @@
+﻿@using MyHebrewBible.Client.Enums
+
+<div class="card mt-4 mb-3 border-danger">
+	<div class="card-header">
+		<h4 class="card-title text-center">Hundreds and Tens</h4>
+	</div>
+	<div class="card-body">
+		<TableTemplate Items="BibleBook.List.OrderBy(o => o.Value ).ToList()">
+			<TableHeader>
+				<th class="text-primary">Name</th>
+				<th class="">Last Chap</th>
+				<th class="">100s</th>
+				<th class="">10s</th>
+				<th class="">1s</th>
+			</TableHeader>
+			<RowTemplate>
+				<td>@context.Name</td>
+				<td>@context.LastChapter</td>
+				<td>@context.ChapterHundreds</td>
+				<td>@context.ChapterTens</td>
+				<td>@context.ChapterOnes</td>
+			</RowTemplate>
+		</TableTemplate>
+
+	</div>
+</div>
+
+
+@code {
+	/*
+		<th class="">Vers 100s</th>
+		<th class="">Vers 10s</th>
+	
+		<td>@context.VersesHasHundreds</td>
+		<td>@context.VersesHasTens</td>
+
+ */
+
+}

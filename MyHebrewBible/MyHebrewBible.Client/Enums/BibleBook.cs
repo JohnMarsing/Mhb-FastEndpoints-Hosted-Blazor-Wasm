@@ -1,6 +1,4 @@
-﻿// Ignore Spelling: Songof Colossians Thessalonians Philemon
-
-using Ardalis.SmartEnum;
+﻿using Ardalis.SmartEnum;
 
 namespace MyHebrewBible.Client.Enums;
 
@@ -167,24 +165,43 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 	#region Extra Fields
 	public abstract string Title { get; }
+	public abstract string Abrv { get; }
 
-	// ToDo: Instead of setting it like `Abrv => "Gen"`, it should be `Abrv => nameof(Id.Gen)`
-	// ToDo: it would be nice to remove this all together, but used a lot
-	public abstract string Abrv { get; }  
-	
 	public abstract BookGroupEnum BookGroupEnum { get; }
 	public abstract int LastChapter { get; }
 	public abstract string TransliterationInHebrew { get; }
 	public abstract string NameInHebrew { get; }
-
 	public abstract List<int> LastVerses { get; }
-
 	public abstract BibleBookPrevNext NavigationPrevious(int Chapter);
 	public abstract BibleBookPrevNext NavigationNext(int Chapter);
 
 	//Properties
 	public bool IsHebrewBible => this.Value <= BookChapterFacts.LastBookInOT ? true : false;
-
+	public int MaxLastVerses() => this.LastVerses.Max();
+	public int ChapterHundreds => this.LastChapter >= 100 ? LastChapter / 100 : 0;
+	public int ChapterTens => this.LastChapter >= 10 ? LastChapter / 10 : 0;
+	public int ChapterOnes
+	{
+		get
+		{
+			if (this.LastChapter >= 100)
+			{
+				return LastChapter % 100;
+			}
+			else
+			{
+				if (this.LastChapter >= 10)
+				{
+					return LastChapter % 10;
+				}
+				else
+				{
+					return LastChapter;
+				}
+			}
+		}
+	}
+	public bool ChapterIsWhole => (this.LastChapter % 10 == 0);
 	#endregion
 
 	#region Private Instantiation
@@ -268,6 +285,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Bamidbar";
 		public override string NameInHebrew => "בְּמִדְבַּר";
 
+		//                                    0   1   2   3	  4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35	 36
 		public override List<int> LastVerses => [54, 34, 51, 49, 31, 27, 89, 26, 23, 36, 35, 16, 33, 45, 41, 50, 13, 32, 22, 29, 35, 41, 30, 25, 18, 65, 23, 31, 40, 16, 54, 42, 56, 29, 34, 13,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
@@ -291,6 +309,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Devarim";
 		public override string NameInHebrew => "דְּבָרִים";
 
+		//                                    0   1   2   3	  4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35	 36
 		public override List<int> LastVerses => [46, 37, 29, 49, 33, 25, 26, 20, 29, 22, 32, 32, 18, 29, 23, 22, 20, 22, 21, 20, 23, 30, 25, 22, 19, 19, 26, 68, 29, 20, 30, 52, 29, 12,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)
@@ -1719,3 +1738,6 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public const string Up = "fas fa-arrow-up";
 	}
 }
+
+
+// Ignore Spelling: Songof Colossians Thessalonians Philemon

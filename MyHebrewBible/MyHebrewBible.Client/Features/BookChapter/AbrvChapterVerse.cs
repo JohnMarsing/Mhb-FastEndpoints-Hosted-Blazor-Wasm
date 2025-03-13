@@ -12,9 +12,9 @@ Why doesn't this work???...
  */
 
 
-public record AbrvChapterVerse(string Abrv, int Chapter, int Verse, int ScriptureId)
+public record AbrvChapterVerse(string Abrv, int Chapter, int Verse, bool VerseIsNotDefault, int ScriptureId)
 {
-	public static AbrvChapterVerse Default => new AbrvChapterVerse(BibleBookEnum.BibleBook.Genesis.Name, 1, 1, 1);
+	public static AbrvChapterVerse Default => new AbrvChapterVerse(BibleBookEnum.BibleBook.Genesis.Name, 1, 1, false, 1);
 	//                                                                     Enums.BibleBook.Genesis.Name
 }
 

@@ -18,11 +18,12 @@
 @code {
 	[Parameter, EditorRequired] public BookAndChapter? PreviousBookAndChapter { get; set; }
 	[Parameter, EditorRequired] public ButtonsToShow buttonToShow { get; set; }
-	[Parameter, EditorRequired] public bool IsXs { get; set; }
 	[Parameter] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
 
 	BibleBookPrevNext? Previous; // only null when Gen 1
-	MarkupString Text => IsXs ? (MarkupString)"" : (MarkupString)$"<sup>{Previous!.ButtonText}</sup> ";
+
+	//MarkupString TextOLD => IsXs ? (MarkupString)"" : (MarkupString)$"<sup>{Previous!.ButtonText}</sup> ";
+	MarkupString Text =>  (MarkupString)$"<sup>{Previous!.ButtonText}</sup> ";
 
 	protected override void OnParametersSet()
 	{

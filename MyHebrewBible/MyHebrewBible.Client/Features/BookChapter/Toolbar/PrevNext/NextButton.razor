@@ -20,10 +20,11 @@
 	[Parameter, EditorRequired] public BookAndChapter? NextBookAndChapter { get; set; } 
 	[Parameter, EditorRequired] public ButtonsToShow buttonToShow { get; set; }
 	[Parameter] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
-	[Parameter, EditorRequired] public bool IsXs { get; set; }
 
 	BibleBookPrevNext? Next;  // only null when Rev 22:2
-	MarkupString Text => IsXs ? (MarkupString)"" : (MarkupString)$" <sup>{Next!.ButtonText}</sup>";
+	//MarkupString Text => IsXs ? (MarkupString)"" : (MarkupString)$" <sup>{Next!.ButtonText}</sup>";
+	MarkupString Text => (MarkupString)$" <sup>{Next!.ButtonText}</sup>";
+
 
 	protected override void OnParametersSet()
 	{

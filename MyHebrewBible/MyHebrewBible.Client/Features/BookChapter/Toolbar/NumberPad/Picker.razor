@@ -2,7 +2,6 @@
 
 @inject ILogger<Picker>? Logger
 
-@* <h5>BCV: @Title</h5> *@
 @if (ModalIsNotShownToggle)
 {
 	<button type="button" class="btn btn-info"
@@ -51,19 +50,12 @@ else
 
 				</div>
 
-				<div class="modal-body @modalBodyColor">
-					@* <Buttons3by4 VM="VM" CurrentValueChanged="ReturnedValue" />  Title="" *@
-					<Buttons3by4 Max="maxChapter" CurrentValueChanged="ReturnedValue" />
+				<div class="modal-body pt-0 @modalBodyColor">
+					<Buttons3by4 BibleBook="SelectedBook" OnBCVSelected="ReturnedBCV" />
 				</div>
 
-				<div class="modal-footer @modalFooterColor d-flex justify-content-between">
-					<button type="button" class="btn btn-primary">Clear</button>
-					<span>
-						@SubTitle
-					</span> 
-
-
-					<button type="button" class="btn btn-primary">Go</button>
+				<div class="modal-footer @modalFooterColor">
+					@* <button type="button" class="btn btn-primary">Go</button> *@
 				</div>
 
 			</div>
@@ -71,37 +63,21 @@ else
 	</div>
 }
 
-
 @code {
-	//[Parameter, EditorRequired] public BookChapterVerse? CurrentBCV { get; set; }
-	[Parameter, EditorRequired] public PickerVM? CurrentPickerVM { get; set; }
+	[Parameter, EditorRequired] public BookChapterVerse? CurrentBCV { get; set; }
 	[Parameter] public EventCallback<BookChapterVerse> OnBCVSelected { get; set; }
-
-	//protected VM? VM;
-	protected int maxChapter = 0;
-	protected int maxVerse = 0;
 
 	protected BibleBook? SelectedBook { get; set; }
 	protected BookChapterVerse? SelectedBCV { get; set; } // why do I need this???
 
-	// MediaQuery == MediaQuery.Xs ? CurrentBookAndChapter!.BibleBook!.Abrv : CurrentBookAndChapter!.BibleBook!.Title;
-	string Title => CurrentPickerVM!.BCV.BibleBook!.Title;
-	string SubTitle = string.Empty;
-
+	string Title => $"{CurrentBCV!.BibleBook!.Title} {CurrentBCV.Chapter}";
 
 	protected override void OnParametersSet()
 	{
-		//if (CurrentBCV is not null && CurrentBCV.BibleBook is not null)
-		if (CurrentPickerVM is not null && CurrentPickerVM.BCV is not null && CurrentPickerVM.BCV.BibleBook is not null)
+		if (CurrentBCV is not null && CurrentBCV.BibleBook is not null)
 		{
-			SelectedBook = CurrentPickerVM!.BCV.BibleBook;
-			SelectedBCV = CurrentPickerVM!.BCV;
-
-			//VM = new VM(true, SelectedBook.LastChapter);
-			maxChapter = SelectedBook.LastChapter;
-			//maxVerse = BibleBook!.LastVerses[chapter - 1]; // SelectedBook.LastVerses;
-			//SubTitle = VM!.IsForChapter ? "Chapter" : "Verse";
-			SubTitle = CurrentPickerVM.Step!.Heading;
+			SelectedBook = CurrentBCV!.BibleBook;
+			SelectedBCV = CurrentBCV;
 		}
 	}
 
@@ -116,33 +92,22 @@ else
 	{
 		if (bibleBook is not null)
 		{
-			Logger!.LogInformation("{Method}, BibleBook: {BibleBook}", nameof(SelectedBookChanged), bibleBook.Name);
+			//Logger!.LogInformation("{Method}, BibleBook: {BibleBook}", nameof(SelectedBookChanged), bibleBook.Name);
 			// Tab to the next field
 			SelectedBook = bibleBook;
 			SelectedBCV = SelectedBCV! with { BibleBook = bibleBook };
-			OnBCVSelected.InvokeAsync(SelectedBCV);
-			//SubTitle = CurrentPickerVM!.Step!.Heading;
 		}
 	}
 
-	//private void ReturnedValue(int value)
-	private void ReturnedValue(string value)
+	private void ReturnedBCV(BookChapterVerse bcv)
 	{
-		//if (VM!.IsForChapter)
-		int i = int.Parse(value);
-		if (CurrentPickerVM!.Step == Enums.StepBCV.NeedChapter)
-		{
-			SelectedBCV = SelectedBCV! with { Chapter = i }; // =  value;
-			CurrentPickerVM = CurrentPickerVM with { Step = Enums.StepBCV.NeedVerse };
-			//VM = VM with { IsForChapter = false };
-		}
-		else
-		{
-			SelectedBCV = SelectedBCV! with { Verse = i };
-		}
-		OnBCVSelected.InvokeAsync(SelectedBCV);
+		SelectedBCV = bcv;
+		Logger!.LogInformation("{Method}, BibleBook: {BibleBook}", nameof(ReturnedBCV), bcv);
+		CloseModal();
+	 	OnBCVSelected.InvokeAsync(SelectedBCV);
 	}
 
+	#region Show-Close
 	void ShowModal()
 	{
 		modalOpen = true;
@@ -157,7 +122,8 @@ else
 		ModalIsNotShownToggle = true;
 		modalClass = "modal";
 	}
-	
+#endregion
+
 	#region chrome
 	bool modalOpen = false;
 	string modalClass = "modal";
