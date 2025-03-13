@@ -1,131 +1,116 @@
-﻿@* @Title: *@
-<p class="text-center">Max: @Max CV: @CurrentValue</p>
+﻿@using ButtonEnums = MyHebrewBible.Client.Features.BookChapter.Enums.ButtonsBCV
+@using ButtonHelper = MyHebrewBible.Client.Features.BookChapter.Enums.Helper
+@using MyHebrewBible.Client.Features.BookChapter.Enums
+@using LastVerseHelper = MyHebrewBible.Client.Enums.LastVerseHelper
 
-@inject IToastService? Toast
+@* <div class="modal-body pt-0"></div> *@
 
-@* <p class="text-black-50 text-center " style="font-size:11px;">10's</p> *@
-
-<div class="d-flex justify-content-between">
-	<div>
-		<div class="d-flex justify-content-center">
-			<span class="text-black-50 text-center" style="font-size:11px;">100's</span>
+	@if (SetupChapter)
+	{
+		<div class="mb-3">
+			<DebugChapterCard BibleBook="BibleBook" CurrentPlaceValue="placeValue" />
 		</div>
-		<div class="d-flex justify-content-center">
-				<button class="btn btn-outline-danger font-monospace @fontSize" @onclick="() => AppendNumber(1)">1</button>
+	}
+	else
+	{
+		<div class="mb-3">
+			<DebugVerseCard SelectedChapter="@ReturnedBCV!.Chapter" CurrentPlaceValue="placeValue" LastVerse="LastVerse" />
 		</div>
+	}
+
+	<div class="d-flex justify-content-center">
+
+		<!-- Hundreds -->
+		@if (BibleBook!.ChapterHundreds != 0)
+		{
+			<div class="pe-3">
+
+				<div class="d-flex justify-content-center">
+					<span class="text-black-50 text-center" style="font-size:11px;">100's</span>
+				</div>
+
+				<div class="d-flex justify-content-center">
+					<NumberButton VM="new NumberButtonVM(Place.Hundreds, 0)" ButtonClass="@GetButtonClass(Place.Hundreds, 0)" OnVMSelected="ReturnedButtonSelected" />
+				</div>
+
+				<div class="d-flex justify-content-center">
+					<NumberButton VM="new NumberButtonVM(Place.Hundreds, 1)" ButtonClass="@GetButtonClass(Place.Hundreds, 1)" OnVMSelected="ReturnedButtonSelected" />
+				</div>
+
+			</div>
+		}
+
+
+		<!-- Tens ps-5 -->
+		<div class="pe-3">
+			<div class="d-flex justify-content-center">
+				<span class="text-black-50 text-center" style="font-size:11px;">tens</span>
+			</div>
+
+			<div class="d-flex justify-content-center">
+				<button class="@ButtonHelper.GetButtonClassEmpty()">&nbsp;</button>
+				<NumberButton VM="new NumberButtonVM(Place.Tens, 0)" ButtonClass="@GetButtonClass(Place.Tens, 0)" OnVMSelected="ReturnedButtonSelected" />
+				<button class="@ButtonHelper.GetButtonClassEmpty()">&nbsp;</button>
+			</div>
+
+			<div class="d-flex justify-content-center">
+				<NumberButton VM="new NumberButtonVM(Place.Tens, 1)" ButtonClass="@GetButtonClass(Place.Tens, 1)" OnVMSelected="ReturnedButtonSelected" />
+				<NumberButton VM="new NumberButtonVM(Place.Tens, 2)" ButtonClass="@GetButtonClass(Place.Tens, 2)" OnVMSelected="ReturnedButtonSelected" />
+				<NumberButton VM="new NumberButtonVM(Place.Tens, 3)" ButtonClass="@GetButtonClass(Place.Tens, 3)" OnVMSelected="ReturnedButtonSelected" />
+			</div>
+
+			<div class="d-flex justify-content-center">
+				<NumberButton VM="new NumberButtonVM(Place.Tens, 4)" ButtonClass="@GetButtonClass(Place.Tens, 4)" OnVMSelected="ReturnedButtonSelected" />
+				<NumberButton VM="new NumberButtonVM(Place.Tens, 5)" ButtonClass="@GetButtonClass(Place.Tens, 5)" OnVMSelected="ReturnedButtonSelected" />
+				<NumberButton VM="new NumberButtonVM(Place.Tens, 6)" ButtonClass="@GetButtonClass(Place.Tens, 6)" OnVMSelected="ReturnedButtonSelected" />
+			</div>
+
+			<div class="d-flex justify-content-center">
+				<NumberButton VM="new NumberButtonVM(Place.Tens, 7)" ButtonClass="@GetButtonClass(Place.Tens, 7)" OnVMSelected="ReturnedButtonSelected" />
+				<NumberButton VM="new NumberButtonVM(Place.Tens, 8)" ButtonClass="@GetButtonClass(Place.Tens, 8)" OnVMSelected="ReturnedButtonSelected" />
+				<NumberButton VM="new NumberButtonVM(Place.Tens, 9)" ButtonClass="@GetButtonClass(Place.Tens, 9)" OnVMSelected="ReturnedButtonSelected" />
+			</div>
+		</div>
+
+		<!-- Ones class="pe-2"-->
+		<div>
+			<div class="d-flex justify-content-center">
+				<span class="text-black-50 text-center" style="font-size:11px;">ones</span>
+			</div>
+
+			<div class="d-flex justify-content-center">
+				<button class="@ButtonHelper.GetButtonClassEmpty()">&nbsp;</button>
+				<NumberButton VM="new NumberButtonVM(Place.Ones, 0)" ButtonClass="@GetButtonClass(Place.Ones, 0)" OnVMSelected="ReturnedButtonSelected" />
+				<button class="@ButtonHelper.GetButtonClassEmpty()">&nbsp;</button>
+			</div>
+
+			<div class="d-flex justify-content-center">
+				<NumberButton VM="new NumberButtonVM(Place.Ones, 1)" ButtonClass="@GetButtonClass(Place.Ones, 1)" OnVMSelected="ReturnedButtonSelected" />
+				<NumberButton VM="new NumberButtonVM(Place.Ones, 2)" ButtonClass="@GetButtonClass(Place.Ones, 2)" OnVMSelected="ReturnedButtonSelected" />
+				<NumberButton VM="new NumberButtonVM(Place.Ones, 3)" ButtonClass="@GetButtonClass(Place.Ones, 3)" OnVMSelected="ReturnedButtonSelected" />
+			</div>
+
+			<div class="d-flex justify-content-center">
+				<NumberButton VM="new NumberButtonVM(Place.Ones, 4)" ButtonClass="@GetButtonClass(Place.Ones, 4)" OnVMSelected="ReturnedButtonSelected" />
+				<NumberButton VM="new NumberButtonVM(Place.Ones, 5)" ButtonClass="@GetButtonClass(Place.Ones, 5)" OnVMSelected="ReturnedButtonSelected" />
+				<NumberButton VM="new NumberButtonVM(Place.Ones, 6)" ButtonClass="@GetButtonClass(Place.Ones, 6)" OnVMSelected="ReturnedButtonSelected" />
+			</div>
+
+			<div class="d-flex justify-content-center">
+				<NumberButton VM="new NumberButtonVM(Place.Ones, 7)" ButtonClass="@GetButtonClass(Place.Ones, 7)" OnVMSelected="ReturnedButtonSelected" />
+				<NumberButton VM="new NumberButtonVM(Place.Ones, 8)" ButtonClass="@GetButtonClass(Place.Ones, 8)" OnVMSelected="ReturnedButtonSelected" />
+				<NumberButton VM="new NumberButtonVM(Place.Ones, 9)" ButtonClass="@GetButtonClass(Place.Ones, 9)" OnVMSelected="ReturnedButtonSelected" />
+			</div>
+		</div>
+
 	</div>
 
 
-	<div>
-		<div class="d-flex justify-content-center">
-			<span class="text-black-50 text-center" style="font-size:11px;">tens</span>
-		</div>
-		<div class="d-flex justify-content-center">
 
-			@for (int i = 1; i <= 3; i++)
-			{
-				int iLocal = i;
-				<button class="btn btn-outline-warning font-monospace @fontSize" @onclick="() => AppendNumber(iLocal)">@iLocal</button>
-			}
-		</div>
-		<div class="d-flex justify-content-center">
-			@for (int i = 4; i <= 6; i++)
-			{
-				int iLocal = i;
-				<button class="btn btn-outline-warning font-monospace @fontSize" @onclick="() => AppendNumber(iLocal)">@iLocal</button>
-			}
-		</div>
+<div class="d-flex justify-content-center">
+	<div class="bg-dark-subtle text-black-50 my-1">
+		@* <ResetButton OnPlaceSelected="ReturnedPlace" /> *@
+		<ResetButton Place="Place" OnPlaceSelected="ReturnedPlace" />
 	</div>
-
-
-	<div>
-		<div class="d-flex justify-content-center">
-			<span class="text-black-50 text-center" style="font-size:11px;">ones</span>
-		</div>
-
-		<div class="d-flex justify-content-center">
-			@for (int i = 1; i <= 3; i++)
-			{
-				int iLocal = i;
-				<button class="btn btn-outline-info font-monospace @fontSize" @onclick="() => AppendNumber(iLocal)">@iLocal</button>
-			}
-		</div>
-
-		<div class="d-flex justify-content-center">
-			@for (int i = 4; i <= 6; i++)
-			{
-				int iLocal = i;
-				<button class="btn btn-outline-info font-monospace @fontSize" @onclick="() => AppendNumber(iLocal)">@iLocal</button>
-			}
-		</div>
-
-		<div class="d-flex justify-content-center">
-			@for (int i = 7; i <= 9; i++)
-			{
-				int iLocal = i;
-				<button class="btn btn-outline-info font-monospace @fontSize" @onclick="() => AppendNumber(iLocal)">@iLocal</button>
-			}
-		</div>
-
-		<div class="d-flex justify-content-center">
-			<button class="btn btn-outline-info font-monospace @fontSize">&nbsp;</button>
-			<button class="btn btn-outline-info font-monospace @fontSize" @onclick="() => AppendNumber(0)">0</button>
-			<button class="btn btn-outline-info font-monospace @fontSize">&nbsp;</button>
-		</div>
-	</div>
-
 </div>
 
-@code {
-	//[Parameter, EditorRequired] public VM? VM { get; set; }
-	//[Parameter, EditorRequired] public string Title { get; set; }
-	[Parameter, EditorRequired] public int Max { get; set; }
-
-	//[Parameter] public int CurrentValue { get; set; } = 0;
-	[Parameter] public string CurrentValue { get; set; } = "0";
-
-	//[Parameter] public EventCallback<int> CurrentValueChanged { get; set; }
-	[Parameter] public EventCallback<string> CurrentValueChanged { get; set; }
-
-	//private string CurrentValue = "0";
-	private void AppendNumber(int number)
-	{
-		Toast!.ShowInfo($"Inside: {nameof(AppendNumber)}; number: {number}");
-		//if (CurrentValue == 0)
-		if (CurrentValue == "0")
-		{
-			//CurrentValue = number;
-			CurrentValue = number.ToString();
-		}
-		else
-		{
-			int i = int.Parse(CurrentValue);
-			//if (CurrentValue + number > Max)
-			if (i + number > Max)
-			{
-				Toast!.ShowWarning($"The number {CurrentValue + number} is greater than {Max}");
-			}
-			else
-			{
-				CurrentValue += number.ToString();  //number;
-				Toast!.ShowSuccess($"New CurrentValue: {CurrentValue + number}");
-				NotifyValueChanged();
-			}
-		}
-	}
-
-
-	private async void NotifyValueChanged()
-	{
-		if (CurrentValueChanged.HasDelegate)
-		{
-			await CurrentValueChanged.InvokeAsync(CurrentValue);
-		}
-	}
-
-
-	#region chrome
-	string fontSize => "fs-4"; // fs-5
-	#endregion
-
-}

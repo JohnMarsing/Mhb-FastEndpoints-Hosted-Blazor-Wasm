@@ -7,7 +7,7 @@
 @inject IToastService? Toast
 @inject IJSRuntime? JSRuntime
 
-<LoadingComponent IsLoading="verses==null && CurrentAbrvChapterVerse==null" TurnSpinnerOff="TurnSpinnerOff">
+<LoadingComponent IsLoading="verses==null || CurrentAbrvChapterVerse==null" TurnSpinnerOff="TurnSpinnerOff">
 	<Sections Verses="GetBookChapterVerses()"
 	AbrvChapterVerse="CurrentAbrvChapterVerse"
 	CalledBy="ReportEnums.CalledBy.BookChapter" />
@@ -28,22 +28,41 @@
 		try
 		{
 			//Logger!.LogInformation("{Method}, BookAndChapter: {BookAndChapter}", nameof(OnParametersSetAsync), BookAndChapter);
-			//Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(OnParametersSetAsync), AbrvChapterVerse);
+			Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(OnParametersSetAsync), AbrvChapterVerse);
 
 			verses = await Api!.GetBookChapterWithATAsync(BookAndChapter!.BibleBook, BookAndChapter.Chapter);
-
-			//Logger!.LogInformation("{Method}, ScriptureId: {ScriptureId}", nameof(OnParametersSetAsync), AbrvChapterVerse!.ScriptureId);
-			if (AbrvChapterVerse!.ScriptureId == 0)
+			if (verses is not null && verses.Any())
 			{
-				CurrentAbrvChapterVerse = AbrvChapterVerse! with { ScriptureId = verses.First().ID};
-				//Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(OnParametersSetAsync), AbrvChapterVerse);
-				await State!.AppState!.BookChapterState!.UpdateACV(CurrentAbrvChapterVerse!);
+				//Logger!.LogInformation("{Method}, ScriptureId: {ScriptureId}", nameof(OnParametersSetAsync), AbrvChapterVerse!.ScriptureId);
+				if (AbrvChapterVerse!.ScriptureId == 0)
+				{
+					// Bug: if using Picker/Buttons3by4, the chosen Verse is ignore
+					if (AbrvChapterVerse.VerseIsNotDefault && AbrvChapterVerse.Verse != 1)
+					{
+						int scriptureId = verses.First().ID + AbrvChapterVerse.Verse - 1;
+						CurrentAbrvChapterVerse = AbrvChapterVerse! with { ScriptureId = scriptureId };
+					}
+					else
+					{
+						CurrentAbrvChapterVerse = AbrvChapterVerse! with { ScriptureId = verses.First().ID }; 
+					}
+					//Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(OnParametersSetAsync), AbrvChapterVerse);
+					await State!.AppState!.BookChapterState!.UpdateACV(CurrentAbrvChapterVerse!);
+				}
+				else
+				{
+					CurrentAbrvChapterVerse = AbrvChapterVerse;
+				}
+				//Logger!.LogInformation("{Method}, set CurrentAbrvChapterVerse: {CurrentAbrvChapterVerse}", nameof(OnParametersSetAsync), CurrentAbrvChapterVerse);
 			}
 			else
 			{
-				CurrentAbrvChapterVerse = AbrvChapterVerse;
+				//ToDo: do a test of AbrvChapterVerse to see if the fields are logically valid or not
+				Logger!.LogWarning("{Method} verses is null or empty; might be corrupt cookies; AbrvChapterVerse: {AbrvChapterVerse}"
+					, nameof(OnParametersSetAsync), AbrvChapterVerse);
+				Toast!.ShowWarning($"verses is null or empty; {nameof(ReportWrapper)}!{nameof(OnParametersSetAsync)}");
 			}
-			//Logger!.LogInformation("{Method}, set CurrentAbrvChapterVerse: {CurrentAbrvChapterVerse}", nameof(OnParametersSetAsync), CurrentAbrvChapterVerse);
+
 		}
 		catch (Exception ex)
 		{

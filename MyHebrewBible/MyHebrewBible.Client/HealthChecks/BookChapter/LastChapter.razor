@@ -1,0 +1,19 @@
+﻿@using MyHebrewBible.Client.Enums
+
+<div class="card mt-4 mb-3 border-warning">
+	<div class="card-header">
+		<h4 class="card-title text-center"><code>BibleBook.List.ToList().OrderByDescending(o => o.LastChapter)</code></h4>
+	</div>
+	<div class="card-body">
+		<ul>
+			@foreach (var item in @BibleBook.List.ToList().OrderByDescending(o => o.LastChapter))
+			{
+				<li>@item.Abrv - @item.LastChapter</li>
+			}
+		</ul>
+	</div>
+</div>
+
+@code {
+
+}
