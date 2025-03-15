@@ -59,6 +59,17 @@ public class Helper
 
 	public static string GetButtonClassEmpty()
 	{
+		return $"btn {BtnOutlineColors.Secondary} disabled {fontType} {fontSize}"; 
+	}
+
+	public static string GetButtonClassEmptyNoColor()
+	{
+		return $"btn {fontType} {fontSize}";
+	}
+
+
+	public static string GetButtonClassEmptyDELETE()
+	{
 		return $"btn {fontType} {fontSize}"; // btn 
 	}
 
@@ -70,6 +81,11 @@ public class Helper
 	public static string GetDisabledColor()
 	{
 		return BtnOutlineColors.Secondary;
+	}
+
+	public static string GetButtonColor()
+	{
+		return BtnOutlineColors.Info;
 	}
 
 

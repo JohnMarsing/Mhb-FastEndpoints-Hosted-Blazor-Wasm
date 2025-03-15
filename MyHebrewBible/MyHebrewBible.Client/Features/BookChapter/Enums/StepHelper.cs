@@ -3,10 +3,30 @@
 
 public class StepHelper
 {
-	public static string CssDisabled(Step step, int maxButtons)
+	// MyHebrewBible.Client.Features.BookChapter.Enums;
+	//public static string CssDisabled(Step step, int maxButtons)
+	//{
+	//	if (step.MayNotBeVisible) return "disabled";
+	//	return "";
+	//}
+
+	public static string GetPlaceColumnHeading(Step? step, bool opposite)
 	{
-		if (step.MayNotBeVisible) return "disabled";
-		return "";
+		if (step == Step.ChapterTen)
+		{
+			return opposite ? "Ones" : "Tens";
+		}
+		else 
+		{
+			if (step == Step.ChapterOne)
+			{
+				return opposite ? "Tens" : "Ones";
+			}
+			else 
+			{
+				return "???";
+			}
+		}
 	}
 
 	// The 0 button is disabled when 

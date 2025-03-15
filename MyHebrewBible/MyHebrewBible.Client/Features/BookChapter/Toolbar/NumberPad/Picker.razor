@@ -1,4 +1,5 @@
 ﻿@using MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Features.BookChapter.Enums
 
 @inject ILogger<Picker>? Logger
 
@@ -51,12 +52,14 @@ else
 				</div>
 
 				<div class="modal-body pt-0 @modalBodyColor">
-					<Buttons3by4 BibleBook="SelectedBook" OnBCVSelected="ReturnedBCV" />
+
+
+					@* <Buttons3by4 BibleBook="SelectedBook" OnBCVSelected="ReturnedBCV" /> *@
+					<ButtonWrapper BibleBook="SelectedBook" OnBCVSelected="ReturnedBCV" />
 				</div>
 
-				<div class="modal-footer @modalFooterColor">
-					@* <button type="button" class="btn btn-primary">Go</button> *@
-				</div>
+@* 				<div class="modal-footer @modalFooterColor">
+				</div> *@
 
 			</div>
 		</div>

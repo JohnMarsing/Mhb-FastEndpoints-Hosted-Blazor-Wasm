@@ -1,0 +1,155 @@
+﻿@using ButtonEnums = MyHebrewBible.Client.Features.BookChapter.Enums.ButtonsBCV
+@using ButtonHelper = MyHebrewBible.Client.Features.BookChapter.Enums.Helper
+@using MyHebrewBible.Client.Features.BookChapter.Enums
+@using LastVerseHelper = MyHebrewBible.Client.Enums.LastVerseHelper
+
+@inject ILogger<ButtonWrapper>? Logger
+@* @inject IToastService? Toast *@
+
+@if (StepState!.Chapter == 0)
+{
+	<h6 class="text-center">Selecting Places <b>@placeValue!.Concatenate()</b></h6>
+}
+else
+{
+	<h6 class="text-center">Selected Chapter <b>@StepState!.Chapter</b></h6>
+}
+ 
+
+<p class="text-black-50 text-center">
+	<span style="font-size:12px;">Step: @StepState!.CurrentStep | MaxPlace: @StepState.CurrentMaxPlace</span>
+</p>
+
+<div class="d-flex justify-content-center">
+	<div class="pe-3">
+		@if (StepState.ChapterHundredIsVisible)
+		{
+			@* ToDo: Make this a component, call it HundredsButton *@
+			<div class="d-flex justify-content-center">
+				<span class="text-black-50 text-center" style="font-size:11px;">100's</span>
+			</div>
+
+			<div class="d-flex justify-content-center">
+				<NumberButton VM="new NumberButtonVM(Place.Hundreds, 0)"
+				ButtonClass="@GetButtonClass(Place.Hundreds, 0)"
+				OnVMSelected="ReturnedButtonSelected" />
+			</div>
+
+			<div class="d-flex justify-content-center">
+				<NumberButton VM="new NumberButtonVM(Place.Hundreds, 1)"
+				ButtonClass="@GetButtonClass(Place.Hundreds, 1)"
+				OnVMSelected="ReturnedButtonSelected" />
+			</div>
+		}
+
+	</div>
+
+	@if (StepState!.CurrentStep == Enums.Step.ChapterTen)
+	{
+		<div class="pe-3">
+			<TensAndOnesButtons CurrentStepState="StepState" Place=Place.Tens OnNumberSelected="ReturnedNumber"  />
+		</div>
+		<div class="pe-3">
+			<ButtonPadPlaceHolder SubTitle="@StepHelper.GetPlaceColumnHeading(StepState!.CurrentStep, opposite:true)" />
+		</div>
+	}
+	else
+	{
+		<div class="pe-3">
+			<ButtonPadPlaceHolder SubTitle="@StepHelper.GetPlaceColumnHeading(StepState!.CurrentStep, opposite:true)" />
+		</div>
+		<div class="pe-3">
+			<TensAndOnesButtons CurrentStepState="StepState" Place=Place.Ones OnNumberSelected="ReturnedNumber" />
+		</div>
+	}
+
+</div>
+
+@* <div class="bg-dark-subtle text-black-50 my-3">*@
+<div class=" mt-2 mb-1">
+
+	<div class="d-flex justify-content-center py-2">
+		<button id="backspace" @onclick="() => ButtonClick()"
+		type="button" title="@StepState!.CurrentPhase" class="btn btn-primary btn-sm @BackSpaceDisable">
+			<i class="fas fa-backspace"></i> Step @StepState!.CurrentPhase
+		</button>
+	</div>
+</div>
+
+
+@code {
+	[Parameter, EditorRequired] public GlobalEnums.BibleBook? BibleBook { get; set; }
+	[Parameter, EditorRequired] public EventCallback<BookChapterVerse> OnBCVSelected { get; set; }
+
+	protected StepState? StepState { get; set; }
+	protected PlaceValue? placeValue = new();
+
+	protected override void OnParametersSet()
+	{
+		StepState = new StepState(BibleBook);
+		ReturnedBCV = new BookChapterVerse(BibleBook, 1, 1);
+		placeValue!.Hundreds = 0;
+	}
+
+	private void ReturnedNumber(int number)
+	{
+		if (StepState!.CurrentStep == Enums.Step.ChapterHundred || StepState!.CurrentStep == Enums.Step.VerseHundred)
+		{
+			placeValue!.Hundreds = number;
+		}
+		else
+		{
+			if (StepState!.CurrentStep == Enums.Step.ChapterTen || StepState!.CurrentStep == Enums.Step.VerseTen)
+			{
+				placeValue!.Tens = number;
+			}
+			else
+			{
+				placeValue!.Ones = number;
+			}
+
+		}
+
+		StepState!.ChangeCurrentStep(StepState!.CurrentStep!.DirectionForward);
+		
+		//StepState!.Chapter = number;
+		//OnBCVSelected.InvokeAsync(ReturnedBCV);
+	}
+
+	BookChapterVerse? ReturnedBCV;
+
+	private void ReturnedButtonSelected(NumberButtonVM vm)
+	{
+		OnBCVSelected.InvokeAsync(ReturnedBCV);
+	}
+
+	protected string GetButtonClass(Place place, int btnNumber)
+	{
+		return $"btn {GetColor(place, btnNumber)}" +
+		// $" {GetDisabled(place, btnNumber)}" +
+		$" {ButtonHelper.GetDefaultButtonClass()}";
+	}
+
+	protected string GetColor(Place place, int number)
+	{
+		//return number == ReturnedBCV!.BibleBook!.ChapterHundreds ? ButtonEnums.Hundreds.ButtonColor : ButtonHelper.GetDisabledColor();
+		if (number <= StepState!.CurrentMaxPlace)
+		{
+			return ButtonHelper.GetButtonColor();
+		}
+		else
+		{
+			return ButtonHelper.GetDisabledColor() + " disabled";
+		}
+	}
+
+	//<ResetButton Place="Place" OnPlaceSelected="ReturnedPlace" />
+	//[Parameter, EditorRequired] public EventCallback<Place> OnPlaceSelected { get; set; }
+	protected string? BackSpaceDisable = "";
+	private void ButtonClick()
+	{
+
+	}
+
+
+}

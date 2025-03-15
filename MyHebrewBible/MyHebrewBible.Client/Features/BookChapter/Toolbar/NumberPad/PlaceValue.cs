@@ -15,6 +15,11 @@ public class PlaceValue
 		return (hp * 100) + (tp * 10) + Ones;
 	}
 
+	public string Concatenate()
+	{
+		return $"{Hundreds}-{Tens}-{Ones}";
+	}
+
 	public void ResetAll()
 	{
 		Hundreds = -1;
