@@ -1,6 +1,5 @@
 ﻿using MyHebrewBible.Client.Enums;
 using MyHebrewBible.Client.Features.BookChapter.Enums;
-using MyHebrewBible.Client.HealthChecks;
 
 namespace MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad;
 
@@ -14,16 +13,21 @@ public class StepState
 		CurrentPhase = Enums.Phase.Chapter;
 		if (bibleBook!.ChapterHundreds > 0)
 		{
+			CurrentMaxPlace = bibleBook!.ChapterHundreds;
 			StartupStep = Step.ChapterHundred;
+			ChapterHundredIsVisible = true;
 		}
 		else
 		{
+			ChapterHundredIsVisible = false;
 			if (bibleBook!.ChapterTens > 0)
 			{
+				CurrentMaxPlace = bibleBook!.ChapterTens;
 				StartupStep = Step.ChapterTen;
 			}
 			else
 			{
+				CurrentMaxPlace = bibleBook!.ChapterOnes;
 				StartupStep = Step.ChapterOne;
 			}
 		}
@@ -32,10 +36,17 @@ public class StepState
 	}
 
 	private BibleBook? BibleBook { get; set; } // 
+	//public BibleBook? BibleBook { get; set; } // 
 	public int Chapter { get; set; } //
 	public Step? StartupStep { get; set; }   // 
 	public Step? CurrentStep { get; set; }
 	public Phase? CurrentPhase { get; set; }
+	public int CurrentMaxPlace { get; set; }
+
+	public string DisableTens;
+	public string DisableZeroButton;
+
+	public bool ChapterHundredIsVisible { get; set; } //
 
 	public void ChangePhase()
 	{
@@ -43,7 +54,7 @@ public class StepState
 	}
 
 
-	public void ChangeCurrentStep(Direction newDirection)
+	public void ChangeCurrentStep(Direction? newDirection)
 	{
 		switch (newDirection)
 		{

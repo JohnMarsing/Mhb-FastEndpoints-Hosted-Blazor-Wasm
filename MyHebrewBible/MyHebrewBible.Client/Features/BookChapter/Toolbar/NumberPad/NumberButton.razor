@@ -8,7 +8,7 @@
 
 
 @code {
-	[Parameter, EditorRequired] public NumberButtonVM? VM { get; set; }
+	[Parameter, EditorRequired] public NumberButtonVM? VM { get; set; } // public record NumberButtonVM(Place PlaceEnum, int Number);
 	[Parameter, EditorRequired] public string? ButtonClass { get; set; }
 	[Parameter, EditorRequired] public EventCallback<NumberButtonVM> OnVMSelected { get; set; }
 
@@ -41,7 +41,5 @@
 	{
 		//Logger!.LogInformation("{Method}, VM: {VM}", nameof(ButtonClick), VM);
 		OnVMSelected.InvokeAsync(VM);
-
-		
 	}
 }
