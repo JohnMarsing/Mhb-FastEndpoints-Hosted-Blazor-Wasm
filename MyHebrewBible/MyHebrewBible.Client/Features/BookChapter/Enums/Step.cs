@@ -13,7 +13,8 @@ public abstract class Step : SmartEnum<Step>
 	internal const int VerseHundred = 4;
 	internal const int VerseTen = 5;
 	internal const int VerseOne = 6;
-}
+	internal const int FinishAndReturnBCV = 7;
+	}
 #endregion
 
 #region  Declared Public Instances
@@ -23,6 +24,7 @@ public abstract class Step : SmartEnum<Step>
 	public static readonly Step VerseHundred = new VerseHundredSE();
 	public static readonly Step VerseTen = new VerseTenSE();
 	public static readonly Step VerseOne = new VerseOneSE();
+	public static readonly Step FinishAndReturnBCV = new FinishAndReturnBCVSE();
 	// SE=SmartEnum
 	#endregion
 
@@ -33,13 +35,8 @@ public abstract class Step : SmartEnum<Step>
 	public abstract Direction? DirectionForward { get; }
 	public abstract Direction? DirectionBackward { get; }
 	public abstract string PlaceShortName { get; }   
-	
-	//public abstract int Columns { get; } // 3
-	//public abstract int Rows { get; }    // 4
-
 
 //Properties
-
 
 	#endregion
 
@@ -53,8 +50,6 @@ public abstract class Step : SmartEnum<Step>
 		public override Direction? DirectionForward => Direction.GoToNextStep;  
 		public override Direction? DirectionBackward => null;
 		public override string PlaceShortName => "h";
-		//public override int Columns => 1;
-		//public override int Rows => 2;
 	}
 
 	private sealed class ChapterTenSE : Step
@@ -64,9 +59,6 @@ public abstract class Step : SmartEnum<Step>
 		public override Direction? DirectionForward => Direction.GoToNextStep; 
 		public override Direction? DirectionBackward => Direction.GoToPreviousStep;
 		public override string PlaceShortName => "t";
-		//public override int Columns => 3;
-		//public override int Rows => 4;
-		//public override string PlaceColumnHeading => "Tens";
 	}
 
 	private sealed class ChapterOneSE : Step
@@ -76,9 +68,6 @@ public abstract class Step : SmartEnum<Step>
 		public override Direction? DirectionForward => Direction.GoToSecondPhase;   
 		public override Direction? DirectionBackward => Direction.GoToPreviousStep;
 		public override string PlaceShortName => "o";
-		//public override int Columns => 3;
-		//public override int Rows => 4;
-		//public override string PlaceColumnHeading => "Ones";
 	}
 
 	private sealed class VerseHundredSE : Step
@@ -88,9 +77,6 @@ public abstract class Step : SmartEnum<Step>
 		public override Direction? DirectionForward => Direction.GoToNextStep; 
 		public override Direction? DirectionBackward => Direction.GoToPreviousStep; //.GoToPreviousPlace;
 		public override string PlaceShortName => "h";
-		//public override int Columns => 1;
-		//public override int Rows => 2;
-		//public override string PlaceColumnHeading => "!00's";
 	}
 
 	private sealed class VerseTenSE : Step
@@ -100,9 +86,6 @@ public abstract class Step : SmartEnum<Step>
 		public override Direction? DirectionForward => Direction.GoToNextStep;
 		public override Direction? DirectionBackward => Direction.GoToPreviousStep;
 		public override string PlaceShortName => "t";
-		//public override int Columns => 3;
-		//public override int Rows => 4;
-		//public override string PlaceColumnHeading => "Tens";
 	}
 
 	private sealed class VerseOneSE : Step
@@ -112,9 +95,15 @@ public abstract class Step : SmartEnum<Step>
 		public override Direction? DirectionForward => Direction.FinishAndReturnBCV;
 		public override Direction? DirectionBackward => Direction.GoToPreviousStep;
 		public override string PlaceShortName => "o";
-		//public override int Columns => 3;
-		//public override int Rows => 4;
-		//public override string PlaceColumnHeading => "Ones";
+	}
+
+	private sealed class FinishAndReturnBCVSE : Step
+	{
+		public FinishAndReturnBCVSE() : base($"{nameof(Id.FinishAndReturnBCV)}", Id.FinishAndReturnBCV) { }
+		public override Phase Phase => Phase.Verse;
+		public override Direction? DirectionForward => Direction.FinishAndReturnBCV;
+		public override Direction? DirectionBackward => Direction.GoToPreviousStep;
+		public override string PlaceShortName => "o";
 	}
 
 	#endregion

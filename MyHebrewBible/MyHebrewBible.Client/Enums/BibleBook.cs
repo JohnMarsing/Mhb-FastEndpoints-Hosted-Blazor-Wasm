@@ -175,6 +175,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 	public abstract BibleBookPrevNext NavigationPrevious(int Chapter);
 	public abstract BibleBookPrevNext NavigationNext(int Chapter);
 
+
 	//Properties
 	public bool IsHebrewBible => this.Value <= BookChapterFacts.LastBookInOT ? true : false;
 	public int MaxLastVerses() => this.LastVerses.Max();
@@ -215,6 +216,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override string TransliterationInHebrew => "Beresheeth";
 		public override string NameInHebrew => "בְּרֵאשִׁית";
 
+		//                                    0   1   2   3	  4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35	 36
 		public override List<int> LastVerses => [31, 25, 24, 26, 32, 22, 24, 22, 29, 32, 32, 20, 18, 24, 21, 16, 27, 33, 38, 18, 34, 24, 20, 67, 34, 35, 46, 22, 35, 43, 55, 32, 20, 31, 29, 43, 36, 30, 23, 23, 57, 38, 34, 34, 28, 34, 31, 22, 33, 26,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)

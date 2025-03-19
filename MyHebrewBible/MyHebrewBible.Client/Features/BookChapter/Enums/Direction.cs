@@ -2,10 +2,6 @@
 
 public enum Direction
 {
-	//GoToNextPlace,
-	//GoToPreviousPlace,
-	//GoToNextPhase,
-	//GoToPreviousPhase,
 	GoToNextStep,
 	GoToPreviousStep,
 	GoToSecondPhase,
