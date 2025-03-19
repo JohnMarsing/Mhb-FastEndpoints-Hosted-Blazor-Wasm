@@ -1,65 +1,92 @@
 ﻿@using MyHebrewBible.Client.Features.BookChapter.Enums;
-@using ButtonHelper = MyHebrewBible.Client.Features.BookChapter.Enums.Helper
 
 @inject ILogger<TensAndOnesButtons>? Logger
 
-
 <div class="d-flex justify-content-center">
-	<span class="text-center" style="font-size:12px;">@StepHelper.GetPlaceColumnHeading(CurrentStepState!.CurrentStep, opposite: false)</span>
+	<span class="text-center" style="font-size:12px;">
+		@Place.Hundreds.ColumnName
+	</span>
 </div>
 
+<!-- 1st row GetZeroButtonClass -->
 <div class="d-flex justify-content-center">
 	<button class="@ButtonHelper.GetButtonClassEmptyNoColor()">&nbsp;</button>
-	@* <button id="@GetId(iLocal)" title="@GetId(iLocal)" class="@GetZeroButtonClass(Place)" @onclick="() => ButtonClick(iLocal)">@iLocal</button> *@
-	<button id="@GetId(0)" title="@GetId(0)" class="@GetZeroButtonClass(Place!)" @onclick="() => ButtonClick(0)">0</button>
+	<button id="@GetId(0)" title="@GetId(0)" class="@GetZeroButtonClass()" @onclick="() => ButtonClick(0)">0</button>
 	<button class="@ButtonHelper.GetButtonClassEmptyNoColor()">&nbsp;</button>
 </div>
 
+<!-- 2nd row Cols 1-3 -->
 <div class="d-flex justify-content-center">
-	<button id="@GetId(1)" title="@GetId(1)" class="@GetButtonClass(Place!, 1)" @onclick="() => ButtonClick(1)">1</button>
-	<button id="@GetId(2)" title="@GetId(2)" class="@GetButtonClass(Place!, 2)" @onclick="() => ButtonClick(2)">2</button>
-	<button id="@GetId(3)" title="@GetId(3)" class="@GetButtonClass(Place!, 3)" @onclick="() => ButtonClick(3)">3</button>
+	<button id="@GetId(1)" title="@GetId(1)" class="@GetButtonClass(1)" @onclick="() => ButtonClick(1)">1</button>
+	<button id="@GetId(2)" title="@GetId(2)" class="@GetButtonClass(2)" @onclick="() => ButtonClick(2)">2</button>
+	<button id="@GetId(3)" title="@GetId(3)" class="@GetButtonClass(3)" @onclick="() => ButtonClick(3)">3</button>
 </div>
 
 @* if (iLocal > 3 && iLocal <= 6) 	{ } *@
 
+<!-- 3rd row Cols 4-6 -->
 <div class="d-flex justify-content-center">
-	@* <button id="@GetId(iLocal)" title="@GetId(iLocal)" class="@GetButtonClass(Place, iLocal)" @onclick="() => ButtonClick(iLocal)">@iLocal</button> *@
-	<button id="@GetId(4)" title="@GetId(4)" class="@GetButtonClass(Place!, 4)" @onclick="() => ButtonClick(4)">4</button>
-	<button id="@GetId(5)" title="@GetId(5)" class="@GetButtonClass(Place!, 5)" @onclick="() => ButtonClick(5)">5</button>
-	<button id="@GetId(6)" title="@GetId(6)" class="@GetButtonClass(Place!, 6)" @onclick="() => ButtonClick(6)">6</button>
+	<button id="@GetId(4)" title="@GetId(4)" class="@GetButtonClass(4)" @onclick="() => ButtonClick(4)">4</button>
+	<button id="@GetId(5)" title="@GetId(5)" class="@GetButtonClass(5)" @onclick="() => ButtonClick(5)">5</button>
+	<button id="@GetId(6)" title="@GetId(6)" class="@GetButtonClass(6)" @onclick="() => ButtonClick(6)">6</button>
 </div>
 
-@* if (iLocal > 6 *@
+<!-- 3rd row Cols 7-9 -->
 <div class="d-flex justify-content-center">
-	@* <button id="@GetId(iLocal)" title="@GetId(iLocal)" class="@GetButtonClass(Place, iLocal)" @onclick="() => ButtonClick(iLocal)">@iLocal</button> *@
-	<button id="@GetId(7)" title="@GetId(7)" class="@GetButtonClass(Place!, 7)" @onclick="() => ButtonClick(7)">7</button>
-	<button id="@GetId(8)" title="@GetId(8)" class="@GetButtonClass(Place!, 8)" @onclick="() => ButtonClick(8)">8</button>
-	<button id="@GetId(9)" title="@GetId(9)" class="@GetButtonClass(Place!, 9)" @onclick="() => ButtonClick(9)">9</button>
+	<button id="@GetId(7)" title="@GetId(7)" class="@GetButtonClass(7)" @onclick="() => ButtonClick(7)">7</button>
+	<button id="@GetId(8)" title="@GetId(8)" class="@GetButtonClass(8)" @onclick="() => ButtonClick(8)">8</button>
+	<button id="@GetId(9)" title="@GetId(9)" class="@GetButtonClass(9)" @onclick="() => ButtonClick(9)">9</button>
 </div>
 
-
+<p style="font-size:12px;">PVR: @CurrentStepState!.PlaceValueRec</p>
 
 @code {
 	[Parameter, EditorRequired] public StepState? CurrentStepState { get; set; }
-	[Parameter, EditorRequired] public Place? Place { get; set; }
-	[Parameter, EditorRequired] public EventCallback<int> OnNumberSelected { get; set; }
+	[Parameter, EditorRequired] public Place? Place { get; set; } // ToDo: Not Used
+	[Parameter, EditorRequired] public EventCallback<ReturnedNumberVM> OnNumberSelected { get; set; }
 
-	protected string GetButtonClass(Place place, int number)
+	protected string GetButtonClass(int number)
 	{
-		if (number <= CurrentStepState!.CurrentMaxPlace)
+		if (CurrentStepState!.CurrentStep == Step.ChapterTen || CurrentStepState!.CurrentStep == Step.VerseTen)
 		{
-			return $"btn {ButtonHelper.GetButtonColor()} {ButtonHelper.GetDefaultButtonClass()}";
+			if (number <= CurrentStepState!.PlaceValueRec!.Tens)
+			{
+				return $"btn {ButtonHelper.GetButtonColor()} {ButtonHelper.GetDefaultButtonClass()}";
+			}
+			else
+			{
+				return $"btn {ButtonHelper.GetDisabledColor()} disabled  {ButtonHelper.GetDefaultButtonClass()}";
+			}
 		}
-		else
+		else // (CurrentStepState!.CurrentStep == Step.ChapterOne || CurrentStepState!.CurrentStep == Step.VerseOne)
 		{
-			return $"btn {ButtonHelper.GetDisabledColor()} disabled  {ButtonHelper.GetDefaultButtonClass()}";
+			int one = 0;
+
+			if (CurrentStepState!.PlaceValueRec!.IsWhole)
+			{
+				one = 9;
+			}
+			else
+			{
+				one = CurrentStepState!.PlaceValueRec!.Ones;
+			}
+
+			if (number <= one)
+			{
+				return $"btn {ButtonHelper.GetButtonColor()} {ButtonHelper.GetDefaultButtonClass()}";
+			}
+			else
+			{
+				return $"btn {ButtonHelper.GetDisabledColor()} disabled  {ButtonHelper.GetDefaultButtonClass()}";
+			}
+
 		}
+
 	}
 
-	protected string GetZeroButtonClass(Place place)
+	protected string GetZeroButtonClass()
 	{
-		if (StepHelper.IsZeroButtonDisabled(CurrentStepState!.CurrentStep))
+		if (PlaceValueRecHelper.OnesPlaceZeroButtonIsDisabled(CurrentStepState!.PlaceValueRec!))
 		{
 			return $"btn {ButtonHelper.GetDisabledColor()} disabled {ButtonHelper.GetDefaultButtonClass()}";
 		}
@@ -71,9 +98,17 @@
 
 	private void ButtonClick(int number)
 	{
-		//Logger!.LogInformation("{Method}, VM: {VM}", nameof(ButtonClick), VM);
-		OnNumberSelected.InvokeAsync(number);
+		//Logger!.LogInformation("{Method}, number: {number}", nameof(ButtonClick), number);
+		if (CurrentStepState!.CurrentStep == Step.VerseOne)
+		{
+			OnNumberSelected.InvokeAsync(new ReturnedNumberVM(number, true));
+		}
+		else
+		{
+			OnNumberSelected.InvokeAsync(new ReturnedNumberVM(number, false));
+		}
 	}
+
 	private string GetId(int number)
 	{
 		return $"{CurrentStepState!.CurrentStep!.PlaceShortName}-{number}";

@@ -5,93 +5,128 @@ namespace MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad;
 
 public class StepState
 {
-	// this is initialized by one of the three chapter phases
+
+/*  ToDo: how to add a logger   */
+
 	public StepState(BibleBook? bibleBook)
 	{
 		BibleBook = bibleBook;
+		LoadPlaceValueRecForChapter();
 		Chapter = 0; // not defined
 		CurrentPhase = Enums.Phase.Chapter;
-		if (bibleBook!.ChapterHundreds > 0)
+		ChapterHundredIsVisible = bibleBook!.ChapterHundreds > 0;
+	}
+
+	private BibleBook? BibleBook { get; set; }
+
+	public int Chapter { get; set; }
+	public int Verse { get; set; }
+	public Step? CurrentStep { get; set; }
+	public Phase? CurrentPhase { get; set; }
+	public PlaceValueRec? PlaceValueRec; //{ get; set; } 
+	public bool ChapterHundredIsVisible { get; set; } //
+
+	private void LoadPlaceValueRecForChapter()
+	{
+		if (BibleBook!.ChapterHundreds > 0)
 		{
-			CurrentMaxPlace = bibleBook!.ChapterHundreds;
-			StartupStep = Step.ChapterHundred;
-			ChapterHundredIsVisible = true;
+			PlaceValueRec = new PlaceValueRec(BibleBook!.ChapterHundreds, BibleBook!.ChapterTens, BibleBook!.ChapterOnes, BibleBook.ChapterIsWhole);
+			CurrentStep = Step.ChapterHundred; ;
 		}
 		else
 		{
-			ChapterHundredIsVisible = false;
-			if (bibleBook!.ChapterTens > 0)
+			if (BibleBook!.ChapterTens > 0)
 			{
-				CurrentMaxPlace = bibleBook!.ChapterTens;
-				StartupStep = Step.ChapterTen;
+				PlaceValueRec = new PlaceValueRec(null, BibleBook!.ChapterTens, BibleBook!.ChapterOnes, BibleBook.ChapterIsWhole);
+				CurrentStep = Step.ChapterTen;
 			}
 			else
 			{
-				CurrentMaxPlace = bibleBook!.ChapterOnes;
-				StartupStep = Step.ChapterOne;
+				PlaceValueRec = new PlaceValueRec(null, null, BibleBook!.ChapterOnes, BibleBook.ChapterIsWhole);
+				CurrentStep = Step.ChapterOne;
 			}
 		}
-		// during CTOR, CurrentStep = StartupStep;
-		CurrentStep = StartupStep;
 	}
 
-	private BibleBook? BibleBook { get; set; } // 
-	//public BibleBook? BibleBook { get; set; } // 
-	public int Chapter { get; set; } //
-	public Step? StartupStep { get; set; }   // 
-	public Step? CurrentStep { get; set; }
-	public Phase? CurrentPhase { get; set; }
-	public int CurrentMaxPlace { get; set; }
-
-	public string DisableTens;
-	public string DisableZeroButton;
-
-	public bool ChapterHundredIsVisible { get; set; } //
-
-	public void ChangePhase()
+	private void LoadPlaceValueRecForVerse()
 	{
-		CurrentPhase = CurrentPhase == Phase.Chapter ? Phase.Verse : Phase.Chapter;
+		if (LastVerse >= 100)  
+		{
+			PlaceValueRec = new PlaceValueRec(
+				LastVerseHelper.GetPlace(Place.Hundreds, LastVerse),
+				LastVerseHelper.GetPlace(Place.Tens, LastVerse),
+				LastVerseHelper.GetPlace(Place.Ones, LastVerse),
+				LastVerseHelper.GetLastVerseIsWhole(LastVerse));
+		}
+		else
+		{
+			if (LastVerse >= 10)  
+			{
+				PlaceValueRec = new PlaceValueRec(
+					null,
+					LastVerseHelper.GetPlace(Place.Tens, LastVerse),
+					LastVerseHelper.GetPlace(Place.Ones, LastVerse),
+					LastVerseHelper.GetLastVerseIsWhole(LastVerse));
+			}
+			else
+			{
+				PlaceValueRec = new PlaceValueRec(
+					null,
+					null,
+					LastVerseHelper.GetPlace(Place.Ones, LastVerse),
+					LastVerseHelper.GetLastVerseIsWhole(LastVerse));
+			}
+		}
 	}
 
-
-	public void ChangeCurrentStep(Direction? newDirection)
+	public int LastVerse = 0;
+	public void ChangeCurrentStep(Direction? newDirection, int number = 0)
 	{
 		switch (newDirection)
 		{
 			case Direction.GoToNextStep:
+				if (CurrentStep == Enums.Step.ChapterHundred || CurrentStep == Enums.Step.VerseHundred)
+				{
+					PlaceValueRec = PlaceValueRec! with { Hundreds = number };
+				}
+				else
+				{
+					PlaceValueRec = PlaceValueRec! with { Tens = number };
+				}
 				CurrentStep = Step.FromValue(CurrentStep!.Value + 1);
-				//CurrentStep = CurrentStep.DirectionForward;
 				break;
 
 			case Direction.GoToPreviousStep:
+				//ToDo: Finish this
 				CurrentStep = Step.FromValue(CurrentStep!.Value - 1);
 				break;
 
 			case Direction.GoToSecondPhase:
-				if (Chapter == 0)
-				{
-					throw new ArgumentException("Chapter cannot be zero when changing to the second phase.");
-				}
+				PlaceValueRec = PlaceValueRec! with { Ones = number }; // Finish chapter processing
+				Chapter = PlaceValueRecHelper.Combine(PlaceValueRec);
+				LastVerse = LastVerseHelper.GetLastVerse(BibleBook, Chapter);
+				LoadPlaceValueRecForVerse(); //PlaceValueRec = PlaceValueRec.Default;
 
-				//bibleBook!.LastVerses[chapter - 1];
-				int lastVerse = LastVerseHelper.GetLastVerse(BibleBook, Chapter);
-
-				if (lastVerse >= 100) // 100 or more
+				if (LastVerse >= 100) // 100 or more
 				{
 					CurrentStep = Step.VerseHundred;
 				}
-				else if (lastVerse >= 10) // 10 or more
+				else if (LastVerse >= 10) // 10 or more
 				{
 					CurrentStep = Step.VerseTen;
 				}
 				else // less than 10
 				{
 					CurrentStep = Step.VerseOne;
-				}	
+				}
+
 				break;
 
+
+			// ToDo: this never actually gets called 
 			case Direction.FinishAndReturnBCV:
-				// ToDo: what do I do here?
+				//public int Verse { get; set; } // ToDo: this is actually never used
+				//Verse = number;
 				break;
 
 			default:
@@ -100,31 +135,4 @@ public class StepState
 	}
 
 
-	/*
-	// the only place that may not be visible is the Hundred (Chapter of Verse)
-	public bool IsPlaceVisible
-	{
-		get
-		{
-
-			//return CurrentStep!.Phase == Phase.Chapter
-			//? StartupStep != Step.ChapterHundred
-			//: StartupStep != Step.VerseHundred;
-		}
-	}
-
-	// This is set by 
-	public bool IsPlaceDisabled { get; set; }
-
-	public bool IsZeroButtonDisabled
-	{
-		get
-		{
-			//return CurrentStep!.Phase == Phase.Chapter
-			//? StartupStep != Step.ChapterHundred
-			//: StartupStep != Step.VerseHundred;
-		}
-	}
-
-	*/
 }

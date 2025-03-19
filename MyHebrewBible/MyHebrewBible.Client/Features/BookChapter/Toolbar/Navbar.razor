@@ -19,8 +19,8 @@
 		<div class="collapse navbar-collapse justify-content-center">
 			<div class="">
 				<PreviousButton PreviousBookAndChapter="@CurrentBookAndChapter"
-												buttonToShow="ButtonsToShow.PreviousOnly"
-												OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+				buttonToShow="ButtonsToShow.PreviousOnly"
+				OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 			</div>
 
 			<div class="px-1">
@@ -29,8 +29,8 @@
 
 			<div class="">
 				<NextButton NextBookAndChapter="@CurrentBookAndChapter"
-										buttonToShow="ButtonsToShow.NextOnly"
-										OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+				buttonToShow="ButtonsToShow.NextOnly"
+				OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 			</div>
 
 		</div>
@@ -52,9 +52,10 @@
 
 	// Only used by <ConfigureDropdown>
 	[Parameter, EditorRequired] public EventCallback<Enums.MenuItem> OnMenuItemSelected { get; set; }
-	
+
 	private string Chapter = "0";
 	private string TitleOrAbrv => CurrentBookAndChapter!.BibleBook!.Title;
+	
 
 	private void ReturnedBook(GlobalEnums.BibleBook bibleBook)  //Enums.BibleBook bibleBook
 	{

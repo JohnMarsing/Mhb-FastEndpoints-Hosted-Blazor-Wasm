@@ -5,7 +5,7 @@
 
 @if (ModalIsNotShownToggle)
 {
-	<button type="button" class="btn btn-info"
+	<button type="button" class="btn btn-info" title="@bcvTitle"
 	@onclick="() => ShowModal()">
 		@Title <i class="fas fa-angle-down"></i>
 	</button>
@@ -52,14 +52,10 @@ else
 				</div>
 
 				<div class="modal-body pt-0 @modalBodyColor">
-
-
-					@* <Buttons3by4 BibleBook="SelectedBook" OnBCVSelected="ReturnedBCV" /> *@
-					<ButtonWrapper BibleBook="SelectedBook" OnBCVSelected="ReturnedBCV" />
+					 <ButtonWrapper BibleBook="SelectedBook" OnBCVSelected="ReturnedBCV" /> 
 				</div>
 
-@* 				<div class="modal-footer @modalFooterColor">
-				</div> *@
+@* 				<div class="modal-footer @modalFooterColor">	</div> *@
 
 			</div>
 		</div>
@@ -74,6 +70,7 @@ else
 	protected BookChapterVerse? SelectedBCV { get; set; } // why do I need this???
 
 	string Title => $"{CurrentBCV!.BibleBook!.Title} {CurrentBCV.Chapter}";
+	private string bcvTitle = "";
 
 	protected override void OnParametersSet()
 	{
@@ -105,6 +102,7 @@ else
 	private void ReturnedBCV(BookChapterVerse bcv)
 	{
 		SelectedBCV = bcv;
+		bcvTitle = $"{bcv.BibleBook?.Abrv} {bcv.Chapter}:{bcv.Verse} ";
 		Logger!.LogInformation("{Method}, BibleBook: {BibleBook}", nameof(ReturnedBCV), bcv);
 		CloseModal();
 	 	OnBCVSelected.InvokeAsync(SelectedBCV);
