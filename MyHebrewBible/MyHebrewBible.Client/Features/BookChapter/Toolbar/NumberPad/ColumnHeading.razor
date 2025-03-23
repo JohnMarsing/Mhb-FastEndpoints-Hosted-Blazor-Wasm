@@ -1,0 +1,9 @@
+﻿<div class="d-flex justify-content-center">
+	<span class="text-center" style="font-size:12px;">
+		@Place!.ColumnName
+	</span>
+</div>
+
+@code {
+	[Parameter, EditorRequired] public Enums.Place? Place { get; set; }
+}

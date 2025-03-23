@@ -179,15 +179,21 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 	//Properties
 	public bool IsHebrewBible => this.Value <= BookChapterFacts.LastBookInOT ? true : false;
 	public int MaxLastVerses() => this.LastVerses.Max();
+	#endregion
+
+	#region ToDo Create Common Modulus Function
 	public int ChapterHundreds => this.LastChapter >= 100 ? LastChapter / 100 : 0;
-	public int ChapterTens => this.LastChapter >= 10 ? LastChapter / 10 : 0;
+
+	// modulus `%` :  calculates the remainder after division of one number by another
+	public int ChapterTens => (this.LastChapter / 10) % 10;
+	public bool ChapterIsWhole => (this.LastChapter % 10 == 0); // Gen-50, Exo-40, Ezra-10 Est-10 and Psa-150
 	public int ChapterOnes
 	{
 		get
 		{
 			if (this.LastChapter >= 100)
 			{
-				return LastChapter % 100;
+				return LastChapter % 10;
 			}
 			else
 			{
@@ -202,8 +208,9 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 			}
 		}
 	}
-	public bool ChapterIsWhole => (this.LastChapter % 10 == 0);
+
 	#endregion
+
 
 	#region Private Instantiation
 	private sealed class GenesisSE : BibleBook
@@ -634,7 +641,8 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 		public override int LastChapter => 150;
 		public override string TransliterationInHebrew => "Tehillim";
 		public override string NameInHebrew => "תְּהִלִּים";
-
+		
+		// MaxLastVerse=176 LastVerse[120-1] i.e. LastVerse[119]
 		public override List<int> LastVerses => [6, 12, 8, 8, 12, 10, 17, 9, 20, 18, 7, 8, 6, 7, 5, 11, 15, 50, 14, 9, 13, 31, 6, 10, 22, 12, 14, 9, 11, 12, 24, 11, 22, 22, 28, 12, 40, 22, 13, 17, 13, 11, 5, 26, 17, 11, 9, 14, 20, 23, 19, 9, 6, 7, 23, 13, 11, 11, 17, 12, 8, 12, 11, 10, 13, 20, 7, 35, 36, 5, 24, 20, 28, 23, 10, 12, 20, 72, 13, 19, 16, 8, 18, 12, 13, 17, 7, 18, 52, 17, 16, 15, 5, 23, 11, 13, 12, 9, 9, 5, 8, 28, 22, 35, 45, 48, 43, 13, 31, 7, 10, 10, 9, 8, 18, 19, 2, 29, 176, 7, 8, 9, 4, 8, 5, 6, 5, 6, 8, 8, 3, 18, 3, 3, 21, 26, 9, 8, 24, 13, 10, 7, 12, 15, 21, 10, 20, 14, 9, 6,];
 
 		public override BibleBookPrevNext NavigationPrevious(int Chapter)

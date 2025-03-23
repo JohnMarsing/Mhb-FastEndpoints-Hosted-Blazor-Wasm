@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-
+﻿
 namespace MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad;
 
 public class PlaceValueRecHelper // static
@@ -32,7 +31,7 @@ public class PlaceValueRecHelper // static
 
 	public static string Concatenate(PlaceValueRec place)
 	{
-		return $"{(place.Hundreds is null ? "X" : place.Hundreds)} {(place.Tens is null ? "X" : place.Tens)} {place.Ones} Whole: {place.IsWhole}";
+		return $"Hun:{(place.Hundreds is null ? "X" : place.Hundreds)}, Tens:{(place.Tens is null ? "X" : place.Tens)}, Ones:{place.Ones}"; // , W:{(place.IsWhole ? "T" : "F")}
 	}
 
 	private static int EvalNullValues(int? hundredsOrTens)
@@ -47,24 +46,5 @@ public class PlaceValueRecHelper // static
 		return EvalNullValues(place.Hundreds) * 100 + EvalNullValues(place.Tens) * 10 + place.Ones;
 	}
 
-	//public MarkupString SubTitle(int chapter)
-	//{
-	//	if (chapter == 0)
-	//	{
-	//		return (MarkupString)$"Selecting Chapter Places <b>{Concatenate()}</b>";
-	//	}
-	//	else
-	//	{
-	//		return (MarkupString)$"Selected Chapter <b>{chapter}</b>";
-	//	}
-
-	//}
-
 }
 
-/*
-public static PlaceValueRec Reset()
-{
-	return PlaceValueRec.Default;
-}
-*/

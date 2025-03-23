@@ -1,0 +1,12 @@
+﻿@using MyHebrewBible.Client.Enums
+
+@foreach (var item in @BibleBook.List.ToList().Where(w => w.Value == CurrentBibleBook!.Value))
+{
+	<li>@item.LastVerses[chapter - 1]</li>
+}
+
+@code {
+
+	[Parameter, EditorRequired] public GlobalEnums.BibleBook? CurrentBibleBook { get; set; }
+	[Parameter, EditorRequired] public int chapter { get; set; }
+}
