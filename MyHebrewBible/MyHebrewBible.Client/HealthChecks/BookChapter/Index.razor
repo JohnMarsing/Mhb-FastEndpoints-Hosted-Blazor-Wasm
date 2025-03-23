@@ -6,12 +6,11 @@
 
 <PageHeader PageEnum="Page.HealthCheckBibleBook" />
 
-
 <div class="card mb-3 border-success">
 	<div class="card-header">
 		<h4 class="card-title text-center">Test some API Calls</h4>
 	</div>
-	@* with SAT  [with SAT]  *@
+	
 	<div class="card-body">
 		<a class="btn btn-primary btn-xs" href="/api/bookchapterwithat/2/20" target="_blank">API BookChapter 2 20:5</a>
 		<a class="btn btn-primary btn-xs" href="/bookchapter/Exo/20/5/">BookChapter Exo 20:5 </a>
@@ -30,17 +29,22 @@
 </div>
 
 
+@* with SAT  [with SAT]  *@
+
+
 <div class="card mt-4 mb-3 border-warning">
 	<div class="card-header">
 		<h4 class="card-title text-center"><code>BibleBook.List.ToList()</code></h4>
 	</div>
 	<div class="card-body">
 		<TableTemplate Items="BibleBook.List.OrderBy(o => o.Value ).ToList()">
+			@* .Where(w => w.ChapterIsWhole==true) *@
 			<TableHeader>
 				<th class="text-info">Id</th>
 				<th class="text-primary">Name</th>
 				<th class="text-danger">Abrv</th>
 				<th class="text-danger">Last Ch.</th>
+				<th class="text-danger">Whole</th>
 				<th class="text-warning">
 					<i class="@Enums.BibleBook.NavigationIcon.Previous"></i> Prev (1C)
 				</th>
@@ -54,6 +58,7 @@
 				<td>@context.Name</td>
 				<td>@context.Abrv</td>
 				<td>@context.LastChapter</td>
+				<td>@context.ChapterIsWhole</td>
 				<td>@context.NavigationPrevious(1).ButtonText</td>
 				<td>@context.NavigationNext(context.LastChapter).ButtonText</td>
 				<td>
@@ -78,6 +83,22 @@
 	<p class="card-footer text-center"><code><small>BibleBook.List.Count</small></code>: @BibleBook.List.Count</p>
 </div>
 
+<h3>Last Verses for the chapters in Genesis</h3>
+
+<div class="card mt-4 mb-3 border-warning">
+	<div class="card-header">
+	</div>
+	<div class="card-body">
+		<ol>
+			@for (int i = 1; i <= 31; i++)
+			{
+				int iLocal = i;
+				<LastVerseOrderdList CurrentBibleBook="BibleBook.Genesis" chapter="i" />
+			}
+		</ol>
+	</div>
+</div>
+
 
 <HundredsAndTens />
 
@@ -85,8 +106,7 @@
 
 <MaxLastVerses />
 
-
-
+<TestColumns />
 
 @code {
 }

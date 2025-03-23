@@ -1,4 +1,4 @@
-﻿namespace MyHebrewBible.Client.Features.BookChapter.Enums;
+﻿namespace MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad.Enums;
 
 public enum Direction
 {

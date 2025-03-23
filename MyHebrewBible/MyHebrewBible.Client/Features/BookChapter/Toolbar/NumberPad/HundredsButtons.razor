@@ -1,5 +1,4 @@
-﻿@using MyHebrewBible.Client.Features.BookChapter.Enums;
-
+﻿
 <div class="d-flex justify-content-center">
 	<span class="text-black-50 text-center" style="font-size:11px;">100's</span>
 </div>
@@ -19,7 +18,7 @@
 
 	protected string GetButtonClass(int number)
 	{
-		return $"btn {ButtonHelper.GetButtonColor()} {ButtonHelper.GetDefaultButtonClass(small: true)}";
+		return $"btn {Helper.GetButtonColor(0)} {Helper.GetDefaultButtonClass(small: true)}";
 	}
 
 	private void ButtonClick(int number)
@@ -30,7 +29,7 @@
 
 	private string GetId(int number)
 	{
-		return $"{CurrentStepState!.CurrentStep!.PlaceShortName}-{number}";
+		return $"{CurrentStepState!.Step!.PlaceShortName}-{number}";
 	}
 
 }

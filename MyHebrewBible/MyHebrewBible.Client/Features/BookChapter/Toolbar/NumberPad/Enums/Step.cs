@@ -1,5 +1,5 @@
 ﻿using Ardalis.SmartEnum;
-namespace MyHebrewBible.Client.Features.BookChapter.Enums;
+namespace MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad.Enums;
 
 public abstract class Step : SmartEnum<Step>
 {
@@ -32,6 +32,7 @@ public abstract class Step : SmartEnum<Step>
 
 	#region Extra Fields
 	public abstract Phase Phase { get; }
+	public abstract Place? Place { get; }
 	public abstract Direction? DirectionForward { get; }
 	public abstract Direction? DirectionBackward { get; }
 	public abstract string PlaceShortName { get; }   
@@ -47,6 +48,7 @@ public abstract class Step : SmartEnum<Step>
 	{
 		public ChapterHundredSE() : base($"{nameof(Id.ChapterHundred)}", Id.ChapterHundred) { }
 		public override Phase Phase => Phase.Chapter;
+		public override Place Place => Place.Hundreds;
 		public override Direction? DirectionForward => Direction.GoToNextStep;  
 		public override Direction? DirectionBackward => null;
 		public override string PlaceShortName => "h";
@@ -56,6 +58,7 @@ public abstract class Step : SmartEnum<Step>
 	{
 		public ChapterTenSE() : base($"{nameof(Id.ChapterTen)}", Id.ChapterTen) { }
 		public override Phase Phase => Phase.Chapter;
+		public override Place Place => Place.Tens;
 		public override Direction? DirectionForward => Direction.GoToNextStep; 
 		public override Direction? DirectionBackward => Direction.GoToPreviousStep;
 		public override string PlaceShortName => "t";
@@ -65,6 +68,7 @@ public abstract class Step : SmartEnum<Step>
 	{
 		public ChapterOneSE() : base($"{nameof(Id.ChapterOne)}", Id.ChapterOne) { }
 		public override Phase Phase => Phase.Chapter;
+		public override Place Place => Place.Ones;
 		public override Direction? DirectionForward => Direction.GoToSecondPhase;   
 		public override Direction? DirectionBackward => Direction.GoToPreviousStep;
 		public override string PlaceShortName => "o";
@@ -74,6 +78,7 @@ public abstract class Step : SmartEnum<Step>
 	{
 		public VerseHundredSE() : base($"{nameof(Id.VerseHundred)}", Id.VerseHundred) { }
 		public override Phase Phase => Phase.Verse;
+		public override Place Place => Place.Hundreds;
 		public override Direction? DirectionForward => Direction.GoToNextStep; 
 		public override Direction? DirectionBackward => Direction.GoToPreviousStep; //.GoToPreviousPlace;
 		public override string PlaceShortName => "h";
@@ -83,6 +88,7 @@ public abstract class Step : SmartEnum<Step>
 	{
 		public VerseTenSE() : base($"{nameof(Id.VerseTen)}", Id.VerseTen) { }
 		public override Phase Phase => Phase.Verse;
+		public override Place Place => Place.Tens;
 		public override Direction? DirectionForward => Direction.GoToNextStep;
 		public override Direction? DirectionBackward => Direction.GoToPreviousStep;
 		public override string PlaceShortName => "t";
@@ -92,6 +98,7 @@ public abstract class Step : SmartEnum<Step>
 	{
 		public VerseOneSE() : base($"{nameof(Id.VerseOne)}", Id.VerseOne) { }
 		public override Phase Phase => Phase.Verse;
+		public override Place Place => Place.Ones;
 		public override Direction? DirectionForward => Direction.FinishAndReturnBCV;
 		public override Direction? DirectionBackward => Direction.GoToPreviousStep;
 		public override string PlaceShortName => "o";
@@ -101,6 +108,7 @@ public abstract class Step : SmartEnum<Step>
 	{
 		public FinishAndReturnBCVSE() : base($"{nameof(Id.FinishAndReturnBCV)}", Id.FinishAndReturnBCV) { }
 		public override Phase Phase => Phase.Verse;
+		public override Place Place => null!;
 		public override Direction? DirectionForward => Direction.FinishAndReturnBCV;
 		public override Direction? DirectionBackward => Direction.GoToPreviousStep;
 		public override string PlaceShortName => "o";

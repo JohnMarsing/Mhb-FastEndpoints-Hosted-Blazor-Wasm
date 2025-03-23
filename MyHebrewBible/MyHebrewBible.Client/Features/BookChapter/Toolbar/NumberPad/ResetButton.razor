@@ -1,13 +1,12 @@
-﻿@using MyHebrewBible.Client.Features.BookChapter.Enums
-
+﻿
 <button id="backspace" @onclick="() => ButtonClick()"
 				type="button" title="@BackSpaceTitle" class="btn btn-primary btn-sm @BackSpaceDisable">
 	<i class="fas fa-backspace"></i>
 </button>
 
 @code {
-	[Parameter, EditorRequired] public Place? Place { get; set; }
-	[Parameter, EditorRequired] public EventCallback<Place> OnPlaceSelected { get; set; }
+	[Parameter, EditorRequired] public Enums.Place? Place { get; set; }
+	[Parameter, EditorRequired] public EventCallback<Enums.Place> OnPlaceSelected { get; set; }
 
 	protected string? BackSpaceTitle;
 	protected string? BackSpaceDisable;

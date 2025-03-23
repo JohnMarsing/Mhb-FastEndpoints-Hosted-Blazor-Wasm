@@ -1,10 +1,7 @@
 ﻿namespace MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad;
 
-public record PlaceValueRec(int? Hundreds, int? Tens, int Ones, bool IsWhole)
+public record PlaceValueRec(int? Hundreds, int? Tens, int Ones, bool IsWhole, string Mask)
 {
-	// ToDo: give a better example of where this is being used
-	//	return (AbrvChapterVerse.Default, new BookAndChapter(GlobalEnums.BibleBook.Genesis, chapter));
-	public static PlaceValueRec Default => new(null, null, -1, false);
 }
 
 /*
@@ -25,6 +22,10 @@ From a UI perspective there are conditions when you don't want the user the opti
 See helper method `OnesPlaceZeroButtonIsDisabled` for the details
 
 ### Initialization
+
+	public static int Count(PlaceValueRec place)
+	{
+	}
 
 
 Ignore Spelling: Nullabillity 

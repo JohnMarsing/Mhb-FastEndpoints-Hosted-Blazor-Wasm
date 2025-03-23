@@ -1,5 +1,5 @@
 ﻿using MyHebrewBible.Client.Enums;
-using MyHebrewBible.Client.Features.BookChapter.Enums;
+using MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad.Enums;
 
 namespace MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad;
 
@@ -12,40 +12,46 @@ public class StepState
 	{
 		BibleBook = bibleBook;
 		LoadPlaceValueRecForChapter();
-		Chapter = 0; // not defined
-		CurrentPhase = Enums.Phase.Chapter;
-		ChapterHundredIsVisible = bibleBook!.ChapterHundreds > 0;
+		Chapter = 0;
+		Phase = Enums.Phase.Chapter;
+		HundredPlaceIsVisible = bibleBook!.ChapterHundreds > 0;
 	}
 
 	private BibleBook? BibleBook { get; set; }
 
 	public int Chapter { get; set; }
-	public int Verse { get; set; }
-	public Step? CurrentStep { get; set; }
-	public Phase? CurrentPhase { get; set; }
+	public Step? Step { get; set; }
+	public Phase? Phase { get; set; }
 	public PlaceValueRec? PlaceValueRec; //{ get; set; } 
-	public bool ChapterHundredIsVisible { get; set; } //
+	public bool HundredPlaceIsVisible { get; set; } //
+	public int LastChapter = 0;
 
 	private void LoadPlaceValueRecForChapter()
 	{
 		if (BibleBook!.ChapterHundreds > 0)
 		{
-			PlaceValueRec = new PlaceValueRec(BibleBook!.ChapterHundreds, BibleBook!.ChapterTens, BibleBook!.ChapterOnes, BibleBook.ChapterIsWhole);
-			CurrentStep = Step.ChapterHundred; ;
+			PlaceValueRec = new PlaceValueRec(BibleBook!.ChapterHundreds, BibleBook!.ChapterTens, BibleBook!.ChapterOnes, BibleBook.ChapterIsWhole, "XXX");
+			Step = Step.ChapterHundred; ;
 		}
 		else
 		{
 			if (BibleBook!.ChapterTens > 0)
 			{
-				PlaceValueRec = new PlaceValueRec(null, BibleBook!.ChapterTens, BibleBook!.ChapterOnes, BibleBook.ChapterIsWhole);
-				CurrentStep = Step.ChapterTen;
+				PlaceValueRec = new PlaceValueRec(null, BibleBook!.ChapterTens, BibleBook!.ChapterOnes, BibleBook.ChapterIsWhole, "XX");
+				Step = Step.ChapterTen;
 			}
 			else
 			{
-				PlaceValueRec = new PlaceValueRec(null, null, BibleBook!.ChapterOnes, BibleBook.ChapterIsWhole);
-				CurrentStep = Step.ChapterOne;
+				PlaceValueRec = new PlaceValueRec(null, null, BibleBook!.ChapterOnes, BibleBook.ChapterIsWhole, "X");
+				Step = Step.ChapterOne;
 			}
 		}
+		LastChapter = BibleBook.LastChapter;
+	}
+
+	private static string GetPlaceMask(int count)
+	{
+		return new string('X', count); //  PlaceValueRec!.Count
 	}
 
 	private void LoadPlaceValueRecForVerse()
@@ -53,10 +59,10 @@ public class StepState
 		if (LastVerse >= 100)  
 		{
 			PlaceValueRec = new PlaceValueRec(
-				LastVerseHelper.GetPlace(Place.Hundreds, LastVerse),
-				LastVerseHelper.GetPlace(Place.Tens, LastVerse),
-				LastVerseHelper.GetPlace(Place.Ones, LastVerse),
-				LastVerseHelper.GetLastVerseIsWhole(LastVerse));
+				Helper.GetPlace(Place.Hundreds, LastVerse),
+				Helper.GetPlace(Place.Tens, LastVerse),
+				Helper.GetPlace(Place.Ones, LastVerse),
+				Helper.GetLastVerseIsWhole(LastVerse), "XXX");
 		}
 		else
 		{
@@ -64,19 +70,20 @@ public class StepState
 			{
 				PlaceValueRec = new PlaceValueRec(
 					null,
-					LastVerseHelper.GetPlace(Place.Tens, LastVerse),
-					LastVerseHelper.GetPlace(Place.Ones, LastVerse),
-					LastVerseHelper.GetLastVerseIsWhole(LastVerse));
+					Helper.GetPlace(Place.Tens, LastVerse),
+					Helper.GetPlace(Place.Ones, LastVerse),
+					Helper.GetLastVerseIsWhole(LastVerse), "XX");
 			}
 			else
 			{
 				PlaceValueRec = new PlaceValueRec(
 					null,
 					null,
-					LastVerseHelper.GetPlace(Place.Ones, LastVerse),
-					LastVerseHelper.GetLastVerseIsWhole(LastVerse));
+					Helper.GetPlace(Place.Ones, LastVerse),
+					Helper.GetLastVerseIsWhole(LastVerse), "X");
 			}
 		}
+
 	}
 
 	public int LastVerse = 0;
@@ -85,39 +92,40 @@ public class StepState
 		switch (newDirection)
 		{
 			case Direction.GoToNextStep:
-				if (CurrentStep == Enums.Step.ChapterHundred || CurrentStep == Enums.Step.VerseHundred)
+				if (Step == Enums.Step.ChapterHundred || Step == Enums.Step.VerseHundred)
 				{
-					PlaceValueRec = PlaceValueRec! with { Hundreds = number };
+					PlaceValueRec = PlaceValueRec! with { Hundreds = number, Mask=$"{number}XX" };
 				}
 				else
 				{
-					PlaceValueRec = PlaceValueRec! with { Tens = number };
+					PlaceValueRec = PlaceValueRec! with { Tens = number, Mask = $"{PlaceValueRec.Hundreds}{number}X" };
 				}
-				CurrentStep = Step.FromValue(CurrentStep!.Value + 1);
+				Step = Step.FromValue(Step!.Value + 1);
 				break;
 
 			case Direction.GoToPreviousStep:
 				//ToDo: Finish this
-				CurrentStep = Step.FromValue(CurrentStep!.Value - 1);
+				Step = Step.FromValue(Step!.Value - 1);
 				break;
 
 			case Direction.GoToSecondPhase:
-				PlaceValueRec = PlaceValueRec! with { Ones = number }; // Finish chapter processing
+				PlaceValueRec = PlaceValueRec! with { Ones = number, Mask = "X" }; // Finish chapter processing
 				Chapter = PlaceValueRecHelper.Combine(PlaceValueRec);
-				LastVerse = LastVerseHelper.GetLastVerse(BibleBook, Chapter);
-				LoadPlaceValueRecForVerse(); //PlaceValueRec = PlaceValueRec.Default;
+				LastVerse = Helper.GetLastVerse(BibleBook, Chapter);
+				LoadPlaceValueRecForVerse();
+				//Verse = PlaceValueRecHelper.Combine(PlaceValueRec);
 
 				if (LastVerse >= 100) // 100 or more
 				{
-					CurrentStep = Step.VerseHundred;
+					Step = Step.VerseHundred;
 				}
 				else if (LastVerse >= 10) // 10 or more
 				{
-					CurrentStep = Step.VerseTen;
+					Step = Step.VerseTen;
 				}
 				else // less than 10
 				{
-					CurrentStep = Step.VerseOne;
+					Step = Step.VerseOne;
 				}
 
 				break;

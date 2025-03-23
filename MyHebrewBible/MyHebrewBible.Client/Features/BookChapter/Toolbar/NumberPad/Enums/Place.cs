@@ -1,6 +1,6 @@
 ﻿using Ardalis.SmartEnum;
 
-namespace MyHebrewBible.Client.Features.BookChapter.Enums;
+namespace MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad.Enums;
 
 public abstract class Place : SmartEnum<Place>
 {
