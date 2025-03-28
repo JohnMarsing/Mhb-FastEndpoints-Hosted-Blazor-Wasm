@@ -31,7 +31,8 @@ public class PlaceValueRecHelper // static
 
 	public static string Concatenate(PlaceValueRec place)
 	{
-		return $"Hun:{(place.Hundreds is null ? "X" : place.Hundreds)}, Tens:{(place.Tens is null ? "X" : place.Tens)}, Ones:{place.Ones}"; // , W:{(place.IsWhole ? "T" : "F")}
+		return $"Hun:{(place.Hundreds is null ? "X" : place.Hundreds)}, Tens:{(place.Tens is null ? "X" : place.Tens)}, Ones:{place.Ones}"; 
+		// , W:{(place.IsWhole ? "T" : "F")}
 	}
 
 	private static int EvalNullValues(int? hundredsOrTens)

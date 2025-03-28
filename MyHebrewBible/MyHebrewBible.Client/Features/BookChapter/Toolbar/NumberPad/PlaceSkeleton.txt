@@ -1,0 +1,2 @@
+﻿
+Rename PlaceWrapper.razor to PlaceSkeleton.razor

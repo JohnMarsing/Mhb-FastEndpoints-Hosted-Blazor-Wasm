@@ -6,13 +6,10 @@
 @inject ILogger<ButtonWrapper>? Logger
 @inject IToastService? Toast
 
-@* <p>Chapter: @StepState!.Chapter | Verse: @StepState!.Verse</p> *@
-
-<PlaceWrapper StepState="StepState" IsDebug=true>
+<PlaceWrapper StepState="StepState" IsDebug=IsDebug>
 
 	<TitleContent>
 		@GetTitleContent(@StepState!.Step!.Phase, StepState!.Chapter, StepState!.PlaceValueRec!.Mask)
-		@* , StepState!.Verse *@
 	</TitleContent>
 
 	<HundredsColumn>
@@ -26,9 +23,19 @@
 			<ColumnHeading Place="Enums.Place.Tens" />
 			@if (StepState!.Step!.Place == Place.Tens)
 			{
-				<TensAndOnesButtons CurrentStepState="StepState"
+				@if (StepState!.Step!.Phase == Phase.Chapter)
+				{
+					@* ChapterTensAndOnesButtons StepState="StepState" ??? *@
+				}
+				else
+				{
+					@* VerseTensAndOnesButtons  StepState="StepState" ??? *@
+				}
+
+				<TensAndOnesButtons StepState="StepState"
 														LastTensPlaceIsWhole=@GetLastTensPlaceIsWhole()
-														OnNumberSelected="ReturnedNumber" />
+														OnNumberSelected="ReturnedNumber"
+														OnNumberFinished="ReturnedFinalNumber" />
 			}
 			else
 			{
@@ -48,9 +55,10 @@
 			{
 				@if (StepState!.Step!.Place == Place.Ones)
 				{
-					<TensAndOnesButtons CurrentStepState="StepState"
+					<TensAndOnesButtons StepState="StepState"
 															LastTensPlaceIsWhole=@GetLastTensPlaceIsWhole()
-															OnNumberSelected="ReturnedNumber" />
+															OnNumberSelected="ReturnedNumber"
+															OnNumberFinished="ReturnedFinalNumber" />
 				}
 				else
 				{
@@ -61,9 +69,8 @@
 	</OnesColumn>
 
 	<FooterDebugContent>
-		<p class="text-center mt-3">
-			@GetPVR(StepState!.PlaceValueRec!, StepState!.Phase, StepState.LastChapter, StepState.LastVerse)
-		</p>
+		<p class="text-center mt-3 mb-1">@StepState!.Dump()</p>
+		<p class="text-center mt-1">@StepState!.Dump2()</p>
 		<p>
 			<div class="d-flex justify-content-between">
 				<div class="@GetPadding()">
@@ -79,11 +86,11 @@
 
 	<Footer>
 		<div class=" mt-2 mb-1">
-
+			@* StepState!.Phase *@
 			<div class="d-flex justify-content-center py-2">
 				<button id="backspace" @onclick="() => ButtonClick()"
-								type="button" title="@StepState!.Phase" class="btn btn-primary btn-sm @BackSpaceDisable">
-					<i class="fas fa-backspace"></i> Step @StepState!.Phase
+								type="button" title="@StepState!.Step!.Phase" class="btn btn-primary btn-sm @BackSpaceDisable">
+					<i class="fas fa-backspace"></i> Step @StepState!.Step!.Phase
 				</button>
 			</div>
 		</div>
@@ -91,69 +98,104 @@
 
 </PlaceWrapper>
 
-
 @code {
 	[Parameter, EditorRequired] public GlobalEnums.BibleBook? BibleBook { get; set; }
 	[Parameter, EditorRequired] public EventCallback<BookChapterVerse> OnBCVSelected { get; set; }
 
-	protected int SelectedVerse = 0; // ToDo: are you going to use this or not.
+	private const bool IsDebug = true; // ToDo: remove this when done debugging
 
+	protected int SelectedVerse = 0; // ToDo: are you going to use this or not.
 	protected StepState? StepState { get; set; }
 
 	protected override void OnParametersSet()
 	{
-		StepState = new StepState(BibleBook);
+		//StepState = new StepState(BibleBook);
+		StepState = new StepState(BibleBook, Logger!);
 	}
 
 	private void OnHundredNumberSelected(int number)
 	{
-		Logger!.LogInformation("{Method}, number: {number}", nameof(OnHundredNumberSelected), number);
-		StepState!.ChangeCurrentStep(StepState!.Step!.DirectionForward, number);
+		//Logger!.LogInformation("{Method}, number: {number}", nameof(OnHundredNumberSelected), number);
+		StepState!.UpdatePlaceValueRecForHundreds(number);
+		StepState!.SetNextStepNoPhaseChange();
 	}
 
-	//private void ReturnedNumber(ReturnedNumberVM vm)
-	private async Task ReturnedNumber(ReturnedNumberVM vm)
+
+	private void ReturnedNumber(ReturnedNumberNotFinishedVM vm)
 	{
-		// Logger!.LogInformation("{Method}, ReturnedNumberVM: {ReturnedNumberVM}, Chapter: {Chapter}"
-		// , nameof(ReturnedNumber), vm, StepState!.Chapter);
+		Logger!.LogInformation("{Method}, VM: {VM}", nameof(ReturnedNumber), vm);
 
-		string before = StepState!.Step!.Name;
-		StepState!.ChangeCurrentStep(StepState!.Step!.DirectionForward, vm.Number);
-
-		// Logger!.LogInformation("{Method}, Before/After {BeforeAfter}"
-		// , nameof(ReturnedNumber), $"B/A: {before}/{StepState!.Step!.Name}");
-
-		if (vm.Finished)
+		if (vm.SkipChapterOnes)
 		{
-			await Task.Delay(500);  // ToDo: comment this out in production
-			StepState!.PlaceValueRec = StepState!.PlaceValueRec! with { Ones = vm.Number };
-			int verse = PlaceValueRecHelper.Combine(StepState.PlaceValueRec!);
-			verse = PlaceValueRecHelper.Combine(StepState.PlaceValueRec!);
+			Logger!.LogWarning("... SkipChapterOnes is True");
+			StepState!.UpdatePlaceValueRecForTens(vm.Number); // e.g. Gen 50
+			StepState!.UpdateOnesPlaceValueRecAndSetChapter(0);
 
-			// 	Logger!.LogInformation("{Method}, Call Combine(), PlaceValueRec: {PlaceValueRec}, Verse: {Verse}"
-			// , nameof(ReturnedNumber), StepState!.PlaceValueRec, StepState.Verse);
-
-			// Logger!.LogInformation("{Method}, BibleBook: {BibleBook}, C/V {Chapter}/{Verse}"
-			// , nameof(ReturnedNumber), BibleBook!.Name, StepState!.Chapter, StepState.Verse);  //, verse
-
-			Toast!.ShowWarning($"{BibleBook!.Abrv} {StepState!.Chapter}:{verse}"); // {verse}
-
-			await OnBCVSelected.InvokeAsync(new BookChapterVerse(BibleBook, StepState!.Chapter, verse)); // , verse
+			StepState!.SetLastVerse();
+			StepState!.SetNextStepForSecondPhase();
+			StepState!.LoadPlaceValueRecForVerse();
+		}
+		else // (!vm.SkipChapterOnes)
+		{
+			if (StepState!.Step!.Place == Enums.Place.Tens)
+			{
+				Logger!.LogWarning("... Place is Tens");
+				StepState!.UpdatePlaceValueRecForTens(vm.Number);
+				StepState!.SetNextStepNoPhaseChange();
+			}
+			else
+			{
+				Logger!.LogWarning("... Place is NOT Tens, it's: {Place}", StepState!.Step!.Place);
+				StepState!.UpdateOnesPlaceValueRecAndSetChapter(vm.Number);
+				StepState!.SetLastVerse();              // bibleBook!.LastVerses[chapter - 1];
+				StepState!.SetNextStepForSecondPhase(); // depends on LastVerse
+				StepState!.LoadPlaceValueRecForVerse(); // depends on LastVerse
+			}
 		}
 	}
 
-	//<ResetButton Place="Place" OnPlaceSelected="ReturnedPlace" />
-	//[Parameter, EditorRequired] public EventCallback<Place> OnPlaceSelected { get; set; }
+	private void ReturnedFinalNumber(ReturnedNumberFinishedVM vm)
+	{
+		Logger!.LogInformation("{Method}, VM: {VM}", nameof(ReturnedFinalNumber), vm);
+
+		if (!vm.SkipingVerseOnes) // Normal Path
+		{
+			StepState!.UpdatePlaceValueRecForOnes(vm.Number);
+		}
+		else  // vm.SkipingVerseOnes == true
+		{
+			StepState!.UpdatePlaceValueRecForTens(vm.Number);  // e.g. Ezr 2:7
+			StepState!.UpdatePlaceValueRecForOnes(0);
+		}
+
+		int verse = StepState!.GetVerse();
+		BookChapterVerse BCV = new BookChapterVerse(BibleBook, StepState!.Chapter, verse);
+		Logger!.LogInformation("{Method}, TSC.Finished , B/C/V {bcv}", nameof(ReturnedFinalNumber), BCV);
+		Toast!.ShowInfo($"{BookChapterVerseHelper.Dump(BCV)}");
+		OnBCVSelected.InvokeAsync(BCV);
+	}
 
 	private int GetLastTensPlaceIsWhole()
 	{
+		Logger!.LogInformation("{Method}, PlaceValueRec: {PlaceValueRec}"
+		, nameof(GetLastTensPlaceIsWhole), StepState!.PlaceValueRec!);
+
 		if (StepState!.PlaceValueRec!.IsWhole)
 		{
 			// If PlaceValueRec.IsWhole is true than PlaceValueRec.Ten must have an int
-			return (int)StepState!.PlaceValueRec.Tens!;
+			if (StepState!.PlaceValueRec.Tens is not null)
+			{
+				return (int)StepState!.PlaceValueRec.Tens!;
+			}
+			else { return 0; }
 		}
 		else { return 0; }
 	}
+
+	//private int GetLastTensPlaceIsWhole()	{	}
+
+	//<ResetButton Place="Place" OnPlaceSelected="ReturnedPlace" />
+	//[Parameter, EditorRequired] public EventCallback<Place> OnPlaceSelected { get; set; }
 
 	protected string? BackSpaceDisable = " disabled";
 	private void ButtonClick()
@@ -171,6 +213,7 @@
 		sb.Append(" <h6 class='text-center py-2'> ")
 			.Append("Chapter: ")
 			.AppendIfElse(chapter == 0, $"<u>{mask}</u>", $"<b>{chapter}</b> {check}").Append("<br />")
+			//.AppendIfElse(chapter == 0, $"<u>{mask}</u>", $"<b>{chapter}</b> {check}").AppendIf(IsDebug, " of []").Append("<br />")
 			.AppendIfElse(chapter == 0, $"<span class='fw-lighter'>Verse: ___</span>", $"Verse: <u>{mask}</u>")
 			// .AppendIf(verse != 0, $"<b>{verse} {check}</b>")
 			.Append("</h6>");
@@ -178,13 +221,6 @@
 		return (MarkupString)sb.ToString();
 	}
 
-	protected string GetPVR(PlaceValueRec placeValueRec, Enums.Phase? phase, int lastChapter, int lastVerse)
-	{
-		string s = PlaceValueRecHelper.Concatenate(placeValueRec);
-		if (lastChapter != 0) { s += ", LC: " + lastChapter; }
-		if (lastVerse != 0) { s += ", LV: " + lastVerse; }
-		return s;
-	}
 
 	protected string GetPadding()
 	{

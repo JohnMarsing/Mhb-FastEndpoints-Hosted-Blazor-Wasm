@@ -29,59 +29,93 @@
 </div>
 
 @code {
-	[Parameter, EditorRequired] public StepState? CurrentStepState { get; set; }
-	[Parameter, EditorRequired] public int LastTensPlaceIsWhole { get; set; }
-	[Parameter, EditorRequired] public EventCallback<ReturnedNumberVM> OnNumberSelected { get; set; }
+	[Parameter, EditorRequired] public StepState? StepState { get; set; }
+	[Parameter, EditorRequired] public int LastTensPlaceIsWhole { get; set; } // If 0 then like being null
+	[Parameter, EditorRequired] public EventCallback<ReturnedNumberNotFinishedVM> OnNumberSelected { get; set; }
+	[Parameter, EditorRequired] public EventCallback<ReturnedNumberFinishedVM> OnNumberFinished { get; set; }
+
+	// private int VerseTensSelected = 0;
+	// if (VerseTensSelected == 0 && StepState!.Step!.Phase == Enums.Phase.Verse) { VerseTensSelected = number;	}
+	
+	private int LastVerse = 0;
+	//private int LastTensPlace = 0; 
+
+	private int one = 0;
+	protected override void OnParametersSet() 
+	{
+		if (StepState!.PlaceValueRec!.IsWhole)
+		{
+			one = 9;
+		}
+		else
+		{
+			one = StepState!.PlaceValueRec!.Ones;
+		}
+		//LastTensPlace = 
+		LastVerse = StepState.LastVerse;
+
+		Logger!.LogInformation("{Method}, one: {one}, Step.Name: {Step.Name}, LastTensPlaceIsWhole: {LastTensPlaceIsWhole}"
+		, nameof(OnParametersSet), one, StepState!.Step!.Name, LastTensPlaceIsWhole);
+	}
 
 	protected string GetButtonClass(int number)
 	{
-		@if (CurrentStepState!.Step!.Place == Enums.Place.Tens)
+		@if (StepState!.Step!.Place == Enums.Place.Tens)
 		{
-			if (number <= CurrentStepState!.PlaceValueRec!.Tens)
-			{
-				if (number == LastTensPlaceIsWhole)
-				{
-					return $"btn {Helper.GetButtonColor(LastTensPlaceIsWhole)} {Helper.GetDefaultButtonClass()}";
-				}
-				else
-				{
-					return $"btn {Helper.GetButtonColor(0)} {Helper.GetDefaultButtonClass()}";
-				}
-			}
-			else
-			{
-				return $"btn {Helper.GetDisabledColor()} disabled  {Helper.GetDefaultButtonClass()}";
-			}
+			return GetTensPlaceButtonClass(number);
 		}
-		else // (CurrentStepState!.Step!.Place == Enums.Place.Ones)
+		else // Place == Enums.Place.Ones
 		{
-			int one = 0;
+			return GetOnesPlaceButtonClass(number);
+		}
+	}
 
-			if (CurrentStepState!.PlaceValueRec!.IsWhole)
+	private string GetTensPlaceButtonClass(int number)
+	{
+		if (number <= StepState!.PlaceValueRec!.Tens)
+		{
+			if (number == LastTensPlaceIsWhole)
 			{
-				one = 9;
+				return $"btn {Helper.GetButtonColor(LastTensPlaceIsWhole)} {Helper.GetDefaultButtonClass()}";
 			}
 			else
-			{
-				one = CurrentStepState!.PlaceValueRec!.Ones;
-			}
-
-			if (number <= one)
 			{
 				return $"btn {Helper.GetButtonColor(0)} {Helper.GetDefaultButtonClass()}";
 			}
-			else
-			{
-				return $"btn {Helper.GetDisabledColor()} disabled  {Helper.GetDefaultButtonClass()}";
-			}
+		}
+		else
+		{
+			return $"btn {Helper.GetDisabledColor()} disabled  {Helper.GetDefaultButtonClass()}";
+		}
+	}
 
+	private string GetOnesPlaceButtonClass(int number)
+	{
+		if (number <= one)
+		{
+			return $"btn {Helper.GetButtonColor(0)} {Helper.GetDefaultButtonClass()}";
+		}
+		else
+		{
+			return $"btn {Helper.GetDisabledColor()} disabled  {Helper.GetDefaultButtonClass()}";
 		}
 
+		/*
+		if (number <= StepState!.PlaceValueRec!.Ones) {	return $"btn {Helper.GetButtonColor(0)} {Helper.GetDefaultButtonClass()}";	}
+		else {	return $"btn {Helper.GetDisabledColor()} disabled  {Helper.GetDefaultButtonClass()}";	}
+
+		int one = 0;
+		if (StepState!.PlaceValueRec!.IsWhole) { 	one = 9; }
+		else { one = StepState!.PlaceValueRec!.Ones;	}
+
+		if (number <= one) {	return $"btn {Helper.GetButtonColor(0)} {Helper.GetDefaultButtonClass()}"; }
+		else { return $"btn {Helper.GetDisabledColor()} disabled  {Helper.GetDefaultButtonClass()}";	}
+		*/
 	}
 
 	protected string GetZeroButtonClass()
 	{
-		if (PlaceValueRecHelper.OnesPlaceZeroButtonIsDisabled(CurrentStepState!.PlaceValueRec!))
+		if (PlaceValueRecHelper.OnesPlaceZeroButtonIsDisabled(StepState!.PlaceValueRec!))
 		{
 			return $"btn {Helper.GetDisabledColor()} disabled {Helper.GetDefaultButtonClass()}";
 		}
@@ -93,28 +127,42 @@
 
 	private void ButtonClick(int number)
 	{
-		//Logger!.LogInformation("{Method}, number: {number}", nameof(ButtonClick), number);
-		if (CurrentStepState!.Step == Enums.Step.VerseOne)
+		Logger!.LogInformation("{Method}, number: {number}, Step.Name: {Step.Name}, LastTensPlaceIsWhole: {LastTensPlaceIsWhole}"
+			, nameof(ButtonClick), number, StepState!.Step!.Name, LastTensPlaceIsWhole);
+
+		if ((StepState!.Step == Enums.Step.VerseOne) |
+				(number > 0 && number == LastTensPlaceIsWhole && StepState!.Step!.Phase == Enums.Phase.Verse))
 		{
-			OnNumberSelected.InvokeAsync(new ReturnedNumberVM(number, true));
-		}
-		else // Enums.Step.VerseTen
-		{
-			if (number == LastTensPlaceIsWhole)
+			if (StepState!.Step == Enums.Step.VerseOne)
 			{
-				//ToDo: Finish this
-				OnNumberSelected.InvokeAsync(new ReturnedNumberVM(number, false)); // Direction.GoToSecondPhase
+				Logger!.LogInformation("... FinishedVM, SkipingVerseOnes: false");
+				OnNumberFinished.InvokeAsync(new ReturnedNumberFinishedVM(number, SkipingVerseOnes: false));
 			}
 			else
 			{
-			OnNumberSelected.InvokeAsync(new ReturnedNumberVM(number, false));
+				Logger!.LogInformation("... FinishedVM, SkipingVerseOnes: true");
+				OnNumberFinished.InvokeAsync(new ReturnedNumberFinishedVM(number, SkipingVerseOnes: true));
+			}
+		}
+		else
+		{
+			if ((StepState!.Step!.Phase == Enums.Phase.Chapter) &&
+					(number > 0 && number == LastTensPlaceIsWhole))  // e.g. Gen 50
+			{
+				Logger!.LogInformation("...NOT FinishedVM, SkipChapterOnes: true");
+				OnNumberSelected.InvokeAsync(new ReturnedNumberNotFinishedVM(number, SkipChapterOnes: true));
+			}
+			else
+			{
+				Logger!.LogInformation("...NOT FinishedVM, SkipChapterOnes: false");
+				OnNumberSelected.InvokeAsync(new ReturnedNumberNotFinishedVM(number, SkipChapterOnes: false));
 			}
 		}
 	}
 
 	private string GetId(int number)
 	{
-		return $"{CurrentStepState!.Step!.PlaceShortName}-{number}";
+		return $"{StepState!.Step!.PlaceShortName}-{number}";
 	}
 
 }
