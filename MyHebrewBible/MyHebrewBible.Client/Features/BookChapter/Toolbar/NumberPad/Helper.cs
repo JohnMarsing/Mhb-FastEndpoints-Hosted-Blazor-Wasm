@@ -50,6 +50,7 @@ public class Helper
 
 	#region ToDo Create Common Modulus Function
 	// Called (7 times) by StepState!LoadPlaceValueRecForVerse
+
 	public static int GetPlace(Enums.Place place, int lastVerse)
 	{
 		if (place == Enums.Place.Hundreds)
@@ -60,14 +61,12 @@ public class Helper
 		{
 			if (place == Enums.Place.Tens)
 			{
-				//return lastVerse >= 10 ? lastVerse / 10 : 0;
 				return lastVerse >= 10 ? (lastVerse / 10) % 10 : 0;
 			}
 			else // PlaceEnums.Place.Ones
 			{
 				if (lastVerse >= 100)
 				{
-					//return lastVerse % 100;
 					return lastVerse % 10;
 				}
 				else
@@ -83,7 +82,6 @@ public class Helper
 				}
 			}
 		}
-
 	}
 	#endregion
 
