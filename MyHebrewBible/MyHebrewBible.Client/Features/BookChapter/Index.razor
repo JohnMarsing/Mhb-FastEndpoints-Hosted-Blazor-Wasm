@@ -18,6 +18,7 @@
 <Navbar CurrentBookAndChapter="CurrentBookAndChapter"
 				OnBookAndChapterSelected="ReturnedBookAndChapter"
 				CurrentBCV="CurrentBCV"
+				ShowDebugPicker="ShowDebugPicker"
 				OnBCVSelected="ReturnedBCV"
 				OnMenuItemSelected="ReturnedMenuItem" />
 
@@ -142,7 +143,10 @@
 
 
 	protected bool ShowPageInstructionsModal = false;
-	private async Task ReturnedMenuItem(Enums.MenuItem item)
+	protected bool ShowDebugPicker = false;
+
+	//private async Task ReturnedMenuItem(Enums.MenuItem item)
+	private void ReturnedMenuItem(Enums.MenuItem item)
 	{
 		if (item == Enums.MenuItem.Instructions)
 		{
@@ -150,17 +154,16 @@
 		}
 		else
 		{
-			if (item == Enums.MenuItem.Edit)
+			if (item == Enums.MenuItem.ShowDebugPicker)
 			{
-				// if (Toolbar == Constants.ToolbarNumericPad)
-				// {
-				// 	Toolbar = Constants.ToolbarDynamicButtons;
-				// }
-				// else
-				// {
-				// 	Toolbar = Constants.ToolbarNumericPad;
-				// }
-				//await State!.AppState!.BookChapterState!.UpdateToolbar(Toolbar);
+				ShowDebugPicker = !ShowDebugPicker;
+				// //if (Toolbar == Constants.ToolbarNumericPad)	{ Toolbar = Constants.ToolbarDynamicButtons; }
+				// //else {Toolbar = Constants.ToolbarNumericPad;}
+				// await State!.AppState!.BookChapterState!.UpdateToolbar(Toolbar);
+			}
+			else
+			{
+				//
 			}
 		}
 	}

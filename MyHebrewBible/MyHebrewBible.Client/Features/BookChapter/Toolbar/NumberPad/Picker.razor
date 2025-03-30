@@ -63,6 +63,7 @@ else
 
 @code {
 	[Parameter, EditorRequired] public BookChapterVerse? CurrentBCV { get; set; }
+	[Parameter, EditorRequired] public bool ShowDebugPicker { get; set; }
 	[Parameter] public EventCallback<BookChapterVerse> OnBCVSelected { get; set; }
 
 	protected BibleBookEnum.BibleBook? SelectedBook { get; set; }
@@ -101,13 +102,22 @@ else
 	//private async Task ReturnedBCV(BookChapterVerse bcv)
 	private void ReturnedBCV(BookChapterVerse bcv)
 	{
-		SelectedBCV = bcv;
-		bcvTitle = $"{bcv.BibleBook?.Abrv} {bcv.Chapter}:{bcv.Verse} ";
-		Logger!.LogInformation("{Method}, BibleBook: {BibleBook}", nameof(ReturnedBCV), bcv);
-		//await Task.Delay(2000);  // ToDo: comment this out in production
-		CloseModal();
-		OnBCVSelected.InvokeAsync(SelectedBCV);
-		//await OnBCVSelected.InvokeAsync(SelectedBCV);
+		try
+		{
+			SelectedBCV = bcv;
+			bcvTitle = $"{bcv.BibleBook?.Abrv} {bcv.Chapter}:{bcv.Verse} ";
+			Logger!.LogInformation("{Method}, BibleBook: {BibleBook}", nameof(ReturnedBCV), bcv);
+			//await Task.Delay(2000);  // ToDo: comment this out in production
+			CloseModal();
+			OnBCVSelected.InvokeAsync(SelectedBCV);
+			//await OnBCVSelected.InvokeAsync(SelectedBCV);
+			// do stuff
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "Error in {Method}", nameof(ReturnedBCV));	
+		}
+
 	}
 
 	#region Show-Close

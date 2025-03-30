@@ -1,4 +1,4 @@
-﻿@inject ILogger<TensAndOnesButtons>? Logger
+﻿@inject ILoggerFactory LoggerFactory
 
 <!-- 1st row GetZeroButtonClass -->
 <div class="d-flex justify-content-center">
@@ -31,31 +31,12 @@
 @code {
 	[Parameter, EditorRequired] public StepState? StepState { get; set; }
 	[Parameter, EditorRequired] public int LastTensPlaceIsWhole { get; set; } // If 0 then like being null
-	[Parameter, EditorRequired] public EventCallback<ReturnedNumberNotFinishedVM> OnNumberSelected { get; set; }
-	[Parameter, EditorRequired] public EventCallback<ReturnedNumberFinishedVM> OnNumberFinished { get; set; }
+	[Parameter, EditorRequired] public EventCallback<ReturnedChapterNumberVM> OnNumberSelected { get; set; }
 
-	// private int VerseTensSelected = 0;
-	// if (VerseTensSelected == 0 && StepState!.Step!.Phase == Enums.Phase.Verse) { VerseTensSelected = number;	}
-	
-	private int LastVerse = 0;
-	//private int LastTensPlace = 0; 
-
-	private int one = 0;
-	protected override void OnParametersSet() 
+	private ILogger? Logger;
+	protected override void OnInitialized()
 	{
-		if (StepState!.PlaceValueRec!.IsWhole)
-		{
-			one = 9;
-		}
-		else
-		{
-			one = StepState!.PlaceValueRec!.Ones;
-		}
-		//LastTensPlace = 
-		LastVerse = StepState.LastVerse;
-
-		Logger!.LogInformation("{Method}, one: {one}, Step.Name: {Step.Name}, LastTensPlaceIsWhole: {LastTensPlaceIsWhole}"
-		, nameof(OnParametersSet), one, StepState!.Step!.Name, LastTensPlaceIsWhole);
+		Logger = LoggerFactory.CreateLogger($"{nameof(ChapterTensAndOnesButtons)}");
 	}
 
 	protected string GetButtonClass(int number)
@@ -87,10 +68,16 @@
 		{
 			return $"btn {Helper.GetDisabledColor()} disabled  {Helper.GetDefaultButtonClass()}";
 		}
+
 	}
 
 	private string GetOnesPlaceButtonClass(int number)
 	{
+		int one = 0;
+
+		if (StepState!.PlaceValueRec!.IsWhole) { one = 9; }
+		else { one = StepState!.PlaceValueRec!.Ones; }
+
 		if (number <= one)
 		{
 			return $"btn {Helper.GetButtonColor(0)} {Helper.GetDefaultButtonClass()}";
@@ -99,18 +86,6 @@
 		{
 			return $"btn {Helper.GetDisabledColor()} disabled  {Helper.GetDefaultButtonClass()}";
 		}
-
-		/*
-		if (number <= StepState!.PlaceValueRec!.Ones) {	return $"btn {Helper.GetButtonColor(0)} {Helper.GetDefaultButtonClass()}";	}
-		else {	return $"btn {Helper.GetDisabledColor()} disabled  {Helper.GetDefaultButtonClass()}";	}
-
-		int one = 0;
-		if (StepState!.PlaceValueRec!.IsWhole) { 	one = 9; }
-		else { one = StepState!.PlaceValueRec!.Ones;	}
-
-		if (number <= one) {	return $"btn {Helper.GetButtonColor(0)} {Helper.GetDefaultButtonClass()}"; }
-		else { return $"btn {Helper.GetDisabledColor()} disabled  {Helper.GetDefaultButtonClass()}";	}
-		*/
 	}
 
 	protected string GetZeroButtonClass()
@@ -125,44 +100,19 @@
 		}
 	}
 
-	private void ButtonClick(int number)
-	{
-		Logger!.LogInformation("{Method}, number: {number}, Step.Name: {Step.Name}, LastTensPlaceIsWhole: {LastTensPlaceIsWhole}"
-			, nameof(ButtonClick), number, StepState!.Step!.Name, LastTensPlaceIsWhole);
-
-		if ((StepState!.Step == Enums.Step.VerseOne) |
-				(number > 0 && number == LastTensPlaceIsWhole && StepState!.Step!.Phase == Enums.Phase.Verse))
-		{
-			if (StepState!.Step == Enums.Step.VerseOne)
-			{
-				Logger!.LogInformation("... FinishedVM, SkipingVerseOnes: false");
-				OnNumberFinished.InvokeAsync(new ReturnedNumberFinishedVM(number, SkipingVerseOnes: false));
-			}
-			else
-			{
-				Logger!.LogInformation("... FinishedVM, SkipingVerseOnes: true");
-				OnNumberFinished.InvokeAsync(new ReturnedNumberFinishedVM(number, SkipingVerseOnes: true));
-			}
-		}
-		else
-		{
-			if ((StepState!.Step!.Phase == Enums.Phase.Chapter) &&
-					(number > 0 && number == LastTensPlaceIsWhole))  // e.g. Gen 50
-			{
-				Logger!.LogInformation("...NOT FinishedVM, SkipChapterOnes: true");
-				OnNumberSelected.InvokeAsync(new ReturnedNumberNotFinishedVM(number, SkipChapterOnes: true));
-			}
-			else
-			{
-				Logger!.LogInformation("...NOT FinishedVM, SkipChapterOnes: false");
-				OnNumberSelected.InvokeAsync(new ReturnedNumberNotFinishedVM(number, SkipChapterOnes: false));
-			}
-		}
-	}
 
 	private string GetId(int number)
 	{
 		return $"{StepState!.Step!.PlaceShortName}-{number}";
 	}
 
+	private void ButtonClick(int number)
+	{
+		bool skipChapterOnes = (number > 0 && number == LastTensPlaceIsWhole);
+
+		Logger!.LogInformation("{Method}, number: {number}, Step.Name: {Step.Name}, LastTensPlaceIsWhole: {LastTensPlaceIsWhole}, skipChapterOnes: {skipChapterOnes}"
+			, nameof(ButtonClick), number, StepState!.Step!.Name, LastTensPlaceIsWhole, skipChapterOnes);
+
+		OnNumberSelected.InvokeAsync(new ReturnedChapterNumberVM(number, skipChapterOnes));
+	}
 }

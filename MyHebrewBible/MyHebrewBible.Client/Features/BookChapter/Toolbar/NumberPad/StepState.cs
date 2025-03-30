@@ -1,15 +1,19 @@
-﻿using MyHebrewBible.Client.Enums;
+﻿using Microsoft.AspNetCore.Components;
+using MyHebrewBible.Client.Enums;
 using MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad.Enums;
-//using Microsoft.Extensions.Logging;
 
 namespace MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad;
 
 public class StepState
 {
+
 	//private readonly ILogger<StepState> Logger; // _logger
 	private readonly ILogger<ButtonWrapper> Logger; // _logger
+	//[Inject] public ILogger<StepState>? Logger { get; set; }
 
-	public StepState(BibleBook? bibleBook, ILogger<ButtonWrapper> logger)  //, ILogger<StepState> logger
+	//public StepState(BibleBook? bibleBook)
+	//public StepState(BibleBook? bibleBook, ILogger<StepState> logger)  
+	public StepState(BibleBook? bibleBook, ILogger<ButtonWrapper> logger) 
 	{
 		BibleBook = bibleBook;
 		Logger = logger;
@@ -61,8 +65,10 @@ public class StepState
 
 	public void UpdatePlaceValueRecForTens(int number)
 	{
+		Logger!.LogInformation("{Method}, XXXXXX number: {number}", nameof(UpdatePlaceValueRecForTens), number);
 		PlaceValueRec = PlaceValueRec! with { Tens = number, Mask = $"{PlaceValueRec.Hundreds}{number}X" };
 	}
+
 	public void UpdateOnesPlaceValueRecAndSetChapter(int onesNumber)
 	{
 		UpdatePlaceValueRecForOnes(onesNumber);
@@ -140,9 +146,12 @@ public class StepState
 		//SetNextStepForSecondPhase();
 	}
 
-
-
 	public int GetVerse()
+	{
+		return PlaceValueRecHelper.Combine(PlaceValueRec!);
+	}
+
+	public int GetVerseShortCircuit()
 	{
 		return PlaceValueRecHelper.Combine(PlaceValueRec!);
 	}
@@ -204,67 +213,5 @@ public class StepState
 		return s;
 	}
 
-	/*
-	public void ChangeCurrentStep(Direction? newDirection, int number = 0)
-	{
-		switch (newDirection)
-		{
-			case Direction.GoToNextStep:
-				if (Step == Enums.Step.ChapterHundred || Step == Enums.Step.VerseHundred)  //if (Step.Place == Enums.Place.Tens)
-				{
-					PlaceValueRec = PlaceValueRec! with { Hundreds = number, Mask=$"{number}XX" };
-				}
-				else
-				{
-					PlaceValueRec = PlaceValueRec! with { Tens = number, Mask = $"{PlaceValueRec.Hundreds}{number}X" };
-				}
-				Step = Step.FromValue(Step!.Value + 1);
-				break;
 
-			case Direction.GoToPreviousStep:
-				//ToDo: Finish this
-				Step = Step.FromValue(Step!.Value - 1);
-				break;
-
-			case Direction.GoToSecondPhase:
-				PlaceValueRec = PlaceValueRec! with { Ones = number, Mask = "X" }; // Finish chapter processing
-				Chapter = PlaceValueRecHelper.Combine(PlaceValueRec);
-				LastVerse = Helper.GetLastVerse(BibleBook, Chapter);
-				LoadPlaceValueRecForVerse();
-				//Verse = PlaceValueRecHelper.Combine(PlaceValueRec);
-
-				if (LastVerse >= 100) // 100 or more
-				{
-					Step = Step.VerseHundred;
-				}
-				else if (LastVerse >= 10) // 10 or more
-				{
-					Step = Step.VerseTen;
-				}
-				else // less than 10
-				{
-					Step = Step.VerseOne;
-				}
-
-				break;
-
-
-			// ToDo: this never actually gets called 
-			case Direction.FinishAndReturnBCV:
-				//public int Verse { get; set; } // ToDo: this is actually never used
-				//Verse = number;
-				break;
-
-			default:
-				break;
-		}
-	}
-	*/
-
-	/*
-	private static string GetPlaceMask(int count)
-	{
-		return new string('X', count); //  PlaceValueRec!.Count
-	}
-	*/
 }

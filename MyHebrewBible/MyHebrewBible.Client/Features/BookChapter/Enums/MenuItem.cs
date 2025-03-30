@@ -8,13 +8,13 @@ public abstract class MenuItem : SmartEnum<MenuItem>
 	#region Id's
 	private static class Id
 	{
-		internal const int Edit = 1;
+		internal const int ShowDebugPicker = 1;
 		internal const int Instructions = 2;
 	}
 	#endregion
 
 	#region Declared Public Instances
-	public static readonly MenuItem Edit = new EditSE();
+	public static readonly MenuItem ShowDebugPicker = new ShowDebugPickerSE();
 	public static readonly MenuItem Instructions = new InstructionsSE();
 	#endregion
 
@@ -34,10 +34,10 @@ public abstract class MenuItem : SmartEnum<MenuItem>
 
 
 
-	private sealed class EditSE : MenuItem
+	private sealed class ShowDebugPickerSE : MenuItem
 	{
-		public EditSE() : base(nameof(Edit), Id.Edit) { }
-		public override string Title => "Change Toolbar";
+		public ShowDebugPickerSE() : base(nameof(ShowDebugPicker), Id.ShowDebugPicker) { }
+		public override string Title => "Show Debug";
 	}
 
 	private sealed class InstructionsSE : MenuItem
