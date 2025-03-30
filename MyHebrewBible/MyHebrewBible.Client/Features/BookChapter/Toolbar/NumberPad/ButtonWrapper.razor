@@ -3,10 +3,11 @@
 @using System.Text
 @using MyHebrewBible.Client.Helpers
 
+@* @inject ILoggerFactory LoggerFactory *@
 @inject ILogger<ButtonWrapper>? Logger
 @inject IToastService? Toast
 
-<PlaceWrapper StepState="StepState" IsDebug=IsDebug>
+<PlaceSkeleton StepState="StepState" IsDebug=IsDebug>
 
 	<TitleContent>
 		@GetTitleContent(@StepState!.Step!.Phase, StepState!.Chapter, StepState!.PlaceValueRec!.Mask)
@@ -25,17 +26,13 @@
 			{
 				@if (StepState!.Step!.Phase == Phase.Chapter)
 				{
-					@* ChapterTensAndOnesButtons StepState="StepState" ??? *@
+					<ChapterTensAndOnesButtons StepState="StepState" LastTensPlaceIsWhole=@GetLastTensPlaceIsWhole() OnNumberSelected="ReturnedNumber" />
 				}
 				else
 				{
-					@* VerseTensAndOnesButtons  StepState="StepState" ??? *@
+					<VerseTensAndOnesButtons StepState="StepState" LastTensPlaceIsWhole=@GetLastTensPlaceIsWhole() OnNumberSelected="ReturnedNumber" />
 				}
 
-				<TensAndOnesButtons StepState="StepState"
-														LastTensPlaceIsWhole=@GetLastTensPlaceIsWhole()
-														OnNumberSelected="ReturnedNumber"
-														OnNumberFinished="ReturnedFinalNumber" />
 			}
 			else
 			{
@@ -55,10 +52,14 @@
 			{
 				@if (StepState!.Step!.Place == Place.Ones)
 				{
-					<TensAndOnesButtons StepState="StepState"
-															LastTensPlaceIsWhole=@GetLastTensPlaceIsWhole()
-															OnNumberSelected="ReturnedNumber"
-															OnNumberFinished="ReturnedFinalNumber" />
+					@if (StepState!.Step!.Phase == Phase.Chapter)
+					{
+						<ChapterTensAndOnesButtons StepState="StepState" LastTensPlaceIsWhole=@GetLastTensPlaceIsWhole() OnNumberSelected="ReturnedNumber" />
+					}
+					else
+					{
+						<VerseTensAndOnesButtons StepState="StepState" LastTensPlaceIsWhole=@GetLastTensPlaceIsWhole() OnNumberSelected="ReturnedNumber" />
+					}
 				}
 				else
 				{
@@ -96,21 +97,27 @@
 		</div>
 	</Footer>
 
-</PlaceWrapper>
+</PlaceSkeleton>
 
 @code {
 	[Parameter, EditorRequired] public GlobalEnums.BibleBook? BibleBook { get; set; }
+	[Parameter, EditorRequired] public bool ShowDebugPicker { get; set; }
 	[Parameter, EditorRequired] public EventCallback<BookChapterVerse> OnBCVSelected { get; set; }
 
-	private const bool IsDebug = true; // ToDo: remove this when done debugging
 
 	protected int SelectedVerse = 0; // ToDo: are you going to use this or not.
 	protected StepState? StepState { get; set; }
+	protected bool IsDebug = true; 
+
+	//	private ILogger? Logger;
+	//	protected override void OnInitialized() { Logger = LoggerFactory.CreateLogger($"{nameof(ButtonWrapper)}"); }
+
 
 	protected override void OnParametersSet()
 	{
 		//StepState = new StepState(BibleBook);
 		StepState = new StepState(BibleBook, Logger!);
+		IsDebug = ShowDebugPicker;	
 	}
 
 	private void OnHundredNumberSelected(int number)
@@ -120,10 +127,9 @@
 		StepState!.SetNextStepNoPhaseChange();
 	}
 
-
-	private void ReturnedNumber(ReturnedNumberNotFinishedVM vm)
+	private void ReturnedNumber(ReturnedChapterNumberVM vm)
 	{
-		Logger!.LogInformation("{Method}, VM: {VM}", nameof(ReturnedNumber), vm);
+		Logger!.LogInformation("{Method}, VM: {VM}", nameof(ReturnedChapterNumberVM), vm);
 
 		if (vm.SkipChapterOnes)
 		{
@@ -154,25 +160,42 @@
 		}
 	}
 
-	private void ReturnedFinalNumber(ReturnedNumberFinishedVM vm)
+	private void ReturnedNumber(ReturnedVerseNumberVM vm)
 	{
-		Logger!.LogInformation("{Method}, VM: {VM}", nameof(ReturnedFinalNumber), vm);
+		Logger!.LogInformation("{Method}, ReturnedVerseNumberVM: {VM}, Step:{Step}", nameof(ReturnedVerseNumberVM), vm, StepState!.Step!.Name);
 
-		if (!vm.SkipingVerseOnes) // Normal Path
+		if (vm.Finished)
 		{
-			StepState!.UpdatePlaceValueRecForOnes(vm.Number);
-		}
-		else  // vm.SkipingVerseOnes == true
-		{
-			StepState!.UpdatePlaceValueRecForTens(vm.Number);  // e.g. Ezr 2:7
-			StepState!.UpdatePlaceValueRecForOnes(0);
-		}
+			int verse;
+			if (vm.ShortCircuit)
+			{
+				StepState!.UpdatePlaceValueRecForOnes(0);
+				verse = StepState!.GetVerseShortCircuit();
+			}
+			else
+			{
+				StepState!.UpdatePlaceValueRecForOnes(vm.Number);
+				verse = StepState!.GetVerse();
+			}
 
-		int verse = StepState!.GetVerse();
-		BookChapterVerse BCV = new BookChapterVerse(BibleBook, StepState!.Chapter, verse);
-		Logger!.LogInformation("{Method}, TSC.Finished , B/C/V {bcv}", nameof(ReturnedFinalNumber), BCV);
-		Toast!.ShowInfo($"{BookChapterVerseHelper.Dump(BCV)}");
-		OnBCVSelected.InvokeAsync(BCV);
+			BookChapterVerse BCV = new BookChapterVerse(BibleBook, StepState!.Chapter, verse);
+			Logger!.LogInformation("...Finished , B/C/V {BCV}", BCV);
+			Toast!.ShowInfo($"{BookChapterVerseHelper.Dump(BCV)}");
+			OnBCVSelected.InvokeAsync(BCV);
+		}
+		else
+		{
+			if (StepState!.Step!.Place == Enums.Place.Tens)
+			{
+				StepState!.UpdatePlaceValueRecForTens(vm.Number);
+				StepState!.SetNextStepNoPhaseChange();
+			}
+			else
+			{
+				Logger!.LogWarning("...Why am I here? vm.Finished should be true; Place: {Place}", StepState.Step!.Place);
+			}
+		}
+		Logger!.LogWarning("...New step{Step}", StepState.Step!.Name);
 	}
 
 	private int GetLastTensPlaceIsWhole()
@@ -216,6 +239,7 @@
 			//.AppendIfElse(chapter == 0, $"<u>{mask}</u>", $"<b>{chapter}</b> {check}").AppendIf(IsDebug, " of []").Append("<br />")
 			.AppendIfElse(chapter == 0, $"<span class='fw-lighter'>Verse: ___</span>", $"Verse: <u>{mask}</u>")
 			// .AppendIf(verse != 0, $"<b>{verse} {check}</b>")
+			// .Append($"IsDebug:{IsDebug}")
 			.Append("</h6>");
 
 		return (MarkupString)sb.ToString();

@@ -30,9 +30,9 @@ public class State
 	//public const string ToolbarNumericPad = "numeric-pad";
 	//public const string ToolbarDynamicButtons = "dynamic-buttons";
 	//private string _DefaultToolbar = ToolbarNumericPad;
-	private string _DefaultToolbar = Constants.ToolbarNumericPad;
-	private string? _Toolbar;
 
+	//private Enums.MenuItem _DefaultMenuItem = Enums.MenuItem.ShowDebugPicker;
+	//private Enums.MenuItem _MenuItem; 
 
 	public async Task Initialize()
 	{
@@ -49,16 +49,16 @@ public class State
 				await UpdateACV(_DefaultAbrvChapterVerse);
 			}
 
-			_Toolbar = await localStorage!.GetItemAsync<string>(KeyToolbar) ?? _DefaultToolbar;
-			if (!String.IsNullOrEmpty(_Toolbar))
-			{
-				await UpdateToolbar(_Toolbar);
-			}
-			else
-			{
-				_Toolbar = _DefaultToolbar;
-				await UpdateToolbar(_DefaultToolbar);
-			}
+			//_MenuItem = await localStorage!.GetItemAsync<string>(KeyToolbar) ?? _DefaultMenuItem;
+			//if (!String.IsNullOrEmpty(_MenuItem))
+			//{
+			//	await UpdateToolbar(_MenuItem);
+			//}
+			//else
+			//{
+			//	_MenuItem = _DefaultMenuItem;
+			//	await UpdateToolbar(_DefaultMenuItem);
+			//}
 
 
 
@@ -82,18 +82,17 @@ public class State
 	}
 
 
+	//public Enums.MenuItem GetShowDebugPicker()
+	//{
+	//	return _MenuItem!;
+	//}
 
-	public string GetToolbar()
-	{
-		return _Toolbar!;
-	}
-
-	public async Task UpdateToolbar(string	toolbar)
-	{
-		await localStorage!.SetItemAsync(KeyToolbar, toolbar);
-		_Toolbar = toolbar;
-		NotifyStateHasChanged();
-	}
+	//public async Task UpdateToolbar(Enums.MenuItem showDebugPicker)
+	//{
+	//	await localStorage!.SetItemAsync(KeyToolbar, showDebugPicker);
+	//	_MenuItem = showDebugPicker;
+	//	NotifyStateHasChanged();
+	//}
 
 }
 // Ignore Spelling: ctor, DI, Abrv, brv, BCV, ACV, bc, toolbar

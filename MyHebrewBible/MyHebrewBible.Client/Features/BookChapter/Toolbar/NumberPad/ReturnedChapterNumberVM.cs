@@ -1,4 +1,4 @@
 ﻿namespace MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad;
 
+public record ReturnedChapterNumberVM(int Number, bool SkipChapterOnes);
 
-public record ReturnedNumberFinishedVM(int Number, bool SkipingVerseOnes);
