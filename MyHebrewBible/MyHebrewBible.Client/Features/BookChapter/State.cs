@@ -19,7 +19,7 @@ public class State
 	#endregion
 
 	private const string KeyACVId = "bc-abrv-chapter-verse-id";
-	private const string KeyToolbar = "bc-toolbar";
+	private const string KeyPickerDebug = "bc-picker-debug";
 	private bool _isInitialized;
 	private void NotifyStateHasChanged() => OnChange?.Invoke();
 	public event Action? OnChange;
@@ -27,12 +27,8 @@ public class State
 	private AbrvChapterVerse _DefaultAbrvChapterVerse = new("Gen", 1, 1, true, 0); //"Gen", 1, 1, 1);
 	private AbrvChapterVerse? _AbrvChapterVerse = new("Gen", 1, 1, true, 0);  //"Gen", 1, 1, 1);
 
-	//public const string ToolbarNumericPad = "numeric-pad";
-	//public const string ToolbarDynamicButtons = "dynamic-buttons";
-	//private string _DefaultToolbar = ToolbarNumericPad;
-
-	//private Enums.MenuItem _DefaultMenuItem = Enums.MenuItem.ShowDebugPicker;
-	//private Enums.MenuItem _MenuItem; 
+	private bool _DefaultKeyPickerDebug = false;
+	private bool _PickerDebug = false;
 
 	public async Task Initialize()
 	{
@@ -49,17 +45,17 @@ public class State
 				await UpdateACV(_DefaultAbrvChapterVerse);
 			}
 
-			//_MenuItem = await localStorage!.GetItemAsync<string>(KeyToolbar) ?? _DefaultMenuItem;
-			//if (!String.IsNullOrEmpty(_MenuItem))
-			//{
-			//	await UpdateToolbar(_MenuItem);
-			//}
-			//else
-			//{
-			//	_MenuItem = _DefaultMenuItem;
-			//	await UpdateToolbar(_DefaultMenuItem);
-			//}
-
+			var pd = await localStorage!.GetItemAsync<bool?>(KeyPickerDebug);
+			if (pd is not null)
+			{
+				_PickerDebug = pd.Value;
+				//await TogglePickerDebug();
+			}
+			else
+			{
+				_PickerDebug = _DefaultKeyPickerDebug;
+				await TogglePickerDebug();
+			}
 
 
 			_isInitialized = true;
@@ -82,17 +78,16 @@ public class State
 	}
 
 
-	//public Enums.MenuItem GetShowDebugPicker()
-	//{
-	//	return _MenuItem!;
-	//}
+	public bool GetPickerDebug()
+	{
+		return _PickerDebug!;
+	}
 
-	//public async Task UpdateToolbar(Enums.MenuItem showDebugPicker)
-	//{
-	//	await localStorage!.SetItemAsync(KeyToolbar, showDebugPicker);
-	//	_MenuItem = showDebugPicker;
-	//	NotifyStateHasChanged();
-	//}
-
+	public async Task TogglePickerDebug()
+	{
+		_PickerDebug = !_PickerDebug;
+		await localStorage!.SetItemAsync(KeyPickerDebug, _PickerDebug);
+		NotifyStateHasChanged();
+	}
 }
 // Ignore Spelling: ctor, DI, Abrv, brv, BCV, ACV, bc, toolbar

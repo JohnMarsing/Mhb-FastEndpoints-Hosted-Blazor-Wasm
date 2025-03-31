@@ -8,12 +8,12 @@ public class Helper
 
 	public static string GetButtonClassEmpty()
 	{
-		return $"btn {BtnOutlineColors.Secondary} disabled {fontType} {fontSize}";
+		return $"btn {BtnOutlineColors.Secondary} disabled {fontType} {fontSize} {Helper.colPadding}";
 	}
 
 	public static string GetButtonClassEmptyNoColor()
 	{
-		return $"btn {fontType} {fontSize}";
+		return $"btn {fontType} {fontSize} {Helper.colPadding}";
 	}
 
 	public static string GetDefaultButtonClass(bool small = false)
@@ -29,7 +29,9 @@ public class Helper
 
 	public static string GetButtonColor(int lastChapterIsWhole)
 	{
-		return lastChapterIsWhole==0 ? BtnOutlineColors.Info : BtnOutlineColors.Primary;
+		//return lastChapterIsWhole==0 ? BtnOutlineColors.Info : BtnOutlineColors.Primary;
+		return lastChapterIsWhole == 0 ? BtnOutlineColors.Primary : BtnOutlineColors.Info;
+		//return lastChapterIsWhole == 0 ? BtnColors.Primary : BtnColors.Info;
 	}
 
 	const string fontType = "font-monospace";
@@ -37,9 +39,15 @@ public class Helper
 	const string fontSizeSmall = "fs-5";
 
 
+	//public const string rowPadding = "mb-1";
+	//public const string colPadding = "me-1";
+	public const string rowPadding = "";
+	public const string colPadding = "";
+
+
 	#region LastVerse
 	//Imported from what was called LastVerseHelper
-	
+
 	// Called by StepState!ChangeCurrentStep! case Direction.GoToSecondPhase:
 	public static int GetLastVerse(BibleBookEnum.BibleBook? bibleBook, int chapter)
 	{

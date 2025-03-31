@@ -24,7 +24,7 @@
 			</div>
 
 			<div class="px-1">
-				<Picker CurrentBCV="CurrentBCV" OnBCVSelected="ReturnedBCV" ShowDebugPicker="ShowDebugPicker" />
+				<Picker CurrentBCV="CurrentBCV" OnBCVSelected="ReturnedBCV" />
 			</div>
 
 			<div class="">
@@ -48,7 +48,6 @@
 
 	// Only used by <Picker>
 	[Parameter, EditorRequired] public NumberPad.BookChapterVerse? CurrentBCV { get; set; }
-	[Parameter, EditorRequired] public bool ShowDebugPicker { get; set; }
 	
 	[Parameter, EditorRequired] public EventCallback<NumberPad.BookChapterVerse> OnBCVSelected { get; set; }
 

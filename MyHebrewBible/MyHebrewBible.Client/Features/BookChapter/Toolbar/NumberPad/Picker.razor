@@ -54,8 +54,6 @@ else
 					<ButtonWrapper BibleBook="SelectedBook" OnBCVSelected="ReturnedBCV" />
 				</div>
 
-				@* 				<div class="modal-footer @modalFooterColor">	</div> *@
-
 			</div>
 		</div>
 	</div>
@@ -63,7 +61,6 @@ else
 
 @code {
 	[Parameter, EditorRequired] public BookChapterVerse? CurrentBCV { get; set; }
-	[Parameter, EditorRequired] public bool ShowDebugPicker { get; set; }
 	[Parameter] public EventCallback<BookChapterVerse> OnBCVSelected { get; set; }
 
 	protected BibleBookEnum.BibleBook? SelectedBook { get; set; }

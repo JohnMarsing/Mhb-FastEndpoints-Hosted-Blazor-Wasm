@@ -65,7 +65,7 @@ public class StepState
 
 	public void UpdatePlaceValueRecForTens(int number)
 	{
-		Logger!.LogInformation("{Method}, XXXXXX number: {number}", nameof(UpdatePlaceValueRecForTens), number);
+		Logger!.LogInformation("{Method}, number: {number}", nameof(UpdatePlaceValueRecForTens), number);
 		PlaceValueRec = PlaceValueRec! with { Tens = number, Mask = $"{PlaceValueRec.Hundreds}{number}X" };
 	}
 
