@@ -12,13 +12,9 @@
 
 <PageTitle>@PageTitle</PageTitle>
 
-
-@* OnBookAndChapterSelected="ReturnedBookAndChapter": Called by  <PreviousButton> & <NextButton> *@
-
 <Navbar CurrentBookAndChapter="CurrentBookAndChapter"
 				OnBookAndChapterSelected="ReturnedBookAndChapter"
 				CurrentBCV="CurrentBCV"
-				ShowDebugPicker="ShowDebugPicker"
 				OnBCVSelected="ReturnedBCV"
 				OnMenuItemSelected="ReturnedMenuItem" />
 
@@ -143,29 +139,18 @@
 
 
 	protected bool ShowPageInstructionsModal = false;
-	protected bool ShowDebugPicker = false;
 
-	//private async Task ReturnedMenuItem(Enums.MenuItem item)
-	private void ReturnedMenuItem(Enums.MenuItem item)
+	private async Task ReturnedMenuItem(Enums.MenuItem item)
 	{
 		if (item == Enums.MenuItem.Instructions)
 		{
 			ShowPageInstructionsModal = !ShowPageInstructionsModal;
 		}
-		else
+		if (item == Enums.MenuItem.ShowDebugPicker)
 		{
-			if (item == Enums.MenuItem.ShowDebugPicker)
-			{
-				ShowDebugPicker = !ShowDebugPicker;
-				// //if (Toolbar == Constants.ToolbarNumericPad)	{ Toolbar = Constants.ToolbarDynamicButtons; }
-				// //else {Toolbar = Constants.ToolbarNumericPad;}
-				// await State!.AppState!.BookChapterState!.UpdateToolbar(Toolbar);
-			}
-			else
-			{
-				//
-			}
+			await State!.AppState!.BookChapterState!.TogglePickerDebug();
 		}
+		//else 	{  	}
 	}
 
 	// Ignore Spelling: bc, rec

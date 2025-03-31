@@ -37,7 +37,7 @@ public abstract class MenuItem : SmartEnum<MenuItem>
 	private sealed class ShowDebugPickerSE : MenuItem
 	{
 		public ShowDebugPickerSE() : base(nameof(ShowDebugPicker), Id.ShowDebugPicker) { }
-		public override string Title => "Show Debug";
+		public override string Title => "** Dynamically Set **"; // Show Debug or Hide Debug
 	}
 
 	private sealed class InstructionsSE : MenuItem

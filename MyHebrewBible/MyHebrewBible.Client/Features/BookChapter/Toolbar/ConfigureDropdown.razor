@@ -10,7 +10,7 @@
 			<li class="dropdown-item">
 				<button @onclick="@(e => ButtonClick(item))"
 				type="button" class="btn btn-outline-primary">
-					<span class="@headerColor">@item.Title</span>
+					<span class="@headerColor">@GetButtonText(@item)</span>
 				</button>
 			</li>
 		}
@@ -20,10 +20,25 @@
 
 @code {
 	[Parameter] public EventCallback<Enums.MenuItem> OnMenuItemSelected { get; set; }
-	
+	[CascadingParameter] public CascadingAppState? State { get; set; }
+
 	string buttonColor => BtnColors.Primary;
 	string headerColor => TextColors.Success;
-	
+	private string? ButtonText;
+
+	private string GetButtonText(Enums.MenuItem menuItem)
+	{
+		if (menuItem == Enums.MenuItem.Instructions)
+		{
+			return menuItem.Title;
+		}
+		else // it's ShowDebugPicker
+		{
+			bool isDebug = State!.AppState!.BookChapterState!.GetPickerDebug();
+			return isDebug ? "Hide Debug" : "Show Debug";	
+		}
+	}
+
 	private void ButtonClick(Enums.MenuItem item)
 	{
 		OnMenuItemSelected.InvokeAsync(item);

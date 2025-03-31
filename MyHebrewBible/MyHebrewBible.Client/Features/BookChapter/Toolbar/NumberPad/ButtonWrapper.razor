@@ -101,9 +101,8 @@
 
 @code {
 	[Parameter, EditorRequired] public GlobalEnums.BibleBook? BibleBook { get; set; }
-	[Parameter, EditorRequired] public bool ShowDebugPicker { get; set; }
 	[Parameter, EditorRequired] public EventCallback<BookChapterVerse> OnBCVSelected { get; set; }
-
+	[CascadingParameter] public CascadingAppState? State { get; set; }
 
 	protected int SelectedVerse = 0; // ToDo: are you going to use this or not.
 	protected StepState? StepState { get; set; }
@@ -117,7 +116,7 @@
 	{
 		//StepState = new StepState(BibleBook);
 		StepState = new StepState(BibleBook, Logger!);
-		IsDebug = ShowDebugPicker;	
+		IsDebug = State!.AppState!.BookChapterState!.GetPickerDebug(); 
 	}
 
 	private void OnHundredNumberSelected(int number)
