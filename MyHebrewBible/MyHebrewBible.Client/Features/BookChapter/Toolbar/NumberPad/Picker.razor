@@ -5,7 +5,7 @@
 @if (ModalIsNotShownToggle)
 {
 	<button type="button" class="btn btn-info" title="@bcvTitle"
-					@onclick="() => ShowModal()">
+	@onclick="() => ShowModal()">
 		@Title <i class="fas fa-angle-down"></i>
 	</button>
 }
@@ -26,15 +26,15 @@ else
 				<div class="modal-body @modalBodyColor">
 
 					<BlazoredTypeahead SearchMethod="SearchBibleBooks"
-														 TValue="BibleBookEnum.BibleBook"
-														 TItem="BibleBookEnum.BibleBook"
-														 Value="SelectedBook"
-														 ValueChanged="SelectedBookChanged"
-														 ValueExpression="@(() => SelectedBook)"
-														 EnableDropDown="true"
-														 MaximumSuggestions="66"
-														 MinimumLength="1"
-														 placeholder="Search bible...">
+					TValue="BibleBookEnum.BibleBook"
+					TItem="BibleBookEnum.BibleBook"
+					Value="SelectedBook"
+					ValueChanged="SelectedBookChanged"
+					ValueExpression="@(() => SelectedBook)"
+					EnableDropDown="true"
+					MaximumSuggestions="66"
+					MinimumLength="1"
+					placeholder="Search bible...">
 						<SelectedTemplate Context="mycontext">
 							<span class="fs-4">@mycontext!.Title</span>
 						</SelectedTemplate>
@@ -61,12 +61,13 @@ else
 
 @code {
 	[Parameter, EditorRequired] public BookChapterVerse? CurrentBCV { get; set; }
+	[Parameter, EditorRequired] public bool IsXs { get; set; }
 	[Parameter] public EventCallback<BookChapterVerse> OnBCVSelected { get; set; }
 
 	protected BibleBookEnum.BibleBook? SelectedBook { get; set; }
 	protected BookChapterVerse? SelectedBCV { get; set; } // why do I need this???
 
-	string Title => $"{CurrentBCV!.BibleBook!.Title} {CurrentBCV.Chapter}";
+	string Title = ""; 
 	private string bcvTitle = "";
 
 	protected override void OnParametersSet()
@@ -75,7 +76,19 @@ else
 		{
 			SelectedBook = CurrentBCV!.BibleBook;
 			SelectedBCV = CurrentBCV;
+
+
+			if (IsXs)
+			{
+				Title = $"{CurrentBCV!.BibleBook!.Abrv} {CurrentBCV.Chapter}";
+			}
+			else
+			{
+				Title = $"{CurrentBCV!.BibleBook!.Title} {CurrentBCV.Chapter}";
+			}
+
 		}
+
 	}
 
 	private async Task<IEnumerable<BibleBookEnum.BibleBook>> SearchBibleBooks(string searchText)

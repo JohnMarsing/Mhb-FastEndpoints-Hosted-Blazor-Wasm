@@ -75,22 +75,29 @@
 
 	private string GetTensPlaceButtonClass(int number)
 	{
-		if (number <= StepState!.PlaceValueRec!.Tens)
+		if (StepState!.PlaceValueRec!.Hundreds is not null && StepState!.PlaceValueRec!.Hundreds == 0)
 		{
-			if (number == LastTensPlaceIsWhole)
-			{
-				return $"btn {Helper.GetButtonColor(LastTensPlaceIsWhole)} {Helper.GetDefaultButtonClass()} {Helper.colPadding}";
-			}
-			else
-			{
-				return $"btn {Helper.GetButtonColor(0)} {Helper.GetDefaultButtonClass()} {Helper.colPadding}";
-			}
+			// Special case Psalms where selected chapter or verse is NOT 100+, so show all buttons.
+			return $"btn {Helper.GetButtonColor(0)} {Helper.GetDefaultButtonClass()} {Helper.colPadding}";
 		}
 		else
 		{
-			return $"btn {Helper.GetDisabledColor()} disabled  {Helper.GetDefaultButtonClass()} {Helper.colPadding}";
+			if (number <= StepState!.PlaceValueRec!.Tens)
+			{
+				if (number == LastTensPlaceIsWhole)
+				{
+					return $"btn {Helper.GetButtonColor(LastTensPlaceIsWhole)} {Helper.GetDefaultButtonClass()} {Helper.colPadding}";
+				}
+				else
+				{
+					return $"btn {Helper.GetButtonColor(0)} {Helper.GetDefaultButtonClass()} {Helper.colPadding}";
+				}
+			}
+			else
+			{
+				return $"btn {Helper.GetDisabledColor()} disabled  {Helper.GetDefaultButtonClass()} {Helper.colPadding}";
+			}
 		}
-
 	}
 
 	private string GetOnesPlaceButtonClass(int number)

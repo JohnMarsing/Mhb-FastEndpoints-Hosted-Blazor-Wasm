@@ -13,11 +13,16 @@
 		@GetTitleContent(@StepState!.Step!.Phase, StepState!.Chapter, StepState!.PlaceValueRec!.Mask)
 	</TitleContent>
 
-	<HundredsColumn>
-		<div class="@GetPadding()">
-			<HundredsButtons CurrentStepState="StepState" OnHundredNumberSelected="OnHundredNumberSelected" />
+	<PsalmsHundredsRow>
+		<div class="card text-center border-info">
+			<div class="card-body">
+				<h5 class="card-title">Is @StepState!.Step!.Phase 100 or more?</h5>
+			</div>
+			<div class="card-footer ">
+				<HundredToggleButton OnStateChanged="OnHundredNumberSelected" />
+			</div>
 		</div>
-	</HundredsColumn>
+	</PsalmsHundredsRow>
 
 	<TensColumn>
 		<div class="@GetPadding()">
@@ -32,7 +37,6 @@
 				{
 					<VerseTensAndOnesButtons StepState="StepState" LastTensPlaceIsWhole=@GetLastTensPlaceIsWhole() OnNumberSelected="ReturnedNumber" />
 				}
-
 			}
 			else
 			{
@@ -119,10 +123,10 @@
 		IsDebug = State!.AppState!.BookChapterState!.GetPickerDebug(); 
 	}
 
-	private void OnHundredNumberSelected(int number)
+	private void OnHundredNumberSelected(bool selection)
 	{
 		//Logger!.LogInformation("{Method}, number: {number}", nameof(OnHundredNumberSelected), number);
-		StepState!.UpdatePlaceValueRecForHundreds(number);
+		StepState!.UpdatePlaceValueRecForHundreds(selection);
 		StepState!.SetNextStepNoPhaseChange();
 	}
 

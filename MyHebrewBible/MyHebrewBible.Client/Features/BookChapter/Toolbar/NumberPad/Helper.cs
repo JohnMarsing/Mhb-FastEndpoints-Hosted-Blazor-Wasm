@@ -38,12 +38,10 @@ public class Helper
 	const string fontSize = "fs-4";
 	const string fontSizeSmall = "fs-5";
 
-
 	//public const string rowPadding = "mb-1";
 	//public const string colPadding = "me-1";
 	public const string rowPadding = "";
 	public const string colPadding = "";
-
 
 	#region LastVerse
 	//Imported from what was called LastVerseHelper

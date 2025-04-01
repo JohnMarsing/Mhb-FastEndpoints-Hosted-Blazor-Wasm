@@ -1,7 +1,7 @@
 ﻿@using MyHebrewBible.Client.Layout
 @using MyHebrewBible.Client.Features.BookChapter.Toolbar.PrevNext
 @using MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad
-@* @using MyHebrewBible.Client.Components *@
+@using MyHebrewBible.Client.Enums
 
 @inject ILogger<Navbar>? Logger
 
@@ -19,18 +19,24 @@
 		<div class="collapse navbar-collapse justify-content-center">
 			<div class="">
 				<PreviousButton PreviousBookAndChapter="@CurrentBookAndChapter"
-				buttonToShow="ButtonsToShow.PreviousOnly"
-				OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+												buttonToShow="ButtonsToShow.PreviousOnly"
+												OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+			</div>
+
+			<div class="@MediaQuery.Xs.DivClass">
+				<Picker CurrentBCV="CurrentBCV" OnBCVSelected="ReturnedBCV" IsXs="true" />
+			</div>
+			<div class="@MediaQuery.SmOrMdOrLgOrXl.DivClass">
+				<Picker CurrentBCV="CurrentBCV" OnBCVSelected="ReturnedBCV" IsXs="false" />
 			</div>
 
 			<div class="px-1">
-				<Picker CurrentBCV="CurrentBCV" OnBCVSelected="ReturnedBCV" />
 			</div>
 
 			<div class="">
 				<NextButton NextBookAndChapter="@CurrentBookAndChapter"
-				buttonToShow="ButtonsToShow.NextOnly"
-				OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+										buttonToShow="ButtonsToShow.NextOnly"
+										OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 			</div>
 
 		</div>
@@ -48,7 +54,7 @@
 
 	// Only used by <Picker>
 	[Parameter, EditorRequired] public NumberPad.BookChapterVerse? CurrentBCV { get; set; }
-	
+
 	[Parameter, EditorRequired] public EventCallback<NumberPad.BookChapterVerse> OnBCVSelected { get; set; }
 
 	// Only used by <ConfigureDropdown>
@@ -56,7 +62,7 @@
 
 	private string Chapter = "0";
 	private string TitleOrAbrv => CurrentBookAndChapter!.BibleBook!.Title;
-	
+
 
 	private void ReturnedBook(GlobalEnums.BibleBook bibleBook)  //Enums.BibleBook bibleBook
 	{

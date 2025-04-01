@@ -17,26 +17,43 @@ public class StepState
 	{
 		BibleBook = bibleBook;
 		Logger = logger;
+
+		// ToDo: TaskHPS I need to something different for Psalms
+		//   LoadPlaceValueRecForHundreds or something???
 		LoadPlaceValueRecForChapter();
+		
 		Chapter = 0;
-		//Phase = Enums.Phase.Chapter;
-		HundredPlaceIsVisible = bibleBook!.ChapterHundreds > 0;
+
+		if (bibleBook!.ChapterHundreds > 0)
+		{
+			HundredsPlaceState = new HundredsPlaceState(IsChosen: false, IsOneHundredOrMore:false); // IsVisible: true, 
+			HundredToggleButtonIsVisible = true;
+		}
+		else
+		{
+			HundredsPlaceState = new HundredsPlaceState(IsChosen: false, IsOneHundredOrMore: false); // IsVisible: false, 
+			HundredToggleButtonIsVisible = false;
+		}
 	}
 
 	private BibleBook? BibleBook { get; set; }
 
 	public int Chapter { get; set; }
 	public Step? Step { get; set; }
-	//public Phase? Phase { get; set; } // Use StepState.Step.Place
 	public PlaceValueRec? PlaceValueRec; //{ get; set; } 
-	public bool HundredPlaceIsVisible { get; set; } //
+	public HundredsPlaceState HundredsPlaceState; //{ get; set; } 
+
+	public bool HundredToggleButtonIsVisible { get; set; }
+
 	public int LastChapter = 0;
 
 	private void LoadPlaceValueRecForChapter()
 	{
-		if (BibleBook!.ChapterHundreds > 0)
+		if (BibleBook!.ChapterHundreds > 0) // only if Psalms
 		{
-			PlaceValueRec = new PlaceValueRec(BibleBook!.ChapterHundreds, BibleBook!.ChapterTens, BibleBook!.ChapterOnes, BibleBook.ChapterIsWhole, "XXX");
+			// ToDo: TaskHPS this needs work, should I use something like HundredsPlaceState???
+			//                                                          , BibleBook!.ChapterTens   , BibleBook.ChapterIsWhole
+			PlaceValueRec = new PlaceValueRec(BibleBook!.ChapterHundreds, 9, BibleBook!.ChapterOnes, false, "XXX");
 			Step = Step.ChapterHundred; ;
 		}
 		else
@@ -58,9 +75,12 @@ public class StepState
 
 	#region Commands
 
-	public void UpdatePlaceValueRecForHundreds(int number)
+	public void UpdatePlaceValueRecForHundreds(bool isHundredsOrMore)
 	{
+		HundredsPlaceState = HundredsPlaceState! with { IsChosen = true, IsOneHundredOrMore = isHundredsOrMore };
+		int number = (isHundredsOrMore ? 1 : 0);	
 		PlaceValueRec = PlaceValueRec! with { Hundreds = number, Mask = $"{number}XX" };
+		HundredToggleButtonIsVisible = false;
 	}
 
 	public void UpdatePlaceValueRecForTens(int number)
@@ -97,6 +117,7 @@ public class StepState
 		if (LastVerse >= 100)
 		{
 			Step = Step.VerseHundred;
+			HundredToggleButtonIsVisible = true;
 		}
 		else
 		{
@@ -108,6 +129,7 @@ public class StepState
 			{
 				Step = Step.VerseOne;
 			}
+			HundredToggleButtonIsVisible = false;
 		}
 
 		Logger!.LogInformation("{Method}, LastVerse: {LastVerse}, new Step: {Step}"
