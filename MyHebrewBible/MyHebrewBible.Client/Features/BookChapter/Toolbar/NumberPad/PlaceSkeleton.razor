@@ -1,27 +1,30 @@
-﻿
-@TitleContent
+﻿@if (StepState!.HundredToggleButtonIsVisible)
+{
+	@* <div class="d-flex justify-content-center"></div> *@
+	<div>
+		@PsalmsHundredsRow
+	</div>
+}
 
-<div class="d-flex justify-content-between">
 
-	@if (StepState!.HundredPlaceIsVisible)
-	{
+@if (!StepState!.HundredToggleButtonIsVisible)
+{
+	@TitleContent
+
+	<div class="d-flex justify-content-between">
 		<div class="d-flex justify-content-center">
-			@HundredsColumn
+			@TensColumn
 		</div>
-	}
+		<div class="d-flex justify-content-center">
+			@OnesColumn
+		</div>
 
-	<div class="d-flex justify-content-center">
-		@TensColumn
 	</div>
-
-	<div class="d-flex justify-content-center">
-		@OnesColumn
-	</div>
-</div>
+}
 
 @if (IsDebug)
 {
-@FooterDebugContent
+	@FooterDebugContent
 }
 
 @Footer
@@ -30,10 +33,12 @@
 	[Parameter, EditorRequired] public StepState? StepState { get; set; }
 	[Parameter] public bool IsDebug { get; set; }
 	[Parameter, EditorRequired] public RenderFragment? TitleContent { get; set; }
-	[Parameter] public RenderFragment? HundredsColumn { get; set; }
+	[Parameter] public RenderFragment? PsalmsHundredsRow { get; set; }
 	[Parameter] public RenderFragment? TensColumn { get; set; }
 	[Parameter] public RenderFragment? OnesColumn { get; set; }
 	[Parameter] public RenderFragment? FooterDebugContent { get; set; }
 	[Parameter] public RenderFragment? Footer { get; set; }
 
 }
+
+	@* @if (StepState!.HundredPlaceIsVisible) { <div class="d-flex justify-content-center">@HundredsColumn</div> } *@

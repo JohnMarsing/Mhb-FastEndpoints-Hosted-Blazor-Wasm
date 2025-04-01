@@ -1,0 +1,17 @@
+﻿
+<button class="btn btn-success" @onclick="() => ButtonClick(true)">
+  Yes <i class="fas fa-question"></i>
+</button>
+
+<button class="btn btn-danger" @onclick="() => ButtonClick(false)">
+  No <i class="fas fa-times"></i>
+</button>
+
+@code {
+  [Parameter, EditorRequired] public EventCallback<bool> OnStateChanged { get; set; }
+
+  private void ButtonClick(bool isHundredPlus)
+  {
+    OnStateChanged.InvokeAsync(isHundredPlus);
+  }
+}
