@@ -7,7 +7,8 @@
 @inject ILogger<ButtonWrapper>? Logger
 @inject IToastService? Toast
 
-<PlaceSkeleton StepState="StepState" IsDebug=IsDebug>
+@* IsDebug=IsDebug *@
+<PlaceSkeleton StepState="StepState" IsDebug=false>
 
 	<TitleContent>
 		@GetTitleContent(@StepState!.Step!.Phase, StepState!.Chapter, StepState!.PlaceValueRec!.Mask)
@@ -31,11 +32,13 @@
 			{
 				@if (StepState!.Step!.Phase == Phase.Chapter)
 				{
-					<ChapterTensAndOnesButtons StepState="StepState" LastTensPlaceIsWhole=@GetLastTensPlaceIsWhole() OnNumberSelected="ReturnedNumber" />
+					<ChapterTensAndOnesButtons StepState="StepState" 
+						LastTensPlaceIsWhole=@GetLastTensPlaceIsWhole() OnNumberSelected="ReturnedNumber" />
 				}
 				else
 				{
-					<VerseTensAndOnesButtons StepState="StepState" LastTensPlaceIsWhole=@GetLastTensPlaceIsWhole() OnNumberSelected="ReturnedNumber" />
+					<VerseTensAndOnesButtons StepState="StepState" 
+						LastTensPlaceIsWhole=@GetLastTensPlaceIsWhole() OnNumberSelected="ReturnedNumber" />
 				}
 			}
 			else
@@ -132,11 +135,11 @@
 
 	private void ReturnedNumber(ReturnedChapterNumberVM vm)
 	{
-		Logger!.LogInformation("{Method}, VM: {VM}", nameof(ReturnedChapterNumberVM), vm);
+		//Logger!.LogInformation("{Method}, VM: {VM}", nameof(ReturnedChapterNumberVM), vm);
 
 		if (vm.SkipChapterOnes)
 		{
-			Logger!.LogWarning("... SkipChapterOnes is True");
+			//Logger!.LogWarning("... SkipChapterOnes is True");
 			StepState!.UpdatePlaceValueRecForTens(vm.Number); // e.g. Gen 50
 			StepState!.UpdateOnesPlaceValueRecAndSetChapter(0);
 
@@ -148,13 +151,13 @@
 		{
 			if (StepState!.Step!.Place == Enums.Place.Tens)
 			{
-				Logger!.LogWarning("... Place is Tens");
+				//Logger!.LogWarning("... Place is Tens");
 				StepState!.UpdatePlaceValueRecForTens(vm.Number);
 				StepState!.SetNextStepNoPhaseChange();
 			}
 			else
 			{
-				Logger!.LogWarning("... Place is NOT Tens, it's: {Place}", StepState!.Step!.Place);
+				//Logger!.LogWarning("... Place is NOT Tens, it's: {Place}", StepState!.Step!.Place);
 				StepState!.UpdateOnesPlaceValueRecAndSetChapter(vm.Number);
 				StepState!.SetLastVerse();              // bibleBook!.LastVerses[chapter - 1];
 				StepState!.SetNextStepForSecondPhase(); // depends on LastVerse
@@ -165,7 +168,7 @@
 
 	private void ReturnedNumber(ReturnedVerseNumberVM vm)
 	{
-		Logger!.LogInformation("{Method}, ReturnedVerseNumberVM: {VM}, Step:{Step}", nameof(ReturnedVerseNumberVM), vm, StepState!.Step!.Name);
+		//Logger!.LogInformation("{Method}, ReturnedVerseNumberVM: {VM}, Step:{Step}", nameof(ReturnedVerseNumberVM), vm, StepState!.Step!.Name);
 
 		if (vm.Finished)
 		{
@@ -182,7 +185,7 @@
 			}
 
 			BookChapterVerse BCV = new BookChapterVerse(BibleBook, StepState!.Chapter, verse);
-			Logger!.LogInformation("...Finished , B/C/V {BCV}", BCV);
+			//Logger!.LogInformation("...Finished , B/C/V {BCV}", BCV);
 			Toast!.ShowInfo($"{BookChapterVerseHelper.Dump(BCV)}");
 			OnBCVSelected.InvokeAsync(BCV);
 		}
@@ -195,16 +198,15 @@
 			}
 			else
 			{
-				Logger!.LogWarning("...Why am I here? vm.Finished should be true; Place: {Place}", StepState.Step!.Place);
+				//Logger!.LogWarning("...Why am I here? vm.Finished should be true; Place: {Place}", StepState.Step!.Place);
 			}
 		}
-		Logger!.LogWarning("...New step{Step}", StepState.Step!.Name);
+		//Logger!.LogWarning("...New step{Step}", StepState.Step!.Name);
 	}
 
 	private int GetLastTensPlaceIsWhole()
 	{
-		Logger!.LogInformation("{Method}, PlaceValueRec: {PlaceValueRec}"
-		, nameof(GetLastTensPlaceIsWhole), StepState!.PlaceValueRec!);
+		//Logger!.LogInformation("{Method}, PlaceValueRec: {PlaceValueRec}", nameof(GetLastTensPlaceIsWhole), StepState!.PlaceValueRec!);
 
 		if (StepState!.PlaceValueRec!.IsWhole)
 		{
@@ -217,8 +219,6 @@
 		}
 		else { return 0; }
 	}
-
-	//private int GetLastTensPlaceIsWhole()	{	}
 
 	//<ResetButton Place="Place" OnPlaceSelected="ReturnedPlace" />
 	//[Parameter, EditorRequired] public EventCallback<Place> OnPlaceSelected { get; set; }
@@ -247,7 +247,6 @@
 
 		return (MarkupString)sb.ToString();
 	}
-
 
 	protected string GetPadding()
 	{

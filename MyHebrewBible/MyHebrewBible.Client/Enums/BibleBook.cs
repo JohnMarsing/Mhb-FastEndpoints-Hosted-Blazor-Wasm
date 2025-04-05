@@ -177,6 +177,7 @@ public abstract class BibleBook : SmartEnum<BibleBook>
 
 
 	//Properties
+	//public int FinalScriptureId() { return this.LastVerses.Sum(); }
 	public bool IsHebrewBible => this.Value <= BookChapterFacts.LastBookInOT ? true : false;
 	public int MaxLastVerses() => this.LastVerses.Max();
 	#endregion

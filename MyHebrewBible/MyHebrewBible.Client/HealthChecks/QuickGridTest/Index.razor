@@ -3,6 +3,9 @@
 @using Microsoft.AspNetCore.Components.QuickGrid
 @using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
 
+@using Page = MyHebrewBible.Client.Enums.Nav
+<PageHeader PageEnum="Page.HealthCheckQuickGrid" />
+
 <div class="card border-info">
 	<div class="card-header">
 		<FilterButtons CurrentFilter="CurrentFilter" OnFilterSelected="ReturnedFilter" />

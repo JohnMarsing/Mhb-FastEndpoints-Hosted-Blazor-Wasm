@@ -1,20 +1,23 @@
-﻿@using BibleBookEnum = MyHebrewBible.Client.Enums;
+﻿@page "/picker"
+@using BibleBookEnum = MyHebrewBible.Client.Enums;
+@using MyHebrewBible.Client.Components;
 
+@inherits ModalBase
 @inject ILogger<Picker>? Logger
 
 @if (ModalIsNotShownToggle)
 {
 	<button type="button" class="btn btn-info" title="@bcvTitle"
-	@onclick="() => ShowModal()">
+					@onclick="() => ShowModal()">
 		@Title <i class="fas fa-angle-down"></i>
 	</button>
 }
 else
 {
 	<div class="@modalClass" style="display:@(modalOpen?"block":"none");">
-		<div class="modal-dialog @modalSize">
-			<div class="modal-content @modalContentColor">
-				<div class="modal-header @modalHeaderColor">
+		<div class="modal-dialog @ModalConstant.Size">
+			<div class="modal-content @ModalConstant.ContentColor">
+				<div class="modal-header @ModalConstant.HeaderColor">
 
 					<p>Select a Book</p>
 
@@ -23,18 +26,17 @@ else
 					</button>
 				</div>
 
-				<div class="modal-body @modalBodyColor">
-
+				<div class="modal-body @ModalConstant.BodyColor">
 					<BlazoredTypeahead SearchMethod="SearchBibleBooks"
-					TValue="BibleBookEnum.BibleBook"
-					TItem="BibleBookEnum.BibleBook"
-					Value="SelectedBook"
-					ValueChanged="SelectedBookChanged"
-					ValueExpression="@(() => SelectedBook)"
-					EnableDropDown="true"
-					MaximumSuggestions="66"
-					MinimumLength="1"
-					placeholder="Search bible...">
+														 TValue="BibleBookEnum.BibleBook"
+														 TItem="BibleBookEnum.BibleBook"
+														 Value="SelectedBook"
+														 ValueChanged="SelectedBookChanged"
+														 ValueExpression="@(() => SelectedBook)"
+														 EnableDropDown="true"
+														 MaximumSuggestions="66"
+														 MinimumLength="1"
+														 placeholder="Search bible...">
 						<SelectedTemplate Context="mycontext">
 							<span class="fs-4">@mycontext!.Title</span>
 						</SelectedTemplate>
@@ -47,10 +49,9 @@ else
 							</div>
 						</ResultTemplate>
 					</BlazoredTypeahead>
-
 				</div>
 
-				<div class="modal-body pt-0 @modalBodyColor">
+				<div class="modal-body pt-0 @ModalConstant.BodyColor">
 					<ButtonWrapper BibleBook="SelectedBook" OnBCVSelected="ReturnedBCV" />
 				</div>
 
@@ -63,11 +64,11 @@ else
 	[Parameter, EditorRequired] public BookChapterVerse? CurrentBCV { get; set; }
 	[Parameter, EditorRequired] public bool IsXs { get; set; }
 	[Parameter] public EventCallback<BookChapterVerse> OnBCVSelected { get; set; }
+	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
 
 	protected BibleBookEnum.BibleBook? SelectedBook { get; set; }
-	protected BookChapterVerse? SelectedBCV { get; set; } // why do I need this???
 
-	string Title = ""; 
+	string Title = "";
 	private string bcvTitle = "";
 
 	protected override void OnParametersSet()
@@ -75,9 +76,6 @@ else
 		if (CurrentBCV is not null && CurrentBCV.BibleBook is not null)
 		{
 			SelectedBook = CurrentBCV!.BibleBook;
-			SelectedBCV = CurrentBCV;
-
-
 			if (IsXs)
 			{
 				Title = $"{CurrentBCV!.BibleBook!.Abrv} {CurrentBCV.Chapter}";
@@ -86,9 +84,7 @@ else
 			{
 				Title = $"{CurrentBCV!.BibleBook!.Title} {CurrentBCV.Chapter}";
 			}
-
 		}
-
 	}
 
 	private async Task<IEnumerable<BibleBookEnum.BibleBook>> SearchBibleBooks(string searchText)
@@ -98,63 +94,29 @@ else
 			.OrderBy(o => o.Value));
 	}
 
+
 	private void SelectedBookChanged(BibleBookEnum.BibleBook? bibleBook)
 	{
 		if (bibleBook is not null)
 		{
-			//Logger!.LogInformation("{Method}, BibleBook: {BibleBook}", nameof(SelectedBookChanged), bibleBook.Name);
-			// Tab to the next field
 			SelectedBook = bibleBook;
-			SelectedBCV = SelectedBCV! with { BibleBook = bibleBook };
 		}
 	}
 
-	//private async Task ReturnedBCV(BookChapterVerse bcv)
-	private void ReturnedBCV(BookChapterVerse bcv)
+	private async Task ReturnedBCV(BookChapterVerse bcv)
 	{
 		try
 		{
-			SelectedBCV = bcv;
 			bcvTitle = $"{bcv.BibleBook?.Abrv} {bcv.Chapter}:{bcv.Verse} ";
-			Logger!.LogInformation("{Method}, BibleBook: {BibleBook}", nameof(ReturnedBCV), bcv);
-			//await Task.Delay(2000);  // ToDo: comment this out in production
+			//Logger!.LogInformation("{Method}, BibleBook: {BibleBook}", nameof(ReturnedBCV), bcv);
 			CloseModal();
-			OnBCVSelected.InvokeAsync(SelectedBCV);
-			//await OnBCVSelected.InvokeAsync(SelectedBCV);
-			// do stuff
+			await CascadingAppState!.AppState!.BookChapterState!.AddBCV(new BookChapterVerseHistory(bcv.BibleBook!.Value, bcv.Chapter, bcv.Verse));
+			await OnBCVSelected.InvokeAsync(bcv);
 		}
 		catch (Exception ex)
 		{
-			Logger!.LogError(ex, "Error in {Method}", nameof(ReturnedBCV));	
+			Logger!.LogError(ex, "Error in {Method}", nameof(ReturnedBCV));
 		}
-
 	}
 
-	#region Show-Close
-	void ShowModal()
-	{
-		modalOpen = true;
-		ModalIsNotShownToggle = false;
-		modalClass += " show";
-		StateHasChanged();
-	}
-
-	void CloseModal()
-	{
-		modalOpen = false;
-		ModalIsNotShownToggle = true;
-		modalClass = "modal";
-	}
-	#endregion
-
-	#region chrome
-	bool modalOpen = false;
-	string modalClass = "modal";
-	string modalSize => "modal-sm"; // MediaQuery == MediaQuery.Xs ? "modal-sm" : "modal-md";
-	string modalHeaderColor = "bg-warning";
-	string modalContentColor = " border-danger";
-	string modalBodyColor = "";  // bg-warning-subtle
-	string modalFooterColor = "bg-dark-subtle text-black-50";  //  bg-light
-	bool ModalIsNotShownToggle = true;
-	#endregion
 }

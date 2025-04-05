@@ -85,7 +85,7 @@ public class StepState
 
 	public void UpdatePlaceValueRecForTens(int number)
 	{
-		Logger!.LogInformation("{Method}, number: {number}", nameof(UpdatePlaceValueRecForTens), number);
+		//Logger!.LogInformation("{Method}, number: {number}", nameof(UpdatePlaceValueRecForTens), number);
 		PlaceValueRec = PlaceValueRec! with { Tens = number, Mask = $"{PlaceValueRec.Hundreds}{number}X" };
 	}
 
@@ -105,9 +105,6 @@ public class StepState
 	public int LastVerse = 0;  // private int LastVerse = 0;
 	public void SetLastVerse()
 	{
-		/*	
-		LastVerse =  bibleBook!.LastVerses[chapter - 1];
-		*/
 		LastVerse = Helper.GetLastVerse(BibleBook, Chapter); 
 		Logger!.LogInformation("{Method}, LastVerse: {LastVerse}", nameof(SetLastVerse), LastVerse);
 	}
@@ -165,7 +162,7 @@ public class StepState
 					Helper.GetLastVerseIsWhole(LastVerse), "X");
 			}
 		}
-		//SetNextStepForSecondPhase();
+		
 	}
 
 	public int GetVerse()
@@ -209,9 +206,6 @@ public class StepState
 
 	public string Dump()
 	{
-		//return $"Step: {Step?.Name}, Phase: {Phase}, PlaceValueRec: {PlaceValueRec?.Mask}, Chapter: {Chapter}, LastVerse: {LastVerse}";
-		//string s = PlaceValueRecHelper.Concatenate(PlaceValueRec!);
-		//return s;
 		return PlaceValueRecHelper.Concatenate(PlaceValueRec!);
 	}
 

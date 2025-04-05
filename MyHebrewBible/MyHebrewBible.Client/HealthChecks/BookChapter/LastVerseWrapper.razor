@@ -1,0 +1,24 @@
+﻿@using MyHebrewBible.Client.Enums
+
+<h3>Last Verses for the chapters in @BibleBook!.Title</h3>
+
+<div class="card mt-4 mb-3 border-warning">
+	<div class="card-header">
+	</div>
+	<div class="card-body">
+		<ol>
+			@for (int i = 1; i <= 31; i++)
+			{
+				int iLocal = i;
+				<LastVerseOrderdList CurrentBibleBook="@BibleBook" chapter="i" />
+			}
+		</ol>
+	</div>
+
+@* <div class="card-footer">	</div> *@
+
+</div>
+
+@code {
+	[Parameter, EditorRequired] public BibleBook? BibleBook { get; set; }
+}

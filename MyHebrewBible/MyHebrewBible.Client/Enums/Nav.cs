@@ -52,6 +52,8 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int HebrewRevelation = 24;
 		internal const int HealthCheckParasha = 25;
 		internal const int HealthCheckTableRowCount = 26;
+		internal const int HealthCheckQuickGrid = 27;
+		
 
 		/*
 		Un documented Health Checks
@@ -90,6 +92,7 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav HebrewRevelation = new HebrewRevelationSE();
 	public static readonly Nav HealthCheckParasha = new HealthCheckParashaSE();
 	public static readonly Nav HealthCheckTableRowCount = new HealthCheckTableRowCountSE();
+	public static readonly Nav HealthCheckQuickGrid = new HealthCheckQuickGridSE();
 
 	#endregion
 
@@ -500,6 +503,22 @@ public abstract class Nav : SmartEnum<Nav>
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 		public override bool Disabled => false;
 	}
+
+	private sealed class HealthCheckQuickGridSE : Nav
+	{
+		public HealthCheckQuickGridSE() : base($"{nameof(Id.HealthCheckQuickGrid)}", Id.HealthCheckQuickGrid) { }
+		public override string Index => "HealthChecks/QuickGrid";
+		public override string Title => "QuickGrid Test";
+		public override string Icon => "fas fa-fighter-jet";  
+		public override int Sort => Id.HealthCheckQuickGrid;
+		public override string HomeTitleSuffix => " ";
+		public override string HomeFloatRightHebrew => "";
+		public override PageListType PageListType => PageListType.SitemapPage | PageListType.HealthCheck;
+		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
+	}
+
+	//
 
 	#endregion
 
