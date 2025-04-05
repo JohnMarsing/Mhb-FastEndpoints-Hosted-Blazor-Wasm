@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Components.QuickGrid
+@using MyHebrewBible.Client.Enums
+
+@* 
+<div class="card border-info">
+	<div class="card-header">
+		ToDo - Filter Component
+	</div>
+</div>
+ *@
+
+<QuickGrid Items="@filteredItems">
+	<PropertyColumn Property="@(p => p.VerseNameAbrv)" Title="Verse" />
+	<PropertyColumn Property="@(p => p.BCV)" Title="BCV" />
+	@* <PropertyColumn Property="@(p => p.VerseDescription)" Title="Description" Sortable="false" Align="Align.Left" /> *@
+</QuickGrid>
+
+@code {
+
+	List<EnumsFV.Verses>? itemList;
+
+	protected override void OnInitialized()
+	{
+		itemList = EnumsFV.Verses.List.ToList();
+		items = itemList.AsQueryable();
+		// Set CurrentFilter
+	}
+
+	//@foreach (var item in EnumsFV.Verses.List.OrderBy(o => o.Value).ToList())
+
+	string? CurrentFilter = "M";
+
+	IQueryable<EnumsFV.Verses>? items;
+
+	IQueryable<EnumsFV.Verses>? filteredItems => items?
+	.Where(x => x.VerseName.StartsWith(CurrentFilter!.ToUpper()))
+	.OrderBy(o => o.Value);
+}

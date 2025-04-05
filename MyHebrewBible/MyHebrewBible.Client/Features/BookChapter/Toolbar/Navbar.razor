@@ -6,8 +6,9 @@
 @inject ILogger<Navbar>? Logger
 
 <nav class="navbar navbar-expand bg-primary-subtle fixed-top">
+
 	<div class="collapse navbar-collapse justify-content-start">
-		<div class="ps-1"><HomeButton /></div>
+		<div class="ps-1"><HomeDropdown OnBCVSelected="OnBCVSelected" /></div>
 	</div>
 
 	@if (CurrentBookAndChapter is null)
@@ -23,14 +24,14 @@
 												OnBookAndChapterSelected="@ReturnedBookAndChapter" />
 			</div>
 
-			<div class="@MediaQuery.Xs.DivClass">
-				<Picker CurrentBCV="CurrentBCV" OnBCVSelected="ReturnedBCV" IsXs="true" />
-			</div>
-			<div class="@MediaQuery.SmOrMdOrLgOrXl.DivClass">
-				<Picker CurrentBCV="CurrentBCV" OnBCVSelected="ReturnedBCV" IsXs="false" />
-			</div>
-
 			<div class="px-1">
+				<div class="@MediaQuery.Xs.DivClass">
+					<Picker CurrentBCV="CurrentBCV" OnBCVSelected="ReturnedBCV" IsXs="true" />
+				</div>
+				<div class="@MediaQuery.SmOrMdOrLgOrXl.DivClass">
+					<Picker CurrentBCV="CurrentBCV" OnBCVSelected="ReturnedBCV" IsXs="false" />
+				</div>
+
 			</div>
 
 			<div class="">
@@ -60,7 +61,6 @@
 	// Only used by <ConfigureDropdown>
 	[Parameter, EditorRequired] public EventCallback<Enums.MenuItem> OnMenuItemSelected { get; set; }
 
-	private string Chapter = "0";
 	private string TitleOrAbrv => CurrentBookAndChapter!.BibleBook!.Title;
 
 
@@ -71,13 +71,13 @@
 
 	private void ReturnedBookAndChapter(BookAndChapter bookAndChapter)
 	{
-		Logger!.LogInformation("{Method}, BookAndChapter: {BookAndChapter}", nameof(ReturnedBookAndChapter), bookAndChapter);
+		//Logger!.LogInformation("{Method}, BookAndChapter: {BookAndChapter}", nameof(ReturnedBookAndChapter), bookAndChapter);
 		OnBookAndChapterSelected.InvokeAsync(bookAndChapter);
 	}
 
 	private void ReturnedBCV(NumberPad.BookChapterVerse bcv)
 	{
-		Logger!.LogInformation("{Method}, BookChapterVerse: {BookChapterVerse}", nameof(ReturnedBCV), bcv);
+		//Logger!.LogInformation("{Method}, BookChapterVerse: {BookChapterVerse}", nameof(ReturnedBCV), bcv);
 		OnBCVSelected.InvokeAsync(bcv);
 	}
 

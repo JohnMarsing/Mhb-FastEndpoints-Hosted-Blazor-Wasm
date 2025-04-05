@@ -1,0 +1,38 @@
+﻿
+@foreach (var row in rows.Select((value, index) => new { value, index }))
+{
+	<div class="d-flex justify-content-center mb-2">
+		@foreach (var key in row.value)
+		{
+			<button class="btn btn-primary @FontSize font-monospace me-1 @GetDisabled(key)" title="@key" @onclick="() => KeyClick(key)">@key</button>
+		}
+	</div>
+}
+
+
+@code {
+	[Parameter] public string? FontSize { get; set; } = "fs-5";
+	[Parameter, EditorRequired] public EventCallback<char> OnKeyClick { get; set; }
+
+	private readonly string[] rows = new[]
+	{
+				"123456789",
+				"QWERTYUIOP",
+				"ASDFGHJKL",
+				"ZXCVBNM"
+		};
+
+	private readonly string[] valid = new[] { "1", "2", "3", "A", "C", "D", "E", "G", "H", "I", "J", "L", "M", "N", "O", "P", "R", "S", "T", "Z" };
+
+	protected string GetDisabled(char key)
+	{
+		string s = key.ToString();
+		return valid.Contains(s) ? "" : "disabled";
+	}
+
+	private void KeyClick(char key)
+	{
+		OnKeyClick.InvokeAsync(key);
+	}
+
+}

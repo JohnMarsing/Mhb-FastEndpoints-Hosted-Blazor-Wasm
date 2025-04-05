@@ -1,0 +1,172 @@
+﻿@using Page = MyHebrewBible.Client.Enums.Nav
+@using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
+@using MyHebrewBible.Client.Helpers
+@using NumberPadBCV = MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad
+
+@inject NavigationManager NavigationManager
+@inject ILogger<HomeDropdown>? Logger
+@inject IToastService? Toast
+
+<div class="btn-group " role="group" aria-label="Vertical button group">
+	<button @onclick="ButtonClickHome" class="btn btn-primary btn-sm" title="@Page.Home.Title">
+		<i class="@Page.Home.Icon"></i>
+	</button>
+
+	<button type="button" class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+		<span class="visually-hidden">Toggle Dropdown</span>
+	</button>
+
+	@if (RecentList is not null && RecentList.Any())
+	{
+		<ul class="dropdown-menu">
+			<li><h5 class="dropdown-header"><b>BCV History</b></h5></li>
+			@foreach (var item in RecentList)
+			{
+				<li class="dropdown-item">
+					<a @onclick="@(e => ButtonClick(item))">
+						@GlobalEnums.BibleBook.FromValue(item.BibleBookId).Abrv @item.Chapter:@item.Verse
+					</a>
+				</li>
+			}
+
+			<li><hr class="dropdown-divider"></li>
+
+			<li class="dropdown-item">
+				<button @onclick="ButtonClickEdit" title="Edit" class="btn btn-primary btn-sm">
+					<i class="fas fa-pencil-alt"></i>
+				</button>
+				@* Edit *@
+			</li>
+
+			<li class="dropdown-item">
+				<button @onclick="ButtonClickFavorites" title="@Page.FavoriteVerses.Title" class="btn btn-danger btn-sm">
+					<i class="fas fa-star"></i>
+				</button>
+			</li>
+
+			<li class="dropdown-item">
+				<button @onclick="ButtonClickParasha" title="@Page.Parasha.Title" class="btn btn-danger btn-sm">
+					<i class="@Page.Parasha.Icon"></i>
+				</button>
+			</li>
+
+		</ul>
+	}
+	else
+	{
+		<ul class="dropdown-menu">
+			<li class="dropdown-item">--No BCV--</li>
+		</ul>
+	}
+
+
+	@if (ParashaList is not null && ParashaList.Any())
+	{
+		<ul class="dropdown-menu">
+			<li><h5 class="dropdown-header"><b>Parasha</b></h5></li>
+			@foreach (var item in ParashaList)
+			{
+				<li class="dropdown-item">
+					<a @onclick="@(e => ButtonClick(item))">
+						@GlobalEnums.BibleBook.FromValue(item.BibleBookId).Abrv @item.Chapter:@item.Verse
+					</a>
+				</li>
+			}
+		</ul>
+	}
+	else
+	{
+		<ul class="dropdown-menu">
+			<li class="dropdown-item">--No Parasha--</li>
+		</ul>
+	}
+
+</div>
+
+@code {
+	[Parameter] public EventCallback<NumberPadBCV.BookChapterVerse> OnBCVSelected { get; set; }
+	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+
+	string headerColor => TextColors.Success;
+	private string? ButtonText;
+
+	protected List<BookChapterVerseHistory> RecentList = new();
+	protected List<BookChapterVerseHistory>? ParashaList = new();
+	protected bool ShowParashaList = false;
+
+	protected override void OnParametersSet()
+	{
+		try
+		{
+			RecentList = CascadingAppState!.AppState!.BookChapterState!.GetBCVs();
+			ParashaList = LoadParasha();
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(OnParametersSet));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnParametersSet)}");
+		}
+	}
+
+	private List<BookChapterVerseHistory>? LoadParasha()
+	{
+		ParashaEnums.Triennial? _reading =
+	ParashaEnums.Triennial.List
+	.Where(w => w.Date == ParashaEnums.Constants.GetNextShabbatDate())
+	.SingleOrDefault();
+
+		if (_reading is not null)
+		{
+			//public record VerseRange(BibleBook BibleBook, string ChapterVerse, int	BegId, int EndId);
+			ParashaEnums.VerseRange? verseRange;
+			verseRange = _reading.TorahVerse;
+
+			/*
+			public override VerseRange TorahVerse => new VerseRange(BibleBook.Genesis, "1:1-2:3", 1, 34);
+			public override VerseRange TorahVerse => new VerseRange(BibleBook.Exodus, "1 & 2", 1534, 1580);
+			*/
+			ParashaList!.Add(new BookChapterVerseHistory(verseRange.BibleBook.Value, 1, 2));
+			foreach (var item in _reading.Haftorah)
+			{
+
+			}
+			return ParashaList;
+		}
+		else
+		{
+			Toast!.ShowWarning("Current Triennial Parasha Not Found");
+			return null;
+		}
+	}
+
+	private void ButtonClickEdit()
+	{
+		Toast!.ShowInfo(Emoji.NotYetImplemented); // Edit BCV
+	}
+
+	private void ButtonClickFavorites()
+	{
+		Toast!.ShowInfo(Emoji.NotYetImplemented);
+	}
+
+	//
+	private void ButtonClickParasha()
+	{
+		//Toast!.ShowInfo(Emoji.NotYetImplemented);
+		ShowParashaList = true;
+
+
+
+	}
+
+	private void ButtonClickHome()
+	{
+		NavigationManager!.NavigateTo($"{Page.Home.Index}");
+	}
+
+	private void ButtonClick(BookChapterVerseHistory bcv)
+	{
+		OnBCVSelected.InvokeAsync(new NumberPadBCV.BookChapterVerse(GlobalEnums.BibleBook.FromValue(bcv.BibleBookId), bcv.Chapter, bcv.Verse));
+	}
+
+}

@@ -47,10 +47,5 @@ public class PlaceValueRecHelper // static
 		return EvalNullValues(place.Hundreds) * 100 + EvalNullValues(place.Tens) * 10 + place.Ones;
 	}
 
-	public static int CombineForceOnesToZero(PlaceValueRec place)
-	{
-		return EvalNullValues(place.Hundreds) * 100 + EvalNullValues(place.Tens) * 10;
-	}
-
 }
 

@@ -5,6 +5,12 @@ public static class Global
 	public const string ToastShowError = "An invalid operation occurred, contact your administrator";
 }
 
+public static class Emoji
+{
+	public const string NotYetImplemented = "Not yet implemented (◡︵◡)";
+}
+
+
 public static class Emails
 {
 	public static class Donations

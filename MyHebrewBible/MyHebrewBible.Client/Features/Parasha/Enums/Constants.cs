@@ -44,6 +44,7 @@ public static class Constants
 				}
 				else
 				{
+					//ToDo: add logging
 					Console.WriteLine($"Warning: {nameof(Constants)}!{nameof(GetUrl)}; {nameof(_defaultReading)} is null");
 					throw new InvalidOperationException($"{nameof(Constants)}!{nameof(GetUrl)}; {nameof(_defaultReading)} is null");
 				}
@@ -51,6 +52,7 @@ public static class Constants
 		}
 		catch (Exception ex)
 		{
+			//ToDo: add logging
 			Console.WriteLine($"Exception: {nameof(Constants)}!{nameof(GetUrl)}; ex: {ex}");
 			throw;
 		}

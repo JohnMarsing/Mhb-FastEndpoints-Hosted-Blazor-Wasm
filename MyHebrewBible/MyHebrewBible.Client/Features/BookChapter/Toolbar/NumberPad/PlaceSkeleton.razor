@@ -1,11 +1,9 @@
 ﻿@if (StepState!.HundredToggleButtonIsVisible)
 {
-	@* <div class="d-flex justify-content-center"></div> *@
 	<div>
 		@PsalmsHundredsRow
 	</div>
 }
-
 
 @if (!StepState!.HundredToggleButtonIsVisible)
 {
@@ -31,14 +29,11 @@
 
 @code {
 	[Parameter, EditorRequired] public StepState? StepState { get; set; }
-	[Parameter] public bool IsDebug { get; set; }
 	[Parameter, EditorRequired] public RenderFragment? TitleContent { get; set; }
 	[Parameter] public RenderFragment? PsalmsHundredsRow { get; set; }
 	[Parameter] public RenderFragment? TensColumn { get; set; }
 	[Parameter] public RenderFragment? OnesColumn { get; set; }
 	[Parameter] public RenderFragment? FooterDebugContent { get; set; }
 	[Parameter] public RenderFragment? Footer { get; set; }
-
+	[Parameter] public bool IsDebug { get; set; }
 }
-
-	@* @if (StepState!.HundredPlaceIsVisible) { <div class="d-flex justify-content-center">@HundredsColumn</div> } *@

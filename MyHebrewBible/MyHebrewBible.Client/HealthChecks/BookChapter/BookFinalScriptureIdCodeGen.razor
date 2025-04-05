@@ -1,0 +1,22 @@
+﻿@using MyHebrewBible.Client.Enums
+
+<h3>Book Final Scripture Id | CodeGen</h3>
+
+
+@foreach (var item in @BibleBook.List.ToList().OrderBy(o => o.Value)) 
+{
+	<p>@GetLastChapterSummary(item)</p>
+} 
+
+
+
+
+@code {
+
+	protected string GetLastChapterSummary(BibleBook bibleBook)
+	{
+		return $"public const int {bibleBook.Name} = {BibleBook.List.ToList().Where(w => w.Value == bibleBook.Value).Sum(x => x.LastVerses.Sum())};";
+	}
+
+
+}

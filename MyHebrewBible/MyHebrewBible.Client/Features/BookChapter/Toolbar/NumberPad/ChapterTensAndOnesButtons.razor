@@ -45,7 +45,7 @@
 
 	protected override void OnParametersSet()
 	{
-		Logger!.LogInformation("{Method}, LC: {LastChapter}", nameof(OnParametersSet), StepState!.LastChapter);
+		//Logger!.LogInformation("{Method}, LC: {LastChapter}", nameof(OnParametersSet), StepState!.LastChapter);
 
 		MaxTensPlace = (StepState!.LastChapter / 10) % 10;
 		SelectedTensPlace = StepState!.PlaceValueRec!.Tens is not null ? (int)StepState!.PlaceValueRec!.Tens! : 0;
@@ -57,8 +57,8 @@
 			if (onesDigit == 0) onesDigit = 10;
 			MaxOnesPlace = onesDigit;
 		}
-		Logger!.LogWarning("...TensPlace Selected {SelectedTensPlace}/Max: {MaxTensPlace}; MaxOnesPlace: {MaxOnesPlace}"
-	, SelectedTensPlace, MaxTensPlace, MaxOnesPlace);
+		//Logger!.LogWarning("...TensPlace Selected {SelectedTensPlace}/Max: {MaxTensPlace}; MaxOnesPlace: {MaxOnesPlace}"
+		//, SelectedTensPlace, MaxTensPlace, MaxOnesPlace);
 	}
 
 	protected string GetButtonClass(int number)
@@ -140,8 +140,8 @@
 	{
 		bool skipChapterOnes = (number > 0 && number == LastTensPlaceIsWhole);
 
-		Logger!.LogInformation("{Method}, number: {number}, Step.Name: {Step.Name}, LastTensPlaceIsWhole: {LastTensPlaceIsWhole}, skipChapterOnes: {skipChapterOnes}"
-			, nameof(ButtonClick), number, StepState!.Step!.Name, LastTensPlaceIsWhole, skipChapterOnes);
+		//Logger!.LogInformation("{Method}, number: {number}, Step.Name: {Step.Name}, LastTensPlaceIsWhole: {LastTensPlaceIsWhole}, skipChapterOnes: {skipChapterOnes}"
+		//	, nameof(ButtonClick), number, StepState!.Step!.Name, LastTensPlaceIsWhole, skipChapterOnes);
 
 		OnNumberSelected.InvokeAsync(new ReturnedChapterNumberVM(number, skipChapterOnes));
 	}
