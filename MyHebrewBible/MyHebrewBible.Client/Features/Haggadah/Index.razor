@@ -1,0 +1,48 @@
+﻿@page "/Haggadah"
+
+@using Page = MyHebrewBible.Client.Enums.Nav
+@using MyHebrewBible.Client.Features.Haggadah.Toolbar
+
+<PageTitle>@Page.Haggadah.Title</PageTitle>
+
+<NavbarHaggadah Section="Section" />
+
+<br />
+
+@foreach (var section in Enums.Content.List
+		.OrderBy(o => o.Value).ToList())
+{
+	<ContentSkeleton Content=section Language="Language">
+		<EngBody>
+			@foreach (var detailEng in Enums.ContentDetail.List
+				.Where(w => w.ParentId == section.Value)
+				.OrderBy(o => o.Value).ToList())
+			{
+				@detailEng.EngBody
+			}
+		</EngBody>
+
+		<EspBody>
+			@foreach (var detailEsp in Enums.ContentDetail.List
+				.Where(w => w.ParentId == section.Value)
+				.OrderBy(o => o.Value).ToList())
+			{
+				@detailEsp.EspBody
+			}
+		</EspBody>
+
+	</ContentSkeleton>
+
+}
+
+@code {
+	[Parameter, EditorRequired] public DisplayLanguage? Language { get; set; }
+
+	protected int Section;
+
+	protected override void OnParametersSet()
+	{
+		Language = Haggadah.DisplayLanguage.Both;
+		Section = 2;
+	}
+}

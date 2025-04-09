@@ -1,0 +1,45 @@
+﻿
+<div class="card border-primary p-2 my-2">
+
+	<sup class="text-center mt-2">@Content!.Value</sup>
+
+	<div class="row">
+		@if (Language == Haggadah.DisplayLanguage.English || Language == Haggadah.DisplayLanguage.Both)
+		{
+			<div class="@Cols">@Content!.EngTitle</div>
+		}
+
+		@if (Language == Haggadah.DisplayLanguage.Spanish || Language == Haggadah.DisplayLanguage.Both)
+		{
+			<div class="@Cols">@Content!.EspTitle</div>
+		}
+	</div>  <!-- Title -->
+
+	<div class="row">
+		@if (Language == Haggadah.DisplayLanguage.English || Language == Haggadah.DisplayLanguage.Both)
+		{
+			<div class="@Cols">
+				@EngBody
+			</div>
+
+		}
+
+		@if (Language == Haggadah.DisplayLanguage.Spanish || Language == Haggadah.DisplayLanguage.Both)
+		{
+			<div class="@Cols">
+				@EspBody
+			</div>
+		}
+	</div>  <!-- Body -->
+
+</div> <!-- card -->
+@code {
+	[Parameter, EditorRequired] public Enums.Content? Content { get; set; }
+	[Parameter, EditorRequired] public DisplayLanguage? Language { get; set; } = DisplayLanguage.Both;
+
+	[Parameter, EditorRequired] public RenderFragment? EngBody { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? EspBody { get; set; }
+
+	protected string Cols => Language == DisplayLanguage.Both ? "col-6" : "col-12";
+
+}

@@ -1,0 +1,64 @@
+﻿@using MyHebrewBible.Client.Layout
+@using Page = MyHebrewBible.Client.Enums.Nav
+
+
+@inject NavigationManager Navigation
+
+<div class="container-fluid fixed-top bg-secondary-subtle p-2">
+	<div class="row align-items-center">
+
+		<div class="col-auto">
+			<button class="btn btn-primary btn-sm" @onclick="NavigateToHome">
+				<i class="@Page.Home.Icon"></i>
+			</button>
+		</div>
+
+		<div class="col">
+			<div class="progress" style="height: 20px;">
+				<div class="progress-bar" style='@GetProgressStyle()'>
+					@GetProgressPercent()
+				</div>
+			</div>
+		</div>
+
+		<div class="col-auto">
+			<button class="btn btn-primary btn-sm" @onclick="NavigateToAbout">
+				<i class="@Page.About.Icon"></i>
+			</button>
+		</div>
+
+	</div>
+</div>
+
+<br />
+
+@code {
+
+	protected string GetProgressStyle()
+	{
+		//<div class="progress-bar" style='width:@progressPercentageString'>
+		return $"width:{progressPercentage}%";
+	}
+
+	protected string GetProgressPercent()
+	{
+		//	@progressPercentageString
+		return $"{progressPercentage}%";
+	}
+
+	[Parameter, EditorRequired] public int Section { get; set; }
+
+	//private int progressValue = 9; 
+	private int progressPercentage => (Section) * 10; //(Section - 1)
+	//private string progressPercentageString => ((Section) * 10).ToString() + "%";  // Section - 1
+
+	private void NavigateToHome()
+	{
+		Navigation.NavigateTo("/");
+	}
+
+	private void NavigateToAbout()
+	{
+		Navigation.NavigateTo("/about");
+	}
+}
