@@ -45,6 +45,14 @@ public abstract class ContentDetail : SmartEnum<ContentDetail>
 		internal const int SecondCup01 = 29;
 		internal const int SecondCup02 = 30;
 		internal const int SecondCup03 = 31;
+
+		internal const int ThirdCup01 = 32;
+		internal const int ThirdCup02 = 33;
+
+		internal const int FourthCup01 = 34;
+		internal const int FourthCup02 = 35;
+		internal const int FourthCup03 = 36;
+		internal const int FourthCup04 = 37;
 	}
 	#endregion
 
@@ -62,7 +70,7 @@ public abstract class ContentDetail : SmartEnum<ContentDetail>
 	public static readonly ContentDetail FirstPassover06 = new FirstPassover06SE();
 	public static readonly ContentDetail FirstPassover07 = new FirstPassover07SE();
 	public static readonly ContentDetail FirstPassover08 = new FirstPassover08SE();
-	
+
 	public static readonly ContentDetail PassoverDeliverance01 = new PassoverDeliverance01SE();
 
 	public static readonly ContentDetail StoryOfRedemption01 = new StoryOfRedemption01SE(); // Reader 1
@@ -80,18 +88,23 @@ public abstract class ContentDetail : SmartEnum<ContentDetail>
 	public static readonly ContentDetail Matzah02 = new Matzah02SE(); // Reader
 	public static readonly ContentDetail Matzah03 = new Matzah03SE(); // Leader
 
-	public static readonly ContentDetail FirstCup01 = new FirstCup01SE(); // Leader
-	public static readonly ContentDetail FirstCup02 = new FirstCup02SE(); // Reader
-	public static readonly ContentDetail FirstCup03 = new FirstCup03SE(); // Leader
+	public static readonly ContentDetail FirstCup01 = new FirstCup01SE();
+	public static readonly ContentDetail FirstCup02 = new FirstCup02SE();
+	public static readonly ContentDetail FirstCup03 = new FirstCup03SE();
 
-	public static readonly ContentDetail SecondCup01 = new SecondCup01SE(); // Leader
-	public static readonly ContentDetail SecondCup02 = new SecondCup02SE(); // Reader
-	public static readonly ContentDetail SecondCup03 = new SecondCup03SE(); // Leader
+	public static readonly ContentDetail SecondCup01 = new SecondCup01SE();
+	public static readonly ContentDetail SecondCup02 = new SecondCup02SE();
+	public static readonly ContentDetail SecondCup03 = new SecondCup03SE();
+
+	public static readonly ContentDetail ThirdCup01 = new ThirdCup01SE();
+	public static readonly ContentDetail ThirdCup02 = new ThirdCup02SE();
+
+	public static readonly ContentDetail FourthCup01 = new FourthCup01SE();
+	public static readonly ContentDetail FourthCup02 = new FourthCup02SE();
+	public static readonly ContentDetail FourthCup03 = new FourthCup03SE();
+	public static readonly ContentDetail FourthCup04 = new FourthCup04SE();
 
 	/*
-SecondCup = 7;
-ThirdCup = 8;
-FourthCup = 9;
 Charoset = 10;
 Dinner = 11;
 FithCup = 12;
@@ -808,8 +821,12 @@ NextYear = 15;
 			<i class='fas fa-quote-left'></i> Blessed are You Yehovah our Elohim, King of the universe Who creates the fruit of the Vine 
 			We toast to the Renewed Covenant that Messiah gave us to rescue us and redeem us!
 		</p>
+		
 		<p class='fs-5'>
-			All Shout <span class='badge bg-warning text-dark'> L'Chaim <i class='fas fa-exclamation'></i> </span>  , then  –  DRINK THE CUP <i class='text-danger fas fa-wine-glass-alt'></i>
+			<span class='text-danger fw-bold'>All Shout</span> 
+			<span class='badge bg-danger text-white'> L'Chaim <i class='fas fa-exclamation'></i></span> 
+			<i class='fas fa-long-arrow-alt-right'></i>
+			DRINK THE CUP <i class='text-danger fas fa-wine-glass-alt'></i>
 		</p>
 		");
 
@@ -819,7 +836,10 @@ NextYear = 15;
 			<i class='fas fa-quote-left '></i> Bendito eres Tú, YHWH nuestro Elohim, Rey del universo, Quien crea el fruto de la Vid.
 		</p>
 		<p class='fs-5'>
-			Todos gritan <span class='badge bg-warning text-dark'> L'Chaim <i class='fas fa-exclamation'></i> </span>, luego - BEBEN LA COPA <i class='text-danger fas fa-wine-glass-alt'></i>
+			<span class='text-danger fw-bold'>Todos gritan</span> 
+			<span class='badge bg-danger text-white'> L'Chaim <i class='fas fa-exclamation'></i></span> 
+			<i class='fas fa-long-arrow-alt-right'></i>
+			BEBEN LA COPA <i class='text-danger fas fa-wine-glass-alt'></i>
 		</p>
 		");
 	}
@@ -845,7 +865,6 @@ NextYear = 15;
 		</p>
 		");
 	}
-
 
 
 	private sealed class SecondCup01SE : ContentDetail
@@ -876,9 +895,11 @@ NextYear = 15;
 		</p>
 
 		<p class='fs-5'>
-			All Shout <span class='badge bg-warning text-dark'> L'Chaim <i class='fas fa-exclamation'></i> </span>  , then  –  DRINK THE CUP <i class='text-danger fas fa-wine-glass-alt'></i>
+			<span class='text-danger fw-bold'>All Shout</span> 
+			<span class='badge bg-danger text-white'> L'Chaim <i class='fas fa-exclamation'></i></span> 
+			<i class='fas fa-long-arrow-alt-right'></i>
+			DRINK THE CUP <i class='text-danger fas fa-wine-glass-alt'></i>
 		</p>
-
 		");
 
 		public override MarkupString EspBody => (MarkupString)(@"
@@ -904,7 +925,10 @@ NextYear = 15;
 			<sup class='text-primary fw-bold'>15</sup> ... Y después de haberlos desarraigado, volveré a tener compasión de ellos....
 		</p>
 		<p class='fs-5'>
-			Todos gritan <span class='badge bg-warning text-dark'> L'Chaim <i class='fas fa-exclamation'></i> </span>, luego - BEBEN LA COPA <i class='text-danger fas fa-wine-glass-alt'></i>
+			<span class='text-danger fw-bold'>Todos gritan</span> 
+			<span class='badge bg-danger text-white'> L'Chaim <i class='fas fa-exclamation'></i></span> 
+			<i class='fas fa-long-arrow-alt-right'></i>
+			BEBEN LA COPA <i class='text-danger fas fa-wine-glass-alt'></i>
 		</p>
 
 		");
@@ -963,14 +987,336 @@ NextYear = 15;
 	}
 
 
+	private sealed class ThirdCup01SE : ContentDetail
+	{
+		public ThirdCup01SE() : base($"{nameof(Id.ThirdCup01)}", Id.ThirdCup01) { }
+		public override int ParentId => Content.ThirdCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+		<p class='fs-5'>
+			<span class='text-success fw-bold'>Leader:</span>
+			We are set-free to know our identity in Messiah, aka, in Israel 
+		</p>
+
+		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+			<b>Hosea 1:9</b><br />
+			<sup class='text-primary fw-bold'>9</sup>  
+			And Yehovah said, “Name him Lo-ammi, for you are not My people, and I am not your God.” 
+		</p>		
+
+		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+			<b>1 Peter 2:10</b><br />
+			<sup class='text-primary fw-bold'>10</sup>  
+			Which in time past were not a people, but are now the people of God...
+		</p>		
+
+		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+			<b>Hosea 1:10</b><br />
+			<sup class='text-primary fw-bold'>10</sup>  
+			...and it will be that in the place where it is said to them “You are not My people,” It will be said to them, “You are the sons of the living God.”
+			<sup>(also Romans 9:25-26)</sup>
+		</p>
+
+		<p class='fs-5'>
+			We embrace our new identity as the Israel of God, a people who had not known who they were for over 2730 years, but now we do.
+			We toast to knowing our identity as the House of Israel thru the blood of Messiah Yeshua 
+		</p>
+
+		<p class='fs-5'>
+			<span class='text-danger fw-bold'>All Shout</span> 
+			<span class='badge bg-danger text-white'> L'Chaim <i class='fas fa-exclamation'></i></span> 
+			<i class='fas fa-long-arrow-alt-right'></i>
+			DRINK THE CUP <i class='text-danger fas fa-wine-glass-alt'></i>
+		</p>
+		");
+
+		public override MarkupString EspBody => (MarkupString)(@"
+		<p class='fs-5'>
+			<span class='text-success fw-bold'>Líder:</span> 
+			Somos liberados para conocer nuestra identidad en el Mesías, también conocida como en Israel. 
+		</p>
+
+		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+			<b>Oseas 1:9</b><br />
+			<sup class='text-primary fw-bold'>9</sup>  
+			Y Yahvé dijo: “Nómbrenlo Lo-ammi, porque ustedes no son Mi pueblo, y Yo no soy su Dios.”
+		</p>
+
+		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+			<b>1 Peter 2:10</b><br />
+			<sup class='text-primary fw-bold'>10</sup>  
+			Que en tiempos pasados no eran un pueblo, pero ahora son el pueblo de Dios...
+		</p>		
+
+		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+			<b>Oseas 1:0</b><br />
+			<sup class='text-primary fw-bold'>10</sup>  
+			...Y será que en el lugar donde se les dijo “No son Mi pueblo,” se les dirá, “Son los hijos del Dios viviente.”
+			<sup>(también Romanos 9:25-26)</sup>  
+		</p>		
+
+		<p class='fs-5'>
+			Abrazamos nuestra nueva identidad como el Israel de Dios, un pueblo que no sabía quiénes eran durante más de 2730 años, pero ahora lo sabemos.
+			Brindamos por conocer nuestra identidad como la Casa de Israel a través de la sangre del Mesías Yeshua
+		</p>
+		
+		<p class='fs-5'>
+			<span class='text-danger fw-bold'>Todos gritan</span> 
+			<span class='badge bg-danger text-white'> L'Chaim <i class='fas fa-exclamation'></i></span> 
+			<i class='fas fa-long-arrow-alt-right'></i>
+			BEBEN LA COPA <i class='text-danger fas fa-wine-glass-alt'></i>
+		</p>
+		");
+	}
+
+	private sealed class ThirdCup02SE : ContentDetail
+	{
+		public ThirdCup02SE() : base($"{nameof(Id.ThirdCup02)}", Id.ThirdCup02) { }
+		public override int ParentId => Content.ThirdCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+		<p class='fs-5'>
+			<span class='text-danger fw-bold'>Reader:</span> 
+			Very closely aligned with a return to identity is the keeping of God’s instructions. 
+			We just  read that Ephraim had called God’s Torah a strange thing in Hosea.
+		</p>
+
+		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+			<b>Jeremiah 31:19</b><br />
+			<sup class='text-primary fw-bold'>19</sup>
+			“For after my turning back I repented, And after I was instructed I slapped myself on the thigh. 
+			I was ashamed and even humiliated because I carried the disgrace of my youth [as a nation]”
+		</p>		
+
+		<p class='fs-5'>
+			Our testimonies of returning to God’s Instructions confirm this call to be the born again Ephraim because of his renewed covenant.
+		</p>
+
+		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+			<b>Psalms 78:9-11</b><br />
+			<sup class='text-primary fw-bold'>11</sup>
+			The children of Ephraim  didn't keep God's covenant, and refused to walk in his law. They forgot his acts; His wondrous works that he had shown them. 
+		</p>		
+		");
+
+		public override MarkupString EspBody => (MarkupString)(@"
+		<p class='fs-5'>
+			<span class='text-danger fw-bold'>Lector:</span> 
+			Muy alineado con un retorno a la identidad está el guardar las instrucciones de Dios. 
+			Acabamos de leer que Efraím había llamado a la Torá de Dios algo extraño en Oseas.
+		</p>
+
+		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+			<b>Jeremías 31:19</b><br />
+			<sup class='text-primary fw-bold'>19</sup>
+			“Porque después de mi regreso me arrepentí, y después de ser instruido me golpeé el muslo. 
+			Me avergoncé y hasta me humillé porque cargué con la desgracia de mi juventud [como nación].”
+		</p>
+
+		<p class='fs-5'>
+			Nuestros testimonios de regresar a las Instrucciones de Dios confirman este llamado a ser el Efraím nacido de nuevo debido a su nuevo pacto.
+		</p>
+
+		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+			<b>Salmo 78:9-11</b><br />
+			<sup class='text-primary fw-bold'>11</sup>
+			Los hijos de Efraím no guardaron el pacto de Dios y se negaron a caminar en su ley. Olvidaron sus actos; Sus obras maravillosas que les había mostrado.
+		</p>		
+		");
+	}
+
+
+	private sealed class FourthCup01SE : ContentDetail
+	{
+		public FourthCup01SE() : base($"{nameof(Id.FourthCup01)}", Id.FourthCup01) { }
+		public override int ParentId => Content.FourthCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+		<p class='fs-5'>
+			<span class='text-success fw-bold'>Leader:</span>
+			(there is Liberty in God's perfect Law)
+		</p>
+
+		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+			<b>James 1:25</b><br />
+			<sup class='text-primary fw-bold'>25</sup>  
+			But the one who looks into the perfect law, the law of liberty, and perseveres, being no hearer who forgets but a doer who acts, he will be blessed in his doing.
+		</p>
+
+		<ul class='fs-5'>
+			<li>We are set-free to know God's Holy instructions.</li>
+			<li>Ephraim can now call God's instructions good, right, holy and spiritual.</li>
+			<li>We can say with David in Psalm 119</li>
+		");
+
+		public override MarkupString EspBody => (MarkupString)(@"
+		<p class='fs-5'>
+			<span class='text-success fw-bold'>Líder:</span> 
+			(hay Libertad en la Ley perfecta de Dios)
+		</p>
+
+		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+			<b>Santiago 1:25</b><br />
+			<sup class='text-primary fw-bold'>25</sup>  
+			Pero el que mira en la ley perfecta, la ley de la libertad, y persevera, no siendo un oidor que olvida sino un hacedor que actúa, será bendecido en su hacer.
+		</p>
+
+		<ul class='fs-5'>
+			<li>Somos liberados para conocer las Santas instrucciones de Dios.</li>
+			<li>Efraím ahora puede llamar a las instrucciones de Dios buenas, justas, santas y espirituales.</li>
+			<li>Podemos decir con David en Salmo 119:12-16:</li>
+		");
+	}
+
+	private sealed class FourthCup02SE : ContentDetail
+	{
+		public FourthCup02SE() : base($"{nameof(Id.FourthCup02)}", Id.FourthCup02) { }
+		public override int ParentId => Content.FourthCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+		<p class='fs-5'>
+			<span class='text-danger fw-bold'>All Read:</span> 
+		</p>
+
+		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+			<b>Psalm 119:12-16</b><br />
+			<sup class='text-primary fw-bold'>12</sup>
+			Blessed are You, O Yehovah; Teach me Your statutes.
+			<sup class='text-primary fw-bold'>13</sup>
+			With my lips I have recounted All the judgments of Your mouth.
+			<sup class='text-primary fw-bold'>14</sup>
+			I have rejoiced in the way of Your testimonies, As much as in all riches.
+			<sup class='text-primary fw-bold'>15</sup>
+			I will muse upon Your precepts And look upon Your ways.
+			<sup class='text-primary fw-bold'>16</sup>
+			I shall delight in Your statutes; I shall not forget Your word.
+		</p>
+		");
+
+		public override MarkupString EspBody => (MarkupString)(@"
+		<p class='fs-5'>
+			<span class='text-danger fw-bold'>All Leer:</span> 
+		</p>
+
+		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+			<b>Salmo 119:12-16</b><br />
+			<sup class='text-primary fw-bold'>12</sup>
+			Bendito eres Tú, Oh Yahvé; Enséñame Tus estatutos.
+			<sup class='text-primary fw-bold'>13</sup>
+			Con mis labios he relatado Todos los juicios de Tu boca.
+			<sup class='text-primary fw-bold'>14</sup>
+			Me he regocijado en el camino de Tus testimonios, Tanto como en todas las riquezas.
+			<sup class='text-primary fw-bold'>15</sup>
+			Meditaré en Tus preceptos Y miraré Tus caminos.
+			<sup class='text-primary fw-bold'>16</sup>
+			Me deleitaré en Tus estatutos; No olvidaré Tu palabra.
+		</p>
+		");
+	}
+
+	private sealed class FourthCup03SE : ContentDetail
+	{
+		public FourthCup03SE() : base($"{nameof(Id.FourthCup03)}", Id.FourthCup03) { }
+		public override int ParentId => Content.FourthCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+		<p class='fs-5'>
+			<span class='text-success fw-bold'>Leader:</span>
+			 We toast to joyfully to receiving God’s Holy Instructions 
+		</p>
+		
+		<p class='fs-5'>
+			<span class='text-danger fw-bold'>All Shout</span> 
+			<span class='badge bg-danger text-white'> L'Chaim <i class='fas fa-exclamation'></i></span> 
+			<i class='fas fa-long-arrow-alt-right'></i>
+			DRINK THE CUP <i class='text-danger fas fa-wine-glass-alt'></i>
+		</p>
+
+		<p class='fs-5'>
+			 By our redemption thru the power of the blood of the Lamb of God and the giving of His Holy Spirit we have been set-free 
+			 from the bondage of the sins that caused Ephraim Israel to be divorced from Yehovah and sifted among the nations. WE HAVE BEEN REDEEMED!
+		</p>
+
+		<p class='fs-5'>
+			We will all say together this phrase for each item 1-10, one at a time:	
+		</p>
+		");
+
+		public override MarkupString EspBody => (MarkupString)(@"
+		<p class='fs-5'>
+			<span class='text-success fw-bold'>Líder:</span> 
+			Brindamos con alegría por recibir las Santas Instrucciones de Dios  
+		</p>
+
+		<p class='fs-5'>
+			<span class='text-danger fw-bold'>Todos gritan</span> 
+			<span class='badge bg-danger text-white'> L'Chaim <i class='fas fa-exclamation'></i></span> 
+			<i class='fas fa-long-arrow-alt-right'></i>
+			BEBEN LA COPA <i class='text-danger fas fa-wine-glass-alt'></i>
+		</p>
+
+
+		<p class='fs-5'>
+			 Por nuestra redención a través del poder de la sangre del Cordero de Dios y la entrega de Su Espíritu Santo, hemos sido liberados 
+			 de la esclavitud de los pecados que causaron que Efraím Israel fuera divorciado de Yahvé y tamizado entre las naciones. ¡HEMOS SIDO REDIMIDOS!
+		</p>
+
+		<p class='fs-5'>
+			Todos diremos juntos esta frase para cada ítem del 1 al 10, uno a la vez:
+		</p>
+		");
+	}
+
+	private sealed class FourthCup04SE : ContentDetail
+	{
+		public FourthCup04SE() : base($"{nameof(Id.FourthCup04)}", Id.FourthCup04) { }
+		public override int ParentId => Content.FourthCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+		<p class='fs-5'>
+			<span class='text-danger fw-bold'>All Shout</span> <i class='fas fa-level-down-alt'></i>
+		</p>
+
+		<div class='bg-danger-subtle p-2'>
+			<p class='fs-5 fst-italic'>
+				By His blood we have been set-free from... <u>1-10</u> ...<b>HalleluYah!</b>
+			</p>
+			<ol class='fs-5'>
+				<li>...sin & rebellion</li>
+				<li>...anger, bitterness & resentment</li>
+				<li>...fear</li>
+				<li>...division (from Judah)</li>
+				<li>...lies  - (from false teachers and our forefathers)</li>
+				<li>...false religious systems with their false gods and false holidays,</li>
+				<li>...curses - (the long term curses put on us by Yehovah because of our rebellion)</li>
+				<li>...blindness  -  (anti Torah beliefs and identity)</li>
+				<li>...calling ourselves gentiles (identity)</li>
+				<li>...being jealous of Judah, anti Judah attitudes and behavior</li>
+			</ol>
+		</div>
+		");
+
+		public override MarkupString EspBody => (MarkupString)(@"
+		<p class='fs-5'>
+			<span class='text-danger fw-bold'>All Gritan:</span> <i class='fas fa-level-down-alt'></i>
+		</p>
+
+		<div class='bg-danger-subtle p-2'>
+			<p class='fs-5 fst-italic'>
+				Por Su sangre hemos sido liberados de... <u>1-10</u>, ...<b>¡HalleluYah!</b>
+			</p>
+
+			<ol class='fs-5'>
+				<li>...pecado y rebelión  </li>
+				<li>...ira, amargura y resentimiento</li>
+				<li>...miedo</li>
+				<li>...división (de Judá)</li>
+				<li>...mentiras - (de falsos maestros y nuestros antepasados)</li>
+				<li>...sistemas religiosos falsos con sus dioses falsos y fiestas falsas,</li>
+				<li>...maldiciones - (las maldiciones a largo plazo puestas sobre nosotros por Yahvé debido a nuestra rebelión)</li>
+				<li>...ceguera - (creencias e identidad anti-Torá)</li>
+				<li>...llamarnos gentiles (identidad)</li>
+				<li>...estar celosos de Judá, actitudes y comportamientos anti-Judá</li>
+			</ol>
+		</div>
+		");
+	}
 
 	#endregion
 }
-/*
-	fas fa-quote-left fa-2x <i class='fas fa-exclamation'></i>
-	<span class='badge rounded-pill bg-info'>6</span>
-	<span class='badge bg-warning text-dark'> <i class='fas fa-exclamation'></i> </span>
-	<i class='fas fa-wine-glass-alt'></i>
-*/
 
 // Ignore Spelling: Matzah

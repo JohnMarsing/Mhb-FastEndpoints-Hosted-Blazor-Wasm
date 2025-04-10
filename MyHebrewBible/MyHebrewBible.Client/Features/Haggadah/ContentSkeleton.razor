@@ -1,22 +1,23 @@
-﻿
+﻿@using MyHebrewBible.Client.Features.Haggadah.Enums
+
 <div class="card border-primary p-2 my-2">
 
 	<sup class="text-center mt-2">@Content!.Value</sup>
 
 	<div class="row">
-		@if (Language == Haggadah.DisplayLanguage.English || Language == Haggadah.DisplayLanguage.Both)
+		@if (Language == DisplayLanguage.English || Language == DisplayLanguage.Both)
 		{
 			<div class="@Cols">@Content!.EngTitle</div>
 		}
 
-		@if (Language == Haggadah.DisplayLanguage.Spanish || Language == Haggadah.DisplayLanguage.Both)
+		@if (Language == DisplayLanguage.Spanish || Language == DisplayLanguage.Both)
 		{
 			<div class="@Cols">@Content!.EspTitle</div>
 		}
 	</div>  <!-- Title -->
 
 	<div class="row">
-		@if (Language == Haggadah.DisplayLanguage.English || Language == Haggadah.DisplayLanguage.Both)
+		@if (Language == DisplayLanguage.English || Language == DisplayLanguage.Both)
 		{
 			<div class="@Cols">
 				@EngBody
@@ -24,7 +25,7 @@
 
 		}
 
-		@if (Language == Haggadah.DisplayLanguage.Spanish || Language == Haggadah.DisplayLanguage.Both)
+		@if (Language == DisplayLanguage.Spanish || Language == DisplayLanguage.Both)
 		{
 			<div class="@Cols">
 				@EspBody

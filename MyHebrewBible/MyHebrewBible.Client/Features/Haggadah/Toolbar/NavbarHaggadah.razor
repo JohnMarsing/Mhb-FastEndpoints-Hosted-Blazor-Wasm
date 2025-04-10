@@ -1,7 +1,6 @@
 ﻿@using MyHebrewBible.Client.Layout
 @using Page = MyHebrewBible.Client.Enums.Nav
 
-
 @inject NavigationManager Navigation
 
 <div class="container-fluid fixed-top bg-secondary-subtle p-2">
@@ -22,9 +21,8 @@
 		</div>
 
 		<div class="col-auto">
-			<button class="btn btn-primary btn-sm" @onclick="NavigateToAbout">
-				<i class="@Page.About.Icon"></i>
-			</button>
+			<ConfigureDropdown OnMenuItemSelected="@ReturnedMenuItem" />
+			
 		</div>
 
 	</div>
@@ -33,6 +31,7 @@
 <br />
 
 @code {
+	[Parameter, EditorRequired] public EventCallback<Enums.DisplayLanguage> OnMenuItemSelected { get; set; }
 
 	protected string GetProgressStyle()
 	{
@@ -57,8 +56,9 @@
 		Navigation.NavigateTo("/");
 	}
 
-	private void NavigateToAbout()
+	private void ReturnedMenuItem(Enums.DisplayLanguage item)
 	{
-		Navigation.NavigateTo("/about");
+		OnMenuItemSelected.InvokeAsync(item);
 	}
+
 }
