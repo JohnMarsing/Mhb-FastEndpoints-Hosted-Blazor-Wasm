@@ -1,0 +1,56 @@
+﻿
+<div class="btn-group-vertical btn-group-sm dropstart" role="group" aria-label="Vertical button group">
+	<button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+		<i class="fas fa-cogs"></i>
+	</button>
+	<ul class="dropdown-menu">
+		<li class="fs-5 fw-bold dropdown-header">Language</li>
+		@foreach (var item in Enums.DisplayLanguage.List)
+		{
+			<li class="dropdown-item">
+				<button @onclick="@(e => ButtonClick(item))"
+				type="button" class="btn btn-outline-primary">
+					@item.Title
+				</button>
+			</li>
+		} 
+	</ul>
+
+</div>
+
+@code {
+	[Parameter] public EventCallback<Enums.DisplayLanguage> OnMenuItemSelected { get; set; }
+	[CascadingParameter] public CascadingAppState? State { get; set; }
+
+	//protected string Active = string.Empty;
+	//protected Enums.DisplayLanguage language;
+
+	private void ButtonClick(Enums.DisplayLanguage item)
+	{
+		OnMenuItemSelected.InvokeAsync(item);
+	}
+
+
+	// async Task
+	// private void ReturnedMenuItem(Enums.DisplayLanguage item)
+	// {
+	// 	//Language = item;
+	// 	language = State!.AppState!.HaggadahState!.GetLanguage();
+	// 	//await State!.AppState!.BookChapterState!.TogglePickerDebug();
+	// 	//State!.AppState!.BookChapterState!.GetACV();
+	// }
+
+	/*
+	protected override void OnInitialized()
+	{
+		GetCurrentVisibilityState
+	}
+
+	private Permutation GetCurrentVisibilityState()
+	{
+		int _permutation = CascadingAppState!.AppState!.ParashaState!.Get();
+		return (Permutation)_permutation;
+		}
+				 */
+
+}

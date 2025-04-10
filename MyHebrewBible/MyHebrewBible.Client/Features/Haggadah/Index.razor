@@ -1,48 +1,72 @@
 ﻿@page "/Haggadah"
 
-@using Page = MyHebrewBible.Client.Enums.Nav
+@using MyHebrewBible.Client.Features.Haggadah.Enums
 @using MyHebrewBible.Client.Features.Haggadah.Toolbar
+@using Page = MyHebrewBible.Client.Enums.Nav
 
 <PageTitle>@Page.Haggadah.Title</PageTitle>
 
-<NavbarHaggadah Section="Section" />
+<NavbarHaggadah Section="Section" OnMenuItemSelected="ReturnedMenuItem" />
 
-<br />
+<LoadingProgress>
+	<div class="mt-5">
+		@foreach (var section in Enums.Content.List
+			.OrderBy(o => o.Value).ToList())
+		{
+			<ContentSkeleton Content=section Language="Language">
+				<EngBody>
+					@foreach (var detailEng in Enums.ContentDetail.List
+							.Where(w => w.ParentId == section.Value)
+							.OrderBy(o => o.Value).ToList())
+					{
+						@detailEng.EngBody
+					}
+				</EngBody>
 
-@foreach (var section in Enums.Content.List
-		.OrderBy(o => o.Value).ToList())
-{
-	<ContentSkeleton Content=section Language="Language">
-		<EngBody>
-			@foreach (var detailEng in Enums.ContentDetail.List
-				.Where(w => w.ParentId == section.Value)
-				.OrderBy(o => o.Value).ToList())
-			{
-				@detailEng.EngBody
-			}
-		</EngBody>
+				<EspBody>
+					@foreach (var detailEsp in Enums.ContentDetail.List
+							.Where(w => w.ParentId == section.Value)
+							.OrderBy(o => o.Value).ToList())
+					{
+						@detailEsp.EspBody
+					}
+				</EspBody>
 
-		<EspBody>
-			@foreach (var detailEsp in Enums.ContentDetail.List
-				.Where(w => w.ParentId == section.Value)
-				.OrderBy(o => o.Value).ToList())
-			{
-				@detailEsp.EspBody
-			}
-		</EspBody>
-
-	</ContentSkeleton>
-
-}
+			</ContentSkeleton>
+		}
+	</div>
+</LoadingProgress>
 
 @code {
-	[Parameter, EditorRequired] public DisplayLanguage? Language { get; set; }
+	[CascadingParameter] public CascadingAppState? State { get; set; }
 
 	protected int Section;
+	protected Enums.DisplayLanguage? Language;
 
-	protected override void OnParametersSet()
+	protected override void OnInitialized()
 	{
-		Language = Haggadah.DisplayLanguage.Both;
+		Language = GetLanguageState();
 		Section = 2;
+	}
+
+	private Enums.DisplayLanguage GetLanguageState()
+	{
+		int id = State!.AppState!.HaggadahState!.Get();
+
+		Enums.DisplayLanguage? _language;
+		if (Enums.DisplayLanguage.TryFromValue(id, out _language))
+		{
+			return Enums.DisplayLanguage.FromValue(id);
+		}
+		else
+		{
+			return Enums.DisplayLanguage.English;
+		}
+	}
+
+	private async Task ReturnedMenuItem(Enums.DisplayLanguage item)
+	{
+		Language = item;
+		await State!.AppState!.HaggadahState!.UpdateLanguage(item);
 	}
 }
