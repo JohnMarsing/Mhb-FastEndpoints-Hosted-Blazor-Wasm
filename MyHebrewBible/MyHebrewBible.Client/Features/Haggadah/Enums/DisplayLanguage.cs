@@ -37,15 +37,15 @@ public abstract class DisplayLanguage : SmartEnum<DisplayLanguage>
 	private sealed class SpanishSE : DisplayLanguage
 	{
 		public SpanishSE() : base(nameof(Spanish), Id.Spanish) { }
-		public override string Title => "Spanish";
-		public override string Description => "Display content in Spanish only.";
+		public override string Title => "Español";
+		public override string Description => "Display content in Español only.";
 	}
 
 	private sealed class BothSE : DisplayLanguage
 	{
 		public BothSE() : base(nameof(Both), Id.Both) { }
 		public override string Title => "Eng + Esp";
-		public override string Description => "Display content in both English and Spanish.";
+		public override string Description => "Display content in both English and Español.";
 	}
 }
 

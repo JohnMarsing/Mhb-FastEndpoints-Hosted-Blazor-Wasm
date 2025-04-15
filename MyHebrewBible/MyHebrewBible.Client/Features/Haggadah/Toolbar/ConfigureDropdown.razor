@@ -5,7 +5,7 @@
 	</button>
 	<ul class="dropdown-menu">
 		<li class="fs-5 fw-bold dropdown-header">Language</li>
-		@foreach (var item in Enums.DisplayLanguage.List)
+		@foreach (var item in Enums.DisplayLanguage.List.OrderBy(o => o.Value))
 		{
 			<li class="dropdown-item">
 				<button @onclick="@(e => ButtonClick(item))"

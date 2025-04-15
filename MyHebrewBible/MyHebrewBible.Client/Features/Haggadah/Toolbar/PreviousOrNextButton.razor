@@ -1,0 +1,31 @@
+﻿
+<button type="button" class="btn btn-outline-primary btn-sm @Margin"
+				title="Section: @Section"
+				@onclick="ButtonClick">
+	<i class="@Icon"></i>
+</button>
+
+@code {
+	[Parameter, EditorRequired] public int Section { get; set; }
+	[Parameter, EditorRequired] public bool Forward { get; set; }
+	[Parameter, EditorRequired] public EventCallback<int> OnSectionSelected { get; set; }
+
+	private string Icon => Forward ? "fas fa-arrow-right" : "fas fa-arrow-left";
+	private string Margin => Forward ? "me-1" : "ms-1";
+
+	private int i = 0;
+
+	private void ButtonClick()
+	{
+		if (Forward)
+		{
+			i = Section + 1;
+			OnSectionSelected.InvokeAsync(i);
+		}
+		else
+		{
+			i = Section - 1;
+			OnSectionSelected.InvokeAsync(i);
+		}
+	}
+}

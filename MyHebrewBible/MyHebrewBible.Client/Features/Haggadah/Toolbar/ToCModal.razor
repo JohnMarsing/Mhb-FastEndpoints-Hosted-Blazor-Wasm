@@ -1,0 +1,70 @@
+﻿@if (ModalIsNotShownToggle)
+{
+	<div class="col-auto">
+		<button type="button" class="btn btn-primary  btn-sm" title="Table of Contents"
+						@onclick="() => ShowModal()">
+			TOC <i class="fas fa-angle-down"></i>
+		</button>
+	</div>
+}
+else
+{
+<div class="@modalClass" style="display:@(modalOpen?"block":"none");">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header @headerBackGround">
+
+					<p class="fs-5 modal-title">Table of Contents</p>
+
+				<button type="button" class="close" @onclick="CloseModal">
+					<span>&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body @bodyBackGround">
+				<ol class="fs-5">
+					@foreach (var item in Enums.Content.List.OrderBy(o => o.Value))
+					{
+						<li>
+								<a class="text-decoration-underline" @onclick="@(() => ButtonClick(item.Value))" title="@item.Value">@item.Title </a>
+						</li>
+					}
+				</ol>
+
+			</div>
+		</div>
+	</div>
+</div>
+}
+
+@code {
+	[Parameter, EditorRequired] public EventCallback<int> OnSectionSelected { get; set; }
+
+	bool modalOpen = true;
+	string modalClass = "modal show";
+	string headerBackGround = "bg-warning";
+	string bodyBackGround = "bg-warning-subtle";
+	private string Icon = "fas fa-arrow-right";
+	bool ModalIsNotShownToggle = true;
+
+	protected void ShowModal()
+	{
+		modalOpen = true;
+		ModalIsNotShownToggle = false;
+		modalClass += " show";
+		StateHasChanged();
+	}
+
+	void CloseModal()
+	{
+		modalOpen = false;
+		ModalIsNotShownToggle = true;
+		modalClass = "modal";
+	}
+
+	private void ButtonClick(int value)
+	{
+		CloseModal();
+		OnSectionSelected.InvokeAsync(value);
+	}
+}

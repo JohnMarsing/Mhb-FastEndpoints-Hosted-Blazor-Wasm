@@ -7,11 +7,13 @@ internal class Program
 	{
 		var arguments = Helpers.ParseArguments(args);
 
+		/*
 		if (arguments.Count == 0 || arguments.ContainsKey("--help"))
 		{
 			Helpers.PrintHelp();
 			return; 
 		}
+		*/
 
 		// Example: Check if a specific argument is defined
 		if (arguments.ContainsKey("--verbose"))
@@ -28,6 +30,7 @@ internal class Program
 
 		//await ShowAnimation.Run();
 		//ExportTriennialCSV.Run();
+		HaggadahVerseExtractor.Run();
 	}
 }
 

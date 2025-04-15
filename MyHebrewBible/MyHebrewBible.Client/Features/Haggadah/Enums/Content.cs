@@ -51,7 +51,7 @@ public abstract class Content : SmartEnum<Content>
 	}
 
 	#region Extra Fields
-	//public abstract int Section { get; }
+	public abstract string Title { get; }	
 	public abstract MarkupString EngTitle { get; }
 	public abstract MarkupString EspTitle { get; }
 	#endregion
@@ -60,6 +60,7 @@ public abstract class Content : SmartEnum<Content>
 
 	private sealed class IntroductionSE : Content
 	{
+		public override string Title => "Messiah, Savior, Redeemer";
 		public IntroductionSE() : base($"{nameof(Id.Introduction)}", Id.Introduction) { }
 		//public override int Section => 1;
 		public override MarkupString EngTitle => (MarkupString)(@"
@@ -77,6 +78,7 @@ public abstract class Content : SmartEnum<Content>
 	private sealed class FirstPassoverSE : Content
 	{
 		public FirstPassoverSE() : base($"{nameof(Id.FirstPassover)}", Id.FirstPassover) { }
+		public override string Title => "1st Passover";
 		//public override int Section => 2;	
 		public override MarkupString EngTitle => (MarkupString)(@"
 			<h3 class='text-center'>
@@ -92,8 +94,8 @@ public abstract class Content : SmartEnum<Content>
 
 	private sealed class PassoverDeliveranceSE : Content
 	{
-		//public override int Section => 3;
 		public PassoverDeliveranceSE() : base($"{nameof(Id.PassoverDeliverance)}", Id.PassoverDeliverance) { }
+		public override string Title => "Passover Deliverance";
 		public override MarkupString EngTitle => (MarkupString)(@"
 			<h3 class='text-center'>
 				<span class='text-dark'>THIS  IS THE PASSOVER DELIVERANCE  OF Yehovah!</span>
@@ -109,6 +111,7 @@ public abstract class Content : SmartEnum<Content>
 	private sealed class StoryOfRedemptionSE : Content
 	{
 		public StoryOfRedemptionSE() : base($"{nameof(Id.StoryOfRedemption)}", Id.StoryOfRedemption) { }
+		public override string Title => "Ephraim's Redemption Story";
 		public override MarkupString EngTitle => (MarkupString)(@"
 			<h3 class='text-center'>
 				<span class='text-dark'>The Story and Redemption of Ephraim</span>
@@ -124,6 +127,7 @@ public abstract class Content : SmartEnum<Content>
 	private sealed class MatzahSE : Content
 	{
 		public MatzahSE() : base($"{nameof(Id.Matzah)}", Id.Matzah) { }
+		public override string Title => "Matzah | Bread of Life";
 		public override MarkupString EngTitle => (MarkupString)(@"
 			<h3 class='text-center'>
 				<span class='text-dark'>MATZAH</span>
@@ -139,6 +143,7 @@ public abstract class Content : SmartEnum<Content>
 	private sealed class FirstCupSE : Content
 	{
 		public FirstCupSE() : base($"{nameof(Id.FirstCup)}", Id.FirstCup) { }
+		public override string Title => "1st Cup | Renewed Covenant";
 		public override MarkupString EngTitle => (MarkupString)(@"
 			<h3 class='text-center'>
 				First Cup of Ephraim’s Redemption
@@ -158,6 +163,7 @@ public abstract class Content : SmartEnum<Content>
 	private sealed class SecondCupSE : Content
 	{
 		public SecondCupSE() : base($"{nameof(Id.SecondCup)}", Id.SecondCup) { }
+		public override string Title => "2nd Cup | Mercy";
 		public override MarkupString EngTitle => (MarkupString)(@"
 			<h3 class='text-center'>
 				Second Cup of Ephraim’s Redemption 
@@ -177,6 +183,7 @@ public abstract class Content : SmartEnum<Content>
 	private sealed class ThirdCupSE : Content
 	{
 		public ThirdCupSE() : base($"{nameof(Id.ThirdCup)}", Id.ThirdCup) { }
+		public override string Title => "3rd Cup | Identity";
 		public override MarkupString EngTitle => (MarkupString)(@"
 			<h3 class='text-center'>
 				Third Cup of Ephraim’s Redemption 
@@ -196,6 +203,7 @@ public abstract class Content : SmartEnum<Content>
 	private sealed class FourthCupSE : Content
 	{
 		public FourthCupSE() : base($"{nameof(Id.FourthCup)}", Id.FourthCup) { }
+		public override string Title => "4th Cup | Torah, Instructions";
 		public override MarkupString EngTitle => (MarkupString)(@"
 			<h3 class='text-center'>
 				Fourth Cup of Ephraim’s Redemption
@@ -216,6 +224,7 @@ public abstract class Content : SmartEnum<Content>
 	private sealed class CharosetSE : Content
 	{
 		public CharosetSE() : base($"{nameof(Id.Charoset)}", Id.Charoset) { }
+		public override string Title => "Charoset | Sweet Freedom";
 		public override MarkupString EngTitle => (MarkupString)(@"
 			<h3 class='text-center'>CHAROSET</h3>
 			");
@@ -227,6 +236,7 @@ public abstract class Content : SmartEnum<Content>
 	private sealed class DinnerSE : Content
 	{
 		public DinnerSE() : base($"{nameof(Id.Dinner)}", Id.Dinner) { }
+		public override string Title => "Dinner | Seder Meal";
 		public override MarkupString EngTitle => (MarkupString)(@"
 			<h3 class='text-center'>DINNER IS SERVED</h3>
 			");
@@ -239,6 +249,7 @@ public abstract class Content : SmartEnum<Content>
 	private sealed class FifthCupSE : Content
 	{
 		public FifthCupSE() : base($"{nameof(Id.FifthCup)}", Id.FifthCup) { }
+		public override string Title => "5th Cup | Holiness, Kadosh";
 		public override MarkupString EngTitle => (MarkupString)(@"
 			<h3 class='text-center'>
 				Fifth Cup of Ephraim’s Redemption
@@ -258,6 +269,7 @@ public abstract class Content : SmartEnum<Content>
 	private sealed class SixthCupSE : Content
 	{
 		public SixthCupSE() : base($"{nameof(Id.SixthCup)}", Id.SixthCup) { }
+		public override string Title => "6th Cup | Reconciliation";
 		public override MarkupString EngTitle => (MarkupString)(@"
 			<h3 class='text-center'>
 				Sixth Cup of Ephraim’s Redemption 
@@ -277,6 +289,7 @@ public abstract class Content : SmartEnum<Content>
 	private sealed class SeventhCupSE : Content
 	{
 		public SeventhCupSE() : base($"{nameof(Id.SeventhCup)}", Id.SeventhCup) { }
+		public override string Title => "7th Cup | Return, Teshuva";
 		public override MarkupString EngTitle => (MarkupString)(@"
 			<h3 class='text-center'>
 				Seventh Cup of Ephraim’s Redemption 
@@ -296,6 +309,7 @@ public abstract class Content : SmartEnum<Content>
 	private sealed class NextYearSE : Content
 	{
 		public NextYearSE() : base($"{nameof(Id.NextYear)}", Id.NextYear) { }
+		public override string Title => "Next Year | Jerusalem";
 		public override MarkupString EngTitle => (MarkupString)(@"
 			<h3 class='text-center'>Next Year</h3>
 			<h2 class='mt-5 text-center'>
