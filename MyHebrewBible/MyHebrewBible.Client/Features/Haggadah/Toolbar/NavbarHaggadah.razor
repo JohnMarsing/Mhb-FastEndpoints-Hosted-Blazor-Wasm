@@ -7,10 +7,26 @@
 	<div class="row align-items-center">
 
 		<div class="col-auto">
-			<button class="btn btn-primary btn-sm" @onclick="NavigateToHome">
-				<i class="@Page.Home.Icon"></i>
-			</button>
+
+			<button class="btn btn-primary btn-sm" @onclick="NavigateToHome"> <i class="@Page.Home.Icon"></i> </button>
+
+@* 
+			ToDo: DOES NOT WORK, NOT VISIBLE
+			<div class="collapse navbar-collapse justify-content-start">
+				<div class="ps-1"><HomeDropdown OnSectionSelected="ReturnedSection" /></div>
+			</div>
+ *@
+
+			@if (Section != 1)
+			{
+				<PreviousOrNextButton Section="Section" Forward=false OnSectionSelected="ReturnedSection" />
+			}	
+			else
+			{
+				<button class="btn btn-light btn-sm disabled ms-1"><span class="text-black-50"><i class="fas fa-ban"></i></span></button>
+			}
 		</div>
+
 
 		<div class="col">
 			<div class="progress" style="height: 20px;">
@@ -21,9 +37,21 @@
 		</div>
 
 		<div class="col-auto">
+
+			@if (Section < Enums.Content.List.Count)
+			{
+				<PreviousOrNextButton Section="Section" Forward=true OnSectionSelected="ReturnedSection" />
+			}
+			else
+			{
+				<button class="btn btn-light btn-sm disabled me-1"><span class="text-black-50"><i class="fas fa-ban"></i></span></button>
+			}
+
 			<ConfigureDropdown OnMenuItemSelected="@ReturnedMenuItem" />
-			
+
 		</div>
+
+		 <ToCModal OnSectionSelected="ReturnedSection"/>
 
 	</div>
 </div>
@@ -31,25 +59,24 @@
 <br />
 
 @code {
+	[Parameter, EditorRequired] public int Section { get; set; }
 	[Parameter, EditorRequired] public EventCallback<Enums.DisplayLanguage> OnMenuItemSelected { get; set; }
+	[Parameter, EditorRequired] public EventCallback<int> OnSectionSelected { get; set; }
 
 	protected string GetProgressStyle()
 	{
-		//<div class="progress-bar" style='width:@progressPercentageString'>
-		return $"width:{progressPercentage}%";
+		return $"width:{CalculatePercentage()}%";
 	}
 
 	protected string GetProgressPercent()
 	{
-		//	@progressPercentageString
-		return $"{progressPercentage}%";
+		return $"{CalculatePercentage()}%";
 	}
 
-	[Parameter, EditorRequired] public int Section { get; set; }
-
-	//private int progressValue = 9; 
-	private int progressPercentage => (Section) * 10; //(Section - 1)
-	//private string progressPercentageString => ((Section) * 10).ToString() + "%";  // Section - 1
+	private int CalculatePercentage ()
+	{
+		return (Section * 100) / Enums.Content.List.Count;
+	}
 
 	private void NavigateToHome()
 	{
@@ -59,6 +86,11 @@
 	private void ReturnedMenuItem(Enums.DisplayLanguage item)
 	{
 		OnMenuItemSelected.InvokeAsync(item);
+	}
+
+	private void ReturnedSection(int section)
+	{
+		OnSectionSelected.InvokeAsync(section);
 	}
 
 }

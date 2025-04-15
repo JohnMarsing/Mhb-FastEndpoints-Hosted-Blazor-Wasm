@@ -53,6 +53,33 @@ public abstract class ContentDetail : SmartEnum<ContentDetail>
 		internal const int FourthCup02 = 35;
 		internal const int FourthCup03 = 36;
 		internal const int FourthCup04 = 37;
+
+		internal const int Charoset = 38;
+
+		internal const int Dinner01 = 39;
+		internal const int Dinner02 = 40;
+		internal const int Dinner03 = 41;
+		internal const int Dinner04 = 42;
+
+		internal const int FifthCup01 = 43;
+
+		internal const int SixthCup01 = 44;
+		internal const int SixthCup02 = 45;
+		internal const int SixthCup03 = 46;
+		internal const int SixthCup04 = 47;
+		internal const int SixthCup05 = 48;
+		internal const int SixthCup06 = 49;
+
+		internal const int SeventhCup01 = 50;
+		internal const int SeventhCup02 = 51;
+		internal const int SeventhCup03 = 52;
+		internal const int SeventhCup04 = 53;
+		internal const int SeventhCup05 = 54;
+		internal const int SeventhCup06 = 55;
+		internal const int SeventhCup07 = 56;
+		internal const int SeventhCup08 = 57;
+
+		internal const int NextYear = 58;
 	}
 	#endregion
 
@@ -104,14 +131,32 @@ public abstract class ContentDetail : SmartEnum<ContentDetail>
 	public static readonly ContentDetail FourthCup03 = new FourthCup03SE();
 	public static readonly ContentDetail FourthCup04 = new FourthCup04SE();
 
-	/*
-Charoset = 10;
-Dinner = 11;
-FithCup = 12;
-SixthCup = 13;
-SeventCup = 14;
-NextYear = 15;
-	 */
+	public static readonly ContentDetail Charoset = new CharosetSE();
+
+	public static readonly ContentDetail Dinner01 = new Dinner01SE();
+	public static readonly ContentDetail Dinner02 = new Dinner02SE();
+	public static readonly ContentDetail Dinner03 = new Dinner03SE();
+	public static readonly ContentDetail Dinner04 = new Dinner04SE();
+
+	public static readonly ContentDetail FifthCup01 = new FifthCup01SE();
+
+	public static readonly ContentDetail SixthCup01 = new SixthCup01SE();
+	public static readonly ContentDetail SixthCup02 = new SixthCup02SE();
+	public static readonly ContentDetail SixthCup03 = new SixthCup03SE();
+	public static readonly ContentDetail SixthCup04 = new SixthCup04SE();
+	public static readonly ContentDetail SixthCup05 = new SixthCup05SE();
+	public static readonly ContentDetail SixthCup06 = new SixthCup06SE();
+
+	public static readonly ContentDetail SeventhCup01 = new SeventhCup01SE();
+	public static readonly ContentDetail SeventhCup02 = new SeventhCup02SE();
+	public static readonly ContentDetail SeventhCup03 = new SeventhCup03SE();
+	public static readonly ContentDetail SeventhCup04 = new SeventhCup04SE();
+	public static readonly ContentDetail SeventhCup05 = new SeventhCup05SE();
+	public static readonly ContentDetail SeventhCup06 = new SeventhCup06SE();
+	public static readonly ContentDetail SeventhCup07 = new SeventhCup07SE();
+	public static readonly ContentDetail SeventhCup08 = new SeventhCup08SE();
+
+	public static readonly ContentDetail NextYear = new NextYearSE();
 
 	#endregion
 
@@ -195,7 +240,7 @@ NextYear = 15;
 		public override int ParentId => Content.FirstPassover;
 		public override MarkupString EngBody => (MarkupString)(@"
 			<p class='fs-5'>
-				<b class='text-danger'>Reader 1:</b> 
+				<span class='text-danger'>Reader 1:</span> 
 				Long ago our forefathers lived in a land beyond the Euphrates River called Mesopotamia.  
 				There, a descendant of Shem named Abram was told by God to go to a land called Canaan. 
 				So Abram along with his wife  Sarai and many from Haran journeyed to Canaan. 
@@ -221,7 +266,7 @@ NextYear = 15;
 		public override int ParentId => Content.FirstPassover;
 		public override MarkupString EngBody => (MarkupString)(@"
 			<p class='fs-5'>
-				<b class='text-danger fw-bold'>Reader 2:</b> 
+				<span class='text-danger fw-bold'>Reader 2:</span> 
 				Abraham’s grandson Jacob had 12 sons who became the 12 tribes of Israel. 
 				The 11th son, Joseph, was envied by his brothers, thrown into a pit then sold to slave traders and was brought to Egypt.  
 				There he  became 2nd in command of all Egypt and in charge of the nations food supply. 
@@ -247,7 +292,7 @@ NextYear = 15;
 		public override int ParentId => Content.FirstPassover;
 		public override MarkupString EngBody => (MarkupString)(@"
 			<p class='fs-5'>
-				<b class='text-danger fw-bold'>Reader 3:</b> 
+				<span class='text-danger fw-bold'>Reader 3:</span> 
 				Many years later, the Egyptians began to look upon the people of Jacob/Israel as slaves and made life very difficult for them. Then they cried out to God for deliverance. They remembered Abraham and the promises that God gave him and they prayed in desperation for a deliverer who would rescue them from their oppression.
 			</p>
 			");
@@ -265,7 +310,7 @@ NextYear = 15;
 		public override int ParentId => Content.FirstPassover;
 		public override MarkupString EngBody => (MarkupString)(@"
 			<p class='fs-5'>
-				<b class='text-danger fw-bold'>Reader 4:</b> 
+				<span class='text-danger fw-bold'>Reader 4:</span> 
 				God sent Moses, a Levite, and in a burning bush told him to confront the Pharaoh to <b>Let my people go</b>.
 				Pharaoh ignored Moses’ plea’s, so God caused 10 plagues to destroy Egypt. 
 				The 10th plague, the death of the firstborn, finally caused Pharaoh to let them go.  
@@ -297,7 +342,7 @@ NextYear = 15;
 		public override int ParentId => Content.FirstPassover;
 		public override MarkupString EngBody => (MarkupString)(@"
 			<p class='fs-5'>
-				<b class='text-danger fw-bold'>Reader 5:</b> 
+				<span class='text-danger fw-bold'>Reader 5:</span> 
 				And it came to  pass at midnight, all the firstborn in the land of Egypt died, even the cattle. 
 				<mark>“But when I see the blood on the lintel and doorposts of the houses where you live, 
 				I will pass over you and no plague will befall you to destroy you and you will be spared”</mark>.
@@ -321,7 +366,7 @@ NextYear = 15;
 		public override int ParentId => Content.FirstPassover;
 		public override MarkupString EngBody => (MarkupString)(@"
 			<p class='fs-5'>
-				<b class='text-danger fw-bold'>Reader 6:</b> 
+				<span class='text-danger fw-bold'>Reader 6:</span> 
 				The Israelites left Egypt and were led by a pillar of cloud by day and of fire by night to a camp on a sandy shore on an arm of the Red Sea. 
 				Back in Egypt, Pharaoh changed his mind again and took horses and chariots to chase after the Israelites. 
 				Seeing the Egyptians coming, the people were terrified. Moses told the people, 
@@ -345,7 +390,7 @@ NextYear = 15;
 		public override int ParentId => Content.FirstPassover;
 		public override MarkupString EngBody => (MarkupString)(@"
 			<p class='fs-5'>
-				<b class='text-danger fw-bold'>Reader 7:</b> 
+				<span class='text-danger fw-bold'>Reader 7:</span> 
 				Then God said to Moses, 
 				“Raise your staff and stretch out your arm over the sea to divide the water so that the Israelites can go through the sea on dry ground.” 
 				Then the sea drew back and dry land appeared. 
@@ -377,7 +422,7 @@ NextYear = 15;
 		public override int ParentId => Content.FirstPassover;
 		public override MarkupString EngBody => (MarkupString)(@"
 			<p class='fs-5'>
-				<b class='text-danger fw-bold'>Reader 8:</b> 
+				<span class='text-danger fw-bold'>Reader 8:</span> 
 				Then God said to Moses, 
 				“Stretch out your hand over the sea so that the waters may flow back over the Egyptians.”
 				And God swept them all under the sea. 
@@ -627,8 +672,10 @@ NextYear = 15;
 			The fate of Ephraim was to not be a people any longer and not be betrothed to Yehovah. 
 			The first sign of the redemption of the House of Israel from the nations where they had been banished and sifted is with the promise of a Renewed covenant
 		</p>
+
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Jeremiah 31:31-33</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>31</sup> “Behold, days are coming,” declares Yehovah, “when I will cut a renewed covenant with the house of Israel and with the house of Judah,
 			<sup class='text-primary fw-bold'>32</sup> not like the covenant which I cut with their fathers in the day I took them by the hand to bring them out of the land of Egypt, My covenant which they broke, but I was a husband to them,” declares Yehovah. 
 			<sup class='text-primary fw-bold'>33</sup> “But this is the covenant which I will cut with the house of Israel after those days,” declares Yehovah: 
@@ -642,6 +689,7 @@ NextYear = 15;
 		</p>
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Jeremías 31:31-33</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>31</sup> “He aquí, vienen días,' declara Yahvé, 'cuando cortaré un nuevo pacto con la casa de Israel y con la casa de Judá,  
 			<sup class='text-primary fw-bold'>32</sup> no como el pacto que corté con sus padres el día que los tomé de la mano para sacarlos de la tierra de Egipto, Mi pacto que ellos rompieron, aunque Yo fui un esposo para ellos,' declara Yahvé.
 			<sup class='text-primary fw-bold'>33</sup> “Pero este es el pacto que cortaré con la casa de Israel después de esos días,' declara Yahvé: 
@@ -683,6 +731,7 @@ NextYear = 15;
 		</p>
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Luke 22:19-20</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>19</sup> And when He had taken some bread and given thanks, He broke it and gave it to them, saying, 
 			“This is My body which is given for you. Do this in remembrance of Me.” 
 			<sup class='text-primary fw-bold'>20</sup> And in the same way He took the cup after they had eaten, saying, 
@@ -696,6 +745,7 @@ NextYear = 15;
 		</p>
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Lucas 22:19-20</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>19</sup> Y cuando hubo tomado pan y dado gracias, lo partió y se lo dio, diciendo: 
 			“Este es Mi cuerpo que es dado por ustedes. Hagan esto en memoria de Mí.” 
 			<sup class='text-primary fw-bold'>20</sup> Y de la misma manera tomó la copa después de haber comido, diciendo: 
@@ -744,6 +794,7 @@ NextYear = 15;
 			<span class='text-danger fw-bold'>Reader:</span> 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>John 6:35, 38, 51</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>35</sup> Yeshua says. “I am the bread of life...”<br />
 			<sup class='text-primary fw-bold'>38</sup> “For I have come down from heaven, not to do My own will, but the will of Him who sent Me.”<br />
 			<sup class='text-primary fw-bold'>51</sup> “I am the living  bread which came down from heaven. If anyone eats of this bread, he will live forever, and the bread that I shall give is My flesh which I shall give for the life of the world.”
@@ -756,6 +807,7 @@ NextYear = 15;
 		</p>
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Juan 6:35, 38, 51</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>35</sup> Yeshua dice. “Yo soy el pan de vida....”<br />
 			<sup class='text-primary fw-bold'>38</sup> “Porque he descendido del cielo, no para hacer Mi propia voluntad, sino la voluntad de Aquel que me envió.”<br />
 			<sup class='text-primary fw-bold'>51</sup> “Yo soy el pan vivo que descendió del cielo. Si alguien come de este pan, vivirá para siempre, y el pan que daré es Mi carne, que daré por la vida del mundo.”
@@ -879,6 +931,7 @@ NextYear = 15;
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Jeremiah 31:20</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>20</sup>  
 			“Is Ephraim My dear son? Indeed, as often as I have spoken against him, 
 			I certainly still remember him; Therefore My inmost being yearns for him; I will surely have mercy on him,” declares Yehovah.
@@ -886,11 +939,13 @@ NextYear = 15;
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>1 Peter 2:10</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>10</sup> ...” you had NOT RECEIVED MERCY, but now you have RECEIVED MERCY.”
 		</p>
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Jeremiah 12:15</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>15</sup> ... And after I have uprooted them , I will again have compassion on them...
 		</p>
 
@@ -910,6 +965,7 @@ NextYear = 15;
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Jeremías 31:20</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>20</sup>  
 			“¿Es Efraím Mi hijo querido? En verdad, tantas veces como he hablado contra él, 
 			ciertamente aún lo recuerdo; por eso Mis entrañas anhelan por él; seguramente tendré misericordia de él,” declara Yahvé. 
@@ -917,11 +973,13 @@ NextYear = 15;
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>1 Pedro 2:10</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>10</sup> ...” no HABÍAN RECIBIDO MISERICORDIA, pero ahora HAN RECIBIDO MISERICORDIA.”
 		</p>
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Jeremías 12:15</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>15</sup> ... Y después de haberlos desarraigado, volveré a tener compasión de ellos....
 		</p>
 		<p class='fs-5'>
@@ -999,18 +1057,21 @@ NextYear = 15;
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Hosea 1:9</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>9</sup>  
 			And Yehovah said, “Name him Lo-ammi, for you are not My people, and I am not your God.” 
 		</p>		
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>1 Peter 2:10</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>10</sup>  
 			Which in time past were not a people, but are now the people of God...
 		</p>		
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Hosea 1:10</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>10</sup>  
 			...and it will be that in the place where it is said to them “You are not My people,” It will be said to them, “You are the sons of the living God.”
 			<sup>(also Romans 9:25-26)</sup>
@@ -1037,18 +1098,21 @@ NextYear = 15;
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Oseas 1:9</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>9</sup>  
 			Y Yahvé dijo: “Nómbrenlo Lo-ammi, porque ustedes no son Mi pueblo, y Yo no soy su Dios.”
 		</p>
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>1 Peter 2:10</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>10</sup>  
 			Que en tiempos pasados no eran un pueblo, pero ahora son el pueblo de Dios...
 		</p>		
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Oseas 1:0</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>10</sup>  
 			...Y será que en el lugar donde se les dijo “No son Mi pueblo,” se les dirá, “Son los hijos del Dios viviente.”
 			<sup>(también Romanos 9:25-26)</sup>  
@@ -1081,6 +1145,7 @@ NextYear = 15;
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Jeremiah 31:19</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>19</sup>
 			“For after my turning back I repented, And after I was instructed I slapped myself on the thigh. 
 			I was ashamed and even humiliated because I carried the disgrace of my youth [as a nation]”
@@ -1092,6 +1157,7 @@ NextYear = 15;
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Psalms 78:9-11</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>11</sup>
 			The children of Ephraim  didn't keep God's covenant, and refused to walk in his law. They forgot his acts; His wondrous works that he had shown them. 
 		</p>		
@@ -1106,6 +1172,7 @@ NextYear = 15;
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Jeremías 31:19</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>19</sup>
 			“Porque después de mi regreso me arrepentí, y después de ser instruido me golpeé el muslo. 
 			Me avergoncé y hasta me humillé porque cargué con la desgracia de mi juventud [como nación].”
@@ -1117,6 +1184,7 @@ NextYear = 15;
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Salmo 78:9-11</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>11</sup>
 			Los hijos de Efraím no guardaron el pacto de Dios y se negaron a caminar en su ley. Olvidaron sus actos; Sus obras maravillosas que les había mostrado.
 		</p>		
@@ -1136,6 +1204,7 @@ NextYear = 15;
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>James 1:25</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>25</sup>  
 			But the one who looks into the perfect law, the law of liberty, and perseveres, being no hearer who forgets but a doer who acts, he will be blessed in his doing.
 		</p>
@@ -1154,6 +1223,7 @@ NextYear = 15;
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Santiago 1:25</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>25</sup>  
 			Pero el que mira en la ley perfecta, la ley de la libertad, y persevera, no siendo un oidor que olvida sino un hacedor que actúa, será bendecido en su hacer.
 		</p>
@@ -1176,6 +1246,7 @@ NextYear = 15;
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Psalm 119:12-16</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>12</sup>
 			Blessed are You, O Yehovah; Teach me Your statutes.
 			<sup class='text-primary fw-bold'>13</sup>
@@ -1196,6 +1267,7 @@ NextYear = 15;
 
 		<p class='bg-primary-subtle fs-5 p-2 ms-3'>
 			<b>Salmo 119:12-16</b><br />
+			<i class='fas fa-quote-left'></i> 
 			<sup class='text-primary fw-bold'>12</sup>
 			Bendito eres Tú, Oh Yahvé; Enséñame Tus estatutos.
 			<sup class='text-primary fw-bold'>13</sup>
@@ -1316,7 +1388,810 @@ NextYear = 15;
 		");
 	}
 
+
+	private sealed class CharosetSE : ContentDetail
+	{
+		public CharosetSE() : base($"{nameof(Id.Charoset)}", Id.Charoset) { }
+		public override int ParentId => Content.Charoset;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-success fw-bold'>Leader:</span> 
+				Now we enjoy the sweetness of Freedom and Salvation 
+				Blessed are You, LORD our God and Messiah Yeshua for allowing us to taste the sweetness of freedom and setting us free from the sins of Jeroboam. In Yeshua’s Name we pray. 
+			</p>
+			<p class='fs-5'>EAT SOME SWEET CHAROSETW/MATZAH</p>
+
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-success fw-bold'>Líder:</span> 
+				Ahora disfrutamos de la dulzura de la Libertad y la Salvación  
+				Bendito eres Tú, SEÑOR nuestro Dios y Mesías Yeshua por permitirnos saborear la dulzura de la libertad y liberarnos de los pecados de Jeroboam. 
+				En el Nombre de Yeshua oramos.
+			</p>
+			
+			<p class='fs-5'>
+			</p>
+			
+			");
+	}
+
+
+	private sealed class Dinner01SE : ContentDetail
+	{
+		public Dinner01SE() : base($"{nameof(Id.Dinner01)}", Id.Dinner01) { }
+		public override int ParentId => Content.Dinner;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>All:</span> 
+				Blessing God AFTER the meal
+			</p>
+
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Deuteronomy 8:10</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>10</sup>  
+					Blessed are You, Yehovah our Elohim, King of the universe, who feeds the entire world in His goodness, 
+					with grace, with kindness, with mercy. He gives food to all flesh, His kindness forever it endures. 
+					And through His great goodness we have never lacked, may we never lack for food for all of eternity.  
+					For the sake of His great Name, because He is God who feeds and sustains and benefits all and prepares food for all of His creatures which He has created. 
+					Blessed are You, Yehovah, Who feeds all. 
+					Amein.
+			</p>	
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Todos:</span> 
+				Bendiciendo a Dios DESPUÉS de la comida
+			</p>
+
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Deuteronomio 8:10</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>10</sup>  
+				Bendito eres Tú, Yahvé nuestro Elohim, Rey del universo, quien alimenta al mundo entero en Su bondad, con gracia, 
+				con bondad, con misericordia. Él da comida a toda carne, Su bondad para siempre perdura. 
+				Y por Su gran bondad nunca nos ha faltado, que nunca nos falte comida por toda la eternidad. 
+				Por el bien de Su gran Nombre, porque Él es Dios que alimenta y sostiene y beneficia a todos y prepara comida para todas Sus criaturas que Él ha creado. 
+				Bendito eres Tú, Yahvé, Quien alimenta a todos. 
+				Amén.
+			</p>	
+			");
+	}
+
+	private sealed class Dinner02SE : ContentDetail
+	{
+		public Dinner02SE() : base($"{nameof(Id.Dinner02)}", Id.Dinner02) { }
+		public override int ParentId => Content.Dinner;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Reader:</span> 
+				In our Renewed Covenant redemption, we are called to become a Holy people and a nation who was once an unholy nation.  
+				We are called to be obedient children.  				
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>1 Peter 1:14-15</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>14</sup>  
+				“As obedient children, do not conform to the evil desires of your former ignorance,  
+				<sup class='text-primary fw-bold'>15</sup>  
+				but like the Holy One who called you, be holy yourselves also in all your behavior.” 
+			</p>	
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Lector:</span> 
+				En nuestra redención del Nuevo Pacto, estamos llamados a convertirnos en un pueblo santo y una nación que antes era una nación impía. 
+				Estamos llamados a ser hijos obedientes.
+			</p>
+
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>1 Pedro 1:14-15</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>14</sup>  
+				“Como hijos obedientes, no se conformen a los deseos malignos de su antigua ignorancia, 
+				<sup class='text-primary fw-bold'>15</sup>
+				sino como el Santo que los llamó, sean santos también en todo su comportamiento.”
+			</p>	
+			");
+	}
+
+	private sealed class Dinner03SE : ContentDetail
+	{
+		public Dinner03SE() : base($"{nameof(Id.Dinner03)}", Id.Dinner03) { }
+		public override int ParentId => Content.Dinner;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Reader:</span> 
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Leviticus 20:7-8</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>7</sup>  
+				And you shall set yourselves apart, and shall be set apart, for I am Yehovah your Elohim, and you shall guard My laws and do them. 
+				<sup class='text-primary fw-bold'>8</sup>  
+				I am Yehovah, Who sets you apart.
+			</p>	
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Lector:</span> 
+			</p>
+
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Levítico 20:7-8</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>7</sup>  
+				Y ustedes se apartarán, y estarán apartados, porque Yo soy Yahvé su Elohim,
+				<sup class='text-primary fw-bold'>8</sup>
+				y guardarán Mis leyes y las harán. Yo soy Yahvé, Quien los aparta.
+			</p>	
+			");
+	}
+
+	private sealed class Dinner04SE : ContentDetail
+	{
+		public Dinner04SE() : base($"{nameof(Id.Dinner04)}", Id.Dinner04) { }
+		public override int ParentId => Content.Dinner;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Reader:</span> 
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Hosea 14:4-5</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>4</sup>  
+				I will heal their turning away from Me; I will love them freely, For My anger has turned away from them
+				<sup class='text-primary fw-bold'>5</sup>  
+				I will be like the dew to Israel; He will flourish like the lily, And he will [fn]take root like the cedars of Lebanon
+			</p>	
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Lector:</span> 
+			</p>
+
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Oseas 14:4-5</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>4</sup>  
+				Sanaré su apartamiento de Mí; los amaré libremente, porque Mi ira se ha apartado de ellos.
+				<sup class='text-primary fw-bold'>5</sup>
+				Seré como el rocío para Israel; florecerá como el lirio, y echará raíces como los cedros del Líbano.
+			</p>	
+			");
+	}
+
+
+	private sealed class FifthCup01SE : ContentDetail
+	{
+		public FifthCup01SE() : base($"{nameof(Id.FifthCup01)}", Id.FifthCup01) { }
+		public override int ParentId => Content.FifthCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-success fw-bold'>Leader:</span> 
+				We renounce all false gods and idols, false holidays and worship only the one true God of Israel. 
+			</p>
+
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Galatians 5:22-23</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>22</sup>  
+				...[and pursue the] fruits of the Spirit of God, which are love, joy, peace, forbearance, kindness, goodness, faithfulness, 
+				<sup class='text-primary fw-bold'>23</sup>  
+				gentleness and self-control. Against such things there is no law.
+			</p>
+
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>All Shout</span> 
+				<span class='badge bg-danger text-white'> L'Chaim <i class='fas fa-exclamation'></i></span> 
+				<i class='fas fa-long-arrow-alt-right'></i>
+				DRINK THE CUP <i class='text-danger fas fa-wine-glass-alt'></i>
+			</p>
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-success fw-bold'>Líder:</span> 
+				Renunciamos a todos los dioses falsos e ídolos, fiestas falsas y adoramos solo al único Dios verdadero de Israel.
+			</p>
+
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Gálatas 5:22-23</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>22</sup>  
+				...Deseamos vivir vidas apartadas para Él y perseguir los frutos del Espíritu de Dios, que son amor, gozo, paz, paciencia, bondad, benignidad, fidelidad, 
+				<sup class='text-primary fw-bold'>23</sup>  
+				mansedumbre y autocontrol. Contra tales cosas no hay ley.
+			</p>
+			
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Todos gritan</span> 
+				<span class='badge bg-danger text-white'> L'Chaim <i class='fas fa-exclamation'></i></span> 
+				<i class='fas fa-long-arrow-alt-right'></i>
+				BEBEN LA COPA <i class='text-danger fas fa-wine-glass-alt'></i>
+			</p>
+			");
+	}
+
+
+	private sealed class SixthCup01SE : ContentDetail
+	{
+		public SixthCup01SE() : base($"{nameof(Id.SixthCup01)}", Id.SixthCup01) { }
+		public override int ParentId => Content.SixthCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-success fw-bold'>Leader:</span> 
+				We are reconciled to God. Let us also prepare ourselves to be reconciled to our brother Judah. 
+			</p>
+
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Reader:</span>
+			</p>
+			
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Ezekiel 37:15-23</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>15</sup>  
+				The word of Yehovah came again to me saying,
+				<sup class='text-primary fw-bold'>16</sup>  
+				“Now as for you, son of man, take for yourself one stick and write on it, ‘For Judah and for the sons of Israel, his companions’; 
+				then take another stick and write on it, ‘For Joseph, the stick of Ephraim and all the house of Israel, his companions.’ 
+				<sup class='text-primary fw-bold'>17</sup>  
+				Then draw them together for yourself one to another into one stick, that they may become one in your hand. 
+				<sup class='text-primary fw-bold'>18</sup>
+				And when the sons of your people speak to you saying, ‘Will you not declare to us what you mean by these?’
+				<sup class='text-primary fw-bold'>19</sup>
+				say to them, ‘Thus says Master Yehovah, “Behold, I will take the stick of Joseph, which is in the hand of Ephraim, and the tribes of Israel, his companions; 
+				and I will put them with it, with the stick of Judah, and make them one stick, and they will be one in My hand.”’ 
+				<sup class='text-primary fw-bold'>20</sup>
+				And the sticks on which you write will be in your hand before their eyes. 
+				<sup class='text-primary fw-bold'>21</sup>
+				And speak to them, ‘Thus says Master Yehovah, “Behold, I will take the sons of Israel from among the nations where they have gone, 
+				and I will gather them from every side and bring them into their own land; 
+				<sup class='text-primary fw-bold'>22</sup>
+				and I will make them one nation in the land, on the mountains of Israel; and one king will be king for all of them; 
+				and they will no longer be two nations and no longer be divided into two kingdoms. 
+				<sup class='text-primary fw-bold'>23</sup>
+				They also will no longer defile themselves with their idols or with their detestable things or with any of their transgressions; 
+				but I will save them from all their places of habitation in which they have sinned, and I will cleanse them. And they will be My people, and I will be their God.
+			</p>
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-success fw-bold'>Líder:</span> 
+				Renunciamos a todos los dioses falsos e ídolos, fiestas falsas y adoramos solo al único Dios verdadero de Israel.
+			</p>
+
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Lector:</span>
+			</p>
+			
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Ezequiel 37:15-23</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>15</sup>  
+				La palabra de Yahvé vino nuevamente a mí diciendo,  
+				<sup class='text-primary fw-bold'>16</sup>  
+				Ahora, hijo de hombre, toma para ti un palo y escribe en él, 'Para Judá y para los hijos de Israel, sus compañeros'; 
+				luego toma otro palo y escribe en él, 'Para José, el palo de Efraím y toda la casa de Israel, sus compañeros.'
+				<sup class='text-primary fw-bold'>17</sup>  
+				Luego júntalos uno con otro en un solo palo, para que se conviertan en uno en tu mano.
+				<sup class='text-primary fw-bold'>18</sup>
+				Y cuando los hijos de tu pueblo te hablen diciendo, '¿No nos declararás qué quieres decir con esto?' 
+				<sup class='text-primary fw-bold'>19</sup>
+				diles, 'Así dice el Maestro Yahvé, He aquí, tomaré el palo de José, que está en la mano de Efraím, y las tribus de Israel, sus compañeros; 
+				y los pondré con él, con el palo de Judá, y los haré un solo palo, y serán uno en Mi mano.' 
+				<sup class='text-primary fw-bold'>20</sup>
+				Y los palos en los que escribas estarán en tu mano ante sus ojos. 
+				<sup class='text-primary fw-bold'>21</sup>
+				Y habla con ellos, 'Así dice el Maestro Yahvé, He aquí, tomaré a los hijos de Israel de entre las naciones donde han ido, 
+				y los reuniré de todos lados y los traeré a su propia tierra;
+				<sup class='text-primary fw-bold'>22</sup>
+				y los haré una nación en la tierra, en las montañas de Israel; y un rey será rey para todos ellos; 
+				y ya no serán dos naciones ni estarán divididos en dos reinos. 
+				<sup class='text-primary fw-bold'>23</sup>
+				Tampoco se contaminarán más con sus ídolos ni con sus cosas detestables ni con ninguna de sus transgresiones; 
+				pero los salvaré de todos sus lugares de habitación en los que han pecado, y los limpiaré. Y serán Mi pueblo, y Yo seré su Dios.
+			</p>
+			");
+	}
+
+	private sealed class SixthCup02SE : ContentDetail
+	{
+		public SixthCup02SE() : base($"{nameof(Id.SixthCup02)}", Id.SixthCup02) { }
+		public override int ParentId => Content.SixthCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Reader:</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Isaiah 11:12, 16</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>12</sup>  
+				“He will raise a signal for the nations and will assemble the banished of Israel,  and gather the dispersed of Judah from the four corners of the earth.  
+				<sup class='text-primary fw-bold'>13</sup>
+				The jealousy of Ephraim shall depart and those who harass Judah shall be cut off;  Ephraim shall not be jealous of Judah, and Judah shall not harass Ephraim.  
+				<sup class='text-primary fw-bold'>16</sup>  
+				And there will be a highway from Assyria for the remnant that remains of his people,  as there was for Israel when they came up from the land of Egypt.”
+			</p>
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Lector:</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Isaías 11:12-13, 16</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>12</sup>  
+				Él levantará una señal para las naciones y reunirá a los desterrados de Israel, y juntará a los dispersos de Judá desde los cuatro rincones de la tierra. 
+				<sup class='text-primary fw-bold'>13</sup>  
+				Los celos de Efraím se apartarán y los que acosan a Judá serán cortados; Efraím no estará celoso de Judá, y Judá no acosará a Efraím.
+				<sup class='text-primary fw-bold'>16</sup>  
+				Y habrá un camino desde Asiria para el remanente que queda de su pueblo, como lo hubo para Israel cuando subieron de la tierra de Egipto.
+			</p>
+			");
+	}
+
+	private sealed class SixthCup03SE : ContentDetail
+	{
+		public SixthCup03SE() : base($"{nameof(Id.SixthCup03)}", Id.SixthCup03) { }
+		public override int ParentId => Content.SixthCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Reader:</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Jeremiah 50:4-5</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>4</sup>  
+				“In those days and in that time, declares the LORD, the people of Israel and the people of Judah shall come together, weeping as they come, and they shall seek the LORD their God. 
+				<sup class='text-primary fw-bold'>5</sup>
+				They shall ask the way to Tsiyon [Zion], their faces toward it,  
+				'Come and let us join ourselves to Yehovah, in an everlasting Covenant, never to be forgotten.'
+			</p>
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Lector:</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Jeremías 50:4-5</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>4</sup>  
+				En esos días y en ese tiempo, declara el SEÑOR, los pueblos de Israel y los pueblos de Judá vendrán juntos, llorando mientras vienen, y buscarán al SEÑOR su Dios. 
+				Preguntarán el camino a Tsiyon [Sión], con sus rostros hacia allá, 
+				<sup class='text-primary fw-bold'>5</sup>
+				'Vengan y unámonos a YHWH, en un Pacto eterno, nunca olvidado.'
+			</p>
+			");
+	}
+
+	private sealed class SixthCup04SE : ContentDetail
+	{
+		public SixthCup04SE() : base($"{nameof(Id.SixthCup04)}", Id.SixthCup04) { }
+		public override int ParentId => Content.SixthCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Reader:</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Zechariah 10:6</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>6</sup>  
+				“I will strengthen the house of Judah, and I will save the house of Joseph. 
+				I will bring them back because I have compassion on them, and they shall be as though I had not rejected them, 
+				for I am the LORD their God and I will answer them.
+			</p>
+			<p class='fs-5 text-black-50 ms-3'>Read Zechariah 12:7-10</p>
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Lector:</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Zacarías 10:6</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>6</sup>  
+				Fortificaré la casa de Judá, y salvaré la casa de José. 
+				Los traeré de vuelta porque tengo compasión de ellos, y serán como si no los hubiera rechazado, 
+				porque Yo soy el SEÑOR su Dios y les responderé.
+			</p>
+			<p class='fs-5 text-black-50 ms-3'>Lee Zacarías 12:7-10</p>
+			");
+	}
+
+	private sealed class SixthCup05SE : ContentDetail
+	{
+		public SixthCup05SE() : base($"{nameof(Id.SixthCup05)}", Id.SixthCup05) { }
+		public override int ParentId => Content.SixthCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Reader:</span>
+			</p>
+			<p class='fs-5'>
+			It is not enough to be reconciled to our God, for our destiny in not heaven,  but a return to our covenant land. 
+			The reunion with Judah will most likely be in the Land under the authority of the King. 
+			This is when the One New Man is finally manifest. It is another way of saying the One Stick in the Father’s hand is the One New Man mentioned by Paul in <u>Ephesians 2:15</u>. 
+			The One New Man is the Israel of Yehovah! HalelluYah!.
+			</p>
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Lector:</span>
+			</p>
+			<p class='fs-5'>
+				No basta con reconciliarnos con nuestro Dios, porque nuestro destino no es el cielo, sino un regreso a nuestra tierra del pacto. 
+				La reunión con Judá probablemente será en la Tierra bajo la autoridad del Rey. 
+				Aquí es cuando el Hombre Nuevo finalmente se manifiesta. Es otra forma de decir que el Palo Único en la mano del Padre es el Hombre Nuevo mencionado por Pablo en Efesios 2:15.
+				¡El Hombre Nuevo es el Israel de Yahvé! ¡HalleluYah!
+			</p>
+			");
+	}
+
+	private sealed class SixthCup06SE : ContentDetail
+	{
+		public SixthCup06SE() : base($"{nameof(Id.SixthCup06)}", Id.SixthCup06) { }
+		public override int ParentId => Content.SixthCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>All:</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Revelation 5:9-10</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>9</sup>  
+				And they sang a new song, saying, 'You are worthy to take the scroll, and to open its seals, 
+				because You were slain, and have redeemed us to Elohim by Your blood out of every tribe and tongue and people and nation, 
+				<sup class='text-primary fw-bold'>10</sup>
+				and made us sovereigns and priests to our Elohim, and we shall reign upon the Earth.
+			</p>
+
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>All Shout</span> 
+				<span class='badge bg-danger text-white'> L'Chaim <i class='fas fa-exclamation'></i></span> 
+				<i class='fas fa-long-arrow-alt-right'></i>
+				DRINK THE CUP <i class='text-danger fas fa-wine-glass-alt'></i>
+			</p>
+
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Lector:</span>
+			</p>
+
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Apocalipsis 5:9-10</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>9</sup>  
+				Y cantaron un cántico nuevo, diciendo, 'Tú eres digno de tomar el rollo y abrir sus sellos, 
+				porque fuiste inmolado, y nos has redimido para Elohim por Tu sangre de cada tribu y lengua y pueblo y nación, 
+				<sup class='text-primary fw-bold'>10</sup>
+				y nos hiciste soberanos y sacerdotes para nuestro Elohim, y reinaremos sobre la Tierra.'
+			</p>
+
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Todos gritan</span> 
+				<span class='badge bg-danger text-white'> L'Chaim <i class='fas fa-exclamation'></i></span> 
+				<i class='fas fa-long-arrow-alt-right'></i>
+				BEBEN LA COPA <i class='text-danger fas fa-wine-glass-alt'></i>
+			</p>
+			");
+	}
+
+
+	private sealed class SeventhCup01SE : ContentDetail
+	{
+		public SeventhCup01SE() : base($"{nameof(Id.SeventhCup01)}", Id.SeventhCup01) { }
+		public override int ParentId => Content.SeventhCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-success fw-bold'>Leader:</span> 
+			</p>
+			
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Jeremiah 3:18</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>18</sup>  
+				In those days the house of Judah shall join the house of Israel, 
+				and together they shall come from the land of the north to the land that I gave your fathers for a heritage
+			</p>
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-success fw-bold'>Líder:</span> 
+			</p>
+			
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Jeremías 3:18</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>18</sup>  
+				In those days the house of Judah shall join the house of Israel, 
+				and together they shall come from the land of the north to the land that I gave your fathers for a heritage
+			</p>
+			");
+	}
+
+	private sealed class SeventhCup02SE : ContentDetail
+	{
+		public SeventhCup02SE() : base($"{nameof(Id.SeventhCup02)}", Id.SeventhCup02) { }
+		public override int ParentId => Content.SeventhCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Reader: 1</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Jeremiah 50:19</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>19</sup>  
+				And I will return Israel back to his pasture, and he will graze on Carmel and Bashan, 
+				and his desire will be satisfied in the hill country of Ephraim and Gilead. 
+			</p>
+			<p class='fs-4 fw-bold text-center'>
+				A <mark>Greater Exodus</mark> than the one from Egypt is coming
+			</p>
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Lector: 1</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Jeremías 50:19</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>19</sup>  
+				Y devolveré a Israel a su pasto, y pastará en Carmelo y Basán, 
+				y su deseo se satisfará en la región montañosa de Efraím y Galaad.
+			</p>
+			<p class='fs-4 fw-bold text-center'>
+				Un <mark>Éxodo Mayor</mark> que el de Egipto está por venir
+			</p>
+			");
+	}
+
+	private sealed class SeventhCup03SE : ContentDetail
+	{
+		public SeventhCup03SE() : base($"{nameof(Id.SeventhCup03)}", Id.SeventhCup03) { }
+		public override int ParentId => Content.SeventhCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Reader: 2</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Jeremiah 16:14-15</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>14</sup>
+				Therefore behold, days are coming, declares Yehovah, 
+				“when it will no longer be said, ‘As Yehovah lives, who brought up the sons of Israel out of the land of Egypt,’ 
+				<sup class='text-primary fw-bold'>15</sup>
+				but, ‘As Yehovah lives, who brought up the sons of Israel from the land of the north and from all the lands where He had banished them.’ 
+				For I will return them to their own land which I gave to their fathers.”
+			</p>
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Lector: 2</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Jeremías 16:14-15</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>14</sup>
+				Por tanto, he aquí, vienen días, declara Yahvé, 
+				“cuando ya no se dirá, 'Vive Yahvé, que sacó a los hijos de Israel de la tierra de Egipto,' 
+				<sup class='text-primary fw-bold'>15</sup>
+				sino, 'Vive Yahvé, que sacó a los hijos de Israel de la tierra del norte y de todas las tierras donde los había desterrado.' 
+				Porque los devolveré a su propia tierra que di a sus padres.”
+			</p>
+			");
+	}
+
+	private sealed class SeventhCup04SE : ContentDetail
+	{
+		public SeventhCup04SE() : base($"{nameof(Id.SeventhCup04)}", Id.SeventhCup04) { }
+		public override int ParentId => Content.SeventhCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Reader: 3</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Ezekiel 36:24-25</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>24</sup>
+				And I shall take you from among the gentiles, and I shall gather you out of all lands, and I shall bring you into our own land. 
+				<sup class='text-primary fw-bold'>25</sup>
+				And I shall sprinkle clean water on you, and you shall be clean from all your filthiness, and from all your idols I cleanse you
+			</p>
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Lector: 3</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Ezequiel 36:24-25</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>24</sup>
+				Y los tomaré de entre los gentiles, y los reuniré de todas las tierras, y los traeré a su propia tierra.
+				<sup class='text-primary fw-bold'>25</sup>
+				Y rociaré agua limpia sobre ustedes, y quedarán limpios de toda su inmundicia, y de todos sus ídolos los limpiaré.
+			</p>
+			");
+	}
+
+	private sealed class SeventhCup05SE : ContentDetail
+	{
+		public SeventhCup05SE() : base($"{nameof(Id.SeventhCup05)}", Id.SeventhCup05) { }
+		public override int ParentId => Content.SeventhCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Reader: 4</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Jeremiah 31:7-8</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>7</sup>
+				For thus says Yehovah, Sing aloud with gladness for Jacob, And shout among the head of the nations;  
+				Make it heard, give praise, and say, ‘O Yehovah, save Your people, The remnant <span class='hebrew text-danger fw-bold'>אֵת</span> of Israel. 
+				<sup class='text-primary fw-bold'>8</sup>
+				Behold, I will bring them from the north country and gather them from the farthest parts of the earth, 
+				among them the blind and the lame, the pregnant woman and she who is in labor, together; a great company, they shall return here.
+			</p>
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Lector: 4</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Jeremías 31:7-8</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>7</sup>
+				Porque así dice Yahvé, Canten con alegría por Jacob, Y griten entre la cabeza de las naciones; 
+				Hagan que se oiga, den alabanza, y digan, 'Oh Yahvé, salva a Tu pueblo, El remanente <span class='hebrew text-danger fw-bold'>אֵת</span> de Israel.
+				<sup class='text-primary fw-bold'>8</sup>
+				He aquí, los traeré del país del norte y los reuniré de las partes más lejanas de la tierra, 
+				entre ellos el ciego y el cojo, la mujer embarazada y la que está en trabajo de parto, juntos; una gran compañía, regresarán aquí.
+			</p>
+			");
+	}
+
+	private sealed class SeventhCup06SE : ContentDetail
+	{
+		public SeventhCup06SE() : base($"{nameof(Id.SeventhCup06)}", Id.SeventhCup06) { }
+		public override int ParentId => Content.SeventhCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>	
+				<span class='text-success fw-bold'>Leader:</span><br />
+				We drink joyfully of this last cup in expectation of the coming of the Kingdom of our Messiah Yeshua and of the Restoration of All Israel.<br />
+				Let us toast to completing our journey from the nations back to our homeland. 
+			</p>
+
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>All Shout</span> 
+				<span class='badge bg-danger text-white'> L'Chaim <i class='fas fa-exclamation'></i></span> 
+				<i class='fas fa-long-arrow-alt-right'></i>
+				DRINK THE CUP <i class='text-danger fas fa-wine-glass-alt'></i>
+			</p>
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>	
+				<span class='text-success fw-bold'>Leader:</span><br />
+				Bebemos con alegría de esta última copa en expectativa de la venida del Reino de nuestro Mesías Yeshua y de la Restauración de Todo Israel.<br />
+				Brindemos por completar nuestro viaje desde las naciones de regreso a nuestra patria.
+			</p>
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Todos gritan</span> 
+				<span class='badge bg-danger text-white'> L'Chaim <i class='fas fa-exclamation'></i></span> 
+				<i class='fas fa-long-arrow-alt-right'></i>
+				BEBEN LA COPA <i class='text-danger fas fa-wine-glass-alt'></i>
+			</p>
+			");
+	}
+
+	private sealed class SeventhCup07SE : ContentDetail
+	{
+		public SeventhCup07SE() : base($"{nameof(Id.SeventhCup07)}", Id.SeventhCup07) { }
+		public override int ParentId => Content.SeventhCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>	
+				<span class='text-success fw-bold'>Leader:</span><br />
+				Those of us who understand our true identity in Messiah, aka “in Israel”,  have begun to cry out for our final deliverance.  
+				We are tired of Egypt and our long exile, even in this abundant and prosperous land, for we now yearn for the Land of our Fathers. 
+				We are drawn to our Roots, to our Fathers ancient paths, to our heritage, to our true identity, and most importantly, to our awesome Bride-Groom of Messiah. 
+			</p>
+			<p class='fs-5'>
+				We desire that Heaven hear us, breaking the boundaries that limit us, 
+				and that Yehovah send our Messiah to lead us HOME, where our inward spirit is leading us.
+			</p>
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>	
+				<span class='text-success fw-bold'>Líder:</span><br />
+				Aquellos de nosotros que entendemos nuestra verdadera identidad en el Mesías, también conocida como “en Israel”, hemos comenzado a clamar por nuestra liberación final.
+				Estamos cansados de Egipto y de nuestro largo exilio, incluso en esta tierra abundante y próspera, porque ahora anhelamos la Tierra de nuestros Padres. 
+				Nos sentimos atraídos por nuestras Raíces, por los caminos antiguos de nuestros Padres, por nuestra heredad, por nuestra verdadera identidad, y lo más importante, por nuestro impresionante Novio del Mesías.
+			</p>
+			<p class='fs-5'>
+				Deseamos que el Cielo nos escuche, rompiendo los límites que nos restringen, 
+				y que YHWH envíe a nuestro Mesías para guiarnos a CASA, donde nuestro espíritu interior nos está llevando.
+			</p>
+
+			");
+	}
+
+
+	private sealed class SeventhCup08SE : ContentDetail
+	{
+		public SeventhCup08SE() : base($"{nameof(Id.SeventhCup08)}", Id.SeventhCup08) { }
+		public override int ParentId => Content.SeventhCup;
+		public override MarkupString EngBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Reader: 5</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Revelation 22:17, 20</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>17</sup>
+				And the Spirit and the bride say, “Come.” And let the one who hears say, “Come.” And let the one who is thirsty come. 
+				Let the one who wishes to receive the water of life  without cost.
+				<sup class='text-primary fw-bold'>20</sup>
+				He who bears witness to these things says, “Yes, I am coming quickly.” Amen. Come, Master Yeshua!
+			</p>
+			");
+		public override MarkupString EspBody => (MarkupString)(@"
+			<p class='fs-5'>
+				<span class='text-danger fw-bold'>Lector: 5</span>
+			</p>
+			<p class='bg-primary-subtle fs-5 p-2 ms-3'>
+				<b>Apocalipsis 22:17, 20</b><br />
+				<i class='fas fa-quote-left'></i> 
+				<sup class='text-primary fw-bold'>17</sup>
+				Y el Espíritu y la novia dicen, “Ven.” Y que el que oye diga, “Ven.” Y que el que tenga sed venga. 
+				Que el que desee reciba el agua de la vida sin costo.
+				<sup class='text-primary fw-bold'>20</sup>
+				El que da testimonio de estas cosas dice, “Sí, vengo pronto.” Amén. ¡Ven, Maestro Yeshua!'
+			</p>
+			");
+	}
+
+	private sealed class NextYearSE : ContentDetail
+	{
+		public NextYearSE() : base($"{nameof(Id.NextYear)}", Id.NextYear) { }
+		public override int ParentId => Content.NextYear;
+		public override MarkupString EngBody => (MarkupString)(@"
+		<h3 class='mt-5 mb-3 text-center'>Exodus Verses</h3>
+			<p class=' fs-5'>
+				<b>Exodus 12 1-6</b><br />
+			</p>
+		<div class='bg-danger-subtle p-2'>
+			<p class='fs-5 fst-italic'>10 Plagues</p>
+			<ol class='fs-5'>
+				<li>Water turned to blood -  <a href='/BookChapter/Exo/7/14/1700'>Exodus 7:14-24</a></li>
+				<li>Frogs -                  <a href='/BookChapter/Exo/8/1/1712'>Exodus 8:1-15</a></li> </li>
+				<li>Lice (or gnats) -        <a href='/BookChapter/Exo/8/16/1727'>Exodus 8:16-19</a></li>
+				<li>Flies (or swarms) -      <a href='/BookChapter/Exo/8/20/1731'>Exodus 8:20-32</a></li>
+				<li>Livestock diseased -     <a href='/BookChapter/Exo/9/1/1744'>Exodus 9:1-7</a></li>
+				<li>Boils -                  <a href='/BookChapter/Exo/9/8/1751'>Exodus 9:8-12</a></li>
+				<li>Hail -                   <a href='/BookChapter/Exo/9/13/1756'>Exodus 9:13-35</a></li>
+				<li>Locusts -                <a href='/BookChapter/Exo/10/1/1779'>Exodus 10:1-20</a></li>
+				<li>Darkness -               <a href='/BookChapter/Exo/10/21/1799'>Exodus 10:21-29</a></li>
+				<li>Death of the firstborn - <a href='/BookChapter/Exo/11/10/1808'>Exodus 11:1-10</a>; <a href='/BookChapter/Exo/12/29/1846'>Exodus 12:29-36</a> </li>
+			</ol>
+		</div>
+			<ol class='fs-5 mt-5'>
+			<li>
+				<a href='https://myhebrewbible5.blob.core.windows.net/mhb-container/Article/Acts-12-4-The-one-and-only-occurrence-of-Easter-in-the-King-James.pdf' target='_blank'>
+				Acts 12:4 - the one and only occurrence of Easter in the KJB (PDF)
+				</a>
+			</li>
+			<li>
+				<a href='https://myhebrewbible5.blob.core.windows.net/mhb-container/Article/Acts-12-4-Easter-only-in-KJV-G3957-H6453-BLB-Translations.jpg' target='_blank'>
+					Acts 12:4 Word Study of Easter (Image)
+				</a>
+			</li>		
+		</ol>
+		");
+		public override MarkupString EspBody => (MarkupString)(@"
+		");
+	}
 	#endregion
+
 }
 
-// Ignore Spelling: Matzah
+// Ignore Spelling: Matzah Charoset

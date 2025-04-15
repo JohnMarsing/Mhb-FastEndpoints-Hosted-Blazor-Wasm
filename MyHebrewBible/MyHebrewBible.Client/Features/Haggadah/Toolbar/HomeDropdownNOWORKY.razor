@@ -1,0 +1,58 @@
+﻿@using Page = MyHebrewBible.Client.Enums.Nav
+
+@inject NavigationManager NavigationManager
+
+<div class="btn-group " role="group" aria-label="Vertical button group">
+	<button @onclick="ButtonClickHome" class="btn btn-primary btn-sm" title="@Page.Home.Title">
+		<i class="@Page.Home.Icon"></i> VBG
+	</button>
+
+	<button type="button" class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+		<span class="visually-hidden">Toggle Dropdown</span>
+	</button>
+
+	<ul class="dropdown-menu">
+		
+		<li><h5 class="dropdown-header"><b>Table of Content</b></h5></li>
+
+		@foreach (var item in Enums.Content.List.OrderBy(o => o.Value))
+		{
+			<li class="dropdown-item">
+				@* <a @onclick="@(e => ButtonClick(item))"> *@
+				<a @onclick="@(() => ButtonClick(item.Value))" title="@item.Value">@item.Title</a>
+			</li>
+		}
+		
+		<li><hr class="dropdown-divider"></li>
+
+		<li class="dropdown-item">
+			@* onclick="ButtonClickFavorites" title="" *@
+			<button  class="btn btn-danger btn-sm">
+				<i class="fas fa-star"></i>
+			</button>
+		</li>
+
+	</ul>
+</div>
+
+@code {
+	[Parameter] public EventCallback<int> OnSectionSelected { get; set; }
+	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+
+	private void ButtonClickHome()
+	{
+		NavigationManager!.NavigateTo($"{Page.Home.Index}");
+	}
+
+
+	private void ReturnedSection(int section)
+	{
+		OnSectionSelected.InvokeAsync(section);
+	}
+
+	private void ButtonClick(int value)
+	{
+		//CloseModal();
+		OnSectionSelected.InvokeAsync(value);
+	}
+}

@@ -522,11 +522,11 @@ public abstract class Nav : SmartEnum<Nav>
 	{
 		public HaggadahSE() : base($"{nameof(Id.Haggadah)}", Id.Haggadah) { }
 		public override string Index => "Haggadah";
-		public override string Title => "Haggadah";
+		public override string Title => "Haggadah (telling)";
 		public override string Icon => "fas fa-book-open";  
 		public override int Sort => Id.Haggadah;
-		public override string HomeTitleSuffix => " ";
-		public override string HomeFloatRightHebrew => "";
+		public override string HomeTitleSuffix => " Nagad H5046";
+		public override string HomeFloatRightHebrew => "הַגָּדָה";
 		public override PageListType PageListType => PageListType.SitemapPage;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 		public override bool Disabled => false;
