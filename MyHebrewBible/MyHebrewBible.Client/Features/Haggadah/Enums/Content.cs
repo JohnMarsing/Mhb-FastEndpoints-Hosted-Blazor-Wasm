@@ -145,11 +145,8 @@ public abstract class Content : SmartEnum<Content>
 		public FirstCupSE() : base($"{nameof(Id.FirstCup)}", Id.FirstCup) { }
 		public override string Title => "1st Cup | Renewed Covenant";
 		public override MarkupString EngTitle => (MarkupString)(@"
-			<h3 class='text-center'>
-				First Cup of Ephraim’s Redemption
-				<br /><br />
-				The CUP of Messiah(the Renewed Covenant)
-			</h3>
+			<h2 class='text-center mb-1'>1<sup>st</sup> Cup of Ephraim’s Redemption</h2>
+			<h4 class='text-center mt-3 mb-4'>The CUP of Messiah (the Renewed Covenant)</h4>
 			");
 		public override MarkupString EspTitle => (MarkupString)(@"
 			<h3 class='text-center'>
@@ -165,11 +162,8 @@ public abstract class Content : SmartEnum<Content>
 		public SecondCupSE() : base($"{nameof(Id.SecondCup)}", Id.SecondCup) { }
 		public override string Title => "2nd Cup | Mercy";
 		public override MarkupString EngTitle => (MarkupString)(@"
-			<h3 class='text-center'>
-				Second Cup of Ephraim’s Redemption 
-				<br /><br />
-				The CUP OF MERCY 
-			</h3>
+			<h2 class='text-center mb-1'>2<sup>nd</sup> Cup of Ephraim’s Redemption</h2>
+			<h4 class='text-center mt-3 mb-4'>The CUP of MERCY</h4>
 			");
 		public override MarkupString EspTitle => (MarkupString)(@"
 			<h3 class='text-center'>
@@ -185,11 +179,8 @@ public abstract class Content : SmartEnum<Content>
 		public ThirdCupSE() : base($"{nameof(Id.ThirdCup)}", Id.ThirdCup) { }
 		public override string Title => "3rd Cup | Identity";
 		public override MarkupString EngTitle => (MarkupString)(@"
-			<h3 class='text-center'>
-				Third Cup of Ephraim’s Redemption 
-				<br /><br />
-				The CUP OF IDENTITY 
-			</h3>
+			<h2 class='text-center mb-1'>3<sup>rd</sup> Cup of Ephraim’s Redemption</h2>
+			<h4 class='text-center mt-3 mb-4'>The CUP of IDENTITY</h4>
 			");
 		public override MarkupString EspTitle => (MarkupString)(@"
 			<h3 class='text-center'>
@@ -205,11 +196,8 @@ public abstract class Content : SmartEnum<Content>
 		public FourthCupSE() : base($"{nameof(Id.FourthCup)}", Id.FourthCup) { }
 		public override string Title => "4th Cup | Torah, Instructions";
 		public override MarkupString EngTitle => (MarkupString)(@"
-			<h3 class='text-center'>
-				Fourth Cup of Ephraim’s Redemption
-				<br /><br />
-				The CUP of God's Instructions 
-			</h3>
+			<h2 class='text-center mb-1'>4<sup>th</sup> Cup of Ephraim’s Redemption</h2>
+			<h4 class='text-center mt-3 mb-4'>The CUP of God's Instructions (TORAH)</h4>
 			");
 		public override MarkupString EspTitle => (MarkupString)(@"
 			<h3 class='text-center'>
@@ -219,7 +207,6 @@ public abstract class Content : SmartEnum<Content>
 			</h3>
 			");
 	}
-
 
 	private sealed class CharosetSE : Content
 	{
@@ -245,17 +232,13 @@ public abstract class Content : SmartEnum<Content>
 			");
 	}
 
-
 	private sealed class FifthCupSE : Content
 	{
 		public FifthCupSE() : base($"{nameof(Id.FifthCup)}", Id.FifthCup) { }
 		public override string Title => "5th Cup | Holiness, Kadosh";
 		public override MarkupString EngTitle => (MarkupString)(@"
-			<h3 class='text-center'>
-				Fifth Cup of Ephraim’s Redemption
-				<br /><br />
-				The CUP of Holiness/Fidelity
-			</h3>
+			<h2 class='text-center mb-1'>5<sup>th</sup> Cup of Ephraim’s Redemption</h2>
+			<h4 class='text-center mt-3 mb-4'>The CUP of Holiness/Fidelity</h4>
 			");
 		public override MarkupString EspTitle => (MarkupString)(@"
 			<h3 class='text-center'>
@@ -271,11 +254,8 @@ public abstract class Content : SmartEnum<Content>
 		public SixthCupSE() : base($"{nameof(Id.SixthCup)}", Id.SixthCup) { }
 		public override string Title => "6th Cup | Reconciliation";
 		public override MarkupString EngTitle => (MarkupString)(@"
-			<h3 class='text-center'>
-				Sixth Cup of Ephraim’s Redemption 
-				<br /><br />
-				The CUP of Reconciliation 
-			</h3>
+			<h2 class='text-center mb-1'>6<sup>th</sup> Cup of Ephraim’s Redemption</h2>
+			<h4 class='text-center mt-3 mb-4'>The CUP of RECONCILIATION</h4>
 			");
 		public override MarkupString EspTitle => (MarkupString)(@"
 			<h3 class='text-center'>
@@ -291,11 +271,8 @@ public abstract class Content : SmartEnum<Content>
 		public SeventhCupSE() : base($"{nameof(Id.SeventhCup)}", Id.SeventhCup) { }
 		public override string Title => "7th Cup | Return, Teshuva";
 		public override MarkupString EngTitle => (MarkupString)(@"
-			<h3 class='text-center'>
-				Seventh Cup of Ephraim’s Redemption 
-				<br /><br />
-				The CUP of RETURN
-			</h3>
+			<h2 class='text-center mb-1'>7<sup>th</sup> Cup of Ephraim’s Redemption</h2>
+			<h4 class='text-center mt-3 mb-4'>The CUP of RETURN</h4>
 			");
 		public override MarkupString EspTitle => (MarkupString)(@"
 			<h3 class='text-center'>

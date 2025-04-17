@@ -35,25 +35,25 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int Hebrew = 7;
 		internal const int AlephTavs = 8;
 		internal const int BibleList = 9;
-		internal const int Teaching = 10;
-		internal const int Sitemap = 11;
-		internal const int About = 12;
-		internal const int HomeMhbVer6 = 13;
-		internal const int VerseList = 14;
-		internal const int Contact = 15;
-		internal const int DonateReplyConfirm = 16;
-		internal const int Profile = 17;
-		internal const int BibleSearch = 18;
-		internal const int HealthCheckBibleBook = 19;
-		internal const int HealthCheckThrowError = 20;
-		internal const int HealthCheckVerseList = 21;
-		internal const int ParashaList = 22;
-		internal const int HealthCheckBitwise = 23;
-		internal const int HebrewRevelation = 24;
-		internal const int HealthCheckParasha = 25;
-		internal const int HealthCheckTableRowCount = 26;
-		internal const int HealthCheckQuickGrid = 27;
-		internal const int Haggadah = 28;
+		internal const int Haggadah = 10;
+		internal const int Teaching = 11;
+		internal const int Sitemap = 12;
+		internal const int About = 13;
+		internal const int HomeMhbVer6 = 14;
+		internal const int VerseList = 15;
+		internal const int Contact = 16;
+		internal const int DonateReplyConfirm = 17;
+		internal const int Profile = 18;
+		internal const int BibleSearch = 19;
+		internal const int HealthCheckBibleBook = 20;
+		internal const int HealthCheckThrowError = 21;
+		internal const int HealthCheckVerseList = 22;
+		internal const int ParashaList = 23;
+		internal const int HealthCheckBitwise = 24;
+		internal const int HebrewRevelation = 25;
+		internal const int HealthCheckParasha = 26;
+		internal const int HealthCheckTableRowCount = 27;
+		internal const int HealthCheckQuickGrid = 28;
 
 		/*
 		Un documented Health Checks
@@ -75,6 +75,7 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav Hebrew = new HebrewSE();
 	public static readonly Nav AlephTavs = new AlephTavsSE();
 	public static readonly Nav BibleList = new BibleListSE();
+	public static readonly Nav Haggadah = new HaggadahSE();
 	public static readonly Nav Teaching = new TeachingSE();
 	public static readonly Nav Sitemap = new SitemapSE();
 	public static readonly Nav About = new AboutSE();
@@ -93,7 +94,6 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav HealthCheckParasha = new HealthCheckParashaSE();
 	public static readonly Nav HealthCheckTableRowCount = new HealthCheckTableRowCountSE();
 	public static readonly Nav HealthCheckQuickGrid = new HealthCheckQuickGridSE();
-	public static readonly Nav Haggadah = new HaggadahSE();
 	#endregion
 
 	private Nav(string name, int value) : base(name, value)  // Constructor
@@ -527,7 +527,7 @@ public abstract class Nav : SmartEnum<Nav>
 		public override int Sort => Id.Haggadah;
 		public override string HomeTitleSuffix => " Nagad H5046";
 		public override string HomeFloatRightHebrew => "הַגָּדָה";
-		public override PageListType PageListType => PageListType.SitemapPage;
+		public override PageListType PageListType => PageListType.SitemapPage | PageListType.Layout;
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 		public override bool Disabled => false;
 	}

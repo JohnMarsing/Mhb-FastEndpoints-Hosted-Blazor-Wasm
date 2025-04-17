@@ -1,0 +1,27 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+@if (Language == Enums.DisplayLanguage.English)
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+		<sup class="@H.VerseSupClass">19</sup>
+		For after my turning back I repented, And after I was instructed I slapped myself on the thigh.
+		I was ashamed and even humiliated because I carried the disgrace of my youth [as a nation]
+	</p>
+}
+else
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+		<sup class="@H.VerseSupClass">19</sup>
+		Porque después de mi regreso me arrepentí, y después de ser instruido me golpeé el muslo.
+		Me avergoncé y hasta me humillé porque cargué con la desgracia de mi juventud [como nación].
+	</p>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

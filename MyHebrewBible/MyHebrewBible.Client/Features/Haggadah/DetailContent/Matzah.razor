@@ -1,0 +1,59 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+@using MyHebrewBible.Client.Features.Haggadah.DetailContent.VerseContent
+
+@if (Language == Enums.DisplayLanguage.English)
+{
+	<p class="@H.pClass">
+		@H.Leader("Leader")
+		Our people left Egypt in such haste that their bread dough did not have time to rise and they did not take their leavened lump with them.
+		They ate unleavened bread.
+		Messiah is our unleavened bread as He is without sin.
+	</p>
+
+	<p class='fs-5'>
+		Tonight, we eat Matzah to recognize Yeshua our Messiah, Who has rescued us and whose Spirit causes us to walk in His ways of Torah.
+	</p>
+
+	<p class="@H.pClass">@H.Reader("Reader", 1)</p>
+
+	<Joh_06_35 Language="Language" Title="John 6:35" />
+	<Joh_06_38 Language="Language" Title="John 6:38" />
+	<Joh_06_51 Language="Language" Title="John 6:51" />
+
+	<p class="@H.pClass">
+		@H.Leader("Leader")
+		Blessed are You Yehovah our Elohim, King of the universe Who brings forth Bread from the Earth…
+	</p>
+
+	<p class="@pCenter">Eat the Matzah</p>
+}
+else
+{
+	<p class="@H.pClass">
+		@H.Leader("Líder")
+		Nuestro pueblo dejó Egipto con tanta prisa que su masa de pan no tuvo tiempo de leudar y no llevaron consigo su masa leudada.
+		Comieron pan sin levadura. El Mesías es nuestro pan sin levadura, ya que Él está sin pecado.
+	</p>
+
+	<p class='fs-5'>
+		Esta noche, comemos Matzá para reconocer a Yeshua nuestro Mesías, Quien nos ha rescatado y cuyo Espíritu nos hace caminar en Sus caminos de la Torá.
+	</p>
+
+	<p class="@H.pClass">@H.Reader("Lector", 1)</p>
+
+	<Joh_06_35 Language="Language" Title="Juan 6:35" />
+	<Joh_06_38 Language="Language" Title="Juan 6:38" />
+	<Joh_06_51 Language="Language" Title="Juan 6:51" />
+
+	<p class="@H.pClass">
+		@H.Leader("Líder")
+		Bendito eres Tú, YHWH nuestro Elohim, Rey del universo, Quien saca el Pan de la Tierra...
+	</p>
+
+	<p class="@pCenter">Come el Matzá</p>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; } = Enums.DisplayLanguage.English;
+	public const string pCenter = "fs-5 fw-bold text-center my-3";
+}
