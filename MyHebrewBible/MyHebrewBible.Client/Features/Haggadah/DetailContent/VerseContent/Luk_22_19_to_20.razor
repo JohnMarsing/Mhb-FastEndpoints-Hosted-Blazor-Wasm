@@ -1,0 +1,38 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+@if (Language == Enums.DisplayLanguage.English)
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+
+		<sup class="@H.VerseSupClass">19</sup>
+		And when He had taken some bread and given thanks, He broke it and gave it to them, saying,
+		This is My body which is given for you. Do this in remembrance of Me.
+
+		<sup class="@H.VerseSupClass">22</sup>
+		And in the same way He took the cup after they had eaten, saying,
+		This cup which is poured out for you is the renewed covenant in My blood.
+	</p>
+}
+else
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+
+		<sup class="@H.VerseSupClass">19</sup>
+		Y cuando hubo tomado pan y dado gracias, lo partió y se lo dio, diciendo:
+		Este es Mi cuerpo que es dado por ustedes. Hagan esto en memoria de Mí.
+
+		<sup class="@H.VerseSupClass">22</sup>
+		Y de la misma manera tomó la copa después de haber comido, diciendo:
+		Esta copa que es derramada por ustedes es el nuevo pacto en Mi sangre.
+
+	</p>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

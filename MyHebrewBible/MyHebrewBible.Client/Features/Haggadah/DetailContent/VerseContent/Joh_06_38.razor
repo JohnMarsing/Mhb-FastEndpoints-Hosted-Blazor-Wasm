@@ -1,0 +1,25 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+@if (Language == Enums.DisplayLanguage.English)
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+		<sup class="@H.VerseSupClass">38</sup>
+		For I have come down from heaven, not to do My own will, but the will of Him who sent Me.<br />
+	</p>
+}
+else
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+		<sup class="@H.VerseSupClass">38</sup>
+		Porque he descendido del cielo, no para hacer Mi propia voluntad, sino la voluntad de Aquel que me envió.<br />
+	</p>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

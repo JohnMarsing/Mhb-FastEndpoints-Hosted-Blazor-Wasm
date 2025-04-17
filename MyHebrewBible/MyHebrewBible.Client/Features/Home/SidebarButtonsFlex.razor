@@ -20,7 +20,7 @@ else
 			<div class="col-6">
 				<div class="list-group">
 					@foreach (var item in Nav.List.ToList()
-							.Where(w => w.IsPartOfList(PageListType.Layout)).Where(w => w.Value <= 9)
+							.Where(w => w.IsPartOfList(PageListType.Layout)).Where(w => w.Value <= ColumnButtonCountSplit)
 							.OrderBy(o => o.Sort))
 					{
 						<FancyFatNavButton Nav="item" MediaQuery="MediaQuery" />
@@ -30,7 +30,7 @@ else
 			<div class="col-6">
 				<div class="list-group">
 					@foreach (var item in Nav.List.ToList()
-							.Where(w => w.IsPartOfList(PageListType.Layout)).Where(w => w.Value > 9)
+							.Where(w => w.IsPartOfList(PageListType.Layout)).Where(w => w.Value > ColumnButtonCountSplit)
 							.OrderBy(o => o.Sort))
 					{
 						<FancyFatNavButton Nav="item" MediaQuery="MediaQuery" />
@@ -43,4 +43,5 @@ else
 
 @code {
 	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
+	private const int ColumnButtonCountSplit = 10;	
 }

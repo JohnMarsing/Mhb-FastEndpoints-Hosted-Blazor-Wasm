@@ -1,0 +1,40 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+@if (Language == Enums.DisplayLanguage.English)
+{
+	<p class="@H.pClass">
+		@H.ParagraphAllRead("All Read")
+		Yehovah brought Yisrael out,
+		led them through the wilderness, revealed His Presence at Mount Sinai, and gave to them the Torah.
+		He instructed them to build the Tabernacle and established a Priesthood to serve Him.
+		Neither their shoes nor their clothes were worn out.
+		He fed them with manna, gave them water from the Rock,
+		defeated their enemies before them and brought them into <i>Eretz Yisrael</i>.
+		Yehovah did what He promised to do; He delivered them.
+	</p>
+
+	<p class='@pClass4'>
+		He will ALSO do what He has promised to do to deliver the House of Israel from its dilemma in the nations.
+	</p>
+}
+else
+{
+	<p class="@H.pClass">
+		@H.ParagraphAllRead("Todos Gritan")
+		Yahvé sacó a Yisrael, los guió a través del desierto, reveló Su Presencia en el Monte Sinaí y les dio la Torá.
+		Les instruyó que construyeran el Tabernáculo y estableció un Sacerdocio para servirle.
+		Ni sus zapatos ni sus ropas se desgastaron.
+		Los alimentó con maná, les dio agua de la Roca,
+		derrotó a sus enemigos delante de ellos y los llevó a <i>Eretz Yisrael</i>.
+		Yahvé hizo lo que prometió; los liberó.
+	</p>
+
+	<p class='@pClass4'>
+		También hará lo que ha prometido para liberar a la Casa de Israel de su dilema en las naciones.
+	</p>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; } = Enums.DisplayLanguage.English;
+	public const string pClass4 = "fs-4 text-center fw-bold";
+}

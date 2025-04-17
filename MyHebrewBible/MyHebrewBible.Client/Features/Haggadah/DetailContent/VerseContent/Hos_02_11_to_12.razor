@@ -1,0 +1,37 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+@if (Language == Enums.DisplayLanguage.English)
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+
+		<sup class="@H.VerseSupClass">11</sup> <sup class="@H.VerseSupClassHebrew">[2:13]</sup>
+		I will also cause all her mirth to cease, her feast days, her new moons, 
+		and her sabbaths, and all her solemn feasts.
+
+		<sup class="@H.VerseSupClass">12</sup>  <sup class="@H.VerseSupClassHebrew">[2:14]</sup>
+		And I will make desolate her vines and fig trees, whereof she hath said,
+		These are my rewards that my lovers have given me: and I will make them
+	</p>
+}
+else
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+
+		<sup class="@H.VerseSupClass">11</sup> <sup class="@H.VerseSupClassHebrew">[2:13]</sup>
+		Haré cesar todo su gozo, sus fiestas, sus nuevas lunas 
+		y sus días de reposo, y todas sus festividades.
+
+		<sup class="@H.VerseSupClass">12</sup>  <sup class="@H.VerseSupClassHebrew">[2:14]</sup>
+		Y haré talar sus vides y sus higueras, de las cuales dijo: Mi salario son, 
+		salario que me han dado mis amantes. Y las reduciré a un matorral, y las comerán las bestias del campo.
+	</p>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

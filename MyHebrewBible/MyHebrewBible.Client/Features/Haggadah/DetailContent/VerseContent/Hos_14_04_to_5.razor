@@ -1,0 +1,34 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+@if (Language == Enums.DisplayLanguage.English)
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+
+		<sup class="@H.VerseSupClass">4</sup> <sup class="@H.VerseSupClassHebrew">[14:5]</sup>
+		I will heal their turning away from Me; I will love them freely, For My anger has turned away from them
+
+		<sup class="@H.VerseSupClass">5</sup>  <sup class="@H.VerseSupClassHebrew">[14:6]</sup>
+		I will be like the dew to Israel; He will flourish like the lily, And he will [fn]take root like the cedars of Lebanon
+	</p>
+}
+else
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+
+		<sup class="@H.VerseSupClass">4</sup> <sup class="@H.VerseSupClassHebrew">[14:5]</sup>
+		Sanaré su apartamiento de Mí; los amaré libremente, porque Mi ira se ha apartado de ellos.
+
+		<sup class="@H.VerseSupClass">5</sup>  <sup class="@H.VerseSupClassHebrew">[14:6]</sup>
+		Seré como el rocío para Israel; florecerá como el lirio, y echará raíces como los cedros del Líbano.
+
+	</p>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}
