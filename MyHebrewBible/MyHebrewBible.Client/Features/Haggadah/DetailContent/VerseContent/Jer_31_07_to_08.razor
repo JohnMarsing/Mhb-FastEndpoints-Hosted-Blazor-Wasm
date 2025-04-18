@@ -1,0 +1,39 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+@if (Language == Enums.DisplayLanguage.English)
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+
+		<sup class="@H.VerseSupClass">07</sup>
+		For thus says Yehovah, Sing aloud with gladness for Jacob, And shout among the head of the nations;
+		Make it heard, give praise, and say, ‘O Yehovah, save Your people, The remnant <span class='hebrew text-danger fw-bold'>אֵת</span> of Israel.
+
+		<sup class="@H.VerseSupClass">08</sup>
+		Behold, I will bring them from the north country and gather them from the farthest parts of the earth,
+		among them the blind and the lame, the pregnant woman and she who is in labor, together; a great company, they shall return here.
+
+	</p>
+}
+else
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+
+		<sup class="@H.VerseSupClass">07</sup>
+		Porque así dice Yahvé, Canten con alegría por Jacob, Y griten entre la cabeza de las naciones;
+		Hagan que se oiga, den alabanza, y digan, 'Oh Yahvé, salva a Tu pueblo, El remanente <span class='hebrew text-danger fw-bold'>אֵת</span> de Israel.
+
+		<sup class="@H.VerseSupClass">08</sup>
+		He aquí, los traeré del país del norte y los reuniré de las partes más lejanas de la tierra,
+		entre ellos el ciego y el cojo, la mujer embarazada y la que está en trabajo de parto, juntos; una gran compañía, regresarán aquí.
+
+	</p>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

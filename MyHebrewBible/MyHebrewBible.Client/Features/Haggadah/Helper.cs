@@ -7,6 +7,16 @@ public static class Helper
 	public const string pClass = "fs-5";
 	public const string p4CenterBoldClass = "fs-4 text-center fw-bold";
 
+	private const string green = "text-success";
+	private const string red = "text-danger";
+	private const string bold = "fw-bold";
+	private const string size5 = "fs-5";
+	private const string size4 = "fs-4";
+	private const string size3 = "fs-3";
+	private const string center = "text-center";
+	private const string iconLevelDown = "<i class='fas fa-level-down-alt'></i>";
+	private const string iconArrowDown = "<i class='fas fa-long-arrow-alt-down'></i>";
+
 	public const string VerseClass = "bg-primary-subtle fs-5 p-2 ms-3";
 	public const string VerseIcon = "<i class='fas fa-quote-left'></i>";
 	public const string VerseSupClass = "text-primary fw-bold";
@@ -26,12 +36,39 @@ public static class Helper
 		return new MarkupString($"{s1}{role}:{s2}");
 	}
 
-	public static string ParagraphIndent(string body)
+	public static MarkupString ParagraphSetFree(string role) // All Shout or Todos Gritan	
 	{
-		const string ps = "<p class='fs-5 mt-1 ms-3'>";
-		const string pe = "</p>";
-		return ($"{ps}{body}{pe}");
+		return new MarkupString(@$"
+		<p class='{size3} {center}'>
+		<sub>{iconArrowDown}</sub> <span class='{red} {bold}'>{role}</span> <sub>{iconArrowDown}</sub>
+		</p>
+		");
 	}
+
+	public static MarkupString ParagraphLeader(string role) 
+	{
+		const string ps = "<p class='fs-5 mb-1'>";
+		const string pe = "</p>";
+		return new MarkupString(@$"
+		{ps}
+		<span class='{green} {bold}'>{role}</span>
+		{pe}
+		");
+	}
+
+	public static MarkupString ParagraphReader(string role, int readerNumber)
+	{
+		return new MarkupString(@$"
+		<p class='{size5} mb-1'>
+		<span class='{red} {bold}'>{role} {readerNumber}</span>
+		</p>
+		");
+	}
+	/*
+	 ⬇️
+	 ⤵️
+	 <i class='{iconLevelDown}'></i> 
+	*/
 
 	public static MarkupString Reader(string role, int readerNumber) // Reader or Lector	
 	{
@@ -55,38 +92,6 @@ public static class Helper
 			{pe}");
 	}
 
-	//, int begId, int endId, bool isEnglish = true
-	//public static string VerseParagraph(string title, string body)
-	//{
-	//	const string ps = "<p class='bg-primary-subtle fs-5 p-2 ms-3'>";
-	//	const string pe = "</p>";
-	//	const string ts = "<b>";
-	//	const string te = "</b><br />";
-	//	const string q = "<i class='fas fa-quote-left'></i>";
-	//	//const string sups = "<sup class='text-primary fw-bold'>";
-	//	//const string supe = "</sup>";
-
-	//	return (@$"
-	//		{ps}
-	//		  {ts}{title}{te}{q}
-	//			{body}
-	//		{pe}");
-	//}
-
-
-	//public static string Paragraph(string body) 
-	//{
-	//	const string ps = "<p class='fs-5'>";
-	//	const string pe = "</p>";
-	//	return ($"{ps}{body}{pe}");
-	//}
-
-	//public static string Title(string body)
-	//{
-	//	const string ps = "<p class='fs-5'>";
-	//	const string pe = "</p>";
-	//	return ($"{ps}{body}{pe}");
-	//}
 }
 
 // Ignore spelling: Lector, Líder, ps, pe, ss, se

@@ -1,0 +1,29 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+@if (Language == Enums.DisplayLanguage.English)
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+		<sup class="@H.VerseSupClass">6</sup>
+		I will strengthen the house of Judah, and I will save the house of Joseph.
+		I will bring them back because I have compassion on them, and they shall be as though I had not rejected them,
+		for I am the LORD their God and I will answer them.
+	</p>
+}
+else
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+		<sup class="@H.VerseSupClass">6</sup>
+		Fortificaré la casa de Judá, y salvaré la casa de José. 
+		Los traeré de vuelta porque tengo compasión de ellos, y serán como si no los hubiera rechazado, 
+		porque Yo soy el SEÑOR su Dios y les responderé
+	</p>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

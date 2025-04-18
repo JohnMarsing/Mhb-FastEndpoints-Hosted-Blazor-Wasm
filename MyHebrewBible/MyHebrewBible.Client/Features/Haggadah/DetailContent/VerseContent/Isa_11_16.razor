@@ -1,0 +1,29 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+@if (Language == Enums.DisplayLanguage.English)
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+
+		<sup class="@H.VerseSupClass">16</sup>
+		And there will be a highway from Assyria for the remnant that remains of his people,  as there was for Israel when they came up from the land of Egypt.”
+
+	</p>
+}
+else
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+
+		<sup class="@H.VerseSupClass">16</sup>
+		Y habrá un camino desde Asiria para el remanente que queda de su pueblo, como lo hubo para Israel cuando subieron de la tierra de Egipto.
+
+	</p>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

@@ -1,0 +1,25 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+@if (Language == Enums.DisplayLanguage.English)
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+		<sup class="@H.VerseSupClass">20</sup>
+		He who bears witness to these things says, “Yes, I am coming quickly.” Amen. Come, Master Yeshua!
+	</p>
+}
+else
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+		<sup class="@H.VerseSupClass">20</sup>
+		El que da testimonio de estas cosas dice, “Sí, vengo pronto.” Amén. ¡Ven, Maestro Yeshua!'
+	</p>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

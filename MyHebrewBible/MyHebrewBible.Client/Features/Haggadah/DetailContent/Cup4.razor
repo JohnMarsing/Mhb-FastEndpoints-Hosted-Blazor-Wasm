@@ -37,9 +37,7 @@
 		We will all say together this phrase for each item 1-10, one at a time:
 	</p>
 
-	<p class="@H.pClass">
-		<span class='text-danger fw-bold'>All Shout</span> <i class='fas fa-level-down-alt'></i>
-	</p>
+	@H.ParagraphSetFree("All Shout");
 
 	<div class='bg-danger-subtle p-2'>
 		<p class='@H.pClass fst-italic'>
@@ -62,7 +60,7 @@
 else
 {
 	<p class="@H.pClass">
-		<span class='text-success fw-bold'>Líder:</span>
+		@H.Leader("Líder")
 		(hay Libertad en la Ley perfecta de Dios)
 	</p>
 
@@ -79,7 +77,7 @@ else
 	<Psa_119_12_to_16 Language="Language" Title="Salmo 119:12-16" />
 
 	<p class="@H.pClass">
-		<span class='text-success fw-bold'>Líder:</span>
+		@H.Leader("Líder")
 		Brindamos con alegría por recibir las Santas Instrucciones de Dios
 	</p>
 
@@ -93,12 +91,9 @@ else
 	<p class="@H.pClass">
 		Todos diremos juntos esta frase para cada ítem del 1 al 10, uno a la vez:
 	</p>
-
-
-	<p class="@H.pClass">
-		<span class='text-danger fw-bold'>All Gritan:</span> <i class='fas fa-level-down-alt'></i>
-	</p>
-
+	
+	@H.ParagraphSetFree("Todos Gritan")
+	
 	<div class='bg-danger-subtle p-2'>
 		<p class='@H.pClass  fst-italic'>
 			Por Su sangre hemos sido liberados de... <u>1-10</u>, ...<b>¡HalleluYah!</b>
@@ -121,5 +116,4 @@ else
 
 @code {
 	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; } = Enums.DisplayLanguage.English;
-	public const string pClass4 = "fs-4 text-center fw-bold";
 }

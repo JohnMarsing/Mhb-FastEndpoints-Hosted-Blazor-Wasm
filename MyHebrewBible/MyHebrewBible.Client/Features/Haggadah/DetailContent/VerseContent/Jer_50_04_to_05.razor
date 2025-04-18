@@ -1,0 +1,39 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+@if (Language == Enums.DisplayLanguage.English)
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+
+		<sup class="@H.VerseSupClass">4</sup>
+		In those days and in that time, declares the LORD, the people of Israel and the people of Judah shall come together, 
+		weeping as they come, and they shall seek the LORD their God.
+
+		<sup class="@H.VerseSupClass">5</sup>
+		They shall ask the way to Tsiyon [Zion], their faces toward it,
+		'Come and let us join ourselves to Yehovah, in an everlasting Covenant, never to be forgotten.'
+
+	</p>
+}
+else
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+
+		<sup class="@H.VerseSupClass">4</sup>
+		En esos días y en ese tiempo, declara el SEÑOR, los pueblos de Israel y los pueblos de Judá vendrán juntos, 
+		llorando mientras vienen, y buscarán al SEÑOR su Dios.
+		
+
+		<sup class="@H.VerseSupClass">5</sup>
+		Preguntarán el camino a Tsiyon [Sión], con sus rostros hacia allá,
+		'Vengan y unámonos a YHWH, en un Pacto eterno, nunca olvidado.'
+	</p>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}
