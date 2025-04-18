@@ -23,6 +23,7 @@ public abstract class Content : SmartEnum<Content>
 		internal const int SixthCup = 13;
 		internal const int SeventhCup = 14;
 		internal const int NextYear = 15;
+		internal const int Appendix = 16;
 	}
 	#endregion
 
@@ -43,6 +44,7 @@ public abstract class Content : SmartEnum<Content>
 	public static readonly Content SixthCup = new SixthCupSE();
 	public static readonly Content SeventhCup = new SeventhCupSE();
 	public static readonly Content NextYear = new NextYearSE();
+	public static readonly Content Appendix = new AppendixSE();
 
 	#endregion
 
@@ -293,7 +295,7 @@ public abstract class Content : SmartEnum<Content>
 				May He come quickly, soon, and in our day
 				<br />
 				Next Year in Jerusalem
-			</p>
+			</h2>
 			");
 		public override MarkupString EspTitle => (MarkupString)(@"
 			<h3 class='text-center'>Próximo Año</h3>
@@ -301,13 +303,25 @@ public abstract class Content : SmartEnum<Content>
 				Que venga rápidamente, pronto, y en nuestro día El
 				<br />
 				próximo año en Jerusalén
-			</p>
+			</h2>
 			
 			");
 	}
 
-	#endregion
-}
+		private sealed class AppendixSE : Content
+		{
+			public AppendixSE() : base($"{nameof(Id.Appendix)}", Id.Appendix) { }
+			public override string Title => "Appendix";
+			public override MarkupString EngTitle => (MarkupString)(@"
+			<h3 class='text-center'>Appendix</h3>
+			");
+			public override MarkupString EspTitle => (MarkupString)(@"
+			<h3 class='text-center'>Apéndice</h3>
+			");
+		}
+
+		#endregion
+	}
 //<sup> <span class='text-dark'><span class='badge rounded-pill bg-danger'>2</span> <i class='text-danger fas fa-wine-glass-alt'></i> </sup>	
 // <span class='text-dark'><span class='badge rounded-pill bg-info'>1</span> 
 // Ignore Spelling: Matzah, Charoset

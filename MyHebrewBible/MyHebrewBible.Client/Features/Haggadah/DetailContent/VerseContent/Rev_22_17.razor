@@ -1,0 +1,27 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+@if (Language == Enums.DisplayLanguage.English)
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+		<sup class="@H.VerseSupClass">17</sup>
+		And the Spirit and the bride say, “Come.” And let the one who hears say, “Come.” And let the one who is thirsty come.
+		Let the one who wishes to receive the water of life  without cost.
+	</p>
+}
+else
+{
+	<p class="@H.VerseClass">
+		<b>@Title</b><br />
+		@((MarkupString)H.VerseIcon)
+		<sup class="@H.VerseSupClass">17</sup>
+		Y el Espíritu y la novia dicen, “Ven.” Y que el que oye diga, “Ven.” Y que el que tenga sed venga.
+		Que el que desee reciba el agua de la vida sin costo.
+	</p>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

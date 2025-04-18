@@ -3,14 +3,28 @@
 
 @if (Language == Enums.DisplayLanguage.English)
 {
-	<p class="@H.pClass">ToDo</p>
+	<p class="@H.pClass">
+		@H.Leader("Leader")
+		We renounce all false gods and idols, false holidays and worship only the one true God of Israel.
+	</p>
+
+ <Gal_05_22_to_23 Language="Language" Title="Galatians 5:22-23" />
+
+	@H.Toast("All Shout")
+
 }
 else
 {
-	<p class="@H.pClass">ToDo</p>
+	<p class="@H.pClass">
+		@H.Leader("Líder")
+		Renunciamos a todos los dioses falsos e ídolos, fiestas falsas y adoramos solo al único Dios verdadero de Israel.
+	</p>
+
+	<Gal_05_22_to_23 Language="Language" Title="Gálatas 5:22-23" />
+
+	@H.Toast("Todos Gritan")
 }
 
 @code {
 	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; } = Enums.DisplayLanguage.English;
-	public const string pClass4 = "fs-4 text-center fw-bold";
 }

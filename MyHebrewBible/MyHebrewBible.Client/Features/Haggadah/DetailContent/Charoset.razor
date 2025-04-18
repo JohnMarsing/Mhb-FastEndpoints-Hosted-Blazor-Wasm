@@ -3,7 +3,7 @@
 @if (Language == Enums.DisplayLanguage.English)
 {
 	<p class="@H.pClass">
-		<span class='text-success fw-bold'>Leader:</span>
+		@H.Leader("Líder")
 		Now we enjoy the sweetness of Freedom and Salvation
 		Blessed are You, LORD our God and Messiah Yeshua for allowing us to taste the sweetness of freedom and setting us free from the sins of Jeroboam. In Yeshua’s Name we pray.
 	</p>
@@ -13,7 +13,7 @@
 else
 {
 	<p class="@H.pClass">
-		<span class='text-success fw-bold'>Líder:</span>
+		@H.Leader("Líder")
 		Ahora disfrutamos de la dulzura de la Libertad y la Salvación
 		Bendito eres Tú, SEÑOR nuestro Dios y Mesías Yeshua por permitirnos saborear la dulzura de la libertad y liberarnos de los pecados de Jeroboam.
 		En el Nombre de Yeshua oramos.

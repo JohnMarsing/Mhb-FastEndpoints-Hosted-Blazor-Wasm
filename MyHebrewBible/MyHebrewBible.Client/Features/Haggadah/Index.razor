@@ -16,7 +16,7 @@ OnSectionSelected="ReturnedSection" />
 		{
 			<ContentSkeleton Content=CurrentContent Language="Language">
 				<EngBody>
-					@foreach (var detailEng in Enums.ContentDetail.List
+					@foreach (var detailEng in Enums.ContentDetailDELETE.List
 															.Where(w => w.ParentId == CurrentContent!.Value)
 															.OrderBy(o => o.Value).ToList())
 					{
@@ -25,7 +25,7 @@ OnSectionSelected="ReturnedSection" />
 				</EngBody>
 
 				<EspBody>
-					@foreach (var detailEsp in Enums.ContentDetail.List
+					@foreach (var detailEsp in Enums.ContentDetailDELETE.List
 															.Where(w => w.ParentId == CurrentContent!.Value)
 															.OrderBy(o => o.Value).ToList())
 					{
