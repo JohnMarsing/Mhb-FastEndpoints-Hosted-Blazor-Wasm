@@ -1,51 +1,27 @@
 ﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
 
-@if (Language == Enums.DisplayLanguage.English)
-{
-	<h3 class='mb-3 text-center'>Welcome to the Feast of Passover</h3>
-	<h3 class='mb-3 text-center text-primary'>A celebration of the rescue of the House of Israel (Ephraim)</h3>
+<h3 class='mb-3 text-center'>Welcome to the Feast of Passover</h3>
+<h3 class='mb-3 text-center text-primary'>A celebration of the rescue of the House of Israel (Ephraim)</h3>
 
-	<p class='@pClass1'>Come my beloved and celebrate the festival of our redemption</p>
+<p class='@pClass1'>Come my beloved and celebrate the festival of our redemption</p>
 
-	<p class='@pClass2'>Where bondage bows to freedom </p>
-	<p class='@pClass2'>Where darkness bows to light</p>
-	<p class='@pClass2'>Where despair bows to hope</p>
-	<p class='text-center text-danger fs-5 mt-1 mb-3'>Where death bows to life</p>
+<p class='@pClass2'>Where bondage bows to freedom </p>
+<p class='@pClass2'>Where darkness bows to light</p>
+<p class='@pClass2'>Where despair bows to hope</p>
+<p class='text-center text-danger fs-5 mt-1 mb-3'>Where death bows to life</p>
 
-	<p class='@pClass2'>Where faith overcomes fear</p>
-	<p class='@pClass2'>Where good overcomes evil</p>
-	<p class='@pClass2'>Where truth overcomes falsehood</p>
-	<p class='text-center text-danger fs-5 mt-1 mb-3'>Where joy overcomes anger</p>
+<p class='@pClass2'>Where faith overcomes fear</p>
+<p class='@pClass2'>Where good overcomes evil</p>
+<p class='@pClass2'>Where truth overcomes falsehood</p>
+<p class='text-center text-danger fs-5 mt-1 mb-3'>Where joy overcomes anger</p>
 
-	<p class='@pClass2'>Where pride is replaced by humility</p>
-	<p class='@pClass2'>Where apathy is replaced by love</p>
-	<p class='@pClass2'>Where chaos is replaced by shalom</p>
-	<p class='@pClass2'>Where rebellion is replaced by obedience</p>
-}
-else
-{
-	<h3 class='mb-3 text-center'>Bienvenidos a la Fiesta de Pascua</h3>
-	<h3 class='mb-3 text-center'>Una celebración del rescate de la Casa de Israel (Efraím)</h3>
-	<p class='@pClass1'>Ven, amado mío, y celebra la conmemoracion de nuestra redención</p>
-
-	<p class='@pClass2'>Donde la esclavitud se inclina ante la libertad</p>
-	<p class='@pClass2'>Donde la oscuridad se inclina ante la luz</p>
-	<p class='@pClass2'>Donde la desesperanza se inclina ante la esperanza</p>
-	<p class='text-center text-danger fs-5 mt-1 mb-3'>Donde la muerte se inclina ante la vida</p>
-
-	<p class='@pClass2'>Donde la fe vence al miedo</p>
-	<p class='@pClass2'>Donde el bien vence al mal</p>
-	<p class='@pClass2'>Donde la verdad vence a la falsedad</p>
-	<p class='text-center text-danger fs-5 mt-1 mb-3'>Donde la alegría vence a la ir</p>
-
-	<p class='@pClass2'>Donde el orgullo es reemplazado por la humanidad</p>
-	<p class='@pClass2'>Donde la apatía es reemplazada por el amor</p>
-	<p class='@pClass2'>Donde el caos es reemplazado por el shalom</p>
-	<p class='@pClass2'>Donde la rebelión es reemplazada por la obediencia</p>
-}
+<p class='@pClass2'>Where pride is replaced by humility</p>
+<p class='@pClass2'>Where apathy is replaced by love</p>
+<p class='@pClass2'>Where chaos is replaced by shalom</p>
+<p class='@pClass2'>Where rebellion is replaced by obedience</p>
 
 @code {
-	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; } = Enums.DisplayLanguage.English;
+	
 	public const string pClass1 = "text-center text-danger fs-5 mb-3";
 	public const string pClass2 = "text-center text-danger fs-5 my-1";
 }

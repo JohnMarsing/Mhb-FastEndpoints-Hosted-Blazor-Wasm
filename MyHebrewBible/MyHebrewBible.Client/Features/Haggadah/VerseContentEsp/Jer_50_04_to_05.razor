@@ -1,0 +1,19 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+
+	<sup class="@H.VerseSupClass">4</sup>
+	En esos días y en ese tiempo, declara el SEÑOR, los pueblos de Israel y los pueblos de Judá vendrán juntos,
+	llorando mientras vienen, y buscarán al SEÑOR su Dios.
+
+	<sup class="@H.VerseSupClass">5</sup>
+	Preguntarán el camino a Tsiyon [Sión], con sus rostros hacia allá,
+	'Vengan y unámonos a YHWH, en un Pacto eterno, nunca olvidado.'
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

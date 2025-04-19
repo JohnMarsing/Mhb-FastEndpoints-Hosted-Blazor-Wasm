@@ -1,0 +1,18 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+	<sup class="@H.VerseSupClass">10</sup>
+	Bendito eres Tú, Yahvé nuestro Elohim, Rey del universo, quien alimenta al mundo entero en Su bondad, con gracia,
+	con bondad, con misericordia. Él da comida a toda carne, Su bondad para siempre perdura.
+	Y por Su gran bondad nunca nos ha faltado, que nunca nos falte comida por toda la eternidad.
+	Por el bien de Su gran Nombre, porque Él es Dios que alimenta y sostiene y beneficia a todos y prepara comida para todas Sus criaturas que Él ha creado.
+	Bendito eres Tú, Yahvé, Quien alimenta a todos.
+	Amén.
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

@@ -1,0 +1,42 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+
+	<sup class="@H.VerseSupClass">15</sup>
+	La palabra de Yahvé vino nuevamente a mí diciendo,
+
+	<sup class="@H.VerseSupClass">16</sup>
+	Ahora, hijo de hombre, toma para ti un palo y escribe en él, 'Para Judá y para los hijos de Israel, sus compañeros';
+	luego toma otro palo y escribe en él, 'Para José, el palo de Efraím y toda la casa de Israel, sus compañeros.'
+
+	<sup class="@H.VerseSupClass">17</sup>
+	Luego júntalos uno con otro en un solo palo, para que se conviertan en uno en tu mano.
+
+	<sup class="@H.VerseSupClass">18</sup>
+	Y cuando los hijos de tu pueblo te hablen diciendo, '¿No nos declararás qué quieres decir con esto?'
+
+	<sup class="@H.VerseSupClass">19</sup>
+	diles, 'Así dice el Maestro Yahvé, He aquí, tomaré el palo de José, que está en la mano de Efraím, y las tribus de Israel, sus compañeros;
+	y los pondré con él, con el palo de Judá, y los haré un solo palo, y serán uno en Mi mano.'
+
+	<sup class="@H.VerseSupClass">20</sup>
+	Y los palos en los que escribas estarán en tu mano ante sus ojos.
+
+	<sup class="@H.VerseSupClass">21</sup>
+	Y habla con ellos, 'Así dice el Maestro Yahvé, He aquí, tomaré a los hijos de Israel de entre las naciones donde han ido,
+
+	<sup class="@H.VerseSupClass">22</sup>
+	y los haré una nación en la tierra, en las montañas de Israel; y un rey será rey para todos ellos;
+
+	<sup class="@H.VerseSupClass">23</sup>
+	Tampoco se contaminarán más con sus ídolos ni con sus cosas detestables ni con ninguna de sus transgresiones;
+	pero los salvaré de todos sus lugares de habitación en los que han pecado, y los limpiaré. Y serán Mi pueblo, y Yo seré su Dios.
+
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

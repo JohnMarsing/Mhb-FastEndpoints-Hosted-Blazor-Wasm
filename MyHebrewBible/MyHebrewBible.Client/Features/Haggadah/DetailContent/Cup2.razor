@@ -1,68 +1,34 @@
 ﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
 @using MyHebrewBible.Client.Features.Haggadah.VerseContent
 
-@if (Language == Enums.DisplayLanguage.English)
-{
-	<p class="@H.pClass">
-		@H.Leader("Leader")
-		Come back(repent) to me Ephraim and I will have MERCY on you --
-	</p>
+<p class="@H.pClass">
+	@H.Leader("Leader")
+	Come back(repent) to me Ephraim and I will have MERCY on you --
+</p>
 
-	<Jer_31_20 Language="Language" Title="Jeremiah 31:20" />
-	<OnePe_02_10 Language="Language" Title="1 Peter 2:10" />
-	<Jer_12_15 Language="Language" Title="Jeremiah 12:15" />
+<Jer_31_20 Title="Jeremiah 31:20" />
+<OnePe_02_10 Title="1 Peter 2:10" />
+<Jer_12_15 Title="Jeremiah 12:15" />
 
-	@H.Toast("All Shout")
+@H.Toast("All Shout")
 
-	<p class="@H.pClass">
-		@H.Reader("Reader", 1)
-		As a final fateful blow to Ephraim, the Northern Kingdom or House of Israel, were to lose their identity as Israel.
-		They would become <i>Lo-Ammi</i>, NOT MY PEOPLE.
-		They would be stripped of all associations with and memories of the God of Israel and in fact God says He will take from them the things of Torah,
-		since they had called the Torah and its instructions a strange thing.
-	</p>
+<p class="@H.pClass">
+	@H.Reader("Reader", 1)
+	As a final fateful blow to Ephraim, the Northern Kingdom or House of Israel, were to lose their identity as Israel.
+	They would become <i>Lo-Ammi</i>, NOT MY PEOPLE.
+	They would be stripped of all associations with and memories of the God of Israel and in fact God says He will take from them the things of Torah,
+	since they had called the Torah and its instructions a strange thing.
+</p>
 
-	<Hos_02_11_to_12 Language="Language" Title="Hosea 2:11-12" />
+<Hos_02_11_to_12 Title="Hosea 2:11-12" />
 
-	<p class="@H.pClass">
-		@H.Reader("Reader", 2)
-		But God has begun to restore Ephraim’s identity thru the gospel of the Kingdom message that Yeshua preached.
-		Ephraim has not known who he is because of a long-term curse put upon him by God.
-		The first step back in this process of return is to acknowledge Yeshua as LORD and savior and return to keeping His word.
-	</p>
-}
-else
-{
-	<p class="@H.pClass">
-		@H.Leader("Lider")
-		Vuelve (arrepiéntete) a mí, Efraím, y tendré MISERICORDIA de ti --
-	</p>
-
-	<Jer_31_20 Language="Language" Title="Jeremías 31:20" />
-	<OnePe_02_10 Language="Language" Title="1 Pedro 2:10" />
-
-	<Jer_12_15 Language="Language" Title="Jeremías 12:15" />
-
-	@H.Toast("Todos Gritan")
-
-	<p class="@H.pClass">
-		@H.Reader("Lector", 1)
-		Como un golpe final fatídico para Efraím, el Reino del Norte o Casa de Israel, debían perder su identidad como Israel.
-		Se convertirían en  <i>Lo-Ammi</i>, NO MI PUEBLO.
-		Serían despojados de todas las asociaciones y recuerdos del Dios de Israel y, de hecho, Dios dice que les quitará las cosas de la Torá, ya que habían llamado a la Torá
-		y sus instrucciones algo extraño.
-
-		<Hos_02_11_to_12 Language="Language" Title="Oseas 2:11-12" />
-	</p>
-
-	<p class="@H.pClass">
-		@H.Reader("Lector", 2)
-		Pero Dios ha comenzado a restaurar la identidad de Efraím a través del mensaje del evangelio del Reino que Yeshua predicó.
-		Efraím no ha sabido quién es debido a una maldición a largo plazo impuesta por Dios.
-		El primer paso de regreso en este proceso de retorno es reconocer a Yeshua como SEÑOR y salvador y volver a guardar Su palabra.
-	</p>
-}
+<p class="@H.pClass">
+	@H.Reader("Reader", 2)
+	But God has begun to restore Ephraim’s identity thru the gospel of the Kingdom message that Yeshua preached.
+	Ephraim has not known who he is because of a long-term curse put upon him by God.
+	The first step back in this process of return is to acknowledge Yeshua as LORD and savior and return to keeping His word.
+</p>
 
 @code {
-	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; } = Enums.DisplayLanguage.English;
+	
 }

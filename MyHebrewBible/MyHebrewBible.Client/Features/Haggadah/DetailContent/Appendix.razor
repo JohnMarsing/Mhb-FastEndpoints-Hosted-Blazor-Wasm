@@ -1,54 +1,44 @@
 ﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
 @using MyHebrewBible.Client.Features.Haggadah.VerseContent
 
+<div class='bg-danger-subtle p-2'>
+	<p class="@H.p4CenterBoldClass">The 10 Plagues</p>
+	<ol class="@H.pClass">
+		<li>Water turned to blood -  <a href='/BookChapter/Exo/7/14/1700'>Exodus 7:14-24</a></li>
+		<li>Frogs -                  <a href='/BookChapter/Exo/8/1/1712'>Exodus 8:1-15</a></li>
+		<li>Lice (or gnats) -        <a href='/BookChapter/Exo/8/16/1727'>Exodus 8:16-19</a></li>
+		<li>Flies (or swarms) -      <a href='/BookChapter/Exo/8/20/1731'>Exodus 8:20-32</a></li>
+		<li>Livestock diseased -     <a href='/BookChapter/Exo/9/1/1744'>Exodus 9:1-7</a></li>
+		<li>Boils -                  <a href='/BookChapter/Exo/9/8/1751'>Exodus 9:8-12</a></li>
+		<li>Hail -                   <a href='/BookChapter/Exo/9/13/1756'>Exodus 9:13-35</a></li>
+		<li>Locusts -                <a href='/BookChapter/Exo/10/1/1779'>Exodus 10:1-20</a></li>
+		<li>Darkness -               <a href='/BookChapter/Exo/10/21/1799'>Exodus 10:21-29</a></li>
+		<li>Death of the firstborn - <a href='/BookChapter/Exo/11/10/1808'>Exodus 11:1-10</a>; <a href='/BookChapter/Exo/12/29/1846'>Exodus 12:29-36</a> </li>
+	</ol>
+</div>
 
-@if (Language == Enums.DisplayLanguage.English)
-{
+<div class='bg-info-subtle p-2'>
+	<p class="@H.p4CenterBoldClass">What about Easter?</p>
+	<p class="fs-4 text-center">Turns out, from a biblical perspective anyway, that's not a thing.</p>
+	<ol class='fs-5 mt-2'>
+		<li>
+			<a href='https://myhebrewbible5.blob.core.windows.net/mhb-container/Article/Acts-12-4-The-one-and-only-occurrence-of-Easter-in-the-King-James.pdf' target='_blank'>
+				Acts 12:4 - the one and only occurrence of Easter in the KJB (PDF)
+			</a>
+		</li>
+		<li>
+			<a href='https://myhebrewbible5.blob.core.windows.net/mhb-container/Article/Acts-12-4-Easter-only-in-KJV-G3957-H6453-BLB-Translations.jpg' target='_blank'>
+				Acts 12:4 Word Study of Easter (Image)
+			</a>
+		</li>
+	</ol>
+</div>
 
-	<div class='bg-danger-subtle p-2'>
-		<p class="@H.p4CenterBoldClass">The 10 Plagues</p>
-		<ol class="@H.pClass">
-			<li>Water turned to blood -  <a href='/BookChapter/Exo/7/14/1700'>Exodus 7:14-24</a></li>
-			<li>Frogs -                  <a href='/BookChapter/Exo/8/1/1712'>Exodus 8:1-15</a></li>
-			<li>Lice (or gnats) -        <a href='/BookChapter/Exo/8/16/1727'>Exodus 8:16-19</a></li>
-			<li>Flies (or swarms) -      <a href='/BookChapter/Exo/8/20/1731'>Exodus 8:20-32</a></li>
-			<li>Livestock diseased -     <a href='/BookChapter/Exo/9/1/1744'>Exodus 9:1-7</a></li>
-			<li>Boils -                  <a href='/BookChapter/Exo/9/8/1751'>Exodus 9:8-12</a></li>
-			<li>Hail -                   <a href='/BookChapter/Exo/9/13/1756'>Exodus 9:13-35</a></li>
-			<li>Locusts -                <a href='/BookChapter/Exo/10/1/1779'>Exodus 10:1-20</a></li>
-			<li>Darkness -               <a href='/BookChapter/Exo/10/21/1799'>Exodus 10:21-29</a></li>
-			<li>Death of the firstborn - <a href='/BookChapter/Exo/11/10/1808'>Exodus 11:1-10</a>; <a href='/BookChapter/Exo/12/29/1846'>Exodus 12:29-36</a> </li>
+<div class='bg-primary-subtle p-2'>
+	<p class="fs-4 text-center">Original Instructions <a href='/BookChapter/Exo/7/14/1700'><b>Exodus 12 1-16</b></a></p>
+</div>
 
-		</ol>
-	</div>
-
-	<div class='bg-info-subtle p-2'>-
-		<p class="@H.p4CenterBoldClass">What about Easter?</p>
-		<p class="fs-4 text-center">Turns out, from a biblical perspective anyway, that's not a thing.</p>
-		<ol class='fs-5 mt-2'>
-			<li>
-				<a href='https://myhebrewbible5.blob.core.windows.net/mhb-container/Article/Acts-12-4-The-one-and-only-occurrence-of-Easter-in-the-King-James.pdf' target='_blank'>
-					Acts 12:4 - the one and only occurrence of Easter in the KJB (PDF)
-				</a>
-			</li>
-			<li>
-				<a href='https://myhebrewbible5.blob.core.windows.net/mhb-container/Article/Acts-12-4-Easter-only-in-KJV-G3957-H6453-BLB-Translations.jpg' target='_blank'>
-					Acts 12:4 Word Study of Easter (Image)
-				</a>
-			</li>
-		</ol>
-	</div>
-
-	<div class='bg-primary-subtle p-2'>
-		<p class="fs-4 text-center">Original Instructions <a href='/BookChapter/Exo/7/14/1700'><b>Exodus 12 1-16</b></a></p>
-	</div>
-
-}
-else
-{
-	<p class="@H.pClass">ToDo</p>
-}
 
 @code {
-	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; } = Enums.DisplayLanguage.English;
+	// [Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; } = Enums.DisplayLanguage.English;
 }

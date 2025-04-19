@@ -1,96 +1,49 @@
 ﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
 @using MyHebrewBible.Client.Features.Haggadah.VerseContent
 
-@if (Language == Enums.DisplayLanguage.English)
-{
-	@H.ParagraphLeader("Leader")
-	<Jer_03_18 Language="Language" Title="Jeremiah 3:18" />
+@H.ParagraphLeader("Leader")
+<Jer_03_18 Title="Jeremiah 3:18" />
 
-	@H.ParagraphReader("Reader", 1)
-	<Jer_50_19 Language="Language" Title="Jeremiah 50:19" />
+@H.ParagraphReader("Reader", 1)
+<Jer_50_19 Title="Jeremiah 50:19" />
 
-	<p class='fs-4 fw-bold text-center'>
-		A <mark>Greater Exodus</mark> than the one from Egypt is coming
-	</p>
+<p class='fs-4 fw-bold text-center'>
+	A <mark>Greater Exodus</mark> than the one from Egypt is coming
+</p>
 
-	@H.ParagraphReader("Reader", 2)
-	<Jer_16_14_to_15 Language="Language" Title="Jeremiah 16:14-15" />
+@H.ParagraphReader("Reader", 2)
+<Jer_16_14_to_15 Title="Jeremiah 16:14-15" />
 
-	@H.ParagraphReader("Reader", 3)
-	<Eze_36_24_to_25 Language="Language" Title="Ezekiel 36:24-25" /> 
+@H.ParagraphReader("Reader", 3)
+<Eze_36_24_to_25 Title="Ezekiel 36:24-25" />
 
-	@H.ParagraphReader("Reader", 4)
-	<Jer_31_07_to_08 Language="Language" Title="Jeremiah 31:7-8" /> 
-	
-	<p class="@H.pClass">
-		@H.Leader("Leader")<br />
-		We drink joyfully of this last cup in expectation of the coming of the Kingdom of our Messiah Yeshua and of the Restoration of All Israel.<br />
-		Let us toast to completing our journey from the nations back to our homeland.
-	</p>
+@H.ParagraphReader("Reader", 4)
+<Jer_31_07_to_08 Title="Jeremiah 31:7-8" />
 
-		@H.Toast("All Shout")
+<p class="@H.pClass">
+	@H.Leader("Leader")<br />
+	We drink joyfully of this last cup in expectation of the coming of the Kingdom of our Messiah Yeshua and of the Restoration of All Israel.<br />
+	Let us toast to completing our journey from the nations back to our homeland.
+</p>
 
-	<p class="@H.pClass">
-		@H.Leader("Leader")<br />
-		Those of us who understand our true identity in Messiah, aka “in Israel”,  have begun to cry out for our final deliverance.
-		We are tired of Egypt and our long exile, even in this abundant and prosperous land, for we now yearn for the Land of our Fathers.
-		We are drawn to our Roots, to our Fathers ancient paths, to our heritage, to our true identity, and most importantly, to our awesome Bride-Groom of Messiah.
-	</p>
+@H.Toast("All Shout")
 
-	<p class="@H.pClass">
-		We desire that Heaven hear us, breaking the boundaries that limit us,
-		and that Yehovah send our Messiah to lead us HOME, where our inward spirit is leading us.
-	</p>
-		
-	@H.ParagraphReader("Reader", 5)
-	<Rev_22_17 Language="Language" Title="Revelation 22:17" />
-	<Rev_22_20 Language="Language" Title="Revelation 22:20" />
-}
-else
-{
-	@H.ParagraphLeader("Líder")
-	<Jer_03_18 Language="Language" Title="Jeremías 3:18" />
+<p class="@H.pClass">
+	@H.Leader("Leader")<br />
+	Those of us who understand our true identity in Messiah, aka “in Israel”,  have begun to cry out for our final deliverance.
+	We are tired of Egypt and our long exile, even in this abundant and prosperous land, for we now yearn for the Land of our Fathers.
+	We are drawn to our Roots, to our Fathers ancient paths, to our heritage, to our true identity, and most importantly, to our awesome Bride-Groom of Messiah.
+</p>
 
-	@H.ParagraphReader("Lector", 1)
-	<Jer_50_19 Language="Language" Title="Jeremías 50:19" />
+<p class="@H.pClass">
+	We desire that Heaven hear us, breaking the boundaries that limit us,
+	and that Yehovah send our Messiah to lead us HOME, where our inward spirit is leading us.
+</p>
 
-	<p class='fs-4 fw-bold text-center'>Un <mark>Éxodo Mayor</mark> que el de Egipto está por venir</p>
-
-	@H.ParagraphReader("Lector", 2)
-	<Jer_16_14_to_15 Language="Language" Title="Jeremías 16:14-15" />
-
-	@H.ParagraphReader("Lector", 3)
-	<Eze_36_24_to_25 Language="Language" Title="Ezequiel 36:24-25" />
-
-	@H.ParagraphReader("Lector", 4)
-	<Jer_31_07_to_08 Language="Language" Title="Jeremías 31:7-8" />
-
-
-	<p class="@H.pClass">
-		@H.Leader("Líder")
-		Bebemos con alegría de esta última copa en expectativa de la venida del Reino de nuestro Mesías Yeshua y de la Restauración de Todo Israel.<br />
-		Brindemos por completar nuestro viaje desde las naciones de regreso a nuestra patria.
-	</p>
-
-	@H.Toast("Todos Gritan")
-
-	<p class="@H.pClass">
-		@H.Leader("Líder")<br />
-		Aquellos de nosotros que entendemos nuestra verdadera identidad en el Mesías, también conocida como “en Israel”, hemos comenzado a clamar por nuestra liberación final.
-		Estamos cansados de Egipto y de nuestro largo exilio, incluso en esta tierra abundante y próspera, porque ahora anhelamos la Tierra de nuestros Padres.
-		Nos sentimos atraídos por nuestras Raíces, por los caminos antiguos de nuestros Padres, por nuestra heredad, por nuestra verdadera identidad, y lo más importante, por nuestro impresionante Novio del Mesías.
-	</p>
-	<p class="@H.pClass">
-		Deseamos que el Cielo nos escuche, rompiendo los límites que nos restringen,
-		y que YHWH envíe a nuestro Mesías para guiarnos a CASA, donde nuestro espíritu interior nos está llevando.
-	</p>
-
-
-	@H.ParagraphReader("Lector", 5)
-	<Rev_22_17 Language="Language" Title="Apocalipsis 22:17" />
-	<Rev_22_20 Language="Language" Title="Apocalipsis 22:20" />
-}
+@H.ParagraphReader("Reader", 5)
+<Rev_22_17 Title="Revelation 22:17" />
+<Rev_22_20 Title="Revelation 22:20" />
 
 @code {
-	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; } = Enums.DisplayLanguage.English;
+	
 }

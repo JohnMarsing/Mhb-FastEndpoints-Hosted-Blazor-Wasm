@@ -1,0 +1,29 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+@using MyHebrewBible.Client.Features.Haggadah.VerseContentEsp
+
+<p class="@H.pClass">
+	@H.Leader("Líder")
+	Nuestro pueblo dejó Egipto con tanta prisa que su masa de pan no tuvo tiempo de leudar y no llevaron consigo su masa leudada.
+	Comieron pan sin levadura. El Mesías es nuestro pan sin levadura, ya que Él está sin pecado.
+</p>
+
+<p class='fs-5'>
+	Esta noche, comemos Matzá para reconocer a Yeshua nuestro Mesías, Quien nos ha rescatado y cuyo Espíritu nos hace caminar en Sus caminos de la Torá.
+</p>
+
+@H.ParagraphReader("Lector", 1)
+<Joh_06_35 Title="Juan 6:35" />
+<Joh_06_38 Title="Juan 6:38" />
+<Joh_06_51 Title="Juan 6:51" />
+
+<p class="@H.pClass">
+	@H.Leader("Líder")
+	Bendito eres Tú, YHWH nuestro Elohim, Rey del universo, Quien saca el Pan de la Tierra...
+</p>
+
+<p class="@pCenter">Come el Matzá</p>
+
+@code {
+	
+	public const string pCenter = "fs-5 fw-bold text-center my-3";
+}

@@ -1,52 +1,26 @@
 ﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
 
-@if (Language == Enums.DisplayLanguage.English)
-{
-	<p class="@H.VerseClass">
-		<b>@Title</b><br />
-		@((MarkupString)H.VerseIcon)
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
 
-		<sup class="@H.VerseSupClass">12</sup>
-		Blessed are You, O Yehovah; Teach me Your statutes.
+	<sup class="@H.VerseSupClass">12</sup>
+	Blessed are You, O Yehovah; Teach me Your statutes.
 
-		<sup class="@H.VerseSupClass">13</sup>
-		With my lips I have recounted All the judgments of Your mouth.
+	<sup class="@H.VerseSupClass">13</sup>
+	With my lips I have recounted All the judgments of Your mouth.
 
-		<sup class="@H.VerseSupClass">14</sup>
-		I have rejoiced in the way of Your testimonies, As much as in all riches.
+	<sup class="@H.VerseSupClass">14</sup>
+	I have rejoiced in the way of Your testimonies, As much as in all riches.
 
-		<sup class="@H.VerseSupClass">15</sup>
-		I will muse upon Your precepts And look upon Your ways.
+	<sup class="@H.VerseSupClass">15</sup>
+	I will muse upon Your precepts And look upon Your ways.
 
-		<sup class="@H.VerseSupClass">16</sup>
-		I shall delight in Your statutes; I shall not forget Your word.
-	</p>
-}
-else
-{
-	<p class="@H.VerseClass">
-		<b>@Title</b><br />
-		@((MarkupString)H.VerseIcon)
-
-		<sup class="@H.VerseSupClass">12</sup>
-		Bendito eres Tú, Oh Yahvé; Enséñame Tus estatutos.
-
-		<sup class="@H.VerseSupClass">13</sup>
-		Con mis labios he relatado Todos los juicios de Tu boca.
-
-		<sup class="@H.VerseSupClass">14</sup>
-		Me he regocijado en el camino de Tus testimonios, Tanto como en todas las riquezas.
-
-		<sup class="@H.VerseSupClass">15</sup>
-		Meditaré en Tus preceptos Y miraré Tus caminos.
-
-		<sup class="@H.VerseSupClass">16</sup>
-		Me deleitaré en Tus estatutos; No olvidaré Tu palabra.
-
-	</p>
-}
+	<sup class="@H.VerseSupClass">16</sup>
+	I shall delight in Your statutes; I shall not forget Your word.
+</p>
 
 @code {
-	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	
 	[Parameter, EditorRequired] public string? Title { get; set; }
 }

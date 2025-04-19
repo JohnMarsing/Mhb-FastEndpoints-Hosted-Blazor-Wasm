@@ -1,39 +1,21 @@
 ﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
 
-@if (Language == Enums.DisplayLanguage.English)
-{
-	<p class="@H.VerseClass">
-		<b>@Title</b><br />
-		@((MarkupString)H.VerseIcon)
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
 
-		<sup class="@H.VerseSupClass">9</sup>
-		And Yehovah said, Name him <i>Lo-ammi</i>, for you are not My people, and I am not your God.
+	<sup class="@H.VerseSupClass">9</sup>
+	And Yehovah said, Name him <i>Lo-ammi</i>, for you are not My people, and I am not your God.
 
-		<sup class="@H.VerseSupClass">10</sup>  <sup class="@H.VerseSupClassHebrew">[2:1]</sup>
-		...and it will be that in the place where it is said to them “You are not My people,” 
-		It will be said to them, “You are the sons of the living God.”
-		
-		<sup>(also Romans 9:25-26)</sup>
-	</p>
-}
-else
-{
-	<p class="@H.VerseClass">
-		<b>@Title</b><br />
-		@((MarkupString)H.VerseIcon)
+	<sup class="@H.VerseSupClass">10</sup>  <sup class="@H.VerseSupClassHebrew">[2:1]</sup>
+	...and it will be that in the place where it is said to them “You are not My people,”
+	It will be said to them, “You are the sons of the living God.”
 
-		<sup class="@H.VerseSupClass">9</sup>
-		Y Yahvé dijo: Nómbrenlo Lo-ammi, porque ustedes no son Mi pueblo, y Yo no soy su Dios.
+	<sup>(also Romans 9:25-26)</sup>
+</p>
 
-		<sup class="@H.VerseSupClass">10</sup>  <sup class="@H.VerseSupClassHebrew">[2:1]</sup>
-		...Y será que en el lugar donde se les dijo “No son Mi pueblo,” 
-		se les dirá, “Son los hijos del Dios viviente.”
-
-		<sup>(también Romanos 9:25-26)</sup>
-	</p>
-}
 
 @code {
-	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	
 	[Parameter, EditorRequired] public string? Title { get; set; }
 }

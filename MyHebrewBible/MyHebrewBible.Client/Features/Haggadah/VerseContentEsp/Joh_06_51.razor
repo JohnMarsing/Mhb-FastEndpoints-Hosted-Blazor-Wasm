@@ -1,0 +1,13 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+	<sup class="@H.VerseSupClass">51</sup>
+	Yo soy el pan vivo que descendió del cielo. Si alguien come de este pan, vivirá para siempre, y el pan que daré es Mi carne, que daré por la vida del mundo.
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

@@ -1,119 +1,59 @@
 ﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
 @using MyHebrewBible.Client.Features.Haggadah.VerseContent
 
+<p class="@H.pClass">
+	@H.Leader("Leader")
+	(there is Liberty in God's perfect Law)
+</p>
 
-@if (Language == Enums.DisplayLanguage.English)
-{
-	<p class="@H.pClass">
-		@H.Leader("Leader")
-		(there is Liberty in God's perfect Law)
+<Jam_01_25 Title="James 1:25" />
+
+<ul class="@H.pClass">
+	<li>We are set-free to know God's Holy instructions.</li>
+	<li>Ephraim can now call God's instructions good, right, holy and spiritual.</li>
+	<li>We can say with David in Psalm 119</li>
+</ul>
+
+@H.ParagraphAllRead("All Read")
+
+<Psa_119_12_to_16 Title="Psalms 119:12-16" />
+
+<p class="@H.pClass">
+	@H.Leader("Leader")
+	We toast to joyfully to receiving God’s Holy Instructions
+</p>
+
+@H.Toast("All Shout")
+
+<p class="@H.pClass">
+	By our redemption thru the power of the blood of the Lamb of God and the giving of His Holy Spirit we have been set-free
+	from the bondage of the sins that caused Ephraim Israel to be divorced from Yehovah and sifted among the nations. WE HAVE BEEN REDEEMED!
+</p>
+
+<p class="@H.pClass">
+	We will all say together this phrase for each item 1-10, one at a time:
+</p>
+
+@H.ParagraphSetFree("All Shout");
+
+<div class='bg-danger-subtle p-2'>
+	<p class='@H.pClass fst-italic'>
+		By His blood we have been set-free from... <u>1-10</u> ...<b>HalleluYah!</b>
 	</p>
-
-	<Jam_01_25 Language="Language" Title="James 1:25" /> 
-
-	<ul class="@H.pClass">
-		<li>We are set-free to know God's Holy instructions.</li>
-		<li>Ephraim can now call God's instructions good, right, holy and spiritual.</li>
-		<li>We can say with David in Psalm 119</li>
-	</ul>
-
-	@H.ParagraphAllRead("All Read")
-
-	<Psa_119_12_to_16 Language="Language" Title="Psalms 119:12-16" />
-
-	<p class="@H.pClass">
-		@H.Leader("Leader")
-		We toast to joyfully to receiving God’s Holy Instructions
-	</p>
-
-	@H.Toast("All Shout")
-
-	<p class="@H.pClass">
-		By our redemption thru the power of the blood of the Lamb of God and the giving of His Holy Spirit we have been set-free
-		from the bondage of the sins that caused Ephraim Israel to be divorced from Yehovah and sifted among the nations. WE HAVE BEEN REDEEMED!
-	</p>
-
-	<p class="@H.pClass">
-		We will all say together this phrase for each item 1-10, one at a time:
-	</p>
-
-	@H.ParagraphSetFree("All Shout");
-
-	<div class='bg-danger-subtle p-2'>
-		<p class='@H.pClass fst-italic'>
-			By His blood we have been set-free from... <u>1-10</u> ...<b>HalleluYah!</b>
-		</p>
-		<ol class="@H.pClass">
-			<li>...sin & rebellion</li>
-			<li>...anger, bitterness & resentment</li>
-			<li>...fear</li>
-			<li>...division (from Judah)</li>
-			<li>...lies  - (from false teachers and our forefathers)</li>
-			<li>...false religious systems with their false gods and false holidays,</li>
-			<li>...curses - (the long term curses put on us by Yehovah because of our rebellion)</li>
-			<li>...blindness  -  (anti Torah beliefs and identity)</li>
-			<li>...calling ourselves gentiles (identity)</li>
-			<li>...being jealous of Judah, anti Judah attitudes and behavior</li>
-		</ol>
-	</div>
-}
-else
-{
-	<p class="@H.pClass">
-		@H.Leader("Líder")
-		(hay Libertad en la Ley perfecta de Dios)
-	</p>
-
-	<Jam_01_25 Language="Language" Title="Santiago 1:25" />
-
-	<ul class="@H.pClass">
-		<li>Somos liberados para conocer las Santas instrucciones de Dios.</li>
-		<li>Efraím ahora puede llamar a las instrucciones de Dios buenas, justas, santas y espirituales.</li>
-		<li>Podemos decir con David en Salmo 119:12-16:</li>
-	</ul>
-
-	@H.ParagraphAllRead("Todos Gritan")
-
-	<Psa_119_12_to_16 Language="Language" Title="Salmo 119:12-16" />
-
-	<p class="@H.pClass">
-		@H.Leader("Líder")
-		Brindamos con alegría por recibir las Santas Instrucciones de Dios
-	</p>
-
-	@H.Toast("Todos Gritan")
-
-	<p class="@H.pClass">
-		Por nuestra redención a través del poder de la sangre del Cordero de Dios y la entrega de Su Espíritu Santo, hemos sido liberados
-		de la esclavitud de los pecados que causaron que Efraím Israel fuera divorciado de Yahvé y tamizado entre las naciones. ¡HEMOS SIDO REDIMIDOS!
-	</p>
-
-	<p class="@H.pClass">
-		Todos diremos juntos esta frase para cada ítem del 1 al 10, uno a la vez:
-	</p>
-	
-	@H.ParagraphSetFree("Todos Gritan")
-	
-	<div class='bg-danger-subtle p-2'>
-		<p class='@H.pClass  fst-italic'>
-			Por Su sangre hemos sido liberados de... <u>1-10</u>, ...<b>¡HalleluYah!</b>
-		</p>
-
-		<ol class="@H.pClass">
-			<li>...pecado y rebelión  </li>
-			<li>...ira, amargura y resentimiento</li>
-			<li>...miedo</li>
-			<li>...división (de Judá)</li>
-			<li>...mentiras - (de falsos maestros y nuestros antepasados)</li>
-			<li>...sistemas religiosos falsos con sus dioses falsos y fiestas falsas,</li>
-			<li>...maldiciones - (las maldiciones a largo plazo puestas sobre nosotros por Yahvé debido a nuestra rebelión)</li>
-			<li>...ceguera - (creencias e identidad anti-Torá)</li>
-			<li>...llamarnos gentiles (identidad)</li>
-			<li>...estar celosos de Judá, actitudes y comportamientos anti-Judá</li>
-		</ol>
-	</div>
-}
+	<ol class="@H.pClass">
+		<li>...sin & rebellion</li>
+		<li>...anger, bitterness & resentment</li>
+		<li>...fear</li>
+		<li>...division (from Judah)</li>
+		<li>...lies  - (from false teachers and our forefathers)</li>
+		<li>...false religious systems with their false gods and false holidays,</li>
+		<li>...curses - (the long term curses put on us by Yehovah because of our rebellion)</li>
+		<li>...blindness  -  (anti Torah beliefs and identity)</li>
+		<li>...calling ourselves gentiles (identity)</li>
+		<li>...being jealous of Judah, anti Judah attitudes and behavior</li>
+	</ol>
+</div>
 
 @code {
-	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; } = Enums.DisplayLanguage.English;
+//	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; } = Enums.DisplayLanguage.English;
 }

@@ -1,0 +1,14 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+	<sup class="@H.VerseSupClass">20</sup>
+	¿Es Efraím Mi hijo querido? En verdad, tantas veces como he hablado contra él,
+	ciertamente aún lo recuerdo; por eso Mis entrañas anhelan por él; seguramente tendré misericordia de él, declara Yahvé.
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

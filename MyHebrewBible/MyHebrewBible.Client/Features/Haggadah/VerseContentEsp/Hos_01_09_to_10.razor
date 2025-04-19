@@ -1,0 +1,20 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+
+	<sup class="@H.VerseSupClass">9</sup>
+	Y Yahvé dijo: Nómbrenlo Lo-ammi, porque ustedes no son Mi pueblo, y Yo no soy su Dios.
+
+	<sup class="@H.VerseSupClass">10</sup>  <sup class="@H.VerseSupClassHebrew">[2:1]</sup>
+	...Y será que en el lugar donde se les dijo “No son Mi pueblo,”
+	se les dirá, “Son los hijos del Dios viviente.”
+
+	<sup>(también Romanos 9:25-26)</sup>
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

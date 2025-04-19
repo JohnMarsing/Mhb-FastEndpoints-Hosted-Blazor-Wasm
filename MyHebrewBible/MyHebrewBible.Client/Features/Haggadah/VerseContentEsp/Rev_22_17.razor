@@ -1,0 +1,14 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+	<sup class="@H.VerseSupClass">17</sup>
+	Y el Espíritu y la novia dicen, “Ven.” Y que el que oye diga, “Ven.” Y que el que tenga sed venga.
+	Que el que desee reciba el agua de la vida sin costo.
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

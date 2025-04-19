@@ -1,0 +1,21 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+
+	<sup class="@H.VerseSupClass">9</sup>
+	Los hijos de Efraín, arqueros armados, Volvieron las espaldas en el día de la batalla.
+
+	<sup class="@H.VerseSupClass">10</sup>
+	No guardaron el pacto de Dios, Ni quisieron andar en su ley;
+
+	<sup class="@H.VerseSupClass">11</sup>
+	Sino que se olvidaron de sus obras, Y de sus maravillas que les había mostrado.
+
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}
