@@ -1,0 +1,14 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+	<sup class="@H.VerseSupClass">18</sup>
+	En esos días la casa de Judá se unirá a la casa de Israel,
+	y juntos vendrán de la tierra del norte a la tierra que di a sus padres por heredad.
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

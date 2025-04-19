@@ -1,27 +1,14 @@
 ﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
 
-@if (Language == Enums.DisplayLanguage.English)
-{
-	<p class="@H.VerseClass">
-		<b>@Title</b><br />
-		@((MarkupString)H.VerseIcon)
-		<sup class="@H.VerseSupClass">20</sup>
-		Is Ephraim My dear son? Indeed, as often as I have spoken against him,
-		I certainly still remember him; Therefore My inmost being yearns for him; I will surely have mercy on him, declares Yehovah.
-	</p>
-}
-else
-{
-	<p class="@H.VerseClass">
-		<b>@Title</b><br />
-		@((MarkupString)H.VerseIcon)
-		<sup class="@H.VerseSupClass">20</sup>
-		¿Es Efraím Mi hijo querido? En verdad, tantas veces como he hablado contra él,
-		ciertamente aún lo recuerdo; por eso Mis entrañas anhelan por él; seguramente tendré misericordia de él, declara Yahvé.
-	</p>
-}
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+	<sup class="@H.VerseSupClass">20</sup>
+	Is Ephraim My dear son? Indeed, as often as I have spoken against him,
+	I certainly still remember him; Therefore My inmost being yearns for him; I will surely have mercy on him, declares Yehovah.
+</p>
 
 @code {
-	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	
 	[Parameter, EditorRequired] public string? Title { get; set; }
 }

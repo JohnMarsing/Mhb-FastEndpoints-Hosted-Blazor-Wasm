@@ -1,0 +1,27 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+
+	<sup class="@H.VerseSupClass">12</sup>
+	Bendito eres Tú, Oh Yahvé; Enséñame Tus estatutos.
+
+	<sup class="@H.VerseSupClass">13</sup>
+	Con mis labios he relatado Todos los juicios de Tu boca.
+
+	<sup class="@H.VerseSupClass">14</sup>
+	Me he regocijado en el camino de Tus testimonios, Tanto como en todas las riquezas.
+
+	<sup class="@H.VerseSupClass">15</sup>
+	Meditaré en Tus preceptos Y miraré Tus caminos.
+
+	<sup class="@H.VerseSupClass">16</sup>
+	Me deleitaré en Tus estatutos; No olvidaré Tu palabra.
+
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

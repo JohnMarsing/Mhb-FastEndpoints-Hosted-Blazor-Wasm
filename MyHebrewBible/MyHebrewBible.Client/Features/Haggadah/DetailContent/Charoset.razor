@@ -1,28 +1,14 @@
 ﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
 
-@if (Language == Enums.DisplayLanguage.English)
-{
-	<p class="@H.pClass">
-		@H.Leader("Líder")
-		Now we enjoy the sweetness of Freedom and Salvation
-		Blessed are You, LORD our God and Messiah Yeshua for allowing us to taste the sweetness of freedom and setting us free from the sins of Jeroboam. In Yeshua’s Name we pray.
-	</p>
+<p class="@H.pClass">
+	@H.Leader("Líder")
+	Now we enjoy the sweetness of Freedom and Salvation
+	Blessed are You, LORD our God and Messiah Yeshua for allowing us to taste the sweetness of freedom and setting us free from the sins of Jeroboam. In Yeshua’s Name we pray.
+</p>
 
-	<p class="@H.p4CenterBoldClass">EAT SOME SWEET <i>CHAROSETW/MATZAH</i></p>
-}
-else
-{
-	<p class="@H.pClass">
-		@H.Leader("Líder")
-		Ahora disfrutamos de la dulzura de la Libertad y la Salvación
-		Bendito eres Tú, SEÑOR nuestro Dios y Mesías Yeshua por permitirnos saborear la dulzura de la libertad y liberarnos de los pecados de Jeroboam.
-		En el Nombre de Yeshua oramos.
-	</p>
-
-	<p class="@H.p4CenterBoldClass">COME ALGO DULCE	<i>CHAROSETW/MATZAH</i></p>
-}
+<p class="@H.p4CenterBoldClass">EAT SOME SWEET <i>CHAROSETW/MATZAH</i></p>
 
 @code {
-	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; } = Enums.DisplayLanguage.English;
-	
+	// [Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; } = Enums.DisplayLanguage.English;
+
 }

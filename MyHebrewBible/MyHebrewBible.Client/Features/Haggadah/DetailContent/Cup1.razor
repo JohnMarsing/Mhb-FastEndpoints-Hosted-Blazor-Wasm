@@ -1,65 +1,33 @@
 ﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
 
-@if (Language == Enums.DisplayLanguage.English)
-{
-	<p class="@H.pClass">
-		@H.Leader("Leader")
-		We drink this cup in gratitude for our Messiah Yeshua coming down from heaven and becoming a man,
-		to show us how to live and then dying for our sins and rising from the dead to offer us forgiveness 
-		and a new relationship with our Father in heaven.
-		The first marriage covenant, which Ephraim broke, is dissolved
-		<span class='text-decoration-underline fw-bold'>
-			so all could be born anew to a new and better covenant with our resurrected (new) Groom and King
-		</span>.
-		This is the CUP of the New Heart and New Spirit of the Renewed Covenant.
-	</p>
+<p class="@H.pClass">
+	@H.Leader("Leader")
+	We drink this cup in gratitude for our Messiah Yeshua coming down from heaven and becoming a man,
+	to show us how to live and then dying for our sins and rising from the dead to offer us forgiveness
+	and a new relationship with our Father in heaven.
+	The first marriage covenant, which Ephraim broke, is dissolved
+	<span class='text-decoration-underline fw-bold'>
+		so all could be born anew to a new and better covenant with our resurrected (new) Groom and King
+	</span>.
+	This is the CUP of the New Heart and New Spirit of the Renewed Covenant.
+</p>
 
-	<p class="@H.pClass">
-		@H.Leader("Leader") <br />
-		<i class='fas fa-quote-left'></i> Blessed are You Yehovah our Elohim, King of the universe Who creates the fruit of the Vine
-		We toast to the Renewed Covenant that Messiah gave us to rescue us and redeem us!
-	</p>
+<p class="@H.pClass">
+	@H.Leader("Leader") <br />
+	<i class='fas fa-quote-left'></i> Blessed are You Yehovah our Elohim, King of the universe Who creates the fruit of the Vine
+	We toast to the Renewed Covenant that Messiah gave us to rescue us and redeem us!
+</p>
 
-	@H.Toast("All Shout")
+@H.Toast("All Shout")
 
-	<p class="@H.pClass">
-		@H.Reader("Reader", 1)
-		Another fate of Ephraim in <b>Hosea 1:6</b> is receiving NO MERCY from God.
-		God has declared that He is no longer her husband in <b>Hosea 2:2</b>.
-		God is calling Ephraim to repent so that He may have mercy upon her. 
-		But she does not repent.There is no hope for Ephraim to return to God.
-	</p>
-}
-else
-{
-	<p class="@H.pClass">
-		@H.Leader("Líder")
-		Bebemos esta copa en gratitud por nuestro Mesías Yeshua que descendió del cielo y se hizo hombre,
-		para mostrarnos cómo vivir y luego morir por nuestros pecados y resucitar de entre los muertos para ofrecernos perdón 
-		y una nueva relación con nuestro Padre en el cielo.
-		El primer pacto matrimonial, que Efraím rompió, se disuelve
-		<span class='text-decoration-underline fw-bold'>
-			para que todos puedan nacer de nuevo en un pacto nuevo y mejor con nuestro Novio y Rey resucitado (nuevo)
-		</span>.
-		Esta es la COPA del Nuevo Corazón y Nuevo Espíritu del Nuevo Pacto.
-	</p>
-
-	<p class="@H.pClass">
-		@H.Leader("Líder") <br />
-		<i class='fas fa-quote-left '></i> Bendito eres Tú, YHWH nuestro Elohim, Rey del universo, Quien crea el fruto de la Vid.
-	</p>
-
-	@H.Toast("Todos Gritan")
-
-	<p class="@H.pClass">
-		@H.Reader("Lector", 1)
-		Otro destino de Efraím en <b>Oseas 1:6</b> es no recibir MISERICORDIA de Dios. 
-		Dios ha declarado que ya no es su esposo en <b>Oseas 2:2</b>. 
-		Dios está llamando a Efraím a arrepentirse para que pueda tener misericordia de ella. 
-		Pero ella no se arrepiente. No hay esperanza para que Efraím regrese a Dios.
-	</p>
-}
+<p class="@H.pClass">
+	@H.Reader("Reader", 1)
+	Another fate of Ephraim in <b>Hosea 1:6</b> is receiving NO MERCY from God.
+	God has declared that He is no longer her husband in <b>Hosea 2:2</b>.
+	God is calling Ephraim to repent so that He may have mercy upon her.
+	But she does not repent.There is no hope for Ephraim to return to God.
+</p>
 
 @code {
-	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; } = Enums.DisplayLanguage.English;
+	// [Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; } = Enums.DisplayLanguage.English;
 }

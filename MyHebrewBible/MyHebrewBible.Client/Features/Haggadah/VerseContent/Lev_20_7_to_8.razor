@@ -1,37 +1,19 @@
 ﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
 
-@if (Language == Enums.DisplayLanguage.English)
-{
-	<p class="@H.VerseClass">
-		<b>@Title</b><br />
-		@((MarkupString)H.VerseIcon)
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
 
-		<sup class="@H.VerseSupClass">7</sup>
-		And you shall set yourselves apart, and shall be set apart, 
-		for I am Yehovah your Elohim, and you shall guard My laws and do them.
+	<sup class="@H.VerseSupClass">7</sup>
+	And you shall set yourselves apart, and shall be set apart,
+	for I am Yehovah your Elohim, and you shall guard My laws and do them.
 
-		<sup class="@H.VerseSupClass">8</sup>
-		I am Yehovah, Who sets you apart.
+	<sup class="@H.VerseSupClass">8</sup>
+	I am Yehovah, Who sets you apart.
 
-	</p>
-}
-else
-{
-	<p class="@H.VerseClass">
-		<b>@Title</b><br />
-		@((MarkupString)H.VerseIcon)
-
-		<sup class="@H.VerseSupClass">7</sup>
-		Y ustedes se apartarán, y estarán apartados,
-		porque Yo soy Yahvé su Elohim,
-
-		<sup class="@H.VerseSupClass">8</sup>
-		y guardarán Mis leyes y las harán. Yo soy Yahvé, Quien los aparta.
-
-	</p>
-}
+</p>
 
 @code {
-	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	
 	[Parameter, EditorRequired] public string? Title { get; set; }
 }

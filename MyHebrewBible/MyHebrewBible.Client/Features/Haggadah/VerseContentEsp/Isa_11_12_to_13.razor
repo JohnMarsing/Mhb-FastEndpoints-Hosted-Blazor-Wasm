@@ -1,0 +1,18 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+
+	<sup class="@H.VerseSupClass">12</sup>
+	Él levantará una señal para las naciones y reunirá a los desterrados de Israel, y juntará a los dispersos de Judá desde los cuatro rincones de la tierra.
+
+	<sup class="@H.VerseSupClass">13</sup>
+	Los celos de Efraím se apartarán y los que acosan a Judá serán cortados; Efraím no estará celoso de Judá, y Judá no acosará a Efraím.
+
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

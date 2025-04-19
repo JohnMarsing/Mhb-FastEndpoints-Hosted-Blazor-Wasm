@@ -1,0 +1,14 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+	<sup class="@H.VerseSupClass">25</sup>
+	Pero el que mira en la ley perfecta, la ley de la libertad, y persevera,
+	no siendo un oidor que olvida sino un hacedor que actúa, será bendecido en su hacer.
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

@@ -1,0 +1,17 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+
+	<sup class="@H.VerseSupClass">24</sup>
+	Y los tomaré de entre los gentiles, y los reuniré de todas las tierras, y los traeré a su propia tierra.
+
+	<sup class="@H.VerseSupClass">25</sup>
+	Y rociaré agua limpia sobre ustedes, y quedarán limpios de toda su inmundicia, y de todos sus ídolos los limpiaré.
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

@@ -1,0 +1,19 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+
+	<sup class="@H.VerseSupClass">7</sup>
+	Y ustedes se apartarán, y estarán apartados,
+	porque Yo soy Yahvé su Elohim,
+
+	<sup class="@H.VerseSupClass">8</sup>
+	y guardarán Mis leyes y las harán. Yo soy Yahvé, Quien los aparta.
+
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

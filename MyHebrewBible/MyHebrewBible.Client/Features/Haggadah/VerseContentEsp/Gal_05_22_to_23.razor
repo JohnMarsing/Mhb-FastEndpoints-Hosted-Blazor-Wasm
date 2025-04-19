@@ -1,0 +1,18 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+
+	<sup class="@H.VerseSupClass">22</sup>
+	...Deseamos vivir vidas apartadas para Él y perseguir los frutos del Espíritu de Dios, que son amor, gozo, paz, paciencia, bondad, benignidad, fidelidad,
+
+	<sup class="@H.VerseSupClass">23</sup>
+	mansedumbre y autocontrol. Contra tales cosas no hay ley.
+
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

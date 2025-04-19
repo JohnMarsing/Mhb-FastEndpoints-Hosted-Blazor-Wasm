@@ -1,0 +1,13 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+	<sup class="@H.VerseSupClass">38</sup>
+	Porque he descendido del cielo, no para hacer Mi propia voluntad, sino la voluntad de Aquel que me envió.<br />
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

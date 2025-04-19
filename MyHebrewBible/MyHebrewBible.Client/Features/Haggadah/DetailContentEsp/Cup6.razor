@@ -1,0 +1,38 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+@using MyHebrewBible.Client.Features.Haggadah.VerseContentEsp
+
+<p class="@H.pClass">
+	@H.Leader("Líder")
+	Renunciamos a todos los dioses falsos e ídolos, fiestas falsas y adoramos solo al único Dios verdadero de Israel.
+</p>
+
+@H.ParagraphReader("Lector", 1)
+<Eze_37_15_to_23 Title="Ezequiel 37:15-23" />
+
+@H.ParagraphReader("Lector", 2)
+<Isa_11_12_to_13 Title="Isaías 11:12-13" />
+<Isa_11_16 Title="Isaías 11:16" />
+
+@H.ParagraphReader("Lector", 3)
+<Jer_50_04_to_05 Title="Jeremías 50:4-5" />
+
+@H.ParagraphReader("Lector", 4)
+<Zec_10_06 Title="Zechariah 10:6" />
+<p class='fs-5 text-black-50 ms-3'>Lee Zacarías 12:7-10</p>
+
+<p class="@H.pClass">@H.Reader("Lector", 5)</p>
+<p class="@H.pClass">
+	No basta con reconciliarnos con nuestro Dios, porque nuestro destino no es el cielo, sino un regreso a nuestra tierra del pacto.
+	La reunión con Judá probablemente será en la Tierra bajo la autoridad del Rey.
+	Aquí es cuando el Hombre Nuevo finalmente se manifiesta. Es otra forma de decir que el Palo Único en la mano del Padre es el Hombre Nuevo mencionado por Pablo en Efesios 2:15.
+	¡El Hombre Nuevo es el Israel de Yahvé! ¡HalleluYah!
+</p>
+
+@H.ParagraphAllRead("Todos Gritan")
+<Rev_05_09_to_10 Title="Apocalipsis 5:9-10" />
+
+@H.Toast("Todos Gritan")
+
+@code {
+	
+}

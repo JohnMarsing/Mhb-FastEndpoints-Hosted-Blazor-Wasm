@@ -1,0 +1,15 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+
+	<sup class="@H.VerseSupClass">16</sup>
+	Y habrá un camino desde Asiria para el remanente que queda de su pueblo, como lo hubo para Israel cuando subieron de la tierra de Egipto.
+
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

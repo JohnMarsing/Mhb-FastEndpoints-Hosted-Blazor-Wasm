@@ -1,25 +1,13 @@
 ﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
 
-@if (Language == Enums.DisplayLanguage.English)
-{
-	<p class="@H.VerseClass">
-		<b>@Title</b><br />
-		@((MarkupString)H.VerseIcon)
-		<sup class="@H.VerseSupClass">24</sup>
-		...this thing is of me
-	</p>
-}
-else
-{
-	<p class="@H.VerseClass">
-		<b>@Title</b><br />
-		@((MarkupString)H.VerseIcon)
-		<sup class="@H.VerseSupClass">24</sup>
-		...esto es de mí
-	</p>
-}
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+	<sup class="@H.VerseSupClass">24</sup>
+	...this thing is of me
+</p>
 
 @code {
-	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	
 	[Parameter, EditorRequired] public string? Title { get; set; }
 }

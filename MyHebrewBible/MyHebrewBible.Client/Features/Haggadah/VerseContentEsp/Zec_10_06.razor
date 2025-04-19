@@ -1,0 +1,15 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+	<sup class="@H.VerseSupClass">6</sup>
+	Fortificaré la casa de Judá, y salvaré la casa de José.
+	Los traeré de vuelta porque tengo compasión de ellos, y serán como si no los hubiera rechazado,
+	porque Yo soy el SEÑOR su Dios y les responderé
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

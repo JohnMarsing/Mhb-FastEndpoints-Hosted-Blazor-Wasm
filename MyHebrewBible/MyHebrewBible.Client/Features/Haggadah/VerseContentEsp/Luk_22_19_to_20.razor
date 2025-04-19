@@ -1,0 +1,20 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+
+	<sup class="@H.VerseSupClass">19</sup>
+	Y cuando hubo tomado pan y dado gracias, lo partió y se lo dio, diciendo:
+	Este es Mi cuerpo que es dado por ustedes. Hagan esto en memoria de Mí.
+
+	<sup class="@H.VerseSupClass">22</sup>
+	Y de la misma manera tomó la copa después de haber comido, diciendo:
+	Esta copa que es derramada por ustedes es el nuevo pacto en Mi sangre.
+
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

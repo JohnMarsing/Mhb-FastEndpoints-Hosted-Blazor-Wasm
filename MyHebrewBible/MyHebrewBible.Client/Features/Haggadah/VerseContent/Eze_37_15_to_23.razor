@@ -1,85 +1,45 @@
 ﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
 
-@if (Language == Enums.DisplayLanguage.English)
-{
-	<p class="@H.VerseClass">
-		<b>@Title</b><br />
-		@((MarkupString)H.VerseIcon)
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
 
-		<sup class="@H.VerseSupClass">15</sup>
-		The word of Yehovah came again to me saying,
+	<sup class="@H.VerseSupClass">15</sup>
+	The word of Yehovah came again to me saying,
 
-		<sup class="@H.VerseSupClass">16</sup>
-		Now as for you, son of man, take for yourself one stick and write on it, ‘For Judah and for the sons of Israel, his companions’;
-		then take another stick and write on it, ‘For Joseph, the stick of Ephraim and all the house of Israel, his companions.’
+	<sup class="@H.VerseSupClass">16</sup>
+	Now as for you, son of man, take for yourself one stick and write on it, ‘For Judah and for the sons of Israel, his companions’;
+	then take another stick and write on it, ‘For Joseph, the stick of Ephraim and all the house of Israel, his companions.’
 
-		<sup class="@H.VerseSupClass">17</sup>
-		Then draw them together for yourself one to another into one stick, that they may become one in your hand.
+	<sup class="@H.VerseSupClass">17</sup>
+	Then draw them together for yourself one to another into one stick, that they may become one in your hand.
 
-		<sup class="@H.VerseSupClass">18</sup>
-		And when the sons of your people speak to you saying, ‘Will you not declare to us what you mean by these?’
+	<sup class="@H.VerseSupClass">18</sup>
+	And when the sons of your people speak to you saying, ‘Will you not declare to us what you mean by these?’
 
-		<sup class="@H.VerseSupClass">19</sup>
-		say to them, ‘Thus says Master Yehovah, Behold, I will take the stick of Joseph, which is in the hand of Ephraim, and the tribes of Israel, his companions;
-		and I will put them with it, with the stick of Judah, and make them one stick, and they will be one in My hand.”’
+	<sup class="@H.VerseSupClass">19</sup>
+	say to them, ‘Thus says Master Yehovah, Behold, I will take the stick of Joseph, which is in the hand of Ephraim, and the tribes of Israel, his companions;
+	and I will put them with it, with the stick of Judah, and make them one stick, and they will be one in My hand.”’
 
-		<sup class="@H.VerseSupClass">20</sup>
-		And the sticks on which you write will be in your hand before their eyes.
+	<sup class="@H.VerseSupClass">20</sup>
+	And the sticks on which you write will be in your hand before their eyes.
 
-		<sup class="@H.VerseSupClass">21</sup>
-		And speak to them, ‘Thus says Master Yehovah, “Behold, I will take the sons of Israel from among the nations where they have gone,
-		and I will gather them from every side and bring them into their own land;
+	<sup class="@H.VerseSupClass">21</sup>
+	And speak to them, ‘Thus says Master Yehovah, “Behold, I will take the sons of Israel from among the nations where they have gone,
+	and I will gather them from every side and bring them into their own land;
 
-		<sup class="@H.VerseSupClass">22</sup>
-		and I will make them one nation in the land, on the mountains of Israel; and one king will be king for all of them;
-		and they will no longer be two nations and no longer be divided into two kingdoms.
+	<sup class="@H.VerseSupClass">22</sup>
+	and I will make them one nation in the land, on the mountains of Israel; and one king will be king for all of them;
+	and they will no longer be two nations and no longer be divided into two kingdoms.
 
-		<sup class="@H.VerseSupClass">23</sup>
-		They also will no longer defile themselves with their idols or with their detestable things or with any of their transgressions;
-		but I will save them from all their places of habitation in which they have sinned, and I will cleanse them. And they will be My people, and I will be their God.
+	<sup class="@H.VerseSupClass">23</sup>
+	They also will no longer defile themselves with their idols or with their detestable things or with any of their transgressions;
+	but I will save them from all their places of habitation in which they have sinned, and I will cleanse them. And they will be My people, and I will be their God.
 
-	</p>
-}
-else
-{
-	<p class="@H.VerseClass">
-		<b>@Title</b><br />
-		@((MarkupString)H.VerseIcon)
+</p>
 
-		<sup class="@H.VerseSupClass">15</sup>
-		La palabra de Yahvé vino nuevamente a mí diciendo,
-
-		<sup class="@H.VerseSupClass">16</sup>
-		Ahora, hijo de hombre, toma para ti un palo y escribe en él, 'Para Judá y para los hijos de Israel, sus compañeros';
-		luego toma otro palo y escribe en él, 'Para José, el palo de Efraím y toda la casa de Israel, sus compañeros.'
-
-		<sup class="@H.VerseSupClass">17</sup>
-		Luego júntalos uno con otro en un solo palo, para que se conviertan en uno en tu mano.
-
-		<sup class="@H.VerseSupClass">18</sup>
-		Y cuando los hijos de tu pueblo te hablen diciendo, '¿No nos declararás qué quieres decir con esto?'
-
-		<sup class="@H.VerseSupClass">19</sup>
-		diles, 'Así dice el Maestro Yahvé, He aquí, tomaré el palo de José, que está en la mano de Efraím, y las tribus de Israel, sus compañeros;
-		y los pondré con él, con el palo de Judá, y los haré un solo palo, y serán uno en Mi mano.'
-
-		<sup class="@H.VerseSupClass">20</sup>
-		Y los palos en los que escribas estarán en tu mano ante sus ojos.
-
-		<sup class="@H.VerseSupClass">21</sup>
-		Y habla con ellos, 'Así dice el Maestro Yahvé, He aquí, tomaré a los hijos de Israel de entre las naciones donde han ido,
-
-		<sup class="@H.VerseSupClass">22</sup>
-		y los haré una nación en la tierra, en las montañas de Israel; y un rey será rey para todos ellos;
-
-		<sup class="@H.VerseSupClass">23</sup>
-		Tampoco se contaminarán más con sus ídolos ni con sus cosas detestables ni con ninguna de sus transgresiones;
-		pero los salvaré de todos sus lugares de habitación en los que han pecado, y los limpiaré. Y serán Mi pueblo, y Yo seré su Dios.
-
-	</p>
-}
 
 @code {
-	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	
 	[Parameter, EditorRequired] public string? Title { get; set; }
 }

@@ -1,120 +1,94 @@
-﻿@page "/Haggadah"
-@using MyHebrewBible.Client.Features.Haggadah.DetailContent
+﻿@page "/HaggadahTEST"
+@using Eng = MyHebrewBible.Client.Features.Haggadah.DetailContent
+@using Esp = MyHebrewBible.Client.Features.Haggadah.DetailContentEsp
 
-
-@* 
-@using MyHebrewBible.Client.Features.Haggadah.Enums
-@using MyHebrewBible.Client.Features.Haggadah.Toolbar
-@using Page = MyHebrewBible.Client.Enums.Nav
-
-<PageTitle>@Page.Haggadah.Title</PageTitle>
-
-<NavbarHaggadah Section="Section"
-OnMenuItemSelected="ReturnedMenuItem"
-OnSectionSelected="ReturnedSection" />
-
-<LoadingProgress>
-	<div class="mt-5">
-		@if (CurrentContent is not null)
-		{
-*@		
+<ContentWrapper Content=Enums.Content.Cup1 Language="Language">
+	<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Cup1 Language="Language" /></EngBody>
+	<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Cup1 Language="Language" /></EspBody>
+</ContentWrapper>
 
 <ContentWrapper Content=Enums.Content.Introduction Language="Language">
-	<EngBody><Introduction Language="Language" /></EngBody>
-	<EspBody><Introduction Language="Language" /></EspBody>
+	<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Introduction Language="Language" /></EngBody>
+	<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Introduction Language="Language" /></EspBody>
 </ContentWrapper>
 
 <ContentWrapper Content=Enums.Content.FirstPassover Language="Language">
-	<EngBody><FirstPassover Language="Language" /></EngBody>
-	<EspBody><FirstPassover Language="Language" /></EspBody>
+	<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.FirstPassover Language="Language" /></EngBody>
+	<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.FirstPassover Language="Language" /></EspBody>
 </ContentWrapper>
 
 <ContentWrapper Content=Enums.Content.PassoverDeliverance Language="Language">
-	<EngBody><PassoverDeliverance Language="Language" /></EngBody>
-	<EspBody><PassoverDeliverance Language="Language" /></EspBody>
+	<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.PassoverDeliverance Language="Language" /></EngBody>
+	<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.PassoverDeliverance Language="Language" /></EspBody>
 </ContentWrapper>
 
 <ContentWrapper Content=Enums.Content.StoryOfRedemption Language="Language">
-	<EngBody><StoryOfRedemption Language="Language" /></EngBody>
-	<EspBody><StoryOfRedemption Language="Language" /></EspBody>
+	<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.StoryOfRedemption Language="Language" /></EngBody>
+	<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.StoryOfRedemption Language="Language" /></EspBody>
 </ContentWrapper>
 
 <ContentWrapper Content=Enums.Content.Matzah Language="Language">
-	<EngBody><Matzah Language="Language" /></EngBody>
-	<EspBody><Matzah Language="Language" /></EspBody>
+	<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Matzah Language="Language" /></EngBody>
+	<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Matzah Language="Language" /></EspBody>
 </ContentWrapper>
 
 <ContentWrapper Content=Enums.Content.Cup1 Language="Language">
-	<EngBody><Cup1 Language="Language" /></EngBody>
-	<EspBody><Cup1 Language="Language" /></EspBody>
+	<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Cup1 Language="Language" /></EngBody>
+	<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Cup1 Language="Language" /></EspBody>
 </ContentWrapper>
 
 <ContentWrapper Content=Enums.Content.Cup2 Language="Language">
-	<EngBody><Cup2 Language="Language" /></EngBody>
-	<EspBody><Cup2 Language="Language" /></EspBody>
+	<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Cup2 Language="Language" /></EngBody>
+	<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Cup2 Language="Language" /></EspBody>
 </ContentWrapper>
 
 <ContentWrapper Content=Enums.Content.Cup3 Language="Language">
-	<EngBody><Cup3 Language="Language" /></EngBody>
-	<EspBody><Cup3 Language="Language" /></EspBody>
+	<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Cup3 Language="Language" /></EngBody>
+	<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Cup3 Language="Language" /></EspBody>
 </ContentWrapper>
 
 <ContentWrapper Content=Enums.Content.Cup4 Language="Language">
-	<EngBody><Cup4 Language="Language" /></EngBody>
-	<EspBody><Cup4 Language="Language" /></EspBody>
+	<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Cup4 Language="Language" /></EngBody>
+	<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Cup4 Language="Language" /></EspBody>
 </ContentWrapper>
 
 <ContentWrapper Content=Enums.Content.Charoset Language="Language">
-	<EngBody><Charoset Language="Language" /></EngBody>
-	<EspBody><Charoset Language="Language" /></EspBody>
+	<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Charoset Language="Language" /></EngBody>
+	<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Charoset Language="Language" /></EspBody>
 </ContentWrapper>
 
 <ContentWrapper Content=Enums.Content.Dinner Language="Language">
-	<EngBody><Dinner Language="Language" /></EngBody>
-	<EspBody><Dinner Language="Language" /></EspBody>
+	<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Dinner Language="Language" /></EngBody>
+	<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Dinner Language="Language" /></EspBody>
 </ContentWrapper>
 
 <ContentWrapper Content=Enums.Content.Cup5 Language="Language">
-	<EngBody><Cup5 Language="Language" /></EngBody>
-	<EspBody><Cup5 Language="Language" /></EspBody>
+	<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Cup5 Language="Language" /></EngBody>
+	<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Cup5 Language="Language" /></EspBody>
 </ContentWrapper>
 
 <ContentWrapper Content=Enums.Content.Cup6 Language="Language">
-	<EngBody><Cup6 Language="Language" /></EngBody>
-	<EspBody><Cup6 Language="Language" /></EspBody>
+	<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Cup6 Language="Language" /></EngBody>
+	<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Cup6 Language="Language" /></EspBody>
 </ContentWrapper>
 
 <ContentWrapper Content=Enums.Content.Cup7 Language="Language">
-	<EngBody><Cup7 Language="Language" /></EngBody>
-	<EspBody><Cup7 Language="Language" /></EspBody>
+	<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Cup7 Language="Language" /></EngBody>
+	<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Cup7 Language="Language" /></EspBody>
 </ContentWrapper>
 
 <ContentWrapper Content="Enums.Content.NextYear" Language="Language" >
-	<EngBody></EngBody>
+	<EngBody></EngBody>	
 	<EspBody></EspBody>	
 </ContentWrapper>
 
 <ContentWrapper Content="Enums.Content.Appendix" Language="Language">
-	<EngBody><Appendix Language="Language" /></EngBody>
-	<EspBody><Appendix Language="Language" /></EspBody>
+	<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Appendix Language="Language" /></EngBody>
+	<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Appendix Language="Language" /></EspBody>
 </ContentWrapper>
 
 
-@* 
-		}
-		else
-		{
-			<div class="card border-danger mb-3 mt-5">
-				<div class="card-body text-center fs-1">No Haggadah Section Found <br /> (◡︵◡)</div>
-			</div>
-		}
-	</div>
-
-</LoadingProgress>			
-*@
-
-
 @code {
-	protected Enums.DisplayLanguage? Language = Enums.DisplayLanguage.English;
+	protected Enums.DisplayLanguage? Language = Enums.DisplayLanguage.Both;
 	protected Enums.Content? CurrentContent;
 }

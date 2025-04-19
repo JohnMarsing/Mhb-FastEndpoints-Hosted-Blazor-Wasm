@@ -1,0 +1,19 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+
+	<sup class="@H.VerseSupClass">9</sup>
+	Y cantaron un cántico nuevo, diciendo, 'Tú eres digno de tomar el rollo y abrir sus sellos,
+	porque fuiste inmolado, y nos has redimido para Elohim por Tu sangre de cada tribu y lengua y pueblo y nación,
+
+	<sup class="@H.VerseSupClass">10</sup>
+	y nos hiciste soberanos y sacerdotes para nuestro Elohim, y reinaremos sobre la Tierra.'
+
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

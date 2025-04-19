@@ -1,0 +1,14 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+	<sup class="@H.VerseSupClass">19</sup>
+	Porque después de mi regreso me arrepentí, y después de ser instruido me golpeé el muslo.
+	Me avergoncé y hasta me humillé porque cargué con la desgracia de mi juventud [como nación].
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

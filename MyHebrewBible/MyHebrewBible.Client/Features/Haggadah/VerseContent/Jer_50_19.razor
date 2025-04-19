@@ -1,27 +1,14 @@
 ﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
 
-@if (Language == Enums.DisplayLanguage.English)
-{
-	<p class="@H.VerseClass">
-		<b>@Title</b><br />
-		@((MarkupString)H.VerseIcon)
-		<sup class="@H.VerseSupClass">19</sup>
-		And I will return Israel back to his pasture, and he will graze on Carmel and Bashan,
-		and his desire will be satisfied in the hill country of Ephraim and Gilead.
-	</p>
-}
-else
-{
-	<p class="@H.VerseClass">
-		<b>@Title</b><br />
-		@((MarkupString)H.VerseIcon)
-		<sup class="@H.VerseSupClass">19</sup>
-		Y devolveré a Israel a su pasto, y pastará en Carmelo y Basán,
-		y su deseo se satisfará en la región montañosa de Efraím y Galaad.
-	</p>
-}
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+	<sup class="@H.VerseSupClass">19</sup>
+	And I will return Israel back to his pasture, and he will graze on Carmel and Bashan,
+	and his desire will be satisfied in the hill country of Ephraim and Gilead.
+</p>
 
 @code {
-	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	
 	[Parameter, EditorRequired] public string? Title { get; set; }
 }

@@ -1,0 +1,22 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+
+	<sup class="@H.VerseSupClass">31</sup>
+	He aquí, vienen días, declara Yahvé, cuando cortaré un nuevo pacto con la casa de Israel y con la casa de Judá,
+
+	<sup class="@H.VerseSupClass">32</sup>
+	no como el pacto que corté con sus padres el día que los tomé de la mano para sacarlos de la tierra de Egipto,
+	Mi pacto que ellos rompieron, aunque Yo fui un esposo para ellos, declara Yahvé.
+
+	<sup class="@H.VerseSupClass">33</sup>
+	Pero este es el pacto que cortaré con la casa de Israel después de esos días, declara Yahvé:
+	Pondré Mi ley dentro de ellos, y en su corazón la escribiré; y Yo seré su Dios, y ellos serán Mi pueblo'.
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

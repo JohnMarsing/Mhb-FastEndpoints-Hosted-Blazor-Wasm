@@ -1,0 +1,18 @@
+﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
+
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
+
+	<sup class="@H.VerseSupClass">4</sup> <sup class="@H.VerseSupClassHebrew">[14:5]</sup>
+	Sanaré su apartamiento de Mí; los amaré libremente, porque Mi ira se ha apartado de ellos.
+
+	<sup class="@H.VerseSupClass">5</sup>  <sup class="@H.VerseSupClassHebrew">[14:6]</sup>
+	Seré como el rocío para Israel; florecerá como el lirio, y echará raíces como los cedros del Líbano.
+
+</p>
+
+@code {
+
+	[Parameter, EditorRequired] public string? Title { get; set; }
+}

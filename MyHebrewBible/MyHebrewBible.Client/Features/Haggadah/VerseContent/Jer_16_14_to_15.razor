@@ -1,40 +1,20 @@
 ﻿@using H = MyHebrewBible.Client.Features.Haggadah.Helper
 
-@if (Language == Enums.DisplayLanguage.English)
-{
-	<p class="@H.VerseClass">
-		<b>@Title</b><br />
-		@((MarkupString)H.VerseIcon)
+<p class="@H.VerseClass">
+	<b>@Title</b><br />
+	@((MarkupString)H.VerseIcon)
 
-		<sup class="@H.VerseSupClass">14</sup>
-		Therefore behold, days are coming, declares Yehovah,
-		when it will no longer be said, ‘As Yehovah lives, who brought up the sons of Israel out of the land of Egypt,’
+	<sup class="@H.VerseSupClass">14</sup>
+	Therefore behold, days are coming, declares Yehovah,
+	when it will no longer be said, ‘As Yehovah lives, who brought up the sons of Israel out of the land of Egypt,’
 
-		<sup class="@H.VerseSupClass">15</sup>
-		but, ‘As Yehovah lives, who brought up the sons of Israel from the land of the north and from all the lands where He had banished them.’
-		For I will return them to their own land which I gave to their fathers.
+	<sup class="@H.VerseSupClass">15</sup>
+	but, ‘As Yehovah lives, who brought up the sons of Israel from the land of the north and from all the lands where He had banished them.’
+	For I will return them to their own land which I gave to their fathers.
 
-	</p>
-}
-else
-{
-	<p class="@H.VerseClass">
-		<b>@Title</b><br />
-		@((MarkupString)H.VerseIcon)
-
-		<sup class="@H.VerseSupClass">14</sup>
-		Por tanto, he aquí, vienen días, declara Yahvé,
-		cuando ya no se dirá, 'Vive Yahvé, que sacó a los hijos de Israel de la tierra de Egipto,'
-
-		<sup class="@H.VerseSupClass">15</sup>
-		sino, 'Vive Yahvé, que sacó a los hijos de Israel de la tierra del norte y de todas las tierras donde los había desterrado.'
-		Porque los devolveré a su propia tierra que di a sus padres.
-
-
-	</p>
-}
+</p>
 
 @code {
-	[Parameter, EditorRequired] public Enums.DisplayLanguage? Language { get; set; }
+	
 	[Parameter, EditorRequired] public string? Title { get; set; }
 }
