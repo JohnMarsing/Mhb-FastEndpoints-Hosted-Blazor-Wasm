@@ -1,0 +1,75 @@
+﻿
+@inject ILogger<Card>? Logger
+@inject IToastService? Toast
+
+@if (Verse != null)
+{
+	<div class="card mt-2">
+		<div class="card-header h3 px-2">
+			@Verse!.VerseName
+			<a class="" href="/bookchapter/@Verse!.BCV">
+				<i class="fas fa-chevron-circle-right"></i>
+			</a>
+		</div>
+
+		<div class="card-body">
+			<h6 class="card-title float-end fst-italic text-black-50">
+				@((MarkupString)@Verse!.VerseDescription!)
+			</h6>
+		</div>
+
+		<div class="card-body bg-warning">
+			<p class="card-text fs-5 ">
+				@((MarkupString)@Verse!.ConcatenatedVerses!)
+			</p>
+		</div>
+
+		<div class="card-body">
+			<h5 class="card-title">Comments</h5>
+			<p class="card-text fs-6 ml-2">
+				@((MarkupString)@Verse!.Commentary!)
+			</p>
+
+			@if (Verse!.HasExtraInfo)
+			{
+				@* @onclick="@(e => ButtonClick(Verse))" *@
+				<button @onclick="ButtonClick" type="button" class="btn btn-outline-info">
+					Details
+				</button>
+
+				@if (DetailContentType is not null)
+				{
+					if (Verse!.BegId == Verse!.BegId)
+					{
+						<div class="border border-primary my-3 p-2">
+							<DynamicComponent Type="@DetailContentType" />
+						</div>
+					}
+				}
+			}
+		</div>
+	</div>
+}
+
+@code {
+	[Parameter, EditorRequired] public Enums.Verse? Verse { get; set; }
+
+	private Type? DetailContentType;
+
+	private void ButtonClick() 
+	{
+		string componentPathAndName = $"{Constants.DynamicComponentPath }.{ Verse!.Name}";
+		//Logger!.LogInformation("{Method}; ComponentPathAndName: {ComponentPathAndName}"
+		//, nameof(ButtonClick), componentPathAndName);
+
+		DetailContentType = Type.GetType(componentPathAndName);
+
+		if (DetailContentType is null)
+		{
+			Logger!.LogWarning("{Method}, DetailComponent IS NULL; Verse: {Verse}"
+				, nameof(ButtonClick), Verse);
+			Toast!.ShowWarning($"Dynamic Detail Content Missing | {nameof(Card)}!{nameof(ButtonClick)}");
+			return;
+		}
+	}
+}

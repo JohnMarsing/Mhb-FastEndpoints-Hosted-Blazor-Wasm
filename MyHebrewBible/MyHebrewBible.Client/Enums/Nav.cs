@@ -54,7 +54,7 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int HealthCheckParasha = 26;
 		internal const int HealthCheckTableRowCount = 27;
 		internal const int HealthCheckQuickGrid = 28;
-
+		internal const int HealthCheckTypeahead = 29;
 		/*
 		Un documented Health Checks
 		internal const int HealthCheckBitwiseSample = 25;
@@ -94,6 +94,7 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav HealthCheckParasha = new HealthCheckParashaSE();
 	public static readonly Nav HealthCheckTableRowCount = new HealthCheckTableRowCountSE();
 	public static readonly Nav HealthCheckQuickGrid = new HealthCheckQuickGridSE();
+	public static readonly Nav HealthCheckTypeahead = new HealthCheckTypeaheadSE();
 	#endregion
 
 	private Nav(string name, int value) : base(name, value)  // Constructor
@@ -532,6 +533,20 @@ public abstract class Nav : SmartEnum<Nav>
 		public override bool Disabled => false;
 	}
 
+	private sealed class HealthCheckTypeaheadSE : Nav
+	{
+		public HealthCheckTypeaheadSE() : base($"{nameof(Id.HealthCheckTypeahead)}", Id.HealthCheckTypeahead) { }
+		public override string Index => "HealthChecks/Typeahead";
+		public override string Title => "Typeahead bind-value";
+		public override string Icon => "fas fa-fighter-jet";
+		public override int Sort => Id.HealthCheckTypeahead;
+		public override string HomeTitleSuffix => " ";
+		public override string HomeFloatRightHebrew => "";
+		public override PageListType PageListType => PageListType.SitemapPage | PageListType.HealthCheck;
+		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
+	}
+	
 	// 
 
 	#endregion

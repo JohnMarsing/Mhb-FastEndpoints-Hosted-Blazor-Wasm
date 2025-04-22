@@ -1,38 +1,100 @@
 ﻿@using Microsoft.AspNetCore.Components.QuickGrid
 @using MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Helpers;
 
 @* 
-<div class="card border-info">
 	<div class="card-header">
 		ToDo - Filter Component
 	</div>
-</div>
- *@
 
-<QuickGrid Items="@filteredItems">
+	<i class="fas fa-chevron-circle-right"></i>
+	<a href="@($"/bookchapter/{context.BCV}")" class="">@context.VerseNameAbrv</a>
+	@onclick="@(e => ButtonClick(item.Strongs, item.WordCount))">
 	<PropertyColumn Property="@(p => p.VerseNameAbrv)" Title="Verse" />
-	<PropertyColumn Property="@(p => p.BCV)" Title="BCV" />
-	@* <PropertyColumn Property="@(p => p.VerseDescription)" Title="Description" Sortable="false" Align="Align.Left" /> *@
-</QuickGrid>
+*@
+
+<div class="card border-info mt-3">
+
+	<div class="p-2">
+		<select @bind="@pagination.ItemsPerPage"
+						class="form-select" style="width: 18rem;" aria-label="Default select example">
+			<option selected>Items per page</option>
+			<option>5</option>
+			<option>10</option>
+			<option>20</option>
+			<option>50</option>
+		</select>
+	</div>
+
+	<QuickGrid Items="@filteredItems" Pagination="@pagination">
+		<TemplateColumn Title="Verse">
+			<a href="javascript:void(0)" @onclick="@(() => ButtonClick(context))" class="">@context.VerseNameAbrv <i class="fas fa-level-down-alt"></i></a>
+		</TemplateColumn>
+		<TemplateColumn Title="BCV">
+			<a href="@($"/bookchapter/{context.BCV}")" class=""><i class="fas fa-chevron-circle-right"></i></a>
+		</TemplateColumn>
+		<PropertyColumn Property="@(p => p.VerseDescription.Truncate(60))" Title="Description" Sortable="false" Align="Align.Left" />
+	</QuickGrid>
+
+	<div class="card-footer bg-light">
+		<div class="page-buttons">
+			Page:
+			@if (pagination.TotalItemCount.HasValue)
+			{
+				for (var pageIndex = 0; pageIndex <= pagination.LastPageIndex; pageIndex++)
+				{
+					var capturedIndex = pageIndex;
+					<button @onclick="@(() => GoToPageAsync(capturedIndex))"
+									class="@PageButtonClass(capturedIndex)"
+									aria-current="@AriaCurrentValue(capturedIndex)"
+									aria-label="Go to page @(pageIndex + 1)">
+						@(pageIndex + 1)
+					</button>
+				}
+			}
+
+		</div>
+	</div>
+</div>
 
 @code {
+	[Parameter, EditorRequired] public EventCallback<Enums.Verse> OnVerseSelected { get; set; }
 
-	List<EnumsFV.Verses>? itemList;
+	private void ButtonClick(Enums.Verse verses)
+	{
+		OnVerseSelected.InvokeAsync(verses);
+	}
+
+	PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
+
+	List<Enums.Verse>? itemList;
 
 	protected override void OnInitialized()
 	{
-		itemList = EnumsFV.Verses.List.ToList();
+		itemList = Enums.Verse.List.ToList();
 		items = itemList.AsQueryable();
+		pagination.TotalItemCountChanged += (sender, eventArgs) => StateHasChanged();
 		// Set CurrentFilter
 	}
 
-	//@foreach (var item in EnumsFV.Verses.List.OrderBy(o => o.Value).ToList())
+	private async Task GoToPageAsync(int pageIndex)
+	{
+		await pagination.SetCurrentPageIndexAsync(pageIndex);
+	}
 
-	string? CurrentFilter = "M";
+	private string? PageButtonClass(int pageIndex)
+		=> pagination.CurrentPageIndex == pageIndex ? "current" : null;
 
-	IQueryable<EnumsFV.Verses>? items;
+	private string? AriaCurrentValue(int pageIndex)
+			=> pagination.CurrentPageIndex == pageIndex ? "page" : null;
 
-	IQueryable<EnumsFV.Verses>? filteredItems => items?
+	//@foreach (var item in Enums.Verse.List.OrderBy(o => o.Value).ToList())
+
+	string? CurrentFilter = "";
+
+	IQueryable<Enums.Verse>? items;
+
+	IQueryable<Enums.Verse>? filteredItems => items?
 	.Where(x => x.VerseName.StartsWith(CurrentFilter!.ToUpper()))
 	.OrderBy(o => o.Value);
 }

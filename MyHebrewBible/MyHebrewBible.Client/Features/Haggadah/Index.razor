@@ -4,134 +4,31 @@
 @using MyHebrewBible.Client.Features.Haggadah.Toolbar
 @using Page = MyHebrewBible.Client.Enums.Nav
 
+@inject IToastService? Toast
+@inject ILogger<Index>? Logger
+
 <PageTitle>@Page.Haggadah.Title</PageTitle>
 
 <NavbarHaggadah Section="Section"
-								OnMenuItemSelected="ReturnedMenuItem"
-								OnSectionSelected="ReturnedSection" />
+OnMenuItemSelected="ReturnedMenuItem"
+OnSectionSelected="ReturnedSection" />
 
 <LoadingProgress>
 	<div class="mt-5">
 		@if (CurrentContent is not null)
 		{
-			if (CurrentContent == Content.Introduction)
+			if (DetailContentEng is not null && DetailContentEsp is not null)
 			{
 				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Introduction /></EngBody>
-					<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Introduction /></EspBody>
-				</ContentSkeleton>
-			}
-			else if (CurrentContent == Content.FirstPassover)
-			{
-				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.FirstPassover /></EngBody>
-					<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.FirstPassover /></EspBody>
-				</ContentSkeleton>
-			}
-			else if (CurrentContent == Content.PassoverDeliverance)
-			{
-				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.PassoverDeliverance /></EngBody>
-					<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.PassoverDeliverance /></EspBody>
-				</ContentSkeleton>
-			}
-			else if (CurrentContent == Content.StoryOfRedemption)
-			{
-				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.StoryOfRedemption /></EngBody>
-					<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.StoryOfRedemption /></EspBody>
-				</ContentSkeleton>
-			}
-			else if (CurrentContent == Content.Matzah)
-			{
-				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Matzah /></EngBody>
-					<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Matzah /></EspBody>
-				</ContentSkeleton>
-			}
-			else if (CurrentContent == Content.Cup1)
-			{
-				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Cup1 /></EngBody>
-					<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Cup1 /></EspBody>
-				</ContentSkeleton>
-			}
-			else if (CurrentContent == Content.Cup2)
-			{
-				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Cup2 /></EngBody>
-					<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Cup2 /></EspBody>
-				</ContentSkeleton>
-			}
-			else if (CurrentContent == Content.Cup3)
-			{
-				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Cup3 /></EngBody>
-					<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Cup3 /></EspBody>
-				</ContentSkeleton>
-			}
-			else if (CurrentContent == Content.Cup4)
-			{
-				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Cup4 /></EngBody>
-					<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Cup4 /></EspBody>
-				</ContentSkeleton>
-			}
-			else if (CurrentContent == Content.Charoset)
-			{
-				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Charoset /></EngBody>
-					<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Charoset /></EspBody>
-				</ContentSkeleton>
-			}
-			else if (CurrentContent == Content.Dinner)
-			{
-				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Dinner /></EngBody>
-					<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Dinner /></EspBody>
-				</ContentSkeleton>
-			}
-			else if (CurrentContent == Content.Cup5)
-			{
-				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Cup5 /></EngBody>
-					<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Cup5 /></EspBody>
-				</ContentSkeleton>
-			}
-			else if (CurrentContent == Content.Cup6)
-			{
-				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Cup6 /></EngBody>
-					<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Cup6 /></EspBody>
-				</ContentSkeleton>
-			}
-			else if (CurrentContent == Content.Cup7)
-			{
-				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Cup7 /></EngBody>
-					<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Cup7 /></EspBody>
-				</ContentSkeleton>
-			}
-			else if (CurrentContent == Content.NextYear)
-			{
-				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody></EngBody>
-					<EspBody></EspBody>
-				</ContentSkeleton>
-			}
-			else if (CurrentContent == Content.Appendix)
-			{
-				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody><MyHebrewBible.Client.Features.Haggadah.DetailContent.Appendix /></EngBody>
-					<EspBody><MyHebrewBible.Client.Features.Haggadah.DetailContentEsp.Appendix /></EspBody>
+					<EngBody><DynamicComponent Type="DetailContentEng" /></EngBody>
+					<EspBody><DynamicComponent Type="DetailContentEsp" /></EspBody>
 				</ContentSkeleton>
 			}
 			else
 			{
-				<ContentSkeleton Content=CurrentContent Language="Language">
-					<EngBody>Error</EngBody>
-					<EspBody>Error</EspBody>
-				</ContentSkeleton>
+				<div class="card border-danger mb-3 mt-5">
+					<div class="card-body text-center fs-1">DetailContentEng and/or DetailContentEsg are null <br /> (◡︵◡)</div>
+				</div>
 			}
 		}
 		else
@@ -155,8 +52,49 @@
 	{
 		Language = GetLanguageState();
 		Section = 1;
+		//Logger!.LogInformation("OnParametersSet: Language: {Language}; Section: {Section}", Language, Section);
 		CurrentContent = Enums.Content.List.FirstOrDefault(w => w.Value == Section);
+		SetDetail();
 	}
+
+	protected Type? DetailContentEng;
+	protected Type? DetailContentEsp;
+
+	private void SetDetail()
+	{
+		//Logger!.LogInformation("{Method}, EngPath: {EngPath}, EspPath: {EspPath}"
+		//	, nameof(SetDetail), Constants.DynamicComponentPathEng, Constants.DynamicComponentPathEsp);
+		try
+		{
+			DetailContentEng = Type.GetType($"{Constants.DynamicComponentPathEng}.{CurrentContent!.Name}");
+			DetailContentEsp = Type.GetType($"{Constants.DynamicComponentPathEsp}.{CurrentContent!.Name}");
+			
+			if (DetailContentEng is null)
+			{
+				Logger!.LogWarning("{Method}, DetailContentEng IS NULL; CurrentContent: {CurrentContent}"
+					, nameof(SetDetail), CurrentContent);
+				Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnParametersSetAsync)}");
+				return;
+			}
+
+			if (DetailContentEsp is null)
+			{
+				Logger!.LogWarning("{Method}, DetailContentEsp IS NULL; CurrentContent: {CurrentContent}"
+					, nameof(SetDetail), CurrentContent);
+				Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnParametersSetAsync)}");
+				return;
+			}
+
+			//Logger!.LogInformation("{Method}, DetailContentEng: {DetailContentEng}, DetailContentEsp: {DetailContentEsp}"
+			//	, nameof(SetDetail), DetailContentEng?.ToString() ?? "null", DetailContentEsp?.ToString() ?? "null");
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(SetDetail));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnParametersSetAsync)}");
+		}
+	}
+
 
 	private Enums.DisplayLanguage GetLanguageState()
 	{
@@ -183,6 +121,7 @@
 	{
 		Section = section;
 		CurrentContent = Enums.Content.List.FirstOrDefault(w => w.Value == Section);
+		SetDetail();
 		// save to local storage
 	}
 }
