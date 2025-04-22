@@ -24,7 +24,7 @@
 		<span class='badge bg-warning pb-15'>Introduction</span>
 
 		<button @onclick="@(e => ToggleButtonClick(IsCollapsed))"
-						class="@Color btn-sm float-end">
+						class="btn @Color btn-sm float-end">
 			@Title <i class='@Icon'></i>
 		</button>
 
@@ -59,8 +59,9 @@
 					<ul class="">
 						<li>
 							<sup>&dagger; &dagger;</sup>: For now (circa Jan 2015) &quot;We&quot; at <span class="mhb-site-title"><b>MHB</b></span> (<span class="mhb-site-title"><b>M</b>y <b>H</b>ebrew <b>B</b>ible</span>)
-							consists of the opinions of <a href="@Enums.Nav.HomeMhbVer6.Index">John Marsing</a>
+							consists of the opinions of <a href="@MyHebrewBible.Client.Enums.Nav.HomeMhbVer6.Index">John Marsing</a>
 						</li>
+						
 						<li>
 							<sup>&Dagger;</sup>: This pattern comes from radio talk show host
 							<a title="Dennis Prager" target="_blank"

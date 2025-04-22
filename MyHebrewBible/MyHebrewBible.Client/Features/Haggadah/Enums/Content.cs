@@ -289,20 +289,10 @@ public abstract class Content : SmartEnum<Content>
 		public override string Title => "Next Year | Jerusalem";
 		public override MarkupString EngTitle => (MarkupString)(@"
 			<h3 class='text-center'>Next Year</h3>
-			<h2 class='mt-5 text-center'>
-				May He come quickly, soon, and in our day
-				<br />
-				Next Year in Jerusalem
-			</h2>
 			");
 		public override MarkupString EspTitle => (MarkupString)(@"
 			<h3 class='text-center'>Próximo Año</h3>
-			<h2 class='mt-5 text-center'>
-				Que venga rápidamente, pronto, y en nuestro día El
-				<br />
-				próximo año en Jerusalén
-			</h2>
-			
+		
 			");
 	}
 

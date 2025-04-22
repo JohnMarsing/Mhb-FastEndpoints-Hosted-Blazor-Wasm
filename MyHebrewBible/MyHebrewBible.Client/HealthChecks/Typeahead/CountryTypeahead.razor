@@ -1,0 +1,47 @@
+﻿
+<BlazoredTypeahead SearchMethod="SearchCountries"
+									 @bind-Value="SelectedCountry"
+									 DisableClear="false"
+									 placeholder="Search for a country...">
+	<SelectedTemplate>
+		@context
+	</SelectedTemplate>
+	<ResultTemplate>
+		@context
+	</ResultTemplate>
+	<NotFoundTemplate>
+		No countries found for "@context".
+	</NotFoundTemplate>
+</BlazoredTypeahead>
+
+@code {
+	[Parameter] public EventCallback<string>	SelectedCountryChanged	{ get; set; }
+
+	[Parameter]	public string SelectedCountry
+	{
+		get => selectedCountry;
+		set
+		{
+			if (selectedCountry != value)
+			{
+				selectedCountry = value;
+				SelectedCountryChanged.InvokeAsync(value); // Notify parent of change
+			}
+		}
+	}
+
+	private string selectedCountry = string.Empty;
+
+	private async Task<IEnumerable<string>>	SearchCountries(string searchText)
+	{
+		var countries = new List<string>
+		{
+			"Australia", "Brazil", "Canada", "Denmark", "Egypt",
+			"France", "Germany", "India", "Japan", "United States"
+		};
+
+		return await Task.FromResult(
+			countries
+				.Where(c => c.Contains(searchText, StringComparison.OrdinalIgnoreCase)));
+	}
+}
