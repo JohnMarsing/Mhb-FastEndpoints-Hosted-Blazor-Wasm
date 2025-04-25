@@ -1,51 +1,87 @@
 ﻿@using Microsoft.AspNetCore.Components.Web
 @using MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Helpers
 
 <div class="card mt-4 mb-3 border-warning">
 	<div class="card-header">
-		<h4 class="card-title text-center">Chapters and their LastVerses</h4>
+		<h2 class="card-title text-center">Chapters and their LastVerses</h2>
 	</div>
 
 	<div class="card-body">
 		@foreach (var chapter in @BibleBook.List.ToList().OrderBy(o => o.Value))
 		{
-			<h5 class="mt-4 mb-1">@chapter.Abrv: @chapter.LastChapter chapters</h5>
-			
-			<table class="table table-bordered">
-				<thead>
-					<tr class="text-center">
-						<th>X</th>
-						@for (int i = 1; i <= 10; i++)
-						{
-							<th class="bg-primary-subtle">@i</th>
-						}
-					</tr>
-				</thead>
-				<tbody>
-					@for (int i = 0; i < chapter.LastVerses.Count(); i += 10)
-					{
+			<div class="card mt-1 mb-3">
+				<div class="card-header text-center @BgAndText.BodySecondary">
+					<p class="fs-4">@chapter.Title: @chapter.LastChapter chapters</p>
+				</div>
+
+				@* <div class="card-body m-1 p-1"></div> *@
+				<table class="table table-bordered">
+					<thead>
 						<tr class="text-center">
-							<td class="bg-warning-subtle">@((i / 10))</td>
-							@for (int j = 0; j < 10; j++)
+							<th>X</th>
+							@for (int i = 1; i <= 10; i++)
 							{
-								@* ToDo: use the properties in BibleBook to display title*@
-								if (i + j < chapter.LastVerses.Count())
-								{
-									<td title="@chapter.Abrv @((i / 10)):@(j + 1)">@chapter.LastVerses[i + j]</td>
-								}
-								else
-								{
-									<td title="@chapter.Abrv @((i / 10)):@(j + 1)"></td>
-								}
+								<th class="bg-primary-subtle">@i</th>
 							}
 						</tr>
-					}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						@for (int i = 0; i < chapter.LastVerses.Count(); i += 10)
+						{
+							<tr class="text-center">
+								<td class="bg-warning-subtle">@((i / 10))</td>
+								@for (int j = 0; j < 10; j++)
+								{
+									@* ToDo: use the properties in BibleBook to display title*@
+									if (i + j < chapter.LastVerses.Count())
+									{
+										<td title="@chapter.Abrv @((i / 10)):@(j + 1)">@chapter.LastVerses[i + j]</td>
+									}
+									else
+									{
+										<td title="@chapter.Abrv @((i / 10)):@(j + 1)"></td>
+									}
+								}
+							</tr>
+						}
+					</tbody>
+				</table>
+
+
+				<div class="card-footer @BgAndText.PrimarySubtle">
+					<div class="d-flex justify-content-between">
+						<div class="px-1">
+							<b>Running Total:</b> @RunningTotal(chapter)
+							@* &Epsilon; *@
+						</div>
+						<div class="px-1">
+							<b>Total:</b> @CalculateTotal(chapter)
+						</div>
+					</div>
+					
+				</div>
+			</div>
 		}
 	</div>
 </div>
 
 @code {
+	// ToDo: can I use the code in BibleBookHelper.cs?
+	protected static string CalculateTotal(BibleBook bibleBook)
+	{
+		return
+			BibleBook.List.ToList()
+			.Where(w => w.Value == bibleBook.Value)
+			.OrderBy(o => o.Value)
+			.Sum(x => x.LastVerses.Sum()).ToString(IntegerFormat.CommasNoDecimal);
+	}
 
+	protected static string RunningTotal(BibleBook bibleBook)
+	{
+		return
+			BibleBook.List.ToList()
+			.Where(w => w.Value <= bibleBook.Value)
+			.Sum(x => x.LastVerses.Sum()).ToString(IntegerFormat.CommasNoDecimal);
+	}
 }

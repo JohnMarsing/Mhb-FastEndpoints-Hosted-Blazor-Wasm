@@ -1,0 +1,25 @@
+﻿@* @inject NavigationManager NavigationManager *@
+@using MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Features.Haggadah.Enums;
+@using Helper = MyHebrewBible.Client.Enums.BibleBookHelper
+
+<div class="card mt-5 mb-3 border-warning">
+	<div class="card-body">
+		<ul>
+			@foreach (var item in @Enums.Verse.List.ToList()
+				.OrderBy(o => o.VerseRecord.BibleBook.Value))
+			{
+				<li>
+					<a href="@Helper.GetUrl(item.VerseRecord.BibleBook, item.VerseRecord.Chapter, item.VerseRecord.BegVerse)" class="">
+						@Helper.GetBCV(item.VerseRecord.BibleBook, item.VerseRecord.Chapter, item.VerseRecord.BegVerse)
+						<i class="fas fa-chevron-right"></i>
+					</a>
+				</li>
+			}
+		</ul>
+	</div>
+</div>
+
+@code {
+
+}

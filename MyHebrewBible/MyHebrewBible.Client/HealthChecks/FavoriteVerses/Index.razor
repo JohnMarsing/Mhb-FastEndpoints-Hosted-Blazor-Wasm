@@ -1,0 +1,76 @@
+﻿@page "/HealthChecks/FavoriteVerses"
+@using Page = MyHebrewBible.Client.Enums.Nav
+@using Helper = MyHebrewBible.Client.Enums.BibleBookHelper
+@using MyHebrewBible.Client.HealthChecks.FavoriteVerses.Enums
+
+@inject NavigationManager NavigationManager
+
+<PageHeader PageEnum="Page.HealthCheckFavoriteVerses" />
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Anchor Tag</th>
+			<th>Button</th>
+			<th><code>GetScriptureId()</code></th>
+			<th><code>GetUrl()</code></th>
+			<th><code>GetBCV(useTitle:false)</code></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		@foreach (var item in @Enums.Verse.List.ToList()
+											.OrderBy(o => o.VerseRecord.BibleBook.Value))
+		{
+			<tr>
+				<td>
+					<a href="@Helper.GetUrl(item.VerseRecord.BibleBook, item.VerseRecord.Chapter, item.VerseRecord.BegVerse)" class="">
+						@Helper.GetBCV(item.VerseRecord.BibleBook, item.VerseRecord.Chapter, item.VerseRecord.BegVerse)
+						@* <i class="fas fa-chevron-right"></i> *@
+					</a>
+				</td>
+				<td>
+					<button @onclick="@(e => ButtonClick(item.VerseRecord))" 
+					type="button" class="btn btn-outline-primary btn-sm">
+						@Helper.GetBCV(item.VerseRecord.BibleBook, item.VerseRecord.Chapter, item.VerseRecord.BegVerse)
+						<i class="fas fa-chevron-right"></i>
+					</button>
+				</td>
+
+				<td>@Helper.GetScriptureId(item.VerseRecord.BibleBook, item.VerseRecord.Chapter, item.VerseRecord.BegVerse)</td>
+				<td>@Helper.GetUrl(item.VerseRecord.BibleBook, item.VerseRecord.Chapter, item.VerseRecord.BegVerse)</td>
+				<td>@Helper.GetBCV(item.VerseRecord.BibleBook, item.VerseRecord.Chapter, item.VerseRecord.BegVerse, useTitle:false)</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<div class="card mt-4 mb-3 border-warning">
+	<div class="card-header">
+		<h2 class="card-title text-center">Code Gen region Id's</h2>
+	</div>
+
+	<div class="card-body">
+
+		@foreach (var item in @Enums.Verse.List.ToList()
+											.OrderBy(o => o.VerseRecord.BibleBook.Value))
+		{
+			<p class="font-monospace mt-1 mb-3">
+				@Helper.GetCodeGenInternalConst(item.VerseRecord.BibleBook, item.VerseRecord.Chapter, item.VerseRecord.BegVerse)
+				<br />
+				@Helper.GetCodeGenPublicInstance(item.VerseRecord.BibleBook, item.VerseRecord.Chapter, item.VerseRecord.BegVerse)
+				<br /><br />
+				@Helper.GetCodeGenPrivateInstance(item.VerseRecord.BibleBook, item.VerseRecord.Chapter, item.VerseRecord.BegVerse)
+				<br /><br />
+			</p>
+		}
+
+	</div>
+</div>
+
+@code {
+	private void ButtonClick(VerseRecord rec)
+	{
+		NavigationManager!.NavigateTo($"{@Helper.GetUrl(rec.BibleBook, rec.Chapter, rec.BegVerse)}");
+	}
+}
