@@ -5,13 +5,8 @@
 
 <PageHeader PageEnum="Page.HealthCheckBibleBook" />
 
-@* 
-<p>
-	Mat 5:17 ScritpureId: @GetScriptureId(Enums.BibleBook.Matthew, 5, 17)
-</p>
- *@
-
- <div class="card mt-4 mb-3 border-warning">
+@*  
+<div class="card mt-4 mb-3 border-warning">
 	<div class="card-body">
 		<QwertyKeyboard OnKeyClick="HandleKeyClick" />
 	</div>
@@ -32,35 +27,27 @@
 		</div>
 	}
 
-</div>
+</div> 
+*@
+
+
+<ChaptersAndTheirLastVerses />
 
 @* 
 <ApiCallTest />
 <BookFinalScriptureIdCodeGen />
-<ChaptersAndTheirLastVerses />
 <BookKeyboard />
 <Table />
+
 <HundredsAndTens />
 <LastChapter />
-<MaxLastVerses />
 <TestColumns /> 
 <LastVerseWrapper BibleBook="Enums.BibleBook.Genesis" />
+<MaxLastVerses />
+
 *@
 
 @code {
-
-	protected int GetScriptureId(Enums.BibleBook bibleBook, int chapter, int verse)
-	{
-		int bookCount = Enums.BibleBook.List
-		.Where(w => w.Value < bibleBook.Value)
-		.Sum(b => b.LastVerses.Sum());
-		
-		int chapterCount = bibleBook.LastVerses
-		.Take(chapter - 1)
-		.Sum();
-
-		return bookCount + chapterCount + verse;
-	}
 
 	protected string bookStartLetter = string.Empty;
 

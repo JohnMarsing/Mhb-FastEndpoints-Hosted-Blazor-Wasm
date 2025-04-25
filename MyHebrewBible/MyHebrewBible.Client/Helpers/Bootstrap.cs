@@ -53,4 +53,32 @@ public static class BtnOutlineColors
 	public const string Link = "btn-outline-link";
 }
 
+//public static class BackGroundAndText
+public static class BgAndText
+{
+public const string Primary = "bg-primary text-white";
+public const string PrimarySubtle = "bg-primary-subtle text-primary-emphasis";
+public const string Secondary = "bg-secondary text-white";
+public const string SecondarySubtle = "bg-secondary-subtle text-secondary-emphasis";
+public const string Success = "bg-success text-white";
+public const string SuccessSubtle = "bg-success-subtle text-success-emphasis";
+public const string Danger = "bg-danger text-white";
+public const string DangerSubtle = "bg-danger-subtle text-danger-emphasis";
+public const string Warning = "bg-warning text-dark";
+public const string WarningSubtle = "bg-warning-subtle text-warning-emphasis";
+public const string Info = "bg-info text-dark";
+public const string InfoSubtle = "bg-info-subtle text-info-emphasis";
+public const string Light = "bg-light text-dark";
+public const string LightSubtle = "bg-light-subtle text-light-emphasis";
+public const string Dark = "bg-dark text-white";
+public const string DarkSubtle = "bg-dark-subtle text-dark-emphasis";
+public const string BodySecondary = "bg-body-secondary";
+public const string BodyTertiary = "bg-body-tertiary";
+public const string Body = "bg-body text-body";
+public const string Black = "bg-black text-white";
+public const string White = "bg-white text-dark";
+public const string Transparent = "bg-transparent text-body";
+	/*   */
+}
+// Ignore spelling: bg
 

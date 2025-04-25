@@ -46,15 +46,16 @@ public abstract class Nav : SmartEnum<Nav>
 		internal const int Profile = 18;
 		internal const int BibleSearch = 19;
 		internal const int HealthCheckBibleBook = 20;
-		internal const int HealthCheckThrowError = 21;
-		internal const int HealthCheckVerseList = 22;
-		internal const int ParashaList = 23;
-		internal const int HealthCheckBitwise = 24;
-		internal const int HebrewRevelation = 25;
-		internal const int HealthCheckParasha = 26;
-		internal const int HealthCheckTableRowCount = 27;
-		internal const int HealthCheckQuickGrid = 28;
-		internal const int HealthCheckTypeahead = 29;
+		internal const int HealthCheckFavoriteVerses = 21;
+		internal const int HealthCheckThrowError = 22;
+		internal const int HealthCheckVerseList = 23;
+		internal const int ParashaList = 24;
+		internal const int HealthCheckBitwise = 25;
+		internal const int HebrewRevelation = 26;
+		internal const int HealthCheckParasha = 27;
+		internal const int HealthCheckTableRowCount = 28;
+		internal const int HealthCheckQuickGrid = 29;
+		internal const int HealthCheckTypeahead = 30;
 		/*
 		Un documented Health Checks
 		internal const int HealthCheckBitwiseSample = 25;
@@ -86,6 +87,7 @@ public abstract class Nav : SmartEnum<Nav>
 	public static readonly Nav Profile = new ProfileSE();
 	public static readonly Nav BibleSearch = new BibleSearchSE();
 	public static readonly Nav HealthCheckBibleBook = new HealthCheckBibleBookSE();
+	public static readonly Nav HealthCheckFavoriteVerses = new HealthCheckFavoriteVersesSE();
 	public static readonly Nav HealthCheckThrowError = new HealthCheckThrowErrorSE();
 	public static readonly Nav HealthCheckVerseList = new HealthCheckVerseListSE();
 	public static readonly Nav ParashaList = new ParashaListSE();
@@ -404,6 +406,21 @@ public abstract class Nav : SmartEnum<Nav>
 		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
 		public override bool Disabled => false;
 	}
+
+	private sealed class HealthCheckFavoriteVersesSE : Nav
+	{
+		public HealthCheckFavoriteVersesSE() : base($"{nameof(Id.HealthCheckFavoriteVerses)}", Id.HealthCheckFavoriteVerses) { }
+		public override string Index => "HealthChecks/FavoriteVerses";
+		public override string Title => "Favorite Verses (HC)";
+		public override string Icon => "fas fa-ice-cream";  
+		public override int Sort => Id.HealthCheckFavoriteVerses;
+		public override string HomeTitleSuffix => "";
+		public override string HomeFloatRightHebrew => "";
+		public override PageListType PageListType => PageListType.SitemapPage | PageListType.HealthCheck;
+		public override bool IsPartOfList(PageListType pageListType) => (PageListType & pageListType) == pageListType;
+		public override bool Disabled => false;
+	}
+	
 
 	//ToDo This should only be for Admin users
 	private sealed class HealthCheckThrowErrorSE : Nav

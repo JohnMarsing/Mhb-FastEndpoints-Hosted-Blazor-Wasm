@@ -115,6 +115,23 @@ public static class DateFormat
 	public const string YYYY_MM_DD_hh_mm = "yyyy-MM-dd hh:mm";
 }
 
+public static class IntegerFormat
+{
+	public const string CommasNoDecimal = "N0";
+
+	/*
+	int number = 1234567;
+
+	string formatted = number.ToString("N0"); // Output: 1,234,567
+	string formatted = String.Format("{0:N0}", number); /
+	string formatted = $"{number:N0}";
+	 
+	Use #,##0 for explicit comma placement.
+	string formatted = number.ToString("#,##0"); // Output: 1,234,567
+
+	*/
+}
+
 //public static class CurrencyFormat
 //{
 //	public const string NoCents = "{0:C0}"; // doesn't work use a property like below

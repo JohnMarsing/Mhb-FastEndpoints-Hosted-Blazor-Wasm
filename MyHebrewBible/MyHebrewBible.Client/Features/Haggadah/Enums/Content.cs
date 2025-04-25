@@ -24,6 +24,7 @@ public abstract class Content : SmartEnum<Content>
 		internal const int Cup7 = 14;
 		internal const int NextYear = 15; // This doesn't have a razor page FWIW
 		internal const int Appendix = 16;
+		internal const int VerseIndex = 17;
 	}
 	#endregion
 
@@ -45,6 +46,7 @@ public abstract class Content : SmartEnum<Content>
 	public static readonly Content Cup7 = new Cup7SE();
 	public static readonly Content NextYear = new NextYearSE();
 	public static readonly Content Appendix = new AppendixSE();
+	public static readonly Content VerseIndex = new VerseIndexSE();
 
 	#endregion
 
@@ -53,7 +55,7 @@ public abstract class Content : SmartEnum<Content>
 	}
 
 	#region Extra Fields
-	public abstract string Title { get; }	
+	public abstract string Title { get; }
 	public abstract MarkupString EngTitle { get; }
 	public abstract MarkupString EspTitle { get; }
 	#endregion
@@ -296,20 +298,33 @@ public abstract class Content : SmartEnum<Content>
 			");
 	}
 
-		private sealed class AppendixSE : Content
-		{
-			public AppendixSE() : base($"{nameof(Id.Appendix)}", Id.Appendix) { }
-			public override string Title => "Appendix";
-			public override MarkupString EngTitle => (MarkupString)(@"
+	private sealed class AppendixSE : Content
+	{
+		public AppendixSE() : base($"{nameof(Id.Appendix)}", Id.Appendix) { }
+		public override string Title => "Appendix";
+		public override MarkupString EngTitle => (MarkupString)(@"
 			<h3 class='text-center'>Appendix</h3>
 			");
-			public override MarkupString EspTitle => (MarkupString)(@"
+		public override MarkupString EspTitle => (MarkupString)(@"
 			<h3 class='text-center'>Apéndice</h3>
 			");
-		}
-
-		#endregion
 	}
+
+	private sealed class VerseIndexSE : Content
+	{
+		public VerseIndexSE() : base($"{nameof(Id.VerseIndex)}", Id.VerseIndex) { }
+		public override string Title => "Bible Verse Index";
+		public override MarkupString EngTitle => (MarkupString)(@"
+			<h3 class='text-center'>Bible Verses</h3>
+			");
+		public override MarkupString EspTitle => (MarkupString)(@"
+			<h3 class='text-center'>Índice del Verso Bíblico</h3>
+			");
+	}
+
+	//
+	#endregion
+}
 //<sup> <span class='text-dark'><span class='badge rounded-pill bg-danger'>2</span> <i class='text-danger fas fa-wine-glass-alt'></i> </sup>	
 // <span class='text-dark'><span class='badge rounded-pill bg-info'>1</span> 
 // Ignore Spelling: Matzah, Charoset
