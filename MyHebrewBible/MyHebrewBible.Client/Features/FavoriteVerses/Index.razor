@@ -1,34 +1,54 @@
 ﻿@page "/FavoriteVerses"
-@using MyHebrewBible.Client.Features.FavoriteVerses.SearchToolbar
+@using MyHebrewBible.Client.Features.FavoriteVerses.Toolbar
 
-<PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.FavoriteVerses" />
+@* @inject ILogger<Index>? Logger *@
 
-<Typeahead OnVerseSelected="ReturnedVerse" />
+<PageTitle>@PageTitle</PageTitle>
 
-
-@* 
-<TableOfContentList />
-*@
-
-<Grid OnVerseSelected="ReturnedVerse" />
+<Navbar OnVerseSelected="ReturnedVerse" OnMenuItemSelected="ReturnedMenuItem"  />
 
 @if (SelectedVerse is not null)
 {
-	<Card Verse="SelectedVerse" />
+	<br />
+	<Card Verse="SelectedVerse" OnClose="ReturnedCloseEvent" />
+}
+else 
+{
+	<br />
+	<p class="text-center mt-5">Please select a verse to view details.</p> 
+} 
+
+@if (ShowPageInstructionsModal)
+{
+	<PageInstructions />
 }
 
-@* else { <p class="text-center">Please select a verse to view details.</p> } *@
-
-@* ToDo: move <IntroductionContent /> to the menu *@
-
+<Grid OnVerseSelected="ReturnedVerse" />
 
 @code {
-	public Enums.Verse? SelectedVerse;
+	protected string PageTitle = MyHebrewBible.Client.Enums.Nav.FavoriteVerses.Title;
+
+	public Enums.Verse? SelectedVerse { get; set; }
 
 	private void ReturnedVerse(Enums.Verse verse)
 	{
+		//Logger!.LogInformation("{Method}", nameof(ReturnedVerse));
 		SelectedVerse = verse;
 	}
 
+	private void ReturnedCloseEvent()
+	{
+		SelectedVerse = null;
+	}
+
+	protected bool ShowPageInstructionsModal = false;
+	private void ReturnedMenuItem(Enums.MenuItem item)
+	{
+		if (item == Enums.MenuItem.Instructions)
+		{
+			ShowPageInstructionsModal = !ShowPageInstructionsModal;
+		}
+		
+	}
 
 }

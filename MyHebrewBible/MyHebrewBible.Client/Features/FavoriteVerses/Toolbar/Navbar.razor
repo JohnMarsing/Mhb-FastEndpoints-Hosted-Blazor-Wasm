@@ -1,0 +1,39 @@
+﻿@using MyHebrewBible.Client.Layout
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar.PrevNext
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad
+@using MyHebrewBible.Client.Enums
+
+@* @inject ILogger<Navbar>? Logger *@
+
+<nav class="navbar navbar-expand @Helpers.BgAndText.PrimarySubtle fixed-top">
+
+	<div class="collapse navbar-collapse justify-content-start">
+		<div class="ps-1">
+			<MyHebrewBible.Client.Layout.HomeButton />
+		</div>
+	</div>
+
+	<div class="px-1">
+		<Typeahead OnVerseSelected="ReturnedVerse" />
+	</div>
+
+	<div class="collapse navbar-collapse justify-content-end pe-1">
+		<ConfigureDropdown OnMenuItemSelected="@ReturnedMenuItem" />
+	</div>
+</nav>
+
+@code {
+	[Parameter, EditorRequired] public EventCallback<Enums.Verse> OnVerseSelected { get; set; }
+	[Parameter, EditorRequired] public EventCallback<Enums.MenuItem> OnMenuItemSelected { get; set; }
+
+	private void ReturnedMenuItem(Enums.MenuItem item)
+	{
+		OnMenuItemSelected.InvokeAsync(item);
+	}
+
+	private void ReturnedVerse(Enums.Verse verse)
+	{
+		//Logger!.LogInformation("{Method}, Verse: {Verse}", nameof(ReturnedVerse), verse.VerseName);
+		OnVerseSelected.InvokeAsync(verse);
+	}
+}

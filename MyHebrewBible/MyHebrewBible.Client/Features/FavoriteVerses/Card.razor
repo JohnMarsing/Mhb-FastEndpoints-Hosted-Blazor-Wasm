@@ -1,15 +1,18 @@
-﻿
-@inject ILogger<Card>? Logger
+﻿@inject ILogger<Card>? Logger
 @inject IToastService? Toast
 
 @if (Verse != null)
 {
-	<div class="card mt-2">
-		<div class="card-header h3 px-2">
+	<div class="card mt-5">
+		<div class="card-header h4 px-2">
 			@Verse!.VerseName
 			<a class="" href="/bookchapter/@Verse!.BCV">
 				<i class="fas fa-chevron-circle-right"></i>
 			</a>
+			<button @onclick="ButtonClose"
+							class="btn btn-danger btn-sm float-end">
+				Close <span>&times;</span>
+			</button>
 		</div>
 
 		<div class="card-body">
@@ -18,11 +21,11 @@
 			</h6>
 		</div>
 
-		<div class="card-body bg-warning">
-			<p class="card-text fs-5 ">
-				@((MarkupString)@Verse!.ConcatenatedVerses!)
-			</p>
-		</div>
+		<p class="@VerseClass">
+			<i class='fas fa-quote-left'></i>
+			@((MarkupString)@Verse!.ConcatenatedVerses!)
+		</p>
+
 
 		<div class="card-body">
 			<h5 class="card-title">Comments</h5>
@@ -53,12 +56,15 @@
 
 @code {
 	[Parameter, EditorRequired] public Enums.Verse? Verse { get; set; }
+	[Parameter] public EventCallback OnClose { get; set; }
+
+	public const string VerseClass = "bg-primary-subtle fs-5 p-2 mx-2";
 
 	private Type? DetailContentType;
 
-	private void ButtonClick() 
+	private void ButtonClick()
 	{
-		string componentPathAndName = $"{Constants.DynamicComponentPath }.{ Verse!.Name}";
+		string componentPathAndName = $"{Constants.DynamicComponentPath}.{Verse!.Name}";
 		//Logger!.LogInformation("{Method}; ComponentPathAndName: {ComponentPathAndName}"
 		//, nameof(ButtonClick), componentPathAndName);
 
@@ -72,4 +78,10 @@
 			return;
 		}
 	}
+
+	void ButtonClose()
+	{
+		OnClose.InvokeAsync();
+	}
+
 }
