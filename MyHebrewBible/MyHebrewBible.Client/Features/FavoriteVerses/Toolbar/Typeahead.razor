@@ -1,26 +1,24 @@
 ﻿@using MyHebrewBible.Client.Features.FavoriteVerses
 @using Blazored.Typeahead
 
+@* @inject ILogger<Typeahead>? Logger *@
+
 <BlazoredTypeahead SearchMethod="SearchContent"
 									 TValue="Enums.Verse"
 									 TItem="Enums.Verse"
 									 Value="SelectedVerse"
 									 ValueChanged="SelectedResultChanged"
 									 ValueExpression="@(() => SelectedVerse)"
-									 EnableDropDown="true"
-									 MinimumLength="2"
-									 placeholder="Search favorite verse...">
+									 MaximumSuggestions="200"
+									 MinimumLength="1"
+									 EnableDropDown="true">
 	<SelectedTemplate Context="mycontext">
 		@mycontext!.VerseNameAbrv
 	</SelectedTemplate>
-	<HelpTemplate>
-		Please enter at least 2 characters to perform a search.
-	</HelpTemplate>
 	<ResultTemplate Context="mycontext">
 		@mycontext.VerseName
 	</ResultTemplate>
 </BlazoredTypeahead>
-
 
 
 @code {
@@ -35,8 +33,9 @@
 			.OrderBy(o => o.Value));
 	}
 
-	private void SelectedResultChanged(Enums.Verse verses)
+	private void SelectedResultChanged(Enums.Verse verse)
 	{
-		OnVerseSelected.InvokeAsync(verses);
+		//Logger!.LogInformation("{Method}, Verse: {Verse}", nameof(SelectedResultChanged), verse.VerseName);
+		OnVerseSelected.InvokeAsync(verse);
 	}
 }
