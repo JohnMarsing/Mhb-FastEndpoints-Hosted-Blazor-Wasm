@@ -22,8 +22,16 @@ public static class TextColors
 
 public static class BtnSize
 {
-	public const string BtnLg = "btn-lg";
-	public const string BtnSm = "btn-sm";
+	public const string Lg = "btn-lg";
+	public const string Md = "btn-md";
+	public const string Sm = "btn-sm";
+}
+
+public static class BtnGroupSize
+{
+	public const string Lg = "btn-group-lg";
+	public const string Md = "btn-group-md";
+	public const string Sm = "btn-group-sm";
 }
 
 public static class BtnColors

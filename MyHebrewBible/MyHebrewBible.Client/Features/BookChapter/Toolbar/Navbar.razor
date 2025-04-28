@@ -1,5 +1,5 @@
 ﻿@using MyHebrewBible.Client.Layout
-@using MyHebrewBible.Client.Features.BookChapter.Toolbar.PrevNext
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar.PreviousNext
 @using MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad
 @using MyHebrewBible.Client.Enums
 
@@ -19,9 +19,17 @@
 	{
 		<div class="collapse navbar-collapse justify-content-center">
 			<div class="">
-				<PreviousButton PreviousBookAndChapter="@CurrentBookAndChapter"
-												buttonToShow="ButtonsToShow.PreviousOnly"
-												OnBookAndChapterSelected="@ReturnedBookAndChapter" />
+				@if (CurrentBookAndChapter.BibleBook!.NavigationPrevious(CurrentBookAndChapter.Chapter).BibleBook is not null)
+				{
+					<PreviousOrNextButton BookAndChapter="CurrentBookAndChapter"
+																IsPrevious=true
+																OnBookAndChapterSelected="ReturnedBookAndChapter" />
+				}
+				else
+				{
+					<OnEdgeButton />
+				}
+
 			</div>
 
 			<div class="px-1">
@@ -34,11 +42,16 @@
 
 			</div>
 
-			<div class="">
-				<NextButton NextBookAndChapter="@CurrentBookAndChapter"
-										buttonToShow="ButtonsToShow.NextOnly"
-										OnBookAndChapterSelected="@ReturnedBookAndChapter" />
-			</div>
+			@if (CurrentBookAndChapter.BibleBook!.NavigationNext(CurrentBookAndChapter.Chapter).BibleBook is not null)
+			{
+				<PreviousOrNextButton BookAndChapter="CurrentBookAndChapter"
+															IsPrevious=false
+															OnBookAndChapterSelected="ReturnedBookAndChapter" />
+			}
+			else
+			{
+				<OnEdgeButton />
+			}
 
 		</div>
 	}
@@ -49,13 +62,12 @@
 </nav>
 
 @code {
-	// Only used by <PreviousButton> & <NextButton>
+	// Only used by <PreviousOrNextButton>
 	[Parameter, EditorRequired] public BookAndChapter? CurrentBookAndChapter { get; set; }
 	[Parameter, EditorRequired] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
 
 	// Only used by <Picker>
 	[Parameter, EditorRequired] public NumberPad.BookChapterVerse? CurrentBCV { get; set; }
-
 	[Parameter, EditorRequired] public EventCallback<NumberPad.BookChapterVerse> OnBCVSelected { get; set; }
 
 	// Only used by <ConfigureDropdown>
@@ -63,18 +75,14 @@
 
 	private string TitleOrAbrv => CurrentBookAndChapter!.BibleBook!.Title;
 
-
-	private void ReturnedBook(GlobalEnums.BibleBook bibleBook)  //Enums.BibleBook bibleBook
-	{
-		OnBookAndChapterSelected.InvokeAsync(new BookAndChapter(bibleBook, 1));
-	}
-
+	//Called by <PreviousOrNextButton>
 	private void ReturnedBookAndChapter(BookAndChapter bookAndChapter)
 	{
 		//Logger!.LogInformation("{Method}, BookAndChapter: {BookAndChapter}", nameof(ReturnedBookAndChapter), bookAndChapter);
 		OnBookAndChapterSelected.InvokeAsync(bookAndChapter);
 	}
 
+	//Called by <Picker>
 	private void ReturnedBCV(NumberPad.BookChapterVerse bcv)
 	{
 		//Logger!.LogInformation("{Method}, BookChapterVerse: {BookChapterVerse}", nameof(ReturnedBCV), bcv);

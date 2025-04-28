@@ -54,7 +54,7 @@
 
 	protected override void OnParametersSet()
 	{
-		Logger!.LogInformation("{Method}, Route: {Abrv}/{Chapter}/{Verse}/{ScriptureId}", nameof(OnParametersSet), Abrv, Chapter, Verse, ScriptureId);
+		//Logger!.LogInformation("{Method}, Route: {Abrv}/{Chapter}/{Verse}/{ScriptureId}", nameof(OnParametersSet), Abrv, Chapter, Verse, ScriptureId);
 		try
 		{
 			if (Abrv == Constants.DefaultAbrv)
@@ -72,7 +72,7 @@
 					CurrentBookAndChapter = bibleBook;
 					CurrentBCV = new NumberPad.BookChapterVerse(bibleBook.BibleBook, Chapter, Verse);
 
-					Logger!.LogInformation("{Method}, CurrentAbrvChapterVerse: {CurrentAbrvChapterVerse}", nameof(OnParametersSet), CurrentAbrvChapterVerse);
+					//Logger!.LogInformation("{Method}, CurrentAbrvChapterVerse: {CurrentAbrvChapterVerse}", nameof(OnParametersSet), CurrentAbrvChapterVerse);
 				}
 				else
 				{
@@ -114,23 +114,25 @@
 		return (null, null);
 	}
 
-	// Called by <Navbar>
+	// Called by <Navbar> via <PreviousButton> & <NextButton>
 	private async Task ReturnedBookAndChapter(BookAndChapter bookAndChapter)
 	{
 		AbrvChapterVerse rec = new AbrvChapterVerse(bookAndChapter.BibleBook!.Abrv, bookAndChapter.Chapter, 1, true, 0);
 		//Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(ReturnedBookAndChapter), rec);
 		NavigationManager!.NavigateTo($"{BookChapterConstants.BaseUrl}/{rec.Abrv}/{rec.Chapter}/{rec.Verse}/{rec.ScriptureId}");
 
+		// 
 		await State!.AppState!.BookChapterState!.UpdateACV(rec);
 		CurrentBookAndChapter = bookAndChapter!;
 		//Logger!.LogInformation("{Method}, CurrentBookAndChapter: {CurrentBookAndChapter}", nameof(ReturnedBookAndChapter), CurrentBookAndChapter);
 		PageTitle = GlobalEnums.BibleBookFormat.BC(bookAndChapter);
 	}
 
+	// Called by <Navbar> via <Picker>
 	private async Task ReturnedBCV(NumberPad.BookChapterVerse bcv)
 	{
 		AbrvChapterVerse rec = new AbrvChapterVerse(bcv.BibleBook!.Abrv, bcv.Chapter, bcv.Verse, false, 0);
-		Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(ReturnedBCV), rec);
+		//Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(ReturnedBCV), rec);
 		NavigationManager!.NavigateTo($"{BookChapterConstants.BaseUrl}/{rec.Abrv}/{rec.Chapter}/{rec.Verse}/{rec.ScriptureId}");
 		await State!.AppState!.BookChapterState!.UpdateACV(rec);
 		//Logger!.LogInformation("{Method}, CurrentBookAndChapter: {CurrentBookAndChapter}", nameof(ReturnedBookAndChapter), CurrentBookAndChapter);
