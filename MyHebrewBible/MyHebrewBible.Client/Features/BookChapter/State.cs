@@ -42,7 +42,7 @@ public class State
 						new BookChapterVerseHistory(GlobalEnums.BibleBook.Matthew.Value, 5, 17)
 				];
 	private List<BookChapterVerseHistory>? _BCVs;
-	private int _MaxBCVs = 10;	
+	private int _MaxBCVs = 10;
 
 	public async Task Initialize()
 	{
@@ -74,7 +74,7 @@ public class State
 			_BCVs = await localStorage!.GetItemAsync<List<BookChapterVerseHistory>>(KeyBcvList);
 			if (_BCVs is not null)
 			{
-				await UpdateBCVs(_BCVs);	
+				await UpdateBCVs(_BCVs);
 			}
 			else
 			{
@@ -82,7 +82,7 @@ public class State
 				await localStorage!.SetItemAsync(KeyBcvList, _DefaultBCVs);
 			}
 
-				_isInitialized = true;
+			_isInitialized = true;
 		}
 	}
 
@@ -94,7 +94,7 @@ public class State
 
 	public async Task UpdateACV(AbrvChapterVerse abrvChapterVerse)
 	{
-		//Logger!.LogInformation("{Method}, brvChapterVerse: {AbrvChapterVerse}", "Update", abrvChapterVerse);
+		//Logger!.LogInformation("{Method}, brvChapterVerse: {AbrvChapterVerse}", nameof(UpdateACV), abrvChapterVerse);
 		await localStorage!.SetItemAsync(KeyACVId, abrvChapterVerse);
 		_AbrvChapterVerse = abrvChapterVerse;
 		NotifyStateHasChanged();
@@ -118,30 +118,94 @@ public class State
 		return _BCVs!;
 	}
 
-	public async Task UpdateBCVs(List<BookChapterVerseHistory> bookChapterVerses)
+	// Called by Initialize if (!_isInitialized)
+	private async Task UpdateBCVs(List<BookChapterVerseHistory> bookChapterVerses)
 	{
 		await localStorage!.SetItemAsync(KeyBcvList, bookChapterVerses);
 		_BCVs = bookChapterVerses;
 		NotifyStateHasChanged();
 	}
 
-	public async Task AddBCV(BookChapterVerseHistory bcv)
+	public async Task RemoveDuplicatesFromBcvList()
 	{
-		if (_BCVs!.Count >= _MaxBCVs)
-		{
-			_BCVs.RemoveAt(_BCVs.Count - 1);
-		}
-		_BCVs.Insert(0, bcv);
+		//Logger!.LogInformation("{Method}", nameof(RemoveDuplicatesFromBcvList));
+
+		//if (_BCVs is null) { Logger!.LogInformation("..._BCVs is null; return"); return; }
+		if (_BCVs is null) { return; }
+
+		//Logger!.LogInformation("... old count: {Count}", _BCVs.Count());
+
+		_BCVs = _BCVs!
+			.GroupBy(x => new { x.BibleBookId, x.Chapter, x.Verse } )
+			.Select(g => g.First())
+			.ToList();
+		
+		//Logger!.LogInformation("... new count: {Count}", _BCVs.Count());
+
 		await localStorage!.SetItemAsync(KeyBcvList, _BCVs);
-		NotifyStateHasChanged();
+		NotifyStateHasChanged();	
 	}
+
+	public async Task AddStoredAcvToBcvList()
+	{
+		BookChapterVerseHistory? _BCVH = ConvertStoredAcvToBcv();
+
+		if (_BCVs is null) { return; }
+		//if (_BCVs is null) { Logger!.LogInformation("{Method}; BCVs is null; return", nameof(AddStoredAcvToBcvList)); return; }
+
+		if (!IsVerseAlreadyInList(_BCVH!))
+		{
+			if (_BCVs!.Count >= _MaxBCVs)
+			{
+				//Logger!.LogInformation("{Method}; BCVs.Count >= _MaxBCVs", nameof(AddStoredAcvToBcvList));
+				_BCVs.RemoveAt(_BCVs.Count - 1);
+			}
+
+			_BCVs!.Insert(0, _BCVH!);
+			await localStorage!.SetItemAsync(KeyBcvList, _BCVs);
+			NotifyStateHasChanged();
+		}
+		else
+		{
+			//Logger!.LogInformation("{Method}; BCVH: {BCVH} is already in list", 	nameof(AddStoredAcvToBcvList), _BCVH);
+		}
+	}
+
+	//private 
+	public BookChapterVerseHistory? ConvertStoredAcvToBcv()
+	{
+		var (errMsg, _bibleBookId) = GlobalEnums.BibleBookDictionary.GetId(_AbrvChapterVerse!.Abrv);
+		if (String.IsNullOrEmpty(errMsg))
+		{
+			return new BookChapterVerseHistory(_bibleBookId, _AbrvChapterVerse!.Chapter, _AbrvChapterVerse!.Verse);
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+
+	private bool IsVerseAlreadyInList(BookChapterVerseHistory bCVH)
+	{
+		int count = 0;
+		count = _BCVs!
+			.Where(w => w.BibleBookId == bCVH.BibleBookId)
+			.Where(w => w.Chapter == bCVH.Chapter)
+			.Where(w => w.Verse == bCVH.Verse)
+			.Count();
+
+		//Logger!.LogInformation("{Method}; bCVH:{bCVH}, Duplicate?:{TorF}", nameof(IsVerseAlreadyInList), bCVH, count > 0);
+		return count > 0;
+	}
+
 
 	public async Task RemoveBCV(BookChapterVerseHistory bcv)
 	{
 		_BCVs!.Remove(bcv);
 		await localStorage!.SetItemAsync(KeyBcvList, _BCVs);
 		NotifyStateHasChanged();
-	}	
+	}
 	#endregion
 }
 // Ignore Spelling: ctor, DI, Abrv, brv, BCV, ACV, bc, toolbar

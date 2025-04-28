@@ -28,7 +28,7 @@
 		try
 		{
 			//Logger!.LogInformation("{Method}, BookAndChapter: {BookAndChapter}", nameof(OnParametersSetAsync), BookAndChapter);
-			Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(OnParametersSetAsync), AbrvChapterVerse);
+			//Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(OnParametersSetAsync), AbrvChapterVerse);
 
 			verses = await Api!.GetBookChapterWithATAsync(BookAndChapter!.BibleBook, BookAndChapter.Chapter);
 			if (verses is not null && verses.Any())

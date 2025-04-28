@@ -8,7 +8,7 @@
 @if (ModalIsNotShownToggle)
 {
 	<button type="button" class="btn btn-info" title="@bcvTitle"
-					@onclick="() => ShowModal()">
+	@onclick="() => ShowModal()">
 		@Title <i class="fas fa-angle-down"></i>
 	</button>
 }
@@ -28,16 +28,16 @@ else
 
 				<div class="modal-body @ModalConstant.BodyColor">
 					<BlazoredTypeahead SearchMethod="SearchBibleBooks"
-														 TValue="BibleBookEnum.BibleBook"
-														 TItem="BibleBookEnum.BibleBook"
-														 Value="SelectedBook"
-														 ValueChanged="SelectedBookChanged"
-														 ValueExpression="@(() => SelectedBook)"
-														 EnableDropDown="true"
-														 MaximumSuggestions="66"
-														 MinimumLength="1"
-														 DisableClear="true"
-														 placeholder="Search bible...">
+					TValue="BibleBookEnum.BibleBook"
+					TItem="BibleBookEnum.BibleBook"
+					Value="SelectedBook"
+					ValueChanged="SelectedBookChanged"
+					ValueExpression="@(() => SelectedBook)"
+					EnableDropDown="true"
+					MaximumSuggestions="66"
+					MinimumLength="1"
+					DisableClear="true"
+					placeholder="Search bible...">
 						<SelectedTemplate Context="mycontext">
 							<span class="fs-4">@mycontext!.Title</span>
 						</SelectedTemplate>
@@ -111,7 +111,7 @@ else
 			bcvTitle = $"{bcv.BibleBook?.Abrv} {bcv.Chapter}:{bcv.Verse} ";
 			//Logger!.LogInformation("{Method}, BibleBook: {BibleBook}", nameof(ReturnedBCV), bcv);
 			CloseModal();
-			await CascadingAppState!.AppState!.BookChapterState!.AddBCV(new BookChapterVerseHistory(bcv.BibleBook!.Value, bcv.Chapter, bcv.Verse));
+			await CascadingAppState!.AppState!.BookChapterState!.AddStoredAcvToBcvList();
 			await OnBCVSelected.InvokeAsync(bcv);
 		}
 		catch (Exception ex)

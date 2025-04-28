@@ -1,6 +1,6 @@
 ﻿@using MyHebrewBible.Client.Helpers
 
-<div class="btn-group-vertical btn-group-sm dropstart" role="group" aria-label="Vertical button group">
+<div class="btn-group-vertical @buttonGroupSize dropstart" role="group" aria-label="Vertical button group">
 	<button type="button" class="btn @buttonColor dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 		<i class="fas fa-cogs"></i>
 	</button>
@@ -23,6 +23,7 @@
 	[CascadingParameter] public CascadingAppState? State { get; set; }
 
 	string buttonColor => BtnColors.Primary;
+	string buttonGroupSize => BtnGroupSize.Md;
 	string headerColor => TextColors.Success;
 
 	private string GetButtonText(Enums.MenuItem menuItem)

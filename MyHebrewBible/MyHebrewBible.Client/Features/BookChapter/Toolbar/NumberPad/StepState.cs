@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿//using Microsoft.AspNetCore.Components;
 using MyHebrewBible.Client.Enums;
 using MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad.Enums;
 
@@ -6,7 +6,8 @@ namespace MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad;
 
 public class StepState
 {
-
+	//ToDo:	THIS IS CONFUSING, Why do I need to configure ILogger as <ButtonWrapper> why can't I use <StepState>?
+	// 
 	//private readonly ILogger<StepState> Logger; // _logger
 	private readonly ILogger<ButtonWrapper> Logger; // _logger
 	//[Inject] public ILogger<StepState>? Logger { get; set; }

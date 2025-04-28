@@ -1,0 +1,66 @@
+﻿@using MyHebrewBible.Client.Enums
+
+<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+	<button type="button" class="btn btn-outline-primary" title="@Title"
+					@onclick="ButtonClick">
+		@GetButtonDisplay()
+	</button>
+</div>
+<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+	<button type="button" class="btn btn-outline-primary" title="@Title"
+					@onclick="ButtonClick">
+		@GetButtonDisplay()
+	</button>
+</div>
+
+@code {
+	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
+	[Parameter, EditorRequired] public bool IsPrevious { get; set; }
+	[Parameter] public EventCallback<BookAndChapter> OnBookAndChapterSelected { get; set; }
+
+	private string Icon => IsPrevious ?
+		BibleBook.NavigationIcon.Previous
+		: BibleBook.NavigationIcon.Next;
+
+	private string Chapter => IsPrevious ? $"{Helper.HasNext}" : $"";
+	private string Title => IsPrevious ? "Previous" : "Next";
+
+	MarkupString Text => (MarkupString)$"<sup>{bibleBookPrevOrNext!.ButtonText}</sup> ";
+
+	BibleBookPrevNext? bibleBookPrevOrNext;
+
+	protected override void OnParametersSet()
+	{
+		if (IsPrevious)
+		{
+			bibleBookPrevOrNext = BookAndChapter!.BibleBook!.NavigationPrevious(BookAndChapter.Chapter);
+		}
+		else
+		{
+			bibleBookPrevOrNext = BookAndChapter!.BibleBook!.NavigationNext(BookAndChapter.Chapter);
+		}
+	}
+
+	protected MarkupString GetButtonDisplay()
+	{
+		if (IsPrevious)
+		{
+			return (MarkupString)$"{Text} <i class='{Icon}'></i>";
+		}
+		else
+		{
+			return (MarkupString)$"<i class='{Icon}'></i> {Text}";
+		}
+	}
+
+
+
+	private void ButtonClick()
+	{
+		//BookAndChapter? bookAndChapter = new BookAndChapter(Previous!.BibleBook, Previous!.Chapter);
+		//BookAndChapter? bookAndChapter = new BookAndChapter(Next!.BibleBook, Next!.Chapter);
+		BookAndChapter? bookAndChapter = new BookAndChapter(bibleBookPrevOrNext!.BibleBook, bibleBookPrevOrNext!.Chapter);
+		OnBookAndChapterSelected.InvokeAsync(bookAndChapter);
+	}
+
+}

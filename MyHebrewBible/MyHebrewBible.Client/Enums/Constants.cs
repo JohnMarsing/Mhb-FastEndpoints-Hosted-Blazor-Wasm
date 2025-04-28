@@ -10,6 +10,8 @@ public static class BookChapterFacts
 	public const int LastVerseInBible = 31102;
 	*/
 	public const int LastBookInOT = 39; // used by MyHebrewBible.Client\Enums\BibleBook.cs
+	public const int FirstBook = 1;
+	public const int LastBook = 66;
 	/*
 	public const int FirstBookInNT = 40;
 	public const int FirstGospel = 40;
