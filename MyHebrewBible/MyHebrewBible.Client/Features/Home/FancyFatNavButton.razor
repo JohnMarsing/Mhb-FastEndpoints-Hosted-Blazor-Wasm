@@ -2,8 +2,8 @@
 
 @inject NavigationManager NavigationManager
 
-<button @onclick="ButtonClicked" title="@Nav!.Title @Nav!.HomeTitleSuffix"
-				class="list-group-item @ButtonCollor mt-1 @Nav!.DisabledHtml">
+<button @onclick="ButtonClicked" type="button" title="@Nav!.Title @Nav!.HomeTitleSuffix"
+				class="list-group-item @ButtonCollor mt-1 @Padding  @Nav!.DisabledHtml">
 	<div class="d-flex w-100 justify-content-between">
 		<i class="@Nav!.Icon fa-fw @IconSize" aria-hidden="true"></i>
 		<span class="@FontSize @Nav!.TextColor">@Nav!.Title</span>
@@ -17,6 +17,8 @@
 	[Parameter, EditorRequired] public Nav? Nav { get; set; }
 	[Parameter, EditorRequired] public MediaQuery? MediaQuery { get; set; }
 	[Parameter] public bool IsFeatured { get; set; } = false;
+
+	protected string Padding => $"{(MediaQuery == MediaQuery.Xs ? " px-1" : "")}";
 
 	protected string IconSize => $"{(MediaQuery == MediaQuery.Sm ? " fa-2x" : " fa-3x")}";
 	protected string FontSize => $"{(MediaQuery == MediaQuery.Sm ? " fs-5" : " fs-4")}";

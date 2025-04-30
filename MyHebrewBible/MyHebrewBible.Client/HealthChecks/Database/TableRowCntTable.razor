@@ -3,7 +3,7 @@
 @inject IToastService? Toast
 
 <LoadingComponent IsLoading="tableRowCnts==null" TurnSpinnerOff="TurnSpinnerOff">
-	<TableTemplate Items="tableRowCnts!.OrderBy(o => o.Name).ToList()" HeaderCSS="table table-condensed table-sm table-hover">
+	<TableTemplate Items="tableRowCnts!.OrderBy(o => o.Name).ToList()" HeaderCSS="table table-sm table-hover">
 		<TableHeader>
 			<th class="text-primary float-end">Count</th>
 			<th class="text-primary">Name</th>

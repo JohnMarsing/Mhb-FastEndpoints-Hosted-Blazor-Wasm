@@ -15,7 +15,10 @@
 					<th class="">Transliteration</th>
 					<th class=""><span class="float-end">Hebrew</span></th>
 					<th class="">#</th>
-					<th class="">Strong&apos;s</th>
+					@if (!IsXs)
+					{
+						<th class="">Strong&apos;s</th>
+					}
 					@* <th class="text-center text-danger"><i class="fas fa-exclamation"></i></th> *@
 				</tr>
 			</thead>
@@ -32,8 +35,17 @@
 								@((MarkupString)HebrewFormat.GetSpan(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3))
 								@HebrewFormat.CheckMaqqef(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3)
 							</td>
-							<td> <sup>@item.WordCount</sup></td>
-							<td class=""><small>@GlobalEnums.BibleAnchors.StrongsH_td(item.Strongs)</small></td>
+
+							@if (IsXs)
+							{
+								<td><sup>@GlobalEnums.BibleAnchors.StrongsH_td_Xs(item.Strongs, item.WordCount)</sup></td>
+							}
+							else
+							{
+								<td> <sup>@item.WordCount</sup></td>
+								<td class=""><small>@GlobalEnums.BibleAnchors.StrongsH_td(item.Strongs)</small></td>
+							}
+
 						</tr>
 					}
 				}
@@ -48,8 +60,15 @@
 								@((MarkupString)HebrewFormat.GetSpan(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3))
 								@HebrewFormat.CheckMaqqef(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3)
 							</td>
-							<td> <sup>@item.WordCount</sup></td>
-							<td class=""><small>@GlobalEnums.BibleAnchors.StrongsH_td(item.Strongs)</small></td>
+							@if (IsXs)
+							{
+								<td><sup>@GlobalEnums.BibleAnchors.StrongsH_td_Xs(item.Strongs, item.WordCount)</sup></td>
+							}
+							else
+							{
+								<td> <sup>@item.WordCount</sup></td>
+								<td class=""><small>@GlobalEnums.BibleAnchors.StrongsH_td(item.Strongs)</small></td>
+							}
 						</tr>
 					}
 
@@ -75,12 +94,17 @@
 	[Parameter, EditorRequired] public int ScriptureId { get; set; }
 	[Parameter, EditorRequired] public WordSelected? WordSelected { get; set; }
 	[Parameter, EditorRequired] public bool Filter { get; set; }
+	[Parameter, EditorRequired] public bool IsXs { get; set; }
 
 	protected bool TurnSpinnerOff = false;
 
 	private ICollection<WordPartByScriptureId>? hebrewWords = null;
 
 	private List<WordPartByScriptureId>? hebrewWordsFilter = null;
+
+	protected string HeaderCSS => IsXs ? "table table-sm" : "table ";
+
+	public string TheadCSS { get; set; } = "table-light";
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -94,7 +118,7 @@
 			}
 			else
 			{
-				if (Filter && WordSelected!.Strongs !=0)
+				if (Filter && WordSelected!.Strongs != 0)
 				{
 					hebrewWordsFilter = hebrewWords.Where(w => w.Strongs == WordSelected!.Strongs).OrderBy(o => o.WordCount).ToList();
 				}
@@ -117,6 +141,4 @@
 	// 	//OnHebrewSelected.InvokeAsync(hebrew);
 	// }
 
-	protected string HeaderCSS { get; set; } = "table table-condensed table-sm";
-	public string TheadCSS { get; set; } = "table-light";
 }

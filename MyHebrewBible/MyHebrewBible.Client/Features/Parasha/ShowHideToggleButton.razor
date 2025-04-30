@@ -2,10 +2,22 @@
 
 @* @inject IToastService? Toast *@
 
-<button @onclick="ButtonClicked" title=""
-				class="btn @ShowSection!.ButtonColorShowHide btn-lg">
-	@ButtonText	<i class="fas @ChevronIcon"></i>
-</button>
+
+<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+	<button @onclick="ButtonClicked" type="button" title=""
+					class="btn @ShowSection!.ButtonColorShowHide btn-md">
+		@ButtonText	<i class="fas @ChevronIcon"></i>
+	</button>
+</div>
+
+<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+	<button @onclick="ButtonClicked" type="button" title=""
+					class="btn @ShowSection!.ButtonColorShowHide btn-lg">
+		@ButtonText	<i class="fas @ChevronIcon"></i>
+	</button>
+
+</div>
+
 
 @code {
 	[Parameter, EditorRequired] public ShowSection? ShowSection { get; set; }
