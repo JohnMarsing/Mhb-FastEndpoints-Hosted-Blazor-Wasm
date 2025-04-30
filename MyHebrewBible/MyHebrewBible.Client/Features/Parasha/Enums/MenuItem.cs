@@ -1,6 +1,6 @@
 ﻿using Ardalis.SmartEnum;
 
-namespace MyHebrewBible.Client.Features.BookChapter.Enums;
+namespace MyHebrewBible.Client.Features.Parasha.Enums;
 
 
 public abstract class MenuItem : SmartEnum<MenuItem>
@@ -9,11 +9,13 @@ public abstract class MenuItem : SmartEnum<MenuItem>
 	private static class Id
 	{
 		internal const int Instructions = 1;
+		internal const int ParashaList = 2;
 	}
 	#endregion
 
 	#region Declared Public Instances
 	public static readonly MenuItem Instructions = new InstructionsSE();
+	public static readonly MenuItem ParashaList = new ParashaListSE();
 	#endregion
 
 	private MenuItem(string name, int value) : base(name, value)  // Constructor
@@ -36,4 +38,11 @@ public abstract class MenuItem : SmartEnum<MenuItem>
 		public InstructionsSE() : base(nameof(Instructions), Id.Instructions) { }
 		public override string Title => "Show Instructions";
 	}
+		
+	private sealed class ParashaListSE : MenuItem
+	{
+		public ParashaListSE() : base(nameof(ParashaList), Id.ParashaList) { }
+		public override string Title => "Parasha List"; // Show Debug or Hide Debug
+	}
+	
 }

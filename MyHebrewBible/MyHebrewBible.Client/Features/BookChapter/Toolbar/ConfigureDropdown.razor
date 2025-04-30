@@ -1,7 +1,7 @@
 ﻿@using MyHebrewBible.Client.Helpers
 
 <div class="btn-group-vertical @buttonGroupSize dropstart" role="group" aria-label="Vertical button group">
-	<button type="button" class="btn @buttonColor dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+	<button type="button" class="btn @buttonColor @ButtonSize dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 		<i class="fas fa-cogs"></i>
 	</button>
 	<ul class="dropdown-menu">
@@ -10,7 +10,7 @@
 			<li class="dropdown-item">
 				<button @onclick="@(e => ButtonClick(item))"
 				type="button" class="btn btn-outline-primary">
-					<span class="@headerColor">@GetButtonText(@item)</span>
+					<span class="@headerColor">@item.Title</span>
 				</button>
 			</li>
 		}
@@ -20,24 +20,11 @@
 
 @code {
 	[Parameter] public EventCallback<Enums.MenuItem> OnMenuItemSelected { get; set; }
-	[CascadingParameter] public CascadingAppState? State { get; set; }
 
 	string buttonColor => BtnColors.Primary;
 	string buttonGroupSize => BtnGroupSize.Md;
 	string headerColor => TextColors.Success;
-
-	private string GetButtonText(Enums.MenuItem menuItem)
-	{
-		if (menuItem == Enums.MenuItem.Instructions)
-		{
-			return menuItem.Title;
-		}
-		else // it's ShowDebugPicker
-		{
-			bool isDebug = State!.AppState!.BookChapterState!.GetPickerDebug();
-			return isDebug ? "Hide Debug" : "Show Debug";	
-		}
-	}
+	private string ButtonSize = " btn-md";
 
 	private void ButtonClick(Enums.MenuItem item)
 	{

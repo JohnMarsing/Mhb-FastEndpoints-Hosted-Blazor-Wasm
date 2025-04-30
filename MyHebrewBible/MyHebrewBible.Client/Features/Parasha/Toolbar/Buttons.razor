@@ -53,25 +53,26 @@
 
 		</div>
 	}
-	<div class="collapse navbar-collapse justify-content-end">
-		<div class="pe-1">
-			<NavToParashaListButton />
-		</div>
-		<div class="pe-1">
-			<PageInstructions />
-		</div>
+	<div class="collapse navbar-collapse justify-content-end pe-1">
+		<ConfigureDropdown OnMenuItemSelected="@ReturnedMenuItem" />
 	</div>
-
 </nav>
 
 
 @code {
 	[Parameter, EditorRequired] public Triennial? CurrentReading { get; set; }
 	[Parameter, EditorRequired] public EventCallback<Triennial> OnTriennialSelected { get; set; }
+	[Parameter, EditorRequired] public EventCallback<Enums.MenuItem> OnMenuItemSelected { get; set; }
 
 	private void ReturnedPrevNextVM(PrevNextVM prevNextVM)
 	{
 		NavigationManager!.NavigateTo(prevNextVM.Url);
 		OnTriennialSelected.InvokeAsync(prevNextVM.Triennial);
 	}
+
+	private void ReturnedMenuItem(Enums.MenuItem item)
+	{
+		OnMenuItemSelected.InvokeAsync(item);
+	}
+
 }

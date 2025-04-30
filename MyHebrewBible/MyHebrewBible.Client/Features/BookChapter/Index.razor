@@ -139,20 +139,14 @@
 		PageTitle = GlobalEnums.BibleBookFormat.BCV(bcv);
 	}
 
-
 	protected bool ShowPageInstructionsModal = false;
 
-	private async Task ReturnedMenuItem(Enums.MenuItem item)
+	private void ReturnedMenuItem(Enums.MenuItem item)
 	{
 		if (item == Enums.MenuItem.Instructions)
 		{
 			ShowPageInstructionsModal = !ShowPageInstructionsModal;
 		}
-		if (item == Enums.MenuItem.ShowDebugPicker)
-		{
-			await State!.AppState!.BookChapterState!.TogglePickerDebug();
-		}
-		//else 	{  	}
 	}
 
 	// Ignore Spelling: bc, rec

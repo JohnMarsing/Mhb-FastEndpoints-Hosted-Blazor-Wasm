@@ -123,7 +123,7 @@ An identical point with a different phonetic function (marking different consona
 
 					<div class=""col-4"">
 						<div class=""table-responsive"">
-							<table class=""table table-condensed table-striped"">
+							<table class=""table table-sm table-striped"">
 								<tr>
 									<th colspan=""2"">No Dagesh</th>
 								</tr>
@@ -146,7 +146,7 @@ An identical point with a different phonetic function (marking different consona
 
 					<div class=""col-4"">
 						<div class=""table-responsive"">
-							<table class=""table table-condensed table-striped"">
+							<table class=""table table-sm table-striped"">
 								<tr>
 									<th colspan=""2"">With Dagesh</th>
 								</tr>

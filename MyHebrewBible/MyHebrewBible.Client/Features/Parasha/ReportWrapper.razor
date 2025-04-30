@@ -1,6 +1,6 @@
 ﻿@using MyHebrewBible.Client.Features.Parasha.Enums
 @using MyHebrewBible.Client.Features.Parasha.TableOfContents
-
+@using MyHebrewBible.Client.Helpers
 @using MyHebrewBible.Client.Components.Report
 @using ReportEnums = MyHebrewBible.Client.Components.Report.Enums
 
@@ -29,75 +29,78 @@
 		<p class="fs-3 text-danger text-center">Table of Contents is null  (◡︵◡) </p>
 	}
 
-	<div class="card mb-3">
-		@foreach (var showSection in ShowSection.List.OrderBy(o => o.Value))
-		{
-			<div class="card-header">
-				<div class="d-flex justify-content-between">
-					<div>@((MarkupString)showSection.CardHeader)</div>
-					<div>
-						<ShowHideToggleButton ShowSection="showSection"
-																	CurrentVisibilityState="CurrentVisibilityState"
-																	OnToggleSelected="ReturnedNewVisibilityState" />
-					</div>
+	@foreach (var showSection in ShowSection.List.OrderBy(o => o.Value))
+	{
+		<div class="card-header mb-3">
+			<div class="d-flex justify-content-between">
+				<div>@((MarkupString)showSection.CardHeader)</div>
+				<div>
+					<ShowHideToggleButton ShowSection="showSection"
+																CurrentVisibilityState="CurrentVisibilityState"
+																OnToggleSelected="ReturnedNewVisibilityState" />
 				</div>
 			</div>
+		</div>
+				
 
-			@if (CurrentVisibilityState.HasFlag(Permutation.Torah) && showSection == ShowSection.Torah)
-			{
-				<div class="card-body">
-					<h5 class="text-center">@CurrentReading!.BCV</h5>
-					<Sections Verses="GetParashaTorahVerses(ShowSection.Torah.Value)"
-										ScrollToScriptureId="ScrollToScriptureId"
-										CalledBy="ReportEnums.CalledBy.Parasha" />
-				</div>
-			}
-
-			@if (CurrentVisibilityState.HasFlag(Permutation.Haftorah) && showSection == ShowSection.Haftorah)
-			{
-				if (VM! is not null && VM!.TableOfContentList is not null)
-				{
-					@foreach (var haftorah in VM!.TableOfContentList!
-						.Where(w => w.SectionId == ShowSection.Haftorah.Value)
-						.OrderBy(o => o.GroupCount))
-					{
-						<div class="card-body">
-							@* @(haftorah.GroupCount > 1 ? <hr> : "")"  *@
-							<h5 class="text-center">@haftorah.VerseRange</h5>
-							<Sections Verses="GetParashaHaftorahOrBritVerses(ShowSection.Haftorah.Value, haftorah.GroupCount)"
-												ScrollToScriptureId="ScrollToScriptureId"
-												CalledBy="ReportEnums.CalledBy.Parasha" />
-						</div>
-					}
-				}
-				else
-				{
-					<p class="fs-3 text-danger text-center">Haftorah Verses is null  (◡︵◡) </p>
-				}
-			}
-
-			@if (CurrentVisibilityState.HasFlag(Permutation.Brit) && showSection == ShowSection.Brit)
-			{
-				if (VM! is not null && VM!.TableOfContentList is not null)
-				{
-					@foreach (var brit in VM!.TableOfContentList!.Where(w => w.SectionId == ShowSection.Brit.Value).OrderBy(o => o.GroupCount))
-					{
-						<div class="card-body">
-							<h5 class="text-center">@brit.VerseRange</h5>
-							<Sections Verses="GetParashaHaftorahOrBritVerses(ShowSection.Brit.Value, brit.GroupCount)"
-												ScrollToScriptureId="ScrollToScriptureId"
-												CalledBy="ReportEnums.CalledBy.Parasha" />
-						</div>
-					}
-				}
-				else
-				{
-					<p class="fs-3 text-danger text-center">Brit Verses is null  (◡︵◡) </p>
-				}
-			}
-
+		@if (CurrentVisibilityState.HasFlag(Permutation.Torah) && showSection == ShowSection.Torah)
+		{
+			<div class="card-body">
+				<h5 class="text-center">@CurrentReading!.BCV</h5>
+				<Sections Verses="GetParashaTorahVerses(ShowSection.Torah.Value)"
+									ScrollToScriptureId="ScrollToScriptureId"
+									CalledBy="ReportEnums.CalledBy.Parasha" />
+			</div>
+			<div class="text-center @BgAndText.SuccessSubtle mb-4 py-2">End of Torah</div>
 		}
-	</div>
+
+		@if (CurrentVisibilityState.HasFlag(Permutation.Haftorah) && showSection == ShowSection.Haftorah)
+		{
+			if (VM! is not null && VM!.TableOfContentList is not null)
+			{
+				@foreach (var haftorah in VM!.TableOfContentList!
+				.Where(w => w.SectionId == ShowSection.Haftorah.Value)
+				.OrderBy(o => o.GroupCount))
+				{
+					<div class="card-body">
+						@* @(haftorah.GroupCount > 1 ? <hr> : "")"  *@
+						<h5 class="text-center">@haftorah.VerseRange</h5>
+						<Sections Verses="GetParashaHaftorahOrBritVerses(ShowSection.Haftorah.Value, haftorah.GroupCount)"
+											ScrollToScriptureId="ScrollToScriptureId"
+											CalledBy="ReportEnums.CalledBy.Parasha" />
+					</div>
+				}
+			}
+			else
+			{
+				<p class="fs-3 text-danger text-center">Haftorah Verses is null  (◡︵◡) </p>
+			}
+			<div class="text-center @BgAndText.WarningSubtle mb-4 py-2">End of Haftorah</div>
+		}
+
+		@if (CurrentVisibilityState.HasFlag(Permutation.Brit) && showSection == ShowSection.Brit)
+		{
+			if (VM! is not null && VM!.TableOfContentList is not null)
+			{
+				@foreach (var brit in VM!.TableOfContentList!.Where(w => w.SectionId == ShowSection.Brit.Value).OrderBy(o => o.GroupCount))
+				{
+					<div class="card-body">
+						<h5 class="text-center">@brit.VerseRange</h5>
+						<Sections Verses="GetParashaHaftorahOrBritVerses(ShowSection.Brit.Value, brit.GroupCount)"
+											ScrollToScriptureId="ScrollToScriptureId"
+											CalledBy="ReportEnums.CalledBy.Parasha" />
+					</div>
+				}
+			}
+			else
+			{
+				<p class="fs-3 text-danger text-center">Brit Verses is null  (◡︵◡) </p>
+			}
+			<div class="text-center @BgAndText.DangerSubtle mb-4 py-2">End of Brit</div>
+		}
+
+	}
+	
 </LoadingComponent>
 
 @code {

@@ -5,12 +5,15 @@
 
 @inject ILogger<Index>? Logger
 @inject IToastService? Toast
+@inject NavigationManager? NavigationManager
 
 <PageTitle>@Nav.Parasha.Title @PageTitleDetail</PageTitle>
 
 <LoadingProgress>
 
-	<Buttons CurrentReading="CurrentReading" OnTriennialSelected="ReturnedTriennial" />
+	<Buttons CurrentReading="CurrentReading"
+					 OnTriennialSelected="ReturnedTriennial"
+					 OnMenuItemSelected="ReturnedMenuItem" />
 
 	@if (CurrentReading is not null)
 	{
@@ -36,11 +39,17 @@
 
 </LoadingProgress>
 
+@if (ShowPageInstructionsModal)
+{
+	<PageInstructions />
+}
+
 @code {
 	[Parameter, EditorRequired] public int Id { get; set; }
 	[Parameter] public string? Slug { get; set; } // not used
 
 	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+
 
 	protected Permutation CurrentVisibilityState;
 	public Triennial? CurrentReading { get; set; }
@@ -95,10 +104,22 @@
 		return (Permutation)_permutation;
 	}
 
-
 	private void ReturnedTriennial(Triennial triennial)
 	{
 		CurrentReading = triennial;
 		if (CurrentReading is not null) { PageTitleDetail = CurrentReading.TorahAbrv; }
+	}
+
+	protected bool ShowPageInstructionsModal = false;
+	private void ReturnedMenuItem(Enums.MenuItem item)
+	{
+		if (item == Enums.MenuItem.Instructions)
+		{
+			ShowPageInstructionsModal = !ShowPageInstructionsModal;
+		}
+		else if (item == Enums.MenuItem.ParashaList)
+		{
+			NavigationManager!.NavigateTo(Nav.ParashaList.Index);
+		}	
 	}
 }
