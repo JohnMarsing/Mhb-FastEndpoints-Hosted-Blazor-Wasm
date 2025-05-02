@@ -12,13 +12,14 @@
 
 <PageTitle>@PageTitle</PageTitle>
 
-<Navbar CurrentBookAndChapter="CurrentBookAndChapter"
-				OnBookAndChapterSelected="ReturnedBookAndChapter"
-				CurrentBCV="CurrentBCV"
-				OnBCVSelected="ReturnedBCV"
-				OnMenuItemSelected="ReturnedMenuItem" />
-
 <LoadingProgress>
+
+	<Navbar CurrentBookAndChapter="CurrentBookAndChapter"
+					OnBookAndChapterSelected="ReturnedBookAndChapter"
+					CurrentBCV="CurrentBCV"
+					OnBCVSelected="ReturnedBCV"
+					OnMenuItemSelected="ReturnedMenuItem" />
+
 	<div class="mt-5">
 		<br />
 		@if (CurrentAbrvChapterVerse is not null && CurrentBookAndChapter is not null)
@@ -121,7 +122,7 @@
 		//Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(ReturnedBookAndChapter), rec);
 		NavigationManager!.NavigateTo($"{BookChapterConstants.BaseUrl}/{rec.Abrv}/{rec.Chapter}/{rec.Verse}/{rec.ScriptureId}");
 
-		// 
+		//
 		await State!.AppState!.BookChapterState!.UpdateACV(rec);
 		CurrentBookAndChapter = bookAndChapter!;
 		//Logger!.LogInformation("{Method}, CurrentBookAndChapter: {CurrentBookAndChapter}", nameof(ReturnedBookAndChapter), CurrentBookAndChapter);
