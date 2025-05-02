@@ -7,16 +7,22 @@
 	<QuickGrid Items="@filteredItems" Pagination="@pagination">
 		<TemplateColumn Title="Verse">
 			<a href="javascript:void(0)" @onclick="@(() => ButtonClick(context))"
-				 class="">
+			class="">
 				@context.VerseNameAbrv <i class="fas fa-level-down-alt"></i>
 			</a>
 			<small>@(context.HasExtraInfo ? "*" : "")</small>
 		</TemplateColumn>
-		<TemplateColumn Title="BCV">
-			<a href="@($"/bookchapter/{context.BCV}")" class=""><i class="fas fa-chevron-circle-right"></i></a>
-		</TemplateColumn>
-		<PropertyColumn Property="@(p => p.VerseDescription.Truncate(60))" Title="Description" Sortable="false" Align="Align.Left" />
-	</QuickGrid>
+
+		@if (!IsXs)
+		{
+			<TemplateColumn Title="BCV">
+				<a href="@($"/bookchapter/{context.BCV}")" class=""><i class="fas fa-chevron-circle-right"></i></a>
+			</TemplateColumn>
+		}
+
+		<PropertyColumn Property="@(p => p.VerseDescription.Truncate(@TruncateSize))" Title="Description" Sortable="false" Align="Align.Left" />
+	
+		</QuickGrid>
 
 	<div class="card-footer bg-light">
 		<div class="d-flex justify-content-between">
@@ -39,7 +45,7 @@
 			</div>
 			<div class="p-2">
 				<select @bind="@pagination.ItemsPerPage"
-								class="form-select" style="width: 6rem;" aria-label="Default select example">
+								class="form-select" style="width: 5rem;" aria-label="Default select example">
 					<option selected>Items</option>
 					<option>5</option>
 					<option>10</option>
@@ -53,7 +59,9 @@
 </div>
 @code {
 	[Parameter, EditorRequired] public EventCallback<Enums.Verse> OnVerseSelected { get; set; }
+	[Parameter, EditorRequired] public bool IsXs { get; set; }
 
+	protected int TruncateSize => IsXs ? 30 : 60;
 	PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
 
 	List<Enums.Verse>? itemList;

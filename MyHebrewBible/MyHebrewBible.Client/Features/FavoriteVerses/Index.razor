@@ -23,7 +23,14 @@ else
 	<PageInstructions />
 }
 
-<Grid OnVerseSelected="ReturnedVerse" />
+
+
+<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+	<Grid OnVerseSelected="ReturnedVerse" IsXs=true />
+</div>
+<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+	<Grid OnVerseSelected="ReturnedVerse" IsXs=false />
+</div>
 
 @code {
 	protected string PageTitle = MyHebrewBible.Client.Enums.Nav.FavoriteVerses.Title;

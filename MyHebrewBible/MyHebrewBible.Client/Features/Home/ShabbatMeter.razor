@@ -1,0 +1,83 @@
+﻿@using MyHebrewBible.Client.Helpers
+@using MyHebrewBible.Client.Features.Parasha.Enums;
+
+
+<div class="card w-50 @Borders.Primary border border-3 rounded-top text-center mb-3 mt-2 ">
+
+	<div class="card-header p-1 @BgAndText.PrimarySubtle">
+		<h6><span class="card-title mb-0"><i>Shabbat-O-Meter</i></span></h6>
+		@* <h5 class="text-black-50 mt-3">Next Shabbat <b>@NextShabbat</b></h5> *@
+	</div>
+
+	<div class="card-body">
+
+		<div class="progress" style="height: 40px">
+
+			<div class="progress-bar" style='@GetProgressStyle()'>
+				<span class="fs-4">
+					@GetProgressPercent()
+
+				</span>
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+	@if (DowInt == 7)
+	{
+		<p class="fs-3 mb-1"><b>Shabbat Shalom!</b></p>
+
+		<p class="text-danger hebrew44"> שַׁבָּת שָׁלוֹם</p>
+	}
+	else
+	{
+		<div class="card-body">
+			<h5 class="text-black-50">Next Shabbat <b>@NextShabbat</b></h5>
+		</div>
+
+	}
+
+
+</div>
+
+@code {
+	[Parameter] public int AdjustDaysOverride { get; set; }
+
+	protected int DowInt;
+	protected int DowWidthPerc;
+	protected string? NextShabbat;
+
+	protected override void OnInitialized()
+	{
+		DateTime nextShabbat = Constants.GetNextWeekday(DateTime.Today, DayOfWeek.Saturday);
+		NextShabbat = nextShabbat.ToString("MMMM dd");  //
+		Calculate();
+	}
+
+
+	protected string GetProgressPercent()
+	{
+		return $"{Calculate()}%";
+	}
+
+
+	protected string GetProgressStyle()
+	{
+		return $"width:{Calculate()}%";
+	}
+
+	private int Calculate()
+	{
+		int DayOfWeekAdjust = (AdjustDaysOverride == 0) ? 1 : AdjustDaysOverride;
+		DowInt = (int)DateTime.Today.DayOfWeek + DayOfWeekAdjust;  // + 1;
+
+		//DowInt = 7;
+
+		int dowWidth;
+		dowWidth = DowInt * 100;
+		return DowWidthPerc = dowWidth / 7;
+	}
+}

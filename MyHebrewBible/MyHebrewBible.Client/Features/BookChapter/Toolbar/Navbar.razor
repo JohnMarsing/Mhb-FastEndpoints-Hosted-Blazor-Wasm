@@ -4,11 +4,13 @@
 @using MyHebrewBible.Client.Enums
 
 @inject ILogger<Navbar>? Logger
+@inject IToastService? Toast
+
 
 <nav class="navbar navbar-expand bg-primary-subtle fixed-top">
 
 	<div class="collapse navbar-collapse justify-content-start">
-		<div class="ps-1"><HomeDropdown OnBCVSelected="OnBCVSelected" /></div>
+		<div class="ps-1"><HomeDropdown RecentList="RecentList" OnBCVSelected="OnBCVSelected" /></div>
 	</div>
 
 	@if (CurrentBookAndChapter is null)
@@ -72,6 +74,24 @@
 
 	// Only used by <ConfigureDropdown>
 	[Parameter, EditorRequired] public EventCallback<Enums.MenuItem> OnMenuItemSelected { get; set; }
+
+	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+
+	protected List<BookChapterVerseHistory>? RecentList = new();
+
+	protected override void OnParametersSet()
+	{
+		try
+		{
+			RecentList = CascadingAppState!.AppState!.BookChapterState!.GetBCVs();
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(OnInitialized));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnInitialized)}");
+		}
+	}
+
 
 	private string TitleOrAbrv => CurrentBookAndChapter!.BibleBook!.Title;
 

@@ -4,8 +4,6 @@
 @using NumberPadBCV = MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad
 
 @inject NavigationManager NavigationManager
-@inject ILogger<HomeDropdown>? Logger
-@inject IToastService? Toast
 
 <div class="btn-group " role="group" aria-label="Vertical button group">
 
@@ -37,17 +35,9 @@
 	else
 	{
 		<ul class="dropdown-menu">
-			@* <li class="dropdown-item">--No BCV--</li> *@
-			<li class="dropdown-item">
-				<a @onclick="ButtonClickRefresh" class="fw-bold">
-					Refresh
-					<i class="fas fa-sync-alt"></i>
-				</a>
-			</li>
+			<li class="dropdown-item">--No Items--</li>
 		</ul>
 	}
-
-
 
 	@if (ParashaList is not null && ParashaList.Any())
 	{
@@ -70,58 +60,20 @@
 		</ul>
 	}
 
+
 </div>
 
 
 @code {
+	[Parameter] public List<BookChapterVerseHistory>? RecentList { get; set; }
 	[Parameter] public EventCallback<NumberPadBCV.BookChapterVerse> OnBCVSelected { get; set; }
-	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; } /* Can this be done in NavBar?*/
 
 	string headerColor => TextColors.Success;
 	private string? ButtonText;
 
-	protected List<BookChapterVerseHistory>? RecentList = new();
 	protected List<BookChapterVerseHistory>? ParashaList = new();
-
-
 	protected bool ShowParashaList = false;
-
-	protected override void OnInitialized()
-	{
-		try
-		{
-			RecentList = CascadingAppState!.AppState!.BookChapterState!.GetBCVs();
-			//ParashaList = LoadParasha();
-		}
-		catch (Exception ex)
-		{
-			Logger!.LogError(ex, "{Method}", nameof(OnInitialized));
-			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnInitialized)}");
-		}
-	}
-
-	private void ButtonClickRefresh()
-	{
-		try
-		{
-			if (RecentList is null)
-			{
-				Toast!.ShowWarning($"RecentList IS NULL");
-			}
-			else
-			{
-				Toast!.ShowInfo($"Before Count: {RecentList.Count}");
-			}
-
-			RecentList = CascadingAppState!.AppState!.BookChapterState!.GetBCVs();
-			Toast!.ShowInfo($"After Count: {RecentList.Count}");
-		}
-		catch (Exception ex)
-		{
-			Logger!.LogError(ex, "{Method}", nameof(ButtonClickRefresh));
-			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(ButtonClickRefresh)}");
-		}
-	}
 
 	private void ButtonClickHome()
 	{
