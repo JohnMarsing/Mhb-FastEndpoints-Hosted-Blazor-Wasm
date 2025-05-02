@@ -106,6 +106,10 @@ hr.warning {
 .hebrew62 {
 	font-size: 62.0pt;
 	font-family: david;
+	margin-top: -30px;
+	margin-bottom: .0em;
+	padding-top: .0em;
+	padding-bottom: .0em;
 	direction: rtl;
 }
 

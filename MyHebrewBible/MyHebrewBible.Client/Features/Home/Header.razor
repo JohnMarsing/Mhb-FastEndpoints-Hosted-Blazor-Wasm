@@ -4,16 +4,16 @@
 
 	<ShabbatMeter />
 
-	@if (OmerCnt > 0 && OmerCnt <= 50)
+@if (OmerCnt > 0 && OmerCnt <= 50)
 	{
 		<div class="px-1"></div>
 		<OmerCard OmerCnt="OmerCnt" OmerCntHebrew="@OmerCntHebrew" />
 	}
-
+ 
 </div>
 
 @code {
-	protected int OmerCnt =  Constants.CountInDays();
+	protected int OmerCnt = Constants.CountInDays();
 	protected string? OmerCntHebrew;
 
 	protected override void OnInitialized()

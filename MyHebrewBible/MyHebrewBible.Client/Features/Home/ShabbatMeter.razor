@@ -1,43 +1,52 @@
 ﻿@using MyHebrewBible.Client.Helpers
 @using MyHebrewBible.Client.Features.Parasha.Enums;
 
-
-<div class="card w-50 @Borders.Primary border border-3 rounded-top text-center mb-3 mt-2 ">
+<div class="card w-50 @Borders.Primary border border-3 rounded-top text-center mb-3 mt-2">
 
 	<div class="card-header p-1 @BgAndText.PrimarySubtle">
 		<h6><span class="card-title mb-0"><i>Shabbat-O-Meter</i></span></h6>
-		@* <h5 class="text-black-50 mt-3">Next Shabbat <b>@NextShabbat</b></h5> *@
 	</div>
-
-	<div class="card-body">
-
-		<div class="progress" style="height: 40px">
-
-			<div class="progress-bar" style='@GetProgressStyle()'>
-				<span class="fs-4">
-					@GetProgressPercent()
-
-				</span>
-			</div>
-
-		</div>
-
-	</div>
-
-
 
 	@if (DowInt == 7)
 	{
-		<p class="fs-3 mb-1"><b>Shabbat Shalom!</b></p>
+		<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+			<p class="fs-5 mt-3 mb-1"><b>Shabbat Shalom!</b></p>
+			<p class="px-2 text-danger hebrew30"> שַׁבָּת שָׁלוֹם</p>
+		</div>
 
-		<p class="text-danger hebrew44"> שַׁבָּת שָׁלוֹם</p>
+		<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+			<p class="fs-2 mt-3 mb-1"><b>Shabbat Shalom!</b></p>
+			<p class="px-2 text-danger hebrew44"> שַׁבָּת שָׁלוֹם</p>
+		</div>
+
 	}
 	else
 	{
 		<div class="card-body">
-			<h5 class="text-black-50">Next Shabbat <b>@NextShabbat</b></h5>
+			<div class="progress" style="height: 40px">
+
+				<div class="progress-bar" style='@GetProgressStyle()'>
+					<span class="fs-4">@GetProgressPercent()</span>
+				</div>
+			</div>
 		</div>
 
+		<div class="card-body">
+			<div class="d-flex justify-content-center">
+				@for (int i = 1; i <= 7; i++)
+				{
+					<div class="px-1">
+						<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+							<p class="fs-3 font-monospace @(i <= DowInt ? $"{TextColors.Black50} text-decoration-line-through" : "")">@i</p>
+						</div>
+
+						<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+							<span class="display-2 font-monospace @(i <= DowInt ? $"{TextColors.Black50} text-decoration-line-through" : "")">@i</span>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
 	}
 
 
@@ -57,12 +66,10 @@
 		Calculate();
 	}
 
-
 	protected string GetProgressPercent()
 	{
 		return $"{Calculate()}%";
 	}
-
 
 	protected string GetProgressStyle()
 	{
@@ -74,7 +81,7 @@
 		int DayOfWeekAdjust = (AdjustDaysOverride == 0) ? 1 : AdjustDaysOverride;
 		DowInt = (int)DateTime.Today.DayOfWeek + DayOfWeekAdjust;  // + 1;
 
-		//DowInt = 7;
+		//DowInt = 7;   // Leave for testing
 
 		int dowWidth;
 		dowWidth = DowInt * 100;
