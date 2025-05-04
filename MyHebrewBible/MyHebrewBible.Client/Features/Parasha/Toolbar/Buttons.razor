@@ -1,6 +1,9 @@
 ﻿@using MyHebrewBible.Client.Features.Parasha.Enums
 @using MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Components.Toolbar
 
+@inject ILogger<Buttons>? Logger
+@inject IToastService? Toast
 @inject NavigationManager NavigationManager
 
 <nav class="navbar navbar-expand bg-primary-subtle fixed-top">
@@ -54,7 +57,7 @@
 		</div>
 	}
 	<div class="collapse navbar-collapse justify-content-end pe-1">
-		<ConfigureDropdown OnMenuItemSelected="@ReturnedMenuItem" />
+		<MenuTemplate Items="menuItems" OnItemSelected="ReturnedMenuItemString" />
 	</div>
 </nav>
 
@@ -70,9 +73,24 @@
 		OnTriennialSelected.InvokeAsync(prevNextVM.Triennial);
 	}
 
-	private void ReturnedMenuItem(Enums.MenuItem item)
+	private List<Dictionary<int, string?>> menuItems = Enums.MenuItem.List
+				.Select(item => new Dictionary<int, string?> { { item.Value, item.Name } })
+				.ToList();
+
+	private void ReturnedMenuItemString(string item)
 	{
-		OnMenuItemSelected.InvokeAsync(item);
+		Enums.MenuItem menuItem;
+		if (Enums.MenuItem.TryFromName(item, out menuItem))
+		{
+			//Logger!.LogInformation("{Method}, MenuItem: {MenuItem}", nameof(ReturnedMenuItemString), menuItem);
+			OnMenuItemSelected.InvokeAsync(menuItem);
+		}
+		else
+		{
+			Logger!.LogWarning("{Method}, Invalid MenuItem: {MenuItem}", nameof(ReturnedMenuItemString), item);
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Buttons)}!{nameof(ReturnedMenuItemString)} {item}");
+			return;
+		}
 	}
 
 }

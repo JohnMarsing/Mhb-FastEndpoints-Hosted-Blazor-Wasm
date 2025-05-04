@@ -15,9 +15,18 @@
 </BlazoredTypeahead>
 
 @code {
-	[Parameter] public EventCallback<string>	SelectedCountryChanged	{ get; set; }
+	[Parameter] public EventCallback<string> SelectedCountryChanged { get; set; }
 
+
+
+#pragma warning disable CS0414
+#pragma warning disable CS0649
+#pragma warning disable BL0007
 	[Parameter]	public string SelectedCountry
+#pragma warning restore CS0414
+#pragma warning restore CS0649
+#pragma warning restore BL0007
+
 	{
 		get => selectedCountry;
 		set
@@ -32,7 +41,7 @@
 
 	private string selectedCountry = string.Empty;
 
-	private async Task<IEnumerable<string>>	SearchCountries(string searchText)
+	private async Task<IEnumerable<string>> SearchCountries(string searchText)
 	{
 		var countries = new List<string>
 		{
