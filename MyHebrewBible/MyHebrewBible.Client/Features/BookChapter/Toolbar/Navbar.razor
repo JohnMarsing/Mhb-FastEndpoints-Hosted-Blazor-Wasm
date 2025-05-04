@@ -2,10 +2,10 @@
 @using MyHebrewBible.Client.Features.BookChapter.Toolbar.PreviousNext
 @using MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad
 @using MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Components.Toolbar
 
 @inject ILogger<Navbar>? Logger
 @inject IToastService? Toast
-
 
 <nav class="navbar navbar-expand bg-primary-subtle fixed-top">
 
@@ -59,8 +59,9 @@
 	}
 
 	<div class="collapse navbar-collapse justify-content-end pe-1">
-		<ConfigureDropdown OnMenuItemSelected="@ReturnedMenuItem" />
+		<MenuTemplate Items="menuItems" OnItemSelected="ReturnedMenuItemString" />
 	</div>
+
 </nav>
 
 @code {
@@ -72,12 +73,32 @@
 	[Parameter, EditorRequired] public NumberPad.BookChapterVerse? CurrentBCV { get; set; }
 	[Parameter, EditorRequired] public EventCallback<NumberPad.BookChapterVerse> OnBCVSelected { get; set; }
 
-	// Only used by <ConfigureDropdown>
+	// Only used by <MenuTemplate>
 	[Parameter, EditorRequired] public EventCallback<Enums.MenuItem> OnMenuItemSelected { get; set; }
 
 	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
 
 	protected List<BookChapterVerseHistory>? RecentList = new();
+
+	private List<Dictionary<int, string?>> menuItems = Enums.MenuItem.List
+				.Select(item => new Dictionary<int, string?> { { item.Value, item.Name } })
+				.ToList();
+
+	private void ReturnedMenuItemString(string item)
+	{
+		Enums.MenuItem menuItem;
+		if (Enums.MenuItem.TryFromName(item, out menuItem))
+		{
+			//Logger!.LogInformation("{Method}, MenuItem: {MenuItem}", nameof(ReturnedMenuItemString), menuItem);
+			OnMenuItemSelected.InvokeAsync(menuItem);
+		}
+		else
+		{
+			Logger!.LogWarning("{Method}, Invalid MenuItem: {MenuItem}", nameof(ReturnedMenuItemString), item);
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Navbar)}!{nameof(ReturnedMenuItemString)} {item}");
+			return;
+		}
+	}
 
 	protected override void OnParametersSet()
 	{
@@ -88,10 +109,9 @@
 		catch (Exception ex)
 		{
 			Logger!.LogError(ex, "{Method}", nameof(OnInitialized));
-			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnInitialized)}");
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Navbar)}!{nameof(OnInitialized)}");
 		}
 	}
-
 
 	private string TitleOrAbrv => CurrentBookAndChapter!.BibleBook!.Title;
 
@@ -107,11 +127,6 @@
 	{
 		//Logger!.LogInformation("{Method}, BookChapterVerse: {BookChapterVerse}", nameof(ReturnedBCV), bcv);
 		OnBCVSelected.InvokeAsync(bcv);
-	}
-
-	private void ReturnedMenuItem(Enums.MenuItem item)
-	{
-		OnMenuItemSelected.InvokeAsync(item);
 	}
 
 

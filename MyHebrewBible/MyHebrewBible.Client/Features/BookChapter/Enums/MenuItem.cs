@@ -9,11 +9,13 @@ public abstract class MenuItem : SmartEnum<MenuItem>
 	private static class Id
 	{
 		internal const int Instructions = 1;
+		internal const int HideSAT = 2;
 	}
 	#endregion
 
 	#region Declared Public Instances
 	public static readonly MenuItem Instructions = new InstructionsSE();
+	public static readonly MenuItem HideSAT = new HideSATSE();
 	#endregion
 
 	private MenuItem(string name, int value) : base(name, value)  // Constructor
@@ -35,5 +37,11 @@ public abstract class MenuItem : SmartEnum<MenuItem>
 	{
 		public InstructionsSE() : base(nameof(Instructions), Id.Instructions) { }
 		public override string Title => "Show Instructions";
+	}
+
+	private sealed class HideSATSE : MenuItem
+	{
+		public HideSATSE() : base(nameof(HideSAT), Id.HideSAT) { }
+		public override string Title => "Hide Aleph Tav's";
 	}
 }

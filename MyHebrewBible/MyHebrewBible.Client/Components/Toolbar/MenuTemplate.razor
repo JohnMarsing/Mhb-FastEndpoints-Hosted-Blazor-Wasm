@@ -1,0 +1,39 @@
+﻿@typeparam TItem where TItem : Dictionary<int, string> 
+
+@using MyHebrewBible.Client.Helpers
+
+@if (Items == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<div class="btn-group-vertical @buttonGroupSize dropstart" role="group" aria-label="Vertical button group">
+		<button type="button" class="btn @buttonColor @buttonSize dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+			<i class="fas fa-cogs"></i>
+		</button>
+		<ul class="dropdown-menu">
+
+			@foreach (var item in Items)
+			{
+				<li class="dropdown-item">
+					<button class="btn btn-outline-primary"
+					@onclick="() => OnItemSelected.InvokeAsync(item.Values.FirstOrDefault())"
+					type="button">
+						@item.Values.FirstOrDefault()
+					</button>
+				</li>
+			}
+		</ul>
+	</div>
+}
+
+@code {
+	[Parameter, EditorRequired] public IEnumerable<TItem> Items { get; set; } = default!;
+	[Parameter, EditorRequired] public EventCallback<string> OnItemSelected { get; set; }
+
+	string buttonColor => BtnColors.Primary;
+	string buttonGroupSize => BtnGroupSize.Md;
+	private string buttonSize = BtnSize.Md; 
+
+}
