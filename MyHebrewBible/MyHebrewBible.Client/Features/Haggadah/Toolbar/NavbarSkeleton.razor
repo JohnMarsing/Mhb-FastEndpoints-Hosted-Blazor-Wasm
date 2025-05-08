@@ -1,33 +1,37 @@
 ﻿@using MyHebrewBible.Client.Layout
 @using MyHebrewBible.Client.Helpers
 
+<nav class="navbar navbar-expand bg-primary-subtle fixed-top">
+	
+	<div class="d-flex justify-content-start">
 
-<div class="container-fluid fixed-top bg-secondary-subtle p-2">
-	<div class="row align-items-center">
-
-		<div class="col-auto">
+		<div class="px-1">
 			@HomeButtonContent
 		</div>
+	</div>
 
-		<div class="col-auto">
+	<div class="collapse navbar-collapse justify-content-between">
+
+		<div class="px-1">
 			@PrevButtonContent
 		</div>
 
 		<div class="col">
 			@ProgressBarContent
 		</div>
-
-		<div class="col-auto">
+		<div class="px-1">
 			@NextButtonContent
-		</div>
-
-		<div class="col-auto">
-			@RightMenuContent
 		</div>
 
 	</div>
 
-</div>
+	<div class="d-flex justify-content-end pe-1">
+		<div class="">
+			@RightMenuContent
+		</div>
+	</div>
+
+</nav>
 <br />
 
 @code {
