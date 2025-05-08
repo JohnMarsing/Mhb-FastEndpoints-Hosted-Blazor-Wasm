@@ -1,11 +1,13 @@
-﻿
-<div class="progress" style="height: 20px;">
-	<div class="progress-bar" style='@GetProgressStyle()'>
-		@GetProgressPercent()
+﻿@using MyHebrewBible.Client.Helpers
+
+<div class="progress" style="height: 40px;">
+	<div class="progress-bar @BgAndText.Info" style='@GetProgressStyle()'>
+		<span class="fs-4 fw-bold">@GetProgressPercent()</span>
 	</div>
 </div>
 
 @code {
+
 	[Parameter, EditorRequired] public int Section { get; set; }
 
 	protected string GetProgressStyle()

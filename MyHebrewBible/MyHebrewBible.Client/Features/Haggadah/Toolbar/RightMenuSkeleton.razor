@@ -1,33 +1,47 @@
 ﻿@using MyHebrewBible.Client.Helpers
 
-<div class="btn-group-vertical @BtnGroupSize.Sm" role="group" aria-label="Vertical button group">
+<div class="btn-group-vertical @BtnGroupSize.Md dropstart" role="group" aria-label="Vertical button group">
 
-	<button type="button" class="btn @BtnColors.Primary @BtnSize.Sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+	<button type="button" class="btn @BtnColors.Primary @BtnSize.Md dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 		<i class="fas fa-cogs"></i>
 	</button>
 
 	<ul class="dropdown-menu">
 
-		<li class="fs-5 fw-bold dropdown-header">Language</li>
+		<li class="fw-bold dropdown-header">Language</li>
 		
 		@LanguageButtonsContent
-		
-		@TableOfContentContent
-		@*
 
 		<li><hr class="dropdown-divider"></li>
 
 		<li class="dropdown-item">
-			@TableOfContentButton
-		</li>	
-
-	*@
+			<button type="button" class="btn btn-outline-primary" title="Table of Contents"
+							@onclick="ButtonClickShowTableOfContent">
+				Table of Content
+			</button>
+		</li>
 	</ul>
 
 </div>
 
+@if (ShowTableOfContentModal) { 
+	<ToCModal OnSectionSelected="ReturnedSection" />
+}
+
 @code {
 	[Parameter] public RenderFragment? LanguageButtonsContent { get; set; }
-	[Parameter] public RenderFragment? TableOfContentContent { get; set; }
+	[Parameter, EditorRequired] public EventCallback<int> OnSectionSelected { get; set; }
+
+	protected bool ShowTableOfContentModal = false;
+	private void ButtonClickShowTableOfContent()
+	{
+		ShowTableOfContentModal = !ShowTableOfContentModal;
+	}
+
+	private void ReturnedSection(int section)
+	{
+		ShowTableOfContentModal = !ShowTableOfContentModal;
+		OnSectionSelected.InvokeAsync(section);
+	}
 }
 

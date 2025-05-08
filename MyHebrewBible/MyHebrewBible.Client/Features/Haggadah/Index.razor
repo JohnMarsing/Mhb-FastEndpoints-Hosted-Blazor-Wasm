@@ -14,9 +14,7 @@
 
 <NavbarSkeleton>
 
-	<HomeButtonContent>
-		<HomeButton />
-	</HomeButtonContent>
+	<HomeButtonContent><HomeButton /></HomeButtonContent>
 
 	<PrevButtonContent>
 		@if (Section != 1)
@@ -49,8 +47,7 @@
 	</NextButtonContent>
 
 	<RightMenuContent>
-		<RightMenuSkeleton>
-			
+		<RightMenuSkeleton OnSectionSelected="ReturnedSection">
 			<LanguageButtonsContent>
 				@foreach (var item in Enums.DisplayLanguage.List.OrderBy(o => o.Value))
 				{
@@ -62,28 +59,10 @@
 					</li>
 				}
 			</LanguageButtonsContent>
-
-			<TableOfContentContent>
-				<li><hr class="dropdown-divider"></li>
-
-				<li class="dropdown-item">
-					<button type="button" class="btn btn-outline-primary" title="Table of Contents"
-									@onclick="ButtonClickShowTableOfContent">
-						Table of Content
-					</button>
-				</li>
-			</TableOfContentContent>
-
 		</RightMenuSkeleton>
 	</RightMenuContent>
 
-
 </NavbarSkeleton>
-
-@if (ShowTableOfContentModal)
-{
-	<ToCModal OnSectionSelected="ReturnedSection" />
-}
 
 <LoadingProgress>
 	<div class="mt-5">
@@ -115,12 +94,6 @@
 
 @code {
 	[CascadingParameter] public CascadingAppState? State { get; set; }
-
-	protected bool ShowTableOfContentModal = false;
-	private void ButtonClickShowTableOfContent()
-	{
-		ShowTableOfContentModal = !ShowTableOfContentModal;
-	}
 
 	protected int Section;
 	protected Enums.Content? CurrentContent;
