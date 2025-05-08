@@ -1,14 +1,4 @@
-﻿@if (ModalIsNotShownToggle)
-{
-	<div class="col-auto">
-		<button type="button" class="btn btn-primary  btn-sm" title="Table of Contents"
-						@onclick="() => ShowModal()">
-			TOC <i class="fas fa-angle-down"></i>
-		</button>
-	</div>
-}
-else
-{
+﻿
 <div class="@modalClass" style="display:@(modalOpen?"block":"none");">
 	<div class="modal-dialog modal-md">
 		<div class="modal-content">
@@ -35,7 +25,6 @@ else
 		</div>
 	</div>
 </div>
-}
 
 @code {
 	[Parameter, EditorRequired] public EventCallback<int> OnSectionSelected { get; set; }

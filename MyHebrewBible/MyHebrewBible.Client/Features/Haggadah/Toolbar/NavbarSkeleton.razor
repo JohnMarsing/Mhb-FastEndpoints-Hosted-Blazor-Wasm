@@ -1,0 +1,40 @@
+﻿@using MyHebrewBible.Client.Layout
+@using MyHebrewBible.Client.Helpers
+
+
+<div class="container-fluid fixed-top bg-secondary-subtle p-2">
+	<div class="row align-items-center">
+
+		<div class="col-auto">
+			@HomeButtonContent
+		</div>
+
+		<div class="col-auto">
+			@PrevButtonContent
+		</div>
+
+		<div class="col">
+			@ProgressBarContent
+		</div>
+
+		<div class="col-auto">
+			@NextButtonContent
+		</div>
+
+		<div class="col-auto">
+			@RightMenuContent
+		</div>
+
+	</div>
+
+</div>
+<br />
+
+@code {
+	[Parameter] public RenderFragment? HomeButtonContent { get; set; }
+	[Parameter] public RenderFragment? PrevButtonContent { get; set; }
+	[Parameter] public RenderFragment? ProgressBarContent { get; set; }
+	[Parameter] public RenderFragment? NextButtonContent { get; set; }
+	[Parameter] public RenderFragment? RightMenuContent { get; set; }
+
+}

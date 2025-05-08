@@ -3,15 +3,87 @@
 @using MyHebrewBible.Client.Features.Haggadah.Enums
 @using MyHebrewBible.Client.Features.Haggadah.Toolbar
 @using Page = MyHebrewBible.Client.Enums.Nav
+@using MyHebrewBible.Client.Layout
+@using MyHebrewBible.Client.Components.Toolbar
+@using MyHebrewBible.Client.Helpers
 
 @inject IToastService? Toast
 @inject ILogger<Index>? Logger
 
 <PageTitle>@Page.Haggadah.Title</PageTitle>
 
-<NavbarHaggadah Section="Section"
-OnMenuItemSelected="ReturnedMenuItem"
-OnSectionSelected="ReturnedSection" />
+<NavbarSkeleton>
+
+	<HomeButtonContent>
+		<HomeButton />
+	</HomeButtonContent>
+
+	<PrevButtonContent>
+		@if (Section != 1)
+		{
+			<PreviousOrNextButton Section="Section"
+														Forward=false
+														OnSectionSelected="ReturnedSection" />
+		}
+		else
+		{
+			<OnEdgeButton />
+		}
+	</PrevButtonContent>
+
+	<ProgressBarContent>
+		<Progressbar Section="Section" />
+	</ProgressBarContent>
+
+	<NextButtonContent>
+		@if (Section < Enums.Content.List.Count)
+		{
+			<PreviousOrNextButton Section="Section"
+														Forward=true
+														OnSectionSelected="ReturnedSection" />
+		}
+		else
+		{
+			<OnEdgeButton />
+		}
+	</NextButtonContent>
+
+	<RightMenuContent>
+		<RightMenuSkeleton>
+			
+			<LanguageButtonsContent>
+				@foreach (var item in Enums.DisplayLanguage.List.OrderBy(o => o.Value))
+				{
+					<li class="dropdown-item">
+						<button @onclick="@(e => ReturnedMenuItem(item))"
+										type="button" class="btn btn-outline-primary">
+							@item.Title
+						</button>
+					</li>
+				}
+			</LanguageButtonsContent>
+
+			<TableOfContentContent>
+				<li><hr class="dropdown-divider"></li>
+
+				<li class="dropdown-item">
+					<button type="button" class="btn btn-outline-primary" title="Table of Contents"
+									@onclick="ButtonClickShowTableOfContent">
+						Table of Content
+					</button>
+				</li>
+			</TableOfContentContent>
+
+		</RightMenuSkeleton>
+	</RightMenuContent>
+
+
+</NavbarSkeleton>
+
+@if (ShowTableOfContentModal)
+{
+	<ToCModal OnSectionSelected="ReturnedSection" />
+}
 
 <LoadingProgress>
 	<div class="mt-5">
@@ -44,6 +116,12 @@ OnSectionSelected="ReturnedSection" />
 @code {
 	[CascadingParameter] public CascadingAppState? State { get; set; }
 
+	protected bool ShowTableOfContentModal = false;
+	private void ButtonClickShowTableOfContent()
+	{
+		ShowTableOfContentModal = !ShowTableOfContentModal;
+	}
+
 	protected int Section;
 	protected Enums.Content? CurrentContent;
 	protected Enums.DisplayLanguage? Language;
@@ -68,7 +146,7 @@ OnSectionSelected="ReturnedSection" />
 		{
 			DetailContentEng = Type.GetType($"{Constants.DynamicComponentPathEng}.{CurrentContent!.Name}");
 			DetailContentEsp = Type.GetType($"{Constants.DynamicComponentPathEsp}.{CurrentContent!.Name}");
-			
+
 			if (DetailContentEng is null)
 			{
 				Logger!.LogWarning("{Method}, DetailContentEng IS NULL; CurrentContent: {CurrentContent}"
@@ -94,7 +172,6 @@ OnSectionSelected="ReturnedSection" />
 			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(OnParametersSetAsync)}");
 		}
 	}
-
 
 	private Enums.DisplayLanguage GetLanguageState()
 	{
