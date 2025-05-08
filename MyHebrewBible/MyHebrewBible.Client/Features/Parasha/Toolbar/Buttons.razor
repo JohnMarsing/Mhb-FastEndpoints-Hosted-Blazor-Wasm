@@ -57,7 +57,7 @@
 		</div>
 	}
 	<div class="collapse navbar-collapse justify-content-end pe-1">
-		<MenuTemplate Items="menuItems" OnItemSelected="ReturnedMenuItemString" />
+		<MenuTemplate Items="menuItems" OnItemSelected="ReturnedMenuItemId" />
 	</div>
 </nav>
 
@@ -74,23 +74,21 @@
 	}
 
 	private List<Dictionary<int, string?>> menuItems = Enums.MenuItem.List
-				.Select(item => new Dictionary<int, string?> { { item.Value, item.Name } })
+				.Select(item => new Dictionary<int, string?> { { item.Value, item.Title } })
 				.ToList();
 
-	private void ReturnedMenuItemString(string item)
+	private void ReturnedMenuItemId(int id)
 	{
-		Enums.MenuItem menuItem;
-		if (Enums.MenuItem.TryFromName(item, out menuItem))
+		if (Enums.MenuItem.TryFromValue(id, out Enums.MenuItem? menuItem))
 		{
-			//Logger!.LogInformation("{Method}, MenuItem: {MenuItem}", nameof(ReturnedMenuItemString), menuItem);
+			//Logger!.LogInformation("{Method}, MenuItem: {MenuItem}", nameof(ReturnedMenuItemId), menuItem);
 			OnMenuItemSelected.InvokeAsync(menuItem);
 		}
 		else
 		{
-			Logger!.LogWarning("{Method}, Invalid MenuItem: {MenuItem}", nameof(ReturnedMenuItemString), item);
-			Toast!.ShowError($"{Global.ToastShowError} {nameof(Buttons)}!{nameof(ReturnedMenuItemString)} {item}");
+			Logger!.LogWarning("{Method}, Invalid MenuItem: {MenuItem}", nameof(ReturnedMenuItemId), id);
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Buttons)}!{nameof(ReturnedMenuItemId)} {id}");
 			return;
 		}
 	}
-
 }

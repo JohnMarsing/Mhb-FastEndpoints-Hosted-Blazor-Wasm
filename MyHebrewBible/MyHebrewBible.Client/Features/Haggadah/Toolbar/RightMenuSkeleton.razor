@@ -1,0 +1,33 @@
+﻿@using MyHebrewBible.Client.Helpers
+
+<div class="btn-group-vertical @BtnGroupSize.Sm" role="group" aria-label="Vertical button group">
+
+	<button type="button" class="btn @BtnColors.Primary @BtnSize.Sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+		<i class="fas fa-cogs"></i>
+	</button>
+
+	<ul class="dropdown-menu">
+
+		<li class="fs-5 fw-bold dropdown-header">Language</li>
+		
+		@LanguageButtonsContent
+		
+		@TableOfContentContent
+		@*
+
+		<li><hr class="dropdown-divider"></li>
+
+		<li class="dropdown-item">
+			@TableOfContentButton
+		</li>	
+
+	*@
+	</ul>
+
+</div>
+
+@code {
+	[Parameter] public RenderFragment? LanguageButtonsContent { get; set; }
+	[Parameter] public RenderFragment? TableOfContentContent { get; set; }
+}
+

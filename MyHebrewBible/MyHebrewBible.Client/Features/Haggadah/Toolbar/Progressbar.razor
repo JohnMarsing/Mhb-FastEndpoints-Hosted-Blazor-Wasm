@@ -1,0 +1,26 @@
+﻿
+<div class="progress" style="height: 20px;">
+	<div class="progress-bar" style='@GetProgressStyle()'>
+		@GetProgressPercent()
+	</div>
+</div>
+
+@code {
+	[Parameter, EditorRequired] public int Section { get; set; }
+
+	protected string GetProgressStyle()
+	{
+		return $"width:{CalculatePercentage()}%";
+	}
+
+	protected string GetProgressPercent()
+	{
+		return $"{CalculatePercentage()}%";
+	}
+
+	private int CalculatePercentage()
+	{
+		return (Section * 100) / Enums.Content.List.Count;
+	}
+
+}

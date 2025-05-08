@@ -2,7 +2,6 @@
 
 namespace MyHebrewBible.Client.Features.BookChapter.Enums;
 
-
 public abstract class MenuItem : SmartEnum<MenuItem>
 {
 	#region Id's
