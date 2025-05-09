@@ -1,0 +1,15 @@
+﻿@using MyHebrewBible.Client.Helpers
+
+<button type="button" class="btn @BtnOutlineColors.Primary" title="Table of Contents"
+				@onclick="ButtonClick">
+	Table of Content
+</button>
+
+@code {
+	[Parameter, EditorRequired] public EventCallback OnOpen { get; set; }
+
+	private void ButtonClick()
+	{
+		OnOpen.InvokeAsync();
+	}
+}

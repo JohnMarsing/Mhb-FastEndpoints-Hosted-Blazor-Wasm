@@ -1,58 +1,48 @@
-﻿
-<div class="@modalClass" style="display:@(modalOpen?"block":"none");">
-	<div class="modal-dialog modal-md">
-		<div class="modal-content">
-			<div class="modal-header @headerBackGround">
+﻿@using MyHebrewBible.Client.Helpers
+
+@if(IsVisible)
+{
+	<div class="modal show" style="display:block;">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header @BgAndText.Warning">
 
 					<p class="fs-5 modal-title">Table of Contents</p>
+					 <button type="button" class="close" @onclick="ButtonClickClose"><span>&times;</span></button> 
+				</div>
 
-				<button type="button" class="close" @onclick="CloseModal">
-					<span>&times;</span>
-				</button>
-			</div>
+				<div class="modal-body @BgAndText.WarningSubtle">
+					<ol class="fs-5">
+						@foreach (var item in Enums.Content.List.OrderBy(o => o.Value))
+						{
+							<li>
+								<a class="text-decoration-underline"
+									 @onclick="@(() => ButtonClickSelect(item.Value))"
+									 title="@item.Value">
+									@item.Title
+								</a>
+							</li>
+						}
+					</ol>
 
-			<div class="modal-body @bodyBackGround">
-				<ol class="fs-5">
-					@foreach (var item in Enums.Content.List.OrderBy(o => o.Value))
-					{
-						<li>
-								<a class="text-decoration-underline" @onclick="@(() => ButtonClick(item.Value))" title="@item.Value">@item.Title </a>
-						</li>
-					}
-				</ol>
-
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+}
 
 @code {
+	[Parameter, EditorRequired] public bool IsVisible { get; set; }
 	[Parameter, EditorRequired] public EventCallback<int> OnSectionSelected { get; set; }
+	[Parameter, EditorRequired] public EventCallback OnClose { get; set; }
 
-	bool modalOpen = true;
-	string modalClass = "modal show";
-	string headerBackGround = "bg-warning";
-	string bodyBackGround = "bg-warning-subtle";
-	bool ModalIsNotShownToggle = true;
-
-	protected void ShowModal()
+	private void ButtonClickClose()
 	{
-		modalOpen = true;
-		ModalIsNotShownToggle = false;
-		modalClass += " show";
-		StateHasChanged();
+		OnClose.InvokeAsync();
 	}
 
-	void CloseModal()
+	private void ButtonClickSelect(int value)
 	{
-		modalOpen = false;
-		ModalIsNotShownToggle = true;
-		modalClass = "modal";
-	}
-
-	private void ButtonClick(int value)
-	{
-		CloseModal();
 		OnSectionSelected.InvokeAsync(value);
 	}
 }

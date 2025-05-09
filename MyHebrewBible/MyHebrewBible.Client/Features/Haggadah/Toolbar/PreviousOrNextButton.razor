@@ -1,10 +1,36 @@
 ﻿@using MyHebrewBible.Client.Helpers
+@using MyHebrewBible.Client.Components.Toolbar
 
-<button type="button" class="btn @BtnOutlineColors.Primary @BtnSize.Md @Margin"
-				title="Section: @Section"
-				@onclick="ButtonClick">
-	<i class="@Icon"></i>
-</button>
+@if (Forward)
+{
+	if (Section < Enums.Content.List.Count)
+	{
+		<button type="button" class="btn @BtnOutlineColors.Primary @BtnSize.Md @Margin"
+						title="Section: @Section"
+						@onclick="ButtonClick">
+			<i class="@Icon"></i>
+		</button>
+	}
+	else
+	{
+		<OnEdgeButton />
+	}
+}
+else
+{
+	if (Section != 1)
+	{
+		<button type="button" class="btn @BtnOutlineColors.Primary @BtnSize.Md @Margin"
+						title="Section: @Section"
+						@onclick="ButtonClick">
+			<i class="@Icon"></i>
+		</button>
+	}
+	else
+	{
+		<OnEdgeButton />
+	}
+}
 
 @code {
 	[Parameter, EditorRequired] public int Section { get; set; }
