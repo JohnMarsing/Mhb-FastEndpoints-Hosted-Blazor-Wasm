@@ -2,13 +2,16 @@
 
 <div class="progress" style="height: 40px;">
 	<div class="progress-bar @BgAndText.Info" style='@GetProgressStyle()'>
-		<span class="fs-4 fw-bold">@GetProgressPercent()</span>
+		<span class="@SpanCSS">@GetProgressPercent()</span>
 	</div>
 </div>
 
 @code {
 
 	[Parameter, EditorRequired] public int Section { get; set; }
+	[Parameter, EditorRequired] public bool IsXsOrSm { get; set; }
+
+	protected string SpanCSS => IsXsOrSm ? "" : "fs-4 fw-bold";
 
 	protected string GetProgressStyle()
 	{

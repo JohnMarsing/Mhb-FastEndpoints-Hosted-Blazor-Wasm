@@ -1,11 +1,9 @@
 ﻿@page "/Haggadah"
 
-@using MyHebrewBible.Client.Features.Haggadah.Enums
 @using MyHebrewBible.Client.Features.Haggadah.Toolbar
 @using Page = MyHebrewBible.Client.Enums.Nav
 @using MyHebrewBible.Client.Layout
-@using MyHebrewBible.Client.Components.Toolbar
-@using MyHebrewBible.Client.Helpers
+@using MyHebrewBible.Client.Enums;
 
 @inject IToastService? Toast
 @inject ILogger<Index>? Logger
@@ -14,55 +12,45 @@
 
 <NavbarSkeleton>
 
-	<HomeButtonContent><HomeButton /></HomeButtonContent>
+	<JustifyStart><HomeButton /></JustifyStart>
 
-	<PrevButtonContent>
-		@if (Section != 1)
-		{
-			<PreviousOrNextButton Section="Section"
-														Forward=false
-														OnSectionSelected="ReturnedSection" />
-		}
-		else
-		{
-			<OnEdgeButton />
-		}
-	</PrevButtonContent>
+	<PrevButtonDiv>
+		<PreviousOrNextButton Section="Section"
+													Forward=false
+													OnSectionSelected="ReturnedSection" />
+	</PrevButtonDiv>
 
-	<ProgressBarContent>
-		<Progressbar Section="Section" />
-	</ProgressBarContent>
+	<ProgressBarDiv>
+		<div class="@MediaQuery.XsOrSm.DivClass">
+			<Progressbar Section="Section" IsXsOrSm=true />
+		</div>
+		<div class="@MediaQuery.MdOrLgOrXl.DivClass">
+			<Progressbar Section="Section" IsXsOrSm=false />
+		</div>
+	</ProgressBarDiv>
 
-	<NextButtonContent>
-		@if (Section < Enums.Content.List.Count)
-		{
-			<PreviousOrNextButton Section="Section"
-														Forward=true
-														OnSectionSelected="ReturnedSection" />
-		}
-		else
-		{
-			<OnEdgeButton />
-		}
-	</NextButtonContent>
+	<NextButtonDiv>
+		<PreviousOrNextButton Section="Section"
+													Forward=true
+													OnSectionSelected="ReturnedSection" />
+	</NextButtonDiv>
 
-	<RightMenuContent>
-		<RightMenuSkeleton OnSectionSelected="ReturnedSection">
-			<LanguageButtonsContent>
-				@foreach (var item in Enums.DisplayLanguage.List.OrderBy(o => o.Value))
-				{
-					<li class="dropdown-item">
-						<button @onclick="@(e => ReturnedMenuItem(item))"
-										type="button" class="btn btn-outline-primary">
-							@item.Title
-						</button>
-					</li>
-				}
-			</LanguageButtonsContent>
+	<JustifyEnd>
+		<RightMenuSkeleton>
+			<LanguageItems>
+				<LanguagePicker OnLanguageSelected="ReturnedLanguageMenuItem" />
+			</LanguageItems>
+			<TocButton>
+				<TableOfContentToggle OnOpen="FlipToggle" />
+			</TocButton>
 		</RightMenuSkeleton>
-	</RightMenuContent>
+	</JustifyEnd>
 
 </NavbarSkeleton>
+
+<ToCModal IsVisible="ShowTableOfContentModal"
+					OnSectionSelected="ReturnedSection"
+					OnClose="FlipToggle" />	/>
 
 <LoadingProgress>
 	<div class="mt-5">
@@ -94,6 +82,13 @@
 
 @code {
 	[CascadingParameter] public CascadingAppState? State { get; set; }
+
+	protected bool ShowTableOfContentModal = false;
+	private void FlipToggle()
+	{
+		ShowTableOfContentModal = !ShowTableOfContentModal;
+	}
+
 
 	protected int Section;
 	protected Enums.Content? CurrentContent;
@@ -161,7 +156,7 @@
 		}
 	}
 
-	private async Task ReturnedMenuItem(Enums.DisplayLanguage item)
+	private async Task ReturnedLanguageMenuItem(Enums.DisplayLanguage item)
 	{
 		Language = item;
 		await State!.AppState!.HaggadahState!.UpdateLanguage(item);
@@ -171,6 +166,7 @@
 	{
 		Section = section;
 		CurrentContent = Enums.Content.List.FirstOrDefault(w => w.Value == Section);
+		ShowTableOfContentModal = false;
 		SetDetail();
 		// save to local storage
 	}

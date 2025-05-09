@@ -9,39 +9,22 @@
 	<ul class="dropdown-menu">
 
 		<li class="fw-bold dropdown-header">Language</li>
-		
-		@LanguageButtonsContent
+			@LanguageItems
 
 		<li><hr class="dropdown-divider"></li>
 
+		<li class="fw-bold dropdown-header">Navigate</li>
+
 		<li class="dropdown-item">
-			<button type="button" class="btn btn-outline-primary" title="Table of Contents"
-							@onclick="ButtonClickShowTableOfContent">
-				Table of Content
-			</button>
+			@TocButton
 		</li>
 	</ul>
 
 </div>
 
-@if (ShowTableOfContentModal) { 
-	<ToCModal OnSectionSelected="ReturnedSection" />
-}
-
 @code {
-	[Parameter] public RenderFragment? LanguageButtonsContent { get; set; }
-	[Parameter, EditorRequired] public EventCallback<int> OnSectionSelected { get; set; }
-
-	protected bool ShowTableOfContentModal = false;
-	private void ButtonClickShowTableOfContent()
-	{
-		ShowTableOfContentModal = !ShowTableOfContentModal;
-	}
-
-	private void ReturnedSection(int section)
-	{
-		ShowTableOfContentModal = !ShowTableOfContentModal;
-		OnSectionSelected.InvokeAsync(section);
-	}
+	[Parameter, EditorRequired] public RenderFragment? LanguageItems { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? TocButton { get; set; }
+	
 }
 
