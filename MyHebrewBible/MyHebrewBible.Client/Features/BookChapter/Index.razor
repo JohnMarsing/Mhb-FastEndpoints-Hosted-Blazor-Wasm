@@ -4,7 +4,14 @@
 @using MyHebrewBible.Client.Layout
 @using MyHebrewBible.Client.Features.BookChapter.Toolbar;
 @using BookChapterConstants = MyHebrewBible.Client.Features.BookChapter.Constants
+
 @using NumberPad = MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad;
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad
+
+@using MyHebrewBible.Client.Components.Toolbar
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar.PreviousNext
+@using MyHebrewBible.Client.Enums
+
 
 @inject ILogger<Index>? Logger
 @inject NavigationManager NavigationManager
@@ -13,12 +20,74 @@
 <PageTitle>@PageTitle</PageTitle>
 
 <LoadingProgress>
+	<NavSkeleton>
 
-	<Navbar CurrentBookAndChapter="CurrentBookAndChapter"
-					OnBookAndChapterSelected="ReturnedBookAndChapter"
-					CurrentBCV="CurrentBCV"
-					OnBCVSelected="ReturnedBCV"
-					OnMenuItemSelected="ReturnedMenuItem" />
+		<JustifyStart>
+			<HomeDropdownSkeleton>
+				<Recent>
+					<RecentListPicker OnBCVSelected="ReturnedBCV" />
+				</Recent>
+				<Parashot>
+					<ParashotPicker OnBCVSelected="ReturnedBCV" />
+				</Parashot>
+			</HomeDropdownSkeleton>
+		</JustifyStart>
+
+		<PrevButtonDiv>
+			@if (CurrentBookAndChapter is not null)
+			{
+				@if (CurrentBookAndChapter!.BibleBook!.NavigationPrevious(CurrentBookAndChapter.Chapter).BibleBook is not null)
+				{
+					<PreviousOrNextButton BookAndChapter="CurrentBookAndChapter"
+																IsPrevious=true
+																OnBookAndChapterSelected="ReturnedBookAndChapter" />
+				}
+				else
+				{
+					<OnEdgeButton />
+				}
+			}
+			else
+			{
+				<text><span class="text-center fw-bold fst-italic">CurrentBookAndChapter is null</span></text>
+			}
+		</PrevButtonDiv>
+
+		<PickerDiv>
+			<div class="@MediaQuery.Xs.DivClass">
+				<Picker CurrentBCV="CurrentBCV" OnBCVSelected="ReturnedBCV" IsXs="true" />
+			</div>
+			<div class="@MediaQuery.SmOrMdOrLgOrXl.DivClass">
+				<Picker CurrentBCV="CurrentBCV" OnBCVSelected="ReturnedBCV" IsXs="false" />
+			</div>
+		</PickerDiv>
+
+		<NextButtonDiv>
+			@if (CurrentBookAndChapter is not null)
+			{
+				@if (CurrentBookAndChapter!.BibleBook!.NavigationNext(CurrentBookAndChapter.Chapter).BibleBook is not null)
+				{
+					<PreviousOrNextButton BookAndChapter="CurrentBookAndChapter"
+																IsPrevious=false
+																OnBookAndChapterSelected="ReturnedBookAndChapter" />
+				}
+				else
+				{
+					<OnEdgeButton />
+				}
+			}
+			else
+			{
+				<text><span class="text-center fw-bold fst-italic">CurrentBookAndChapter is null</span></text>
+			}
+		</NextButtonDiv>
+
+		<JustifyEnd>
+			<MenuTemplate Items="menuItems" OnItemSelected="ReturnedMenuItemId" />
+		</JustifyEnd>
+
+	</NavSkeleton>
+
 
 	<div class="mt-5">
 		<br />
@@ -115,7 +184,7 @@
 		return (null, null);
 	}
 
-	// Called by <Navbar> via <PreviousButton> & <NextButton>
+	// Called inside <NavSkeleton> by <PreviousOrNextButton>
 	private async Task ReturnedBookAndChapter(BookAndChapter bookAndChapter)
 	{
 		AbrvChapterVerse rec = new AbrvChapterVerse(bookAndChapter.BibleBook!.Abrv, bookAndChapter.Chapter, 1, true, 0);
@@ -129,7 +198,7 @@
 		PageTitle = GlobalEnums.BibleBookFormat.BC(bookAndChapter);
 	}
 
-	// Called by <Navbar> via <Picker>
+	// Called inside <NavSkeleton>, by <RecentListPicker>, <ParashotPicker> and <Picker>
 	private async Task ReturnedBCV(NumberPad.BookChapterVerse bcv)
 	{
 		AbrvChapterVerse rec = new AbrvChapterVerse(bcv.BibleBook!.Abrv, bcv.Chapter, bcv.Verse, false, 0);
@@ -142,24 +211,38 @@
 
 	protected bool ShowPageInstructionsModal = false;
 
-	private void ReturnedMenuItem(Enums.MenuItem item)
+
+	private List<Dictionary<int, string?>> menuItems = Enums.MenuItem.List
+				.Select(item => new Dictionary<int, string?> { { item.Value, item.Title } })
+				.ToList();
+	// Called inside <NavSkeleton> by <MenuTemplate>
+	private void ReturnedMenuItemId(int id)
 	{
-		if (item == Enums.MenuItem.Instructions)
+		if (Enums.MenuItem.TryFromValue(id, out Enums.MenuItem? item))
 		{
-			ShowPageInstructionsModal = !ShowPageInstructionsModal;
+			if (item == Enums.MenuItem.Instructions)
+			{
+				ShowPageInstructionsModal = !ShowPageInstructionsModal;
+			}
+			else
+			{
+				if (item == Enums.MenuItem.HideSAT)
+				{
+					Toast!.ShowInfo($"Menu item {item.Title} not implemented yet (◡︵◡)");
+				}
+				// else
+				// {
+				// 	Toast!.ShowWarning($"Menu item {item.Title} not implemented yet (◡︵◡)");
+				// }
+			}
 		}
 		else
 		{
-			if (item == Enums.MenuItem.HideSAT)
-			{
-				Toast!.ShowInfo($"Menu item {item.Title} not implemented yet (◡︵◡)");
-			}
-			// else
-			// {
-			// 	Toast!.ShowWarning($"Menu item {item.Title} not implemented yet (◡︵◡)");
-			// }	
+			Logger!.LogWarning("{Method}, Invalid MenuItem: {MenuItem}", nameof(ReturnedMenuItemId), id);
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(ReturnedMenuItemId)} {id}");
+			return;
 		}
 	}
-
 	// Ignore Spelling: bc, rec
 }
+
