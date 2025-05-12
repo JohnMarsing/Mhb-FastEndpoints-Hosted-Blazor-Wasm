@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <Folder Include="Features\AlephTav\Section\" />
+    <Folder Include="Features\BookChapter\Toolbar\PreviousNext\" />
     <Folder Include="Features\Translations\NGIHR\Enums\" />
     <Folder Include="State\BookChapter\" />
   </ItemGroup>

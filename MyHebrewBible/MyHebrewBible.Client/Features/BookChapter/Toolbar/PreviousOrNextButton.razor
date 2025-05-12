@@ -1,17 +1,35 @@
 ﻿@using MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Components.Toolbar
 
-<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
-	<button type="button" class="btn btn-outline-primary" title="@Title"
-					@onclick="ButtonClick">
-		<i class='@Icon'></i>
-	</button>
-</div>
-<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
-	<button type="button" class="btn btn-outline-primary" title="@Title"
-					@onclick="ButtonClick">
-		@GetButtonDisplay()
-	</button>
-</div>
+@if (BookAndChapter is not null)
+{
+	@if (!IsOnEdge)
+	{
+		<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+			<button type="button" class="btn btn-outline-primary" title="@Title"
+							@onclick="ButtonClick">
+				<i class='@Icon'></i>
+			</button>
+		</div>
+
+		<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+			<button type="button" class="btn btn-outline-primary" title="@Title"
+							@onclick="ButtonClick">
+				@ButtonDisplay
+			</button>
+		</div>
+	}
+	else
+	{
+		<OnEdgeButton />
+	}
+}
+else
+{
+	<!-- This should never happen because Index checks 	if (CurrentBookAndChapter is not null) -->
+	<text><span class="text-center fw-bold fst-italic">BookAndChapter is null</span></text>
+}
+
 
 @code {
 	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
@@ -25,7 +43,14 @@
 	private string Chapter => IsPrevious ? $"{Helper.HasNext}" : $"";
 	private string Title => IsPrevious ? "Previous" : "Next";
 
+	private bool IsOnEdge => IsPrevious
+		? BookAndChapter?.BibleBook?.NavigationPrevious(BookAndChapter.Chapter).BibleBook is null
+		: BookAndChapter?.BibleBook?.NavigationNext(BookAndChapter.Chapter).BibleBook is null;
+
 	MarkupString Text => (MarkupString)$"<sup>{bibleBookPrevOrNext!.ButtonText}</sup> ";
+
+	protected MarkupString ButtonDisplay =>
+		new MarkupString(IsPrevious ? $"{Text} <i class='{Icon}'></i>" : $"<i class='{Icon}'></i> {Text}");
 
 	BibleBookPrevNext? bibleBookPrevOrNext;
 
@@ -41,24 +66,9 @@
 		}
 	}
 
-	protected MarkupString GetButtonDisplay()
-	{
-		if (IsPrevious)
-		{
-			return (MarkupString)$"{Text} <i class='{Icon}'></i>";
-		}
-		else
-		{
-			return (MarkupString)$"<i class='{Icon}'></i> {Text}";
-		}
-	}
-
-
 
 	private void ButtonClick()
 	{
-		//BookAndChapter? bookAndChapter = new BookAndChapter(Previous!.BibleBook, Previous!.Chapter);
-		//BookAndChapter? bookAndChapter = new BookAndChapter(Next!.BibleBook, Next!.Chapter);
 		BookAndChapter? bookAndChapter = new BookAndChapter(bibleBookPrevOrNext!.BibleBook, bibleBookPrevOrNext!.Chapter);
 		OnBookAndChapterSelected.InvokeAsync(bookAndChapter);
 	}
