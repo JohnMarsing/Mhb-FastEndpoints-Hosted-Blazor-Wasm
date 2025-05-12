@@ -1,8 +1,10 @@
 ﻿@using MyHebrewBible.Client.Helpers
 
-<div class="btn-group-vertical @BtnGroupSize.Md dropstart" role="group" aria-label="Vertical button group">
+<div class="btn-group-vertical @BtnGroupSize.Md dropstart" 
+	role="group" aria-label="Vertical button group">
 
-	<button type="button" class="btn @BtnColors.Primary @BtnSize.Md dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+	<button type="button" class="btn @BtnColors.Primary @BtnSize.Md dropdown-toggle" 
+		data-bs-toggle="dropdown" aria-expanded="false">
 		<i class="fas fa-cogs"></i>
 	</button>
 
@@ -12,9 +14,7 @@
 			@LanguageItems
 
 		<li><hr class="dropdown-divider"></li>
-
 		<li class="fw-bold dropdown-header">Navigate</li>
-
 		<li class="dropdown-item">
 			@TocButton
 		</li>
@@ -25,6 +25,5 @@
 @code {
 	[Parameter, EditorRequired] public RenderFragment? LanguageItems { get; set; }
 	[Parameter, EditorRequired] public RenderFragment? TocButton { get; set; }
-	
 }
 

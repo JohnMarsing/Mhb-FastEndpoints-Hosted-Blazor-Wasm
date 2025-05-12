@@ -31,10 +31,10 @@
 <br />
 
 @code {
-	[Parameter] public RenderFragment? JustifyStart { get; set; }
-	[Parameter] public RenderFragment? PrevButtonDiv { get; set; }
-	[Parameter] public RenderFragment? ProgressBarDiv { get; set; }
-	[Parameter] public RenderFragment? NextButtonDiv { get; set; }
-	[Parameter] public RenderFragment? JustifyEnd { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? JustifyStart { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? PrevButtonDiv { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? ProgressBarDiv { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? NextButtonDiv { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? JustifyEnd { get; set; }
 
 }
