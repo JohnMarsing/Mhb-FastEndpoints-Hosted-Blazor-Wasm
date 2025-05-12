@@ -1,6 +1,4 @@
-﻿
-<nav class="navbar navbar-expand bg-primary-subtle fixed-top">
-
+﻿<nav class="navbar navbar-expand bg-primary-subtle fixed-top">
 	<div class="collapse navbar-collapse justify-content-start">
 		<div class="ps-1">
 			@JustifyStart
@@ -8,22 +6,16 @@
 	</div>
 
 	<div class="collapse navbar-collapse justify-content-center">
-
-		<!--  <div class="">...</div> -->
 		@PrevButtonDiv
-
 		<div class="px-1">
 			@PickerDiv
 		</div>
-
-		<!--  <div class="">...</div> -->
 		@NextButtonDiv
 	</div>
 
 	<div class="collapse navbar-collapse justify-content-end pe-1">
 		@JustifyEnd
 	</div>
-
 </nav>
 
 @code {
@@ -32,6 +24,4 @@
 	[Parameter, EditorRequired] public RenderFragment? PickerDiv { get; set; }
 	[Parameter, EditorRequired] public RenderFragment? NextButtonDiv { get; set; }
 	[Parameter, EditorRequired] public RenderFragment? JustifyEnd { get; set; }
-
-	//[Parameter, EditorRequired] public RenderFragment? JustifyCenter { get; set; }
 }
