@@ -10,7 +10,21 @@
 <nav class="navbar navbar-expand bg-primary-subtle fixed-top">
 
 	<div class="collapse navbar-collapse justify-content-start">
-		<div class="ps-1"><HomeDropdown RecentList="RecentList" OnBCVSelected="OnBCVSelected" /></div>
+		
+		@* <div class="ps-1"><HomeDropdown RecentList="RecentList" OnBCVSelected="OnBCVSelected" /></div> *@
+
+		<div class="ps-1">
+			<HomeDropdownSkeleton>
+				<Recent>
+					<RecentListPicker OnBCVSelected="ReturnedBCV" />
+				</Recent>
+				<Parashot>
+					<ParashotPicker OnBCVSelected="ReturnedBCV" />
+				</Parashot>
+			</HomeDropdownSkeleton>
+
+		</div>
+
 	</div>
 
 	@if (CurrentBookAndChapter is null)
@@ -78,7 +92,6 @@
 
 	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
 
-	protected List<BookChapterVerseHistory>? RecentList = new();
 
 	private List<Dictionary<int, string?>> menuItems = Enums.MenuItem.List
 				.Select(item => new Dictionary<int, string?> { { item.Value, item.Title } })
@@ -96,19 +109,6 @@
 			Logger!.LogWarning("{Method}, Invalid MenuItem: {MenuItem}", nameof(ReturnedMenuItemId), id);
 			Toast!.ShowError($"{Global.ToastShowError} {nameof(Navbar)}!{nameof(ReturnedMenuItemId)} {id}");
 			return;
-		}
-	}
-
-	protected override void OnParametersSet()
-	{
-		try
-		{
-			RecentList = CascadingAppState!.AppState!.BookChapterState!.GetBCVs();
-		}
-		catch (Exception ex)
-		{
-			Logger!.LogError(ex, "{Method}", nameof(OnInitialized));
-			Toast!.ShowError($"{Global.ToastShowError} {nameof(Navbar)}!{nameof(OnInitialized)}");
 		}
 	}
 

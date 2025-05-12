@@ -1,0 +1,66 @@
+﻿@using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
+@using TriennialEnum = MyHebrewBible.Client.Features.Parasha.Enums.Triennial
+@using NumberPadBCV = MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad
+
+@if (ParashaList is not null && ParashaList.Any())
+{
+	@foreach (var item in ParashaList)
+	{
+		<li class="dropdown-item">
+			<a @onclick="@(e => ButtonClick(item))">
+				@GlobalEnums.BibleBook.FromValue(item.BibleBookId).Abrv @item.Chapter:@item.Verse
+			</a>
+		</li>
+	}
+}
+else
+{
+	<li class="dropdown-item">--No Parasha--</li>
+}
+
+@code {
+	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+	[Parameter] public EventCallback<NumberPadBCV.BookChapterVerse> OnBCVSelected { get; set; }
+
+	private TriennialEnum? CurrentReading = ParashaEnums.Constants.GetCurrentReading();
+	protected List<BookChapterVerseHistory>? ParashaList = new();
+
+	//ToDo: Add a try catch block
+	protected override void OnInitialized()
+	{
+		PopulateParashaList();
+	}
+
+	protected void PopulateParashaList()
+	{
+		if (CurrentReading is null) return;
+
+		var (chapter, verse) = ParashaEnums.Helper.CalculateChapterAndVerse(CurrentReading.TorahVerse.BibleBook, CurrentReading.TorahVerse.BegId);
+
+		ParashaList!.Add(new BookChapterVerseHistory(CurrentReading.TorahVerse.BibleBook.Value, chapter, verse));
+
+		if (CurrentReading.HaftorahVerses is not null)
+		{
+			foreach (var item in CurrentReading.HaftorahVerses)
+			{
+				var (chapterH, verseH) = ParashaEnums.Helper.CalculateChapterAndVerse(item.BibleBook, item.BegId);
+				ParashaList!.Add(new BookChapterVerseHistory(item.BibleBook.Value, chapterH, verseH));
+			}
+		}
+
+		if (CurrentReading.BritVerses is not null)
+		{
+			foreach (var item in CurrentReading.BritVerses)
+			{
+				var (chapterB, verseB) = ParashaEnums.Helper.CalculateChapterAndVerse(item.BibleBook, item.BegId);
+				ParashaList!.Add(new BookChapterVerseHistory(item.BibleBook.Value, chapterB, verseB));
+			}
+		}
+	}
+
+	private async Task ButtonClick(BookChapterVerseHistory bcv)
+	{
+		await CascadingAppState!.AppState!.BookChapterState!.AddStoredAcvToBcvList();
+		await OnBCVSelected.InvokeAsync(new NumberPadBCV.BookChapterVerse(GlobalEnums.BibleBook.FromValue(bcv.BibleBookId), bcv.Chapter, bcv.Verse));
+	}
+}

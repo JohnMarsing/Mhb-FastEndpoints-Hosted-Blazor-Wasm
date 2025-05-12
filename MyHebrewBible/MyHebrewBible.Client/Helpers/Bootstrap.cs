@@ -54,6 +54,26 @@ public static class Display
 }	
 */
 
+//  <div class="btn-group-vertical @BtnGroupSize.Md dropstart" role="group" aria-label="Vertical button group">
+/*
+ ### RightMenuSkeleton
+ - uses `dropstart`
+ ```html
+<div class="btn-group-vertical @BtnGroupSize.Md dropstart" ...
+  <button type="button" class="btn @BtnColors.Primary @BtnSize.Md dropdown-toggle" data-bs-toggle="dropdown" ...
+		<i class="fas fa-cogs"></i>
+	</button>
+</div>
+```
+public static class DropdownDirection
+{
+	public const string End = ""; // <!-- Default dropend button -->
+	public const string Start = "dropstart"; // left
+	public const string Up = "dropup";
+	public const string Down = "dropdown";
+}	
+ */
+
 
 public static class TextColors
 {

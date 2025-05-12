@@ -1,0 +1,45 @@
+﻿@using NumberPadBCV = MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad
+
+@inject ILogger<RecentListPicker>? Logger
+@inject IToastService? Toast
+
+@if (RecentList is not null)
+{
+	@foreach (var item in RecentList)
+	{
+		<li class="dropdown-item">
+			<a @onclick="@(e => ButtonClick(item))">
+				@GlobalEnums.BibleBook.FromValue(item.BibleBookId).Abrv @item.Chapter:@item.Verse
+			</a>
+		</li>
+	}
+}
+else
+{
+	<li class="dropdown-item">--No Items--</li>
+}
+
+@code {
+	[Parameter] public EventCallback<NumberPadBCV.BookChapterVerse> OnBCVSelected { get; set; }
+	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; } /* Can this be done in NavBar?*/
+
+	protected List<BookChapterVerseHistory>? RecentList = new();
+	protected override void OnParametersSet()
+	{
+		try
+		{
+			RecentList = CascadingAppState!.AppState!.BookChapterState!.GetBCVs();
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(OnParametersSet));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(Navbar)}!{nameof(OnParametersSet)}");
+		}
+	}
+
+	private async Task ButtonClick(BookChapterVerseHistory bcv)
+	{
+		await CascadingAppState!.AppState!.BookChapterState!.AddStoredAcvToBcvList();
+		await OnBCVSelected.InvokeAsync(new NumberPadBCV.BookChapterVerse(GlobalEnums.BibleBook.FromValue(bcv.BibleBookId), bcv.Chapter, bcv.Verse));
+	}
+}
