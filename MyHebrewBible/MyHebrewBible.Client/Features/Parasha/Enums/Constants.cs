@@ -3,13 +3,11 @@ using MyHebrewBible.Client.Enums;
 
 namespace MyHebrewBible.Client.Features.Parasha.Enums;
 
-
 public static class ParashaFacts
 {
 	public const int FirstParashaId = 1;
 	public const int LastParashaId = 155;
 }
-
 
 public static class Constants
 {
@@ -18,6 +16,23 @@ public static class Constants
 	public static string PrevNextUrl(Triennial triennial)
 	{
 		return $"parasha/{triennial.Value}/{BibleBook.FromValue(triennial.TorahVerse.BibleBook).Abrv}_{triennial.TorahVerse.ChapterVerse.Replace("-", "-to-").Replace(":", "-")}";
+	}
+
+	public static Triennial? GetCurrentReading()
+	{
+		Triennial? _reading =
+				Triennial.List
+				.Where(w => w.Date == Constants.GetNextShabbatDate())
+				.SingleOrDefault();
+
+		if (_reading is not null)
+		{
+			return _reading;
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	public static string? GetUrl()
@@ -174,7 +189,7 @@ public static class Constants
 		DateTime nextSundayAt1AM = nextSunday.AddHours(1);
 		return nextSundayAt1AM;
 	}
-	
+
 	public static DateTime GetNextWeekday(DateTime start, DayOfWeek day)
 	{
 		// The (... + 7) % 7 ensures we end up with a value in the range [0, 6]

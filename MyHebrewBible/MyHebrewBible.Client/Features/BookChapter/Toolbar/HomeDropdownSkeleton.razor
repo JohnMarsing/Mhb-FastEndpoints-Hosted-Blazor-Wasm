@@ -1,0 +1,60 @@
+﻿@using MyHebrewBible.Client.Helpers
+@using Page = MyHebrewBible.Client.Enums.Nav
+@using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
+@using NumberPadBCV = MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad
+@using TriennialEnum = MyHebrewBible.Client.Features.Parasha.Enums.Triennial
+
+@inject NavigationManager NavigationManager
+
+@* 
+@using MyHebrewBible.Client.Layout
+<NavSkeleton>
+	<JustifyStart><HomeButton /></JustifyStart> 
+</NavSkeleton>
+*@
+
+<div class="btn-group " role="group" aria-label="Vertical button group">
+
+	<button @onclick="ButtonClickHome" class="btn btn-primary btn-md" title="@Page.Home.Title">
+		<i class="@Page.Home.Icon"></i>
+	</button>
+
+	<button type="button" class="btn btn-info btn-md dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+		<span class="visually-hidden">Toggle Dropdown</span>
+	</button>
+
+	<div class="btn-group-vertical @BtnGroupSize.Md " role="group" aria-label="Vertical button group">
+
+		<ul class="dropdown-menu">
+
+			<li class="fw-bold dropdown-header">Recent</li>
+			@Recent
+
+			<li><hr class="dropdown-divider"></li>
+
+			<li class="fw-bold dropdown-header">Parasha</li>
+
+			<li class="dropdown-item">
+				@Parashot
+			</li>
+		</ul>
+
+	</div>
+
+</div>
+
+
+@code {
+	[Parameter, EditorRequired] public RenderFragment? Recent { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? Parashot { get; set; }
+
+
+	private void ButtonClickHome()
+	{
+		//ToDo: Should I call await CascadingAppState!.AppState!.BookChapterState!.AddStoredAcvToBcvList();???
+		NavigationManager!.NavigateTo($"{Page.Home.Index}");
+	}
+
+
+}
+
