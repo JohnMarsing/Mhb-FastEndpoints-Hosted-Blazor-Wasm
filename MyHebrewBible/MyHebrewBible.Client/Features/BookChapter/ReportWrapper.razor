@@ -9,8 +9,8 @@
 
 <LoadingComponent IsLoading="verses==null || CurrentAbrvChapterVerse==null" TurnSpinnerOff="TurnSpinnerOff">
 	<Sections Verses="GetBookChapterVerses()"
-	AbrvChapterVerse="CurrentAbrvChapterVerse"
-	CalledBy="ReportEnums.CalledBy.BookChapter" />
+						AbrvChapterVerse="CurrentAbrvChapterVerse"
+						CalledBy="ReportEnums.CalledBy.BookChapter" />
 </LoadingComponent>
 
 @code {
@@ -44,7 +44,7 @@
 					}
 					else
 					{
-						CurrentAbrvChapterVerse = AbrvChapterVerse! with { ScriptureId = verses.First().ID }; 
+						CurrentAbrvChapterVerse = AbrvChapterVerse! with { ScriptureId = verses.First().ID };
 					}
 					//Logger!.LogInformation("{Method}, AbrvChapterVerse: {AbrvChapterVerse}", nameof(OnParametersSetAsync), AbrvChapterVerse);
 					await State!.AppState!.BookChapterState!.UpdateACV(CurrentAbrvChapterVerse!);

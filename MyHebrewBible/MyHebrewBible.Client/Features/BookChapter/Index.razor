@@ -189,8 +189,9 @@
 	private List<Dictionary<int, string?>> menuItems = Enums.MenuItem.List
 				.Select(item => new Dictionary<int, string?> { { item.Value, item.Title } })
 				.ToList();
+
 	// Called inside <NavSkeleton> by <MenuTemplate>
-	private void ReturnedMenuItemId(int id)
+	private async Task ReturnedMenuItemId(int id)
 	{
 		if (Enums.MenuItem.TryFromValue(id, out Enums.MenuItem? item))
 		{
@@ -200,14 +201,14 @@
 			}
 			else
 			{
-				if (item == Enums.MenuItem.HideSAT)
+				if (item == Enums.MenuItem.ToggleSplitMode)
 				{
-					Toast!.ShowInfo($"Menu item {item.Title} not implemented yet (◡︵◡)");
+					await State!.AppState!.BookChapterState!.ToggleSplitMode();
 				}
-				// else
-				// {
-				// 	Toast!.ShowWarning($"Menu item {item.Title} not implemented yet (◡︵◡)");
-				// }
+				else
+				{
+					Toast!.ShowWarning($"Menu item {item.Title} not implemented yet (◡︵◡)");
+				}
 			}
 		}
 		else
