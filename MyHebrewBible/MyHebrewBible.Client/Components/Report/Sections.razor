@@ -17,9 +17,9 @@
 		{
 			<div id="verse-@item.ID" tabindex="0" @onkeydown="HandleKeyDown">
 				<Paragraph BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
-				Verse="item"
-				ScrollToScriptureId="CurrentScrollToScriptureId"
-				OnVerseSelectedPassThrough="ReturnedVerse" />
+									 Verse="item"
+									 ScrollToScriptureId="CurrentScrollToScriptureId"
+									 OnVerseSelectedPassThrough="ReturnedVerse" />
 			</div>
 			@if (item.WordPartList!.Count() > 0)
 			{
@@ -33,47 +33,72 @@
 				<div class="card border-primary mt-2 mb-4">
 					<div class="card-header">
 						<CardHeader BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
-						BCV="@item!.BCV"
-						VerseNumber="item!.Verse"
-						Filter="Filter"
-						OnFilter="ReturnedFilter"
-						OnClose="ReturnedCloseEvent" />
+												BCV="@item!.BCV"
+												VerseNumber="item!.Verse"
+												IsSplitMode="IsSplitMode"
+												Filter="Filter"
+												OnFilter="ReturnedFilter"
+												OnClose="ReturnedCloseEvent" />
 					</div>
+
 					@if (IsSplitMode)
 					{
 						<div class="card-body">
-							<div class="d-flex justify-content-between">
-								<div class="px-1">
+
+							<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+								<ParagraphWithWordButtons ScriptureId="DrilldownScriptureId"
+																					WordSelected="CurrentWordSelected"
+																					OnWordSelected="ReturnedWord" />
+								<hr />
+								<HebrewParagraph ScriptureId="DrilldownScriptureId"
+																 WordSelected="CurrentWordSelected"
+																 OnWordSelected="ReturnedWord" />
+							</div>
+
+							<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+								<div class="d-flex justify-content-between">
 									<ParagraphWithWordButtons ScriptureId="DrilldownScriptureId"
-									OnWordSelected="ReturnedWord" />
-								</div>
-								<div class="px-1">
+																						WordSelected="CurrentWordSelected"
+																						OnWordSelected="ReturnedWord" />
+
 									<HebrewParagraph ScriptureId="DrilldownScriptureId"
-									WordSelected="CurrentWordSelected" />
+																	 WordSelected="CurrentWordSelected"
+																	 OnWordSelected="ReturnedWord" />
+
 								</div>
 							</div>
 						</div>
 
-						<HebrewTableFiltered ScriptureId="DrilldownScriptureId"
-						WordSelected="CurrentWordSelected" />
+						<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+							<HebrewTableFiltered ScriptureId="DrilldownScriptureId"
+																	 WordSelected="CurrentWordSelected" IsXs=true />
+
+						</div>
+						<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+							<HebrewTableFiltered ScriptureId="DrilldownScriptureId"
+																	 WordSelected="CurrentWordSelected" IsXs=false />
+
+						</div>
+
 					}
 					else
 					{
 						<div class="card-body">
 							<ParagraphWithWordButtons ScriptureId="DrilldownScriptureId"
-							OnWordSelected="ReturnedWord" />
+																				WordSelected="CurrentWordSelected"
+																				OnWordSelected="ReturnedWord" />
 						</div>
 
 						<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
 							<HebrewTable ScriptureId="DrilldownScriptureId"
-							Filter="Filter"
-							WordSelected="CurrentWordSelected" IsXs=true />
+													 Filter="Filter"
+													 WordSelected="CurrentWordSelected" IsXs=true />
 
 						</div>
 						<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
 							<HebrewTable ScriptureId="DrilldownScriptureId"
-							Filter="Filter"
-							WordSelected="CurrentWordSelected" IsXs=false />
+													 Filter="Filter"
+													 WordSelected="CurrentWordSelected" IsXs=false />
 
 						</div>
 
@@ -83,9 +108,9 @@
 			else
 			{
 				<Paragraph BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
-				Verse="item"
-				ScrollToScriptureId="CurrentScrollToScriptureId"
-				OnVerseSelectedPassThrough="ReturnedVerse" />
+									 Verse="item"
+									 ScrollToScriptureId="CurrentScrollToScriptureId"
+									 OnVerseSelectedPassThrough="ReturnedVerse" />
 			}
 		}
 	}
@@ -129,8 +154,8 @@ else
 		{
 			CurrentScrollToScriptureId = ScrollToScriptureId;
 		}
-		
-		IsSplitMode = State!.AppState!.BookChapterState!.GetSplitMode();	
+
+		IsSplitMode = State!.AppState!.BookChapterState!.GetSplitMode();
 
 		if (_firstRendered)
 		{

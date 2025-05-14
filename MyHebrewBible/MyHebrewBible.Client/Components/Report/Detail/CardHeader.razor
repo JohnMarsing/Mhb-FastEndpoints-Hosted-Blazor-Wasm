@@ -4,22 +4,20 @@
 
 <div class="d-flex justify-content-between">
 
-	<div class="px-1">
 		<button @onclick="ButtonClick"
 						type="button" class="mt-1 btn btn-outline-primary btn-sm" title="@BCV">
 			<i class="fas fa-chevron-up"></i>
 		</button>
-	</div>
-
-	<div class="px-1">
+	
 		<h5 class="card-title">
 			<BibleAnchor BLB="BLBEnum.WLC" BookAndChapter="BookAndChapter" Verse="VerseNumber" />
 		</h5>
-	</div>
-
-
+	
 	<div class="pe-1">
-		<FilterButton IsFiltered="Filter" OnFilter="OnFilterChanged" />
+		@if (!IsSplitMode)
+		{
+			<FilterButton IsFiltered="Filter" OnFilter="OnFilterChanged" />
+		}
 	</div>
 
 </div>
@@ -28,6 +26,7 @@
 	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
 	[Parameter, EditorRequired] public string? BCV { get; set; }
 	[Parameter, EditorRequired] public int VerseNumber { get; set; }
+	[Parameter, EditorRequired] public bool IsSplitMode { get; set; }
 	[Parameter, EditorRequired] public bool Filter { get; set; }
 	[Parameter] public EventCallback<bool> OnFilter { get; set; }
 	[Parameter] public EventCallback OnClose { get; set; }

@@ -4,26 +4,26 @@
 
 <LoadingComponent IsLoading="kjvWords==null" TurnSpinnerOff="TurnSpinnerOff">
 
-	<p class="fs-5">
+	<p class="fs-5 mb-1">
 		@foreach (var item in kjvWords!)
 		{
 			if (item.Strongs != 0)
 			{
 				if (item.WordCount != WordCount | WordCount == 0)
 				{
-					<span class="bg-info-subtle text-decoration-underline me-2"
-					@onclick="@(e => ButtonWordClick(item.Strongs, item.WordCount))">
+					<span class="@GetBgColor(item.Strongs, item.WordCount) me-2"
+							@onclick="@(e => ButtonWordClick(item.Strongs, item.WordCount))">
 						@item.Word
 					</span>
 				}
 				else
 				{
-					<span class="bg-warning-subtle me-2"> @item.Word</span>
+					<span class=" @GetBgColor(item.Strongs, item.WordCount) me-2"> @item.Word</span>
 				}
 			}
 			else
 			{
-				<span class="bg-dark-subtle text-black-50 me-2 "> @item.Word</span>
+				<span class=" @GetBgColor(item.Strongs, item.WordCount) text-black-50 me-2 "> @item.Word</span>
 			}
 		}
 	</p>
@@ -32,6 +32,7 @@
 
 @code {
 	[Parameter, EditorRequired] public int ScriptureId { get; set; }
+	[Parameter, EditorRequired] public WordSelected? WordSelected { get; set; }
 	[Parameter] public EventCallback<WordSelected?> OnWordSelected { get; set; }
 
 	protected bool TurnSpinnerOff = false;
@@ -55,6 +56,18 @@
 		}
 	}
 
+	protected string GetBgColor(int strongs, int wordCount)
+	{
+		if (WordSelected is null) return " bg-dark-subtle ";
+		if (strongs == 0) return " bg-dark-subtle ";
+		
+		//return " bg-warning-subtle ";
+
+		if (strongs == WordSelected.Strongs) {	return " bg-warning-subtle"; }
+		else { return " bg-info-subtle "; }
+	}
+
+
 	protected int WordCount = 0;
 	private void ButtonWordClick(int strongs, int wordCount)
 	{
@@ -62,7 +75,6 @@
 		WordCount = wordCount;
 		OnWordSelected.InvokeAsync(new WordSelected(strongs, wordCount));
 	}
-
-	// Ignore Spelling: Strongs
+	
 }
 
