@@ -8,8 +8,7 @@
 
 	<div class="mx-1">
 		<table class="@HeaderCSS">
-			<thead class="@TheadCSS">
-				@* <tr>@TableHeader</tr> *@
+			<thead class="table-light">
 				<tr>
 					<th class="">KJV</th>
 					<th class="">Transliteration</th>
@@ -19,7 +18,6 @@
 					{
 						<th class="">Strong&apos;s</th>
 					}
-					@* <th class="text-center text-danger"><i class="fas fa-exclamation"></i></th> *@
 				</tr>
 			</thead>
 			<tbody>
@@ -43,9 +41,8 @@
 							else
 							{
 								<td> <sup>@item.WordCount</sup></td>
-								<td class=""><small>@GlobalEnums.BibleAnchors.StrongsH_td(item.Strongs)</small></td>
+								<td class="">@GlobalEnums.BibleAnchors.StrongsH_td(item.Strongs)</td>
 							}
-
 						</tr>
 					}
 				}
@@ -67,7 +64,7 @@
 							else
 							{
 								<td> <sup>@item.WordCount</sup></td>
-								<td class=""><small>@GlobalEnums.BibleAnchors.StrongsH_td(item.Strongs)</small></td>
+								<td class="">@GlobalEnums.BibleAnchors.StrongsH_td(item.Strongs)</td>
 							}
 						</tr>
 					}
@@ -78,16 +75,6 @@
 	</div>
 
 </LoadingComponent>
-
-
-@* 
-	<td class="text-center">
-		<button type="button" class="mt-1 btn btn-outline-success btn-sm" title="Add hebrew to the MHB translation (•‿•)"
-						@onclick="@(e => ButtonAddClick(item.Hebrew1))">
-			<small><i class="fas fa-plus"></i></small>
-		</button>
-	</td>
- *@
 
 @code {
 
@@ -103,8 +90,6 @@
 	private List<WordPartByScriptureId>? hebrewWordsFilter = null;
 
 	protected string HeaderCSS => IsXs ? "table table-sm" : "table ";
-
-	public string TheadCSS { get; set; } = "table-light";
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -134,11 +119,5 @@
 			TurnSpinnerOff = true;
 		}
 	}
-
-	// private void ButtonAddClick(string hebrew)
-	// {
-	// 	Toast!.ShowWarning("Not yet implemented (◡︵◡)");
-	// 	//OnHebrewSelected.InvokeAsync(hebrew);
-	// }
 
 }

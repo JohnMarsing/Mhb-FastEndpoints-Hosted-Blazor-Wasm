@@ -6,31 +6,46 @@
 
 <LoadingComponent IsLoading="hebrewWords==null" TurnSpinnerOff="TurnSpinnerOff">
 
-	@if (hebrewWordsFilter is not null)
+	@if (hebrewWordsFilter is not null && hebrewWordsFilter.Any())
 	{
 		<table class="@HeaderCSS">
 			<thead class="table-light">
-				@* <tr>table-light</tr> *@
-				<tr>
+				<tr class="">
+					<th class=""></th> @* bump  *@
 					<th class="">KJV</th>
 					<th class="">Transliteration</th>
 					<th class=""><span class="float-end">Hebrew</span></th>
 					<th class="">#</th>
+					@if (!IsXs)
+					{
+						<th class="">Strong&apos;s</th>
+					}
+
 				</tr>
 			</thead>
 
 			<tbody>
 				@foreach (var item in hebrewWordsFilter!)
 				{
-					<tr class="@(item.Strongs != 0 && item.Strongs == WordSelected!.Strongs ? "table-success" : "")">
+					<tr class="table-success">
+						<td class=""></td>
 						<td class="">@item.KjvWord</td>
 						<td class=""><i>@item.Transliteration</i></td>
+
 						<td class="hebrew">
 							@((MarkupString)HebrewFormat.GetSpan(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3))
 							@HebrewFormat.CheckMaqqef(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3)
 						</td>
-						<td> <sup>@item.WordCount</sup></td>
-						<td class=""><small>@GlobalEnums.BibleAnchors.StrongsH_td(item.Strongs)</small></td>
+
+						@if (IsXs)
+						{
+							<td><sup>@GlobalEnums.BibleAnchors.StrongsH_td_Xs(item.Strongs, item.WordCount)</sup></td>
+						}
+						else
+						{
+							<td> <sup>@item.WordCount</sup></td>
+							<td class="">@GlobalEnums.BibleAnchors.StrongsH_td(item.Strongs)</td>
+						}
 					</tr>
 				}
 			</tbody>
@@ -41,11 +56,13 @@
 </LoadingComponent>
 
 @code {
+
 	[Parameter, EditorRequired] public int ScriptureId { get; set; }
 	[Parameter, EditorRequired] public WordSelected? WordSelected { get; set; }
+	[Parameter, EditorRequired] public bool IsXs { get; set; }
 
 	protected bool TurnSpinnerOff = false;
-	protected string HeaderCSS = "table table-sm";
+	protected string HeaderCSS => IsXs ? "table table-sm" : "table ";
 
 	//ToDo: I would be better if I can figure out how to have hebrewWords passed to me instead of making a call to the API
 	private ICollection<WordPartByScriptureId>? hebrewWords = null;
