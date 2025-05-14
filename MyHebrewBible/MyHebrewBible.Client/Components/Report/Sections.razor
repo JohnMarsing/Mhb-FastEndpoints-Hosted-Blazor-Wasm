@@ -17,9 +17,9 @@
 		{
 			<div id="verse-@item.ID" tabindex="0" @onkeydown="HandleKeyDown">
 				<Paragraph BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
-									 Verse="item"
-									 ScrollToScriptureId="CurrentScrollToScriptureId"
-									 OnVerseSelectedPassThrough="ReturnedVerse" />
+				Verse="item"
+				ScrollToScriptureId="CurrentScrollToScriptureId"
+				OnVerseSelectedPassThrough="ReturnedVerse" />
 			</div>
 			@if (item.WordPartList!.Count() > 0)
 			{
@@ -33,37 +33,59 @@
 				<div class="card border-primary mt-2 mb-4">
 					<div class="card-header">
 						<CardHeader BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
-												BCV="@item!.BCV"
-												VerseNumber="item!.Verse"
-												Filter="Filter"
-												OnFilter="ReturnedFilter"
-												OnClose="ReturnedCloseEvent" />
+						BCV="@item!.BCV"
+						VerseNumber="item!.Verse"
+						Filter="Filter"
+						OnFilter="ReturnedFilter"
+						OnClose="ReturnedCloseEvent" />
 					</div>
-					<div class="card-body">
-						<ParagraphWithWordButtons ScriptureId="DrilldownScriptureId"
-																			OnWordSelected="ReturnedWord" />
-					</div>
+					@if (IsSplitMode)
+					{
+						<div class="card-body">
+							<div class="d-flex justify-content-between">
+								<div class="px-1">
+									<ParagraphWithWordButtons ScriptureId="DrilldownScriptureId"
+									OnWordSelected="ReturnedWord" />
+								</div>
+								<div class="px-1">
+									<HebrewParagraph ScriptureId="DrilldownScriptureId"
+									WordSelected="CurrentWordSelected" />
+								</div>
+							</div>
+						</div>
 
-					<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
-						<HebrewTable ScriptureId="DrilldownScriptureId"
-												 Filter="Filter"
-												 WordSelected="CurrentWordSelected" IsXs=true />
+						<HebrewTableFiltered ScriptureId="DrilldownScriptureId"
+						WordSelected="CurrentWordSelected" />
+					}
+					else
+					{
+						<div class="card-body">
+							<ParagraphWithWordButtons ScriptureId="DrilldownScriptureId"
+							OnWordSelected="ReturnedWord" />
+						</div>
 
-					</div>
-					<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
-						<HebrewTable ScriptureId="DrilldownScriptureId"
-												 Filter="Filter"
-												 WordSelected="CurrentWordSelected" IsXs=false />
+						<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+							<HebrewTable ScriptureId="DrilldownScriptureId"
+							Filter="Filter"
+							WordSelected="CurrentWordSelected" IsXs=true />
 
-					</div>
+						</div>
+						<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+							<HebrewTable ScriptureId="DrilldownScriptureId"
+							Filter="Filter"
+							WordSelected="CurrentWordSelected" IsXs=false />
+
+						</div>
+
+					}
 				</div>
 			}
 			else
 			{
 				<Paragraph BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
-									 Verse="item"
-									 ScrollToScriptureId="CurrentScrollToScriptureId"
-									 OnVerseSelectedPassThrough="ReturnedVerse" />
+				Verse="item"
+				ScrollToScriptureId="CurrentScrollToScriptureId"
+				OnVerseSelectedPassThrough="ReturnedVerse" />
 			}
 		}
 	}
@@ -79,6 +101,8 @@ else
 	[Parameter] public int ScrollToScriptureId { get; set; }                // Used by Parasha!ReportWrapper (not BC)
 	[Parameter] public BC.AbrvChapterVerse? AbrvChapterVerse { get; set; } // Used by BC!ReportWrapper (not Parasha)
 	[CascadingParameter] public CascadingAppState? State { get; set; }
+
+	private bool IsSplitMode; // = false;
 
 	#region OnAfter-and-OnParameters
 	protected BC.AbrvChapterVerse? CurrentAbrvChapterVerse;
@@ -105,6 +129,9 @@ else
 		{
 			CurrentScrollToScriptureId = ScrollToScriptureId;
 		}
+		
+		IsSplitMode = State!.AppState!.BookChapterState!.GetSplitMode();	
+
 		if (_firstRendered)
 		{
 			await JSRuntime.InvokeVoidAsync(JS.SetFocusToElement, $"verse-{CurrentScrollToScriptureId}");

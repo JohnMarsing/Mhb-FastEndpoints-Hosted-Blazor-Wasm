@@ -11,14 +11,14 @@
 			{
 				if (item.WordCount != WordCount | WordCount == 0)
 				{
- 					<span class="bg-info-subtle text-decoration-underline me-2"
-								@onclick="@(e => ButtonWordClick(item.Strongs, item.WordCount))">
+					<span class="bg-info-subtle text-decoration-underline me-2"
+					@onclick="@(e => ButtonWordClick(item.Strongs, item.WordCount))">
 						@item.Word
 					</span>
 				}
 				else
 				{
-					<span class="bg-info-subtle me-2"> @item.Word</span>
+					<span class="bg-warning-subtle me-2"> @item.Word</span>
 				}
 			}
 			else
@@ -31,12 +31,11 @@
 </LoadingComponent>
 
 @code {
-
 	[Parameter, EditorRequired] public int ScriptureId { get; set; }
 	[Parameter] public EventCallback<WordSelected?> OnWordSelected { get; set; }
 
 	protected bool TurnSpinnerOff = false;
-
+	
 	private ICollection<WordPartKjv>? kjvWords = null;
 	protected override async Task OnParametersSetAsync()
 	{

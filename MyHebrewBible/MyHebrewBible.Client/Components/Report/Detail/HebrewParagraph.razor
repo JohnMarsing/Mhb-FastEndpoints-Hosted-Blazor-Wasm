@@ -1,0 +1,66 @@
+﻿@using MyHebrewBible.Client.Helpers
+
+@inject ApiClient Api
+@inject IToastService? Toast
+@inject ILogger<HebrewParagraph>? Logger
+
+<LoadingComponent IsLoading="hebrewWords==null" TurnSpinnerOff="TurnSpinnerOff">
+	<p dir="rtl">
+		@foreach (var item in hebrewWords!)
+		{
+			<sup><span class="text-muted fst-italic">@item.WordCount</span></sup>
+			<span class="hebrew @GetBgColor(item.Strongs, item.WordCount)">
+				@((MarkupString)HebrewFormat.GetSpan(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3))
+				@HebrewFormat.CheckMaqqef(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3)
+			</span>
+		}
+	</p>
+</LoadingComponent>
+
+@code {
+	[Parameter, EditorRequired] public int ScriptureId { get; set; }
+	[Parameter, EditorRequired] public WordSelected? WordSelected { get; set; }
+	//[Parameter, EditorRequired] public bool IsXs { get; set; }
+
+	protected bool TurnSpinnerOff = false;
+
+	//protected string HeaderCSS => IsXs ? "table table-sm" : "table ";
+	//protected string HeaderCSS = "table table-sm";
+	protected string HeaderCSS = "table ";
+
+	private ICollection<WordPartByScriptureId>? hebrewWords = null;
+	protected override async Task OnParametersSetAsync()
+	{
+		try
+		{
+			hebrewWords = await Api!.GetWordPartByScriptureIdAsync(ScriptureId);
+			//if (!hebrewWords.Any()) { Toast!.ShowWarning($"No records found for ScriptureId: {ScriptureId}"); }
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(OnParametersSetAsync));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(HebrewTable)}!{nameof(OnParametersSetAsync)}");
+		}
+		finally
+		{
+			TurnSpinnerOff = true;
+		}
+	}
+
+	protected string GetBgColor(int strongs, int wordCount)
+	{
+		if (WordSelected is null) return string.Empty;
+		if (strongs == 0) return string.Empty;
+
+		if (strongs== WordSelected.Strongs)
+		{
+			return " bg-warning-subtle";
+		}
+		else
+		{
+			return string.Empty;
+		}
+
+	}
+
+}

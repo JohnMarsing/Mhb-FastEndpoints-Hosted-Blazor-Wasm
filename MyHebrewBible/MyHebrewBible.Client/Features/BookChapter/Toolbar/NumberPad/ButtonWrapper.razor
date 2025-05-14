@@ -113,7 +113,6 @@
 
 	protected int SelectedVerse = 0; // ToDo: are you going to use this or not.
 	protected StepState? StepState { get; set; }
-	protected bool IsDebug = true; 
 
 	//	private ILogger? Logger;
 	//	protected override void OnInitialized() { Logger = LoggerFactory.CreateLogger($"{nameof(ButtonWrapper)}"); }
@@ -123,7 +122,6 @@
 	{
 		//StepState = new StepState(BibleBook);
 		StepState = new StepState(BibleBook, Logger!);
-		IsDebug = State!.AppState!.BookChapterState!.GetPickerDebug(); 
 	}
 
 	private void OnHundredNumberSelected(bool selection)

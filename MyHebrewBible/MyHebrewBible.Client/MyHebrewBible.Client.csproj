@@ -9,9 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\BookChapter\Toolbar\PreviousNext\**" />
     <Compile Remove="Features\VerseList\Enums\**" />
+    <Content Remove="Features\BookChapter\Toolbar\PreviousNext\**" />
     <Content Remove="Features\VerseList\Enums\**" />
+    <EmbeddedResource Remove="Features\BookChapter\Toolbar\PreviousNext\**" />
     <EmbeddedResource Remove="Features\VerseList\Enums\**" />
+    <None Remove="Features\BookChapter\Toolbar\PreviousNext\**" />
     <None Remove="Features\VerseList\Enums\**" />
   </ItemGroup>
 
@@ -33,7 +37,6 @@
 
   <ItemGroup>
     <Folder Include="Features\AlephTav\Section\" />
-    <Folder Include="Features\BookChapter\Toolbar\PreviousNext\" />
     <Folder Include="Features\Translations\NGIHR\Enums\" />
     <Folder Include="State\BookChapter\" />
   </ItemGroup>

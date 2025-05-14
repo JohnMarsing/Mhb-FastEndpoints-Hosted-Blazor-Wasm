@@ -8,13 +8,13 @@ public abstract class MenuItem : SmartEnum<MenuItem>
 	private static class Id
 	{
 		internal const int Instructions = 1;
-		internal const int HideSAT = 2;
+		internal const int ToggleSplitMode = 2;
 	}
 	#endregion
 
 	#region Declared Public Instances
 	public static readonly MenuItem Instructions = new InstructionsSE();
-	public static readonly MenuItem HideSAT = new HideSATSE();
+	public static readonly MenuItem ToggleSplitMode = new ToggleSplitModeSE();
 	#endregion
 
 	private MenuItem(string name, int value) : base(name, value)  // Constructor
@@ -38,9 +38,9 @@ public abstract class MenuItem : SmartEnum<MenuItem>
 		public override string Title => "Show Instructions";
 	}
 
-	private sealed class HideSATSE : MenuItem
+	private sealed class ToggleSplitModeSE : MenuItem
 	{
-		public HideSATSE() : base(nameof(HideSAT), Id.HideSAT) { }
-		public override string Title => "Hide Aleph Tav's";
+		public ToggleSplitModeSE() : base(nameof(ToggleSplitMode), Id.ToggleSplitMode) { }
+		public override string Title => "Toggle Split Mode";
 	}
 }

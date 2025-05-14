@@ -21,7 +21,7 @@ public class State
 	#endregion
 
 	private const string KeyACVId = "bc-abrv-chapter-verse-id";
-	private const string KeyPickerDebug = "bc-picker-debug";
+	private const string KeySplitMode = "bc-split-mode";
 	private const string KeyBcvList = "bc-bcv-list";
 
 
@@ -32,8 +32,8 @@ public class State
 	private AbrvChapterVerse _DefaultAbrvChapterVerse = new("Gen", 1, 1, true, 0); //"Gen", 1, 1, 1);
 	private AbrvChapterVerse? _AbrvChapterVerse = new("Gen", 1, 1, true, 0);  //"Gen", 1, 1, 1);
 
-	private bool _DefaultKeyPickerDebug = false;
-	private bool _PickerDebug = false;
+	private bool _DefaultSplitMode = false;
+	private bool _SplitMode = false;
 
 	private readonly List<BookChapterVerseHistory>? _DefaultBCVs =
 				[
@@ -59,16 +59,15 @@ public class State
 				await UpdateACV(_DefaultAbrvChapterVerse);
 			}
 
-			var pd = await localStorage!.GetItemAsync<bool?>(KeyPickerDebug);
-			if (pd is not null)
+			var sm = await localStorage!.GetItemAsync<bool?>(KeySplitMode);
+			if (sm is not null)
 			{
-				_PickerDebug = pd.Value;
-				//await TogglePickerDebug();
+				_SplitMode = sm.Value;
 			}
 			else
 			{
-				_PickerDebug = _DefaultKeyPickerDebug;
-				await TogglePickerDebug();
+				_SplitMode = _DefaultSplitMode;
+				await ToggleSplitMode();
 			}
 
 			_BCVs = await localStorage!.GetItemAsync<List<BookChapterVerseHistory>>(KeyBcvList);
@@ -100,15 +99,15 @@ public class State
 		NotifyStateHasChanged();
 	}
 
-	public bool GetPickerDebug()
+	public bool GetSplitMode()
 	{
-		return _PickerDebug!;
+		return _SplitMode!;
 	}
 
-	public async Task TogglePickerDebug()
+	public async Task ToggleSplitMode()
 	{
-		_PickerDebug = !_PickerDebug;
-		await localStorage!.SetItemAsync(KeyPickerDebug, _PickerDebug);
+		_SplitMode = !_SplitMode;
+		await localStorage!.SetItemAsync(KeySplitMode, _SplitMode);
 		NotifyStateHasChanged();
 	}
 

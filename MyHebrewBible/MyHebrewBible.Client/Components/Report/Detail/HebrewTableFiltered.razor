@@ -1,0 +1,81 @@
+﻿@using MyHebrewBible.Client.Helpers
+
+@inject ApiClient Api
+@inject IToastService? Toast
+@inject ILogger<HebrewTableFiltered>? Logger
+
+<LoadingComponent IsLoading="hebrewWords==null" TurnSpinnerOff="TurnSpinnerOff">
+
+	@if (hebrewWordsFilter is not null)
+	{
+		<table class="@HeaderCSS">
+			<thead class="table-light">
+				@* <tr>table-light</tr> *@
+				<tr>
+					<th class="">KJV</th>
+					<th class="">Transliteration</th>
+					<th class=""><span class="float-end">Hebrew</span></th>
+					<th class="">#</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				@foreach (var item in hebrewWordsFilter!)
+				{
+					<tr class="@(item.Strongs != 0 && item.Strongs == WordSelected!.Strongs ? "table-success" : "")">
+						<td class="">@item.KjvWord</td>
+						<td class=""><i>@item.Transliteration</i></td>
+						<td class="hebrew">
+							@((MarkupString)HebrewFormat.GetSpan(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3))
+							@HebrewFormat.CheckMaqqef(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3)
+						</td>
+						<td> <sup>@item.WordCount</sup></td>
+						<td class=""><small>@GlobalEnums.BibleAnchors.StrongsH_td(item.Strongs)</small></td>
+					</tr>
+				}
+			</tbody>
+
+		</table>
+	}
+
+</LoadingComponent>
+
+@code {
+	[Parameter, EditorRequired] public int ScriptureId { get; set; }
+	[Parameter, EditorRequired] public WordSelected? WordSelected { get; set; }
+
+	protected bool TurnSpinnerOff = false;
+	protected string HeaderCSS = "table table-sm";
+
+	//ToDo: I would be better if I can figure out how to have hebrewWords passed to me instead of making a call to the API
+	private ICollection<WordPartByScriptureId>? hebrewWords = null;
+	private List<WordPartByScriptureId>? hebrewWordsFilter = null;
+	protected override async Task OnParametersSetAsync()
+	{
+		try
+		{
+			hebrewWords = await Api!.GetWordPartByScriptureIdAsync(ScriptureId);
+			//if (!hebrewWords.Any()) { Toast!.ShowWarning($"No records found for ScriptureId: {ScriptureId}"); }
+			if (!hebrewWords.Any())
+			{
+				Toast!.ShowWarning($"No records found for ScriptureId: {ScriptureId}");
+			}
+			else
+			{
+				if (WordSelected!.Strongs != 0)
+				{
+					hebrewWordsFilter = hebrewWords.Where(w => w.Strongs == WordSelected!.Strongs).OrderBy(o => o.WordCount).ToList();
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(OnParametersSetAsync));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(HebrewTableFiltered)}!{nameof(OnParametersSetAsync)}");
+		}
+		finally
+		{
+			TurnSpinnerOff = true;
+		}
+	}
+}
