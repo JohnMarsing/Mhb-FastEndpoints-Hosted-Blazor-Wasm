@@ -4,99 +4,60 @@
 @inject IToastService? Toast
 @inject ILogger<HebrewTable>? Logger
 
-<LoadingComponent IsLoading="hebrewWords==null" TurnSpinnerOff="TurnSpinnerOff">
+<LoadingComponent IsLoading="items==null" TurnSpinnerOff="TurnSpinnerOff">
 
 	<div class="mx-1">
-		<table class="@HeaderCSS">
-			<thead class="table-light">
-				<tr>
-					<th class="">KJV</th>
-					<th class="">Transliteration</th>
-					<th class=""><span class="float-end">Hebrew</span></th>
-					<th class="">#</th>
-					@if (!IsXs)
-					{
-						<th class="">Strong&apos;s</th>
-					}
-				</tr>
-			</thead>
-			<tbody>
-
-				@if (Filter && hebrewWordsFilter is not null)
+		<TableTemplate Items="items!.ToList()" TheadCSS="table-secondary"
+									 RowClassSelector="@(item => item.Strongs == WordSelected!.Strongs ? "table-success" : "")">
+			<TableHeader>
+				<th class="">KJV</th>
+				<th class=""><i>Transliteration</i></th>
+				<th class=""><span class="float-end">Hebrew</span></th>
+				<th class="">#</th>
+				@if (!IsXs)
 				{
-					@foreach (var item in hebrewWordsFilter!)
-					{
-						<tr class="@(item.Strongs != 0 && item.Strongs == WordSelected!.Strongs ? "table-success" : "")">
-							<td class="">@item.KjvWord</td>
-							<td class=""><i>@item.Transliteration</i></td>
-							<td class="hebrew">
-								@((MarkupString)HebrewFormat.GetSpan(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3))
-								@HebrewFormat.CheckMaqqef(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3)
-							</td>
-
-							@if (IsXs)
-							{
-								<td><sup>@GlobalEnums.BibleAnchors.StrongsH_td_Xs(item.Strongs, item.WordCount)</sup></td>
-							}
-							else
-							{
-								<td> <sup>@item.WordCount</sup></td>
-								<td class="">@GlobalEnums.BibleAnchors.StrongsH_td(item.Strongs)</td>
-							}
-						</tr>
-					}
+					<th class="">Strong&apos;s</th>
+				}
+			</TableHeader>
+			<RowTemplate>
+				<td>@context.KjvWord</td>
+				<td>@context.Transliteration</td>
+				<td class="hebrew">
+					@((MarkupString)HebrewFormat.GetSpan(context.WordEnum, context.Hebrew1, context.Hebrew2, context.Hebrew3))
+					@HebrewFormat.CheckMaqqef(context.WordEnum, context.Hebrew1, context.Hebrew2, context.Hebrew3)
+				</td>
+				@if (IsXs)
+				{
+					<td><sup>@GlobalEnums.BibleAnchors.StrongsH_td_Xs(context.Strongs, context.WordCount)</sup></td>
 				}
 				else
 				{
-					@foreach (var item in hebrewWords!)
-					{
-						<tr class="@(item.Strongs != 0 && item.Strongs == WordSelected!.Strongs ? "table-success" : "")">
-							<td class="">@item.KjvWord</td>
-							<td class=""><i>@item.Transliteration</i></td>
-							<td class="hebrew">
-								@((MarkupString)HebrewFormat.GetSpan(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3))
-								@HebrewFormat.CheckMaqqef(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3)
-							</td>
-							@if (IsXs)
-							{
-								<td><sup>@GlobalEnums.BibleAnchors.StrongsH_td_Xs(item.Strongs, item.WordCount)</sup></td>
-							}
-							else
-							{
-								<td> <sup>@item.WordCount</sup></td>
-								<td class="">@GlobalEnums.BibleAnchors.StrongsH_td(item.Strongs)</td>
-							}
-						</tr>
-					}
-
+					<td> <sup>@context.WordCount</sup></td>
+					<td class="">@GlobalEnums.BibleAnchors.StrongsH_td(context.Strongs)</td>
 				}
-			</tbody>
-		</table>
+			</RowTemplate>
+		</TableTemplate>
 	</div>
 
 </LoadingComponent>
 
 @code {
-
 	[Parameter, EditorRequired] public int ScriptureId { get; set; }
 	[Parameter, EditorRequired] public WordSelected? WordSelected { get; set; }
 	[Parameter, EditorRequired] public bool Filter { get; set; }
 	[Parameter, EditorRequired] public bool IsXs { get; set; }
 
-	protected bool TurnSpinnerOff = false;
-
-	private ICollection<WordPartByScriptureId>? hebrewWords = null;
-
-	private List<WordPartByScriptureId>? hebrewWordsFilter = null;
-
 	protected string HeaderCSS => IsXs ? "table table-sm" : "table ";
+
+	protected bool TurnSpinnerOff = false;
+	protected IQueryable<WordPartByScriptureId>? items;
 
 	protected override async Task OnParametersSetAsync()
 	{
+		ICollection<WordPartByScriptureId>? hebrewWords;
 		try
 		{
 			hebrewWords = await Api!.GetWordPartByScriptureIdAsync(ScriptureId);
-			//if (!hebrewWords.Any()) { Toast!.ShowWarning($"No records found for ScriptureId: {ScriptureId}"); }
 			if (!hebrewWords.Any())
 			{
 				Toast!.ShowWarning($"No records found for ScriptureId: {ScriptureId}");
@@ -105,8 +66,13 @@
 			{
 				if (Filter && WordSelected!.Strongs != 0)
 				{
-					hebrewWordsFilter = hebrewWords.Where(w => w.Strongs == WordSelected!.Strongs).OrderBy(o => o.WordCount).ToList();
+					items = hebrewWords.AsQueryable().Where(w => w.Strongs == WordSelected.Strongs).OrderBy(o => o.WordCount);
 				}
+				else
+				{
+					items = hebrewWords.AsQueryable().OrderBy(o => o.WordCount);
+				}
+				//Logger!.LogInformation("{Method}; RowCnt: {RowCnt}", nameof(OnParametersSetAsync), items.Count());
 			}
 		}
 		catch (Exception ex)

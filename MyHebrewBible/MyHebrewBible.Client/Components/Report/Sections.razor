@@ -69,16 +69,17 @@
 							</div>
 						</div>
 
-						<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
-							<HebrewTableFiltered ScriptureId="DrilldownScriptureId"
-																	 WordSelected="CurrentWordSelected" IsXs=true />
-
-						</div>
-						<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
-							<HebrewTableFiltered ScriptureId="DrilldownScriptureId"
-																	 WordSelected="CurrentWordSelected" IsXs=false />
-
-						</div>
+						@if (CurrentWordSelected is not null && CurrentWordSelected.WordCount != 0)
+						{
+							<div class="@GlobalEnums.MediaQuery.Xs.DivClass">
+								<HebrewTableFiltered ScriptureId="DrilldownScriptureId"
+																		 WordSelected="CurrentWordSelected" IsXs=true />
+							</div>
+							<div class="@GlobalEnums.MediaQuery.SmOrMdOrLgOrXl.DivClass">
+								<HebrewTableFiltered ScriptureId="DrilldownScriptureId"
+																		 WordSelected="CurrentWordSelected" IsXs=false />
+							</div>
+						}
 
 					}
 					else
