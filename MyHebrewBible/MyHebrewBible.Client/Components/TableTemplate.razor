@@ -13,7 +13,9 @@ else
 		<tbody>
 			@foreach (var item in Items)
 			{
-				<tr class="@TRCSS">@RowTemplate!(item)</tr> @* How do I bass in a boolean to show which rows to color? *@
+				<tr class="@(RowClassSelector != null ? RowClassSelector(item) : TRCSS)">
+					@RowTemplate!(item)
+				</tr>
 			}
 		</tbody>
 		<tfoot>
@@ -27,8 +29,9 @@ else
 	[Parameter] public RenderFragment<TItem>? RowTemplate { get; set; }
 	[Parameter] public IReadOnlyList<TItem>? Items { get; set; }
 	[Parameter] public string HeaderCSS { get; set; } = "table ";
-	[Parameter] public string TheadCSS { get; set; } = ""; // table-dark | table-light
-	[Parameter] public string TRCSS { get; set; } = ""; // table-success | "table-danger
+	[Parameter] public string TheadCSS { get; set; } = ""; 
+	[Parameter] public string TRCSS { get; set; } = ""; 
+	[Parameter] public Func<TItem, string>? RowClassSelector { get; set; } // allow per-row CSS class logic.
 	[Parameter] public RenderFragment? TableFooter { get; set; }
 	[Parameter] public string TableFooterColor { get; set; } = "";
 }
