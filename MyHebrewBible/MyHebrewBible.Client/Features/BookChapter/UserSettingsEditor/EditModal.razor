@@ -1,0 +1,125 @@
+﻿@using MyHebrewBible.Client.Helpers
+
+@inject ILogger<EditModal>? Logger
+@inject IToastService? Toast
+
+@if (ModalIsNotShownToggle)
+{
+	<button type="button" class="btn @BtnOutlineColors.Primary @BtnSize.Sm float-end"
+					@onclick="() => ShowModal()">
+		<i class="fas fa-users-cog"></i>
+	</button>
+}
+else
+{
+	<div class="@modalClass" style="display:@(modalOpen ? "block" : "none");">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header @BgAndText.Warning">
+					<p class="fs-5 text-center">Edit User Settings <sup>@IntCurrentPermutations</sup> </p>
+					<button type="button" class="btn-close" @onclick="CloseModal"></button>
+				</div>
+
+				<div class="modal-body">
+
+						@foreach (var item in Enums.UserSetting.List.OrderBy(o => o.Value))
+						{
+							<div class="d-flex justify-content-end mb-3">
+								<span class="fs-5 mt-2 me-1">@item.Title</span>
+
+								<button class="btn @BtnSize.Lg"
+										@onclick="() => ToggleClick(item)"
+										title="@item.Value | @((int)item.OnState)" type="button">
+									<i class="@GetIcon(item) @Icon.Size.TwoX"></i>
+								</button>
+
+							</div>
+						}
+					
+
+				</div> <!-- modal-body -->
+
+				<div class="modal-footer bg-light">
+					<button @onclick="ButtonClickSetToDefault" 
+						class="btn @BtnColors.Primary @BtnSize.Lg"	title="Set to Default" type="button">
+						Default
+					</button>
+				</div>
+
+			</div>  <!-- modal-content -->
+		</div> <!-- modal-dialog -->
+	</div> <!-- modalClass -->
+}
+
+@code {
+	[CascadingParameter] public CascadingAppState? State { get; set; }
+
+	private int IntCurrentPermutations = 0;
+
+
+	protected Enums.Permutation CurrentPermutations;
+	protected override void OnParametersSet()
+	{
+		try
+		{
+			CurrentPermutations = (Enums.Permutation)State!.AppState!.BookChapterState!.GetUserSetting();
+			IntCurrentPermutations = (int)CurrentPermutations;
+			Logger!.LogInformation("{Method}; CurrentPermutations: {int}=>{CurrentPermutations}"
+			, nameof(OnParametersSet), (int)CurrentPermutations, CurrentPermutations);
+		}
+		catch (Exception ex)
+		{
+			Logger!.LogError(ex, "{Method}", nameof(OnParametersSet));
+			Toast!.ShowError($"{Global.ToastShowError} {nameof(EditModal)}!{nameof(OnParametersSet)}");
+		}
+	}
+
+	private async Task  ToggleClick(Enums.UserSetting userSetting)
+	{
+		if (CurrentPermutations.HasFlag(userSetting.OnState))
+		{ 
+			CurrentPermutations &= ~userSetting.OnState; // remove the flag
+		}
+		else
+		{
+			CurrentPermutations |= userSetting.OnState; // add the flag
+		}	
+		await State!.AppState!.BookChapterState!.UpdateUserSetting(CurrentPermutations);
+		IntCurrentPermutations = (int)CurrentPermutations;
+	}
+
+	private async Task ButtonClickSetToDefault()
+	{
+		CurrentPermutations = Enums.UserSetting.AntiDefault;
+		await State!.AppState!.BookChapterState!.UpdateUserSetting(CurrentPermutations);
+		CloseModal();
+	}
+	
+	protected string GetIcon(Enums.UserSetting userSetting)
+	{
+		return CurrentPermutations.HasFlag(userSetting.OnState) ? Icon.Toggle.On : Icon.Toggle.Off;
+	}
+
+	#region Modal Code
+	bool ModalIsNotShownToggle = true;
+	bool modalOpen = false;
+
+	string modalClass = "modal";
+
+	void ShowModal()
+	{
+		modalOpen = true;
+		ModalIsNotShownToggle = false;
+		modalClass += " show";
+		StateHasChanged();
+	}
+
+	void CloseModal()
+	{
+		modalOpen = false;
+		ModalIsNotShownToggle = true;
+		modalClass = "modal";
+	}
+	#endregion
+}

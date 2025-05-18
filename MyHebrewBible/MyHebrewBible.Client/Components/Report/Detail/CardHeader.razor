@@ -1,12 +1,13 @@
 ﻿@using BLBEnum=MyHebrewBible.Client.Enums.BLB
+@using MyHebrewBible.Client.Helpers
 
 @* @inject IToastService? Toast *@
 
 <div class="d-flex justify-content-between">
 
 		<button @onclick="ButtonClick"
-						type="button" class="mt-1 btn btn-outline-primary btn-sm" title="@BCV">
-			<i class="fas fa-chevron-up"></i>
+					type="button" class="mt-1 btn @BtnOutlineColors.Primary @BtnSize.Sm" title="@BCV">
+			<i class="@Icon.Chevron.Up"></i>
 		</button>
 	
 		<h5 class="card-title">

@@ -156,7 +156,7 @@ else
 			CurrentScrollToScriptureId = ScrollToScriptureId;
 		}
 
-		IsSplitMode = State!.AppState!.BookChapterState!.GetSplitMode();
+		IsSplitMode = ((BC.Enums.Permutation)State!.AppState!.BookChapterState!.GetUserSetting()).HasFlag(BC.Enums.Permutation.HebrewShownOnTheSide);
 
 		if (_firstRendered)
 		{
