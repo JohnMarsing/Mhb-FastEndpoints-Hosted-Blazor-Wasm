@@ -3,6 +3,7 @@
 @using MyHebrewBible.Client.Features.Lists.Components
 
 @using Page = MyHebrewBible.Client.Features.Lists.MenuItemConstants.PeopleKilled
+@using MyHebrewBible.Client.Helpers
 
 <PageHeader PageEnum="@MyHebrewBible.Client.Enums.Nav.BibleList" PageTitle="@Page.Title" />
 <SubNavBar ActiveMenuItem="@MenuItems.PeopleKilled" />
@@ -26,8 +27,8 @@
 		</div>
 		<div class="col-6 ">
 			<button @onclick="PeopleKilledToggleButtonClick"
-							class="btn btn-outline-primary float-end">
-				<i class='@Icon'></i> @Opposite
+							class="btn @BtnOutlineColors.Primary float-end">
+				<i class=@Icon.Toggle.Get(ParentShowAll)></i> @Opposite
 			</button>
 			
 		</div>
@@ -43,7 +44,7 @@
 	bool ParentShowAll { get; set; } = false;
 
 	private string Title => ParentShowAll ? "All people" : "Only people in the wilderness";
-	private string Icon => ParentShowAll ? "fas fa-toggle-on" : "fas fa-toggle-off";
+
 	private string Opposite => ParentShowAll ? "Show in the wilderness only" : "Show All";
 
 	void PeopleKilledToggleButtonClick()

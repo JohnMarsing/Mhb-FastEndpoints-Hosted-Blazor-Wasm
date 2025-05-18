@@ -2,6 +2,7 @@
 using MyHebrewBible.Client.State;
 using GlobalEnums = MyHebrewBible.Client.Enums;
 using MyHebrewBible.Client.Features.BookChapter.Toolbar;
+using MyHebrewBible.Client.Features.BookChapter.Enums;
 
 namespace MyHebrewBible.Client.Features.BookChapter;
 
@@ -21,9 +22,8 @@ public class State
 	#endregion
 
 	private const string KeyACVId = "bc-abrv-chapter-verse-id";
-	private const string KeySplitMode = "bc-split-mode";
 	private const string KeyBcvList = "bc-bcv-list";
-
+	private const string KeyUserSetting = "bc-user-setting-permutation";
 
 	private bool _isInitialized;
 	private void NotifyStateHasChanged() => OnChange?.Invoke();
@@ -32,8 +32,8 @@ public class State
 	private AbrvChapterVerse _DefaultAbrvChapterVerse = new("Gen", 1, 1, true, 0); //"Gen", 1, 1, 1);
 	private AbrvChapterVerse? _AbrvChapterVerse = new("Gen", 1, 1, true, 0);  //"Gen", 1, 1, 1);
 
-	private bool _DefaultSplitMode = false;
-	private bool _SplitMode = false;
+	//private Permutation = Enums.UserSetting.DefaultUserSetting;
+	private int _UserSetting;
 
 	private readonly List<BookChapterVerseHistory>? _DefaultBCVs =
 				[
@@ -59,15 +59,19 @@ public class State
 				await UpdateACV(_DefaultAbrvChapterVerse);
 			}
 
-			var sm = await localStorage!.GetItemAsync<bool?>(KeySplitMode);
-			if (sm is not null)
+			var us = await localStorage!.GetItemAsync<string>(KeyUserSetting);
+			if (us is null)
 			{
-				_SplitMode = sm.Value;
+			  //Logger!.LogWarning("... us is null, using {Default}, calling {UserSetting}", UserSetting.Default, nameof(UserSetting));
+				await UpdateUserSetting(UserSetting.Default); 
 			}
 			else
 			{
-				_SplitMode = _DefaultSplitMode;
-				await ToggleSplitMode();
+				bool _success = int.TryParse(us, out _UserSetting);
+				if (!_success)
+				{
+					await UpdateUserSetting(UserSetting.Default);
+				}
 			}
 
 			_BCVs = await localStorage!.GetItemAsync<List<BookChapterVerseHistory>>(KeyBcvList);
@@ -85,6 +89,7 @@ public class State
 		}
 	}
 
+
 	public AbrvChapterVerse GetACV()
 	{
 		//Logger!.LogInformation("{Method}, _AbrvChapterVerse: {AbrvChapterVerse}", "Get", _AbrvChapterVerse);
@@ -99,15 +104,17 @@ public class State
 		NotifyStateHasChanged();
 	}
 
-	public bool GetSplitMode()
+	public int GetUserSetting()
 	{
-		return _SplitMode!;
+		//Logger!.LogInformation("{Method}, permutation: {permutation}", nameof(Get), _permutation); // DEBUG 
+		return _UserSetting;
 	}
 
-	public async Task ToggleSplitMode()
+	public async Task UpdateUserSetting(Permutation permutation)
 	{
-		_SplitMode = !_SplitMode;
-		await localStorage!.SetItemAsync(KeySplitMode, _SplitMode);
+		await localStorage!.SetItemAsync(KeyUserSetting, (int)permutation);
+		_UserSetting = (int)permutation;
+		//Logger!.LogError("{Method}, permutation: {permutation}", nameof(UpdateUserSetting), permutation);
 		NotifyStateHasChanged();
 	}
 

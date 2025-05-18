@@ -1,16 +1,17 @@
-﻿<button @onclick="Toggle" class="@GetButtonClass() btn-md" title="@GetTitle()">
-	<i class='@GetIcon()'></i>
+﻿@using MyHebrewBible.Client.Helpers
+
+<button @onclick="ButtonClick" class="btn @GetButtonClass() @BtnSize.Md" title="@GetTitle()">
+	<i class='@Icon.Toggle.Get(IsFiltered)'></i>
 </button>
 
 @code {
 	[Parameter, EditorRequired] public bool IsFiltered { get; set; }
 	[Parameter] public EventCallback<bool> OnFilter { get; set; }
 
-	protected string GetIcon() => IsFiltered ? " fas fa-toggle-on" : " fas fa-toggle-off";
-	protected string GetButtonClass() => IsFiltered ? "btn btn-success" : "btn btn-outline-secondary";
+	protected string GetButtonClass() => IsFiltered ? BtnColors.Success : BtnOutlineColors.Secondary;
 	protected string GetTitle() => IsFiltered ? "  Filtering" : "  Not filtering";
 
-	protected void Toggle()
+	protected void ButtonClick()
 	{
 		IsFiltered = !IsFiltered;
 		OnFilter.InvokeAsync(IsFiltered);

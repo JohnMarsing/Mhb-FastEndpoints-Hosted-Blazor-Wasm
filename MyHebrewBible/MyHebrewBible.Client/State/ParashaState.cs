@@ -35,7 +35,7 @@ public class ParashaState
 		if (!_isInitialized)
 		{
 			var s = await localStorage!.GetItemAsync<string>(Key);
-			if (s == null)
+			if (s is null)
 			{
 				//Logger!.LogWarning("... s is null, using {defaultPermutation}, calling {Update}", defaultPermutation, nameof(Update));
 				await Update(defaultPermutation);

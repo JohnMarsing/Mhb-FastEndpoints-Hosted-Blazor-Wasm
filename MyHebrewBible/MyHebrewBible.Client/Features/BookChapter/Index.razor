@@ -1,10 +1,10 @@
 ﻿@page "/bookchapter/{Abrv}/{Chapter:int}/{Verse:int=1}/{ScriptureId:int=0}/"
 
-@using MyHebrewBible.Client.Features.BookChapter
 @using MyHebrewBible.Client.Layout
-@using MyHebrewBible.Client.Features.BookChapter.Toolbar;
+@using MyHebrewBible.Client.Features.BookChapter.Toolbar
+@using MyHebrewBible.Client.Features.BookChapter.UserSettingsEditor
 @using BookChapterConstants = MyHebrewBible.Client.Features.BookChapter.Constants
-@using NumberPad = MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad;
+@using NumberPad = MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad
 @using MyHebrewBible.Client.Features.BookChapter.Toolbar.NumberPad
 @using MyHebrewBible.Client.Components.Toolbar
 @using MyHebrewBible.Client.Enums
@@ -58,6 +58,7 @@
 
 		<JustifyEnd>
 			<MenuTemplate Items="menuItems" OnItemSelected="ReturnedMenuItemId" />
+			<EditModal />
 		</JustifyEnd>
 
 	</NavSkeleton>
@@ -191,7 +192,7 @@
 				.ToList();
 
 	// Called inside <NavSkeleton> by <MenuTemplate>
-	private async Task ReturnedMenuItemId(int id)
+	private void ReturnedMenuItemId(int id)
 	{
 		if (Enums.MenuItem.TryFromValue(id, out Enums.MenuItem? item))
 		{
@@ -201,14 +202,7 @@
 			}
 			else
 			{
-				if (item == Enums.MenuItem.ToggleSplitMode)
-				{
-					await State!.AppState!.BookChapterState!.ToggleSplitMode();
-				}
-				else
-				{
-					Toast!.ShowWarning($"Menu item {item.Title} not implemented yet (◡︵◡)");
-				}
+				Toast!.ShowWarning($"Menu item {item.Title} not implemented yet (◡︵◡)");
 			}
 		}
 		else

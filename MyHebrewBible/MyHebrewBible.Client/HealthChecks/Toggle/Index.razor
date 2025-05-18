@@ -12,13 +12,13 @@
 			</div>
 			<div>
 				<p>
-					<button class="btn @BtnColors.Warning @ButtonSize" @onclick="ButtonClicked" title="">
+					<button class="btn @BtnColors.Warning @BtnSize.Lg" @onclick="ButtonClicked" title="">
 						@if (ShowToggleIcon)
 						{
-						<i class="fas @ToggleIcon  @IconSize"></i>
+							<i class="@Icon.Toggle.Get(isOn:ToggleValue) @Icon.Size.TwoX"></i>
 						}
-						<span class="@ButtonFontSize">@ButtonText</span>
-						<i class="fas @ChevronIcon @IconSize"></i>
+						<span class="fs-4">@ButtonText</span>
+						<i class="@Icon.Chevron.Get(isDown:ChevronValue) @Icon.Size.TwoX"></i>
 					</button>
 				</p>
 			</div>
@@ -35,16 +35,16 @@
 			<h5>Toggle</h5>
 			<p class="ps-2">
 				The <i>toggle</i> paradigm reflects the <b>current</b> <i>state</i><br />
-				Toggle Is <b>Off</b> <i class="fas fa-toggle-off fa-2x"></i> means Show<i>ing</i> <b>Less</b><br />
-				Toggle Is <b>On</b> <i class="fas fa-toggle-on fa-2x"></i> means Show<i>ing</i> <b>More</b><br />
+				Toggle Is <b>Off</b> <i class="@Icon.Toggle.Off @Icon.Size.TwoX"></i> means Show<i>ing</i> <b>Less</b><br />
+				Toggle Is <b>On</b> <i class="@Icon.Toggle.On @Icon.Size.TwoX"></i> means Show<i>ing</i> <b>More</b><br />
 				The toggle is an indicator of what the state <b>currently IS</b>
 			</p>
 
 			<h5>Chevron</h5>
 			<p class="ps-2">
 				The <i>chevron</i> paradigm reflects what the <i>state</i> <b>could be</b> (which would be the opposite of what it currently is.)<br />
-				Chevron Is <b>Down</b> <i class="fas fa-chevron-down fa-2x"></i> means change the state to Show <b>More</b><br />
-				Chevron Is <b>Up</b> <i class="fas fa-chevron-up fa-2x"></i> means change the state to Show <b>Less</b><br />
+				Chevron Is <b>Down</b> <i class="@Icon.Chevron.Down @Icon.Size.TwoX"></i> means change the state to Show <b>More</b><br />
+				Chevron Is <b>Up</b> <i class="@Icon.Chevron.Up  @Icon.Size.TwoX"></i> means change the state to Show <b>Less</b><br />
 				The Chevron is an indicator of what the current state <b>could BE</b>
 			</p>
 
@@ -56,20 +56,16 @@
 
 @code {
 	bool ToggleValue = false;
-	bool SizeLarge = false;
+	bool ChevronValue = false;
 	bool ShowToggleIcon = false;
 
-	private string ToggleIcon => ToggleValue ? " fa-toggle-on" : " fa-toggle-off";
 	private string ButtonText => ToggleValue ? "Hide Details" : "Show Details";
-	private string ChevronIcon => ToggleValue ? " fa-chevron-up" : " fa-chevron-down";
-	private string IconSize => SizeLarge ? " fa-fw fa-2x" : "";
-	private string ButtonSize => SizeLarge ? " btn-lg" : "";
-	private string ButtonFontSize => SizeLarge ? " fs-4" : "";
 
 
 	private void ButtonClicked()
 	{
 		ToggleValue = (!ToggleValue);
+		ChevronValue = (!ChevronValue);
 	}
 
 }
