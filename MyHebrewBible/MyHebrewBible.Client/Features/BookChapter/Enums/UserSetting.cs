@@ -6,18 +6,14 @@ namespace MyHebrewBible.Client.Features.BookChapter.Enums;
 public enum Permutation : int
 {
 	HebrewShownOnTheSide = 1,
-	HebrewShownAsTable = 2,
-	SatDetailOn = 4,
-	SatDetailOff = 8,
-	ParashaDividerOn = 16,
-	ParashaDividerOff = 32,
-	HebrewWordNumbersOn = 64,
-	HebrewWordNumbersOff = 128,
+	StandaloneAlephTavDetailOn = 2,
+	ParashaDividerOn = 4,
+	HebrewWordNumbersOn = 8,
 
 	/*
-	ReplaceEnglishWithHebrewLevelBasic = 256,	
-	ReplaceEnglishWithHebrewLevelIntermediate = 512,
-	ReplaceEnglishWithHebrewLevelAdvanced = 1024,
+	ReplaceEnglishWithHebrewLevelBasic = 16,	
+	ReplaceEnglishWithHebrewLevelIntermediate = 32,
+	ReplaceEnglishWithHebrewLevelAdvanced = 64,
 
 	Enums\BLB.cs
 
@@ -35,7 +31,7 @@ public abstract class UserSetting : SmartEnum<UserSetting>
 	private static class Id
 	{
 		internal const int HebrewLocation = 1;
-		internal const int SAT = 2;
+		internal const int StandaloneAlephTav = 2;
 		internal const int ParashaDivider = 3;
 		internal const int HebrewWordNumbers = 4;	
 		//internal const int WordReplaceLevel = 5;
@@ -44,7 +40,7 @@ public abstract class UserSetting : SmartEnum<UserSetting>
 
 	#region  Declared Public Instances
 	public static readonly UserSetting HebrewLocation = new HebrewLocationSE();
-	public static readonly UserSetting SAT = new SATSE();
+	public static readonly UserSetting StandaloneAlephTav = new StandaloneAlephTavSE();
 	public static readonly UserSetting ParashaDivider = new ParashaDividerSE();
 	public static readonly UserSetting HebrewWordNumbers = new HebrewWordNumbersSE();	
 	//public static readonly UserSetting WordReplaceLevel = new WordReplaceLevelSE();
@@ -57,22 +53,17 @@ public abstract class UserSetting : SmartEnum<UserSetting>
 	#region Extra Fields 
 	public abstract string Title { get; }
 	public abstract Permutation OnState { get; }
+	public abstract string DetailWhenOn { get; }
+	public abstract string DetailWhenOff { get; }
 
 	//Properties
 
 	public static Permutation Default =>
 		Permutation.HebrewShownOnTheSide
-	| Permutation.SatDetailOn
+	| Permutation.StandaloneAlephTavDetailOn
 	| Permutation.ParashaDividerOn
 	| Permutation.HebrewWordNumbersOn;
 	//| Permutation.ReplaceEnglishWithHebrewLevelBasic
-
-
-	public static Permutation AntiDefault => 
-		Permutation.HebrewShownAsTable
-	| Permutation.SatDetailOff
-	| Permutation.ParashaDividerOff
-	| Permutation.HebrewWordNumbersOff;
 
 
 	#endregion
@@ -83,27 +74,35 @@ public abstract class UserSetting : SmartEnum<UserSetting>
 		public HebrewLocationSE() : base($"{nameof(Id.HebrewLocation)}", Id.HebrewLocation) { }
 		public override Permutation OnState => Permutation.HebrewShownOnTheSide;
 		public override string Title => "Hebrew Location";
+		public override string DetailWhenOn => "on the right as a paragraph";
+		public override string DetailWhenOff => "at the bottom as a table";
 	}
 
-	private sealed class SATSE : UserSetting
+	private sealed class StandaloneAlephTavSE : UserSetting
 	{
-		public SATSE() : base($"{nameof(Id.SAT)}", Id.SAT) { }
-		public override Permutation OnState => Permutation.SatDetailOn;
+		public StandaloneAlephTavSE() : base($"{nameof(Id.StandaloneAlephTav)}", Id.StandaloneAlephTav) { }
+		public override Permutation OnState => Permutation.StandaloneAlephTavDetailOn;
 		public override string Title => "Standalone Aleph Tav";
+		public override string DetailWhenOn => "expanded to show surrounding words";
+		public override string DetailWhenOff => "shrunk to only show an icon";
 	}
 
 	private sealed class ParashaDividerSE : UserSetting
 	{
 		public ParashaDividerSE() : base($"{nameof(Id.ParashaDivider)}", Id.ParashaDivider) { }
 		public override Permutation OnState => Permutation.ParashaDividerOn;
-		public override string Title => "Show Parasha Divider";
+		public override string Title => "Parasha Divider";
+		public override string DetailWhenOn => "Parasha divider shown";
+		public override string DetailWhenOff => "Parasha divider NOT shown";
 	}
 
 	private sealed class HebrewWordNumbersSE : UserSetting
 	{
 		public HebrewWordNumbersSE() : base($"{nameof(Id.HebrewWordNumbers)}", Id.HebrewWordNumbers) { }
 		public override Permutation OnState => Permutation.HebrewWordNumbersOn;
-		public override string Title => "Show Hebrew Word Numbers";
+		public override string Title => "Hebrew Word Numbers";
+		public override string DetailWhenOn => "sequential cardinal numbers shown";
+		public override string DetailWhenOff => "sequential cardinal numbers NOT shown";
 	}
 
 	/*

@@ -57,8 +57,7 @@
 		</NextButtonDiv>
 
 		<JustifyEnd>
-			<MenuTemplate Items="menuItems" OnItemSelected="ReturnedMenuItemId" />
-			<EditModal />
+			<EditModal OnUserSettingsSelected="ReturnUserSettingsDTO" />
 		</JustifyEnd>
 
 	</NavSkeleton>
@@ -66,9 +65,10 @@
 
 	<div class="mt-5">
 		<br />
-		@if (CurrentAbrvChapterVerse is not null && CurrentBookAndChapter is not null)
+		@if (CurrentAbrvChapterVerse is not null && CurrentBookAndChapter is not null && UserSettings is not null)
 		{
 			<ReportWrapper AbrvChapterVerse="CurrentAbrvChapterVerse"
+										 UserSettings="UserSettings"
 										 BookAndChapter="CurrentBookAndChapter" />
 		}
 	</div>
@@ -93,6 +93,7 @@
 
 	public BookAndChapter? CurrentBookAndChapter { get; set; }     // parameter for ReportWrapper
 	public AbrvChapterVerse? CurrentAbrvChapterVerse { get; set; } // parameter for ReportWrapper
+	protected Enums.UserSettingsDTO? UserSettings { get; set; }
 	public NumberPad.BookChapterVerse? CurrentBCV { get; set; }
 
 	protected string PageTitle = string.Empty;
@@ -102,6 +103,13 @@
 		//Logger!.LogInformation("{Method}, Route: {Abrv}/{Chapter}/{Verse}/{ScriptureId}", nameof(OnParametersSet), Abrv, Chapter, Verse, ScriptureId);
 		try
 		{
+			Enums.Permutation _currentPermutations = (Enums.Permutation)State!.AppState!.BookChapterState!.GetUserSetting();
+			UserSettings = new Enums.UserSettingsDTO(
+				IsHebrewShownOnTheSide: _currentPermutations.HasFlag(Enums.Permutation.HebrewShownOnTheSide),
+				IsStandaloneAlephTavDetailsOn: _currentPermutations.HasFlag(Enums.Permutation.StandaloneAlephTavDetailOn),
+				IsParashaDividerOn: _currentPermutations.HasFlag(Enums.Permutation.ParashaDividerOn),
+				IsHebrewWordNumbersOn: _currentPermutations.HasFlag(Enums.Permutation.HebrewWordNumbersOn));
+
 			if (Abrv == Constants.DefaultAbrv)
 			{
 				AbrvChapterVerse? rec = State!.AppState!.BookChapterState!.GetACV();
@@ -157,6 +165,13 @@
 			return (AbrvChapterVerse.Default, new BookAndChapter(GlobalEnums.BibleBook.Genesis, chapter));
 		}
 		return (null, null);
+	}
+
+
+	private void ReturnUserSettingsDTO(Enums.UserSettingsDTO userSettingsDTO)
+	{
+		Logger!.LogInformation("{Method}, UserSettingsDTO: {UserSettingsDTO}", nameof(ReturnUserSettingsDTO), userSettingsDTO);
+		UserSettings = userSettingsDTO;
 	}
 
 	// Called inside <NavSkeleton> by <PreviousOrNextButton>

@@ -1,21 +1,23 @@
 ﻿@using MyHebrewBible.Client.Components.Report
 @using ReportEnums = MyHebrewBible.Client.Components.Report.Enums
-@using BC=MyHebrewBible.Client.Features.BookChapter
+@using BC = MyHebrewBible.Client.Features.BookChapter
 
 @inject ApiClient Api
 @inject ILogger<ReportWrapper>? Logger
 @inject IToastService? Toast
 @inject IJSRuntime? JSRuntime
 
-<LoadingComponent IsLoading="verses==null || CurrentAbrvChapterVerse==null" TurnSpinnerOff="TurnSpinnerOff">
+<LoadingComponent IsLoading="verses == null || CurrentAbrvChapterVerse == null " TurnSpinnerOff="TurnSpinnerOff">
 	<Sections Verses="GetBookChapterVerses()"
 						AbrvChapterVerse="CurrentAbrvChapterVerse"
+						UserSettings="UserSettings"
 						CalledBy="ReportEnums.CalledBy.BookChapter" />
 </LoadingComponent>
 
 @code {
 	[Parameter, EditorRequired] public AbrvChapterVerse? AbrvChapterVerse { get; set; }
 	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
+	[Parameter, EditorRequired] public BC.Enums.UserSettingsDTO UserSettings { get; set; }
 	[CascadingParameter] public CascadingAppState? State { get; set; }
 
 	protected BC.AbrvChapterVerse? CurrentAbrvChapterVerse;

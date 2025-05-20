@@ -13,6 +13,11 @@
 		}
 		@((MarkupString)@Verse.KJV!)
 
+		@if (ShowStandaloneAlephTavIcon)
+		{
+			<span><i class="fa fa-letter-aleph-tav text-danger ps-2"></i></span>
+		}
+
 		@if (BookAndChapter!.BibleBook!.IsHebrewBible)
 		{
 			<DrillDownButton ScriptureId="Verse!.ID"
@@ -23,6 +28,7 @@
 									 IconOnly="true"
 									 ScriptureId="Verse!.ID"
 									 Verse="Verse.Verse" />
+
 		</sup>
 	</p>
 }
@@ -30,6 +36,7 @@
 @code {
 	[Parameter, EditorRequired] public ReportModel? Verse { get; set; }
 	[Parameter, EditorRequired] public BookAndChapter? BookAndChapter { get; set; }
+	[Parameter, EditorRequired] public bool ShowStandaloneAlephTavIcon { get; set; }
 	[Parameter] public EventCallback<int> OnVerseSelectedPassThrough { get; set; }
 	[Parameter] public int ScrollToScriptureId { get; set; }
 

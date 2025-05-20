@@ -3,6 +3,7 @@
 @using MyHebrewBible.Client.Helpers
 @using MyHebrewBible.Client.Components.Report
 @using ReportEnums = MyHebrewBible.Client.Components.Report.Enums
+@using BC = MyHebrewBible.Client.Features.BookChapter
 
 @inject ApiClient Api
 @inject ILogger<ReportWrapper>? Logger
@@ -47,9 +48,12 @@
 		{
 			<div class="card-body">
 				<h5 class="text-center">@CurrentReading!.BCV</h5>
+
 				<Sections Verses="GetParashaTorahVerses(ShowSection.Torah.Value)"
 									ScrollToScriptureId="ScrollToScriptureId"
+									UserSettings="UserSettings"
 									CalledBy="ReportEnums.CalledBy.Parasha" />
+
 			</div>
 			<div class="text-center @BgAndText.SuccessSubtle mb-4 py-2">End of Torah</div>
 		}
@@ -67,6 +71,7 @@
 						<h5 class="text-center">@haftorah.VerseRange</h5>
 						<Sections Verses="GetParashaHaftorahOrBritVerses(ShowSection.Haftorah.Value, haftorah.GroupCount)"
 											ScrollToScriptureId="ScrollToScriptureId"
+											UserSettings="UserSettings"
 											CalledBy="ReportEnums.CalledBy.Parasha" />
 					</div>
 				}
@@ -88,6 +93,7 @@
 						<h5 class="text-center">@brit.VerseRange</h5>
 						<Sections Verses="GetParashaHaftorahOrBritVerses(ShowSection.Brit.Value, brit.GroupCount)"
 											ScrollToScriptureId="ScrollToScriptureId"
+											UserSettings="UserSettings"
 											CalledBy="ReportEnums.CalledBy.Parasha" />
 					</div>
 				}
@@ -106,6 +112,7 @@
 @code {
 	[Parameter, EditorRequired] public Triennial? CurrentReading { get; set; }
 	[Parameter, EditorRequired] public Permutation CurrentVisibilityState { get; set; }
+	[Parameter, EditorRequired] public BC.Enums.UserSettingsDTO UserSettings { get; set; }
 	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
 
 	protected bool TurnSpinnerOff = false;

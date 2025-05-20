@@ -4,11 +4,14 @@
 @inject IToastService? Toast
 @inject ILogger<HebrewParagraph>? Logger
 
-<LoadingComponent IsLoading="hebrewWords==null" TurnSpinnerOff="TurnSpinnerOff">
+<LoadingComponent IsLoading="hebrewWords == null" TurnSpinnerOff="TurnSpinnerOff">
 	<p dir="rtl" class=" mb-1">
 		@foreach (var item in hebrewWords!)
 		{
-			<sup><span class="text-muted fst-italic">@item.WordCount</span></sup>
+			@if (HebrewWordNumbers)
+			{
+				<sup><span class="px-1 text-muted fst-italic">@item.WordCount</span></sup>
+			}
 			<span class="hebrew @GetBgColor(item.Strongs, item.WordCount)"
 						@onclick="@(e => ButtonWordClick(item.Strongs, item.WordCount))">
 				@((MarkupString)HebrewFormat.GetSpan(item.WordEnum, item.Hebrew1, item.Hebrew2, item.Hebrew3))
@@ -21,6 +24,7 @@
 @code {
 	[Parameter, EditorRequired] public int ScriptureId { get; set; }
 	[Parameter, EditorRequired] public WordSelected? WordSelected { get; set; }
+	[Parameter, EditorRequired] public bool HebrewWordNumbers { get; set; }
 	[Parameter] public EventCallback<WordSelected?> OnWordSelected { get; set; }
 
 	protected bool TurnSpinnerOff = false;
@@ -49,7 +53,7 @@
 		if (WordSelected is null) return string.Empty;
 		if (strongs == 0) return string.Empty;
 
-		if (strongs== WordSelected.Strongs)
+		if (strongs == WordSelected.Strongs)
 		{
 			return " bg-warning-subtle";
 		}
@@ -58,7 +62,7 @@
 			return string.Empty;
 		}
 	}
-	
+
 	protected int WordCount = 0;
 	private void ButtonWordClick(int strongs, int wordCount)
 	{

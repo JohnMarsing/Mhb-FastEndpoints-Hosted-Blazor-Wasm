@@ -19,11 +19,15 @@
 				<Paragraph BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
 									 Verse="item"
 									 ScrollToScriptureId="CurrentScrollToScriptureId"
+									 ShowStandaloneAlephTavIcon="ShowStandaloneAlephTavIcon(item.WordPartList!.Count())"
 									 OnVerseSelectedPassThrough="ReturnedVerse" />
 			</div>
 			@if (item.WordPartList!.Count() > 0)
 			{
-				<SatAndSurroundingWords SurroundingWords="item.WordPartList!.ToList()" />
+				if (UserSettings.IsStandaloneAlephTavDetailsOn)
+				{
+					<SatAndSurroundingWords SurroundingWords="item.WordPartList!.ToList()" />
+				}
 			}
 		}
 		else
@@ -35,13 +39,13 @@
 						<CardHeader BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
 												BCV="@item!.BCV"
 												VerseNumber="item!.Verse"
-												IsSplitMode="IsSplitMode"
+												IsSplitMode="UserSettings.IsHebrewShownOnTheSide"
 												Filter="Filter"
 												OnFilter="ReturnedFilter"
 												OnClose="ReturnedCloseEvent" />
 					</div>
 
-					@if (IsSplitMode)
+					@if (UserSettings.IsHebrewShownOnTheSide)
 					{
 						<div class="card-body">
 
@@ -52,6 +56,7 @@
 								<hr />
 								<HebrewParagraph ScriptureId="DrilldownScriptureId"
 																 WordSelected="CurrentWordSelected"
+																 HebrewWordNumbers="UserSettings.IsHebrewWordNumbersOn"
 																 OnWordSelected="ReturnedWord" />
 							</div>
 
@@ -63,6 +68,7 @@
 
 									<HebrewParagraph ScriptureId="DrilldownScriptureId"
 																	 WordSelected="CurrentWordSelected"
+																	 HebrewWordNumbers="UserSettings.IsHebrewWordNumbersOn"
 																	 OnWordSelected="ReturnedWord" />
 
 								</div>
@@ -111,6 +117,7 @@
 				<Paragraph BookAndChapter="GetBookAndChapter(item.BookID, item.Chapter)"
 									 Verse="item"
 									 ScrollToScriptureId="CurrentScrollToScriptureId"
+									 ShowStandaloneAlephTavIcon="ShowStandaloneAlephTavIcon(item.WordPartList!.Count())"
 									 OnVerseSelectedPassThrough="ReturnedVerse" />
 			}
 		}
@@ -122,13 +129,16 @@ else
 }
 
 @code {
+
+
 	[Parameter, EditorRequired] public List<ReportModel>? Verses { get; set; }
 	[Parameter, EditorRequired] public Enums.CalledBy CalledBy { get; set; }
 	[Parameter] public int ScrollToScriptureId { get; set; }                // Used by Parasha!ReportWrapper (not BC)
 	[Parameter] public BC.AbrvChapterVerse? AbrvChapterVerse { get; set; } // Used by BC!ReportWrapper (not Parasha)
+	[Parameter, EditorRequired] public BC.Enums.UserSettingsDTO UserSettings { get; set; }
 	[CascadingParameter] public CascadingAppState? State { get; set; }
 
-	private bool IsSplitMode; // = false;
+	protected bool ShowStandaloneAlephTavIcon(int count) => count > 0 && !UserSettings.IsStandaloneAlephTavDetailsOn;
 
 	#region OnAfter-and-OnParameters
 	protected BC.AbrvChapterVerse? CurrentAbrvChapterVerse;
@@ -155,8 +165,6 @@ else
 		{
 			CurrentScrollToScriptureId = ScrollToScriptureId;
 		}
-
-		IsSplitMode = ((BC.Enums.Permutation)State!.AppState!.BookChapterState!.GetUserSetting()).HasFlag(BC.Enums.Permutation.HebrewShownOnTheSide);
 
 		if (_firstRendered)
 		{

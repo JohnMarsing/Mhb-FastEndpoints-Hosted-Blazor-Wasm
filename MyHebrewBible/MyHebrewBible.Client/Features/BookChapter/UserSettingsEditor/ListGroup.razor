@@ -1,0 +1,58 @@
+﻿@using MyHebrewBible.Client.Helpers
+
+@inject ILogger<ListGroup>? Logger
+@* @inject IToastService? Toast *@
+
+<ol class="list-group list-group-numbered">
+
+	@foreach (var item in Enums.UserSetting.List.OrderBy(o => o.Value))
+	{
+		<li class="list-group-item d-flex justify-content-between align-items-start">
+			<div class="ms-2 me-auto">
+				<div class="fw-bold">@item.Title</div>
+				@GetDetails(item)
+			</div>
+
+			<button class=""
+							@onclick="() => ButtonClick(item)"
+							title="@item.Value | @((int)item.OnState)" type="button">
+				<i class="@GetIcon(item) @Icon.Size.TwoX"></i>
+			</button>
+		</li>
+	}
+
+</ol>
+
+@code {
+	[Parameter, EditorRequired] public Enums.Permutation Permutations { get; set; }
+	[Parameter, EditorRequired] public EventCallback<Enums.Permutation> OnPermutationSelected { get; set; }
+
+	protected string GetIcon(Enums.UserSetting userSetting)
+	{
+		return Permutations.HasFlag(userSetting.OnState) ? Icon.Toggle.On : Icon.Toggle.Off;
+	}
+
+	protected string GetDetails(Enums.UserSetting userSetting)
+	{
+		return Permutations.HasFlag(userSetting.OnState) ? userSetting.DetailWhenOn : userSetting.DetailWhenOff;
+	}
+
+	private async Task ButtonClick(Enums.UserSetting userSetting)
+	{
+		Enums.Permutation newPermutations = Permutations; // copy the current permutations	
+
+		if (newPermutations.HasFlag(userSetting.OnState))
+		{
+			newPermutations &= ~userSetting.OnState; // remove the flag
+		}
+		else
+		{
+			newPermutations |= userSetting.OnState; // add the flag
+		}
+
+		//Logger!.LogInformation("{Method}; Permutations: {int}=>{Permutations}"
+		//	, nameof(ButtonClick), (int)newPermutations, newPermutations);
+
+		await OnPermutationSelected.InvokeAsync(newPermutations);
+	}
+}
