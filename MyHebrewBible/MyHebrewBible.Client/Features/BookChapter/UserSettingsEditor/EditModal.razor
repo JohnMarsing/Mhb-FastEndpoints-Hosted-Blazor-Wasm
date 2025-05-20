@@ -5,9 +5,9 @@
 
 @if (ModalIsNotShownToggle)
 {
-	<button type="button" class="btn @BtnOutlineColors.Primary @BtnSize.Sm float-end"
+	<button type="button" class="btn @BtnColors.Primary @BtnSize.Md float-end"
 					@onclick="() => ShowModal()">
-		<i class="fas fa-users-cog"></i>
+		<i class="fas fa-cogs"></i>
 	</button>
 }
 else
@@ -17,33 +17,21 @@ else
 			<div class="modal-content">
 
 				<div class="modal-header @BgAndText.Warning">
-					<p class="fs-5 text-center">Edit User Settings <sup>@IntCurrentPermutations</sup> </p>
+					<p class="fs-5 text-center">Edit User Settings 
+						@* <sup>@IntCurrentPermutations</sup>  *@
+					</p>
 					<button type="button" class="btn-close" @onclick="CloseModal"></button>
 				</div>
 
 				<div class="modal-body">
-
-						@foreach (var item in Enums.UserSetting.List.OrderBy(o => o.Value))
-						{
-							<div class="d-flex justify-content-end mb-3">
-								<span class="fs-5 mt-2 me-1">@item.Title</span>
-
-								<button class="btn @BtnSize.Lg"
-										@onclick="() => ToggleClick(item)"
-										title="@item.Value | @((int)item.OnState)" type="button">
-									<i class="@GetIcon(item) @Icon.Size.TwoX"></i>
-								</button>
-
-							</div>
-						}
-					
-
+					<ListGroup Permutations="@GetPermutationParameter()" OnPermutationSelected="ReturnedPermutation" />
 				</div> <!-- modal-body -->
 
 				<div class="modal-footer bg-light">
-					<button @onclick="ButtonClickSetToDefault" 
-						class="btn @BtnColors.Primary @BtnSize.Lg"	title="Set to Default" type="button">
-						Default
+
+					<button @onclick="ButtonClickUpdate" 
+						class="btn @BtnColors.Primary @BtnSize.Md"	title="Update user settings and close" type="button">
+						Update and Close
 					</button>
 				</div>
 
@@ -53,53 +41,65 @@ else
 }
 
 @code {
+	[Parameter, EditorRequired] public EventCallback<Enums.UserSettingsDTO> OnUserSettingsSelected { get; set; }
 	[CascadingParameter] public CascadingAppState? State { get; set; }
 
-	private int IntCurrentPermutations = 0;
+	protected bool PerumationHasBeenUpdated = false;
 
-
+	protected Enums.Permutation InitialPermutations;
 	protected Enums.Permutation CurrentPermutations;
 	protected override void OnParametersSet()
 	{
 		try
 		{
-			CurrentPermutations = (Enums.Permutation)State!.AppState!.BookChapterState!.GetUserSetting();
-			IntCurrentPermutations = (int)CurrentPermutations;
-			Logger!.LogInformation("{Method}; CurrentPermutations: {int}=>{CurrentPermutations}"
-			, nameof(OnParametersSet), (int)CurrentPermutations, CurrentPermutations);
+			InitialPermutations = (Enums.Permutation)State!.AppState!.BookChapterState!.GetUserSetting();
+			CurrentPermutations = InitialPermutations;
+			// Logger!.LogInformation("{Method}; CurrentPermutations: {int}=>{CurrentPermutations}"
+			// , nameof(OnParametersSet), (int)CurrentPermutations, CurrentPermutations);
 		}
 		catch (Exception ex)
 		{
 			Logger!.LogError(ex, "{Method}", nameof(OnParametersSet));
 			Toast!.ShowError($"{Global.ToastShowError} {nameof(EditModal)}!{nameof(OnParametersSet)}");
 		}
+	}	
+
+  private Enums.Permutation GetPermutationParameter()
+  {
+		return PerumationHasBeenUpdated ? CurrentPermutations : InitialPermutations;
+  }
+
+	private void ReturnedPermutation(Enums.Permutation newPermutations)
+	{
+		Logger!.LogInformation("{Method}, newPermutations: {Permutations}", nameof(ReturnedPermutation), newPermutations);
+		CurrentPermutations = newPermutations;
+		PerumationHasBeenUpdated = true;
 	}
 
-	private async Task  ToggleClick(Enums.UserSetting userSetting)
+	private async Task ButtonClickUpdate()
 	{
-		if (CurrentPermutations.HasFlag(userSetting.OnState))
-		{ 
-			CurrentPermutations &= ~userSetting.OnState; // remove the flag
+		if (InitialPermutations == CurrentPermutations)
+		{
+			Toast!.ShowWarning($"No changes made to user settings {Emoji.Shrug}");
 		}
 		else
 		{
-			CurrentPermutations |= userSetting.OnState; // add the flag
-		}	
-		await State!.AppState!.BookChapterState!.UpdateUserSetting(CurrentPermutations);
-		IntCurrentPermutations = (int)CurrentPermutations;
-	}
+			Toast!.ShowSuccess($"User settings updated {Emoji.Happy}");
+			await State!.AppState!.BookChapterState!.UpdateUserSetting(CurrentPermutations);
 
-	private async Task ButtonClickSetToDefault()
-	{
-		CurrentPermutations = Enums.UserSetting.AntiDefault;
-		await State!.AppState!.BookChapterState!.UpdateUserSetting(CurrentPermutations);
+			var usDTO = new Enums.UserSettingsDTO(
+				IsHebrewShownOnTheSide: CurrentPermutations.HasFlag(Enums.Permutation.HebrewShownOnTheSide), 
+				IsStandaloneAlephTavDetailsOn: CurrentPermutations.HasFlag(Enums.Permutation.StandaloneAlephTavDetailOn), 
+				IsParashaDividerOn: CurrentPermutations.HasFlag(Enums.Permutation.ParashaDividerOn), 
+				IsHebrewWordNumbersOn: CurrentPermutations.HasFlag(Enums.Permutation.HebrewWordNumbersOn));
+
+			await OnUserSettingsSelected.InvokeAsync(usDTO);
+		}
+
 		CloseModal();
 	}
-	
-	protected string GetIcon(Enums.UserSetting userSetting)
-	{
-		return CurrentPermutations.HasFlag(userSetting.OnState) ? Icon.Toggle.On : Icon.Toggle.Off;
-	}
+
+
 
 	#region Modal Code
 	bool ModalIsNotShownToggle = true;

@@ -2,6 +2,7 @@
 @using MyHebrewBible.Client.Enums
 @using MyHebrewBible.Client.Features.Parasha.Enums
 @using MyHebrewBible.Client.Features.Parasha.Toolbar
+@using BC = MyHebrewBible.Client.Features.BookChapter
 
 @inject ILogger<Index>? Logger
 @inject IToastService? Toast
@@ -27,7 +28,9 @@
 			</div>
 		</div>
 
-		<ReportWrapper CurrentReading="CurrentReading" CurrentVisibilityState="CurrentVisibilityState" />
+		<ReportWrapper CurrentReading="CurrentReading" 
+			UserSettings="UserSettings"
+			CurrentVisibilityState="CurrentVisibilityState" />
 	}
 	else
 	{
@@ -48,8 +51,9 @@
 	[Parameter, EditorRequired] public int Id { get; set; }
 	[Parameter] public string? Slug { get; set; } // not used
 
-	[CascadingParameter] public CascadingAppState? CascadingAppState { get; set; }
+	[CascadingParameter] public CascadingAppState? State { get; set; }
 
+	protected BC.Enums.UserSettingsDTO? UserSettings { get; set; }
 
 	protected Permutation CurrentVisibilityState;
 	public Triennial? CurrentReading { get; set; }
@@ -61,6 +65,15 @@
 		//Logger!.LogInformation("{Method}, Id: {Id}", nameof(OnInitialized), Id);
 		try
 		{
+
+			BC.Enums.Permutation _currentPermutations = (BC.Enums.Permutation)State!.AppState!.BookChapterState!.GetUserSetting();
+			UserSettings = new BC.Enums.UserSettingsDTO(
+				IsHebrewShownOnTheSide: _currentPermutations.HasFlag(BC.Enums.Permutation.HebrewShownOnTheSide),
+				IsStandaloneAlephTavDetailsOn: _currentPermutations.HasFlag(BC.Enums.Permutation.StandaloneAlephTavDetailOn),
+				IsParashaDividerOn: _currentPermutations.HasFlag(BC.Enums.Permutation.ParashaDividerOn),
+				IsHebrewWordNumbersOn: _currentPermutations.HasFlag(BC.Enums.Permutation.HebrewWordNumbersOn));
+
+
 			CurrentReading = GetCurrentReadingViaRoutes(Id);
 
 			if (CurrentReading is not null)
@@ -99,7 +112,7 @@
 
 	private Permutation GetCurrentVisibilityState()
 	{
-		int _permutation = CascadingAppState!.AppState!.ParashaState!.Get();
+		int _permutation = State!.AppState!.ParashaState!.Get();
 		//Logger!.LogInformation("{Method}, _permutation: {_permutation}", nameof(GetCurrentPermutation), _permutation);
 		return (Permutation)_permutation;
 	}
