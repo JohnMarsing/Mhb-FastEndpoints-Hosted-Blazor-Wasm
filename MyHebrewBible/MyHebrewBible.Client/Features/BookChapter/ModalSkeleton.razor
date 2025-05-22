@@ -1,0 +1,21 @@
+﻿@using MyHebrewBible.Client.Features.Parasha.Toolbar
+
+@if (ShowMenuItem is not null)
+{
+	@if (ShowMenuItem == Enums.MenuItem.Instructions)
+	{
+		@InstructionsModal
+	}
+	else
+	{
+		@UserConfigurationModal
+	}
+}
+@* else { <p>no modal showing</p>	 } *@
+
+
+@code {
+	[Parameter, EditorRequired] public Enums.MenuItem? ShowMenuItem { get; set; }
+	[Parameter] public RenderFragment? InstructionsModal { get; set; }
+	[Parameter] public RenderFragment? UserConfigurationModal { get; set; }
+}

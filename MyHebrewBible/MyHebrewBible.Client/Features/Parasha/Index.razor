@@ -28,9 +28,9 @@
 			</div>
 		</div>
 
-		<ReportWrapper CurrentReading="CurrentReading" 
-			UserSettings="UserSettings"
-			CurrentVisibilityState="CurrentVisibilityState" />
+		<ReportWrapper CurrentReading="CurrentReading"   
+			CurrentVisibilityState="CurrentVisibilityState" 
+			UserSettings="UserSettings" />
 	}
 	else
 	{
@@ -39,18 +39,13 @@
 			<div class="card-body text-center fs-1">No Parasha Found <br /> (◡︵◡)</div>
 		</div>
 	}
-
 </LoadingProgress>
 
-@if (ShowPageInstructionsModal)
-{
-	<PageInstructions />
-}
+@if (ShowPageInstructionsModal) { <PageInstructions /> }
 
 @code {
 	[Parameter, EditorRequired] public int Id { get; set; }
 	[Parameter] public string? Slug { get; set; } // not used
-
 	[CascadingParameter] public CascadingAppState? State { get; set; }
 
 	protected BC.Enums.UserSettingsDTO? UserSettings { get; set; }
@@ -65,14 +60,12 @@
 		//Logger!.LogInformation("{Method}, Id: {Id}", nameof(OnInitialized), Id);
 		try
 		{
-
 			BC.Enums.Permutation _currentPermutations = (BC.Enums.Permutation)State!.AppState!.BookChapterState!.GetUserSetting();
 			UserSettings = new BC.Enums.UserSettingsDTO(
 				IsHebrewShownOnTheSide: _currentPermutations.HasFlag(BC.Enums.Permutation.HebrewShownOnTheSide),
 				IsStandaloneAlephTavDetailsOn: _currentPermutations.HasFlag(BC.Enums.Permutation.StandaloneAlephTavDetailOn),
 				IsParashaDividerOn: _currentPermutations.HasFlag(BC.Enums.Permutation.ParashaDividerOn),
 				IsHebrewWordNumbersOn: _currentPermutations.HasFlag(BC.Enums.Permutation.HebrewWordNumbersOn));
-
 
 			CurrentReading = GetCurrentReadingViaRoutes(Id);
 

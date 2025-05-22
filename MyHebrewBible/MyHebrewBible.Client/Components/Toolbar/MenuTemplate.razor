@@ -1,5 +1,4 @@
 ﻿@typeparam TItem where TItem : Dictionary<int, string> 
-
 @using MyHebrewBible.Client.Helpers
 
 @if (Items != null)
@@ -12,10 +11,7 @@
 
 		<ul class="dropdown-menu">
 
-			@if (!string.IsNullOrEmpty(Header))
-			{
-				<li class="fs-5 fw-bold dropdown-header">@Header</li>
-			}	
+			@if (!string.IsNullOrEmpty(Header)) { <li class="fs-5 fw-bold dropdown-header">@Header</li> }	
 
 			@foreach (var item in Items)
 			{
