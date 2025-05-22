@@ -1,8 +1,14 @@
-﻿
+﻿@using MyHebrewBible.Client.Helpers
+
+@* 
+ToDo: can this be changed to handle the modal open/close from the parent component?	
+See Features\BookChapter\Toolbar\PageInstructions.razor
+*@
+
 <div class="@modalClass" style="display:@(modalOpen?"block":"none");">
 	<div class="modal-dialog modal-md">
 		<div class="modal-content">
-			<div class="modal-header @HeaderBackGround">
+			<div class="modal-header @BgAndText.DangerSubtle">
 
 				@ChildHeaderContent
 
@@ -11,7 +17,7 @@
 				</button>
 			</div>
 
-			<div class="modal-body @BodyBackGround">
+			<div class="modal-body @BgAndText.Light">
 				@ChildBodyContent
 			</div>
 		</div>
@@ -19,11 +25,10 @@
 </div>
 
 @code {
-	[Parameter] public string? HeaderBackGround { get; set; } = "bg-warning";
-	[Parameter] public string? BodyBackGround { get; set; } = "bg-warning-subtle";
 	[Parameter, EditorRequired] public RenderFragment? ChildHeaderContent { get; set; }
 	[Parameter, EditorRequired] public RenderFragment? ChildBodyContent { get; set; }
 
+	#region Modal Code
 	bool modalOpen = true; 
 	string modalClass = "modal show"; 
 	
@@ -32,4 +37,5 @@
 		modalOpen = false;
 		modalClass = "modal";
 	}
+	#endregion
 }

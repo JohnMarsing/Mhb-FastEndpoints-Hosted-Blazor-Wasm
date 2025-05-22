@@ -3,48 +3,41 @@
 @inject ILogger<EditModal>? Logger
 @inject IToastService? Toast
 
-@if (ModalIsNotShownToggle)
-{
-	<button type="button" class="btn @BtnColors.Primary @BtnSize.Md float-end"
-					@onclick="() => ShowModal()">
-		<i class="fas fa-cogs"></i>
-	</button>
-}
-else
-{
-	<div class="@modalClass" style="display:@(modalOpen ? "block" : "none");">
-		<div class="modal-dialog">
-			<div class="modal-content">
+<div class="@modalClass" style="display:@(modalOpen ? "block" : "none");">
+	<div class="modal-dialog">
+		<div class="modal-content">
 
-				<div class="modal-header @BgAndText.Warning">
-					<p class="fs-5 text-center">Edit User Settings 
-						@* <sup>@IntCurrentPermutations</sup>  *@
-					</p>
-					<button type="button" class="btn-close" @onclick="CloseModal"></button>
-				</div>
+			<div class="modal-header @BgAndText.Warning">
+				<p class="fs-5 text-center">
+					Edit User Settings
+				</p>
+				<button type="button" class="btn-close" @onclick="ButtonClickClose"></button>
+			</div>
 
-				<div class="modal-body">
-					<ListGroup Permutations="@GetPermutationParameter()" OnPermutationSelected="ReturnedPermutation" />
-				</div> <!-- modal-body -->
+			<div class="modal-body">
+				<ListGroup Permutations="@GetPermutationParameter()" OnPermutationSelected="ReturnedPermutation" />
+			</div> <!-- modal-body -->
 
-				<div class="modal-footer bg-light">
+			<div class="modal-footer @BgAndText.DarkSubtle">
+				<button @onclick="ButtonClickClose" class="btn @BtnColors.Primary @BtnSize.Md" title="call CloseModal AND EventCallback OnClose" type="button">
+					Close
+				</button>
 
-					<button @onclick="ButtonClickUpdate" 
-						class="btn @BtnColors.Primary @BtnSize.Md"	title="Update user settings and close" type="button">
-						Update and Close
-					</button>
-				</div>
+				<button @onclick="ButtonClickUpdate"
+								class="btn @BtnColors.Primary @BtnSize.Md" title="Update user settings and close" type="button">
+					Update and Close
+				</button>
+			</div>
 
-			</div>  <!-- modal-content -->
-		</div> <!-- modal-dialog -->
-	</div> <!-- modalClass -->
-}
+		</div>  <!-- modal-content -->
+	</div> <!-- modal-dialog -->
+</div> <!-- modalClass -->
 
 @code {
+	
 	[Parameter, EditorRequired] public EventCallback<Enums.UserSettingsDTO> OnUserSettingsSelected { get; set; }
 	[CascadingParameter] public CascadingAppState? State { get; set; }
-
-	protected bool PerumationHasBeenUpdated = false;
+	[Parameter, EditorRequired] public EventCallback OnClose { get; set; }
 
 	protected Enums.Permutation InitialPermutations;
 	protected Enums.Permutation CurrentPermutations;
@@ -54,24 +47,25 @@ else
 		{
 			InitialPermutations = (Enums.Permutation)State!.AppState!.BookChapterState!.GetUserSetting();
 			CurrentPermutations = InitialPermutations;
-			// Logger!.LogInformation("{Method}; CurrentPermutations: {int}=>{CurrentPermutations}"
-			// , nameof(OnParametersSet), (int)CurrentPermutations, CurrentPermutations);
+			//Logger!.LogInformation("{Method}; CurrentPermutations: {int}=>{CurrentPermutations}"
+			//, nameof(OnParametersSet), (int)CurrentPermutations, CurrentPermutations);
 		}
 		catch (Exception ex)
 		{
 			Logger!.LogError(ex, "{Method}", nameof(OnParametersSet));
 			Toast!.ShowError($"{Global.ToastShowError} {nameof(EditModal)}!{nameof(OnParametersSet)}");
 		}
-	}	
+	}
 
-  private Enums.Permutation GetPermutationParameter()
-  {
+	protected bool PerumationHasBeenUpdated = false;
+	private Enums.Permutation GetPermutationParameter()
+	{
 		return PerumationHasBeenUpdated ? CurrentPermutations : InitialPermutations;
-  }
+	}
 
 	private void ReturnedPermutation(Enums.Permutation newPermutations)
 	{
-		Logger!.LogInformation("{Method}, newPermutations: {Permutations}", nameof(ReturnedPermutation), newPermutations);
+		//Logger!.LogInformation("{Method}, newPermutations: {Permutations}", nameof(ReturnedPermutation), newPermutations);
 		CurrentPermutations = newPermutations;
 		PerumationHasBeenUpdated = true;
 	}
@@ -80,7 +74,7 @@ else
 	{
 		if (InitialPermutations == CurrentPermutations)
 		{
-			Toast!.ShowWarning($"No changes made to user settings {Emoji.Shrug}");
+			Toast!.ShowWarning($"No changes made {Emoji.Shrug}");
 		}
 		else
 		{
@@ -88,37 +82,33 @@ else
 			await State!.AppState!.BookChapterState!.UpdateUserSetting(CurrentPermutations);
 
 			var usDTO = new Enums.UserSettingsDTO(
-				IsHebrewShownOnTheSide: CurrentPermutations.HasFlag(Enums.Permutation.HebrewShownOnTheSide), 
-				IsStandaloneAlephTavDetailsOn: CurrentPermutations.HasFlag(Enums.Permutation.StandaloneAlephTavDetailOn), 
-				IsParashaDividerOn: CurrentPermutations.HasFlag(Enums.Permutation.ParashaDividerOn), 
+				IsHebrewShownOnTheSide: CurrentPermutations.HasFlag(Enums.Permutation.HebrewShownOnTheSide),
+				IsStandaloneAlephTavDetailsOn: CurrentPermutations.HasFlag(Enums.Permutation.StandaloneAlephTavDetailOn),
+				IsParashaDividerOn: CurrentPermutations.HasFlag(Enums.Permutation.ParashaDividerOn),
 				IsHebrewWordNumbersOn: CurrentPermutations.HasFlag(Enums.Permutation.HebrewWordNumbersOn));
 
 			await OnUserSettingsSelected.InvokeAsync(usDTO);
 		}
 
 		CloseModal();
+		await OnClose.InvokeAsync();
 	}
 
-
+	private void ButtonClickClose()
+	{
+		// Toast!.ShowInfo("ButtonClickClose");
+		CloseModal();
+		OnClose.InvokeAsync();
+	}
 
 	#region Modal Code
-	bool ModalIsNotShownToggle = true;
-	bool modalOpen = false;
+	bool modalOpen = true;
 
 	string modalClass = "modal";
-
-	void ShowModal()
-	{
-		modalOpen = true;
-		ModalIsNotShownToggle = false;
-		modalClass += " show";
-		StateHasChanged();
-	}
 
 	void CloseModal()
 	{
 		modalOpen = false;
-		ModalIsNotShownToggle = true;
 		modalClass = "modal";
 	}
 	#endregion

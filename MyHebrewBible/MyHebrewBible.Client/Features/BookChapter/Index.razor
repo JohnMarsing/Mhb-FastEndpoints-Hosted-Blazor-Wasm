@@ -57,7 +57,7 @@
 		</NextButtonDiv>
 
 		<JustifyEnd>
-			<EditModal OnUserSettingsSelected="ReturnUserSettingsDTO" />
+			<MenuTemplate Items="menuItems" OnItemSelected="ReturnedMenuItemId" />
 		</JustifyEnd>
 
 	</NavSkeleton>
@@ -74,12 +74,14 @@
 	</div>
 </LoadingProgress>
 
-
-@if (ShowPageInstructionsModal)
-{
-	<PageInstructions />
-}
-
+<ModalSkeleton ShowMenuItem="CurrentModalToShow">
+	<InstructionsModal>
+		<PageInstructions OnClose="ReturnedCloseEvent" />
+	</InstructionsModal>
+	<UserConfigurationModal>
+		<EditModal OnUserSettingsSelected="ReturnUserSettingsDTO" OnClose="ReturnedCloseEvent" />
+	</UserConfigurationModal>
+</ModalSkeleton>
 
 @code {
 	// Route parameters
@@ -167,7 +169,6 @@
 		return (null, null);
 	}
 
-
 	private void ReturnUserSettingsDTO(Enums.UserSettingsDTO userSettingsDTO)
 	{
 		Logger!.LogInformation("{Method}, UserSettingsDTO: {UserSettingsDTO}", nameof(ReturnUserSettingsDTO), userSettingsDTO);
@@ -199,34 +200,36 @@
 		PageTitle = GlobalEnums.BibleBookFormat.BCV(bcv);
 	}
 
-	protected bool ShowPageInstructionsModal = false;
-
+	#region MenuTemplate and ModalSkeleton
 
 	private List<Dictionary<int, string?>> menuItems = Enums.MenuItem.List
-				.Select(item => new Dictionary<int, string?> { { item.Value, item.Title } })
-				.ToList();
+			.Select(item => new Dictionary<int, string?> { { item.Value, item.Title } })
+			.ToList();
 
-	// Called inside <NavSkeleton> by <MenuTemplate>
+	protected Enums.MenuItem? CurrentModalToShow { get; set; }
+
 	private void ReturnedMenuItemId(int id)
 	{
-		if (Enums.MenuItem.TryFromValue(id, out Enums.MenuItem? item))
+		//Logger!.LogInformation("{Method}, id: {Id}", nameof(ReturnedMenuItemId), id);
+		if (Enums.MenuItem.TryFromValue(id, out Enums.MenuItem? menuItem))
 		{
-			if (item == Enums.MenuItem.Instructions)
-			{
-				ShowPageInstructionsModal = !ShowPageInstructionsModal;
-			}
-			else
-			{
-				Toast!.ShowWarning($"Menu item {item.Title} not implemented yet (◡︵◡)");
-			}
+			CurrentModalToShow = menuItem;
 		}
 		else
 		{
-			Logger!.LogWarning("{Method}, Invalid MenuItem: {MenuItem}", nameof(ReturnedMenuItemId), id);
+			Logger!.LogWarning("{Method}, Invalid MenuItem: {Id}", nameof(ReturnedMenuItemId), id);
 			Toast!.ShowError($"{Global.ToastShowError} {nameof(Index)}!{nameof(ReturnedMenuItemId)} {id}");
-			return;
 		}
 	}
+
+	private void ReturnedCloseEvent()
+	{
+		CurrentModalToShow = null;
+		//Logger!.LogInformation("{Method}, CurrentModalToShow set to null", nameof(ReturnedCloseEvent));
+	}
+
+	#endregion
+
 	// Ignore Spelling: bc, rec
 }
 
