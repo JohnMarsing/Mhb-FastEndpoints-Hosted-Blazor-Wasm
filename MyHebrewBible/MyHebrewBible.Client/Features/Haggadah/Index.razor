@@ -3,7 +3,8 @@
 @using MyHebrewBible.Client.Features.Haggadah.Toolbar
 @using Page = MyHebrewBible.Client.Enums.Nav
 @using MyHebrewBible.Client.Layout
-@using MyHebrewBible.Client.Enums;
+@using MyHebrewBible.Client.Enums
+@using MyHebrewBible.Client.Features.Haggadah.DetailContent
 
 @inject IToastService? Toast
 @inject ILogger<Index>? Logger
@@ -36,21 +37,57 @@
 	</NextButtonDiv>
 
 	<JustifyEnd>
-		<RightMenuSkeleton>
-			<LanguageItems>
-				<LanguagePicker OnLanguageSelected="ReturnedLanguageMenuItem" />
-			</LanguageItems>
-			<TocButton>
-				<TableOfContentToggle OnOpen="FlipToggle" />
-			</TocButton>
-		</RightMenuSkeleton>
+		<MenuItemModalButtons OnModalSelected="ReturnedMenuItemModal" />
 	</JustifyEnd>
 
 </NavSkeleton>
 
-<ToCModal IsVisible="ShowTableOfContentModal"
-					OnSectionSelected="ReturnedSection"
-					OnClose="FlipToggle" />	/>
+<ModalSkeleton ShowMenuItem="CurrentModalToShow">
+	@* Instructions *@
+	<InstructionsRF>
+		<PageInstructionsModal OnClose="ReturnedCloseEvent" />
+	</InstructionsRF>
+
+	@* Appendix *@
+
+	<TenPlaguesRF>
+		<ModalTemplate OnClose="ReturnedCloseEvent">
+			<HeaderRF>Appendix 10 Plagues</HeaderRF>
+			<BodyRF>
+				<AppendixTenPlagues />
+			</BodyRF>
+		</ModalTemplate>
+	</TenPlaguesRF>
+
+	<EasterRF>
+		<p>ToDo: add content for Appendix What about Easter</p>
+		<ModalTemplate OnClose="ReturnedCloseEvent">
+			<HeaderRF>Appendix What about Easter?</HeaderRF>
+			<BodyRF><AppendixEaster /></BodyRF>
+		</ModalTemplate>
+	</EasterRF>
+
+	<BibleVersesRF>
+		<ModalTemplate OnClose="ReturnedCloseEvent">
+			<HeaderRF>Appendix Bible Verses</HeaderRF>
+			<BodyRF><VerseIndex /></BodyRF>
+		</ModalTemplate>
+	</BibleVersesRF>
+
+	@* User Settings *@
+	<LanguageRF>
+
+		<ModalTemplate OnClose="ReturnedCloseEvent">
+			<HeaderRF>Language</HeaderRF>
+			<BodyRF>
+				<LanguagePickerButtons OnLanguageSelected="ReturnedLanguageMenuItem" />
+			</BodyRF>
+		</ModalTemplate>
+	</LanguageRF>
+
+</ModalSkeleton>
+
+
 
 <LoadingProgress>
 	<div class="mt-5">
@@ -82,12 +119,6 @@
 
 @code {
 	[CascadingParameter] public CascadingAppState? State { get; set; }
-
-	protected bool ShowTableOfContentModal = false;
-	private void FlipToggle()
-	{
-		ShowTableOfContentModal = !ShowTableOfContentModal;
-	}
 
 
 	protected int Section;
@@ -156,18 +187,43 @@
 		}
 	}
 
+
 	private async Task ReturnedLanguageMenuItem(Enums.DisplayLanguage item)
 	{
 		Language = item;
 		await State!.AppState!.HaggadahState!.UpdateLanguage(item);
+		CurrentModalToShow = null;
 	}
 
 	private void ReturnedSection(int section)
 	{
 		Section = section;
 		CurrentContent = Enums.Content.List.FirstOrDefault(w => w.Value == Section);
-		ShowTableOfContentModal = false;
 		SetDetail();
 		// save to local storage
 	}
+
+
+	#region MenuTemplate and ModalSkeleton
+
+	private List<Dictionary<int, string?>> menuItems = Enums.MenuItemModal.List
+			.Select(item => new Dictionary<int, string?> { { item.Value, item.Title } })
+			.ToList();
+
+	protected Enums.MenuItemModal? CurrentModalToShow { get; set; }
+
+
+	private void ReturnedMenuItemModal(Enums.MenuItemModal menuItemModal)
+	{
+		CurrentModalToShow = menuItemModal;
+	}
+
+	private void ReturnedCloseEvent()
+	{
+		CurrentModalToShow = null;
+		//Logger!.LogInformation("{Method}, CurrentModalToShow set to null", nameof(ReturnedCloseEvent));
+	}
+
+	#endregion
+
 }

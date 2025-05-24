@@ -2,7 +2,7 @@
 
 using Ardalis.SmartEnum;
 
-public abstract class MenuItems : SmartEnum<MenuItems>
+public abstract class MenuItemLanguage : SmartEnum<MenuItemLanguage>
 {
 	#region Id's
 	private static class Id
@@ -17,14 +17,14 @@ public abstract class MenuItems : SmartEnum<MenuItems>
 	#endregion
 
 	#region Declared Public Instances
-	public static readonly MenuItems English = new EnglishSE();
-	public static readonly MenuItems Spanish = new SpanishSE();
-	public static readonly MenuItems Both = new BothSE();
-	public static readonly MenuItems ShowToC = new ShowToCSE();
+	public static readonly MenuItemLanguage English = new EnglishSE();
+	public static readonly MenuItemLanguage Spanish = new SpanishSE();
+	public static readonly MenuItemLanguage Both = new BothSE();
+	public static readonly MenuItemLanguage ShowToC = new ShowToCSE();
 
 	#endregion
 
-	private MenuItems(string name, int value) : base(name, value) { }
+	private MenuItemLanguage(string name, int value) : base(name, value) { }
 
 	#region Extra Fields
 	public abstract int HeaderId { get; }
@@ -33,7 +33,7 @@ public abstract class MenuItems : SmartEnum<MenuItems>
 	#endregion
 
 	#region Private Instantiation
-	private sealed class EnglishSE : MenuItems
+	private sealed class EnglishSE : MenuItemLanguage
 	{
 		public EnglishSE() : base(nameof(English), Id.English) { }
 		public override int HeaderId => MenuHeaders.LanguageChoice.Value;
@@ -41,7 +41,7 @@ public abstract class MenuItems : SmartEnum<MenuItems>
 		public override string Description => "Display content in English only.";
 	}
 
-	private sealed class SpanishSE : MenuItems
+	private sealed class SpanishSE : MenuItemLanguage
 	{
 		public SpanishSE() : base(nameof(Spanish), Id.Spanish) { }
 		public override int HeaderId => MenuHeaders.LanguageChoice.Value;
@@ -49,7 +49,7 @@ public abstract class MenuItems : SmartEnum<MenuItems>
 		public override string Description => "Display content in Español only.";
 	}
 
-	private sealed class BothSE : MenuItems
+	private sealed class BothSE : MenuItemLanguage
 	{
 		public BothSE() : base(nameof(Both), Id.Both) { }
 		public override int HeaderId => MenuHeaders.LanguageChoice.Value;
@@ -57,7 +57,7 @@ public abstract class MenuItems : SmartEnum<MenuItems>
 		public override string Description => "Display content in both English and Español.";
 	}
 
-	private sealed class ShowToCSE : MenuItems
+	private sealed class ShowToCSE : MenuItemLanguage
 	{
 		public ShowToCSE() : base(nameof(ShowToC), Id.ShowToC) { }
 		public override int HeaderId => MenuHeaders.ShowHaggadahOutlineModal;

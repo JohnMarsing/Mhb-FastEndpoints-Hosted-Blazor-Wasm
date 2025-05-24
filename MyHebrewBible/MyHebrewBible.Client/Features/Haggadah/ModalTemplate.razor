@@ -1,0 +1,55 @@
+﻿@using MyHebrewBible.Client.Helpers
+
+@*  *@
+
+<div class="@modalClass" style="display:@(modalOpen ? "block" : "none");">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<div class="modal-header @BgAndText.DangerSubtle">
+				<h4 class="modal-title">
+					@HeaderRF
+				</h4>
+
+				<button type="button" class="close" @onclick="ButtonClickClose">
+					<span>&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body @BgAndText.Light">
+				@BodyRF
+			</div>
+
+			<div class="modal-footer @BgAndText.DarkSubtle">
+				<button @onclick="ButtonClickClose" class="btn @BtnColors.Primary @BtnSize.Md"
+								title="close the modal" type="button">
+					Close
+				</button>
+			</div>
+
+		</div>  <!-- modal-content -->
+	</div> <!-- modal-dialog -->
+</div> <!-- modalClass -->
+
+@code {
+	[Parameter, EditorRequired] public RenderFragment? HeaderRF { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? BodyRF { get; set; }
+
+	[Parameter, EditorRequired] public EventCallback OnClose { get; set; }
+
+	private void ButtonClickClose()
+	{
+		// Toast!.ShowInfo("ButtonClickClose");
+		CloseModal();
+		OnClose.InvokeAsync();
+	}
+
+	bool modalOpen = true;
+	string modalClass = "modal show";
+
+	void CloseModal()
+	{
+		modalOpen = false;
+		modalClass = "modal";
+	}
+}
