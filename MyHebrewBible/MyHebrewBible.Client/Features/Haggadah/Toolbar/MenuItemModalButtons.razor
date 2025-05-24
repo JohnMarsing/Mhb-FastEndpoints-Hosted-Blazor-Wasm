@@ -1,0 +1,46 @@
+﻿@using MyHebrewBible.Client.Helpers
+@using System.Linq
+
+<div class="btn-group-vertical @BtnGroupSize.Md dropstart"
+		 role="group" aria-label="Vertical button group">
+
+	<button type="button" class="btn @BtnColors.Primary @BtnSize.Md dropdown-toggle"
+					data-bs-toggle="dropdown" aria-expanded="false">
+		<i class="fas fa-cogs"></i>
+	</button>
+
+	<ul class="dropdown-menu">
+
+
+		@foreach (var group in Enums.MenuItemModal.List
+			.GroupBy(item => item.Category)
+			.OrderBy(g => g.Key))
+		{
+			<li>
+				<strong class="dropdown-header">@group.Key</strong>
+			</li>
+
+			@foreach (var item in group.OrderBy(o => o.Value))
+			{
+				<li class="dropdown-item">
+					<button @onclick="@(e => ButtonClick(item))"
+									type="button" class="btn @BtnOutlineColors.Primary">
+						@item.Title
+					</button>
+				</li>
+			}
+			<li><hr class="dropdown-divider" /></li>
+		}
+
+	</ul>
+
+</div>
+
+@code {
+	[Parameter, EditorRequired] public EventCallback<Enums.MenuItemModal> OnModalSelected { get; set; }
+
+	private void ButtonClick(Enums.MenuItemModal language)
+	{
+		OnModalSelected.InvokeAsync(language);
+	}
+}
