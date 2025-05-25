@@ -1,6 +1,7 @@
 ﻿@page "/Haggadah"
 
 @using MyHebrewBible.Client.Features.Haggadah.Toolbar
+@using MyHebrewBible.Client.Features.Haggadah.Toolbar.Modal
 @using Page = MyHebrewBible.Client.Enums.Nav
 @using MyHebrewBible.Client.Layout
 @using MyHebrewBible.Client.Enums
@@ -13,81 +14,83 @@
 
 <NavSkeleton>
 
-	<JustifyStart><HomeButton /></JustifyStart>
+	<JustifyStartRF><HomeButton /></JustifyStartRF>
 
-	<PrevButtonDiv>
+	<PrevButtonDivRF>
 		<PreviousOrNextButton Section="Section"
 													Forward=false
 													OnSectionSelected="ReturnedSection" />
-	</PrevButtonDiv>
+	</PrevButtonDivRF>
 
-	<ProgressBarDiv>
+	<ProgressBarDivRF>
 		<div class="@MediaQuery.XsOrSm.DivClass">
 			<Progressbar Section="Section" IsXsOrSm=true />
 		</div>
 		<div class="@MediaQuery.MdOrLgOrXl.DivClass">
 			<Progressbar Section="Section" IsXsOrSm=false />
 		</div>
-	</ProgressBarDiv>
+	</ProgressBarDivRF>
 
-	<NextButtonDiv>
+	<NextButtonDivRF>
 		<PreviousOrNextButton Section="Section"
 													Forward=true
 													OnSectionSelected="ReturnedSection" />
-	</NextButtonDiv>
+	</NextButtonDivRF>
 
-	<JustifyEnd>
-		<MenuItemModalButtons OnModalSelected="ReturnedMenuItemModal" />
-	</JustifyEnd>
+	<JustifyEndRF>
+		<ModalMenuItemButtons OnModalSelected="ReturnedModalMenuItem" />
+	</JustifyEndRF>
 
 </NavSkeleton>
 
 <ModalSkeleton ShowMenuItem="CurrentModalToShow">
 	@* Instructions *@
 	<InstructionsRF>
-		<PageInstructionsModal OnClose="ReturnedCloseEvent" />
+		<Template OnClose="ReturnedCloseEvent">
+			<HeaderRF>Haggadah Instructions</HeaderRF>
+			<BodyRF>
+				<PageInstructions />
+			</BodyRF>
+		</Template>
+
 	</InstructionsRF>
 
 	@* Appendix *@
-
 	<TenPlaguesRF>
-		<ModalTemplate OnClose="ReturnedCloseEvent">
+		<Template OnClose="ReturnedCloseEvent">
 			<HeaderRF>Appendix 10 Plagues</HeaderRF>
 			<BodyRF>
 				<AppendixTenPlagues />
 			</BodyRF>
-		</ModalTemplate>
+		</Template>
 	</TenPlaguesRF>
 
 	<EasterRF>
-		<p>ToDo: add content for Appendix What about Easter</p>
-		<ModalTemplate OnClose="ReturnedCloseEvent">
+		<Template OnClose="ReturnedCloseEvent">
 			<HeaderRF>Appendix What about Easter?</HeaderRF>
 			<BodyRF><AppendixEaster /></BodyRF>
-		</ModalTemplate>
+		</Template>
 	</EasterRF>
 
 	<BibleVersesRF>
-		<ModalTemplate OnClose="ReturnedCloseEvent">
+		<Template OnClose="ReturnedCloseEvent">
 			<HeaderRF>Appendix Bible Verses</HeaderRF>
 			<BodyRF><VerseIndex /></BodyRF>
-		</ModalTemplate>
+		</Template>
 	</BibleVersesRF>
 
 	@* User Settings *@
 	<LanguageRF>
 
-		<ModalTemplate OnClose="ReturnedCloseEvent">
+		<Template OnClose="ReturnedCloseEvent">
 			<HeaderRF>Language</HeaderRF>
 			<BodyRF>
 				<LanguagePickerButtons OnLanguageSelected="ReturnedLanguageMenuItem" />
 			</BodyRF>
-		</ModalTemplate>
+		</Template>
 	</LanguageRF>
 
 </ModalSkeleton>
-
-
 
 <LoadingProgress>
 	<div class="mt-5">
@@ -172,6 +175,7 @@
 		}
 	}
 
+	// Called by: OnInitialized
 	private Enums.DisplayLanguage GetLanguageState()
 	{
 		int id = State!.AppState!.HaggadahState!.Get();
@@ -187,14 +191,7 @@
 		}
 	}
 
-
-	private async Task ReturnedLanguageMenuItem(Enums.DisplayLanguage item)
-	{
-		Language = item;
-		await State!.AppState!.HaggadahState!.UpdateLanguage(item);
-		CurrentModalToShow = null;
-	}
-
+	// Called by: PreviousOrNextButton
 	private void ReturnedSection(int section)
 	{
 		Section = section;
@@ -203,21 +200,25 @@
 		// save to local storage
 	}
 
-
-	#region MenuTemplate and ModalSkeleton
-
-	private List<Dictionary<int, string?>> menuItems = Enums.MenuItemModal.List
-			.Select(item => new Dictionary<int, string?> { { item.Value, item.Title } })
-			.ToList();
-
-	protected Enums.MenuItemModal? CurrentModalToShow { get; set; }
+	#region MenuTemplate and Skeleton
 
 
-	private void ReturnedMenuItemModal(Enums.MenuItemModal menuItemModal)
+	// Called by: <Skeleton><LanguageRF><Template><BodyRF><LanguagePickerButtons OnLanguageSelected="ReturnedLanguageMenuItem" />
+	private async Task ReturnedLanguageMenuItem(Enums.DisplayLanguage item)
 	{
-		CurrentModalToShow = menuItemModal;
+		Language = item;
+		await State!.AppState!.HaggadahState!.UpdateLanguage(item);
+		CurrentModalToShow = null;
 	}
 
+	protected Enums.ModalMenuItem? CurrentModalToShow { get; set; }
+
+	private void ReturnedModalMenuItem(Enums.ModalMenuItem modalMenuItem)
+	{
+		CurrentModalToShow = modalMenuItem;
+	}
+
+	// Called by: <Skeleton> 4 times
 	private void ReturnedCloseEvent()
 	{
 		CurrentModalToShow = null;

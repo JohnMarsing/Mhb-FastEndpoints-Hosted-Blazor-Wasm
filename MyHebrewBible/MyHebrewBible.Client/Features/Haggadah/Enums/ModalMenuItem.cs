@@ -2,7 +2,7 @@
 
 namespace MyHebrewBible.Client.Features.Haggadah.Enums;
 
-public abstract class MenuItemModal : SmartEnum<MenuItemModal>
+public abstract class ModalMenuItem : SmartEnum<ModalMenuItem>
 {
 	#region Id's
 	private static class Id
@@ -16,14 +16,14 @@ public abstract class MenuItemModal : SmartEnum<MenuItemModal>
 	#endregion
 
 	#region Declared Public Instances
-	public static readonly MenuItemModal Instructions = new InstructionsSE();
-	public static readonly MenuItemModal TenPlagues = new TenPlaguesPlaguesSE();
-	public static readonly MenuItemModal Easter = new EasterSE();
-	public static readonly MenuItemModal BibleVerses = new BibleVersesSE();
-	public static readonly MenuItemModal Language = new LanguageSE();
+	public static readonly ModalMenuItem Instructions = new InstructionsSE();
+	public static readonly ModalMenuItem TenPlagues = new TenPlaguesPlaguesSE();
+	public static readonly ModalMenuItem Easter = new EasterSE();
+	public static readonly ModalMenuItem BibleVerses = new BibleVersesSE();
+	public static readonly ModalMenuItem Language = new LanguageSE();
 	#endregion
 
-	private MenuItemModal(string name, int value) : base(name, value)  // Constructor
+	private ModalMenuItem(string name, int value) : base(name, value)  // Constructor
 	{
 	}
 
@@ -34,7 +34,7 @@ public abstract class MenuItemModal : SmartEnum<MenuItemModal>
 
 	#endregion
 
-	private sealed class InstructionsSE : MenuItemModal
+	private sealed class InstructionsSE : ModalMenuItem
 	{
 		public InstructionsSE() : base(nameof(Instructions), Id.Instructions) { }
 		public override string Title => "Instructions";
@@ -43,7 +43,7 @@ public abstract class MenuItemModal : SmartEnum<MenuItemModal>
 	}
 
 
-	private sealed class TenPlaguesPlaguesSE : MenuItemModal
+	private sealed class TenPlaguesPlaguesSE : ModalMenuItem
 	{
 		public TenPlaguesPlaguesSE() : base(nameof(TenPlagues), Id.TenPlagues) { }
 		public override string Title => "10 Plagues";
@@ -51,7 +51,7 @@ public abstract class MenuItemModal : SmartEnum<MenuItemModal>
 		public override int CategorySort => 2;
 	}
 
-	private sealed class EasterSE : MenuItemModal
+	private sealed class EasterSE : ModalMenuItem
 	{
 		public EasterSE() : base(nameof(Easter), Id.Easter) { }
 		public override string Title => "Easter";
@@ -59,7 +59,7 @@ public abstract class MenuItemModal : SmartEnum<MenuItemModal>
 		public override int CategorySort => 2;
 	}
 
-	private sealed class BibleVersesSE : MenuItemModal
+	private sealed class BibleVersesSE : ModalMenuItem
 	{
 		public BibleVersesSE() : base(nameof(BibleVerses), Id.BibleVerses) { }
 		public override string Title => "Bible Verses";
@@ -67,7 +67,7 @@ public abstract class MenuItemModal : SmartEnum<MenuItemModal>
 		public override int CategorySort => 2;
 	}
 
-	private sealed class LanguageSE : MenuItemModal
+	private sealed class LanguageSE : ModalMenuItem
 	{
 		public LanguageSE() : base(nameof(Language), Id.Language) { }
 		public override string Title => "Language Setting";

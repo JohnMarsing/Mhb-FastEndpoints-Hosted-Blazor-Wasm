@@ -3,38 +3,41 @@
 	<div class="d-flex justify-content-start">
 
 		<div class="px-1">
-			@JustifyStart
+			@JustifyStartRF
 		</div>
 	</div>
 
 	<div class="collapse navbar-collapse justify-content-between">
 
 		<div class="px-1">
-			@PrevButtonDiv
+			@PrevButtonDivRF
 		</div>
 
 		<div class="col">
-			@ProgressBarDiv
+			@ProgressBarDivRF
 		</div>
 
 		<div class="px-1">
-			@NextButtonDiv
+			@NextButtonDivRF
 		</div>
 
 	</div>
 
 	<div class="d-flex justify-content-end pe-1">
-		@JustifyEnd
+		@JustifyEndRF
 	</div>
 
 </nav>
 <br />
 
+@* <dialog>@DialogRF</dialog> *@
+
 @code {
-	[Parameter, EditorRequired] public RenderFragment? JustifyStart { get; set; }
-	[Parameter, EditorRequired] public RenderFragment? PrevButtonDiv { get; set; }
-	[Parameter, EditorRequired] public RenderFragment? ProgressBarDiv { get; set; }
-	[Parameter, EditorRequired] public RenderFragment? NextButtonDiv { get; set; }
-	[Parameter, EditorRequired] public RenderFragment? JustifyEnd { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? JustifyStartRF { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? PrevButtonDivRF { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? ProgressBarDivRF { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? NextButtonDivRF { get; set; }
+	[Parameter, EditorRequired] public RenderFragment? JustifyEndRF { get; set; }
+	// [Parameter, EditorRequired] public RenderFragment? DialogRF { get; set; }
 
 }

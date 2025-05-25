@@ -12,7 +12,7 @@
 	<ul class="dropdown-menu">
 
 
-		@foreach (var group in Enums.MenuItemModal.List
+		@foreach (var group in Enums.ModalMenuItem.List
 			.GroupBy(item => item.Category)
 			.OrderBy(g => g.Key))
 		{
@@ -37,9 +37,9 @@
 </div>
 
 @code {
-	[Parameter, EditorRequired] public EventCallback<Enums.MenuItemModal> OnModalSelected { get; set; }
+	[Parameter, EditorRequired] public EventCallback<Enums.ModalMenuItem> OnModalSelected { get; set; }
 
-	private void ButtonClick(Enums.MenuItemModal language)
+	private void ButtonClick(Enums.ModalMenuItem language)
 	{
 		OnModalSelected.InvokeAsync(language);
 	}
