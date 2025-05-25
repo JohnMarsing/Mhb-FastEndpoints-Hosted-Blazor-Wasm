@@ -1,0 +1,33 @@
+﻿@using MyHebrewBible.Client.Helpers
+
+<div class="card">
+
+	<div class="card-body">
+		<h5 class="card-title text-center">Toolbar on top</h5>
+		<p class="fs-5">
+			The left
+			<button class="btn @BtnOutlineColors.Primary @BtnSize.Sm"><i class="@Icon.Arrow.Left"></i></button>
+			and right
+			<button class="btn @BtnOutlineColors.Primary @BtnSize.Sm"><i class="@Icon.Arrow.Right"></i></button>
+			buttons allow you to navigate between sections. The progress bar shows how many sections have been read.
+		</p>
+		<p class="fs-5 mt-2">
+			The far right button
+			<button class="btn @BtnOutlineColors.Primary @BtnSize.Sm dropdown-toggle"><i class="@Icon.Menu.Dropdown"></i></button>
+			opens a menu with options to change the language, view instructions, and more.	
+		</p>
+	</div>
+
+	<div class="card-body">
+		<h5 class="card-title text-center mt-2">Roles</h5>
+		<ul class="fs-5">
+			<li><b class="@TextColors.Success">Leader</b>: Reads the main text and guides the participants.</li>
+			<li><b class="@TextColors.Danger">Readers</b>: Also reads.</li>
+		</ul>
+	</div>
+
+</div>
+
+@code {
+
+}

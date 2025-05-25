@@ -29,6 +29,16 @@ public static class Icon
 		public static string Get(bool isDown) => isDown ? Chevron.Down : Chevron.Up;
 	}
 
+	public static class Arrow
+	{
+		public const string Right = " fas fa-arrow-right";
+		public const string Left = " fas fa-arrow-left";
+	}
+
+	public static class Menu
+	{
+		public const string Dropdown = " fas fa-cogs";
+	}	
 
 	public static class Size
 	{
