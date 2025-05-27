@@ -1,9 +1,10 @@
 ﻿@using MyHebrewBible.Client.Components.Report
 @using MyHebrewBible.Client.Components.Report.Detail
 @using MyHebrewBible.Client.Components.Report.Summary
+@using MyHebrewBible.Client.Components.Report.ParashaDivider
 @using BC=MyHebrewBible.Client.Features.BookChapter
 
-@inject ILogger<Sections>? Logger
+@* @inject ILogger<Sections>? Logger *@
 @inject IToastService? Toast
 @inject IJSRuntime JSRuntime
 
@@ -12,6 +13,8 @@
 	@foreach (var item in Verses!.OrderBy(o => o.ID))
 	{
 		<TitleSubtitle Title="@item.DescH" Subtitle="@item.DescD" BCV="@GetBCV(item.BCV!)" />
+		
+		<Skeleton ScriptureId="@item.ID" BookId="@item.BookID" IsParashaDividerOn="UserSettings.IsParashaDividerOn" />
 
 		if (DrilldownScriptureId == 0)
 		{
@@ -130,7 +133,6 @@ else
 
 @code {
 
-
 	[Parameter, EditorRequired] public List<ReportModel>? Verses { get; set; }
 	[Parameter, EditorRequired] public Enums.CalledBy CalledBy { get; set; }
 	[Parameter] public int ScrollToScriptureId { get; set; }                // Used by Parasha!ReportWrapper (not BC)
@@ -229,7 +231,6 @@ else
 			_ => ("Topped out", 0, 0)
 		};
 	}
-
 
 	private void ReturnedVerse(int scriptureId)
 	{

@@ -1,0 +1,44 @@
+﻿@using MyHebrewBible.Client.Helpers
+@using MyHebrewBible.Client.Enums
+@using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
+@using System.Text
+
+<div class="d-flex justify-content-between @BgAndText.SuccessSubtle p-1 fs-5 my-4">
+	<span class="">@GetFormat(isPrevious: true)</span>
+	<span class="fw-bold">Parasha Divider</span>
+	<span class=" ">@GetFormat(isPrevious: false)</span>
+</div>
+
+@code {
+	[Parameter, EditorRequired] public ParashaEnums.Triennial? Parasha { get; set; }
+
+	public MarkupString GetFormat(bool isPrevious)
+	{
+		if (Parasha is null) return (MarkupString)"<span class='text-danger'>Triennial is null???</span>";
+
+		StringBuilder sb = new StringBuilder();
+
+		if (isPrevious)
+		{
+			if (Parasha.PreviousVM != null)
+			{
+				sb.Append($"<sup class='{TextColors.Info}'><i class='{Icon.Hand.Up}'></i></sup>");
+				sb.Append(Parasha!.PreviousVM.Triennial.TorahAbrv);
+				sb.Append($" <sup class='{TextColors.Secondary}'> {Parasha!.PreviousVM.Triennial.Date.ToString(DateFormat.MMM_d_YYYY)}</sup>");
+			}
+			else
+			{
+				sb.Append($"<span class='text-black-50'><i class='{Icon.Edge}'></i></span> None");
+			}
+		}
+		else
+		{
+			sb.Append(Parasha!.TorahAbrv);
+			sb.Append($" <sup class='{TextColors.Secondary}'> {Parasha.Date.ToString(DateFormat.MMM_d_YYYY)}</sup>");
+			sb.Append($" <sub class='{TextColors.Danger}'><i class='{Icon.Hand.Down}'></i></sub>");
+		}
+
+		return (MarkupString)(sb.ToString());
+	}
+
+}

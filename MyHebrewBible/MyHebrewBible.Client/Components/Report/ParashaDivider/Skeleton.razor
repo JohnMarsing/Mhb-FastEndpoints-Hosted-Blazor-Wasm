@@ -1,0 +1,47 @@
+﻿@* ToDo: delete from Sections *@
+@using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
+@using MyHebrewBible.Client.Enums
+
+@if (BookId <= BookChapterFacts.LastBookInTorah)
+{
+	if (IsParashaDividerOn)
+	{
+		@if (GetIsBeginningTorahParasha())
+		{
+			<Indicator Parasha="@triennial" />
+		}
+	}
+	else
+	{
+		@if (GetIsBeginningTorahParasha())
+		{
+			<IconOnly />
+		}
+		
+	}
+}
+
+@code {
+	[Parameter, EditorRequired] public bool IsParashaDividerOn { get; set; }
+	[Parameter, EditorRequired] public int BookId { get; set; }
+	[Parameter, EditorRequired] public int ScriptureId { get; set; }
+
+	ParashaEnums.Triennial? triennial;
+
+	protected bool GetIsBeginningTorahParasha()
+	{
+		if (ScriptureId > BookChapterFacts.LastVerseInTorah) return false;
+
+		triennial = ParashaEnums.Triennial.List.FirstOrDefault(p => p.TorahVerse.BegId == ScriptureId);
+
+		if (triennial is not null)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+}
