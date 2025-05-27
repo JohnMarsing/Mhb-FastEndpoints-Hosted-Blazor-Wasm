@@ -106,6 +106,7 @@ public static class DateFormat
 	public const string ddd_mm_dd = "ddd, MM/dd";  //ddd, MM/dd/yyyy
 	public const string mm_dd = "MM/dd";
 	public const string MMM_d = "MMM d";
+	public const string MMM_d_YYYY = "MMM d yyyy";
 	public const string MM_dd_HH_mm = "MM/dd HH:mm";
 	public const string MM_dd_hh_mm = "MM/dd hh:mm";
 	public const string dd = "dd";

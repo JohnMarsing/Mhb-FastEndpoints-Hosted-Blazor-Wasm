@@ -15,6 +15,8 @@
 
 public static class Icon
 {
+	public const string Edge = " fas fa-ban";
+
 	public static class Toggle
 	{
 		public const string On = " fas fa-toggle-on";
@@ -28,6 +30,13 @@ public static class Icon
 		public const string Up = " fas fa-chevron-up";
 		public static string Get(bool isDown) => isDown ? Chevron.Down : Chevron.Up;
 	}
+
+	public static class Hand
+	{
+		public const string Down = " far fa-hand-point-down";
+		public const string Up = " far fa-hand-point-up";
+	}
+
 
 	public static class Arrow
 	{

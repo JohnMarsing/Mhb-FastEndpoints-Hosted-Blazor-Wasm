@@ -4,6 +4,8 @@ namespace MyHebrewBible.Client.Enums;
 
 public static class BookChapterFacts
 {
+	public const int LastBookInTorah = 5;
+	public const int LastVerseInTorah = 5852;
 	/*
 	public const int LargestVerseCountInOneBook = 2461;
 	public const int LastVerseInTaNaCh = 23145;

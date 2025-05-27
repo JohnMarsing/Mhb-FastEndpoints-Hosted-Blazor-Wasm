@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Components.QuickGrid
 @using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
 @using MyHebrewBible.Client.Features.Parasha
+@using MyHebrewBible.Client.Helpers
 
 
 <div class="card mb-3 border-success">
@@ -10,9 +11,11 @@
 		<h4 class="card-title text-center">Test some API Calls</h4>
 	</div>
 		<div class="card-body">
-		<a class="btn btn-primary btn-xs" href="/api/Parasha/14">API Parasha 14 (Gen 17)</a>
-		<a class="btn btn-primary btn-xs" href="/api/Parasha/15">API Parasha 15 (Gen 18)</a>
-		<a class="btn btn-primary btn-xs" href="/Parasha/15">Parasha 15</a>
+			<div class="d-flex justify-content-between">
+				<a class="btn btn-primary btn-sm" href="/api/Parasha/14">API Parasha 14 (Gen 17)</a>
+				<a class="btn btn-primary btn-sm" href="/api/Parasha/15">API Parasha 15 (Gen 18)</a>
+				<a class="btn btn-primary btn-sm" href="/Parasha/15">Parasha 15 (Error: No api/ prefix) </a>
+		</div>
 	</div>
 	<p class="card-footer text-center">FOOTER</p>
 </div>
