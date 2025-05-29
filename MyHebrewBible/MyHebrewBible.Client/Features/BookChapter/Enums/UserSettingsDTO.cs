@@ -2,6 +2,6 @@
 
 public record UserSettingsDTO(bool IsHebrewShownOnTheSide, 
 															bool IsStandaloneAlephTavDetailsOn, 
-															bool IsParashaDividerOn, 
+															bool IsParashaDividerDetailsOn, 
 															bool IsHebrewWordNumbersOn);	
 

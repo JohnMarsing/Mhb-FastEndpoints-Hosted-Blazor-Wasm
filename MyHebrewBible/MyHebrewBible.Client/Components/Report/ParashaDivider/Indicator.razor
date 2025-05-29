@@ -3,14 +3,27 @@
 @using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
 @using System.Text
 
-<div class="d-flex justify-content-between @BgAndText.SuccessSubtle p-1 fs-5 my-4">
-	<span class="">@GetFormat(isPrevious: true)</span>
-	<span class="fw-bold">Parasha Divider</span>
-	<span class=" ">@GetFormat(isPrevious: false)</span>
+<div class="d-flex justify-content-between @BgAndText.SuccessSubtle p-2  my-4">
+	<span class="@textSize">@GetFormat(isPrevious: true)</span>
+
+	<div class="d-flex justify-content-center">
+
+		<span class="@textSize">Parasha &nbsp;</span>
+		<button @onclick="ButtonClick"
+						type="button" class="btn @BtnOutlineColors.Success @BtnSize.Xs mb-2" title="hide parasha detail">
+			<i class="@Icon.Chevron.Down"></i>
+		</button>
+	</div>
+
+	<span class="@textSize">@GetFormat(isPrevious: false)</span>
 </div>
 
 @code {
 	[Parameter, EditorRequired] public ParashaEnums.Triennial? Parasha { get; set; }
+	[Parameter, EditorRequired] public bool XsOrSm { get; set; }
+	[Parameter] public EventCallback OnToggle { get; set; }
+
+	string textSize => XsOrSm ? "" : "h5";
 
 	public MarkupString GetFormat(bool isPrevious)
 	{
@@ -24,7 +37,9 @@
 			{
 				sb.Append($"<sup class='{TextColors.Info}'><i class='{Icon.Hand.Up}'></i></sup>");
 				sb.Append(Parasha!.PreviousVM.Triennial.TorahAbrv);
-				sb.Append($" <sup class='{TextColors.Secondary}'> {Parasha!.PreviousVM.Triennial.Date.ToString(DateFormat.MMM_d_YYYY)}</sup>");
+				sb.Append($" <sup class='{TextColors.Secondary}'>");
+				sb.AppendIf(!XsOrSm, $"{Parasha!.PreviousVM.Triennial.Date.ToString(DateFormat.MMM_d_YYYY)}");
+				sb.Append("</sup>");
 			}
 			else
 			{
@@ -34,11 +49,20 @@
 		else
 		{
 			sb.Append(Parasha!.TorahAbrv);
-			sb.Append($" <sup class='{TextColors.Secondary}'> {Parasha.Date.ToString(DateFormat.MMM_d_YYYY)}</sup>");
+
+			sb.Append($" <sup class='{TextColors.Secondary}'>");
+			sb.AppendIf(!XsOrSm, $"{Parasha.Date.ToString(DateFormat.MMM_d_YYYY)}");
+			sb.Append("</sup>");
+
 			sb.Append($" <sub class='{TextColors.Danger}'><i class='{Icon.Hand.Down}'></i></sub>");
 		}
 
 		return (MarkupString)(sb.ToString());
+	}
+
+	private void ButtonClick()
+	{
+		OnToggle.InvokeAsync();
 	}
 
 }

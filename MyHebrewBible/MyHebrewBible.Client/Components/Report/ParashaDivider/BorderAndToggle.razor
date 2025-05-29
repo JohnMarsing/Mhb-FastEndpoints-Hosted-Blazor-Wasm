@@ -1,0 +1,25 @@
+﻿@using MyHebrewBible.Client.Helpers
+
+<div class="d-flex align-items-center my-3">
+    <div class="flex-grow-1 border-bottom border-success border-2 border-opacity-50"></div>
+    <div class="px-3 text-center d-flex align-items-center">
+        <span class="h5 @TextColors.Success mb-0">Parasha</span>
+        <button @onclick="ButtonClick"
+                type="button"
+                class="btn @BtnOutlineColors.Success @BtnSize.Xs ms-2"
+                title="show parasha detail">
+            <i class="@Icon.Chevron.Down"></i>
+        </button>
+    </div>
+    <div class="flex-grow-1 border-bottom border-success border-2 border-opacity-50"></div>
+</div>
+
+@code {
+    [Parameter, EditorRequired] public bool DividerDetailOnToggle { get; set; }
+    [Parameter] public EventCallback OnToggle { get; set; }
+
+    private void ButtonClick()
+    {
+        OnToggle.InvokeAsync();
+    }
+}

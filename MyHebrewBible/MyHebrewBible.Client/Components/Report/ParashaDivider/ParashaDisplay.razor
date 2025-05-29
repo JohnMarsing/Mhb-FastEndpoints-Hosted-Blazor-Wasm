@@ -1,0 +1,66 @@
+﻿@using ParashaEnums = MyHebrewBible.Client.Features.Parasha.Enums
+@using MyHebrewBible.Client.Enums
+
+@if (BookId <= BookChapterFacts.LastBookInTorah)
+{
+	if (DividerDetailOnToggle)
+	{
+		@if (GetIsBeginningTorahParasha())
+		{
+			<div class="@GlobalEnums.MediaQuery.XsOrSm.DivClass">
+				<Indicator Parasha="@triennial" XsOrSm=true OnToggle="ReturnedToggle" />
+			</div>
+			<div class="@GlobalEnums.MediaQuery.MdOrLgOrXl.DivClass">
+				<Indicator Parasha="@triennial" XsOrSm=false OnToggle="ReturnedToggle" />
+			</div>
+		}
+	}
+	else
+	{
+		@if (GetIsBeginningTorahParasha())
+		{
+			<BorderAndToggle DividerDetailOnToggle="DividerDetailOnToggle" OnToggle="ReturnedToggle" />
+		}
+	}
+}
+
+@code {
+	[Parameter, EditorRequired] public bool IsUserSettingParashaDividerDetailOn { get; set; }
+	[Parameter, EditorRequired] public int BookId { get; set; }
+	[Parameter, EditorRequired] public int ScriptureId { get; set; }
+
+	private bool _isInitialized = false;
+	bool DividerDetailOnToggle;
+
+	protected override void OnInitialized()
+	{
+		if (!_isInitialized)
+		{
+			DividerDetailOnToggle = IsUserSettingParashaDividerDetailOn;
+			_isInitialized = true;
+		}
+	}
+
+	ParashaEnums.Triennial? triennial;
+
+	protected bool GetIsBeginningTorahParasha()
+	{
+		if (ScriptureId > BookChapterFacts.LastVerseInTorah) return false;
+
+		triennial = ParashaEnums.Triennial.List.FirstOrDefault(p => p.TorahVerse.BegId == ScriptureId);
+
+		if (triennial is not null)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	private void ReturnedToggle() //bool toggle
+	{
+		DividerDetailOnToggle = !DividerDetailOnToggle;
+	}
+}
