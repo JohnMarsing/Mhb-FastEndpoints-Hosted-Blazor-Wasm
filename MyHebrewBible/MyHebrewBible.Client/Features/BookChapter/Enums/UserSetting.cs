@@ -7,7 +7,7 @@ public enum Permutation : int
 {
 	HebrewShownOnTheSide = 1,
 	StandaloneAlephTavDetailOn = 2,
-	ParashaDividerOn = 4,
+	ParashaDividerDetailOn = 4,
 	HebrewWordNumbersOn = 8,
 
 	/*
@@ -61,7 +61,7 @@ public abstract class UserSetting : SmartEnum<UserSetting>
 	public static Permutation Default =>
 		Permutation.HebrewShownOnTheSide
 	| Permutation.StandaloneAlephTavDetailOn
-	| Permutation.ParashaDividerOn
+	| Permutation.ParashaDividerDetailOn
 	| Permutation.HebrewWordNumbersOn;
 	//| Permutation.ReplaceEnglishWithHebrewLevelBasic
 
@@ -90,10 +90,10 @@ public abstract class UserSetting : SmartEnum<UserSetting>
 	private sealed class ParashaDividerSE : UserSetting
 	{
 		public ParashaDividerSE() : base($"{nameof(Id.ParashaDivider)}", Id.ParashaDivider) { }
-		public override Permutation OnState => Permutation.ParashaDividerOn;
-		public override string Title => "Parasha Divider";
-		public override string DetailWhenOn => "Parasha divider shown";
-		public override string DetailWhenOff => "Parasha divider NOT shown";
+		public override Permutation OnState => Permutation.ParashaDividerDetailOn;
+		public override string Title => "Parasha Divider Detail";
+		public override string DetailWhenOn => "Parasha divider detail is shown";
+		public override string DetailWhenOff => "Only parasha divider line is shown";
 	}
 
 	private sealed class HebrewWordNumbersSE : UserSetting

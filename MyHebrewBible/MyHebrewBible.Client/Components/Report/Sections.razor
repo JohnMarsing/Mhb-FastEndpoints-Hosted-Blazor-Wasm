@@ -14,7 +14,9 @@
 	{
 		<TitleSubtitle Title="@item.DescH" Subtitle="@item.DescD" BCV="@GetBCV(item.BCV!)" />
 		
-		<Skeleton ScriptureId="@item.ID" BookId="@item.BookID" IsParashaDividerOn="UserSettings.IsParashaDividerOn" />
+		<ParashaDisplay ScriptureId="@item.ID" 
+			BookId="@item.BookID" 
+			IsUserSettingParashaDividerDetailOn="UserSettings.IsParashaDividerDetailsOn"   /> 
 
 		if (DrilldownScriptureId == 0)
 		{

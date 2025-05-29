@@ -1,0 +1,15 @@
+﻿/*.arrow-svg {
+	width: 20vw;
+	min-width: 40px;
+	max-width: 200px;
+	height: 16px;
+	display: block;
+}
+
+@media (max-width: 576px) {
+	.arrow-svg {
+		width: 10vw;
+		max-width: 80px;
+	}
+}
+*/
