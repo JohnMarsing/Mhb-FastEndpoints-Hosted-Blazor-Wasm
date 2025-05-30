@@ -36,7 +36,7 @@ public abstract class MenuItem : SmartEnum<MenuItem>
 	private sealed class InstructionsSE : MenuItem
 	{
 		public InstructionsSE() : base(nameof(Instructions), Id.Instructions) { }
-		public override string Title => "Show Instructions";
+		public override string Title => "Instructions";
 	}
 		
 	private sealed class ParashaListSE : MenuItem

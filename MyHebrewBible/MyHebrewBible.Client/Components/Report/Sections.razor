@@ -14,9 +14,12 @@
 	{
 		<TitleSubtitle Title="@item.DescH" Subtitle="@item.DescD" BCV="@GetBCV(item.BCV!)" />
 		
-		<ParashaDisplay ScriptureId="@item.ID" 
-			BookId="@item.BookID" 
-			IsUserSettingParashaDividerDetailOn="UserSettings.IsParashaDividerDetailsOn"   /> 
+		@if(CalledBy != Enums.CalledBy.Parasha)
+		{
+			<ParashaDisplay ScriptureId="@item.ID" 
+											BookId="@item.BookID" 
+											IsUserSettingParashaDividerDetailOn="UserSettings.IsParashaDividerDetailsOn"   /> 
+		}	
 
 		if (DrilldownScriptureId == 0)
 		{
